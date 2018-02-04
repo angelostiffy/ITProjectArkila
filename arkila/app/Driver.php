@@ -12,4 +12,8 @@ class Driver extends Model
     public function operator(){
     	return $this->belongsTo(Operator::Class, 'operator_id');
     }
+    public function van(){
+    	return $this->hasOne(Van::Class, 'plate_number');
+    }
+
 }

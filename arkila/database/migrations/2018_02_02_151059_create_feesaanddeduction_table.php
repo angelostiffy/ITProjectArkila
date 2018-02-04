@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDiscountsTable extends Migration
+class CreateFeesaanddeductionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateDiscountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('discounts', function (Blueprint $table) {
-            $table->increments('discount_id');
-            $table->string('description');
-            $table->double('amount');
-            $table->string('type');
+        Schema::create('feesaanddeduction', function (Blueprint $table) {
+            $table->increments('fad_id');
+            $table->string('description', 30);
+            $table->double('amount')->unsigned();
+            $table->enum('type', ['Discount', 'Fee']);
             $table->timestamps();
+
 
             $table->engine = 'InnoDB';
         });
@@ -31,6 +32,6 @@ class CreateDiscountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('discounts');
+        Schema::dropIfExists('feesaanddeduction');
     }
 }

@@ -13,9 +13,18 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
                     You are logged in!
-                </div>
+
+                    <?php
+                    use App\Van;
+                    $vans = Van::all();
+                    ?>
+
+                    @foreach ($vans as $van)
+                        <h1> {{ $van->plate_number }} {{ $van->model }} is driven by {{ $van->driver->last_name }} </h1>
+                        @endforeach
+
+                    </div>
             </div>
         </div>
     </div>
