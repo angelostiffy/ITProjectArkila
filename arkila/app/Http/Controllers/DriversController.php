@@ -14,7 +14,9 @@ class DriversController extends Controller
      */
     public function index()
     {
-        return view('sample');
+        $drivers = Driver::all();
+
+        return view('drivers.index', ['drivers' => $drivers]);
     }
 
     /**
@@ -24,7 +26,7 @@ class DriversController extends Controller
      */
     public function create()
     {
-        //
+        return view('drivers.create');//
     }
 
     /**
@@ -35,6 +37,41 @@ class DriversController extends Controller
      */
     public function store(Request $request)
     {
+        $newDriver = [
+            'first_name' => $request->first,
+            'last_name' => $request->last,
+            'middle_name' => $request->middle,
+            'address' => $request->address,
+            'contact_number' => $request->contactn,
+            'provincial_address' => $request->paddress,
+            'age' => $request->age,
+            'birth_date' => $request->birthdate,
+            'birth_place' => $request->bplace,
+            'gender' => $request->gender,
+            'citizenship' => $request->citizenship,
+            'civil_status' => $request->cstatus,
+            'number_of_children' => $request->nochild,
+            'spouse' => $request->spouse,
+            'spouse_birthdate' => $request->spousebday,
+            'father_name' => $request->father,
+            'father_occupation' => $request->fatheroccup,
+            'mother_name' => $request->mother,
+            'mother_occupation' => $request->motheroccup,
+            'person_in_case_of_emergency' => $request->personemergency,
+            'emergency_address' => $request->peAddress,
+            'emergency_contactno' => $request->peContactnum,
+            'SSS' => $request->sss,
+            'license_number' => $request->licenseNum,
+            'expiry_date' => $request->exp,
+        ];
+
+        $save = Driver::insert($newDriver);
+
+        if($save)
+            return redirect('/home/drivers');
+
+        else
+            return redirect()->back->withInput();
         //
     }
 
@@ -46,6 +83,9 @@ class DriversController extends Controller
      */
     public function show(Driver $driver)
     {
+
+        
+        return view('drivers.show',compact('driver'));
         //
     }
 
@@ -56,7 +96,9 @@ class DriversController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Driver $driver)
-    {
+    {        
+        return view('drivers.edit', compact('driver'));
+        
         //
     }
 
@@ -69,7 +111,20 @@ class DriversController extends Controller
      */
     public function update(Request $request, Driver $driver)
     {
+        $driverUpdate = Driver::where('driver_id', $driver->driver_id)
+        ->update([
+            'driver_id' => $request->input('id'),
+            'last_name' => $request->input('driver-lastname'),
+            'first_name' => $request->input('driver-firstname'),
+            'middle_name' => $request->input('driver-middlename'),
+            'address' => $request->input('driver-address'),
+        ]);
         //
+        if ($driverUpdate) {
+            return redirect('/home/drivers');
+        }
+
+        return back()->withInput();
     }
 
     /**

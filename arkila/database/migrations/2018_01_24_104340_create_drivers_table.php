@@ -44,7 +44,7 @@ class CreateDriversTable extends Migration
             $table->integer('emergency_contactno');
             $table->string('SSS', 20);
             $table->string('license_number', 20);
-            $table->string('status');
+            $table->enum('status', ['Available', 'Not Available']);
             $table->date('expiry_date');
 
 
