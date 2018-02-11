@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="col-md-6 col-lg-6">
-<div class="panel panel-primary">
     <div class="panel-heading">My Drivers</div>
     <div class="panel-body">
        
@@ -21,7 +20,6 @@
         <li class="list-group-item">Expiry Date: {{ $driver->expiry_date }}</li>
 
     </ul>
-    </div>
     </div>
 </div>
 <a href="/home/drivers/{{ $driver->driver_id }}/edit/">Edit</a>

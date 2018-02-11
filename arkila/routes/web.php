@@ -21,4 +21,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('home/drivers', 'DriversController');
+Route::resource('home/operators', 'OperatorsController');
 
