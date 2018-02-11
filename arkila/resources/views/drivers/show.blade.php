@@ -24,6 +24,8 @@
     </div>
     </div>
 </div>
+<a href="/home/drivers/{{ $driver->driver_id }}/edit/">Edit</a>
+<br>
 <a href="/home/drivers">View All Drivers</a>
 
 @endsection

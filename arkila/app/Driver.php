@@ -8,34 +8,8 @@ class Driver extends Model
 {
     protected $primaryKey = 'driver_id';
     
-    protected $fillable = [
+    protected $guarded = [
         'driver_id',
-        'last_name',
-        'first_name',
-        'middle_name',
-        'contact_number',
-        'address',
-        'provincial_address',
-        'age',
-        'birth_date',
-        'birth_place',
-        'gender',
-        'citizenship',
-        'civil_status',
-        'number_of_children',
-        'spouse',
-        'spouse_birthdate',
-        'father_name',
-        'father_occupation',
-        'mother_name',
-        'mother_occupation',
-        'person_in_case_of_emergency',
-        'emergency_address',
-        'emergency_contactno',
-        'SSS',
-        'license_number',
-        'status',
-        'expiry_date',
     ];  
 	
     //

@@ -27,6 +27,13 @@ class CreateVansTable extends Migration
             ->onDelete('restrict')
             ->onUpdate('cascade');
 
+            $table->integer('operator_id')
+            ->unsigned();
+
+            $table->foreign('operator_id')
+            ->references('operator_id')->on('operators');
+
+
             $table->string('model');       
             $table->string('seating_capacity', 2);
 

@@ -20,21 +20,25 @@
                   <thead>
                     <tr>
 
-                        <th><em class="fa fa-cog"></em></th>
+                        <!-- <th><em class="fa fa-cog"></em></th> -->
                         <th class="hidden-xs">ID</th>
                         <th>Name</th>
-                        <th>Status</th>
+                        <th>Contact Number</th>
+                        <th>Address</th>
+                        <th>Age</th>
+                        <th>Actions</th>
 
                     </tr> 
                   </thead>
                   <tbody>
                   @foreach ($drivers as $driver)
                           <tr>
-                            <td align="center"><a href="/home/drivers/{{ $driver->driver_id }}/edit/">Edit</a>
-                            </td>
                             <td class="hidden-xs">{{ $driver->driver_id }}</td>
-                            <td><a href="drivers/{{ $driver->driver_id }}">{{ $driver->first_name }} {{ $driver->middle_name }} {{ $driver->last_name }}</a></td>
-                            <td>{{ $driver->status }}                            </td>
+                            <td>{{ $driver->first_name }} {{ $driver->middle_name }} {{ $driver->last_name }}</td>
+                            <td>{{ $driver->contact_number}} </td>
+                            <td>{{ $driver->address }} </td>
+                            <td>{{ $driver->age }} </td>
+                            <td> <a href="drivers/{{ $driver->driver_id }}">View Details</a> </td>
 
                           </tr>
                   @endforeach
