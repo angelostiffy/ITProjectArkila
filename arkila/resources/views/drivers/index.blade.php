@@ -34,7 +34,7 @@
                             </td>
                             <td class="hidden-xs">{{ $driver->driver_id }}</td>
                             <td><a href="drivers/{{ $driver->driver_id }}">{{ $driver->first_name }} {{ $driver->middle_name }} {{ $driver->last_name }}</a></td>
-                            <td>{{ $driver->status }}</td>
+                            <td>{{ $driver->status }}                            </td>
 
                           </tr>
                   @endforeach
