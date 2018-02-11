@@ -36,7 +36,7 @@ class Driver extends Model
         'license_number',
         'status',
         'expiry_date',
-    ];
+    ];  
 	
     //
     public function operator(){

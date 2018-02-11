@@ -118,7 +118,9 @@ class DriversController extends Controller
             'first_name' => $request->input('driver-firstname'),
             'middle_name' => $request->input('driver-middlename'),
             'address' => $request->input('driver-address'),
-        ]);
+            'status' => $request->input('driver-status'),
+
+            ]);
         //
         if ($driverUpdate) {
             return redirect('/home/drivers');
