@@ -21,10 +21,15 @@
     <input type="name" class="form-control" name="middle" placeholder="Enter Driver's Middle Name" value="{{ isset($driver) ? $driver->middle_name : '' }}">
 
     <label>Operator</label>
-    <select name="cars">
+    <select name="operator">
     <option value="0">Select Category</option>    
-      <option value="{{ $driver->driver_id }}"></option>
+    @foreach($operator as $operators)
+    <option value="{{ $operators->operator_id }}"{{ $operators->operator_id == $driver->operator->operator_id ? 'selected="selected"' : '' }}>{{ $operators->first_name . " " . $operators->last_name }}</option>
+    @endforeach
+
     </select>
+    <br>
+
  
     <label>Address</label>
     <input type="text" class="form-control" name="address" placeholder="Enter Driver's Address" value="{{ isset($driver) ? $driver->address : '' }}">

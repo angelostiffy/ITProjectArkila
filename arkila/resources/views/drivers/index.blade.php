@@ -26,6 +26,7 @@
                         <th>Contact Number</th>
                         <th>Address</th>
                         <th>Age</th>
+                        <th>Operator</th>
                         <th>Actions</th>
 
                     </tr> 
@@ -38,8 +39,14 @@
                             <td>{{ $driver->contact_number}} </td>
                             <td>{{ $driver->address }} </td>
                             <td>{{ $driver->age }} </td>
-                            <td> <a href="drivers/{{ $driver->driver_id }}">View Details</a> </td>
-
+                            <td>{{ $driver->operator->first_name . " " . $driver->operator->last_name }} </td>
+                            <td> <a href="drivers/{{ $driver->driver_id }}">View Details</a>
+                            <form action="{{ route('drivers.destroy', [$driver->driver_id]) }}" method="POST">
+                                 {{ csrf_field() }}
+                                 <input type="hidden" name="_method" value="DELETE">
+                                 <button>Delete</button> 
+                                </form>
+                            </td>
                           </tr>
                   @endforeach
 

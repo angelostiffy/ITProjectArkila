@@ -40,7 +40,7 @@
                                  <input type="hidden" name="_method" value="DELETE">
                                  <button>Delete</button> 
                                 </form>
-                             </a></td>
+                             </td>
                           </tr>
                   @endforeach
 

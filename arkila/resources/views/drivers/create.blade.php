@@ -17,14 +17,14 @@
     <label>Middle Name</label>
     <input type="name" class="form-control" name="middle" placeholder="Enter Driver's Middle Name">
 
-    <!-- <label>Operator</label>
-    <input type="text" name="operators" list="operatorNames" placeholder="Select Category"/>
-    <datalist id="operatorNames">
-        <option value="0"></option>    
-    @foreach($drivers as $driver)
-      <option value="1">{{ $driver->operator->operator_id }}</option>
+    <label>Operator</label>
+    <select name="operator">
+    <option value="0">Select Category</option>
+    @foreach($operators as $operator)
+    <option value="{{ $operator->operator_id }}">{{ $operator->first_name . " " . $operator->last_name }}</option>
     @endforeach
-    </datalist> -->
+    </select>
+    <br>
 
     <label>Address</label>
     <input type="text" class="form-control" name="address" placeholder="Enter Driver's Address">

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Driver;
+use App\Operator;
+
 use Illuminate\Http\Request;
 
 class DriversController extends Controller
@@ -26,7 +28,9 @@ class DriversController extends Controller
      */
     public function create()
     {
-        return view('drivers.create');//
+        $drivers = Driver::all();
+        $operators = Operator::all();
+        return view('drivers.create', compact('drivers','operators'));//
     }
 
     /**
@@ -39,6 +43,7 @@ class DriversController extends Controller
     {
         $newDriver = [
             'member_id' => $request->member,
+            'operator_id' => $request->operator,
             'first_name' => $request->first,
             'last_name' => $request->last,
             'middle_name' => $request->middle,
@@ -98,7 +103,8 @@ class DriversController extends Controller
      */
     public function edit(Driver $driver)
     {        
-        return view('drivers.edit', compact('driver'));
+        $operator = Operator::all();
+        return view('drivers.edit', compact('driver', 'operator'));
         
         //
     }
@@ -116,6 +122,7 @@ class DriversController extends Controller
         ->update([
             // 'driver_id' => $request->input('id'),
             'member_id' => $request->input('member'),
+            'operator_id' => $request->input('operator'),
             'last_name' => $request->input('last'),
             'first_name' => $request->input('first'),
             'middle_name' => $request->input('middle'),
@@ -159,6 +166,9 @@ class DriversController extends Controller
      */
     public function destroy(Driver $driver)
     {
-        //
+        $findDriver = Driver::find($driver->driver_id);
+        if($findDriver->delete()){
+            return redirect()->route('drivers.index');
+        }       //
     }
 }
