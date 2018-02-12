@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="col-md-6 col-lg-6">
-<div class="panel panel-primary">
     <div class="panel-heading">My Drivers</div>
     <div class="panel-body">
        
@@ -22,8 +21,9 @@
 
     </ul>
     </div>
-    </div>
 </div>
+<a href="/home/drivers/{{ $driver->driver_id }}/edit/">Edit</a>
+<br>
 <a href="/home/drivers">View All Drivers</a>
 
 @endsection

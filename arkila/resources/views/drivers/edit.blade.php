@@ -2,12 +2,14 @@
 
 @section('content')
 <h1>Edit </h1><hr>
-<form method="post" action="{{ route('drivers.index')}} {{ isset($driver) ? '/' . $driver->driver_id : '' }}">
+<form method="post" action="{{ route('drivers.update', [$driver->driver_id]) }}">
 {{ csrf_field() }}
 
     @if (isset($driver))
         {{ method_field('PUT')}}
     @endif
+    <label>Member ID</label>
+    <input type="name" class="form-control" name="member" placeholder="Enter Driver's Member ID" value="{{ isset($driver) ? $driver->member_id : '' }}">
 
     <label>First Name</label>
     <input type="name" class="form-control" name="first" placeholder="Enter Driver's First Name" value="{{ isset($driver) ? $driver->first_name : '' }}">
@@ -18,6 +20,12 @@
     <label>Middle Name</label>
     <input type="name" class="form-control" name="middle" placeholder="Enter Driver's Middle Name" value="{{ isset($driver) ? $driver->middle_name : '' }}">
 
+    <label>Operator</label>
+    <select name="cars">
+    <option value="0">Select Category</option>    
+      <option value="{{ $driver->driver_id }}"></option>
+    </select>
+ 
     <label>Address</label>
     <input type="text" class="form-control" name="address" placeholder="Enter Driver's Address" value="{{ isset($driver) ? $driver->address : '' }}">
 
@@ -79,7 +87,7 @@
     <input type="number" class="form-control" name="peContactnum" placeholder="Enter Driver's Contact in Case of Emergency Contact Number"value="{{ isset($driver) ? $driver->emergency_contactno : '' }}">
 
     <label>SSS #</label>
-    <input type="text" class="form-control" name="sss" placeholder="Enter Driver's SSS Number"value="{{ isset($driver) ? $driver->sss : '' }}">
+    <input type="text" class="form-control" name="sss" placeholder="Enter Driver's SSS Number"value="{{ isset($driver) ? $driver->SSS : '' }}">
 
     <label>License Number</label>
     <input type="text" class="form-control" name="licenseNum" placeholder="Enter Driver's License Number"value="{{ isset($driver) ? $driver->license_number : '' }}">

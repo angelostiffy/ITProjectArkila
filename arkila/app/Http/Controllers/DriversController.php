@@ -38,6 +38,7 @@ class DriversController extends Controller
     public function store(Request $request)
     {
         $newDriver = [
+            'member_id' => $request->member,
             'first_name' => $request->first,
             'last_name' => $request->last,
             'middle_name' => $request->middle,
@@ -113,18 +114,39 @@ class DriversController extends Controller
     {
         $driverUpdate = Driver::where('driver_id', $driver->driver_id)
         ->update([
-            'driver_id' => $request->input('id'),
-            'last_name' => $request->input('driver-lastname'),
-            'first_name' => $request->input('driver-firstname'),
-            'middle_name' => $request->input('driver-middlename'),
-            'address' => $request->input('driver-address'),
-            'status' => $request->input('driver-status'),
+            // 'driver_id' => $request->input('id'),
+            'member_id' => $request->input('member'),
+            'last_name' => $request->input('last'),
+            'first_name' => $request->input('first'),
+            'middle_name' => $request->input('middle'),
+            'address' => $request->input('address'),
+            'contact_number' =>  $request->input('contactn'),
+            'provincial_address' =>  $request->input('paddress'),
+            'age' =>  $request->input('age'),
+            'birth_date' =>  $request->input('birthdate'),
+            'birth_place' =>  $request->input('bplace'),
+            'gender' =>  $request->input('gender'),
+            'citizenship' =>  $request->input('citizenship'),
+            'civil_status' =>  $request->input('cstatus'),
+            'number_of_children' =>  $request->input('nochild'),
+            'spouse' =>  $request->input('spouse'),
+            'spouse_birthdate' =>  $request->input('spousebday'),
+            'father_name' =>  $request->input('father'),
+            'father_occupation' =>  $request->input('fatheroccup'),
+            'mother_name' =>  $request->input('mother'),
+            'mother_occupation' =>  $request->input('motheroccup'),
+            'person_in_case_of_emergency' =>  $request->input('personemergency'),
+            'emergency_address' =>  $request->input('peAddress'),
+            'emergency_contactno' =>  $request->input('peContactnum'),
+            'SSS' =>  $request->input('sss'),
+            'license_number' =>  $request->input('licenseNum'),
+            'expiry_date' =>  $request->input('exp'),
 
             ]);
         //
         if ($driverUpdate) {
             return redirect('/home/drivers');
-        }
+        }  
 
         return back()->withInput();
     }

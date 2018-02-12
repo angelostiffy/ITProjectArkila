@@ -5,14 +5,26 @@
 <form method="post" action="{{ route('drivers.index')}}">
 {{ csrf_field() }}
 
+    <label>Member ID</label>
+    <input type="name" class="form-control" name="member" placeholder="Enter Driver's Member ID">
+
     <label>First Name</label>
     <input type="name" class="form-control" name="first" placeholder="Enter Driver's First Name">
-
+    
     <label>Last Name</label>
     <input type="name" class="form-control" name="last" placeholder="Enter Driver's Last Name">
 
     <label>Middle Name</label>
     <input type="name" class="form-control" name="middle" placeholder="Enter Driver's Middle Name">
+
+    <!-- <label>Operator</label>
+    <input type="text" name="operators" list="operatorNames" placeholder="Select Category"/>
+    <datalist id="operatorNames">
+        <option value="0"></option>    
+    @foreach($drivers as $driver)
+      <option value="1">{{ $driver->operator->operator_id }}</option>
+    @endforeach
+    </datalist> -->
 
     <label>Address</label>
     <input type="text" class="form-control" name="address" placeholder="Enter Driver's Address">
