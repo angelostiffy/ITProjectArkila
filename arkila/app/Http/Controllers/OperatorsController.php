@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Operator;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class OperatorsController extends Controller
@@ -36,9 +38,70 @@ class OperatorsController extends Controller
      */
     public function store(Request $request)
     {
-        $newOperator = [
+
+        $validateData = Validator::make($request->all(),[
+            'firstName' => 'required|max:35',
+            'lastName' => 'required|max:35',
+            'middleName' => 'required|max:35',
+            'address' => 'required|max:100',
+            'contactNumber' => 'required|numeric|digits:10',
+            'provincialAddress' => 'required|max:100',
+            'age' => 'required|numeric',
+            'birthDate' => 'required|date',
+            'birthPlace' => 'required|max:50',
+            'gender' => [
+                'required',
+                Rule::in(['Male', 'Female'])
+            ],
+            'citizenship' => 'required|max:35',
+            'cStatus' => [
+                'required',
+                Rule::in(['Single', 'Married', 'Divorced']) 
+            ],
+            'noChild' => 'required|max:3',
+            'spouse' => 'required|max:120',
+            'spouseBirthDate' => 'required|date',
+            'father' => 'required|max:120',
+            'fatherOccupation' => 'required|max:50',
+            'mother' => 'required|max:120',
+            'motherOccupation' => 'required|max:50',
+            'pCaseofEmergency' => 'required|max:120',
+            'emergencyAddress' => 'required|max:50',
+            'emergencyContactNo' => 'required|numeric|digits:10',
+            'sssId' => 'required',    
+        ]); 
+        $contactNumber = '+63'.request('emergencyContactNo');
+        // $newOperator = [
+        //     'first_name' => $request->firstName,
+        //     'last_name' => $request->lastName,
+        //     'middle_name' => $request->middleName,
+        //     'address' => $request->address,
+        //     'contact_number' => $request->contactNumber,
+        //     'provincial_address' => $request->provincialAddress,
+        //     'age' => $request->age,
+        //     'birth_date' => $request->birthDate,
+        //     'birth_place' => $request->birthPlace,
+        //     'gender' => $request->gender,
+        //     'citizenship' => $request->citizenship,
+        //     'civil_status' => $request->cStatus,
+        //     'number_of_children' => $request->noChild,
+        //     'spouse' => $request->spouse,
+        //     'spouse_birthdate' => $request->spouseBirthDate,
+        //     'father_name' => $request->father,
+        //     'father_occupation' => $request->fatherOccupation,
+        //     'mother_name' => $request->mother,
+        //     'mother_occupation' => $request->motherOccupation,
+        //     'person_in_case_of_emergency' => $request->pCaseofEmergency,
+        //     'emergency_address' => $request->emergencyAddress,
+        //     'emergency_contactno' => $request->emergencyContactNo,
+        //     'SSS' => $request->sssId,
+        // ];
+        if($validateData->fails()){
+            return redirect('home/operators/create')->withErrors($validateData)->withInput();
+        }
+        Operator::create([
             'first_name' => $request->firstName,
-            'last_name' => $request->lastName,
+            'last_name'=> $request->lastName,
             'middle_name' => $request->middleName,
             'address' => $request->address,
             'contact_number' => $request->contactNumber,
@@ -58,16 +121,15 @@ class OperatorsController extends Controller
             'mother_occupation' => $request->motherOccupation,
             'person_in_case_of_emergency' => $request->pCaseofEmergency,
             'emergency_address' => $request->emergencyAddress,
-            'emergency_contactno' => $request->emergencyContactNo,
-            'SSS' => $request->sssId,
-        ];
-
-        $save = Operator::insert($newOperator);
-         if($save){
-            return redirect('/home/operators');
-         }else{
-            return redirect()->back->withInput();
-         }
+            'emergency_contactno' => $contactNumber,
+            'SSS' => $request->sssId, 
+        ]);
+         // if($save){
+         //    return redirect('/home/operators');
+         // }else{
+         //    return redirect()->back->withInput();
+         // }
+        return redirect('/home/operators');
     }
 
     /**
@@ -127,6 +189,10 @@ class OperatorsController extends Controller
             'emergency_contactno' => $request->input('emergencyContactNo'),
             'SSS' => $request->input('sssId'),
         ]);
+
+        // $this->validate([
+
+        // ]);
 
         if($operatorUpdate){
             return redirect()->route('operators.show', ['operator' => $operator->operator_id]);       
