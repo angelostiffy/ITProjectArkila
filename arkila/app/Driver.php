@@ -17,7 +17,10 @@ class Driver extends Model
     	return $this->belongsTo(Operator::Class, 'operator_id');
     }
     public function van(){
-    	return $this->hasOne(Van::Class, 'plate_number');
+    	return $this->hasOne(Van::Class, 'driver_id');
     }
 
+    public function getFullNameAttribute(){
+        return "{$this->first_name} {$this->last_name}";
+    }
 }

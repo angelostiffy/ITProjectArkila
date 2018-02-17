@@ -3,7 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use Driver;
+use App\Driver;
 
 class checkDriver implements Rule
 {
