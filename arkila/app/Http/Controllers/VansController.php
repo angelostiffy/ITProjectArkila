@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Van;
 
 class VansController extends Controller
 {
@@ -13,7 +14,7 @@ class VansController extends Controller
      */
     public function index()
     {
-        $vans = Van::all()->latest();
+        $vans = Van::latest();
         return view('vans',compact('vans'));
     }
 

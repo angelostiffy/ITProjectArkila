@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Driver;
 use App\Operator;
-
 use Illuminate\Http\Request;
+use App\Http\Requests\DriverRequest;
+
 
 class DriversController extends Controller
 {
@@ -39,16 +41,19 @@ class DriversController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DriverRequest $request)
     {
-        $newDriver = [
+        $emContactNumber = '+63'.request('peContactnum');
+        $perContactNumber = '+63'.request('contactn');
+
+        $newDriver = Driver::create ([
             'member_id' => $request->member,
             'operator_id' => $request->operator,
             'first_name' => $request->first,
             'last_name' => $request->last,
             'middle_name' => $request->middle,
             'address' => $request->address,
-            'contact_number' => $request->contactn,
+            'contact_number' => $perContactNumber,
             'provincial_address' => $request->paddress,
             'age' => $request->age,
             'birth_date' => $request->birthdate,
@@ -65,19 +70,13 @@ class DriversController extends Controller
             'mother_occupation' => $request->motheroccup,
             'person_in_case_of_emergency' => $request->personemergency,
             'emergency_address' => $request->peAddress,
-            'emergency_contactno' => $request->peContactnum,
+            'emergency_contactno' => $emContactNumber,
             'SSS' => $request->sss,
             'license_number' => $request->licenseNum,
             'expiry_date' => $request->exp,
-        ];
+        ]);
 
-        $save = Driver::insert($newDriver);
-
-        if($save)
-            return redirect('/home/drivers');
-
-        else
-            return redirect()->back->withInput();
+            return redirect('/home/drivers')->with('success', 'Information created successfully');
         //
     }
 
@@ -116,44 +115,45 @@ class DriversController extends Controller
      * @param  \App\Driver  $driver
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Driver $driver)
+    public function update(DriverRequest $request, Driver $driver)
     {
-        $driverUpdate = Driver::where('driver_id', $driver->driver_id)
-        ->update([
-            // 'driver_id' => $request->input('id'),
-            'member_id' => $request->input('member'),
-            'operator_id' => $request->input('operator'),
-            'last_name' => $request->input('last'),
-            'first_name' => $request->input('first'),
-            'middle_name' => $request->input('middle'),
-            'address' => $request->input('address'),
-            'contact_number' =>  $request->input('contactn'),
-            'provincial_address' =>  $request->input('paddress'),
-            'age' =>  $request->input('age'),
-            'birth_date' =>  $request->input('birthdate'),
-            'birth_place' =>  $request->input('bplace'),
-            'gender' =>  $request->input('gender'),
-            'citizenship' =>  $request->input('citizenship'),
-            'civil_status' =>  $request->input('cstatus'),
-            'number_of_children' =>  $request->input('nochild'),
-            'spouse' =>  $request->input('spouse'),
-            'spouse_birthdate' =>  $request->input('spousebday'),
-            'father_name' =>  $request->input('father'),
-            'father_occupation' =>  $request->input('fatheroccup'),
-            'mother_name' =>  $request->input('mother'),
-            'mother_occupation' =>  $request->input('motheroccup'),
-            'person_in_case_of_emergency' =>  $request->input('personemergency'),
-            'emergency_address' =>  $request->input('peAddress'),
-            'emergency_contactno' =>  $request->input('peContactnum'),
-            'SSS' =>  $request->input('sss'),
-            'license_number' =>  $request->input('licenseNum'),
-            'expiry_date' =>  $request->input('exp'),
+        $emContactNumber = '+63'.request('peContactnum');
+        $perContactNumber = '+63'.request('contactn');
+
+        $driver->update([
+            'member_id' => $request->member,
+            'operator_id' => $request->operator,
+            'last_name' => $request->last,
+            'first_name' => $request->first,
+            'middle_name' => $request->middle,
+            'address' => $request->address,
+            'contact_number' => $perContactNumber,
+            'provincial_address' =>  $request->paddress,
+            'age' =>  $request->age,
+            'birth_date' =>  $request->birthdate,
+            'birth_place' =>  $request->bplace,
+            'gender' =>  $request->gender,
+            'citizenship' =>  $request->citizenship,
+            'civil_status' =>  $request->cstatus,
+            'number_of_children' =>  $request->nochild,
+            'spouse' =>  $request->spouse,
+            'spouse_birthdate' =>  $request->spousebday,
+            'father_name' =>  $request->father,
+            'father_occupation' =>  $request->fatheroccup,
+            'mother_name' =>  $request->mother,
+            'mother_occupation' =>  $request->motheroccup,
+            'person_in_case_of_emergency' =>  $request->personemergency,
+            'emergency_address' =>  $request->peAddress,
+            'emergency_contactno' => $emContactNumber,
+            'SSS' =>  $request->sss,
+            'license_number' =>  $request->licenseNum,
+            'expiry_date' =>  $request->exp,
 
             ]);
         //
-        if ($driverUpdate) {
-            return redirect('/home/drivers');
-        }  
+        if($driver){
+            return redirect()->route('drivers.show', ['driver' => $driver->driver_id])->with('success', 'Information updated successfully');       
+        }
 
         return back()->withInput();
     }
