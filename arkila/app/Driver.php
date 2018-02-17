@@ -16,11 +16,22 @@ class Driver extends Model
     public function operator(){
     	return $this->belongsTo(Operator::Class, 'operator_id');
     }
+
     public function van(){
     	return $this->hasOne(Van::Class, 'driver_id');
+    }
+
+
+    public function getContactnAttribute($value){
+        return substr($value, 3);
+    }
+
+    public function getPeContactnumAttribute($value){
+        return substr($value, 3);
     }
 
     public function getFullNameAttribute(){
         return "{$this->first_name} {$this->last_name}";
     }
+
 }

@@ -8,8 +8,8 @@ use App\Driver;
 use App\Operator;
 use App\Rules\checkDriver;
 use App\Rules\checkOperator;
-class VansController extends Controller
-{
+
+class VansController extends Controller {
     /**
      * Display a listing of the resource.
      *
@@ -17,9 +17,11 @@ class VansController extends Controller
      */
     public function index()
     {
+
         $vans = Van::latest()->get();
 
         return view('vans.index',compact('vans'));
+
     }
 
     /**

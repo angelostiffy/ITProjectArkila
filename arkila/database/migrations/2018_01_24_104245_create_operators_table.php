@@ -18,7 +18,7 @@ class CreateOperatorsTable extends Migration
             $table->string('last_name', 35);
             $table->string('first_name', 35);
             $table->string('middle_name', 35);
-            $table->integer('contact_number')->nullable();
+            $table->string('contact_number')->nullable();
             $table->string('address',100);
             $table->string('provincial_address',100);
             $table->smallInteger('age');
@@ -36,7 +36,7 @@ class CreateOperatorsTable extends Migration
             $table->string('mother_occupation', 50)->nullable();
             $table->string('person_in_case_of_emergency', 120);
             $table->string('emergency_address', 50);
-            $table->integer('emergency_contactno');
+            $table->string('emergency_contactno');
             $table->string('SSS', 20);
 
 

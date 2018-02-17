@@ -34,13 +34,13 @@
                             <td>{{ $operator->contact_number }}</td>
                             <td>{{ $operator->address }}</td>
                             <td>{{ $operator->age }}</td>
-                            <td><a href="operators/{{ $operator->operator_id }}">View Details</a>
+                            <td><a href="/home/operators/{{ $operator->operator_id }}">View Details</a>
                                 <form action="{{ route('operators.destroy', [$operator->operator_id]) }}" method="POST">
                                  {{ csrf_field() }}
                                  <input type="hidden" name="_method" value="DELETE">
                                  <button>Delete</button> 
                                 </form>
-                             </a></td>
+                             </td>
                           </tr>
                   @endforeach
 
