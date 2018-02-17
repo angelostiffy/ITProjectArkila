@@ -3,7 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use Operator;
+use App\Operator;
 class checkOperator implements Rule
 {
     /**
@@ -25,7 +25,7 @@ class checkOperator implements Rule
      */
     public function passes($attribute, $value)
     {
-        Operator::find($value) =! null;
+        return Operator::find($value) != null;
     }
 
     /**
@@ -35,6 +35,6 @@ class checkOperator implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'The entered Operator does not exist';
     }
 }

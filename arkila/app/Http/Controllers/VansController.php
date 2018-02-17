@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Van;
+use App\Driver;
+use App\Operator;
+use App\Rules\checkDriver;
+use App\Rules\checkOperator;
 
-class VansController extends Controller
-{
+class VansController extends Controller {
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +17,11 @@ class VansController extends Controller
      */
     public function index()
     {
-        $vans = Van::latest();
-        return view('vans',compact('vans'));
+
+        $vans = Van::latest()->get();
+
+        return view('vans.index',compact('vans'));
+
     }
 
     /**
@@ -25,8 +31,9 @@ class VansController extends Controller
      */
     public function create()
     {
-        //
-        return view('vans.create');
+        $drivers = Driver::all();
+        $operators = Operator::all();
+        return view('vans.create',compact('drivers','operators'));
     }
 
     /**
@@ -40,12 +47,18 @@ class VansController extends Controller
         $this->validate(request(), [
             "plateNumber" => 'required|between:6,8',
             "model" =>  'required',
-            "operatorId" => ['required|numeric', new checkOperator],
-            "driverId" => ['numeric', new checkDriver],
+            "operator" => ['required','numeric', new checkOperator],
+            "driver" => ['numeric', new checkDriver],
             "seatingCapacity" => 'required|between:2,10|numeric'
             ]);
 
-        Van::create(request(['plateNumber','model','operatorId','driverId','seatingCapacity']));
+        Van::create([
+            'plate_number' => request('plateNumber'),
+            'model' => request('model'),
+            'operator_id' => request('operator'),
+            'driver_id' => request('driver'),
+            'seating_capacity' => request('seatingCapacity')
+        ]);
     	session()->flash('message','Van successfully created');
     	return redirect('home/vans');
 
@@ -70,7 +83,9 @@ class VansController extends Controller
      */
     public function edit(Van $van)
     {
-        return view('vans.edit', compact('van'));
+        $drivers = Driver::all();
+        $operators = Operator::all();
+        return view('vans.edit', compact('van','drivers','operators'));
     }
 
     /**
@@ -85,13 +100,21 @@ class VansController extends Controller
         $this->validate(request(), [
             "plateNumber" => 'required|between:6,8',
             "model" =>  'required',
-            "operatorId" => ['required|numeric', new checkOperator],
-            "driverId" => ['numeric', new checkDriver],
+            "operator" => ['required','numeric', new checkOperator],
+            "driver" => ['numeric', new checkDriver],
             "seatingCapacity" => 'required|between:2,10|numeric'
-            ]);
-    	$van->update(request(['plateNumber','model','operatorId','driverId','seatingCapacity']));
+        ]);
+
+        $van->update([
+            'plate_number' => request('plateNumber'),
+            'model' => request('model'),
+            'operator_id' => request('operator'),
+            'driver_id' => request('driver'),
+            'seating_capacity' => request('seatingCapacity')
+        ]);
+
     	session()->flash('message','Van '.request('plateNumber').'Successfully Edited');
-    	return back();
+    	return redirect('home/vans');
     }
 
     /**
@@ -102,7 +125,7 @@ class VansController extends Controller
      */
     public function destroy(Van $van)
     {
-        $van->destroy();
+        $van->delete();
     	return back();
     }
 }
