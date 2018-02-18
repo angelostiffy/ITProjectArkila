@@ -1,14 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\FeesAndDeduction;
 use App\Rules\checkCurrency;
 use Illuminate\Http\Request;
 
-class FeesController extends Controller
+class DiscountsController extends Controller
 {
-
     /**
      * Show the form for creating a new resource.
      *
@@ -16,7 +14,7 @@ class FeesController extends Controller
      */
     public function create()
     {
-        return view('settings.createFees');
+        return view('settings.createDiscounts');
     }
 
     /**
@@ -35,7 +33,7 @@ class FeesController extends Controller
         FeesAndDeduction::create([
             "description" => request('description'),
             "amount" =>request('amount'),
-            "type" => "Fee"
+            "type" => "Discount"
         ]);
 
         return redirect('/home/settings');
@@ -47,9 +45,9 @@ class FeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(FeesAndDeduction $fee)
+    public function edit(FeesAndDeduction $discount)
     {
-        return view('settings.editFees',compact('fee'));
+        return view('settings.editDiscounts',compact('discount'));
     }
 
     /**
@@ -59,14 +57,14 @@ class FeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FeesAndDeduction $fee)
+    public function update(FeesAndDeduction $discount)
     {
         $this->validate(request(),[
-            "description" => "unique:fees_and_deductions,description,".$fee->fad_id.",fad_id|required|max:30",
+            "description" => "unique:fees_and_deductions,description,".$discount->fad_id.",fad_id|required|max:30",
             "amount" => ['required',new checkCurrency]
         ]);
 
-        $fee->update(request(["description","amount"]));
+        $discount->update(request(["description","amount"]));
         return redirect('/home/settings');
     }
 
@@ -76,9 +74,9 @@ class FeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FeesAndDeduction $fee)
+    public function destroy(FeesAndDeduction $discount)
     {
-        $fee->delete();
+        $discount->delete();
         return back();
     }
 }

@@ -23,4 +23,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('home/drivers', 'DriversController');
 Route::resource('home/operators', 'OperatorsController');
 Route::resource('home/vans', 'VansController');
-Route::resource('home/settings', 'RevenueController');
+Route::resource('home/settings/fees', 'FeesController', [
+    'except' => ['index','show']
+]);
+Route::resource('home/settings/discounts', 'DiscountsController', [
+    'except' => ['index','show']
+]);
+Route::get('home/settings/', 'HomeController@settings');
