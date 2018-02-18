@@ -14,9 +14,9 @@ class CreateAnnouncementsTable extends Migration
     public function up()
     {
         Schema::create('announcements', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('announcement_id');
             $table->string('description');
-            $table->enum('viewer', ['Driver', 'Customer']);
+            $table->enum('viewer', ['Public','Driver Only', 'Customer Only']);
             $table->timestamps();
         });
     }

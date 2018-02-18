@@ -34,9 +34,9 @@
 							Driver </a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="home/announcements">
 							<i class="glyphicon glyphicon-user"></i>
-							Account Settings </a>
+							Announcements </a>
 						</li>
 						<li>
 							<a href="#" target="_blank">
