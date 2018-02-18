@@ -43,10 +43,11 @@ class DriversController extends Controller
      */
     public function store(DriverRequest $request)
     {
+
         $emContactNumber = '+63'.request('peContactnum');
         $perContactNumber = '+63'.request('contactn');
 
-        $newDriver = Driver::create ([
+        Driver::create ([
             'member_id' => $request->member,
             'operator_id' => $request->operator,
             'first_name' => $request->first,
@@ -76,7 +77,7 @@ class DriversController extends Controller
             'expiry_date' => $request->exp,
         ]);
 
-            return redirect('/home/drivers')->with('success', 'Information created successfully');
+        return redirect('/home/drivers')->with('success', 'Information created successfully');
         //
     }
 
@@ -117,6 +118,7 @@ class DriversController extends Controller
      */
     public function update(DriverRequest $request, Driver $driver)
     {
+
         $emContactNumber = '+63'.request('peContactnum');
         $perContactNumber = '+63'.request('contactn');
 
@@ -150,7 +152,8 @@ class DriversController extends Controller
             'expiry_date' =>  $request->exp,
 
             ]);
-        //
+        //       
+
         if($driver){
             return redirect()->route('drivers.show', ['driver' => $driver->driver_id])->with('success', 'Information updated successfully');       
         }

@@ -18,20 +18,15 @@ class Driver extends Model
     }
 
     public function van(){
-    	return $this->hasOne(Van::Class, 'driver_id');
+    	return $this->hasOne(Van::Class, 'plate_number');
     }
 
-
-    public function getContactnAttribute($value){
+    public function getContactNumberAttribute($value){
         return substr($value, 3);
     }
 
-    public function getPeContactnumAttribute($value){
+    public function getEmergencyContactnoAttribute($value){
         return substr($value, 3);
-    }
-
-    public function getFullNameAttribute(){
-        return "{$this->first_name} {$this->last_name}";
     }
 
 }
