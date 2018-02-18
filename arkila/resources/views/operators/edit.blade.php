@@ -6,6 +6,7 @@
 {{ csrf_field() }}
 {{method_field('PATCH')}}
 
+	<input type="hidden" name="opId" value="{{$operator->operator_id}}">
     <div class="form-group">
 	        <label >First Name</label>
 	        <input type="text" class="form-control" name="firstName" value="{{ $operator->first_name}}" >
