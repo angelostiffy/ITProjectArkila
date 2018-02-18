@@ -13,7 +13,7 @@ class CreateFeesaanddeductionTable extends Migration
      */
     public function up()
     {
-        Schema::create('feesaanddeduction', function (Blueprint $table) {
+        Schema::create('fees_and_deductions', function (Blueprint $table) {
             $table->increments('fad_id');
             $table->string('description', 30);
             $table->double('amount')->unsigned();
