@@ -513,8 +513,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Trip Log Baguio
+        Daily Ledger Log <a href="#" class="btn btn-primary btn-md" style="margin-left: 1.5%" >
+            Add Report <span class="glyphicon glyphicon-plus-sign"></span> 
+      </a>
       </h1>
+  
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Dashboard</li>
@@ -523,91 +526,34 @@
 
     <!-- Main content -->
     <section class="content">
-          <div class="box">
+          <div id="ledgerInfo" class="box">
             <!-- /.box-header -->
+          
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="dailyLedgerTable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Trip ID</th>
-                  <th>Destination</th>
-                  <th>Van</th>
-                  <th>Departed On</th>
+                  <th>Date</th>
+                  <th>Profit/Loss</th>
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                  <td>Chabal loves shaina</td>
-                  <td>0998273/td>
-                  <td>badihoy</td>
+                  <td>May 23, 2018</td>
+                  <td>5200</td>
                     <td class="center-block">
                         <div class="center-block">
-                             <button class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"> View </i></button>
-                             <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</i></button>
+                             <a button class="btn btn-info" href="dailyLedger.html" ><i class="glyphicon glyphicon-eye-open"> View </i></a>
                         </div>
                     </td>
-                        <div id="myModal" class="modal fade" role="dialog">
-                          <div id="tripModal" class="modal-dialog">
-
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Trip Details</h4>
-                              </div>
-                              <div class="modal-body">
-                                
-                                <div class="well">
-                                <p>Date:</p>
-                                <p>Time:</p>
-                                <p>Origin:</p>
-                                <p>Destination:</p>
-                                </div>
-                                    
-                                <div class="well">
-                                    <p style="font-size: 10pt">Passenger Destination:</p>
-                                    <!-- Dito lagay yung query -->
-                                    <p></p>
-                                </div>
-                                  
-                                <div class="well">
-                                    <p style="font-size: 10pt">Driver's Fees:</p>
-                                    <!-- Dito lagay yung query -->
-                                    <p></p>
-                                </div>
-                                  
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>          
+                    
                 </tr>
-                <tr>
-                  <td>miguel</td>
-                  <td>3254353</td>
-                  <td>basura</td>
-                  <td>23</td>
-                  
-                </tr>
-                <tr>
-                  <td>dixon</td>
-                  <td>23542456</td>
-                  <td>sa tabi</td>
-                  <td>26</td>
-                  
-                </tr>
-                <tr>
-                  <td>sir bench</td>
-                  <td>0982163711212314</td>
-                  <td>silang</td>
-                  <td>60</td>
-                  
-                </tr>
+                
                 </tbody>
               </table>
+            
+              
             </div>
             <!-- /.box-body -->
           </div>
@@ -837,14 +783,14 @@
 <!-- page script -->
     <script>
   $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
+    $('#example2').DataTable()
+    $('#dailyLedgerTable').DataTable({
       'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
+      'lengthChange': true,
+      'searching'   : true,
       'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
+      'info'        : false,
+      'autoWidth'   : true
     })
   })
 </script>
