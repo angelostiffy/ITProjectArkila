@@ -45,12 +45,12 @@ class VansController extends Controller {
     public function store()
     {
         $this->validate(request(), [
-            "plateNumber" => 'required|between:6,8',
+            "plateNumber" => 'unique:vans,plate_number|required|between:6,8',
             "model" =>  'required',
-            "operator" => ['required','numeric', new checkOperator],
-            "driver" => ['numeric', new checkDriver],
+            "operator" => 'exists:operators,operator_id|required|numeric',
+            "driver" => 'exists:drivers,driver_id|numeric',
             "seatingCapacity" => 'required|between:2,10|numeric'
-            ]);
+        ]);
 
         Van::create([
             'plate_number' => request('plateNumber'),
@@ -98,10 +98,10 @@ class VansController extends Controller {
     public function update(Van $van)
     {
         $this->validate(request(), [
-            "plateNumber" => 'required|between:6,8',
+            "plateNumber" => 'unique:vans,plate_number,'.$van->plate_number.',plate_number|required|between:6,8',
             "model" =>  'required',
-            "operator" => ['required','numeric', new checkOperator],
-            "driver" => ['numeric', new checkDriver],
+            "operator" => 'exists:operators,operator_id|required|numeric',
+            "driver" => 'exists:drivers,driver_id|numeric',
             "seatingCapacity" => 'required|between:2,10|numeric'
         ]);
 

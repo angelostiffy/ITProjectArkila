@@ -12,9 +12,9 @@
 
         <div class="form-group">
             <label for="Driver">Driver</label>
-            <select id="Driver" name="driver" value="{{$van->driver_id}}">
+            <select id="Driver" name="driver">
                 @foreach($drivers as $driver)
-                    <option value="{{$driver->driver_id}}">{{$driver->full_name}}</option>
+                    <option value="{{$driver->driver_id}}" @if ($driver->driver_id === $van->driver_id) {{'selected'}} @endif>{{$driver->full_name}}</option>
                 @endforeach
             </select>
         </div>
@@ -23,7 +23,7 @@
             <label for="Operator">Operator</label>
             <select id="Operator" name="operator" value="{{$van->operator_id}}">
                 @foreach($operators as $operator)
-                    <option value="{{$operator->operator_id}}">{{$operator->full_name}}</option>
+                    <option value="{{$operator->operator_id}}" @if ($operator->operator_id === $van->operator_id) {{'selected'}} @endif>{{$operator->full_name}}</option>
                 @endforeach
             </select>
         </div>
