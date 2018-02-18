@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDestinationsTable extends Migration
+class CreateAnnouncementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateDestinationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('destinations', function (Blueprint $table) {
-            $table->increments('destination_id');
+        Schema::create('announcements', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('description');
-            $table->enum('terminal', ['Cabanatuan City', 'San Jose City']);
-            $table->double('amount')
-            ->unsigned();
+            $table->enum('viewer', ['Driver', 'Customer']);
             $table->timestamps();
-
-             $table->engine = 'InnoDB';
         });
     }
 
@@ -32,6 +28,6 @@ class CreateDestinationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('destinations');
+        Schema::dropIfExists('announcements');
     }
 }

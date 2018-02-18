@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\FeesAndDeduction;
 use Illuminate\Http\Request;
 
-class FeesAndDeductionsController extends Controller
+class FeesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,8 @@ class FeesAndDeductionsController extends Controller
      */
     public function index()
     {
-        //
+        $fees = FeesAndDeduction::latest()->where('type','fee')->get();
+        return view('fees.index',compact($fees));
     }
 
     /**
@@ -23,7 +25,7 @@ class FeesAndDeductionsController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -34,7 +36,10 @@ class FeesAndDeductionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(),[
+            "description" => "unique:fees_and_deductions,description|required|max:30",
+            "amount" => "required|",
+        ]);
     }
 
     /**
