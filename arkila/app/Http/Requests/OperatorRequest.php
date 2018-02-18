@@ -44,9 +44,9 @@ class OperatorRequest extends FormRequest
                 'required',
                 Rule::in(['Single', 'Married', 'Divorced']) 
             ],
-            'noChild' => 'required|max:3',
+            'noChild' => 'max:2',
             'spouse' => 'max:120',
-            'spouseBirthDate' => 'date',
+            'spouseBirthDate' => 'nullable|date',
             'father' => 'max:120',
             'fatherOccupation' => 'max:50',
             'mother' => 'max:120',
@@ -54,7 +54,7 @@ class OperatorRequest extends FormRequest
             'pCaseofEmergency' => 'required|max:120',
             'emergencyAddress' => 'required|max:50',
             'emergencyContactNo' => 'required|numeric|digits:10',
-            'sssId' => 'required',
+            'sssId' => 'required|unique:operators,SSS',
         ];
     }
 }

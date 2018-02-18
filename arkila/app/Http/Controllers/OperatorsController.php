@@ -41,7 +41,7 @@ class OperatorsController extends Controller
 
         $emContactNumber = '+63'.request('emergencyContactNo');
         $perContactNumber = '+63'.request('contactNumber');
-        Operator::create([
+        dd(Operator::create([
             'first_name' => $request->firstName,
             'last_name'=> $request->lastName,
             'middle_name' => $request->middleName,
@@ -65,8 +65,9 @@ class OperatorsController extends Controller
             'emergency_address' => $request->emergencyAddress,
             'emergency_contactno' => $emContactNumber,
             'SSS' => $request->sssId, 
-        ]);
-         
+        ]));
+        
+
         return redirect('/home/operators')->with('success', 'Information created successfully');
     }
 
