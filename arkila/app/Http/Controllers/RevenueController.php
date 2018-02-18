@@ -13,7 +13,8 @@ class RevenueController extends Controller
      */
     public function index()
     {
-        return view('settings.index');
+        $revenues = FeesAndDeduction::all9();
+        return view('settings.index', ['revenues' => $revenues]);
     }
 
     /**

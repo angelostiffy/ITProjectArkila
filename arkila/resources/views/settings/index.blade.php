@@ -17,9 +17,11 @@
             	<div class="tab-pane active" id="tab_3">
             		<table class="table table-striped table-bordered table-list">
 						<thead>
-							<tr>Revenue</tr>
-							<tr>Amount</tr>
-							<tr>Actions</tr>
+							<tr>
+								<th>Revenue</th>
+								<th>Amount</th>
+								<th>Actions</th>
+							</tr>
 						</thead>
 						<tbody>
 							<tr>
