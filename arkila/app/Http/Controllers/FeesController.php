@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\FeesAndDeduction;
+use App\Rules\checkCurrency;
 use Illuminate\Http\Request;
 
 class FeesController extends Controller
@@ -38,7 +39,7 @@ class FeesController extends Controller
     {
         $this->validate(request(),[
             "description" => "unique:fees_and_deductions,description|required|max:30",
-            "amount" => "required|",
+            "amount" => ['required',new checkCurrency]
         ]);
     }
 
@@ -71,9 +72,12 @@ class FeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FeesAndDeduction $fee)
     {
-        //
+        $this->validate(request(),[
+            "description" => "unique:fees_and_deductions,description,".$fee->fad_id.",fad_id|required|max:30",
+            "amount" => ['required',new checkCurrency]
+        ]);
     }
 
     /**
@@ -82,8 +86,9 @@ class FeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(FeesAndDeduction $fee)
     {
-        //
+        $fee->delete();
+        return back();
     }
 }
