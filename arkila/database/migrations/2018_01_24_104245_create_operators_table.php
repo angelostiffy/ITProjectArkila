@@ -27,7 +27,7 @@ class CreateOperatorsTable extends Migration
             $table->enum('gender', ['Male', 'Female']);
             $table->string('citizenship', 35);
             $table->enum('civil_status', ['Single', 'Married', 'Divorced']);
-            $table->smallInteger('number_of_children');
+            $table->smallInteger('number_of_children')->nullable();
             $table->string('spouse', 120)->nullable();
             $table->date('spouse_birthdate')->nullable();
             $table->string('father_name', 120)->nullable();

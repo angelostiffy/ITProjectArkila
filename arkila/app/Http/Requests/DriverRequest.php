@@ -56,8 +56,8 @@ class DriverRequest extends FormRequest
             'personemergency' =>  'required|max:100',
             'peAddress' =>  'required|max:55',
             'peContactnum' =>  'required|digits:10',
-            'sss' =>  'required|max:10',
-            'licenseNum' =>  'required|max:10',
+            'sss' =>  'required|unique:drivers,sss|max:10',
+            'licenseNum' =>  'required|unique:drivers,license_number|max:10',
             'exp' =>  'required|date',
  //
         ];
