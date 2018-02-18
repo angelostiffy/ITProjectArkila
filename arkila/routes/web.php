@@ -22,4 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('home/drivers', 'DriversController');
 Route::resource('home/operators', 'OperatorsController');
-
+Route::resource('home/vans', 'VansController');
+Route::resource('home/settings', 'RevenueController');

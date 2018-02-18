@@ -4,10 +4,9 @@
 <h1>Edit </h1><hr>
 <form method="post" action="{{ route('drivers.update', [$driver->driver_id]) }}">
 {{ csrf_field() }}
+{{ method_field('PATCH')}}
 
-    @if (isset($driver))
-        {{ method_field('PUT')}}
-    @endif
+    <input type="hidden" name="driverID" value="{{ $driver->driver_id }}">
     <label>Member ID</label>
     <input type="name" class="form-control" name="member" placeholder="Enter Driver's Member ID" value="{{ isset($driver) ? $driver->member_id : '' }}">
 
@@ -21,16 +20,21 @@
     <input type="name" class="form-control" name="middle" placeholder="Enter Driver's Middle Name" value="{{ isset($driver) ? $driver->middle_name : '' }}">
 
     <label>Operator</label>
-    <select name="cars">
+    <select name="operator">
     <option value="0">Select Category</option>    
-      <option value="{{ $driver->driver_id }}"></option>
+    @foreach($operator as $operators)
+    <option value="{{ $operators->operator_id }}"{{ $operators->operator_id == $driver->operator->operator_id ? 'selected="selected"' : '' }}>{{ $operators->first_name . " " . $operators->last_name }}</option>
+    @endforeach
+
     </select>
+    <br>
+
  
     <label>Address</label>
     <input type="text" class="form-control" name="address" placeholder="Enter Driver's Address" value="{{ isset($driver) ? $driver->address : '' }}">
 
     <label>Contact Number</label>
-    <input type="number" class="form-control" name="contactn" placeholder="Enter Driver's Contact Number" value="{{ isset($driver) ? $driver->contact_number : '' }}">
+    <input type="number" class="form-control" name="contactn" placeholder="Enter Driver's Contact Number" value="{{ $driver->contact_number }}">
 
     <label>Provincial Address</label>
     <input type="text" class="form-control" name="paddress" placeholder="Enter Driver's Provincial Address" value="{{ isset($driver) ? $driver->provincial_address : '' }}">
