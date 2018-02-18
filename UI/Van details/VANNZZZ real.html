@@ -27,7 +27,10 @@
   <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-
+  <link rel="stylesheet" href="bower_components/myOwnStyle.css">
+    
+     <link rel="stylesheet" href="stylessample.css">
+    <script type="text/javascript" src="samplejava.js"></script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -37,6 +40,7 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -510,50 +514,86 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Add Van 
-      </h1>
+
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Driver Management</a></li>
-        <li class="active">Van</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
-      <!-- Small boxes (Stat box) -->
-     
-      <!-- /.row -->
-      <!-- Main row -->
-      <div class="row">
-        <!-- Left col -->
-    <section class="col-lg-7 connectedSortable">
-        <form>
-          <div class="form-group">
-            <label >Plate Number</label>
-            <input type="text" class="form-control" id="plateNumber" placeholder="Van's Platenumber">
-          </div>
-          <div class="form-group">
-            <label >Drivers ID</label>
-            <input type="text" class="form-control" id="vanModel" placeholder="Driver's ID">
-          </div>
-             <div class="form-group">
-            <label>Van Model</label>
-            <input type="text" class="form-control" id="plateNumber" placeholder="Model of the Van">
-          </div>
-          <div class="form-group">
-            <label>Seat Capacity</label>
-            <input type="text" class="form-control" id="plateNumber" placeholder="Van's Seating Capacity">
-          </div>
-          
-          <button type="submit" class="btn btn-primary">Register</button>
+        
        
-        </form>
-    </section>
+        
+        
+        
+        <h3 class="box-title">Add Van</h3>
+
+          <div class="box box-primary"  >
+            <div class="box-body"  >
+                <h3>Van Information</h3>
+              <div class="row">
+                <div class="col-md-5">
+                  Plate Number:<input type="text" class="form-control fixVanForm" placeholder="Last Name">
+                
+             
+              <div class="form-group">
+                Driver's Name
+                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                  <option selected="selected">Alabama</option>
+                  <option>Alaska</option>
+                  <option>California</option>
+                  <option>Delaware</option>
+                  <option>Tennessee</option>
+                  <option>Texas</option>
+                  <option>Washington</option>
+                </select>
+
+                    Van's Model<input type="text" class="form-control" placeholder="First Name">
+                    Seating Capacity<input type="number" class="form-control" placeholder="Address" max="15" min="1">
+
+
+              </div>
+              <div id="buttonsCenter">
+                  <button type="submit" class="btn btn-primary">Add Driver</button>
+                 <button type="submit" class="btn btn-primary">Clear</button>
+                </div>
+              
+                
+                
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+
+
+          </div>
+         
+          
+           
+          
+          
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 2.4.0
+    </div>
+    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+    reserved.
+  </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
