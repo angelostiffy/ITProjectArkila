@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  @section('links')
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Ban Trans | @yield('title')</title>
@@ -38,11 +39,11 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  @show
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini fixed">
     <div class="wrapper">
-        @section('header')
         <header class="main-header">
             <!-- Logo -->
             <a href="index2.html" class="logo">
@@ -248,9 +249,7 @@
                 </div>
             </nav>
         </header>
-        @show
 
-        @section('sidebar')
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
@@ -341,7 +340,6 @@
             </section>
             <!-- /.sidebar -->
         </aside>
-        @show
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -362,17 +360,14 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        @section('footer')
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
                 <b>Version</b> 2.4.0
             </div>
             <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights reserved.
         </footer>
-        @show
 
         <!-- Control Sidebar -->
-        @section('queue')
         <aside class="control-sidebar control-sidebar-dark control-sidebar-open">
             <!-- Create the tabs -->
             <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
@@ -545,14 +540,14 @@
                 <!-- /.tab-pane -->
             </div>
         </aside>
-        @show
         <!-- /.control-sidebar -->
         <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
     </div>
     <!-- ./wrapper -->
-
+    
+    @section('scripts')
     <!-- jQuery 3 -->
     <script src="{{ URL::asset('adminlte/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -586,6 +581,7 @@
     <script src="{{ URL::asset('adminlte/bower_components/fastclick/lib/fastclick.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ URL::asset('adminlte/dist/js/adminlte.min.js') }}"></script>
+    @show
 
 </body>
 
