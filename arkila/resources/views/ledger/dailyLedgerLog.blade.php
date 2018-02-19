@@ -1,5 +1,13 @@
 @extends('layouts.master')
 @section('title', 'index')
+@section('links')
+@parent
+  <!-- DataTables -->
+  <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <!-- additional CSS -->
+  <link rel="stylesheet" href="tripModal.css"> 
+
+@stop
 @section('content')
 
 <section class="content">
@@ -51,3 +59,9 @@
 </script>
 
 @endsection
+@scripts
+@parent
+    <!-- DataTables -->
+    <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+@stop
