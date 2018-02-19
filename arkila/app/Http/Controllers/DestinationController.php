@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use \App\Destination;
 use Illuminate\Http\Request;
 
-class RevenueController extends Controller
+class DestinationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +14,8 @@ class RevenueController extends Controller
      */
     public function index()
     {
-        $revenues = FeesAndDeduction::all9();
-        return view('settings.index', ['revenues' => $revenues]);
+        $destinations = Destination::all();
+        return view('settings.index', ['destinations' => $destinations]);
     }
 
     /**
