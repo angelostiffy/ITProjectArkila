@@ -29,11 +29,10 @@ class VansController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Operator $operator)
     {
-        $drivers = Driver::all();
-        $operators = Operator::all();
-        return view('vans.create',compact('drivers','operators'));
+        $drivers = Driver::all()->where('operator_id',$operator);
+        return view('vans.create',compact('drivers','operator'));
     }
 
     /**
@@ -42,12 +41,11 @@ class VansController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Operator $operator)
     {
         $this->validate(request(), [
             "plateNumber" => 'unique:vans,plate_number|required|between:6,8',
             "model" =>  'required',
-            "operator" => 'exists:operators,operator_id|required|numeric',
             "driver" => 'exists:drivers,driver_id|numeric',
             "seatingCapacity" => 'required|between:2,10|numeric'
         ]);
@@ -55,10 +53,11 @@ class VansController extends Controller {
         Van::create([
             'plate_number' => request('plateNumber'),
             'model' => request('model'),
-            'operator_id' => request('operator'),
+            'operator_id' => $operator,
             'driver_id' => request('driver'),
             'seating_capacity' => request('seatingCapacity')
         ]);
+
     	session()->flash('message','Van successfully created');
     	return redirect('home/vans');
 
@@ -83,8 +82,7 @@ class VansController extends Controller {
      */
     public function edit(Van $van)
     {
-        $drivers = Driver::all();
-        $operators = Operator::all();
+        $drivers = Driver::all()->where('operator_id', $van->operator_id);
         return view('vans.edit', compact('van','drivers','operators'));
     }
 

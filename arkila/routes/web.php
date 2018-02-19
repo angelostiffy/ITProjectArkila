@@ -22,9 +22,22 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('home/ledger', 'DailyLedgerController');
 Route::resource('home/announcements', 'AnnouncementsController');
+
+//Drivers
 Route::resource('home/drivers', 'DriversController');
+
+//Operators
 Route::resource('home/operators', 'OperatorsController');
-Route::resource('home/vans', 'VansController');
+
+//Vans
+Route::resource('home/vans', 'VansController', [
+    'except' => ['create','store']
+]);
+
+Route::get('home/operators/{operator}/vans/create', 'VansController@create');
+Route::post('home/operators/{operator}/vans', 'VansController@store');
+
+//Settings
 Route::resource('home/settings/destinations', 'DestinationController', [
 	'except' => ['index','create','show', 'edit']
 ]);
