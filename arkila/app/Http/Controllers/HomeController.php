@@ -7,7 +7,7 @@ use App\FeesAndDeduction;
 use App\Destination;
 class HomeController extends Controller
 {
-//    /**
+//    /**   
 //     * Create a new controller instance.
 //     *
 //     * @return void
@@ -31,6 +31,8 @@ class HomeController extends Controller
         $fees = FeesAndDeduction::latest()->where('type','Fee')->get();
         $discounts = FeesAndDeduction::latest()->where('type','Discount')->get();
         $destinations = Destination::all();
+
+        
 
         return view('settings.index', compact('fees','destinations','discounts'));
     }
