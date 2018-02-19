@@ -15,8 +15,8 @@ class AnnouncementsController extends Controller
     public function index()
     {
         //
-        $announce = Announcement::all();
-        return view('announcements.index', compact('announce'));
+        $announcements = Announcement::all();
+        return view('announcements.index', compact('announcements'));
     }
 
     /**
@@ -27,8 +27,7 @@ class AnnouncementsController extends Controller
     public function create()
     {
         //
-        $announce = Announcement::all();
-        return view('announcements.create', compact('announce'));
+        return view('announcements.create');
     }
 
     /**
@@ -40,69 +39,66 @@ class AnnouncementsController extends Controller
     public function store(Request $request)
     {
         //
-        // dd($request->all());
-
-        Announcement::create ([
-            'description' => $request->announce,
-            'viewer' => $request->viewer,
+        Announcement::create([
+            'description' => request('announce'),
+            'viewer' => request('viewer'),
         ]);
 
         return redirect('/home/announcements/create')->with('success', 'Information created successfully');
-
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Announcement  $announce
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Announcement $announce)
+    public function show($id)
     {
         //
-        return view('announcements.show', compact('announce'));
-
-        
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Announcement  $announce
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Announcement $announce)
+    public function edit(Announcement $announcement)
     {
         //
-        return view('announcements.edit', compact('announce'));
+        return view('announcements.edit', compact('announcement'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Announcement  $announce
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Announcement $announce)
+    public function update(Announcement $announcement)
     {
         //
-        $announce->update([
-            'description' => request('description'),
+        $announcement->update([
+            'description' => request('announce'),
             'viewer' => request('viewer'),
         ]);
+        return redirect('/home/announcements/')->with('success', 'Information was updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Announcement  $announce 
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Announcement $announcement)
     {
         $announcement->delete();
     	return back();
+
+        //
     }
 }
