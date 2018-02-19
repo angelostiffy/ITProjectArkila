@@ -35,6 +35,6 @@ class checkCurrency implements Rule
      */
     public function message()
     {
-        return 'Wrong currency format, the entered data must have commas and decimal point';
+        return 'Wrong currency format, the entered format must be in the #,###,###.## format';
     }
 }

@@ -8,16 +8,6 @@ use Illuminate\Http\Request;
 
 class FeesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $fees = FeesAndDeduction::latest()->where('type','fee')->get();
-        return view('fees.index',compact($fees));
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -26,7 +16,7 @@ class FeesController extends Controller
      */
     public function create()
     {
-
+        return view('settings.createFees');
     }
 
     /**
@@ -35,23 +25,20 @@ class FeesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         $this->validate(request(),[
             "description" => "unique:fees_and_deductions,description|required|max:30",
-            "amount" => ['required',new checkCurrency]
+            "amount" => ['required',new checkCurrency,'numeric','min:0']
         ]);
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        FeesAndDeduction::create([
+            "description" => request('description'),
+            "amount" =>request('amount'),
+            "type" => "Fee"
+        ]);
+
+        return redirect('/home/settings');
     }
 
     /**
@@ -60,9 +47,9 @@ class FeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(FeesAndDeduction $fee)
     {
-        //
+        return view('settings.editFees',compact('fee'));
     }
 
     /**
@@ -78,6 +65,9 @@ class FeesController extends Controller
             "description" => "unique:fees_and_deductions,description,".$fee->fad_id.",fad_id|required|max:30",
             "amount" => ['required',new checkCurrency]
         ]);
+
+        $fee->update(request(["description","amount"]));
+        return redirect('/home/settings');
     }
 
     /**

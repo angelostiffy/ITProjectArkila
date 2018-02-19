@@ -7,16 +7,6 @@ use Illuminate\Http\Request;
 
 class DestinationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $destinations = Destination::all();
-        return view('settings.index', ['destinations' => $destinations]);
-    }
 
     /**
      * Show the form for creating a new resource.
