@@ -186,11 +186,24 @@
                                 <span class="label label-danger">9</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="header">Enter Announcement:</li>
-                                <form>
+                            
+                            <form method="post" action="{{ route('announcements.index') }}">
+                            {{ csrf_field() }}
+                                    <li class="header box-body">Enter Announcement:
+
+                                    <span class="pull-right">
+                                        <select name="viewer">
+                                            <option value="Public">Public</option>
+                                            <option value="Driver Only">Driver Only</option>
+                                            <option value="Customer Only">Customer Only</option>
+                                            <option value="Only Me">Only Me</option>
+                                        </select>
+                                    </span>
+                                    </li>
+
                                     <li class="box-body">
                                         <!-- inner menu: contains the actual data -->
-                                        <textarea name="" id="" rows="5" class="form-control" placeholder=""></textarea>
+                                        <textarea name="announce" rows="5" class="form-control" placeholder=""></textarea>
                                     </li>
                                     <li class="footer box-body pull-right">
                                         <button class="btn btn-warning">ANNOUNCE</button>
@@ -362,14 +375,12 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        @section('footer')
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
                 <b>Version</b> 2.4.0
             </div>
             <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights reserved.
         </footer>
-        @show
 
         <!-- Control Sidebar -->
         @section('queue')

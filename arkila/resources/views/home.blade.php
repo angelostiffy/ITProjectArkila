@@ -29,24 +29,24 @@
 				<div class="profile-usermenu">
 					<ul class="nav">
 						<li class="active">
-							<a href="home/drivers">
+							<a href="/home/drivers">
 							<i class="glyphicon glyphicon-home"></i>
 							Driver </a>
 						</li>
 						<li>
-							<a href="home/announcements">
+							<a href="/home/announcements">
 							<i class="glyphicon glyphicon-user"></i>
 							Announcements </a>
 						</li>
 						<li>
-							<a href="#" target="_blank">
+							<a href="/home/operators" target="_blank">
 							<i class="glyphicon glyphicon-ok"></i>
-							Tasks </a>
+							Operator </a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="/home/vans">
 							<i class="glyphicon glyphicon-flag"></i>
-							Help </a>
+							Vans </a>
 						</li>
 					</ul>
 				</div>

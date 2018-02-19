@@ -44,7 +44,7 @@ class AnnouncementsController extends Controller
             'viewer' => request('viewer'),
         ]);
 
-        return redirect('/home/announcements/create')->with('success', 'Information created successfully');
+        return redirect('/home/announcements/')->with('success', 'Information created successfully');
 
     }
 
