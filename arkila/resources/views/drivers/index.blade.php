@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="col-md-10 col-md-offset-1">
-
             <div class="panel panel-default panel-table">
               <div class="panel-heading">
                 <div class="row">
@@ -15,7 +14,6 @@
                 </div>
               </div>
               <div class="panel-body">
-
                 <table class="table table-striped table-bordered table-list">
                   <thead>
                     <tr>

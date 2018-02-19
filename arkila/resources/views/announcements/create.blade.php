@@ -15,6 +15,7 @@
             <option value="Public">Public</option>
             <option value="Driver Only">Driver Only</option>
             <option value="Customer Only">Customer Only</option>
+            <option value="Only Me">Only Me</option>
         </select>
     <textarea class="form-control" rows="5" name="announce"></textarea>
 </div>

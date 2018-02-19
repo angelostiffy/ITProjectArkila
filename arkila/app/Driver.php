@@ -28,5 +28,8 @@ class Driver extends Model
     public function getEmergencyContactnoAttribute($value){
         return substr($value, 3);
     }
-
+    
+    public function getFullNameAttribute(){
+        return "{$this->first_name} {$this->last_name}";    
+    }
 }
