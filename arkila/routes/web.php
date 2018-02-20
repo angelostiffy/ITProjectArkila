@@ -24,8 +24,9 @@ Route::resource('home/ledger', 'DailyLedgerController');
 Route::resource('home/announcements', 'AnnouncementsController');
 
 //Drivers
-Route::resource('home/drivers', 'DriversController');
-
+// Route::resource('home/drivers', 'DriversController');
+Route::get('home/drivers/create', 'DriversController@create');
+Route::post('home/drivers/', 'DriversController@store');
 //Operators
 Route::resource('home/operators', 'OperatorsController');
 

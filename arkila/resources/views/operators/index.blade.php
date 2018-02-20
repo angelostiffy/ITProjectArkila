@@ -30,7 +30,7 @@
                   <tbody>
                   @foreach ($operators as $operator)
                           <tr>
-                            <td class="hidden-xs">{{ $operator->operator_id }}</td>
+                            <td class="hidden-xs" name="opId">{{ $operator->operator_id }}</td>
                             <td><a href="operators/{{ $operator->operator_id }}">{{ $operator->first_name }} {{ $operator->middle_name }} {{ $operator->last_name }}</a></td>
                             <td>{{ $operator->contact_number }}</td>
                             <td>{{ $operator->address }}</td>
@@ -41,6 +41,7 @@
                                  <input type="hidden" name="_method" value="DELETE">
                                  <button>Delete</button> 
                                 </form>
+                                <a href="home/operators/{{ $operator->operator_id }}/vans/create">Add Van</a>
                              </td>
                           </tr>
                   @endforeach
@@ -51,6 +52,7 @@
               </div>
             </div>
             <a href="/drivers">Back</a>
+
 
 </div>
 @endsection
