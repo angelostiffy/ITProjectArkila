@@ -3,14 +3,13 @@
 @section('links')
 @parent
   <!-- DataTables -->
-  <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
   <!-- additional CSS -->
   <link rel="stylesheet" href="tripModal.css"> 
 
 @stop
 @section('content')
 
-<section class="content">
       <div id="ledgerInfo" class="box">
         <!-- /.box-header -->
 
@@ -42,8 +41,31 @@
         </div>
         <!-- /.box-body -->
       </div>
-</section>
 
+
+
+@endsection
+
+@section('scripts')
+@parent
+    <!-- DataTables -->
+    <script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}")></script>
+    <script src="{{ URL::asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+<script>
+  $(function () {
+    $('#example2').DataTable()
+    $('#dailyLedgerTable').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : false,
+      'autoWidth'   : true
+    })
+  })
+</script>
+
+@endsection
 
 
 @endsection

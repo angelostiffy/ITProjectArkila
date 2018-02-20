@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Announcement;
 
-class AnnouncementsController extends Controller
+class TestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +13,7 @@ class AnnouncementsController extends Controller
      */
     public function index()
     {
-        //
-        $announcements = Announcement::all();
-        return view('announcements.index', compact('announcements'));
+        return view('test.AddDriver');
     }
 
     /**
@@ -27,7 +24,6 @@ class AnnouncementsController extends Controller
     public function create()
     {
         //
-        return view('announcements.create');
     }
 
     /**
@@ -38,14 +34,9 @@ class AnnouncementsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        Announcement::create([
-            'description' => request('announce'),
-            'viewer' => request('viewer'),
-        ]);
-
-        return redirect('/home/announcements/')->with('success', 'Information created successfully');
-
+        $anak = $request->children;
+        $bday = $request->date;
+        dd(compact('anak', 'bday'));
     }
 
     /**
@@ -65,10 +56,9 @@ class AnnouncementsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Announcement $announcement)
+    public function edit($id)
     {
         //
-        return view('announcements.edit', compact('announcement'));
     }
 
     /**
@@ -78,14 +68,9 @@ class AnnouncementsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Announcement $announcement)
+    public function update(Request $request, $id)
     {
         //
-        $announcement->update([
-            'description' => request('announce'),
-            'viewer' => request('viewer'),
-        ]);
-        return redirect('/home/announcements/')->with('success', 'Information was updated successfully');
     }
 
     /**
@@ -94,11 +79,8 @@ class AnnouncementsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Announcement $announcement)
+    public function destroy($id)
     {
-        $announcement->delete();
-    	return back();
-
         //
     }
 }
