@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ URL::asset('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ URL::asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -187,11 +189,24 @@
                                 <span class="label label-danger">9</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="header">Enter Announcement:</li>
-                                <form>
+                            
+                            <form method="post" action="{{ route('announcements.index') }}">
+                            {{ csrf_field() }}
+                                    <li class="header box-body">Enter Announcement:
+
+                                    <span class="pull-right">
+                                        <select name="viewer">
+                                            <option value="Public">Public</option>
+                                            <option value="Driver Only">Driver Only</option>
+                                            <option value="Customer Only">Customer Only</option>
+                                            <option value="Only Me">Only Me</option>
+                                        </select>
+                                    </span>
+                                    </li>
+
                                     <li class="box-body">
                                         <!-- inner menu: contains the actual data -->
-                                        <textarea name="" id="" rows="5" class="form-control" placeholder=""></textarea>
+                                        <textarea name="announce" rows="5" class="form-control" placeholder=""></textarea>
                                     </li>
                                     <li class="footer box-body pull-right">
                                         <button class="btn btn-warning">ANNOUNCE</button>
@@ -581,6 +596,9 @@
     <script src="{{ URL::asset('adminlte/bower_components/fastclick/lib/fastclick.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ URL::asset('adminlte/dist/js/adminlte.min.js') }}"></script>
+    <!-- DataTables -->
+    <script src="{{ URL::asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     @show
 
 </body>

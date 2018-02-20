@@ -21,15 +21,35 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('home/ledger', 'DailyLedgerController');
+<<<<<<< HEAD
 
+=======
+>>>>>>> bb839bfb85d93075c59b37f77f11289629c590e4
 Route::resource('home/announcements', 'AnnouncementsController');
-Route::resource('home/drivers', 'DriversController');
+
+//Drivers
+// Route::resource('home/drivers', 'DriversController');
+Route::get('home/drivers/create', 'DriversController@create');
+Route::post('home/drivers/', 'DriversController@store');
+//Operators
 Route::resource('home/operators', 'OperatorsController');
-Route::resource('home/vans', 'VansController');
+
+//Vans
+Route::resource('home/vans', 'VansController', [
+    'except' => ['create','store']
+]);
+
+Route::get('home/operators/{operator}/vans/create', 'VansController@create');
+Route::post('home/operators/{operator}/vans', 'VansController@store');
+
+//Settings
+Route::resource('home/settings/destinations', 'DestinationController', [
+	'except' => ['index','create','show', 'edit']
+]);
 Route::resource('home/settings/fees', 'FeesController', [
     'except' => ['index','show']
 ]);
 Route::resource('home/settings/discounts', 'DiscountsController', [
     'except' => ['index','show']
 ]);
-Route::get('home/settings/', 'HomeController@settings');
+Route::get('home/settings', 'HomeController@settings');

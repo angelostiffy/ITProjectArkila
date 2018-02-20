@@ -43,6 +43,7 @@
       </div>
 
 
+<<<<<<< HEAD
 @endsection
 
 @section('scripts')
@@ -65,3 +66,27 @@
 </script>
 
 @endsection
+=======
+
+@endsection
+@scripts
+@parent
+    <!-- DataTables -->
+    <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script>
+    $(function () {
+      $('#example2').DataTable()
+      $('#dailyLedgerTable').DataTable({
+        'paging'      : true,
+        'lengthChange': true,
+        'searching'   : true,
+        'ordering'    : true,
+        'info'        : false,
+        'autoWidth'   : true
+      })
+    })
+    </script>
+    
+@stop
+>>>>>>> bb839bfb85d93075c59b37f77f11289629c590e4
