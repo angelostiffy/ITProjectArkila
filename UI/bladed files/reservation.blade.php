@@ -6,10 +6,9 @@
   @stop
 @section('content')
 
- <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-       <div class="col-xl-6">
+                 <!-- Main content -->
+    <section class="content">
+      <div class="col-xl-6">
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
@@ -33,8 +32,6 @@
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
                 <b>Details:</b>
-                 <!-- Main content -->
-    <section class="content">
           <div class="box">
             <!-- /.box-header -->
             <div class="box-body">
