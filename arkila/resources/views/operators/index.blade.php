@@ -1,10 +1,17 @@
 @extends('layouts.master')
 @section('title', 'index')
-@section('content')
-<div class="col-md-10 col-md-offset-1">
+@section('links')
+@parent
+  <!-- DataTables -->
+  <link rel= "stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+  <!-- additional CSS -->
+  <link rel="stylesheet" href="operatorStyle.css"> 
 
-            <div class="panel panel-default panel-table">
-              <div class="panel-heading">
+@stop
+@section('content')
+          <div class="box">
+            <!-- /.box-header -->
+            <div class="box-header">
                 <div class="row">
                   <div class="col col-xs-6">
                     <h3 class="panel-title">My Operators</h3>
@@ -13,20 +20,20 @@
                     <a href="/home/operators/create" class="btn btn-sm btn-primary btn-create">Create New</a>
                   </div>
                 </div>
-              </div>
-              <div class="panel-body">
-
-                <table class="table table-striped table-bordered table-list">
-                  <thead>
-                    <tr>
-                        <th class="hidden-xs">ID</th>
-                        <th>Name</th>
-                        <th>Contact Number</th>
-                        <th>Address</th>
-                        <th>Age</th>
-                        <th>Action</th>
-                    </tr> 
-                  </thead>
+            </div>
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Contact Number</th>
+                  <th>Address</th>
+                  <th>Age</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                
                   <tbody>
                   @foreach ($operators as $operator)
                           <tr>
@@ -35,24 +42,45 @@
                             <td>{{ $operator->contact_number }}</td>
                             <td>{{ $operator->address }}</td>
                             <td>{{ $operator->age }}</td>
-                            <td><a href="/home/operators/{{ $operator->operator_id }}">View Details</a>
-                                <form action="{{ route('operators.destroy', [$operator->operator_id]) }}" method="POST">
+                            <td>
+                    
+                    <div class="text-center">
+                              
+                                <form action="{{ route('operators.destroy', [$operator->operator_id]) }}" method="POST" >
                                  {{ csrf_field() }}
-                                 <input type="hidden" name="_method" value="DELETE">
-                                 <button>Delete</button> 
+                                  <a href="/home/operators/{{ $operator->operator_id }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
+                                 <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</i></button>
                                 </form>
-                                <a href="home/operators/{{ $operator->operator_id }}/vans/create">Add Van</a>
+                  </div>
                              </td>
                           </tr>
                   @endforeach
 
                         </tbody>
-                </table>
-              </div>
-              </div>
+              </table>
             </div>
-            <a href="/drivers">Back</a>
+            <!-- /.box-body -->
+          </div>
+@stop
 
+@section('scripts')
+@parent
 
-</div>
-@endsection
+    <!-- DataTables -->
+    <script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <script>
+      $(function () {
+        $('#example2').DataTable()
+        $('#example1').DataTable({
+          'paging'      : true,
+          'lengthChange': true,
+          'searching'   : true,
+          'ordering'    : true,
+          'info'        : true,
+          'autoWidth'   : true
+        })
+      })
+    </script>
+    
+@stop
