@@ -18,7 +18,9 @@ class Operator extends Model
     	return $this->hasMany(Driver::class, 'driver_id');
     }
 
-
+    public function van(){
+        return $this->hasMany(Van::class, 'operator_id');
+    }
     public function getContactNumberAttribute($value){
         return substr($value, 3);
     }
@@ -29,5 +31,9 @@ class Operator extends Model
 
     public function getFullNameAttribute(){
         return "{$this->first_name} {$this->last_name}";    
+    }
+
+    public function addVan($van){
+        $this->van()->create($van);
     }
 }

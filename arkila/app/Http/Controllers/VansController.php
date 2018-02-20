@@ -33,15 +33,12 @@ class VansController extends Controller {
         $this->validate(request(), [
             "plateNumber" => 'unique:vans,plate_number|required|between:6,8',
             "model" =>  'required',
-            "driver" => 'exists:drivers,driver_id|numeric',
             "seatingCapacity" => 'required|between:2,10|numeric'
         ]);
 
-        Van::create([
+        $operator->addVan([
             'plate_number' => request('plateNumber'),
             'model' => request('model'),
-            'operator_id' => $operator,
-            'driver_id' => request('driver'),
             'seating_capacity' => request('seatingCapacity')
         ]);
 
