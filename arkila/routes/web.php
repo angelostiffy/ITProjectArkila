@@ -21,10 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('home/ledger', 'DailyLedgerController');
-<<<<<<< HEAD
 
-=======
->>>>>>> bb839bfb85d93075c59b37f77f11289629c590e4
 Route::resource('home/announcements', 'AnnouncementsController');
 
 //Drivers
