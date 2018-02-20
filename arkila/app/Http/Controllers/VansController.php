@@ -10,19 +10,6 @@ use App\Rules\checkDriver;
 use App\Rules\checkOperator;
 
 class VansController extends Controller {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-
-        $vans = Van::latest()->get();
-
-        return view('vans.index',compact('vans'));
-
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -59,7 +46,7 @@ class VansController extends Controller {
         ]);
 
     	session()->flash('message','Van successfully created');
-    	return redirect('home/vans');
+    	return redirect('home/operators/'.$operator);
 
     }
 

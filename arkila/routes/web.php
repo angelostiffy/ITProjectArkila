@@ -21,20 +21,25 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('home/ledger', 'DailyLedgerController');
+
 Route::resource('home/announcements', 'AnnouncementsController');
 
 //Drivers
-// Route::resource('home/drivers', 'DriversController');
-Route::get('home/drivers/create', 'DriversController@create');
-Route::post('home/drivers/', 'DriversController@store');
+Route::resource('home/drivers', 'DriversController',[
+	'except' => ['index','create','store']
+]);
+
+Route::get('home/operators/{operator}/drivers/create', 'DriversController@create');
+Route::post('home/operators/{operator}/drivers/', 'DriversController@store');
+
 //Operators
 Route::resource('home/operators', 'OperatorsController');
 
 //Vans
 Route::resource('home/vans', 'VansController', [
-    'except' => ['create','store']
+    'except' => ['index','create','store']
 ]);
-
+//Creating Vans
 Route::get('home/operators/{operator}/vans/create', 'VansController@create');
 Route::post('home/operators/{operator}/vans', 'VansController@store');
 
