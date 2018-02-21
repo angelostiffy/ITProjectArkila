@@ -40,7 +40,6 @@ class DriverRequest extends FormRequest
                     'address' => 'required|max:55',
                     'contactn' =>  'numeric|digits:10',
                     'paddress' =>  'required|max:55',
-                    'age' =>  'required|digits:2',
                     'birthdate' =>  'required|date|before:today',
                     'bplace' =>  'required|max:50',
                     'gender' => [
