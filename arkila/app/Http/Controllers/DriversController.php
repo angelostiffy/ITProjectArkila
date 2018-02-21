@@ -43,7 +43,6 @@ class DriversController extends Controller
      */
     public function store(DriverRequest $request)
     {
-
         $emContactNumber = '+63'.request('peContactnum');
         $perContactNumber = '+63'.request('contactn');
 
@@ -56,7 +55,6 @@ class DriversController extends Controller
             'address' => $request->address,
             'contact_number' => $perContactNumber,
             'provincial_address' => $request->paddress,
-            'age' => $request->age,
             'birth_date' => $request->birthdate,
             'birth_place' => $request->bplace,
             'gender' => $request->gender,

@@ -25,7 +25,6 @@ class CreateDriversTable extends Migration
             $table->string('contact_number', 13);
             $table->string('address',100);
             $table->string('provincial_address',100);
-            $table->smallInteger('age');
             $table->date('birth_date');
             $table->string('birth_place', 50);
             $table->enum('gender', ['Male', 'Female']);

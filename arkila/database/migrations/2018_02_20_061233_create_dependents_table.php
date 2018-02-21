@@ -14,6 +14,7 @@ class CreateDependentsTable extends Migration
     public function up()
     {
         Schema::create('dependents', function (Blueprint $table) {
+            $table->increments('dependent_id');
             $table->integer('operator_id')
             ->unsigned();
 
