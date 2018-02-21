@@ -1,19 +1,10 @@
-@extends('layouts.master')
-@section('title', 'index')
-@section('links')
-@parent
-  <!-- DataTables -->
-  <link rel= "stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
-  <!-- additional CSS -->
-  <link rel="stylesheet" href="operatorStyle.css"> 
-
-@stop
+@extends('layouts.app')
 @section('content')
-               
-            <a href="operatorProfile.html" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Back</a>
+   <section class="content-header">
+                
                  <div class="box ">
                  <div class="box box-header">
-                     <h3><strong>Edit Driver Information</strong></h3>
+                     <h3 style="margin-right: 10px; display: inline-block;"><strong>Edit Driver Information</strong></h3><button class="btn btn-info" onclick="grayer('f_1',false);" style="float: right; margin-top: 2%;"><i class="fa fa-pencil-square-o"></i> Edit</button>
                  </div>
                 <form id="f_1" action="#" onsubmit="return false;" class="form-horizontal">
                  <div class="box-body">
@@ -159,31 +150,54 @@
                     </div>
                      </form>
                     <div class="box-footer">
-                <button type="button" class="btn btn-primary pull-right">Save changes</button>
+                <button class="btn btn-primary pull-right" onclick="grayer('f_1',true);">Save changes</button>
                     </div>
         </div>
-        </div>    
-
-@stop
-
-@section('scripts')
-@parent
-
-    <!-- DataTables -->
-    <script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-    <script>
-      $(function () {
-        $('#driver').DataTable()
-        $('#van').DataTable({
-          'paging'      : true,
-          'lengthChange': true,
-          'searching'   : true,
-          'ordering'    : true,
-          'info'        : true,
-          'autoWidth'   : true
-        })
-      })
-    </script>
+        </div>
+    </section>
     
-@stop
+
+<script>
+  $(function () {
+    $('#driver').DataTable()
+    $('#van').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  })
+</script>
+  <style>
+    .example-modal .modal {
+      position: relative;
+      top: auto;
+      bottom: auto;
+      right: auto;
+      left: auto;
+      display: block;
+      z-index: 1;
+    }
+
+    .example-modal .modal {
+      background: transparent !important;
+    }
+  </style>
+<script type="text/javascript">
+function grayer(formId, yesNo) {
+   var f = document.getElementById(formId), s, opacity;
+   s = f.style;
+   s.opacity = s.MozOpacity = s.KhtmlOpacity = opacity/100;
+   s.filter = 'alpha(opacity='+opacity+')';
+   for(var i=0; i<f.length; i++) f[i].disabled = yesNo;
+}
+window.onload=function(){grayer('f_1',true);}; // disabled by default
+</script>
+<style type="text/css">
+form {  height: 1%; /* hack IE */
+         padding: 10px;
+      }
+</style>
+@endsection

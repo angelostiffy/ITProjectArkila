@@ -3,12 +3,15 @@
 @section('links')
 @parent
   <!-- DataTables -->
-  <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <link rel= "stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
   <!-- additional CSS -->
   <link rel="stylesheet" href="operatorStyle.css"> 
 
 @stop
-@section('content')                 
+@section('content')    
+                
+        <a href="operatorProfile.html" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Back</a>
+                             
                  <div class="box ">
                  <div class="box box-header">
                      <h3 style="margin-right: 10px; display: inline-block;"><strong>Edit Driver Information</strong></h3><button class="btn btn-info" onclick="grayer('f_1',false);" style="float: right; margin-top: 2%;"><i class="fa fa-pencil-square-o"></i> Edit</button>
@@ -162,13 +165,14 @@
         </div>
         </div>
 
-@endsection
+@stop
 
-@scripts
+@section('scripts')
 @parent
+
     <!-- DataTables -->
-    <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
       $(function () {
         $('#driver').DataTable()

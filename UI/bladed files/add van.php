@@ -13,7 +13,7 @@
                 <div class="col-md-5">
                   Plate Number:<input type="text" class="form-control fixVanForm" placeholder="Last Name">
                 
-             
+               Seating Capacity<input type="number" class="form-control" placeholder="Address" max="15" min="1">
               <div id="buttonsCenter">
                    <button type="submit" class="btn btn-primary">Clear</button>
                   <button type="submit" class="btn btn-success">Add Van</button>

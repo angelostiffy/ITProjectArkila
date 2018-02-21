@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Validator;
-use \App\Operator;
+use App\Operator;
+use App\Van;
 use Illuminate\Http\Request;
 use App\Http\Requests\OperatorRequest;
 
@@ -79,7 +80,9 @@ class OperatorsController extends Controller
      */
     public function show(Operator $operator)
     {
-        return view('operators.show',compact('operator'));
+        $drivers = Driver::latest()->where('operator_id', $operator)->get();
+        $vans = Van::latest()->where('operator_id', $operator)->get();
+        return view('operators.show',compact('operator', 'drivers', 'vans'));
     }
 
     /**

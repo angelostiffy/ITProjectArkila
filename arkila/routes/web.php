@@ -25,17 +25,27 @@ Route::resource('home/ledger', 'DailyLedgerController');
 Route::resource('home/announcements', 'AnnouncementsController');
 
 //Drivers
+<<<<<<< HEAD
 Route::resource('home/drivers', 'DriversController');
 Route::get('home/drivers/create', 'DriversController@create');
 Route::post('home/drivers/', 'DriversController@store');
+=======
+Route::resource('home/drivers', 'DriversController',[
+	'except' => ['index','create','store']
+]);
+
+Route::get('home/operators/{operator}/drivers/create', 'DriversController@create');
+Route::post('home/operators/{operator}/drivers/', 'DriversController@store');
+
+>>>>>>> b3540b42aa8ca64a819b6ac41dbde9b0b25cedb9
 //Operators
 Route::resource('home/operators', 'OperatorsController');
 
 //Vans
 Route::resource('home/vans', 'VansController', [
-    'except' => ['create','store']
+    'except' => ['index','create','store']
 ]);
-
+//Creating Vans
 Route::get('home/operators/{operator}/vans/create', 'VansController@create');
 Route::post('home/operators/{operator}/vans', 'VansController@store');
 
@@ -50,3 +60,5 @@ Route::resource('home/settings/discounts', 'DiscountsController', [
     'except' => ['index','show']
 ]);
 Route::get('home/settings', 'HomeController@settings');
+
+Route::resource('home/test', 'TestController');

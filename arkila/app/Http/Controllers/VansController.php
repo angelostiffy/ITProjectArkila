@@ -10,19 +10,6 @@ use App\Rules\checkDriver;
 use App\Rules\checkOperator;
 
 class VansController extends Controller {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-
-        $vans = Van::latest()->get();
-
-        return view('vans.index',compact('vans'));
-
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -46,20 +33,17 @@ class VansController extends Controller {
         $this->validate(request(), [
             "plateNumber" => 'unique:vans,plate_number|required|between:6,8',
             "model" =>  'required',
-            "driver" => 'exists:drivers,driver_id|numeric',
             "seatingCapacity" => 'required|between:2,10|numeric'
         ]);
 
-        Van::create([
+        $operator->addVan([
             'plate_number' => request('plateNumber'),
             'model' => request('model'),
-            'operator_id' => $operator,
-            'driver_id' => request('driver'),
             'seating_capacity' => request('seatingCapacity')
         ]);
 
     	session()->flash('message','Van successfully created');
-    	return redirect('home/vans');
+    	return redirect('home/operators/'.$operator);
 
     }
 

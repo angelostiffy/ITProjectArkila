@@ -43,7 +43,7 @@
       </div>
 
 
-<<<<<<< HEAD
+
 @endsection
 
 @section('scripts')
@@ -66,7 +66,7 @@
 </script>
 
 @endsection
-=======
+
 
 @endsection
 @scripts
@@ -89,4 +89,3 @@
     </script>
     
 @stop
->>>>>>> bb839bfb85d93075c59b37f77f11289629c590e4
