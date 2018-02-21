@@ -54,3 +54,5 @@ Route::resource('home/settings/discounts', 'DiscountsController', [
     'except' => ['index','show']
 ]);
 Route::get('home/settings', 'HomeController@settings');
+
+Route::resource('home/test', 'TestController');
