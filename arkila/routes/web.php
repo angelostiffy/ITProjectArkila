@@ -25,11 +25,10 @@ Route::resource('home/ledger', 'DailyLedgerController');
 Route::resource('home/announcements', 'AnnouncementsController');
 
 //Drivers
-<<<<<<< HEAD
 Route::resource('home/drivers', 'DriversController');
 Route::get('home/drivers/create', 'DriversController@create');
 Route::post('home/drivers/', 'DriversController@store');
-=======
+
 Route::resource('home/drivers', 'DriversController',[
 	'except' => ['index','create','store']
 ]);
@@ -37,7 +36,6 @@ Route::resource('home/drivers', 'DriversController',[
 Route::get('home/operators/{operator}/drivers/create', 'DriversController@create');
 Route::post('home/operators/{operator}/drivers/', 'DriversController@store');
 
->>>>>>> b3540b42aa8ca64a819b6ac41dbde9b0b25cedb9
 //Operators
 Route::resource('home/operators', 'OperatorsController');
 
