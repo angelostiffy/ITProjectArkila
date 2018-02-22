@@ -24,7 +24,7 @@ class CreateTripTable extends Migration
             $table->date('date_departed');
 
             $table->foreign('destination_id')
-            ->references('destination_id')->on('destinations')
+            ->references('destination_id')->on('destination')
             ->onDelete('restrict')
             ->onUpdate('cascade');
 
