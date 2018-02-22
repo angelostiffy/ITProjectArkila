@@ -17,15 +17,6 @@ class CreateVansTable extends Migration
             $table->engine = 'InnoDB';
             $table->string('plate_number', 8)
             ->unique();
-     
-            $table->integer('member_id')
-            ->unsigned()
-            ->nullable();
-
-            $table->foreign('member_id')
-            ->references('member_id')->on('members')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
 
             $table->string('model');       
             $table->string('seating_capacity', 2);
