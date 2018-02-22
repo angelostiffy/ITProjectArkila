@@ -18,7 +18,6 @@ class CreateMembersTable extends Migration
             $table->increments('member_id');
             $table->integer('operator_id')
             ->unsigned();
-            $table->enum('role', ['O', 'OD', 'D']);
             $table->string('last_name', 35);
             $table->string('first_name', 35);
             $table->string('middle_name', 35);
@@ -51,7 +50,7 @@ class CreateMembersTable extends Migration
         Schema::table('members', function (Blueprint $table) {
             $table->foreign('operator_id')
             ->references('member_id')->on('members')
-            ->onDelete('cascade')
+            ->onDelete('restrict')
             ->onUpdate('cascade'); 
                });
     }
