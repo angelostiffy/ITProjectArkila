@@ -17,7 +17,7 @@ class CreateDestinationsTable extends Migration
             $table->increments('destination_id');
             $table->string('description');
             $table->enum('terminal', ['Cabanatuan City', 'San Jose City']);
-            $table->decimal('amount', 4, 2)
+            $table->decimal('amount', 7, 2)
             ->unsigned();
             $table->timestamps();
 

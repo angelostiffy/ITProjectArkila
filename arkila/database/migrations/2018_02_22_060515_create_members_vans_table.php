@@ -14,13 +14,14 @@ class CreateMembersVansTable extends Migration
     public function up()
     {
         Schema::create('members_vans', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('member_id')
             ->unsigned()
             ->nullable();
             $table->integer('plate_number')
             ->unsigned()
             ->nullable();
+
+            $table->enum('role', ['Operator', 'Driver']);
 
             $table->foreign('member_id')
             ->references('member_id')->on('members')
@@ -33,6 +34,7 @@ class CreateMembersVansTable extends Migration
             ->onUpdate('cascade');
 
             $table->timestamps();
+
         });
     }
 
