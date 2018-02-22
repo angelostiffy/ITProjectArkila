@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Van extends Model
 {
+    protected $table = 'van';
 	protected $primaryKey = 'plate_number';
 	public $incrementing = false;
 	protected $keyType = 'String';
@@ -17,12 +18,8 @@ class Van extends Model
         'seating_capacity',
 	];  
 	//
-	
-	public function driver(){
-    	return $this->belongsTo(Driver::Class, 'driver_id');
-    }
 
-    public function operator(){
-    	return $this->belongsTo(Operator::Class, 'operator_id');
+    public function member(){
+        return $this->belongsToMany(Van::class,'member_van','plate_number','member_id');
     }
 }
