@@ -18,21 +18,14 @@ class CreateVansTable extends Migration
             $table->string('plate_number', 8)
             ->unique();
      
-            $table->integer('driver_id')
+            $table->integer('member_id')
             ->unsigned()
             ->nullable();
 
-            $table->foreign('driver_id')
-            ->references('driver_id')->on('drivers')
-            ->onDelete('restrict')
+            $table->foreign('member_id')
+            ->references('member_id')->on('members')
+            ->onDelete('cascade')
             ->onUpdate('cascade');
-
-            $table->integer('operator_id')
-            ->unsigned();
-
-            $table->foreign('operator_id')
-            ->references('operator_id')->on('operators');
-
 
             $table->string('model');       
             $table->string('seating_capacity', 2);
@@ -44,6 +37,7 @@ class CreateVansTable extends Migration
 
 
         });
+        
     }
 
     /**
