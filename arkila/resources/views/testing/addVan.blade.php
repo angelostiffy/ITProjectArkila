@@ -1,4 +1,6 @@
-@extends('layouts.form') @section('title', 'Add Van') @section('form-title', 'Add Van') @section('form-body')
+@extends('layouts.form') @section('title', 'Add Van')
+@section('back-link','facebook.com')
+  @section('form-title', 'Add Van') @section('form-body')
 <div class="form-group">
     Plate Number:<input type="text" class="form-control fixVanForm" placeholder="Plate Number"> Van's Model<input type="text" class="form-control" placeholder="First Name"> Seating Capacity<input type="number" class="form-control" placeholder="Address" max="15" min="1">
 </div>
