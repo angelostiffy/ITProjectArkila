@@ -1,0 +1,50 @@
+#buttonsCenter{
+	margin-left: 15%;
+}
+
+.fixMarginRight{
+	width: 50%
+}
+
+.fixVanForm{
+	width: 100%;
+
+}
+
+#alignRight{
+	padding-top: 10px;
+	float: right;
+}
+
+#datePickFloat{
+	float:right;
+	width:20%;
+	margin-right: 00%;
+}
+
+.spaceBelow{
+	margin-top: 3%;
+}
+
+.paddingTop{
+	padding-top: 3%;
+	padding-bottom: 3%;
+}
+/*.spaceBelow2{
+	margin-top: %;
+}*/
+
+/*#alignRightButton{
+	float:right;
+	margin-left: 22%;
+}*/
+
+.alignTable{
+	float:right;
+}
+
+#generalLedger{
+	padding-top: 2%;
+	padding-left: 2%;
+	margin-bottom: -2%;
+}

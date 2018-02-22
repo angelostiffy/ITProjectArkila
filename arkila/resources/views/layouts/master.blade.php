@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  @section('links')
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Ban Trans | @yield('title')</title>
@@ -28,6 +29,8 @@
     <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ URL::asset('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ URL::asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,11 +41,11 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  @show
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini fixed">
     <div class="wrapper">
-        @section('header')
         <header class="main-header">
             <!-- Logo -->
             <a href="index2.html" class="logo">
@@ -186,11 +189,24 @@
                                 <span class="label label-danger">9</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="header">Enter Announcement:</li>
-                                <form>
+                            
+                            <form method="post" action="{{ route('announcements.index') }}">
+                            {{ csrf_field() }}
+                                    <li class="header box-body">Enter Announcement:
+
+                                    <span class="pull-right">
+                                        <select name="viewer">
+                                            <option value="Public">Public</option>
+                                            <option value="Driver Only">Driver Only</option>
+                                            <option value="Customer Only">Customer Only</option>
+                                            <option value="Only Me">Only Me</option>
+                                        </select>
+                                    </span>
+                                    </li>
+
                                     <li class="box-body">
                                         <!-- inner menu: contains the actual data -->
-                                        <textarea name="" id="" rows="5" class="form-control" placeholder=""></textarea>
+                                        <textarea name="announce" rows="5" class="form-control" placeholder=""></textarea>
                                     </li>
                                     <li class="footer box-body pull-right">
                                         <button class="btn btn-warning">ANNOUNCE</button>
@@ -248,9 +264,7 @@
                 </div>
             </nav>
         </header>
-        @show
 
-        @section('sidebar')
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
@@ -341,20 +355,14 @@
             </section>
             <!-- /.sidebar -->
         </aside>
-        @show
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Dashboard
-                    <small>Control panel</small>
+                    @yield('content-header')
                 </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">Dashboard</li>
-                </ol>
             </section>
 
             <!-- Main content -->
@@ -367,18 +375,15 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        @section('footer')
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
                 <b>Version</b> 2.4.0
             </div>
             <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights reserved.
         </footer>
-        @show
 
         <!-- Control Sidebar -->
-        @section('queue')
-        <aside class="control-sidebar control-sidebar-dark control-sidebar-open">
+        <aside class="control-sidebar control-sidebar-light">
             <!-- Create the tabs -->
             <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
                 <li class="active"><a href="#control-sidebar-queue-tab" data-toggle="tab"><i class="fa fa-list-ol"></i></a></li>
@@ -550,21 +555,21 @@
                 <!-- /.tab-pane -->
             </div>
         </aside>
-        @show
         <!-- /.control-sidebar -->
         <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
     </div>
     <!-- ./wrapper -->
-
+    
+    @section('scripts')
     <!-- jQuery 3 -->
     <script src="{{ URL::asset('adminlte/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ URL::asset('adminlte/bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uibutton', $.ui.button);8
     </script>
     <!-- Bootstrap 3.3.7 -->
     <script src="{{ URL::asset('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -591,6 +596,11 @@
     <script src="{{ URL::asset('adminlte/bower_components/fastclick/lib/fastclick.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ URL::asset('adminlte/dist/js/adminlte.min.js') }}"></script>
+    <!-- DataTables -->
+    <script src="{{ URL::asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    
+    @show
 
 </body>
 
