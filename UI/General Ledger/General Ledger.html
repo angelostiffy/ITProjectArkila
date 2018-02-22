@@ -544,58 +544,38 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <h3 id="generalLedger">GENERAL LEDGER</h3>
-     <div  class="form-group paddingTop">
-
-
-                  <button type="submit" class="btn btn-info alignTable">Filter</button>
-                <div  id="datePickFloat" class="input-group">
-
-                  <div class="input-group-addon">
-
+       <section class="content-header">
+          
+    <h3 >GENERAL LEDGER</h3>
+      </section>
+    <section class="content">
+        <div class="box">
+        
+        <div class="box-body">
+       <div class="col-xl-6">
+           <div class="col-md-3 pull-right">
+                <div class="input-group">
+                  <span class="input-group-addon">
                     <i class="fa fa-calendar"></i>
-                  </div>
+                  </span>
                   <input type="text" class="form-control pull-right" id="reservation">
+                    <span class="input-group-btn">
+                    <button type="submit" class="btn btn-info alignTable">Filter</button>
+                    </span>
                 </div>
-                    
-                <!-- /.input group -->
-
-              </div>
-    <section class="content-header">
-       <div class="col-xl-6 spaceBelow2">
+                </div>    
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#tab_1" data-toggle="tab">Revenues</a></li>
               <li><a href="#tab_2" data-toggle="tab">Expenses</a></li>
-              <li class="dropdown">
-               <!--  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                  Dropdown <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                  <li role="presentation" class="divider"></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-                </ul>
-              </li>
-              <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li> -->
+             
             </ul>
-           
+             
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
-                
-            <!--   <div id="alignRightButton">
-                <button type="submit" class="btn btn-info">Filter</button>
-              </div>
-               -->   <!-- Main content -->
-
-    <section class="content spaceBelow">
-          <div class="box">
-            <!-- /.box-header -->
             
-            <div class="box-body">
+
               <table class="table table-bordered table-striped example1">
                 <thead>
                 <tr>
@@ -620,13 +600,10 @@
 
                 </tbody>
               </table>
-            </div>
-              <div id="alignRight">
-                <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Generate Report</button>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Generate Report</button>
               </div>
-            <!-- /.box-body -->
-
-
+                  
                 <!-- Modal -->
                 <div id="myModal" class="modal fade" role="dialog">
                   <div class="modal-dialog">
@@ -649,20 +626,16 @@
 
                   </div>
                 </div>
-          </div>
-    </section>
-   
-
-              </div>
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="tab_2">
-                   <!-- Main content -->
-
-    <section class="content spaceBelow">
-          <div class="box">
-            <!-- /.box-header -->
+            </div>
             
-            <div class="box-body">
+            <!-- /.box-body -->
+
+
+          
+ 
+              <!-- /.tab-pane -->
+            <div class="tab-pane" id="tab_2">
+
               <table class="table table-bordered table-striped example1">
                 <thead>
                 <tr>
@@ -687,20 +660,11 @@
 
                 </tbody>
               </table>
-            </div>
-              <div id="alignRight">
+                   <div class="form-group">
                          <!-- Trigger the modal with a button -->
                 <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal2">Generate Report</button>
               </div>
-            <!-- /.box-body -->
-          </div>
-    </section>
-                <!-- /.input group -->
-              </div>
-              
-              <div>
-
-                <!-- Modal -->
+                        <!-- Modal -->
                 <div id="myModal2" class="modal fade" role="dialog">
                   <div class="modal-dialog">
 
@@ -721,26 +685,19 @@
 
                   </div>
                 </div>
-              </div>
-              
-
-              </form>
+            </div>
 
               </div>
+
+
               </div>
-
-
-              <!-- /.tab-pane -->
-                    <!-- /.tab-pane -->
+              </div>
+            </div>
+         <!-- /.tab-pane -->
             </div>
             <!-- /.tab-content -->
-          </div>
-          <!-- nav-tabs-custom -->
-        </div>
-
-    </section>
-    <!-- /.content -->
-  </div>
+      </section>
+    </div>
 
   <!-- /.content-wrapper -->
 
