@@ -33,8 +33,6 @@ class CreateMemberVanTable extends Migration
             ->onDelete('restrict')
             ->onUpdate('cascade');
 
-            $table->timestamps();
-
         });
     }
 
