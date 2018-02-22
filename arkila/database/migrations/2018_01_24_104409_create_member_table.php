@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMembersTable extends Migration
+class CreateMemberTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMembersTable extends Migration
      */
     public function up()
     {
-        Schema::create('members', function (Blueprint $table) {
+        Schema::create('member', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('member_id');
             $table->integer('operator_id')
@@ -48,9 +48,9 @@ class CreateMembersTable extends Migration
 
         });
 
-        Schema::table('members', function (Blueprint $table) {
+        Schema::table('member', function (Blueprint $table) {
             $table->foreign('operator_id')
-            ->references('member_id')->on('members')
+            ->references('member_id')->on('member')
             ->onDelete('restrict')
             ->onUpdate('cascade'); 
                });
@@ -63,6 +63,6 @@ class CreateMembersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('members');
+        Schema::dropIfExists('member');
     }
 }

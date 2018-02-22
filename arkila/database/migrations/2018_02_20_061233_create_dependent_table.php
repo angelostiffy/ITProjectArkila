@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMembersVansTable extends Migration
+class CreateDependentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,28 +13,21 @@ class CreateMembersVansTable extends Migration
      */
     public function up()
     {
-        Schema::create('members_vans', function (Blueprint $table) {
+        Schema::create('dependent', function (Blueprint $table) {
+            $table->increments('dependent_id');
             $table->integer('member_id')
             ->unsigned()
             ->nullable();
-            $table->integer('plate_number')
-            ->unsigned()
-            ->nullable();
 
-            $table->enum('role', ['Operator', 'Driver']);
+            $table->string('cname');
+            $table->date('birthdate');
 
             $table->foreign('member_id')
-            ->references('member_id')->on('members')
-            ->onDelete('restrict')
-            ->onUpdate('cascade');
-
-            $table->foreign('plate_number')
-            ->references('plate_number')->on('vans')
+            ->references('member_id')->on('member')
             ->onDelete('restrict')
             ->onUpdate('cascade');
 
             $table->timestamps();
-
         });
     }
 
@@ -45,6 +38,6 @@ class CreateMembersVansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('members_vans');
+        Schema::dropIfExists('dependent');
     }
 }

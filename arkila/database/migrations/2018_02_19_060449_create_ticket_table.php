@@ -23,12 +23,12 @@ class CreateTicketTable extends Migration
 
 
             $table->foreign('destination_id')
-            ->references('destination_id')->on('destinations')
+            ->references('destination_id')->on('destination')
             ->onDelete('restrict')
             ->onUpdate('cascade');
 
             $table->foreign('fad_id')
-            ->references('fad_id')->on('fees_and_deductions')
+            ->references('fad_id')->on('fees_and_deduction')
             ->onDelete('restrict')
             ->onUpdate('cascade');
 

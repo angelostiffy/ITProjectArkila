@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVansTable extends Migration
+class CreateVanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateVansTable extends Migration
      */
     public function up()
     {
-        Schema::create('vans', function (Blueprint $table) {
+        Schema::create('van', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->string('plate_number', 8)
             ->unique();
@@ -38,6 +38,6 @@ class CreateVansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vans');
+        Schema::dropIfExists('van');
     }
 }
