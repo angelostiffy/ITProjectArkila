@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    @section('links')
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Ban Trans | @yield('title')</title>
@@ -26,6 +27,7 @@
     <![endif]-->
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    @show
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-blue layout-top-nav">
@@ -230,7 +232,7 @@
                     <div class="login-box">
                         <div class="login-logo">
                             <div class="col-md-1">
-                                <h1><a href=#><i class="fa fa-arrow-circle-left"></i></a></h1>
+                                <h1><a href= @yield('back-link') ><i class="fa fa-arrow-circle-left"></i></a></h1>
                             </div>
                             <div class="col-md-11">
                                 <h1>
@@ -295,6 +297,7 @@
     <!-- ./wrapper -->
 
     <!-- jQuery 3 -->
+    @section('scripts')
     <script src="{{ URL::asset('adminlte/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap 3.3.7 -->
     <script src="{{ URL::asset('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -306,6 +309,7 @@
     <script src="{{ URL::asset('adminlte/dist/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ URL::asset('adminlte/dist/js/demo.js') }}"></script>
+    @show
 </body>
 
 </html>
