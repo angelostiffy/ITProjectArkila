@@ -17,6 +17,7 @@ class CreateMembersTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('member_id');
             $table->integer('operator_id')
+            ->nullable()
             ->unsigned();
             $table->string('last_name', 35);
             $table->string('first_name', 35);

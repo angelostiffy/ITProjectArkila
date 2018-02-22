@@ -59,9 +59,5 @@ Route::resource('home/settings/discounts', 'DiscountsController', [
 ]);
 Route::get('home/settings', 'HomeController@settings');
 
-<<<<<<< HEAD
 Route::resource('home/test', 'TestController');
-=======
 Route::resource('home/testing', 'TestingController');
-
->>>>>>> ec75533be8016563d72e280779c3960e128dd36b
