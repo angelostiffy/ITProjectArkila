@@ -1,20 +1,14 @@
 @extends('layouts.master')
 @section('title', 'Add Daily Revenue/Expense')
+@section('form-title', 'Add Daily Revenue/Expense')
 @section('links')
 @parent
   <link rel="stylesheet" href="public\css\myOwnStyle.css">
   @stop
 @section('content')
-
-           <div class="login-box">
-  <div class="login-logo">
-    <h1>  <span><a href="../dailyLedger.html"s><i class="fa fa-arrow-circle-left"></i></a></span> Add Revenue/Expense</h1>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-      
-    <form action="" method="post">
-    <div class="form-group">
+@section('form-body')
+          
+                    <div class="form-group">
                       <label for="payor">Payee/Payor:</label>
                       <input type="text" class="form-control" id="payor">
                     </div>
@@ -43,21 +37,14 @@
                         </label>
         
                     </div>
-                         <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                  </div>
-    </form>
+@endsection
+@section('form-btn')     
+   <button type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
+   <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 
-
-
-  </div>
-  <!-- /.login-box-body -->
-</div>
-
-@stop
+@endsection
 
 @section('scripts')
 @parent
 
-@stop
+@endsection
