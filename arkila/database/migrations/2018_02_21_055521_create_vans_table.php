@@ -17,22 +17,6 @@ class CreateVansTable extends Migration
             $table->engine = 'InnoDB';
             $table->string('plate_number', 8)
             ->unique();
-     
-            $table->integer('driver_id')
-            ->unsigned()
-            ->nullable();
-
-            $table->foreign('driver_id')
-            ->references('driver_id')->on('drivers')
-            ->onDelete('restrict')
-            ->onUpdate('cascade');
-
-            $table->integer('operator_id')
-            ->unsigned();
-
-            $table->foreign('operator_id')
-            ->references('operator_id')->on('operators');
-
 
             $table->string('model');       
             $table->string('seating_capacity', 2);
@@ -44,6 +28,7 @@ class CreateVansTable extends Migration
 
 
         });
+        
     }
 
     /**

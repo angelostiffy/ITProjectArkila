@@ -1,21 +1,13 @@
-@extends('layouts.master')
-@section('title', 'index')
+@extends('layouts.form')
+@section('title', 'Change Password')
+@section('form-title', 'Change Password')
 @section('links')
 @parent
   <link rel="stylesheet" href="public\css\myOwnStyle.css">
   @stop
 @section('content')
-
-<h3 class="box-title">Change Password</h3>
-        <div class="box box-info" style="width:100% ">
-            <div class="box-header with-border">
-              <h3 class="box-title">Be careful in Changing password</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form class="form-horizontal">
-              <div class="box-body">
-                <div class="form-group">
+@section('form-body')
+<div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Old Password</label>
 
                   <div class="col-sm-10">
@@ -43,47 +35,19 @@
                         <input type="checkbox"> Remember me
                       </label>
                     </div>
-              <div class="box-footer pull-left">
-                 <button type="submit" class="btn btn-info paddingBotton">Clear</button>
-                <button type="submit" class="btn btn-success paddingBotton">Sign In</button>
-              </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.box-body -->
-             
-              <!-- /.box-footer -->
-            </form>
-          </div>
+@endsection
+@section('form-btn')
+  <button type="submit" class="btn btn-info ">Clear</button>
+                <button type="submit" class="btn btn-success ">Sign In</button>
+
         
 
 @endsection
 
 @section('scripts')
 @parent
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
-<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
-<!-- InputMask -->
-<script src="plugins/input-mask/jquery.inputmask.js"></script>
-<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
-<!-- iCheck 1.0.1 -->
-<script src="plugins/iCheck/icheck.min.js"></script>
- <script>
-  $(function () {
-    $('.example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-  })
-</script>
+
+
 <script>
   $(function () {
     //Initialize Select2 Elements
