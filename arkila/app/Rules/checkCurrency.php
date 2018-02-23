@@ -25,7 +25,7 @@ class checkCurrency implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match('/(^\d{1,3}\,\d{3}\,\d{3},\d{3}|^\d{1,3}\,\d{3}\,\d{3}|^\d{1,3}\,\d{3}|^\d{1,3})(\.\d{2})$/',$value);
+        return ((preg_match('/(^\d{1,3}\,\d{3}\,\d{3},\d{3}|^\d{1,3}\,\d{3}\,\d{3}|^\d{1,3}\,\d{3}|^\d{1,3})(\.\d{1,2})$/',$value) || (preg_match('/(^\d*)(\.\d{1,2})?$/', $value))) ? true : false);
     }
 
     /**
@@ -35,6 +35,6 @@ class checkCurrency implements Rule
      */
     public function message()
     {
-        return 'Wrong currency format, the entered format must be in the #,###,###.## format';
+        return 'Wrong currency format, the entered format must be in the #,###,###.## or #######.## format';
     }
 }
