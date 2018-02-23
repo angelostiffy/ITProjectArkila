@@ -14,7 +14,6 @@ class CreateDependentTable extends Migration
     public function up()
     {
         Schema::create('dependent', function (Blueprint $table) {
-            $table->increments('dependent_id');
             $table->integer('member_id')
             ->unsigned()
             ->nullable();
@@ -27,7 +26,6 @@ class CreateDependentTable extends Migration
             ->onDelete('restrict')
             ->onUpdate('cascade');
 
-            $table->timestamps();
         });
     }
 
