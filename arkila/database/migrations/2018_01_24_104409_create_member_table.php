@@ -23,6 +23,7 @@ class CreateMemberTable extends Migration
             $table->string('first_name', 35);
             $table->string('middle_name', 35);
             $table->string('contact_number', 13);
+            $table->enum('role', ['Operator', 'Driver']);
             $table->string('address',100);
             $table->string('provincial_address',100);
             $table->date('birth_date');

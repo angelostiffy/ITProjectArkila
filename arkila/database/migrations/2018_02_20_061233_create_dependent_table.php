@@ -18,7 +18,7 @@ class CreateDependentTable extends Migration
             ->unsigned()
             ->nullable();
 
-            $table->string('cname');
+            $table->string('children_name');
             $table->date('birthdate');
 
             $table->foreign('member_id')

@@ -23,67 +23,79 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tab_1">
                                         <b>Details:</b>
+                                        @foreach($reservations->where('type', 'Online') as $reservation)
                                         <table class="table table-bordered table-striped example1">
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
                                                     <th>Contact Number</th>
-                                                    <th>Address</th>
-                                                    <th>Age</th>
+                                                    <th>Departure Date</th>
+                                                    <th>Departure Time</th>
+                                                    <th>Destination</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>Chabal loves shaina</td>
-                                                    <td>0998273</td>
-                                                    <td>badihoy</td>
-                                                    <td>14</td>
+                                                    <td>{{ $reservation->name }}</td>
+                                                    <td>{{ $reservation->contact_number }}</td>
+                                                    <td>{{ $reservation->departure_date }}</td>
+                                                    <td>{{ $reservation->departure_time }}</td>
+                                                    <td>{{ $reservation->destination->description }}</td>
                                                     <td class="center-block">
                                                         <div class="center-block">
-                                                            <button class="btn btn-success"><i class="fa fa-check"></i> Approve</button>
-                                                            <button class="btn btn-danger"><i class="fa fa-close"></i> Decline</i></button>
+                                                        <form action="{{ route('reservations.update', $reservation->id) }}" method="POST">
+                                                            {{ csrf_field() }}
+                                                            {{ method_field('PATCH') }}
+
+                                                            @if ($reservation->status == 'Pending')
+                                                                <button class="btn btn-success" type="submit" name="butt" value="Approved"><i class="fa fa-check"></i> Approve</button>
+                                                                <button class="btn btn-danger" type="submit" name="butt" value="Declined"><i class="fa fa-close"></i> Decline</i></button>
+                                                            @elseif ($reservation->status == 'Approved')
+                                                                <button class="btn btn-success" type="submit" name="butt" value="Paid"><i class="fa fa-check"></i> Paid</button>
+                                                                <button class="btn btn-danger" type="submit" name="butt" value="Cancelled"><i class="fa fa-close"></i> Cancel</i></button>
+                                                            @else
+                                                                <p><b> {{ $reservation->status }} </b></p>
+                                                            @endif
+                                                        </form>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Chabal loves shaina</td>
-                                                    <td>0998273</td>
-                                                    <td>badihoy</td>
-                                                    <td>15</td>
-                                                    <td>fghs</td>
-                                                </tr>
-                                            </tbody>
                                         </table>
+                                        @endforeach
                                     </div>
 
                                     <!-- /.tab-pane -->
                                     <div class="tab-pane" id="tab_2">
+                                    <form action="{{ route('reservations.store', $reservation->id) }}" method="POST">
+                                                            {{ csrf_field() }}
 
                                         <label>Destination</label>
                                         <div class="form-group">
 
-                                            <select class="form-control select2 select2-hidden-accessible" style="width: 50%;" tabindex="-1" aria-hidden="true">
-                                              <option selected="selected">Alabama</option>
-                                              <option>Alaska</option>
-                                              <option>California</option>
-                                              <option>Delaware</option>
-                                              <option>Tennessee</option>
-                                              <option>Texas</option>
-                                              <option>Washington</option>
+                                            <select name="dest" class="form-control select2 select2-hidden-accessible" style="width: 50%;" tabindex="-1" aria-hidden="true">
+                                              <option>Select Destination</option>
+                                              @foreach($destinations as $destination)
+                                              <option value="{{ $destination->destination_id }}">{{ $destination->description }}</option>
+                                    @endforeach
                                             </select>
 
 
                                         </div>
 
                                         <div class="form-group fixMarginRight ">
+                                        <label>Full Name</label>
+                                            <div class="form-group">
+                                                <input type="text" name="name" class="form-control" max=15 min=1>
+                                            </div>
+
                                             <label>Departure Date:</label>
 
                                             <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right" id="datepicker">
+                                                <input type="text" name="date" class="form-control pull-right" id="datepicker">
                                             </div>
 
                                             <!-- time Picker -->
@@ -92,7 +104,7 @@
                                                     <label>Time picker:</label>
 
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control timepicker">
+                                                        <input type="text" name="type" class="form-control timepicker">
 
                                                         <div class="input-group-addon">
                                                             <i class="fa fa-clock-o"></i>
@@ -105,14 +117,19 @@
 
                                             <label>Number of Seats</label>
                                             <div class="form-group">
-                                                <input type="number" class="form-control" max=15 min=1>
+                                                <input type="number" name="seat" class="form-control" max=15 min=1>
                                             </div>
                                             <!-- /.input group -->
+                                            <label>Contact Number</label>
+                                            <div class="form-group">
+                                                <input type="number" name="contact" class="form-control" max=15 min=1>
+                                            </div>
                                         </div>
-
-                                        <div>
-                                            <!-- Trigger the modal with a button -->
-                                            <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Submit</button>
+                                            <input type="hidden" name="type" value="Walk-in">
+                                            <div>
+                                                <!-- Trigger the modal with a button -->
+                                                <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Submit</button>
+                                            </form>
 
                                             <!-- Modal -->
                                             <div id="myModal" class="modal fade" role="dialog">
@@ -139,15 +156,15 @@
                                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
-
+                                        
                                     </div>
-
+                                    
 
                                     <div class="tab-pane" id="tab_3">
+                                    @foreach($reservations as $reservation)
                                         <table class="table table-bordered table-striped example1">
                                             <thead>
                                                 <tr>
@@ -156,42 +173,41 @@
                                                     <th>Time</th>
                                                     <th>Number of Seats</th>
                                                     <th>Contact Number</th>
+                                                    <th>Transaction</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>Randall</td>
-                                                    <td>Marcos Highway</td>
-                                                    <td>9:00 pm</td>
-                                                    <td>15</td>
-                                                    <td>65656566565</td>
+                                                    <td>{{ $reservation->name }}</td>
+                                                    <td>{{ $reservation->destination->description }}</td>
+                                                    <td>{{ $reservation->departure_time }}</td>
+                                                    <td>{{ $reservation->number_of_seats }}</td>
+                                                    <td>{{ $reservation->contact_number }}</td>
+                                                    <td>{{ $reservation->type }}</td>
                                                     <td class="center-block">
                                                         <div class="center-block">
-                                                            <button class="btn btn-success"><i class="fa fa-check"></i> Paid</button>
-                                                            </button>
+                                                            <form action="{{ route('reservations.update', $reservation->id) }}" method="POST">
+                                                                {{ csrf_field() }}
+                                                                {{ method_field('PATCH') }}
+
+                                                                @if ($reservation->status == 'Pending')
+                                                                    <button class="btn btn-success" type="submit" name="butt" value="Approved"><i class="fa fa-check"></i> Approve</button>
+                                                                    <button class="btn btn-danger" type="submit" name="butt" value="Declined"><i class="fa fa-close"></i> Decline</i></button>
+                                                                @elseif ($reservation->status == 'Approved')
+                                                                    <button class="btn btn-success" type="submit" name="butt" value="Paid"><i class="fa fa-check"></i> Paid</button>
+                                                                    <button class="btn btn-danger" type="submit" name="butt" value="Cancelled"><i class="fa fa-close"></i> Cancel</i></button>
+                                                                @else
+                                                                    <p><b> {{ $reservation->status }} </b></p>
+                                                                @endif
+                                                            </form>
 
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Randall;</td>
-                                                    <td>Marcos hHighway</td>
-                                                    <td>9:10 pm</td>
-                                                    <td>05</td>
-                                                    <td>656566565</td>
-                                                    <td class="center-block">
-                                                        <div class="center-block">
-                                                            <button class="btn btn-success"><i class="fa fa-check"></i> Paid</button>
-                                                            <button class="btn btn-danger"><i class="fa fa-close"></i> Declined</button>
-
-
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
                                             </tbody>
                                         </table>
+                                        @endforeach
                                     </div>
 
                                     <!-- /.box-body -->

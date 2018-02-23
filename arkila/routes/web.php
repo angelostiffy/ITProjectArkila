@@ -61,3 +61,4 @@ Route::get('home/settings', 'HomeController@settings');
 
 Route::resource('home/test', 'TestController');
 Route::resource('home/testing', 'TestingController');
+Route::resource('home/reservations', 'ReservationsController');

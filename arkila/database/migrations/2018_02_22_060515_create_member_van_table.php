@@ -21,8 +21,6 @@ class CreateMemberVanTable extends Migration
             ->unsigned()
             ->nullable();
 
-            $table->enum('role', ['Operator', 'Driver']);
-
             $table->foreign('member_id')
             ->references('member_id')->on('member')
             ->onDelete('restrict')

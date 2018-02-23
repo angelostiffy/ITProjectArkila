@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Dependent extends Model
 {
     //
-    protected $primaryKey = ['operator_id', 'driver_id',];
-    
+    protected $fillable = [
+        'children_name',
+        'birthdate',
+    ];
 }
