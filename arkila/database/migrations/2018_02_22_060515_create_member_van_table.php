@@ -17,8 +17,7 @@ class CreateMemberVanTable extends Migration
             $table->integer('member_id')
             ->unsigned()
             ->nullable();
-            $table->integer('plate_number')
-            ->unsigned()
+            $table->string('plate_number')
             ->nullable();
 
             $table->foreign('member_id')
