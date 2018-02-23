@@ -1,7 +1,8 @@
-@extends('layouts.forms')
-@section('title', 'Add Terminal')
+@extends('layouts.form')
+@section('title', 'Create New Terminal')
 @section('back-link', '#')
-@section('form-title', 'Add Terminal')
+@section('form-action', '#')
+@section('form-title', 'Create Terminal')
 @section('form-body')
 
        <div class="form-group">
@@ -11,7 +12,7 @@
 
 @endsection
 @section('form-btn')
-<a href="" class="btn btn-primary" data-toggle="modal" data-target="#form-modal"><i class="fa fa-plus-circle"></i> Add</button>
+<a href="" class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Create</a>
 @endsection
 
 @section('modal-title')

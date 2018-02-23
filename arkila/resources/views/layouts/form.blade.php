@@ -133,41 +133,36 @@
                             </li>
                             <!-- Tasks Menu -->
                             <li class="dropdown tasks-menu">
-                                <!-- Menu Toggle Button -->
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-flag-o"></i>
-                                    <span class="label label-danger">9</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="header">You have 9 tasks</li>
-                                    <li>
-                                        <!-- Inner menu: contains the tasks -->
-                                        <ul class="menu">
-                                            <li>
-                                                <!-- Task item -->
-                                                <a href="#">
-                                                    <!-- Task title and progress text -->
-                                                    <h3>
-                                                        Design some buttons
-                                                        <small class="pull-right">20%</small>
-                                                    </h3>
-                                                    <!-- The progress bar -->
-                                                    <div class="progress xs">
-                                                        <!-- Change the css width attribute to simulate progress -->
-                                                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                            <span class="sr-only">20% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <!-- end task item -->
-                                        </ul>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bullhorn"></i>
+                                <span class="label label-danger">9</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                            
+                            <form method="post" action="{{ route('announcements.index') }}">
+                            {{ csrf_field() }}
+                                    <li class="header box-body">Enter Announcement:
+
+                                    <span class="pull-right">
+                                        <select name="viewer">
+                                            <option value="Public">Public</option>
+                                            <option value="Driver Only">Driver Only</option>
+                                            <option value="Customer Only">Customer Only</option>
+                                            <option value="Only Me">Only Me</option>
+                                        </select>
+                                    </span>
                                     </li>
-                                    <li class="footer">
-                                        <a href="#">View all tasks</a>
+
+                                    <li class="box-body">
+                                        <!-- inner menu: contains the actual data -->
+                                        <textarea name="announce" rows="5" class="form-control" placeholder="" style="resize: none;"></textarea>
                                     </li>
-                                </ul>
-                            </li>
+                                    <li class="footer box-body pull-right">
+                                        <button class="btn btn-warning">ANNOUNCE</button>
+                                    </li>
+                                </form>
+                            </ul>
+                        </li>
                             <!-- User Account Menu -->
                             <li class="dropdown user user-menu">
                                 <!-- Menu Toggle Button -->
@@ -228,6 +223,7 @@
 
                 </section>
                 <!-- /.content -->
+                <form action="@yield('form-action')" method="post">
                 <section class="content">
                     <div class="login-box">
                         <div class="login-logo">
@@ -242,14 +238,11 @@
                         </div>
                         <div class="login-box-body">
                             @yield('form-body')
-                            <form action="" method="post">
+                            
                                 <!-- FORM -->
                                 <div class="form-group pull-right">
                                     @yield('form-btn')
                                 </div>
-                            </form>
-
-                            <!-- /.social-auth-links -->
 
                             <a href="#">lorem</a><br>
                             <a href="register.html" class="text-center">lorem</a>
@@ -257,13 +250,8 @@
                         </div>
                         <!-- /.login-box-body -->
                     </div>
-                </section>
-            </div>
-            <!-- /.container -->
-        </div>
-        <!-- /.content-wrapper -->
 
-        <div class="modal fade" id="form-modal">
+                    <div class="modal fade" id="form-modal">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -283,7 +271,14 @@
             <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
+                </section>
+                </form>
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.content-wrapper -->
 
+        
         <footer class="main-footer">
             <div class="container">
                 <div class="pull-right hidden-xs">
