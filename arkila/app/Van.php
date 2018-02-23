@@ -20,6 +20,7 @@ class Van extends Model
 	//
 
     public function member(){
-        return $this->belongsToMany(Van::class,'member_van','plate_number','member_id');
+        return $this->belongsToMany(Van::class,'member_van','plate_number','member_id')
+            ->withPivot('role');
     }
 }

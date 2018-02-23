@@ -24,30 +24,33 @@ Route::resource('home/ledger', 'DailyLedgerController');
 
 Route::resource('home/announcements', 'AnnouncementsController');
 
-//Drivers
-Route::resource('home/drivers', 'DriversController');
-Route::get('home/drivers/create', 'DriversController@create');
-Route::post('home/drivers/', 'DriversController@store');
-
-Route::resource('home/drivers', 'DriversController',[
-	'except' => ['index','create','store']
-]);
-
-Route::get('home/operators/{operator}/drivers/create', 'DriversController@create');
-Route::post('home/operators/{operator}/drivers/', 'DriversController@store');
 
 //Operators
 Route::resource('home/operators', 'OperatorsController');
 
-//Vans
+/************ Drivers ******************************/
+Route::resource('home/drivers', 'DriversController');
+
+//Adding a driver to a specific operator
+Route::get('home/operators/{operator}/drivers/create', 'DriversController@createUsingOperator');
+Route::post('home/operators/{operator}/drivers/', 'DriversController@storeUsingOperator');
+
+//Adding a driver to a specific van
+Route::get('home/operators/{van}/drivers/create', 'DriversController@createUsingVan');
+Route::post('home/operators/{van}/drivers/', 'DriversController@storeUsingVan');
+/****************************************************/
+
+/************ Vans ******************************/
 Route::resource('home/vans', 'VansController', [
     'except' => ['index','create','store']
 ]);
 //Creating Vans
 Route::get('home/operators/{operator}/vans/create', 'VansController@create');
 Route::post('home/operators/{operator}/vans', 'VansController@store');
+/****************************************************/
 
-//Settings
+
+/************ Settings ******************************/
 Route::resource('home/settings/destinations', 'DestinationController', [
 	'except' => ['index','create','show', 'edit']
 ]);
@@ -58,6 +61,7 @@ Route::resource('home/settings/discounts', 'DiscountsController', [
     'except' => ['index','show']
 ]);
 Route::get('home/settings', 'HomeController@settings');
+/****************************************************/
 
 Route::resource('home/test', 'TestController');
 Route::resource('home/testing', 'TestingController');
