@@ -32,77 +32,78 @@ class DriverRequest extends FormRequest
             case 'POST':
             {
                 return [
-                    'member' => 'unique:drivers,member_id|required|max:10',
-                    'operator' => 'required|max:7',
-                    'last' => 'required|max:35',
-                    'first' => 'required|max:35',
-                    'middle' => 'required|max:35',
-                    'address' => 'required|max:55',
-                    'contactn' =>  'numeric|digits:10',
-                    'paddress' =>  'required|max:55',
-                    'birthdate' =>  'required|date|before:today',
-                    'bplace' =>  'required|max:50',
+                    'lastName' => 'required|max:35',
+                    'firstName' => 'required|max:35',
+                    'operator' => 'nullable|exists:member,member_id|numeric',
+                    'middleName' => 'required|max:35',
+                    'contactNumber' => 'numeric|digits:10',
+                    'address' => 'required|max:100',
+                    'provincialAddress' => 'required|max:100',
+                    'birthDate' => 'required|date|before:today',
+                    'birthPlace' => 'required|max:50',
+                    'age' => 'required|numeric',
                     'gender' => [
                         'required',
                         Rule::in(['Male', 'Female'])
                     ],
-                    'citizenship' =>  'required|max:25',
-                    'cstatus' => [
+                    'citizenship' => 'required|max:35',
+                    'civilStatus' => [
                         'required',
-                        Rule::in(['Single', 'Married', 'Divorced']) 
+                        Rule::in(['Single', 'Married', 'Divorced'])
                     ],
-                    'nochild' =>  'max:3',
-                    'spouse' =>  'max:120',
-                    'spousebday' =>  'nullable|date|before:today',
-                    'father' =>  'max:120',
-                    'fatheroccup' =>  'max:55',
-                    'mother' =>  'max:120',
-                    'motheroccup' =>  'max:55',
-                    'personemergency' =>  'required|max:100',
-                    'peAddress' =>  'required|max:55',
-                    'peContactnum' =>  'required|digits:10',
-                    'sss' =>  'required|max:10',
-                    'licenseNum' =>  'required|max:10',
-                    'exp' =>  'required|date',
+                    'spouse' => 'required_with:spouseBirthDate|max:120',
+                    'spouseBirthDate' => 'required_with:spouse|nullable|date|before:today',
+                    'fathersName' => 'required_with:fatherOccupation|max:120',
+                    'fatherOccupation' => 'required_with:fathersName|max:50',
+                    'mothersName' => 'required_with:motherOccupation|max:120',
+                    'motherOccupation' => 'required_with:mothersName|max:50',
+                    'personInCaseOfEmergency' => 'required|max:120',
+                    'emergencyAddress' => 'required|max:50',
+                    'emergencyContactNumber' => 'required|numeric|digits:10',
+                    'sss' => 'unique:member,SSS|required|max:10',
+                    'driverLicense' => 'required|max:20',
+                    'driverLicenseExpiryDate' => 'required|date|before:today',
+                    'children.*' => 'required_with:childrenBDay.*|distinct',
+                    'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
                 ];
             }
             case 'PATCH':
             {
                 return [
-                    'member' => 'unique:drivers,member_id,'.$driver->member_id.',member_id|required|max:10',
-                    'operator' => 'required|max:7',
-                    'last' => 'required|max:35',
-                    'first' => 'required|max:35',
-                    'middle' => 'required|max:35',
-                    'address' => 'required|max:55',
-                    'contactn' =>  'numeric|digits:10',
-                    'paddress' =>  'required|max:55',
-                    'age' =>  'required|digits:2',
-                    'birthdate' =>  'required|date|before:today',
-                    'bplace' =>  'required|max:50',
+                    'lastName' => 'required|max:35',
+                    'firstName' => 'required|max:35',
+                    'operator' => 'nullable|exists:member,member_id|numeric',
+                    'middleName' => 'required|max:35',
+                    'contactNumber' => 'numeric|digits:10',
+                    'address' => 'required|max:100',
+                    'provincialAddress' => 'required|max:100',
+                    'birthDate' => 'required|date|before:today',
+                    'birthPlace' => 'required|max:50',
+                    'age' => 'required|numeric',
                     'gender' => [
                         'required',
                         Rule::in(['Male', 'Female'])
                     ],
-                    'citizenship' =>  'required|max:25',
-                    'cstatus' => [
+                    'citizenship' => 'required|max:35',
+                    'civilStatus' => [
                         'required',
-                        Rule::in(['Single', 'Married', 'Divorced']) 
+                        Rule::in(['Single', 'Married', 'Divorced'])
                     ],
-                    'nochild' =>  'max:3',
-                    'spouse' =>  'max:120',
-                    'spousebday' =>  'nullable|date|before:today',
-                    'father' =>  'max:120',
-                    'fatheroccup' =>  'max:55',
-                    'mother' =>  'max:120',
-                    'motheroccup' =>  'max:55',
-                    'personemergency' =>  'required|max:100',
-                    'peAddress' =>  'required|max:55',
-                    'peContactnum' =>  'required|digits:10',
-                    'sss' =>  'required|max:10',
-                    'licenseNum' =>  'required|max:10',
-                    'exp' =>  'required|date',
-                ];         
+                    'spouse' => 'required_with:spouseBirthDate|max:120',
+                    'spouseBirthDate' => 'required_with:spouse|nullable|date|before:today',
+                    'fathersName' => 'required_with:fatherOccupation|max:120',
+                    'fatherOccupation' => 'required_with:fathersName|max:50',
+                    'mothersName' => 'required_with:motherOccupation|max:120',
+                    'motherOccupation' => 'required_with:mothersName|max:50',
+                    'personInCaseOfEmergency' => 'required|max:120',
+                    'emergencyAddress' => 'required|max:50',
+                    'emergencyContactNumber' => 'required|numeric|digits:10',
+                    'sss' => 'unique:operators,SSS,'.$driver->operator_id.',operator_id|required|max:10',
+                    'driverLicense' => 'required|max:20',
+                    'driverLicenseExpiryDate' => 'required|date|before:today',
+                    'children.*' => 'required_with:childrenBDay.*|distinct',
+                    'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
+                ];
             }
             default:break;
         }

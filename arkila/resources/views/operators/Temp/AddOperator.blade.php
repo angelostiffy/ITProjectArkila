@@ -13,15 +13,15 @@
               <div class="row">
                 <div class="col-md-4">
                   Last Name:<input type="text" class="form-control" name ="lastName" placeholder="Last Name">
-                    Contact Number:<input type="text" name="firstName" class="form-control" placeholder="Contact Number">
+                    Contact Number:<input type="text" name="contactNumber" class="form-control" placeholder="Contact Number">
                     Age:<input type="text" name="age" class="form-control" placeholder="Age">
                     
                    <div class="radio">
                        <div>Gender:</div>
-                       <label><input type="radio" name="gender">Male</label>
+                       <label><input type="radio" name="gender" value="Male">Male</label>
                     </div>
                     <div class="radio">
-                        <label><input type="radio" name="gender">Female</label>
+                        <label><input type="radio" name="gender" value="Female">Female</label>
                     </div>
             
                 </div>
@@ -41,7 +41,11 @@
                   Middle Name:<input name="middleName" type="text" class="form-control" placeholder="Middle Name">
                     Provincial Address:<input name="provincialAddress" type="text" class="form-control" placeholder="Provincial Address">
                     Birthplace:<input name="birthPlace" type="text" class="form-control" placeholder="Birthplace">
-                    Civil Status:<input name="civilStatus" type="text" class="form-control" placeholder="Civil Status">
+                    Civil Status:<select name="civilStatus" class="form-control" placeholder="Civil Status">
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                    </select>
                 </div>
                 
                 <div class="col-md-12">

@@ -110,7 +110,9 @@ return [
         ],
         'childrenBDay.*' => [
             'required_with' => "Incomplete Information Entered. Every entered Birth date in the Birth date field must have their name be entered in the Childrens name field",
-        ],
+            'before' => "Every entered Birth Date of the Children must be a date before or equal to the date today",
+            'date' => "Every Entered Birth Date in the BirthDate field of the Children must be a date"
+            ],
 
     ],
 

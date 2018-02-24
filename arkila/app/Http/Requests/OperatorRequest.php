@@ -38,9 +38,9 @@ class OperatorRequest extends FormRequest
                     'contactNumber' => 'numeric|digits:10',
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
-                    'age' => 'required|numeric',
                     'birthDate' => 'required|date|before:today',
                     'birthPlace' => 'required|max:50',
+                    'age' => 'required|numeric',
                     'gender' => [
                         'required',
                         Rule::in(['Male', 'Female'])
@@ -51,19 +51,19 @@ class OperatorRequest extends FormRequest
                         Rule::in(['Single', 'Married', 'Divorced']) 
                     ],
                     'spouse' => 'required_with:spouseBirthDate|max:120',
-                    'spouseBirthDate' => 'required_with:spouse|date|before:today',
+                    'spouseBirthDate' => 'required_with:spouse|nullable|date|before:today',
                     'fathersName' => 'required_with:fatherOccupation|max:120',
-                    'fatherOccupation' => 'required_with:father|max:50',
+                    'fatherOccupation' => 'required_with:fathersName|max:50',
                     'mothersName' => 'required_with:motherOccupation|max:120',
-                    'motherOccupation' => 'required_with:mother|max:50',
+                    'motherOccupation' => 'required_with:mothersName|max:50',
                     'personInCaseOfEmergency' => 'required|max:120',
                     'emergencyAddress' => 'required|max:50',
                     'emergencyContactNumber' => 'required|numeric|digits:10',
                     'sss' => 'unique:member,SSS|required|max:10',
-                    'driverLicense' => 'required_with:driversLicenseExpiryDate|max:20',
-                    'driverLicenseExpiryDate' => 'required_with:driverLicense|date|before:today',
+                    'driverLicense' => 'required_with:driverLicenseExpiryDate|max:20',
+                    'driverLicenseExpiryDate' => 'required_with:driverLicense|nullable|date|before:today',
                     'children.*' => 'required_with:childrenBDay.*|distinct',
-                    'childrenBDay.*' => 'required_with:children.*|date|before:today'
+                    'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
                 ];
             }
             case 'PATCH':
@@ -88,19 +88,19 @@ class OperatorRequest extends FormRequest
                         Rule::in(['Single', 'Married', 'Divorced'])
                     ],
                     'spouse' => 'required_with:spouseBirthDate|max:120',
-                    'spouseBirthDate' => 'required_with:spouse|date|before:today',
+                    'spouseBirthDate' => 'required_with:spouse|nullable|date|before:today',
                     'fathersName' => 'required_with:fatherOccupation|max:120',
-                    'fatherOccupation' => 'required_with:father|max:50',
+                    'fatherOccupation' => 'required_with:fathersName|max:50',
                     'mothersName' => 'required_with:motherOccupation|max:120',
-                    'motherOccupation' => 'required_with:mother|max:50',
+                    'motherOccupation' => 'required_with:mothersName|max:50',
                     'personInCaseOfEmergency' => 'required|max:120',
                     'emergencyAddress' => 'required|max:50',
                     'emergencyContactNumber' => 'required|numeric|digits:10',
                     'sss' => 'unique:operators,SSS,'.$operator->operator_id.',operator_id|required|max:10',
-                    'driverLicense' => 'required_with:driversLicenseExpiryDate|max:20',
-                    'driverLicenseExpiryDate' => 'required_with:driverLicense|date|before:today',
+                    'driverLicense' => 'required_with:driverLicenseExpiryDate|max:20',
+                    'driverLicenseExpiryDate' => 'required_with:driverLicense|nullable|date|before:today',
                     'children.*' => 'required_with:childrenBDay.*|distinct',
-                    'childrenBDay.*' => 'required_with:children.*|date|before:today'
+                    'childrenBDay.*' => 'required_with:children.*|nullable|date|before:today'
                 ];
 
             }
