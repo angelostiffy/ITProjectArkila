@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Validator;
-use App\Operator;
-use App\Van;
-use Illuminate\Http\Request;
+use App\Member;
 use App\Http\Requests\OperatorRequest;
 
 class OperatorsController extends Controller
@@ -17,8 +14,8 @@ class OperatorsController extends Controller
      */
     public function index()
     {
-        $operators = Operator::all();
-        return view('operators.index', ['operators' => $operators]); 
+        $operators = Member::operators()->get();
+        return view('operators.index', ['operators' => $operators]);
     }
 
     /**
@@ -28,7 +25,7 @@ class OperatorsController extends Controller
      */
     public function create()
     {
-        return view('operators.create');
+        return view('operators.viewDriverOperator');
     }
 
     /**
@@ -40,9 +37,9 @@ class OperatorsController extends Controller
     public function store(OperatorRequest $request)
     {
 
-        $emContactNumber = '+63'.request('emergencyContactNo');
-        $perContactNumber = '+63'.request('contactNumber');
-        Operator::create([
+        $emContactNumber = '+63'.$request->emergencyContactNo;
+        $perContactNumber = '+63'.$request->contactNumber;
+        Member::create([
             'first_name' => $request->firstName,
             'last_name'=> $request->lastName,
             'middle_name' => $request->middleName,
@@ -78,10 +75,11 @@ class OperatorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Operator $operator)
+    public function show(Member $operator)
     {
-        $drivers = Driver::latest()->where('operator_id', $operator)->get();
-        $vans = Van::latest()->where('operator_id', $operator)->get();
+        dd($operator);
+        $drivers = Member::drivers()->get();
+        $vans = $operator->van();
         return view('operators.show',compact('operator', 'drivers', 'vans'));
     }
 
@@ -91,7 +89,7 @@ class OperatorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Operator $operator)
+    public function edit(Member $operator)
     {
         return view('operators.edit', compact('operator'));
     }
@@ -103,7 +101,7 @@ class OperatorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Operator $operator, OperatorRequest $request)
+    public function update(Member $operator, OperatorRequest $request)
     {
         // $this->validate(request(),[
         //     'firstName' => 'required|max:35',
@@ -182,7 +180,7 @@ class OperatorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Operator $operator)
+    public function destroy(Member $operator)
     {
         $findOperator = Operator::find($operator->operator_id);
         if($findOperator->delete()){
