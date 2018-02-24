@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Operator;
+use App\Member;
 
 class OperatorRequest extends FormRequest
 {
@@ -26,17 +26,17 @@ class OperatorRequest extends FormRequest
     public function rules()
     {
 
-        $operator = Operator::find(request('opId'));
+        $operator = Member::find(request('opId'));
         switch($this->method())
         {
             case 'POST':
             {
                 return [
-                    'firstName' => 'required|max:35',
                     'lastName' => 'required|max:35',
+                    'firstName' => 'required|max:35',
                     'middleName' => 'required|max:35',
-                    'address' => 'required|max:100',
                     'contactNumber' => 'numeric|digits:10',
+                    'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
                     'age' => 'required|numeric',
                     'birthDate' => 'required|date|before:today',
@@ -46,31 +46,34 @@ class OperatorRequest extends FormRequest
                         Rule::in(['Male', 'Female'])
                     ],
                     'citizenship' => 'required|max:35',
-                    'cStatus' => [
+                    'civilStatus' => [
                         'required',
                         Rule::in(['Single', 'Married', 'Divorced']) 
                     ],
-                    'noChild' => 'max:2',
-                    'spouse' => 'max:120',
-                    'spouseBirthDate' => 'nullable|date|before:today',
-                    'father' => 'max:120',
-                    'fatherOccupation' => 'max:50',
-                    'mother' => 'max:120',
-                    'motherOccupation' => 'max:50',
-                    'pCaseofEmergency' => 'required|max:120',
+                    'spouse' => 'required_with:spouseBirthDate|max:120',
+                    'spouseBirthDate' => 'required_with:spouse|date|before:today',
+                    'fathersName' => 'required_with:fatherOccupation|max:120',
+                    'fatherOccupation' => 'required_with:father|max:50',
+                    'mothersName' => 'required_with:motherOccupation|max:120',
+                    'motherOccupation' => 'required_with:mother|max:50',
+                    'personInCaseOfEmergency' => 'required|max:120',
                     'emergencyAddress' => 'required|max:50',
-                    'emergencyContactNo' => 'required|numeric|digits:10',
-                    'sssId' => 'unique:operators,SSS|required|max:10',
+                    'emergencyContactNumber' => 'required|numeric|digits:10',
+                    'sss' => 'unique:member,SSS|required|max:10',
+                    'driverLicense' => 'required_with:driversLicenseExpiryDate|max:20',
+                    'driverLicenseExpiryDate' => 'required_with:driverLicense|date|before:today',
+                    'children.*' => 'required_with:childrenBDay.*|distinct',
+                    'childrenBDay.*' => 'required_with:children.*|date|before:today'
                 ];
             }
             case 'PATCH':
             {
                 return [
-                    'firstName' => 'required|max:35',
                     'lastName' => 'required|max:35',
+                    'firstName' => 'required|max:35',
                     'middleName' => 'required|max:35',
-                    'address' => 'required|max:100',
                     'contactNumber' => 'numeric|digits:10',
+                    'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
                     'age' => 'required|numeric',
                     'birthDate' => 'required|date|before:today',
@@ -80,22 +83,26 @@ class OperatorRequest extends FormRequest
                         Rule::in(['Male', 'Female'])
                     ],
                     'citizenship' => 'required|max:35',
-                    'cStatus' => [
+                    'civilStatus' => [
                         'required',
-                        Rule::in(['Single', 'Married', 'Divorced']) 
+                        Rule::in(['Single', 'Married', 'Divorced'])
                     ],
-                    'noChild' => 'max:2',
-                    'spouse' => 'max:120',
-                    'spouseBirthDate' => 'nullable|date|before:today',
-                    'father' => 'max:120',
-                    'fatherOccupation' => 'max:50',
-                    'mother' => 'max:120',
-                    'motherOccupation' => 'max:50',
-                    'pCaseofEmergency' => 'required|max:120',
+                    'spouse' => 'required_with:spouseBirthDate|max:120',
+                    'spouseBirthDate' => 'required_with:spouse|date|before:today',
+                    'fathersName' => 'required_with:fatherOccupation|max:120',
+                    'fatherOccupation' => 'required_with:father|max:50',
+                    'mothersName' => 'required_with:motherOccupation|max:120',
+                    'motherOccupation' => 'required_with:mother|max:50',
+                    'personInCaseOfEmergency' => 'required|max:120',
                     'emergencyAddress' => 'required|max:50',
-                    'emergencyContactNo' => 'required|numeric|digits:10',
-                    'sssId' => 'unique:operators,SSS,'.$operator->operator_id.',operator_id|required|max:10',
-                ];         
+                    'emergencyContactNumber' => 'required|numeric|digits:10',
+                    'sss' => 'unique:operators,SSS,'.$operator->operator_id.',operator_id|required|max:10',
+                    'driverLicense' => 'required_with:driversLicenseExpiryDate|max:20',
+                    'driverLicenseExpiryDate' => 'required_with:driverLicense|date|before:today',
+                    'children.*' => 'required_with:childrenBDay.*|distinct',
+                    'childrenBDay.*' => 'required_with:children.*|date|before:today'
+                ];
+
             }
             default:break;
         }

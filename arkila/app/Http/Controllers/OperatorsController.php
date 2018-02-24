@@ -15,7 +15,7 @@ class OperatorsController extends Controller
     public function index()
     {
         $operators = Member::operators()->get();
-        return view('operators.index', ['operators' => $operators]);
+        return view('operators.AddOperator', ['operators' => $operators]);
     }
 
     /**
@@ -25,7 +25,7 @@ class OperatorsController extends Controller
      */
     public function create()
     {
-        return view('operators.viewDriverOperator');
+        return view('operators.temp.AddOperator');
     }
 
     /**
@@ -39,33 +39,38 @@ class OperatorsController extends Controller
 
         $emContactNumber = '+63'.$request->emergencyContactNo;
         $perContactNumber = '+63'.$request->contactNumber;
-        Member::create([
-            'first_name' => $request->firstName,
+        $createdOperator = Member::create([
             'last_name'=> $request->lastName,
+            'first_name' => $request->firstName,
             'middle_name' => $request->middleName,
-            'address' => $request->address,
             'contact_number' => $perContactNumber,
+            'role' => 'Operator',
+            'address' => $request->address,
             'provincial_address' => $request->provincialAddress,
             'age' => $request->age,
             'birth_date' => $request->birthDate,
             'birth_place' => $request->birthPlace,
             'gender' => $request->gender,
             'citizenship' => $request->citizenship,
-            'civil_status' => $request->cStatus,
+            'civil_status' => $request->civilStatus,
             'number_of_children' => $request->noChild,
             'spouse' => $request->spouse,
             'spouse_birthdate' => $request->spouseBirthDate,
-            'father_name' => $request->father,
+            'father_name' => $request->fathersName,
             'father_occupation' => $request->fatherOccupation,
-            'mother_name' => $request->mother,
+            'mother_name' => $request->mothersName,
             'mother_occupation' => $request->motherOccupation,
             'person_in_case_of_emergency' => $request->pCaseofEmergency,
             'emergency_address' => $request->emergencyAddress,
             'emergency_contactno' => $emContactNumber,
-            'SSS' => $request->sssId, 
+            'SSS' => $request->sss,
+            'driverLicense' => $request->driverLicense,
+            'driversLicenseExpiryDate' => $request->driverLicenseExpiryDate,
         ]);
-        
 
+        for($i = 0; $i <= sizeof($request->children); $i++){
+            $createdOperator->addChildren($request->children[i],$request->childrenBDay[i]);
+        }
         return redirect('/home/operators')->with('success', 'Information created successfully');
     }
 
