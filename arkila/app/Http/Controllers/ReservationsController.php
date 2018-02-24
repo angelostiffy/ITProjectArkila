@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Rules\checkCurrency;
 use App\Reservation;
 use App\Destination;
 
@@ -37,22 +38,42 @@ class ReservationsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        //        
+       $validation =  $this->validate(request(),[
+            "name" => "required|max:50|min:10",
+            "departure_date" => "required|date",
+            "destination_id" => "required|numeric|min:1",
+            "number_of_seats" => "required|numeric|max:15",
+            "contact_number" => "numeric|digits:10",
+            "amount" => ['required',new checkCurrency,'numeric','min:0'],
+        ]);
+        dd($validation->fails());
+        if ($validation->fails())
+        {
+            alert('WOW');
+        }
+
+        $seat = request('seat');
+        $amount = 100*$seat;
+
+        $perContactNumber = '+63'.request('contact');
+
         Reservation::create([
-            'name' => $request->name,
-            'departure_date' => $request->date,
-            'departure_time' => $request->time,
-            'destination_id' => $request->dest,
-            'number_of_seats' => $request->seat,
-            'contact_number' => $request->contact,
-            'type' => $request->type,
+            'name' => request('name'),
+            'departure_date' => request('date'),
+            'departure_time' => request('time'),
+            'destination_id' => request('dest'),
+            'number_of_seats' => request('seat'),
+            'contact_number' => $perContactNumber,
+            'amount' => $amount,
+            'type' => request('type'),
 
         ]);
+        return redirect('/home/reservations')->with('success', 'Information created successfully');
 
     }
-
     /**
      * Display the specified resource.
      *

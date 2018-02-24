@@ -23,7 +23,7 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tab_1">
                                         <b>Details:</b>
-                                        @foreach($reservations->where('type', 'Online') as $reservation)
+                                        @foreach($reservations->where('type', 'Online')->sortByDesc('status') as $reservation)
                                         <table class="table table-bordered table-striped example1">
                                             <thead>
                                                 <tr>
@@ -67,26 +67,25 @@
 
                                     <!-- /.tab-pane -->
                                     <div class="tab-pane" id="tab_2">
-                                    <form action="{{ route('reservations.store', $reservation->id) }}" method="POST">
-                                                            {{ csrf_field() }}
+                            <form method="POST" action="{{route('reservations.index')}}">
+                                {{csrf_field()}}            
+                                <input type="hidden" name="type" value="Walk-in">
 
                                         <label>Destination</label>
                                         <div class="form-group">
-
-                                            <select name="dest" class="form-control select2 select2-hidden-accessible" style="width: 50%;" tabindex="-1" aria-hidden="true">
-                                              <option>Select Destination</option>
+                                            <select name="dest" id="dest" style="width: 200px">
+                                              <option></option>
                                               @foreach($destinations as $destination)
-                                              <option value="{{ $destination->destination_id }}">{{ $destination->description }}</option>
+                                              <option value="{{ $destination->destination_id }}" @if($destination->destination_id == old('dest') ) {{'selected'}} @endif>{{ $destination->description }}</option>
                                     @endforeach
                                             </select>
-
-
                                         </div>
+
 
                                         <div class="form-group fixMarginRight ">
                                         <label>Full Name</label>
-                                            <div class="form-group">
-                                                <input type="text" name="name" class="form-control" max=15 min=1>
+                                        <div class="form-group">
+                                                <input type="text" name="name" id="name" class="form-control" max=15 min=1 value="{{ old('name') }}">
                                             </div>
 
                                             <label>Departure Date:</label>
@@ -95,7 +94,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" name="date" class="form-control pull-right" id="datepicker">
+                                                <input type="text" name="date" id="date" class="form-control pull-right" id="datepicker" value="{{ old('date') }}">
                                             </div>
 
                                             <!-- time Picker -->
@@ -104,7 +103,7 @@
                                                     <label>Time picker:</label>
 
                                                     <div class="input-group">
-                                                        <input type="text" name="type" class="form-control timepicker">
+                                                        <input type="text" name="time" id="time" class="form-control timepicker" value="{{ old('time') }}">
 
                                                         <div class="input-group-addon">
                                                             <i class="fa fa-clock-o"></i>
@@ -117,54 +116,23 @@
 
                                             <label>Number of Seats</label>
                                             <div class="form-group">
-                                                <input type="number" name="seat" class="form-control" max=15 min=1>
+                                                <input type="number" name="seat" id="seat" class="form-control" max=15 min=1 value="{{ old('seat') }}">
                                             </div>
                                             <!-- /.input group -->
                                             <label>Contact Number</label>
                                             <div class="form-group">
-                                                <input type="number" name="contact" class="form-control" max=15 min=1>
+                                                <input type="number" name="contact" class="form-control" value="{{ old('contact') }}">
                                             </div>
                                         </div>
-                                            <input type="hidden" name="type" value="Walk-in">
-                                            <div>
-                                                <!-- Trigger the modal with a button -->
-                                                <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Submit</button>
+                                                <!-- <button type="button" class="btn btn-primary btn-md">Submit</button> -->
+                                                <input type="submit" class="btn btn-info" value="Submit">                                        
                                             </form>
-
-                                            <!-- Modal -->
-                                            <div id="myModal" class="modal fade" role="dialog">
-                                                <div class="modal-dialog">
-
-                                                    <!-- Modal content-->
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                            <h4 class="modal-title">Walk-in Reservation Information</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>Origin: Baguio City</p>
-                                                            <p> Destination: Cabanatuan </p>
-                                                            <p>Preferred date: 01/17/17</p>
-                                                            <p>Departure time: 2:30 PM</p>
-                                                            <p> Total Passengers :2 </p>
-
-                                                            <p>Fare Amount: PHP 350.00</p>
-                                                            <p>Total Passenger : 2 </p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
-                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
-                                        
-                                    </div>
                                     
 
                                     <div class="tab-pane" id="tab_3">
-                                    @foreach($reservations as $reservation)
+                                    @foreach($reservations->sortByDesc('created_at') as $reservation)
                                         <table class="table table-bordered table-striped example1">
                                             <thead>
                                                 <tr>
@@ -172,6 +140,7 @@
                                                     <th>Destination</th>
                                                     <th>Time</th>
                                                     <th>Number of Seats</th>
+                                                    <th>Amount</th>
                                                     <th>Contact Number</th>
                                                     <th>Transaction</th>
                                                     <th>Actions</th>
@@ -183,6 +152,8 @@
                                                     <td>{{ $reservation->destination->description }}</td>
                                                     <td>{{ $reservation->departure_time }}</td>
                                                     <td>{{ $reservation->number_of_seats }}</td>
+                                                
+                                                    <td>{{ $reservation->amount }}</td>
                                                     <td>{{ $reservation->contact_number }}</td>
                                                     <td>{{ $reservation->type }}</td>
                                                     <td class="center-block">
@@ -225,6 +196,10 @@
 
 @section('scripts')
 @parent
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
 <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
@@ -314,6 +289,13 @@
       showInputs: false
     })
   })
+                                                                                                                  
+    $("#dest").select2({
+        placeholder: 'Select destination',
+        allowClear: true
+    })
+
 </script>
+
 
 @endsection

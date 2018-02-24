@@ -14,17 +14,22 @@ class CreateDestinationTable extends Migration
     public function up()
     {
         Schema::create('destination', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('destination_id');
-            $table->string('description');
-            $table->enum('terminal', ['Cabanatuan City', 'San Jose City']);
-            $table->decimal('amount', 7, 2)
-            ->unsigned();
-            $table->timestamps();
+            $table->integer('terminal_id')->unsigned();
 
-             $table->engine = 'InnoDB';
+
+            $table->string('description');
+            $table->decimal('amount', 7, 2);
+            $table->timestamps();
+            
+            $table->foreign('terminal_id')
+            ->references('terminal_id')->on('terminal')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *

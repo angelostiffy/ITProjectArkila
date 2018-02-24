@@ -28,6 +28,7 @@ class CreateMemberTable extends Migration
             $table->string('provincial_address',100);
             $table->date('birth_date');
             $table->string('birth_place', 50);
+            $table->smallInteger('age');
             $table->enum('gender', ['Male', 'Female']);
             $table->string('citizenship', 35);
             $table->enum('civil_status', ['Single', 'Married', 'Divorced']);
