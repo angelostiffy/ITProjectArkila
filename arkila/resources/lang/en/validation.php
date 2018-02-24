@@ -103,6 +103,15 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'children.*' => [
+            'required_with' => 'Incomplete Information Entered. Every entered name in the children field must have their birth date be entered in the Birth date field ',
+            'distinct' => "There has been a duplicated name in the children name field",
+
+        ],
+        'childrenBDay.*' => [
+            'required_with' => "Incomplete Information Entered. Every entered Birth date in the Birth date field must have their name be entered in the Childrens name field",
+        ],
+
     ],
 
     /*
