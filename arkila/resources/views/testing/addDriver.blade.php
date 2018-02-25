@@ -70,42 +70,48 @@
                                 <label>Last Name:</label>
                                 <input type="text" class="form-control" placeholder="Last Name">
                             </div>
-                            <div class="form-group">
-                                <label>Contact Number:</label>
-                                <input type="text" class="form-control" placeholder="Contact Number">
-                            </div>
-                            <div class="form-group">
-                                <label>Age:</label>
-                                <input type="number" class="form-control" placeholder="Age">
-                            </div>
-                            <div class="form-group">
-                                <label>Gender:</label>
-                                <div class="radio">
-                                    <label for=""> Male</label>
-                                    <label class="radio-inline">
-                        <input type="radio" name="gender"  value="male" class="flat-blue">
-                        </label>
-                                    <label for="">Female</label>
-                                    <label class="radio-inline">
-                        <input type="radio" name="gender" value="female" class="flat-blue">
-                          
-                        </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>SSS No:</label>
-                                <input type="text" class="form-control" placeholder="SSS No.">
-                            </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>First Name:</label>
                                 <input type="text" class="form-control" placeholder="First Name">
                             </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group">
+                                <label>Middle Name:</label>
+                                <input type="text" class="form-control" placeholder="Middle Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                             <div class="form-group">
+                                <label>Contact Number:</label>
+                                <input type="text" class="form-control" placeholder="Contact Number">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                             <div class="form-group">
                                 <label>Address:</label>
                                 <input type="text" class="form-control" placeholder="Address">
                             </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Provincial Address:</label>
+                                <input type="text" class="form-control" placeholder="Provincial Address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Age:</label>
+                                <input type="number" class="form-control" placeholder="Age">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Birthdate:</label>
                                 <div class="input-group date">
@@ -115,37 +121,62 @@
                                     <input type="text" class="form-control pull-right datepicker">
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Birthplace:</label>
+                                <input type="text" class="form-control" placeholder="Birthplace">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Gender:</label>
+                                <div class="radio">
+                                    <label for=""> Male</label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="gender"  value="male" class="flat-blue">
+                                    </label>
+                                    <label for="">Female</label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="gender" value="female" class="flat-blue">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Citizenship:</label>
                                 <input type="text" class="form-control" placeholder="Citizenship">
                             </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Civil Status:</label>
+                                <select class="form-control">
+                                   <option>Single</option>
+                                   <option>Married</option>
+                                   <option>Divorced</option>
+                                   <option>Widowed</option>
+                               </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>SSS No:</label>
+                                <input type="text" class="form-control" placeholder="SSS No.">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>License No:</label>
                                 <input type="text" class="form-control" placeholder="License No.">
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Middle Name:</label>
-                                <input type="text" class="form-control" placeholder="Middle Name">
-                            </div>
-                            <div class="form-group">
-                                <label>Provincial Address:</label>
-                                <input type="text" class="form-control" placeholder="Provincial Address">
-                            </div>
-                            <div class="form-group">
-                                <label>Birthplace:</label>
-                                <input type="text" class="form-control" placeholder="Birthplace">
-                            </div>
-                            <div class="form-group">
-                                <label>Civil Status:</label>
-                                <select class="form-control">
-                       <option>Single</option>
-                       <option>Married</option>
-                       <option>Divorced</option>
-                       <option>Widowed</option>
-                   </select>
-                            </div>
                             <div class="form-group">
                                 <label>License Expiry Date:</label>
                                 <div class="input-group date">
@@ -166,14 +197,6 @@
                                 <label>Name of Spouse:</label>
                                 <input type="text" class="form-control" placeholder="Name of Spouse">
                             </div>
-                            <div class="form-group">
-                                <label>Fathers Name:</label>
-                                <input type="text" class="form-control" placeholder="Fathers Name">
-                            </div>
-                            <div class="form-group">
-                                <label>Mothers Name:</label>
-                                <input type="number" class="form-control" placeholder="Mothers Name">
-                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -185,18 +208,37 @@
                                     <input type="text" class="form-control pull-right datepicker">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label>Occupation:</label>
-                                <input type="text" class="form-control" placeholder="Occupation">
-                            </div>
-                            <div class="form-group">
-                                <label>Occupation:</label>
-                                <input type="text" class="form-control" placeholder="Occupation">
-                            </div>
-
                         </div>
-
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Fathers Name:</label>
+                                <input type="text" class="form-control" placeholder="Fathers Name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Occupation:</label>
+                                <input type="text" class="form-control" placeholder="Occupation">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                             <div class="form-group">
+                                <label>Mothers Name:</label>
+                                <input type="number" class="form-control" placeholder="Mothers Name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Occupation:</label>
+                                <input type="text" class="form-control" placeholder="Occupation">
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
