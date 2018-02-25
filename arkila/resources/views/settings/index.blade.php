@@ -10,10 +10,10 @@
 			</ul>
 			<div class="tab-content">
 			    <div class="active tab-pane" id="tab_1">
-					<button data-toggle="modal" data-target="#addDestination">
+					<button data-toggle="modal" class="addDestination-modal" data-target="#addDestination">
 					    &#43;
 					</button>
-					<!-- Modal -->
+					<!-- Add Destination Modal -->
 					<div class="modal fade" id="addDestination" tabindex="-1" role="dialog" 
 					     aria-labelledby="myModalLabel" aria-hidden="true">
 					    <div class="modal-dialog">
@@ -88,8 +88,8 @@
 								<td>{{ $destination->terminal }}</td>
 								<td>{{ $destination->amount }}</td>
 								<td>
-									<button data-toggle="modal" data-target="#editDestination">Edit</button>
-									<!-- Modal -->
+									<button id="buttonEditDest" class="editDestination-modal" data-toggle="modal" data-target="#editDestination" data-destid="{{$destination->destination_id}}"  data-destination="{{$destination->description}}" data-terminal="{{$destination->terminal}}" data-amount="{{$destination->amount}}">Edit</button>
+									<<!--E></!--E>dit Modal for Destination-->
 									<div class="modal fade" id="editDestination" tabindex="-1" role="dialog" 
 									     aria-labelledby="myModalLabel" aria-hidden="true">
 									    <div class="modal-dialog">
@@ -105,17 +105,19 @@
 									                    Edit Destination
 									                </h4>
 									            </div>
-									            <form class="form-horizontal" action="/home/settings/destinations/{{ $destination->destination_id }}" role="form" method="POST">
-									            {{ csrf_field() }}
-									            {{ method_field('PATCH')}}
+									            <form class="form-horizontal" role="form">
+									            {{csrf_field()}}
+									            <!-- <input name="_method" type="hidden" value="PUT"> -->
 									            <!-- Modal Body -->
 									            <div class="modal-body">  
 									                  <div class="form-group">
+									                  	<input type="hidden" id="editDestId">
 									                    <label  class="col-sm-2 control-label"
 									                              for="destination">Destination</label>
 									                    <div class="col-sm-10">
-									                        <input type="text" class="form-control" 
-									                        name="editDestination" placeholder="Destination" value="{{ $destination->description }}"/>
+									                        <input type="text" class="form-control"
+									                        id="editDes" name="editDes" placeholder="Destination" />
+									                        <p class="errorDestination text-center alert alert-danger hidden"></p>
 									                    </div>
 									                  </div>
 									                  <div class="form-group">
@@ -123,7 +125,8 @@
 									                          for="terminal" >Terminal</label>
 									                    <div class="col-sm-10">
 									                        <input type="text" class="form-control"
-									                            name="editTerminal" placeholder="Terminal" value="{{ $destination->terminal }}"/>
+									                            id="editTerminal" name="editTerminal" placeholder="Terminal"/>
+									                            <p class="errorTerminal text-center alert alert-danger hidden"></p>
 									                    </div>
 									                  </div>
 									                  <div class="form-group">
@@ -131,7 +134,8 @@
 									                          for="Amount" >Amount</label>
 									                    <div class="col-sm-10">
 									                        <input type="number" class="form-control"
-									                            name="editAmountDestination" placeholder="Amount" value="{{ $destination->amount }}" step="0.25"/>
+									                            id="editAmountDestination" name="editAmountDestination" placeholder="Amount" step="0.25"/>
+									                            <p class="errorAmountDestination text-center alert alert-danger hidden"></p>
 									                    </div>
 									                  </div>					                
 									            </div>
@@ -141,7 +145,7 @@
 									                        data-dismiss="modal">
 									                            Close
 									                </button>
-									                	<button type="submit" class="btn btn-primary"> Save </button>
+									                	<button type="submit" class="btn btn-primary editDesti"> Save </button>
 									            </div>
 									            </form>
 									        </div>
@@ -226,7 +230,7 @@
 								<td></td>
 								<td></td>
 								<td>
-									<button data-toggle="modal" data-target="#editDiscount">Edit</button>
+									<button class="editDiscount-modal" data-toggle="modal" data-target="#editDiscount">Edit</button>
 									<!-- Modal -->
 									<div class="modal fade" id="editDiscount" tabindex="-1" role="dialog" 
 									     aria-labelledby="myModalLabel" aria-hidden="true">
@@ -357,7 +361,7 @@
 								<td></td>
 								<td></td>
 								<td>
-									<button data-toggle="modal" data-target="#editFee">Edit</button>
+									<button class="editFee-modal" data-toggle="modal" data-target="#editFee">Edit</button>
 									<!-- Modal -->
 									<div class="modal fade" id="editFee" tabindex="-1" role="dialog" 
 									     aria-labelledby="myModalLabel" aria-hidden="true">
@@ -425,4 +429,87 @@
             	</div>
             	</div>
             </section>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+            <script>
+            	//Add modal for Destinations
+            	// $(document).on('click', '.addDestination-modal', function(){
+            	// 	var destination = $('#destination').val();
+            	// 	var terminal = $('#terminal').val();
+            	// 	var amount = $('#amountDestination').val();
+            	// 	$('.modal-footer').on('click', 'addDestination-modal', function(){
+            	// 		$.ajax({
+            	// 			type: 'POST',
+            	// 			url: '/home/settings/destinations',
+            	// 			data: {
+            	// 				'description' : destination,
+            	// 				'terminal' : terminal,
+            	// 				'amount' : amount
+            	// 			},
+            	// 			success: function(data){
+            	// 				alert('Success');
+            	// 			},
+            	// 			error: function(data){
+            	// 				alert('Fail');
+            	// 			},
+            	// 		});
+            	// 	});
+            	// });
+            	//Edit modal for Destinations
+            	$(document).on('click', '.editDestination-modal', function() {
+            		$('#editDestId').val($(this).data('destid'));
+            		$('#editDes').val($(this).data('destination'));
+            		$('#editTerminal').val($(this).data('terminal'));
+            		$('#editAmountDestination').val($(this).data('amount'));
+            		id = $(this).data('destid');
+            		// $('#editDestination').modal('show');
+            		$('.modal-footer').on('click','.editDesti', function(){
+            		$.ajax({
+            			type: 'PUT',
+            			url: '/home/settings/destinations/' + id,
+            			data: {
+            				'_token': $('input[name=_token]').val(),
+            				'id': $('#editDestId').val(),
+            				'editDes': $('#editDes').val(),
+            				'editTerminal': $('#editTerminal').val(),
+            				'editAmountDestination': $('#editAmountDestination').val()
+            			},
+            			success: function(data){
+            				//alert('Success');
+            				// console.log(data);
+            				$('.errorDestination').addClass('hidden');
+            				$('.errorTerminal').addClass('hidden');
+            				$('.errorAmountDestination').addClass('hidden');
+            				
+            					toastr.success('Successfully updated Destination!', 'Success Alert', {timeOut: 5000});
+            				
+            			},
+            			error: function(data){
+            				//alert('Failed');
+            				setTimeout(function () {
+            					$('#editDestination').modal('show');
+            					toastr.error('Validation error!', 'Error Alert', {timeOut: 5000});
+            				}, 500);
+
+            				if(data.errors.description){
+            					$('.errorDestination').removeClass('hidden');
+            					$('.errorDestination').text(data.errors.description);
+            				}
+
+            				if(data.errors.terminal){
+            					$('.errorTerminal').removeClass('hidden');
+            					$('.errorTerminal').text(data.errors.terminal);
+            				}
+
+            				if(data.errors.amount){
+            					$('.errorAmountDestination').removeClass('hidden');
+            					$('.errorAmountDestination').text(data.errors.amount);
+            				}
+            			}
+            			//
+            		});
+            	});
+            	});
+            	
+            </script>	
 @endsection

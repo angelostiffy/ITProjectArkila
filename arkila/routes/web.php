@@ -50,10 +50,15 @@ Route::post('home/operators/{operator}/vans', 'VansController@store');
 /****************************************************/
 
 
+<<<<<<< Updated upstream
 /************ Settings ******************************/
 Route::resource('home/settings/destinations', 'DestinationController', [
 	'except' => ['index','create','show', 'edit']
 ]);
+=======
+//Settings
+Route::resource('home/settings/destinations', 'DestinationController');
+>>>>>>> Stashed changes
 Route::resource('home/settings/fees', 'FeesController', [
     'except' => ['index','show']
 ]);
