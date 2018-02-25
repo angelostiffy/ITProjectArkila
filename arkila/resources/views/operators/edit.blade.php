@@ -10,7 +10,7 @@
 @stop
 @section('content')            
                 
-            <a href="operatorProfile.html" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Back</a>                    
+            <a href="{{route('operators.showProfile',[$operator->member_id])}}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Back</a>
                  <div class="box ">
                     <div class="box box-header">
                         <h3><strong>Edit Operator Information</strong></h3>
@@ -227,7 +227,7 @@
       })
     </script>
     
-    <script src="{{ URL::('https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js') }}"></script>
+    <script src="{{ URL::asset('https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js') }}"></script>
     <script>
         var app = new Vue({
             el: '#root',

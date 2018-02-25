@@ -18,17 +18,17 @@
             <div class="box-body box-profile">
               <img class="profile-user-img img-responsive img-circle" src="dist/img/user4-128x128.jpg" alt="User profile picture">
 
-              <h3 class="profile-username text-center">Shaina Caballar</h3>
+              <h3 class="profile-username text-center">{{ $operator->full_name }}</h3>
 
               <p class="text-muted text-center">ganda</p>
                               
                 
                 <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                  <b>ID</b> <a class="pull-right">215</a>
+                  <b>ID</b> <a class="pull-right">{{ $operator->member_id }}</a>
                 </li>
                 <li class="list-group-item">
-                  <b>Contact Number</b> <a class="pull-right">1334287</a>
+                  <b>Contact Number</b> <a class="pull-right">{{ $operator->contact_number }}</a>
                 </li>
               </ul>
             </div>
@@ -39,15 +39,15 @@
           <!-- About Me Box -->
           <div class="box box-primary">
             <div class="box-header with-border">
-                <a href="editOperator.html" class="btn btn-block btn-info"><b>Edit Information</b></a>
-                <a href="viewOperator.html" class="btn btn-primary btn-block"><b>View All Information</b></a>
+                <a href="{{route('operators.edit',[$operator->member_id])}}" class="btn btn-block btn-info"><b>Edit Information</b></a>
+                <a href="{{route('operators.show',[$operator->member_id])}}" class="btn btn-primary btn-block"><b>View All Information</b></a>
         <div class="modal fade" id="modal-default">
           <div class="modal-dialog" style="width:400px;">
             <div class="modal-content">
               <div class="modal-header bg-primary" >
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Shaina Caballar</h4>
+                <h4 class="modal-title">{{ $operator->full_name }}</h4>
               </div>
               <div class="modal-body">
                   <div class="container-fluid">
@@ -112,18 +112,26 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>puggggg</td>
-                  <td>Chabal loves shaina</td>
-                  <td>15</td>
-                  <td>
-                    <div class="text-center">
-                        <a href="viewDriverOperator.html" class="btn btn-primary"><i class="fa fa-eye"></i>View</a>
-                        <a href="editDriverOperator.html" class="btn btn-info"><i class="fa fa-pencil-square-o"></i>Edit</a>
-                        <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</i></button>
-                    </div>
-                  </td>
-                </tr>
+
+                  @foreach($drivers as $driver)
+                    <tr>
+                      <td>$driver->full_name</td>
+                      <td>$driver->age</td>
+                      <td>$driver->contact_number</td>
+                      <td>
+                        <div class="text-center">
+                          <a href="{{route('drivers.show',[$driver->member_id])}}" class="btn btn-primary"><i class="fa fa-eye"></i>View</a>
+                          <a href="editDriverOperator.html" class="btn btn-info"><i class="fa fa-pencil-square-o"></i>Edit</a>
+                          <form action="{{route('drivers.destroy',[$driver->member_id])}}" method="POST">
+                            {{ csrf_field() }}
+                            {{method_field('DELETE')}}
+                            <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</i></button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                  @endforeach
+
                 </tbody>
               </table>
             </div>
@@ -147,10 +155,11 @@
                 </tr>
                 </thead>
                 <tbody>
+                @foreach($drivers as $driver)
                 <tr>
-                  <th>pug</th>
-                  <td>Chabal loves shaina</td>
-                    <td>0998273</td>
+                  <td>{{$driver->plate_number}}</td>
+                  <td>{{$driver->driver_name}}</td>
+                    <td>{{$driver->contact_number}}</td>
                   <td>
                     <div class="text-center">
                         <a href="changeDriver.html" class="btn btn-info" data-toggle="modal" data-target="#modal-default"><i class="fa fa-eye"></i> Change Driver</a>
@@ -159,6 +168,8 @@
                     </div>
                   </td>
                 </tr>
+                @endforeach
+
                 </tbody>
               </table>
             </div>

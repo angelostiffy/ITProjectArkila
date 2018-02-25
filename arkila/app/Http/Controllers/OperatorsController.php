@@ -25,7 +25,7 @@ class OperatorsController extends Controller
      */
     public function create()
     {
-        return view('operators.temp.AddOperator');
+        return view('operators.create');
     }
 
     /**
@@ -36,10 +36,9 @@ class OperatorsController extends Controller
      */
     public function store(OperatorRequest $request)
     {
-
         $emContactNumber = '+63'.$request->emergencyContactNumber;
         $perContactNumber = '+63'.$request->contactNumber;
-        $children = array_combine($request->children,$request->ChildrenBDay);
+        $children = array_combine($request->children,$request->childrenBDay);
 
         $createdOperator = Member::create([
             'last_name'=> $request->lastName,
@@ -62,12 +61,12 @@ class OperatorsController extends Controller
             'father_occupation' => $request->fatherOccupation,
             'mother_name' => $request->mothersName,
             'mother_occupation' => $request->motherOccupation,
-            'person_in_case_of_emergency' => $request->personInCaseOfEmergency,
-            'emergency_address' => $request->emergencyAddress,
+            'person_in_case_of_emergency' => $request->contactPerson,
+            'emergency_address' => $request->contactPersonAddress,
             'emergency_contactno' => $emContactNumber,
             'SSS' => $request->sss,
-            'license_number' => $request->driverLicense,
-            'expiry_date' => $request->driverLicenseExpiryDate,
+            'license_number' => $request->licenseNo,
+            'expiry_date' => $request->licenseExpiryDate,
         ]);
 
         $createdOperator->addChildren($children);
@@ -89,7 +88,7 @@ class OperatorsController extends Controller
     {
         $drivers = Member::drivers()->where('operator_id',$operator)->get();
         $vans = $operator->van();
-        return view('operators.OperatorProfile',compact('operator', 'drivers', 'vans'));
+        return view('operators.showProfile',compact('operator', 'drivers', 'vans'));
     }
 
     /**

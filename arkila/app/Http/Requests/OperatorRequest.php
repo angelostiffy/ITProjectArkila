@@ -56,12 +56,12 @@ class OperatorRequest extends FormRequest
                     'fatherOccupation' => 'required_with:fathersName|max:50',
                     'mothersName' => 'required_with:motherOccupation|max:120',
                     'motherOccupation' => 'required_with:mothersName|max:50',
-                    'personInCaseOfEmergency' => 'required|max:120',
-                    'emergencyAddress' => 'required|max:50',
-                    'emergencyContactNumber' => 'required|numeric|digits:10',
+                    'contactPerson' => 'required|max:120',
+                    'contactPersonAddress' => 'required|max:50',
+                    'contactPersonContactNumber' => 'required|numeric|digits:10',
                     'sss' => 'unique:member,SSS|required|max:10',
-                    'driverLicense' => 'required_with:driverLicenseExpiryDate|max:20',
-                    'driverLicenseExpiryDate' => 'required_with:driverLicense|nullable|date|before:today',
+                    'licenseNo' => 'required_with:licenseExpiryDate|max:20',
+                    'licenseExpiryDate' => 'required_with:licenseNo|nullable|date|before:today',
                     'children.*' => 'required_with:childrenBDay.*|distinct',
                     'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
                 ];

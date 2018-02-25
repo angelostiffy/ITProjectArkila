@@ -27,6 +27,7 @@ Route::resource('home/announcements', 'AnnouncementsController');
 
 //Operators
 Route::resource('home/operators', 'OperatorsController');
+Route::get('home/operators/profile/{operator}','OperatorsController@showProfile')->name('operators.showProfile');
 
 /************ Drivers ******************************/
 Route::resource('home/drivers', 'DriversController');
