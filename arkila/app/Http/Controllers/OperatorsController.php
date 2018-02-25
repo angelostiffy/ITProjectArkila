@@ -31,20 +31,19 @@ class OperatorsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  OperatorRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(OperatorRequest $request)
     {
-        $emContactNumber = '+63'.$request->emergencyContactNumber;
-        $perContactNumber = '+63'.$request->contactNumber;
+
         $children = array_combine($request->children,$request->childrenBDay);
 
         $createdOperator = Member::create([
             'last_name'=> $request->lastName,
             'first_name' => $request->firstName,
             'middle_name' => $request->middleName,
-            'contact_number' => $perContactNumber,
+            'contact_number' => $request->contactNumber,
             'role' => 'Operator',
             'address' => $request->address,
             'provincial_address' => $request->provincialAddress,
@@ -55,7 +54,7 @@ class OperatorsController extends Controller
             'citizenship' => $request->citizenship,
             'civil_status' => $request->civilStatus,
             'number_of_children' => $request->noChild,//
-            'spouse' => $request->spouse,
+            'spouse' => $request->nameOfSpouse,
             'spouse_birthdate' => $request->spouseBirthDate,
             'father_name' => $request->fathersName,
             'father_occupation' => $request->fatherOccupation,
@@ -63,7 +62,7 @@ class OperatorsController extends Controller
             'mother_occupation' => $request->motherOccupation,
             'person_in_case_of_emergency' => $request->contactPerson,
             'emergency_address' => $request->contactPersonAddress,
-            'emergency_contactno' => $emContactNumber,
+            'emergency_contactno' => $request->contactPersonContactNumber,
             'SSS' => $request->sss,
             'license_number' => $request->licenseNo,
             'expiry_date' => $request->licenseExpiryDate,
@@ -76,7 +75,7 @@ class OperatorsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Member  $operator
      * @return \Illuminate\Http\Response
      */
     public function show(Member $operator){
@@ -86,7 +85,7 @@ class OperatorsController extends Controller
 
     public function showProfile(Member $operator)
     {
-        $drivers = Member::drivers()->where('operator_id',$operator)->get();
+        $drivers = Member::drivers()->where('operator_id',$operator->member_id)->get();
         $vans = $operator->van();
         return view('operators.showProfile',compact('operator', 'drivers', 'vans'));
     }
@@ -94,7 +93,7 @@ class OperatorsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Member $operator
      * @return \Illuminate\Http\Response
      */
     public function edit(Member $operator)
@@ -105,14 +104,13 @@ class OperatorsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  OperatorRequest  $request
+     * @param  Member  $operator
      * @return \Illuminate\Http\Response
      */
     public function update(Member $operator, OperatorRequest $request)
     {
-        $emContactNumber = '+63'.$request->emergencyContactNumber;
-        $perContactNumber = '+63'.$request->contactNumber;
+
         $children = array_combine($request->children,$request->ChildrenBDay);
 
         $operator->update([
@@ -120,7 +118,7 @@ class OperatorsController extends Controller
             'first_name' => $request->firstName,
             'operator_id' => $request->operator,
             'middle_name' => $request->middleName,
-            'contact_number' => $perContactNumber,
+            'contact_number' => $request->contactNumber,
             'role' => 'Operator',
             'address' => $request->address,
             'provincial_address' => $request->provincialAddress,
@@ -139,7 +137,7 @@ class OperatorsController extends Controller
             'mother_occupation' => $request->motherOccupation,
             'person_in_case_of_emergency' => $request->personInCaseOfEmergency,
             'emergency_address' => $request->emergencyAddress,
-            'emergency_contactno' => $emContactNumber,
+            'emergency_contactno' => $request->emergencyContactNumber,
             'SSS' => $request->sss,
             'license_number' => $request->driverLicense,
             'expiry_date' => $request->driverLicenseExpiryDate,
@@ -155,11 +153,12 @@ class OperatorsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Member  $operator
      * @return \Illuminate\Http\Response
      */
     public function destroy(Member $operator)
     {
+        $operator->drivers()->update(['operator_id'=>null]);
         $operator->delete();
         return redirect()->route('operators.index');
     }

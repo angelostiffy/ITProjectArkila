@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Driver;
+use App\Member;
 
 
 class DriverRequest extends FormRequest
@@ -26,7 +26,7 @@ class DriverRequest extends FormRequest
      */
     public function rules()
     {
-        $driver = Driver::find(request('driverID'));
+        $driver = Member::drivers()->where('member_id',$this->member_id);
         switch($this->method())
         {
             case 'POST':
@@ -51,18 +51,18 @@ class DriverRequest extends FormRequest
                         'required',
                         Rule::in(['Single', 'Married', 'Divorced'])
                     ],
-                    'spouse' => 'required_with:spouseBirthDate|max:120',
-                    'spouseBirthDate' => 'required_with:spouse|nullable|date|before:today',
+                    'nameOfSpouse' => 'required_with:spouseBirthDate|max:120',
+                    'spouseBirthDate' => 'required_with:nameOfSpouse|nullable|date|before:today',
                     'fathersName' => 'required_with:fatherOccupation|max:120',
                     'fatherOccupation' => 'required_with:fathersName|max:50',
                     'mothersName' => 'required_with:motherOccupation|max:120',
                     'motherOccupation' => 'required_with:mothersName|max:50',
-                    'personInCaseOfEmergency' => 'required|max:120',
-                    'emergencyAddress' => 'required|max:50',
-                    'emergencyContactNumber' => 'required|numeric|digits:10',
+                    'contactPerson' => 'required|max:120',
+                    'contactPersonAddress' => 'required|max:50',
+                    'contactPersonContactNumber' => 'required|numeric|digits:10',
                     'sss' => 'unique:member,SSS|required|max:10',
-                    'driverLicense' => 'required|max:20',
-                    'driverLicenseExpiryDate' => 'required|date|before:today',
+                    'licenseNo' => 'required|max:20',
+                    'licenseExpiryDate' => 'required|date|before:today',
                     'children.*' => 'required_with:childrenBDay.*|distinct',
                     'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
                 ];

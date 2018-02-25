@@ -185,7 +185,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Name of Spouse:</label>
-                                <input value="{{old('spouse')}}" name="spouse" type="text" class="form-control" placeholder="Name of Spouse">
+                                <input value="{{old('nameOfSpouse')}}" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -264,7 +264,7 @@
                                 </thead>
                                 <tbody id="childrens">
 
-                                @if(count(old('children')))
+                                @if(old('children'))
 
                                     @for($i = 0; $i < count(old('children')); $i++)
                                         <tr>

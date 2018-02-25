@@ -115,13 +115,13 @@
 
                   @foreach($drivers as $driver)
                     <tr>
-                      <td>$driver->full_name</td>
-                      <td>$driver->age</td>
-                      <td>$driver->contact_number</td>
+                      <td>{{$driver->full_name}}</td>
+                      <td>{{$driver->age}}</td>
+                      <td>{{$driver->contact_number}}</td>
                       <td>
                         <div class="text-center">
                           <a href="{{route('drivers.show',[$driver->member_id])}}" class="btn btn-primary"><i class="fa fa-eye"></i>View</a>
-                          <a href="editDriverOperator.html" class="btn btn-info"><i class="fa fa-pencil-square-o"></i>Edit</a>
+                          <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i>Edit</a>
                           <form action="{{route('drivers.destroy',[$driver->member_id])}}" method="POST">
                             {{ csrf_field() }}
                             {{method_field('DELETE')}}

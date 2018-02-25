@@ -26,7 +26,7 @@ class OperatorRequest extends FormRequest
     public function rules()
     {
 
-        $operator = Member::find(request('opId'));
+        $operator = Member::operators()->where('member_id',$this->opId);
         switch($this->method())
         {
             case 'POST':
@@ -50,8 +50,8 @@ class OperatorRequest extends FormRequest
                         'required',
                         Rule::in(['Single', 'Married', 'Divorced']) 
                     ],
-                    'spouse' => 'required_with:spouseBirthDate|max:120',
-                    'spouseBirthDate' => 'required_with:spouse|nullable|date|before:today',
+                    'nameOfSpouse' => 'required_with:spouseBirthDate|max:120',
+                    'spouseBirthDate' => 'required_with:nameOfSpouse|nullable|date|before:today',
                     'fathersName' => 'required_with:fatherOccupation|max:120',
                     'fatherOccupation' => 'required_with:fathersName|max:50',
                     'mothersName' => 'required_with:motherOccupation|max:120',
