@@ -74,7 +74,7 @@
         @include('layouts.partials.footer')
 
         <!-- Van Queue Sidebar -->
-        @include('layouts.partial.queue_sidebar')
+        @include('layouts.partials.queue_sidebar')
         <!-- /.queue-sidebar -->
         <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
