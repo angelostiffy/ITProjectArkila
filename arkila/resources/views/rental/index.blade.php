@@ -1,6 +1,6 @@
 @extends('layouts.master')
-@section('title', 'Add Driver')
-@section('content-header', 'Add Driver')
+@section('title', 'Rental List')
+@section('content-header', 'Rental List')
 @section('content')
 <section class="content">
           <div class="box">
