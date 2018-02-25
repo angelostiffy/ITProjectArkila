@@ -27,7 +27,7 @@ class CreateTripTable extends Migration
             ->references('destination_id')->on('destination')
             ->onDelete('restrict')
             ->onUpdate('cascade');
-
+            $table->engine="InnoDB";
             $table->timestamps();
         });
     }

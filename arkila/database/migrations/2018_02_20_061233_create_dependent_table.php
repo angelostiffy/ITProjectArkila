@@ -23,7 +23,7 @@ class CreateDependentTable extends Migration
 
             $table->foreign('member_id')
             ->references('member_id')->on('member')
-            ->onDelete('restrict')
+            ->onDelete('cascade')
             ->onUpdate('cascade');
 
         });

@@ -1,428 +1,232 @@
-@extends('layouts.app')
+@extends('layouts.master')
+@section('title', 'Settings')
 @section('content')
-<section class="content-header">
-	<div class="col-xl-6">
-<div class="nav-tabs-custom">
-			<ul class="nav nav-tabs">
-				<li class="active"><a href="#tab_1" data-toggle="tab">Destinations</a></li>
-             	<li><a href="#tab_2" data-toggle="tab">Discount</a></li>
-             	<li><a href="#tab_3" data-toggle="tab">Fees</a></li>
-			</ul>
-			<div class="tab-content">
-			    <div class="active tab-pane" id="tab_1">
-					<button data-toggle="modal" data-target="#addDestination">
-					    &#43;
-					</button>
-					<!-- Modal -->
-					<div class="modal fade" id="addDestination" tabindex="-1" role="dialog" 
-					     aria-labelledby="myModalLabel" aria-hidden="true">
-					    <div class="modal-dialog">
-					        <div class="modal-content">
-					            <!-- Modal Header -->
-					            <div class="modal-header">
-					                <button type="button" class="close" 
-					                   data-dismiss="modal">
-					                       <span aria-hidden="true">&times;</span>
-					                       <span class="sr-only">Close</span>
-					                </button>
-					                <h4 class="modal-title" id="myModalLabel">
-					                    Add Destination
-					                </h4>
-					            </div>
-					            <form class="form-horizontal" action="/home/settings/destinations" role="form" method="POST">
-					            {{ csrf_field() }}
-					            <!-- Modal Body -->
-					            <div class="modal-body">  
-					                  <div class="form-group">
-					                    <label  class="col-sm-2 control-label"
-					                              for="destination">Destination</label>
-					                    <div class="col-sm-10">
-					                        <input type="text" class="form-control" 
-					                        name="destination" placeholder="Destination" required/>
-					                    </div>
-					                  </div>
-					                  <div class="form-group">
-					                    <label class="col-sm-2 control-label"
-					                          for="terminal" >Terminal</label>
-					                    <div class="col-sm-10">
-					                        <input type="text" class="form-control"
-					                            name="terminal" placeholder="Terminal" required/>
-					                    </div>
-					                  </div>
-					                  <div class="form-group">
-					                    <label class="col-sm-2 control-label"
-					                          for="Amount" >Amount</label>
-					                    <div class="col-sm-10">
-					                        <input type="number" class="form-control"
-					                            name="amountDestination" placeholder="Amount" step="0.25" required/>
-					                    </div>
-					                  </div>
-					                					                
-					            </div>
-					            <!-- Modal Footer -->
-					            <div class="modal-footer">
-					                <button type="button" class="btn btn-default"
-					                        data-dismiss="modal">
-					                            Close
-					                </button>
-					                	<button type="submit" class="btn btn-primary"> Save </button>
-					            </div>
-					            </form>
-					        </div>
-					    </div>
-					</div>
 
-					<table class="table table-striped table-bordered table-list">
-						<thead>
-							<tr>
-								<th>Destination</th>
-								<th>Terminal</th>
-								<th>Amount</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($destinations as $destination)
-							<tr>
-								<td>{{ $destination->description }}</td>
-								<td>{{ $destination->terminal }}</td>
-								<td>{{ $destination->amount }}</td>
-								<td>
-									<button data-toggle="modal" data-target="#editDestination">Edit</button>
-									<!-- Modal -->
-									<div class="modal fade" id="editDestination" tabindex="-1" role="dialog" 
-									     aria-labelledby="myModalLabel" aria-hidden="true">
-									    <div class="modal-dialog">
-									        <div class="modal-content">
-									            <!-- Modal Header -->
-									            <div class="modal-header">
-									                <button type="button" class="close" 
-									                   data-dismiss="modal">
-									                       <span aria-hidden="true">&times;</span>
-									                       <span class="sr-only">Close</span>
-									                </button>
-									                <h4 class="modal-title" id="myModalLabel">
-									                    Edit Destination
-									                </h4>
-									            </div>
-									            <form class="form-horizontal" action="/home/settings/destinations/{{ $destination->destination_id }}" role="form" method="POST">
-									            {{ csrf_field() }}
-									            {{ method_field('PATCH')}}
-									            <!-- Modal Body -->
-									            <div class="modal-body">  
-									                  <div class="form-group">
-									                    <label  class="col-sm-2 control-label"
-									                              for="destination">Destination</label>
-									                    <div class="col-sm-10">
-									                        <input type="text" class="form-control" 
-									                        name="editDestination" placeholder="Destination" value="{{ $destination->description }}"/>
-									                    </div>
-									                  </div>
-									                  <div class="form-group">
-									                    <label class="col-sm-2 control-label"
-									                          for="terminal" >Terminal</label>
-									                    <div class="col-sm-10">
-									                        <input type="text" class="form-control"
-									                            name="editTerminal" placeholder="Terminal" value="{{ $destination->terminal }}"/>
-									                    </div>
-									                  </div>
-									                  <div class="form-group">
-									                    <label class="col-sm-2 control-label"
-									                          for="Amount" >Amount</label>
-									                    <div class="col-sm-10">
-									                        <input type="number" class="form-control"
-									                            name="editAmountDestination" placeholder="Amount" value="{{ $destination->amount }}" step="0.25"/>
-									                    </div>
-									                  </div>					                
-									            </div>
-									            <!-- Modal Footer -->
-									            <div class="modal-footer">
-									                <button type="button" class="btn btn-default"
-									                        data-dismiss="modal">
-									                            Close
-									                </button>
-									                	<button type="submit" class="btn btn-primary"> Save </button>
-									            </div>
-									            </form>
-									        </div>
-									    </div>
-									</div>
+<row>
+        <div class="col-md-3">
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Settings</h3>
 
-									<form action="/home/destinations/{{$destination->destination_id}}" method="POST">
-		                                 {{ csrf_field() }}
-		                                             {{method_field('DELETE')}}
-		                                <button>Delete</button> 
-		                            </form>
-								</td>
-							</tr>
-							@endforeach
-						</tbody>
-            		</table>
+              <div class="box-tools">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body no-padding">
+              <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="#"><i class="fa fa-inbox"></i> <input type="checkbox" checked data-toggle="toggle">
+                  <span class="label label-primary pull-right">12</span></a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
+                <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
+                <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
+                </li>
+                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+              </ul>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+        <div class="col-md-9">
+          <row>
+            <!-- Custom Tabs -->
+            <div class="nav-tabs-custom">
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#terminalTab" data-toggle="tab">Terminals</a></li>
+                <li><a href="#destinationTab" data-toggle="tab">Destinations</a></li>
+                <li><a href="#feeTab" data-toggle="tab">Fees</a></li>
+                <li><a href="#discountTab" data-toggle="tab">Discounts</a></li>
+              </ul>
+              <div class="tab-content">
+                <!-- Terminal Tab -->
+              <div class="tab-pane active" id="terminalTab">
+                <div>
+                   <a href="addTerminal.html" class="btn btn-success"><i class="fa fa-plus"> </i> Add Terminal </a>
+                </div>
+                  <table id="terminals" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>Terminal Name</th>
+                      <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>Cabanatuan City</td>
+                      <td>
+                        <div class="form-group">
+                          <a href="editTerminal.html" class="btn btn-info"><i class="fa fa-edit"></i>Edit</a>
+                          <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-terminal"><i class="fa fa-trash"></i>Delete</button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                        <td>San Jose City</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                  </table>
+          </div>
+        <!-- Destinations Tab -->
+              <div class="tab-pane" id="destinationTab">
+                <div>
+                   <a href="addDestination.html" class="btn btn-success"><i class="fa fa-plus"> </i> Add Destination </a>
+                </div>
+                  <table id="destinations" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th></th>
+                      <th>Name</th>
+                      <th>Fare</th>
+                      <th>Terminal</th>
+                      <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>
+                        <div class= "icheckbox_flat-blue">
+                          <input type="checkbox">
+                        </div>
+                      </td>
+                      <td>Cabanatuan</td>
+                      <td>240.00</td>
+                      <td></td>
+                      <td>
+                        <div class="form-group">
+                          <a href="editDestination.html" class="btn btn-info"><i class="fa fa-edit" ></i>Edit</a>
+                          <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-destination"><i class="fa fa-trash"></i>Delete</button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                      </td>
+                        <td>San Jose</td>
+                        <td>240.00</td>
+                        <td>San Jose</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                  </table>
+          </div>
+          <!-- Fee Tab -->
+                <div class="tab-pane" id="feeTab">
+                  <div>
+                   <a href="addFee.html" class="btn btn-success"><i class="fa fa-plus"> </i> Add Fee </a>
+                  </div>
+                    <table id="fees" class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                        <th>Fee</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td>Booking Fee (Baguio)</td>
+                        <td>20.00</td>
+                        <td>
+                        <a href="editFee.html" class="btn btn-info"><i class="fa fa-edit"></i> Edit</a>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-fee"><i class="fa fa-trash"></i> Delete</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>SOP</td>
+                        <td>100.00</td>
+                        <td>
+                        <button class="btn btn-info"><i class="fa fa-edit"></i> Edit</button>
+                        <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                </div>
+          <!-- Discount Tab -->
+            <div class="tab-pane" id="discountTab">
+              <div>
+                   <a href="addDiscount.html" class="btn btn-success"><i class="fa fa-plus"> </i> Add Discount </a>
+                </div>
+                    <table id="discounts" class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                        <th>Discount</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td>Senior Citizen</td>
+                        <td>20.00</td>
+                        <td>
+                        <a href="editDiscount.html" class="btn btn-info" ><i class="fa fa-edit"></i> Edit</a>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-discount"><i class="fa fa-trash"></i> Delete</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>PWD</td>
+                        <td>20.00</td>
+                        <td>
+                        <button class="btn btn-info"><i class="fa fa-edit"></i> Edit</button>
+                        <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                </div>
 
-				</div>
-			    <div class="tab-pane" id="tab_2">
-					<button data-toggle="modal" data-target="#addDiscount">
-					    &#43;
-					</button>
-					<!-- Modal -->
-					<div class="modal fade" id="addDiscount" tabindex="-1" role="dialog" 
-					     aria-labelledby="myModalLabel" aria-hidden="true">
-					    <div class="modal-dialog">
-					        <div class="modal-content">
-					            <!-- Modal Header -->
-					            <div class="modal-header">
-					                <button type="button" class="close" 
-					                   data-dismiss="modal">
-					                       <span aria-hidden="true">&times;</span>
-					                       <span class="sr-only">Close</span>
-					                </button>
-					                <h4 class="modal-title" id="myModalLabel">
-					                    Add Discount
-					                </h4>
-					            </div>
-					            <form class="form-horizontal" action="" role="form" method="POST">
-					            {{ csrf_field() }}
-					            <!-- Modal Body -->
-					            <div class="modal-body">  
-					                  <div class="form-group">
-					                    <label  class="col-sm-2 control-label"
-					                              for="Discount">Discount</label>
-					                    <div class="col-sm-10">
-					                        <input type="text" class="form-control" 
-					                        name="discount" placeholder="Dicsount" required/>
-					                    </div>
-					                  </div>
-					                  <div class="form-group">
-					                    <label class="col-sm-2 control-label"
-					                          for="Amount" >Amount</label>
-					                    <div class="col-sm-10">
-					                        <input type="number" class="form-control"
-					                            name="amountDiscount" placeholder="Amount" step="0.25"/>
-					                    </div>
-					                  </div>
-					                					                
-					            </div>
-					            <!-- Modal Footer -->
-					            <div class="modal-footer">
-					                <button type="button" class="btn btn-default"
-					                        data-dismiss="modal">
-					                            Close
-					                </button>
-					                	<button type="submit" class="btn btn-primary"> Save </button>
-					            </div>
-					            </form>
-					        </div>
-					    </div>
-					</div>
-					<table class="table table-striped table-bordered table-list">
-						<thead>
-							<tr>
-								<th>Discount</th>
-								<th>Amount</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-							<tr>
-								<td></td>
-								<td></td>
-								<td>
-									<button data-toggle="modal" data-target="#editDiscount">Edit</button>
-									<!-- Modal -->
-									<div class="modal fade" id="editDiscount" tabindex="-1" role="dialog" 
-									     aria-labelledby="myModalLabel" aria-hidden="true">
-									    <div class="modal-dialog">
-									        <div class="modal-content">
-									            <!-- Modal Header -->
-									            <div class="modal-header">
-									                <button type="button" class="close" 
-									                   data-dismiss="modal">
-									                       <span aria-hidden="true">&times;</span>
-									                       <span class="sr-only">Close</span>
-									                </button>
-									                <h4 class="modal-title" id="myModalLabel">
-									                    Edit Discount
-									                </h4>
-									            </div>
-									            <form class="form-horizontal" action="" role="form" method="POST">
-									            {{ csrf_field() }}
-									            {{ method_field('PATCH')}}
-									            <!-- Modal Body -->
-									            <div class="modal-body">  
-									                  <div class="form-group">
-									                    <label  class="col-sm-2 control-label"
-									                              for="destination">Discount</label>
-									                    <div class="col-sm-10">
-									                        <input type="text" class="form-control" 
-									                        name="editDiscount" placeholder="Discount" value=""/>
-									                    </div>
-									                  </div>
-									                  <div class="form-group">
-									                    <label class="col-sm-2 control-label"
-									                          for="amount" >Amount</label>
-									                    <div class="col-sm-10">
-									                        <input type="number" class="form-control"
-									                            name="editAmountDiscount" placeholder="Terminal" value="" step="0.25"/>
-									                    </div>
-									                  </div>					                
-									            </div>
-									            <!-- Modal Footer -->
-									            <div class="modal-footer">
-									                <button type="button" class="btn btn-default"
-									                        data-dismiss="modal">
-									                            Close
-									                </button>
-									                	<button type="submit" class="btn btn-primary"> Save </button>
-									            </div>
-									            </form>
-									        </div>
-									    </div>
-									</div>
+            </div>
+          </div>
+        <!-- /.col -->
+      </div>
+      </row>
 
-									<form action="" method="POST">
-		                                 {{ csrf_field() }}
-		                                             {{method_field('DELETE')}}
-		                                <button>Delete</button> 
-		                            </form>
-								</td>
-							</tr>
-						<tbody>
-						</tbody>
-            		</table>
+@endsection
 
-				</div>
-			    <div class="tab-pane" id="tab_3">
-			    	<button data-toggle="modal" data-target="#addFee">
-					    &#43;
-					</button>
-					<!-- Modal -->
-					<div class="modal fade" id="addFee" tabindex="-1" role="dialog" 
-					     aria-labelledby="myModalLabel" aria-hidden="true">
-					    <div class="modal-dialog">
-					        <div class="modal-content">
-					            <!-- Modal Header -->
-					            <div class="modal-header">
-					                <button type="button" class="close" 
-					                   data-dismiss="modal">
-					                       <span aria-hidden="true">&times;</span>
-					                       <span class="sr-only">Close</span>
-					                </button>
-					                <h4 class="modal-title" id="myModalLabel">
-					                    Add Fee
-					                </h4>
-					            </div>
-					            <form class="form-horizontal" action="/home/settings/destinations" role="form" method="POST">
-					            {{ csrf_field() }}
-					            <!-- Modal Body -->
-					            <div class="modal-body">  
-					                  <div class="form-group">
-					                    <label  class="col-sm-2 control-label"
-					                              for="destination">Fee</label>
-					                    <div class="col-sm-10">
-					                        <input type="text" class="form-control" 
-					                        name="fee" placeholder="fee" required/>
-					                    </div>
-					                  </div>
-					                  <div class="form-group">
-					                    <label class="col-sm-2 control-label"
-					                          for="Amount" >Amount</label>
-					                    <div class="col-sm-10">
-					                        <input type="number" class="form-control"
-					                            name="amountFee" placeholder="Amount" step="0.25" required/>
-					                    </div>
-					                  </div>
-					                					                
-					            </div>
-					            <!-- Modal Footer -->
-					            <div class="modal-footer">
-					                <button type="button" class="btn btn-default"
-					                        data-dismiss="modal">
-					                            Close
-					                </button>
-					                	<button type="submit" class="btn btn-primary"> Save </button>
-					            </div>
-					            </form>
-					        </div>
-					    </div>
-					</div>
-					<table class="table table-striped table-bordered table-list">
-						<thead>
-							<tr>
-								<th>Fees</th>
-								<th>Amount</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td></td>
-								<td></td>
-								<td>
-									<button data-toggle="modal" data-target="#editFee">Edit</button>
-									<!-- Modal -->
-									<div class="modal fade" id="editFee" tabindex="-1" role="dialog" 
-									     aria-labelledby="myModalLabel" aria-hidden="true">
-									    <div class="modal-dialog">
-									        <div class="modal-content">
-									            <!-- Modal Header -->
-									            <div class="modal-header">
-									                <button type="button" class="close" 
-									                   data-dismiss="modal">
-									                       <span aria-hidden="true">&times;</span>
-									                       <span class="sr-only">Close</span>
-									                </button>
-									                <h4 class="modal-title" id="myModalLabel">
-									                    Edit Fee
-									                </h4>
-									            </div>
-									            <form class="form-horizontal" action="" role="form" method="POST">
-									            {{ csrf_field() }}
-									            {{ method_field('PATCH')}}
-									            <!-- Modal Body -->
-									            <div class="modal-body">  
-									                  <div class="form-group">
-									                    <label  class="col-sm-2 control-label"
-									                              for="destination">Fee</label>
-									                    <div class="col-sm-10">
-									                        <input type="text" class="form-control" 
-									                        name="editFee" placeholder="Fee" value=""/>
-									                    </div>
-									                  </div>
-									                  <div class="form-group">
-									                    <label class="col-sm-2 control-label"
-									                          for="amount" >Amount</label>
-									                    <div class="col-sm-10">
-									                        <input type="number" class="form-control"
-									                            name="editAmountFee" placeholder="Fee" value="" step="0.25"/>
-									                    </div>
-									                  </div>					                
-									            </div>
-									            <!-- Modal Footer -->
-									            <div class="modal-footer">
-									                <button type="button" class="btn btn-default"
-									                        data-dismiss="modal">
-									                            Close
-									                </button>
-									                	<button type="submit" class="btn btn-primary"> Save </button>
-									            </div>
-									            </form>
-									        </div>
-									    </div>
-									</div>
+@section('scripts')
+@parent
 
-									<form action="" method="POST">
-		                                 {{ csrf_field() }}
-		                                             {{method_field('DELETE')}}
-		                                <button>Delete</button> 
-		                            </form>
-								</td>
-							</tr>
-						</tbody>
-            		</table>
-
-			</div>
-
-			</div>
-            	</div>
-            	</div>
-            </section>
+<script>
+  $(document).ready(function () {
+    $('.sidebar-menu').tree()
+  })
+</script>
+<script>
+  $(function () {
+    $('#terminals').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true,
+    })
+    $('#destinations').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true,
+    })
+    $('#fees').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true,
+    })
+    $('#discounts').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  })
+</script>
 @endsection

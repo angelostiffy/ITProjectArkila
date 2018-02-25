@@ -37,8 +37,8 @@
                   <tbody>
                   @foreach ($operators as $operator)
                           <tr>
-                            <td class="hidden-xs" name="opId">{{ $operator->operator_id }}</td>
-                            <td><a href="operators/{{ $operator->operator_id }}">{{ $operator->first_name }} {{ $operator->middle_name }} {{ $operator->last_name }}</a></td>
+                            <td class="hidden-xs" name="opId">{{ $operator->member_id }}</td>
+                            <td><a href="operators/{{ $operator->member_id }}">{{ $operator->first_name }} {{ $operator->middle_name }} {{ $operator->last_name }}</a></td>
                             <td>{{ $operator->contact_number }}</td>
                             <td>{{ $operator->address }}</td>
                             <td>{{ $operator->age }}</td>
@@ -46,9 +46,10 @@
                     
                     <div class="text-center">
                               
-                                <form action="{{ route('operators.destroy', [$operator->operator_id]) }}" method="POST" >
+                                <form action="{{ route('operators.destroy', [$operator->member_id]) }}" method="POST" >
                                  {{ csrf_field() }}
-                                  <a href="/home/operators/{{ $operator->operator_id }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
+                                    {{method_field('DELETE')}}
+                                  <a href="/home/operators/{{ $operator->member_id }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
                                  <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</i></button>
                                 </form>
                   </div>
