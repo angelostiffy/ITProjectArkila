@@ -19,12 +19,10 @@ class Member extends Model
         return $this->hasMany(Dependent::class,'member_id','member_id');
     }
 
-    public function addChildren($children_name,$birthdate){
-        Dependent::create([
-            'member_id' => $this->member_id,
-            'children_name' => $children_name,
-            'birthdate' => $birthdate
-        ]);
+    public function addChildren($children){
+        foreach($children as $children_name=>$birthdate){
+            $this->children()->create(compact('children_name','birthdate'));
+        }
     }
 
     public static function scopeOperators($query){

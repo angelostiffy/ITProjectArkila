@@ -12,9 +12,12 @@ class Dependent extends Model
     ];
     public $incrementing = false;
     protected $table = 'dependent';
-    protected $primaryKey = ['member_id'];
+    protected $primaryKey = 'member_id';
     public $timestamps = false;
 
+    public function parent(){
+        return $this->belongsTo(Member::class,'member_id','member_id');
+    }
     public function setBirthdateAttribute($value){
         $this->attributes['birthdate'] = Carbon::parse($value);
     }
