@@ -15,17 +15,17 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/Ionicons/css/ionicons.min.css') }}">
     <!-- daterange picker -->
-    <link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
     <!-- bootstrap datepicker -->
-    <link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
     <!-- iCheck for checkboxes and radio inputs -->
-    <link rel="stylesheet" href="{{ URL::asset('plugins/iCheck/all.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('adminlte/plugins/iCheck/all.css') }}">
     <!-- Bootstrap Color Picker -->
-    <link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
     <!-- Bootstrap time Picker -->
-    <link rel="stylesheet" href="{{ URL::asset('plugins/timepicker/bootstrap-timepicker.min.css') }}">
-      <!-- Select2 -->
-    <link rel="stylesheet" href="{{ URL::asset('bower_components/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('adminlte/plugins/timepicker/bootstrap-timepicker.min.css') }}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/select2/dist/css/select2.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ URL::asset('adminlte/dist/css/AdminLTE.min.css') }}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -55,11 +55,11 @@
 
                 </section>
                 <!-- /.content -->
-                <form action="@yield('form-action')" method="post">
+                <form id="@yield('form-id')"" action="@yield('form-action')" method="post">
                 <section class="content">
                     
                 @yield('form-body')
-                
+
                 <div class="modal fade" id="form-modal">
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content">
@@ -99,24 +99,24 @@
     <!-- Bootstrap 3.3.7 -->
     <script src="{{ URL::asset('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- Select2 -->
-    <script src="{{ URL::asset('bower_components/select2/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ URL::asset('adminlte/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
     <!-- InputMask -->
-    <script src="{{ URL::asset('plugins/input-mask/jquery.inputmask.js') }}"></script>
-    <script src="{{ URL::asset('plugins/input-mask/jquery.inputmask.date.extensions.js') }}"></script>
-    <script src="{{ URL::asset('plugins/input-mask/jquery.inputmask.extensions.js') }}"></script>
+    <script src="{{ URL::asset('adminlte/plugins/input-mask/jquery.inputmask.js') }}"></script>
+    <script src="{{ URL::asset('adminlte/plugins/input-mask/jquery.inputmask.date.extensions.js') }}"></script>
+    <script src="{{ URL::asset('adminlte/plugins/input-mask/jquery.inputmask.extensions.js') }}"></script>
     <!-- date-range-picker -->
-    <script src="{{ URL::asset('bower_components/moment/min/moment.min.js') }}"></script>
-    <script src="{{ URL::asset('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ URL::asset('adminlte/bower_components/moment/min/moment.min.js') }}"></script>
+    <script src="{{ URL::asset('adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <!-- bootstrap datepicker -->
-    <script src="{{ URL::asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ URL::asset('adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <!-- bootstrap color picker -->
-    <script src="{{ URL::asset('bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
+    <script src="{{ URL::asset('adminlte/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
     <!-- bootstrap time picker -->
-    <script src="{{ URL::asset('plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
+    <script src="{{ URL::asset('adminlte/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
     <!-- SlimScroll -->
-    <script src="{{ URL::asset('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ URL::asset('adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
     <!-- iCheck 1.0.1 -->
-    <script src="{{ URL::asset('plugins/iCheck/icheck.min.js') }}"></script>
+    <script src="{{ URL::asset('adminlte/plugins/iCheck/icheck.min.js') }}"></script>
     <!-- SlimScroll -->
     <script src="{{ URL::asset('adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
     <!-- FastClick -->
@@ -125,6 +125,8 @@
     <script src="{{ URL::asset('adminlte/dist/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ URL::asset('adminlte/dist/js/demo.js') }}"></script>
+
+
     @show
 </body>
 

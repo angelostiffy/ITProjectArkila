@@ -13,12 +13,15 @@
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+     <!-- Select2 -->
+  <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
      <!-- iCheck for checkboxes and radio inputs -->
      <!-- bootstrap datepicker -->
   <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <link rel="stylesheet" href="plugins/iCheck/all.css">
+ 
     <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
@@ -272,7 +275,10 @@
                 <section class="content">
                        <div class="box box-warning">
         <div class="box-header with-border text-center">
-            <h3 class="box-title">Driver Registration</h3>
+            <a href="" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+            <h3 class="box-title">
+                Driver Registration
+            </h3>
         </div>
 
             <form id="regForm" action="/action_page.php">
@@ -282,13 +288,15 @@
                 <div class="tab">
                     <h4>Personal Information</h4>
                     <div class="row">
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-4">
+                        <div class=" form-group">
                             <label>Choose Operator:</label>
-                            <select name="" id="" class="form-control col-xs-5">
-                                <option value="">No Operator</option>
-                                <option value=""></option>
-                                <option value=""></option>
+                            <select name="" id="" class="form-control select2">
+                                <option selected="">No Operator</option>
+                                <option value="">John Doe</option>
+                                <option value="">Jandu</option>
                             </select>
+                        </div>
                         </div>
                     </div>
                     <div class="row">
@@ -544,6 +552,9 @@
 
     <!-- jQuery 3 -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+<!-- Select2 -->
+<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- SlimScroll -->
@@ -667,6 +678,8 @@
 
     <script>
     $(function () {
+        $('.select2').select2()
+
         $('#datepicker').datepicker({
           autoclose: true
         })
