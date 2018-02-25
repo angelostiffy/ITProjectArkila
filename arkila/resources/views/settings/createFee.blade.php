@@ -17,15 +17,12 @@
 <a href="" class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Create</a>
 @endsection
 
-@section('modal-title')
-
+@section('modal-title','Alert')
 @section('modal-body')
+<p>Are you sure you want to add *insert Description* as a fee?</p>
 @endsection
 
 @section('modal-btn')
-@endsection
-
-@section('scripts')
-@parent
-
+<a href="" type="button" class="btn btn-primary">Yes</a>
+<button class="btn btn-primary" data-dismiss="modal">No</button>
 @endsection
