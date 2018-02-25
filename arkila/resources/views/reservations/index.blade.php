@@ -169,7 +169,7 @@
 
                                                     <td class="center-block">
                                                         <div class="center-block">
-                                                            <form method="POST">
+                                                            <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
                                                                 {{ csrf_field() }}
                                                                 {{ method_field('PATCH') }}
 
