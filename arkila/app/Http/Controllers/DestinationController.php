@@ -39,9 +39,9 @@ class DestinationController extends Controller
         return redirect('/home/settings');
     }
     
-    public function edit()
+    public function edit(Destination $destination)
     {
-
+        return view('settings.editDestination', compact('destination'));
     }
 
     public function update(Request $request, $id)

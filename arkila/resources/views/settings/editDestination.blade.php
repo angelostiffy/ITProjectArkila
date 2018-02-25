@@ -5,13 +5,13 @@
 @section('form-title', 'Add Destination')
 @section('form-body')
 	 <div>
-	 	<label for="">Description:</label>
-	 	<p>*insert Description*</p>
+	 	<label for="destination">Description:</label>
+	 	<p>{{$destination->description}}</p>
 	 </div>
 
      <div class="form-group">
         <label>Fare:</label>
-        <input type="number" class="form-control" name="editDestinationFare" step = "0.25" min="0">
+        <input type="number" class="form-control" name="editDestinationFare" step = "0.25" min="0" value="{{$destination->amount}}">
      </div>
 
 @endsection

@@ -21,7 +21,7 @@
                 </div>
 @endsection
 @section('form-btn')
-<a href="" class="btn btn-primary">Create</a>
+<a href="" data-toggle="modal" data-target="#form-modal" class="btn btn-primary">Create</a>
 @endsection
 
 @section('modal-title','Alert')
