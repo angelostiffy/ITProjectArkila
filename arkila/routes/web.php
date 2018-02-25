@@ -53,15 +53,12 @@ Route::post('home/operators/{operator}/vans', 'VansController@store');
 
 /************ Settings ******************************/
 Route::resource('home/settings/destinations', 'DestinationController', [
-	'except' => ['index','create','show', 'edit']
+	'except' => ['index']
 ]);
-Route::get('home/settings/destinations/add-terminal', 'DestinationControler@createTerminal');
-Route::get('home/settings/destinations/add-destination', 'DestinationControler@createDestination');
-Route::post('home/settings/destinations/', 'DestinationControler@storeTerminal');
-Route::post('home/settings/destinations/', 'DestinationControler@storeDestination');
 
-//Settings
-Route::resource('home/settings/destinations', 'DestinationController');
+Route::resource('home/settings/terminal', 'TerminalController', [
+	'except' => ['index']
+]);
 
 Route::resource('home/settings/fees', 'FeesController', [
     'except' => ['index','show']
@@ -75,3 +72,4 @@ Route::get('home/settings', 'HomeController@settings');
 Route::resource('home/test', 'TestController');
 Route::resource('home/testing', 'TestingController');
 Route::resource('home/reservations', 'ReservationsController');
+Route::resource('home/rental', 'RentalsController');

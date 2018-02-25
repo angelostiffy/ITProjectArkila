@@ -15,5 +15,9 @@ class Destination extends Model
     public function reservation(){
     	return $this->hasOne(Reservation::class, 'id');
     }
+
+    public function terminal(){
+    	return $this->belongsTo(Terminal::class, 'terminal_id');
+    }
     //
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TestingController extends Controller
+class RentalsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,8 @@ class TestingController extends Controller
      */
     public function index()
     {
-        return view('testing.addDriver');
+        //
+        return view('rental.index');
     }
 
     /**
@@ -23,7 +24,7 @@ class TestingController extends Controller
      */
     public function create()
     {
-        //
+        return view('rental.create');
     }
 
     /**

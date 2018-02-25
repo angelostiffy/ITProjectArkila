@@ -41,7 +41,7 @@
                 <!-- Terminal Tab -->
               <div class="tab-pane active" id="terminalTab">
                 <div>
-                   <a href="addTerminal.html" class="btn btn-success"><i class="fa fa-plus"> </i> Add Terminal </a>
+                   <a href="/home/settings/terminal/create" class="btn btn-success"><i class="fa fa-plus"> </i> Add Terminal </a>
                 </div>
                   <table id="terminals" class="table table-bordered table-striped">
                     <thead>
@@ -51,26 +51,24 @@
                     </tr>
                     </thead>
                     <tbody>
+                     @foreach($terminals as $terminal) 
                     <tr>
-                      <td>Cabanatuan City</td>
+                      <td>{{$terminal->terminals}}</td>
                       <td>
                         <div class="form-group">
-                          <a href="editTerminal.html" class="btn btn-info"><i class="fa fa-edit"></i>Edit</a>
+                          <a href="home/settings/terminal/{{$terminal->terminal_id}}/edit-terminal" class="btn btn-info"><i class="fa fa-edit"></i>Edit</a>
                           <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-terminal"><i class="fa fa-trash"></i>Delete</button>
                         </div>
                       </td>
                     </tr>
-                    <tr>
-                        <td>San Jose City</td>
-                        <td></td>
-                    </tr>
+                     @endforeach
                     </tbody>
                   </table>
           </div>
         <!-- Destinations Tab -->
               <div class="tab-pane" id="destinationTab">
                 <div>
-                   <a href="addDestination.html" class="btn btn-success"><i class="fa fa-plus"> </i> Add Destination </a>
+                   <a href="home/settings/destinations/create" class="btn btn-success"><i class="fa fa-plus"> </i> Add Destination </a>
                 </div>
                   <table id="destinations" class="table table-bordered table-striped">
                     <thead>
@@ -83,15 +81,11 @@
                     </tr>
                     </thead>
                     <tbody>
+                      @foreach($destinations as $destination)
                     <tr>
-                      <td>
-                        <div class= "icheckbox_flat-blue">
-                          <input type="checkbox">
-                        </div>
-                      </td>
-                      <td>Cabanatuan</td>
-                      <td>240.00</td>
-                      <td></td>
+                      <td>{{$destination->description}}</td>
+                      <td>{{$destination->amount}}</td>
+                      <td>{{$destination->terminals}}</td>
                       <td>
                         <div class="form-group">
                           <a href="editDestination.html" class="btn btn-info"><i class="fa fa-edit" ></i>Edit</a>
@@ -99,14 +93,8 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
-                      <td>
-                      </td>
-                        <td>San Jose</td>
-                        <td>240.00</td>
-                        <td>San Jose</td>
-                        <td></td>
-                    </tr>
+                    @endforeach
+                    
                     </tbody>
                   </table>
           </div>
@@ -124,22 +112,16 @@
                       </tr>
                       </thead>
                       <tbody>
+                      @foreach($fees as $fee)
                       <tr>
-                        <td>Booking Fee (Baguio)</td>
-                        <td>20.00</td>
-                        <td>
-                        <a href="editFee.html" class="btn btn-info"><i class="fa fa-edit"></i> Edit</a>
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-fee"><i class="fa fa-trash"></i> Delete</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>SOP</td>
-                        <td>100.00</td>
+                        <td>{{$fee->description}}</td>
+                        <td>{{$fee->amount}}</td>
                         <td>
                         <button class="btn btn-info"><i class="fa fa-edit"></i> Edit</button>
                         <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
                         </td>
                       </tr>
+                      @endforeach
                       </tbody>
                     </table>
                 </div>
@@ -157,22 +139,16 @@
                       </tr>
                       </thead>
                       <tbody>
+                      @foreach($discounts as $discount)
                       <tr>
-                        <td>Senior Citizen</td>
-                        <td>20.00</td>
+                        <td>{{$discount->description}}</td>
+                        <td>{{$discount->amount}}</td>
                         <td>
                         <a href="editDiscount.html" class="btn btn-info" ><i class="fa fa-edit"></i> Edit</a>
                         <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-discount"><i class="fa fa-trash"></i> Delete</button>
                         </td>
                       </tr>
-                      <tr>
-                        <td>PWD</td>
-                        <td>20.00</td>
-                        <td>
-                        <button class="btn btn-info"><i class="fa fa-edit"></i> Edit</button>
-                        <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
-                        </td>
-                      </tr>
+                      @endforeach
                       </tbody>
                     </table>
                 </div>

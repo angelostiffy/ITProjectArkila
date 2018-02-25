@@ -40,18 +40,6 @@ class ReservationsController extends Controller
      */
     public function store(ReservationRequest $request)
     {
-// dd($request->all());
-        //        
-        // $this->validate(request(),[
-        //     "name" => "required|max:50|min:10",
-        //     "date" => "required|after_or_equal:today|date_format:m/d/Y",
-        //     "dest" => "required|numeric",
-        //     "time" => 'required|date_format:H:i',
-        //     "seat" => "required|numeric",
-        //     "contact" => "required|numeric|digits:10",
-        //     "amount" => [new checkCurrency,'numeric','min:0'],
-        // ]);
-
         $seat = $request->seat;
         $amount = 100*$seat;
 

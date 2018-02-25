@@ -82,6 +82,36 @@
        immediately after the control sidebar -->
         
     </div>
+        <!-- TEST LANG FLASHING ERRORS -->
+    @if ($flash = session('message'))
+    <div class="alert alert-success" id="flash-msg" role="alert">
+        {{ $flash }}
+    </div>
+    @endif
+    @if(!empty($errors->first()))
+    <div class="row col-lg-12">
+        <div id="error" class="alert alert-danger">
+            <span>{{ $errors->first() }}</span>
+        </div>
+    </div>
+    @endif
+   <!-- test langggg -->
+   <style>
+        div#flash-msg {
+        position: absolute;
+        bottom: 40px;
+        z-index: 10;
+        right: 20px;
+    }
+    div#error {
+        position: absolute;
+        bottom: 40px;
+        z-index: 10;
+        right: 20px;
+    }
+
+    </style>
+
     <!-- ./wrapper -->
     
     @section('scripts')

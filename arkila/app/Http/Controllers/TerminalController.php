@@ -3,19 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-class TestingController extends Controller
+use App\Terminal;
+class TerminalController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('testing.addDriver');
-    }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -23,7 +19,7 @@ class TestingController extends Controller
      */
     public function create()
     {
-        //
+        return view('settings.addTerminal');
     }
 
     /**
@@ -32,9 +28,17 @@ class TestingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $this->validate(request(),[
+            "addTerminalName" => 'unique:terminal,terminals|required|max:40',
+        ]);
+
+        Terminal::create([
+            "terminals" => request('addTerminalName'),
+        ]);
+
+        return redirect('settings.index');
     }
 
     /**

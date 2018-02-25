@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
     <!-- Bootstrap time Picker -->
     <link rel="stylesheet" href="{{ URL::asset('adminlte/plugins/timepicker/bootstrap-timepicker.min.css') }}">
-      <!-- Select2 -->
+    <!-- Select2 -->
     <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/select2/dist/css/select2.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ URL::asset('adminlte/dist/css/AdminLTE.min.css') }}">
@@ -55,54 +55,30 @@
 
                 </section>
                 <!-- /.content -->
-                <form action="@yield('form-action')" method="post">
+                <form id="@yield('form-id')"" action="@yield('form-action')" method="post">
                 <section class="content">
-                    <div class="login-box">
-                        <div class="login-logo">
-                            <div class="col-md-1">
-                                <h1><a href= @yield('back-link') ><i class="fa fa-arrow-circle-left"></i></a></h1>
+                    
+                @yield('form-body')
+
+                <div class="modal fade" id="form-modal">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title"> @yield('modal-title') </h4>
                             </div>
-                            <div class="col-md-11">
-                                <h1>
-                                    @yield('form-title')
-                                </h1>
+                            <div class="modal-body">
+                                @yield('modal-body')
+                            </div>
+                            <div class="modal-footer">
+                                @yield('modal-btn')
                             </div>
                         </div>
-                        <div class="login-box-body">
-                            @yield('form-body')
-                            
-                                <!-- FORM -->
-                                <div class="form-group pull-right">
-                                    @yield('form-btn')
-                                </div>
-
-                            
-                            <a href="#">lorem</a><br>
-                            <a href="#" class="text-center">lorem</a>
-
-                        </div>
-                        <!-- /.login-box-body -->
+                        <!-- /.modal-content -->
                     </div>
-
-                    <div class="modal fade" id="form-modal">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"> @yield('modal-title') </h4>
-                    </div>
-                    <div class="modal-body">
-                        @yield('modal-body')
-                    </div>
-                    <div class="modal-footer">
-                        @yield('modal-btn')
-                    </div>
+                    <!-- /.modal-dialog -->
                 </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
         <!-- /.modal -->
                 </section>
                 </form>
@@ -149,6 +125,8 @@
     <script src="{{ URL::asset('adminlte/dist/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ URL::asset('adminlte/dist/js/demo.js') }}"></script>
+
+
     @show
 </body>
 
