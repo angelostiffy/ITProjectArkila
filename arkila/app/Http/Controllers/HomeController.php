@@ -31,9 +31,10 @@ class HomeController extends Controller
         $fees = FeesAndDeduction::latest()->where('type','Fee')->get();
         $discounts = FeesAndDeduction::latest()->where('type','Discount')->get();
         $destinations = Destination::all();
+        $terminals = Destination::orderBy('terminal', 'asc')->groupBy('terminal')->get();
 
         
 
-        return view('settings.index', compact('fees','destinations','discounts'));
+        return view('settings.index', compact('fees','destinations', 'terminals', 'discounts'));
     }
 }

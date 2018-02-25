@@ -50,15 +50,19 @@ Route::post('home/operators/{operator}/vans', 'VansController@store');
 /****************************************************/
 
 
-<<<<<<< Updated upstream
+
 /************ Settings ******************************/
 Route::resource('home/settings/destinations', 'DestinationController', [
 	'except' => ['index','create','show', 'edit']
 ]);
-=======
+Route::get('home/settings/destinations/add-terminal', 'DestinationControler@createTerminal');
+Route::get('home/settings/destinations/add-destination', 'DestinationControler@createDestination');
+Route::post('home/settings/destinations/', 'DestinationControler@storeTerminal');
+Route::post('home/settings/destinations/', 'DestinationControler@storeDestination');
+
 //Settings
 Route::resource('home/settings/destinations', 'DestinationController');
->>>>>>> Stashed changes
+
 Route::resource('home/settings/fees', 'FeesController', [
     'except' => ['index','show']
 ]);

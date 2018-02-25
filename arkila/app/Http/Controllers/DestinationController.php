@@ -13,22 +13,25 @@ use Response;
 class DestinationController extends Controller
 {
 
-    // protected $rules = 
-    // [
-    //     "destination" => "unique:destinations,description|required|max:40",
-    //     "terminal" => [
-    //         'required',
-    //         Rule::in(['Cabanatuan City', 'San Jose City']),
-    //         'max:40'
-    //     ],
-    //     "amount" => ['required', new checkCurrency, 'numeric','min:0']
-    // ];
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function createTerminal()
+    {
+        return view('settings.addTerminal');
+    }
+
+    public function createDestination()
+    {
+        return view('settings.createDestination');
+    }
+
+    public function storeTerminal()
+    {
+
+    }
+
+    public function storeDestination()
+    {
+        
+    }
     public function store()
     {
         $this->validate(request(),[
