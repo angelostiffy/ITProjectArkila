@@ -1,20 +1,22 @@
 <?php
 
 namespace App;
-
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
-
 class Dependent extends Model
 {
-    //
-<<<<<<< HEAD
     protected $fillable = [
+        'member_id',
         'children_name',
         'birthdate',
     ];
-=======
+    public $incrementing = false;
     protected $table = 'dependent';
-    protected $primaryKey = ['operator_id', 'driver_id',];
-    
->>>>>>> d7d5c6b52de465f18231bf9895ee0ea94ddb8779
+    protected $primaryKey = ['member_id'];
+    public $timestamps = false;
+
+    public function setBirthdateAttribute($value){
+        $this->attributes['birthdate'] = Carbon::parse($value);
+    }
+
 }

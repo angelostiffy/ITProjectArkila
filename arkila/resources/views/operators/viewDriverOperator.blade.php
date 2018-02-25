@@ -14,7 +14,8 @@
                              
                  <div class="box ">
                  <div class="box box-header">
-                     <h3 style="margin-right: 10px; display: inline-block;"><strong>Edit Driver Information</strong></h3><button class="btn btn-info" onclick="grayer('f_1',false);" style="float: right; margin-top: 2%;"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                     <h3 style="margin-right: 10px; display: inline-block;"><strong>Edit Driver Information</strong></h3>
+                     <a href="editDriver.html" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a>
                  </div>
                 <form id="f_1" action="#" onsubmit="return false;" class="form-horizontal">
                  <div class="box-body">
@@ -185,16 +186,6 @@
           'autoWidth'   : true
         })
       })
-    </script>
-    <script type="text/javascript">
-    function grayer(formId, yesNo) {
-       var f = document.getElementById(formId), s, opacity;
-       s = f.style;
-       s.opacity = s.MozOpacity = s.KhtmlOpacity = opacity/100;
-       s.filter = 'alpha(opacity='+opacity+')';
-       for(var i=0; i<f.length; i++) f[i].disabled = yesNo;
-    }
-    window.onload=function(){grayer('f_1',true);}; // disabled by default
     </script>
     
 @stop
