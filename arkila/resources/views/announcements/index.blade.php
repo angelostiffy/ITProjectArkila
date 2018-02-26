@@ -19,8 +19,8 @@
                     <form method="POST" action="/home/announcements/{{$announcement->announcement_id}}">
                             {{csrf_field()}}
                             {{method_field('DELETE')}}
-                            <a href="/home/announcements/{{ $announcement->announcement_id }}/edit/" class="btn btn-sm btn-primary btn-create">Edit</a>
-                            <button class="btn btn-sm btn-danger btn-create">Delete</button>
+                            <a href="/home/announcements/{{ $announcement->announcement_id }}/edit/" class="btn btn-sm btn-outline-primary btn-create">Edit</a>
+                            <button class="btn btn-sm btn-outline-danger btn-create">Delete</button>
                     
                     </div>
                 </div>
