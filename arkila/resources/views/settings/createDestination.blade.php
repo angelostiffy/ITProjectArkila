@@ -1,19 +1,22 @@
 @extends('layouts.form')
 @section('title', 'Create New Destination')
-@section('back-link', '#')
-@section('form-action')
+@section('back-link', '/home/settings')
+@section('form-action', route('destinations.store'))
 @section('form-title', 'Create Destination')
 @section('form-body')
                   <div class="form-group">
                     <label>Destination:</label>
-                    <input type="text" class="form-control">
+                    <input name="addDestination" type="text" class="form-control">
                   </div>
                    <div class="form-group">
                     <label>Terminal:</label>
+                    
                     <select class= "form-control" name="addDestinationTerminal" >
-                      <option value="">Cabanatuan City Terminal</option>
-                      <option value="">San Jose City Terminal</option>
+                      @foreach($terminals as $terminal)
+                      <option value="{{$terminal->terminal_id}}">{{$terminal->terminals}}</option>
+                      @endforeach
                     </select>
+                    
                   </div>
                   <div class="form-group">
                     <label>Fare:</label>
@@ -30,6 +33,6 @@
 @endsection
 
 @section('modal-btn')
-<a href="" type="button" class="btn btn-primary">Yes</a>
+<button type="submit" type="button" class="btn btn-primary">Yes</a>
 <button class="btn btn-primary" data-dismiss="modal">No</button>
 @endsection

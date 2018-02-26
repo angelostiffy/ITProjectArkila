@@ -56,6 +56,8 @@
                 </section>
                 <!-- /.content -->
                 <form id="@yield('form-id')" action="@yield('form-action')" method="POST">
+                {{csrf_field()}}
+                @yield('method_field')
                 <section class="content">
                 @yield('form-body')
 

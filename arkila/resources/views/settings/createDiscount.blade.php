@@ -1,7 +1,7 @@
 @extends('layouts.form')
 @section('title', 'Create New Discount')
 @section('back-link', '#')
-@section('form-action', '#')
+@section('form-action', route('discounts.store'))
 @section('form-title', 'Create Discount')
 @section('form-body')
                   <div class="form-group">
@@ -23,6 +23,6 @@
 @endsection
 
 @section('modal-btn')
-<a href="" type="button" class="btn btn-primary">Yes</a>
+<button type="submit" class="btn btn-primary">Yes</a>
 <button class="btn btn-primary" data-dismiss="modal">No</button>
 @endsection
