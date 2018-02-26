@@ -39,6 +39,8 @@ class OperatorsController extends Controller
 
         $emContactNumber = '+63'.$request->emergencyContactNumber;
         $perContactNumber = '+63'.$request->contactNumber;
+        $children = array_combine($request->children,$request->ChildrenBDay);
+
         $createdOperator = Member::create([
             'last_name'=> $request->lastName,
             'first_name' => $request->firstName,
@@ -68,9 +70,7 @@ class OperatorsController extends Controller
             'expiry_date' => $request->driverLicenseExpiryDate,
         ]);
 
-        for($i = 0; $i < sizeof($request->children); $i++){
-            $createdOperator->addChildren($request->children[$i],$request->childrenBDay[$i]);
-        }
+        $createdOperator->addChildren($children);
         return redirect('/home/operators')->with('success', 'Information created successfully');
     }
 
@@ -109,6 +109,7 @@ class OperatorsController extends Controller
     {
         $emContactNumber = '+63'.$request->emergencyContactNumber;
         $perContactNumber = '+63'.$request->contactNumber;
+        $children = array_combine($request->children,$request->ChildrenBDay);
 
         $operator->update([
             'last_name'=> $request->lastName,
@@ -139,14 +140,8 @@ class OperatorsController extends Controller
             'license_number' => $request->driverLicense,
             'expiry_date' => $request->driverLicenseExpiryDate,
         ]);
-
-        for($i = 0; $i < sizeof($request->children); $i++){
-            $createdDriver->addChildren($request->children[$i],$request->childrenBDay[$i]);
-        }
-
-//        for($i = 0; $i < sizeof($request->children); $i++){
-//            $operator->addChildren($request->children[$i],$request->childrenBDay[$i]);
-//        }
+        $operator->children()->delete();
+        $operator->addChildren($children);
 
         return redirect()->route('operators.show', compact('operator'))->with('success', 'Information updated successfully');
 

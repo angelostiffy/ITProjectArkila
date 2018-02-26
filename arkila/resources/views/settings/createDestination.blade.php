@@ -24,3 +24,12 @@
 <a href="" class="btn btn-primary">Create</a>
 @endsection
 
+@section('modal-title','Alert')
+@section('modal-body')
+<p>Are you sure you want to create *insert Destination name* for *insert Terminal* ?</p>
+@endsection
+
+@section('modal-btn')
+<a href="" type="button" class="btn btn-primary">Yes</a>
+<button class="btn btn-primary" data-dismiss="modal">No</button>
+@endsection

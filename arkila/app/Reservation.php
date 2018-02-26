@@ -18,8 +18,8 @@ class Reservation extends Model
     	return $this->belongsTo(Destination::Class, 'destination_id');
     }
 
-    public function getContactNumberAttribute($value){
-        return substr($value, 3);
-    }
+    // public function getContactNumberAttribute($value){
+    //     return substr($value, 3);
+    // }
 
 }
