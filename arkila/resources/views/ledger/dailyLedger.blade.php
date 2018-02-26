@@ -37,7 +37,7 @@
                                     <td class="center-block">
                                         <div class="center-block">
                                             <a href="./pages/editDaily.html" class="btn btn-info">   <i class="glyphicon glyphicon-pencil">Edit</i>  </a>
-                                            <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                                            <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</button>
                                         </div>
                                     </td>
 
@@ -48,7 +48,7 @@
                         </table>
 
                         <button type="button" class="btn btn-primary">Update Report</button>
-                        <button type="button" class="btn btn-danger">Delete Report</button>
+                        <button type="button" class="btn btn-outline-danger">Delete Report</button>
 
                     </div>
                     <!-- /.box-body -->
