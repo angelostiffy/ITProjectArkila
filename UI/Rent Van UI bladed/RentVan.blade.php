@@ -1,7 +1,4 @@
-@extends('layouts.master') 
-@section('title', 'Rent Van') 
-@section('content-header', 'Rent Van') 
-@section('content')
+@extends('layouts.master') @section('title', 'Rent Van') @section('content-header', 'Rent Van') @section('content')
 <div class="box box-primary">
     <div class="box-header">
         <h3>Van Rental</h3>
@@ -119,9 +116,7 @@
     </div>
 </div>
 
-@endsection 
-@section('scripts') 
-@parent
+@endsection @section('scripts') @parent
 <script>
     var currentTab = 0; // Current tab is set to be the first tab (0)
     showTab(currentTab); // Display the crurrent tab
@@ -183,7 +178,6 @@
 </script>
 <script>
     $(function() {
-        alert("sample")
         //Date picker
         $('#datepicker').datepicker({
             autoclose: true
@@ -192,7 +186,6 @@
         $('#timepicker').timepicker({
             showInputs: false
         })
-
     })
 </script>
 @endsection
