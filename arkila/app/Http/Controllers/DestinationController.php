@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Input;
+use App\Terminal;
 use App\Destination;
 use App\Rules\checkCurrency;
+use App\Rules\checkTerminal;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Validator;
 use Response;
 
@@ -15,25 +15,23 @@ class DestinationController extends Controller
 
     public function create()
     {
-        return view('settings.createDestination');
+        $terminals = Terminal::all();
+        return view('settings.createDestination', compact('terminals'));
     }
 
     public function store()
     {
         $this->validate(request(),[
-            "destination" => "unique:destination,description|required|max:40",
-            "terminal" => [
-                'required',
-                Rule::in(['Cabanatuan City', 'San Jose City']),
-                'max:40'
-            ],
-            "amountDestination" => ['required', new checkCurrency, 'numeric','min:0']
+            "addDestination" => "unique:destination,description|required|max:40",
+            "addDestinationTerminal" => ['required', new checkTerminal, 'max:40'],
+            "addDestinationFare" => ['required', new checkCurrency, 'numeric','min:0']
         ]);
 
+
         Destination::create([
-            "description" => request('destination'),
-            "terminal" => request('terminal'),
-            "amount" => request('amountDestination')
+            "terminal_id" => request('addDestinationTerminal'),
+            "description" => request('addDestination'),
+            "amount" => request('addDestinationFare')
         ]);
 
         return redirect('/home/settings');

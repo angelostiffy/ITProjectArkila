@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\checkAge;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use App\Member;
@@ -39,9 +40,8 @@ class DriverRequest extends FormRequest
                     'contactNumber' => 'numeric|digits:10',
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
-                    'birthDate' => 'required|date|before:today',
+                    'birthDate' => ['required','date', new checkAge],
                     'birthPlace' => 'required|max:50',
-                    'age' => 'required|numeric',
                     'gender' => [
                         'required',
                         Rule::in(['Male', 'Female'])
@@ -77,9 +77,8 @@ class DriverRequest extends FormRequest
                     'contactNumber' => 'numeric|digits:10',
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
-                    'birthDate' => 'required|date|before:today',
+                    'birthDate' => ['required','date', new checkAge],
                     'birthPlace' => 'required|max:50',
-                    'age' => 'required|numeric',
                     'gender' => [
                         'required',
                         Rule::in(['Male', 'Female'])
