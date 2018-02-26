@@ -103,7 +103,7 @@
 
             <div style="overflow:auto;">
                 <div style="float:right;">
-                    <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-primary">Previous</button>
+                    <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-default">Previous</button>
                     <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-primary">Next</button>
                 </div>
             </div>
@@ -116,7 +116,9 @@
     </div>
 </div>
 
-@endsection @section('scripts') @parent
+@endsection 
+@section('scripts') 
+@parent
 <script>
     var currentTab = 0; // Current tab is set to be the first tab (0)
     showTab(currentTab); // Display the crurrent tab
