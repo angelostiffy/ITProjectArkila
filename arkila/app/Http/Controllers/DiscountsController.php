@@ -36,6 +36,7 @@ class DiscountsController extends Controller
             "type" => "Discount"
         ]);
 
+        session()->flash('message', 'Discount created successfully');
         return redirect('/home/settings');
     }
 
@@ -66,6 +67,8 @@ class DiscountsController extends Controller
         $discount->update([
            'amount' => request('editDiscountAmount'),
         ]);
+
+        session()->flash('message', 'Discount updated successfully');
         return redirect('/home/settings');
     }
 
@@ -78,6 +81,7 @@ class DiscountsController extends Controller
     public function destroy(FeesAndDeduction $discount)
     {
         $discount->delete();
+        session()->flash('message', 'Discount deleted successfully');
         return back();
     }
 }

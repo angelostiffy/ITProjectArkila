@@ -1,16 +1,17 @@
 @extends('layouts.form')
+@include('message.error')
 @section('title', 'Edit Terminal')
-@section('back-link', '/home/settings')
+@section('back-link', URL::previous())
 @section('form-action', route('terminal.update', [$terminal->terminal_id]))
 @section('method_field', method_field('PATCH'))
 @section('form-title', 'Edit Terminal')
 @section('form-body')
 
-	@include('message.error')
+	
 	
     <div class="form-group">
         <label>Terminal Name:</label>
-        <input type="text" class="form-control" name="editTerminalName" value="{{$terminal->terminals}}">
+        <input type="text" class="form-control" name="editTerminalName" value="{{$terminal->description}}">
     </div>
 
 @endsection

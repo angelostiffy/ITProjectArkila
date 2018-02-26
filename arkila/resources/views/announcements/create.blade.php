@@ -21,7 +21,7 @@
 </div>
 
 <button type="submit" class="btn btn-primary">Submit</button>
-<a href="/home/announcements/" class="btn btn-md btn-primary btn-create">Back</a>
+<a href="/home/announcements/" class="btn btn-md btn-outline-primary btn-create">Back</a>
 </form>
 </div>
 @endsection

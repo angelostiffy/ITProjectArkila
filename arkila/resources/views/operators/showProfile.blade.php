@@ -18,11 +18,7 @@
             <div class="box-body box-profile">
               <img class="profile-user-img img-responsive img-circle" src="dist/img/user4-128x128.jpg" alt="User profile picture">
 
-              <h3 class="profile-username text-center">{{ $operator->full_name }}</h3>
-
-              <p class="text-muted text-center">ganda</p>
-                              
-                
+              <h3 class="profile-username text-center">{{ $operator->full_name }}</h3>                                          
                 <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
                   <b>ID</b> <a class="pull-right">{{ $operator->member_id }}</a>
@@ -100,7 +96,7 @@
           <div class="box">
             <!-- /.box-header -->
             <div class="box-body">
-                <button class="btn btn-success" style="margin-bottom:-5%;"><i class="fa fa-plus-circle"></i> Add Driver</button>
+                <a href="{{route('drivers.createFromOperator',[$operator->member_id])}}" class="btn btn-success" style="margin-bottom:-5%;"><i class="fa fa-plus-circle"></i> Add Driver</a>
               <table id="driver" class="table table-bordered table-striped">
                
                 <thead>
@@ -113,7 +109,7 @@
                 </thead>
                 <tbody>
 
-                  @foreach($drivers as $driver)
+                  @foreach($operator->drivers as $driver)
                     <tr>
                       <td>{{$driver->full_name}}</td>
                       <td>{{$driver->age}}</td>
@@ -155,11 +151,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($drivers as $driver)
+                @foreach($operator->van as $van)
                 <tr>
-                  <td>{{$driver->plate_number}}</td>
-                  <td>{{$driver->driver_name}}</td>
-                    <td>{{$driver->contact_number}}</td>
+                  <td>{{$van->plate_number}}</td>
+                  <td>{{$van->driver_name}}</td>
+                    <td>{{$van->contact_number}}</td>
                   <td>
                     <div class="text-center">
                         <a href="changeDriver.html" class="btn btn-info" data-toggle="modal" data-target="#modal-default"><i class="fa fa-eye"></i> Change Driver</a>

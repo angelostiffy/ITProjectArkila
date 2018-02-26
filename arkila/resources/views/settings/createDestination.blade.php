@@ -1,6 +1,6 @@
 @extends('layouts.form')
 @section('title', 'Create New Destination')
-@section('back-link', '/home/settings')
+@section('back-link', URL::previous())
 @section('form-action', route('destinations.store'))
 @section('form-title', 'Create Destination')
 @section('form-body')
@@ -13,7 +13,7 @@
                     
                     <select class= "form-control" name="addDestinationTerminal" >
                       @foreach($terminals as $terminal)
-                      <option value="{{$terminal->terminal_id}}">{{$terminal->terminals}}</option>
+                      <option value="{{$terminal->terminal_id}}">{{$terminal->description}}</option>
                       @endforeach
                     </select>
                     

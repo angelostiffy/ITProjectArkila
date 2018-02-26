@@ -1,6 +1,6 @@
 @extends('layouts.form')
 @section('title', 'Create New Discount')
-@section('back-link', '#')
+@section('back-link', URL::previous())
 @section('form-action', route('discounts.store'))
 @section('form-title', 'Create Discount')
 @section('form-body')

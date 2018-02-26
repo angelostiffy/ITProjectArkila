@@ -1,160 +1,151 @@
 @extends('layouts.master')
-@section('title', 'index')
+@section('title', 'Daily Ledger')
+@section('links')
+@parent
+  <link rel="stylesheet" href="public\css\myOwnStyle.css">
+  @stop
 @section('content')
-<section class="content">
+
           <div id="ledgerInfo" class="box">
-            <!-- /.box-header -->
-            <name id="ledgerDate" style="font-size: 13pt">March 23, 2018</name>
-            <a href="#" class="btn btn-primary btn-md" data-toggle="modal" data-target="#addExpRev">
+                    <!-- /.box-header -->
+                    <name id="ledgerDate" style="font-size: 13pt">March 23, 2018</name>
+                    <a href="./pages/addDaily.html" class="btn btn-primary btn-md" data-target="#addExpRev">
                 Add <span class="glyphicon glyphicon-plus-sign"></span> 
             </a>
-              
-            <div id="addExpRev" class="modal fade" role="dialog">
-              <div id="tripModal" class="modal-dialog">
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add Revenue/Expense</h4>
-                  </div>
-                  <div class="modal-body">
-                  
-                   <div class="form-group">
-                      <label for="payor">Payee/Payor:</label>
-                      <input type="text" class="form-control" id="payor">
+                    <div class="box-body">
+                        <table id="dailyLedgerTable" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Payee/Payor</th>
+                                    <th>Particulars</th>
+                                    <th>OR#</th>
+                                    <th>IN</th>
+                                    <th>OUT</th>
+                                    <th>Balance</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Chabal loves shaina</td>
+                                    <td>Booking Fee</td>
+                                    <td>039501</td>
+                                    <td>500</td>
+                                    <td></td>
+                                    <td>500</td>
+                                    <td class="center-block">
+                                        <div class="center-block">
+                                            <a href="./pages/editDaily.html" class="btn btn-info">   <i class="glyphicon glyphicon-pencil">Edit</i>  </a>
+                                            <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</button>
+                                        </div>
+                                    </td>
+
+                      
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <button type="button" class="btn btn-primary">Update Report</button>
+                        <button type="button" class="btn btn-outline-danger">Delete Report</button>
+
                     </div>
-                    <div class="form-group">
-                      <label for="Particulars">Particulars:</label>
-                      <input type="text" class="form-control" id="particulars">
-                    </div>
-                    <div class="form-group">
-                      <label for="or">OR#:</label>
-                      <input type="text" class="form-control" id="or">
-                    </div>
-                    <div class="form-group">
-                      <label for="amount">Amount:</label>
-                      <input type="text" class="form-control" id="amount">
-                    </div>
-                    <div class="form-group" id="revenueExpense" > 
-                    
-                    <div class="form-group">
-                        <label>
-                          <input type="radio" name="r1" class="minimal">
-                            Revenue
-                        </label>
-                        <label>
-                          <input type="radio" name="r1" class="minimal">
-                            Expense
-                        </label>
-        
-                    </div>
-                        
-                        
-                    </div>
-                   
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Submit</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  </div>
+                    <!-- /.box-body -->
                 </div>
+          
+         
 
-              </div>
-            </div>         
-              
-              
-              
-              
+@stop
 
-            <div class="box-body">
-              <table id="dailyLedgerTable" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Payee/Payor</th>
-                  <th>Particulars</th>
-                  <th>OR#</th>
-                  <th>IN</th>
-                  <th>OUT</th>
-                  <th>Balance</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>Chabal loves shaina</td>
-                  <td>Booking Fee</td>
-                  <td>039501</td>
-                  <td>500</td>
-                  <td></td>
-                  <td>500</td>
-                    <td class="center-block">
-                        <div class="center-block">
-                             <button class="btn btn-info" data-toggle="modal" data-target="#editExpRev"><i class="glyphicon glyphicon-pencil"> Edit </i></button>
-                             <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</i></button>
-                        </div>
-                    </td>
-                        <div id="editExpRev" class="modal fade" role="dialog">
-                          <div id="tripModal" class="modal-dialog">
+@section('scripts')
+@parent
+<script>
+        $(function() {
+            $('#example2').DataTable()
+            $('#dailyLedgerTable').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': false,
+                'ordering': true,
+                'info': false,
+                'autoWidth': true
+            })
+        })
+    </script>
 
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Edit Revenue/Expense</h4>
-                              </div>
-                              <div class="modal-body">
+    <script>
+        $(function() {
+            //Initialize Select2 Elements
+            $('.select2').select2()
 
-                               <div class="form-group">
-                                  <label for="payor">Payee/Payor:</label>
-                                  <input type="text" class="form-control" id="payor">
-                                </div>
-                                <div class="form-group">
-                                  <label for="Particulars">Particulars:</label>
-                                  <input type="text" class="form-control" id="particulars">
-                                </div>
-                                <div class="form-group">
-                                  <label for="or">OR#:</label>
-                                  <input type="text" class="form-control" id="or">
-                                </div>
-                                <div class="form-group">
-                                  <label for="amount">Amount:</label>
-                                  <input type="text" class="form-control" id="amount">
-                                </div>
-                                <div class="form-group" id="revenueExpense" > 
-                                
-                                 
-                                <div class="form-group">
-                                    <label>
-                                      <input type="radio" name="r1" class="minimal" >
-                                        Revenue
-                                    </label>
-                                    <label>
-                                      <input type="radio" name="r1" class="minimal">
-                                        Expense
-                                    </label>
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', {
+                'placeholder': 'dd/mm/yyyy'
+            })
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', {
+                'placeholder': 'mm/dd/yyyy'
+            })
+            //Money Euro
+            $('[data-mask]').inputmask()
 
-                                </div>    
-                                    
-                                    
-                                </div>
+            //Date range picker
+            $('#reservation').daterangepicker()
+            //Date range picker with time picker
+            $('#reservationtime').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                format: 'MM/DD/YYYY h:mm A'
+            })
+            //Date range as a button
+            $('#daterange-btn').daterangepicker({
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    },
+                    startDate: moment().subtract(29, 'days'),
+                    endDate: moment()
+                },
+                function(start, end) {
+                    $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+                }
+            )
 
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Submit</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                              </div>
-                              </div>         
-                </tr>
-                
-                </tbody>
-              </table>
-            
-              <button type="button" class="btn btn-primary">Update Report</button>
-              <button type="button" class="btn btn-danger">Delete Report</button>
-              
-            </div>
-            <!-- /.box-body -->
-          </div>
-</section>
-@endsection
+            //Date picker
+            $('#datepicker').datepicker({
+                autoclose: true
+            })
+
+            //iCheck for checkbox and radio inputs
+            $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+                checkboxClass: 'icheckbox_minimal-blue',
+                radioClass: 'iradio_minimal-blue'
+            })
+            //Red color scheme for iCheck
+            $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+                checkboxClass: 'icheckbox_minimal-red',
+                radioClass: 'iradio_minimal-red'
+            })
+            //Flat red color scheme for iCheck
+            $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+                checkboxClass: 'icheckbox_flat-green',
+                radioClass: 'iradio_flat-green'
+            })
+
+            //Colorpicker
+            $('.my-colorpicker1').colorpicker()
+            //color picker with addon
+            $('.my-colorpicker2').colorpicker()
+
+            //Timepicker
+            $('.timepicker').timepicker({
+                showInputs: false
+            })
+        })
+    </script>
+@stop

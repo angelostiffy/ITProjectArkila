@@ -15,7 +15,7 @@ class DriversController extends Controller
      */
     public function index()
     {
-        $drivers = Member::drivers()->get();
+        $drivers = Member::allDrivers()->get();
 
         return view('drivers.driverList', compact('drivers'));
     }
@@ -27,8 +27,8 @@ class DriversController extends Controller
      */
     public function create()
     {
-        $drivers = Member::drivers()->get();
-        $operators = Member::operators()->get();
+        $drivers = Member::allDrivers()->get();
+        $operators = Member::allOperators()->get();
         return view('drivers.create', compact('drivers','operators'));
     }
 
@@ -54,11 +54,10 @@ class DriversController extends Controller
             'provincial_address' => $request->provincialAddress,
             'birth_date' => $request->birthDate,
             'birth_place' => $request->birthPlace,
-            'age' => $request->birthPlace,
+            'age' => $request->birthDate,
             'gender' => $request->gender,
             'citizenship' => $request->citizenship,
             'civil_status' => $request->civilStatus,
-            'number_of_children' => $request->noChild,//
             'spouse' => $request->nameOfSpouse,
             'spouse_birthdate' => $request->spouseBirthDate,
             'father_name' => $request->fathersName,
@@ -77,8 +76,48 @@ class DriversController extends Controller
         $createdDriver->addChildren($children);
 
 
-        return redirect('/home/drivers')->with('success', 'Information created successfully');
+        return redirect(route('drivers.index'))->with('success', 'Information created successfully');
         //
+    }
+
+    public function createFromOperator(Member $operator){
+        return view('drivers.create',compact('operator'));
+    }
+
+    public function storeFromOperator(Member $operator, DriverRequest $request){
+
+        $children = array_combine($request->children,$request->childrenBDay);
+
+        $operator->drivers()->create([
+            'last_name'=> $request->lastName,
+            'first_name' => $request->firstName,
+            'middle_name' => $request->middleName,
+            'contact_number' => $request->contactNumber,
+            'role' => 'Driver',
+            'address' => $request->address,
+            'provincial_address' => $request->provincialAddress,
+            'birth_date' => $request->birthDate,
+            'birth_place' => $request->birthPlace,
+            'age' => $request->birthDate,
+            'gender' => $request->gender,
+            'citizenship' => $request->citizenship,
+            'civil_status' => $request->civilStatus,
+            'spouse' => $request->nameOfSpouse,
+            'spouse_birthdate' => $request->spouseBirthDate,
+            'father_name' => $request->fathersName,
+            'father_occupation' => $request->fatherOccupation,
+            'mother_name' => $request->mothersName,
+            'mother_occupation' => $request->motherOccupation,
+            'person_in_case_of_emergency' => $request->contactPerson,
+            'emergency_address' => $request->contactPersonAddress,
+            'emergency_contactno' => $request->contactPersonContactNumber,
+            'SSS' => $request->sss,
+            'license_number' => $request->licenseNo,
+            'expiry_date' => $request->licenseExpiryDate,
+            'number_of_children' => sizeof($children)
+        ]);
+        $operator->addChildren($children);
+        return redirect(route('operators.showProfile',[$operator->member_id]));
     }
 
     /**
@@ -103,7 +142,7 @@ class DriversController extends Controller
      */
     public function edit(Driver $driver)
     {        
-        $operator = Operator::all();
+        $operator = Member::allOperators();
         return view('drivers.edit', compact('driver', 'operator'));
         
         //

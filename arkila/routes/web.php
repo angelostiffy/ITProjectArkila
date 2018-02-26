@@ -33,8 +33,8 @@ Route::get('home/operators/profile/{operator}','OperatorsController@showProfile'
 Route::resource('home/drivers', 'DriversController');
 
 //Adding a driver to a specific operator
-Route::get('home/operators/{operator}/drivers/create', 'DriversController@createUsingOperator');
-Route::post('home/operators/{operator}/drivers/', 'DriversController@storeUsingOperator');
+Route::get('home/operators/{operator}/drivers/create', 'DriversController@createFromOperator')->name('drivers.createFromOperator');
+Route::post('home/operators/{operator}/drivers/', 'DriversController@storeFromOperator')->name('drivers.storeFromOperator');
 
 //Adding a driver to a specific van
 Route::get('home/operators/{van}/drivers/create', 'DriversController@createUsingVan');
@@ -49,8 +49,6 @@ Route::resource('home/vans', 'VansController', [
 Route::get('home/operators/{operator}/vans/create', 'VansController@create');
 Route::post('home/operators/{operator}/vans', 'VansController@store');
 /****************************************************/
-
-
 
 /************ Settings ******************************/
 Route::resource('home/settings/destinations', 'DestinationController', [
@@ -68,6 +66,10 @@ Route::resource('home/settings/discounts', 'DiscountsController', [
     'except' => ['index']
 ]);
 Route::get('home/settings', 'HomeController@settings');
+/****************************************************/
+
+/************ User Management ******************************/
+Route::resource('home/user-management', 'UserManagementController');
 /****************************************************/
 
 Route::resource('home/test', 'TestController');

@@ -40,7 +40,7 @@ class OperatorRequest extends FormRequest
                     'contactNumber' => 'numeric|digits:10',
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
-                    'birthDate' => ['required','date', new checkAge],
+                    'birthDate' => ['required','date_format:m/d/Y','after:1/1/1918', new checkAge],
                     'birthPlace' => 'required|max:50',
                     'gender' => [
                         'required',

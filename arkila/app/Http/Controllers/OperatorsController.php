@@ -14,7 +14,7 @@ class OperatorsController extends Controller
      */
     public function index()
     {
-        $operators = Member::operators()->get();
+        $operators = Member::allOperators()->get();
         return view('operators.index', compact('operators'));
     }
 
@@ -53,7 +53,6 @@ class OperatorsController extends Controller
             'gender' => $request->gender,
             'citizenship' => $request->citizenship,
             'civil_status' => $request->civilStatus,
-            'number_of_children' => $request->noChild,//
             'spouse' => $request->nameOfSpouse,
             'spouse_birthdate' => $request->spouseBirthDate,
             'father_name' => $request->fathersName,
@@ -66,6 +65,8 @@ class OperatorsController extends Controller
             'SSS' => $request->sss,
             'license_number' => $request->licenseNo,
             'expiry_date' => $request->licenseExpiryDate,
+            'number_of_children' => sizeof($children)
+
         ]);
 
         $createdOperator->addChildren($children);
@@ -79,15 +80,12 @@ class OperatorsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Member $operator){
-        $children = $operator->children()->get();
-        return view('operatos.show',compact('operator','children'));
+        return view('operatrs.show',compact('operator'));
     }
 
     public function showProfile(Member $operator)
     {
-        $drivers = Member::drivers()->where('operator_id',$operator->member_id)->get();
-        $vans = $operator->van();
-        return view('operators.showProfile',compact('operator', 'drivers', 'vans'));
+        return view('operators.showProfile',compact('operator'));
     }
 
     /**
@@ -124,11 +122,10 @@ class OperatorsController extends Controller
             'provincial_address' => $request->provincialAddress,
             'birth_date' => $request->birthDate,
             'birth_place' => $request->birthPlace,
-            'age' => $request->birthPlace,
+            'age' => $request->birthDate,
             'gender' => $request->gender,
             'citizenship' => $request->citizenship,
             'civil_status' => $request->civilStatus,
-            'number_of_children' => $request->noChild,//
             'spouse' => $request->spouse,
             'spouse_birthdate' => $request->spouseBirthDate,
             'father_name' => $request->fathersName,
@@ -141,6 +138,7 @@ class OperatorsController extends Controller
             'SSS' => $request->sss,
             'license_number' => $request->driverLicense,
             'expiry_date' => $request->driverLicenseExpiryDate,
+            'number_of_children' => sizeof($children)
         ]);
         $operator->children()->delete();
         $operator->addChildren($children);
