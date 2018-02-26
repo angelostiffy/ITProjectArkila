@@ -38,6 +38,7 @@ class FeesController extends Controller
             "type" => "Fee"
         ]);
 
+        session()->flash('message', 'Fee created successfully');
         return redirect('/home/settings');
     }
 
@@ -70,6 +71,7 @@ class FeesController extends Controller
             'amount' => request("editFeeAmount"),
         ]);
         
+        session()->flash('message', 'Fee created successfully');
         return redirect('/home/settings');
     }
 
@@ -82,6 +84,7 @@ class FeesController extends Controller
     public function destroy(FeesAndDeduction $fee)
     {
         $fee->delete();
+        session()->flash('message', 'Fee deleted successfully');
         return back();
     }
 }
