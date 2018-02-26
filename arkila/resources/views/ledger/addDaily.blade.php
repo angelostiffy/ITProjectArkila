@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.form')
 @section('title', 'Add Daily Revenue/Expense')
 @section('form-title', 'Add Daily Revenue/Expense')
 @section('links')
