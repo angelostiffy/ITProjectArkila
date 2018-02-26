@@ -22,7 +22,7 @@
 <textarea class="form-control" rows="5" name="announce">{{ $announcement->description }}</textarea>
 </div>
 
-<button type="submit" class="btn btn-outline-primary">Submit</button>
+<button type="submit" class="btn btn-primary">Submit</button>
 <a href="/home/announcements/" class="btn btn-md btn-outline-primary btn-create">Back</a>
 </form>
 </div>
