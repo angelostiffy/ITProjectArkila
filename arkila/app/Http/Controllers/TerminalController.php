@@ -31,11 +31,11 @@ class TerminalController extends Controller
     public function store()
     {
         $this->validate(request(),[
-            "addTerminalName" => 'unique:terminal,terminals|required|max:40',
+            "addTerminalName" => 'unique:terminal,description|required|max:40',
         ]);
 
         Terminal::create([
-            "terminals" => request('addTerminalName'),
+            "description" => request('addTerminalName'),
         ]);
 
         return redirect('/home/settings');
@@ -63,7 +63,7 @@ class TerminalController extends Controller
     public function update(Terminal $terminal)
     {
         $this->validate(request(),[
-            "editTerminalName" => 'unique:terminal,terminals,'.$terminal->id.',terminals|required|max:40',
+            "editTerminalName" => 'unique:terminal,description,'.$terminal->id.',description|required|max:40',
         ]);
 
         $terminal->update([

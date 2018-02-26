@@ -13,7 +13,7 @@
                     
                     <select class= "form-control" name="addDestinationTerminal" >
                       @foreach($terminals as $terminal)
-                      <option value="{{$terminal->terminal_id}}">{{$terminal->terminals}}</option>
+                      <option value="{{$terminal->terminal_id}}">{{$terminal->description}}</option>
                       @endforeach
                     </select>
                     

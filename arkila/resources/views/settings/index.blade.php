@@ -53,7 +53,7 @@
                     <tbody>
                      @foreach($terminals as $terminal) 
                     <tr>
-                      <td>{{$terminal->terminals}}</td>
+                      <td>{{$terminal->description}}</td>
                       <td>
                         <div class="form-group">
                           <a href="{{ route('terminal.edit', [$terminal->terminal_id]) }}" class="btn btn-info"><i class="fa fa-edit"></i>Edit</a>
@@ -89,7 +89,7 @@
                     <tr>
                       <td>{{$destination->description}}</td>
                       <td>{{$destination->amount}}</td>
-                      <td>{{$destination->terminals}}</td>
+                      <td>{{$destination->terminal}}</td>
                       <td>
                         <div class="form-group">
                           <a href="{{ route('destinations.edit', [$destination->destination_id]) }}" class="btn btn-info"><i class="fa fa-edit" ></i>Edit</a>
