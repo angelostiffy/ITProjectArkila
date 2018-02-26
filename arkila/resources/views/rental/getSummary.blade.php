@@ -8,18 +8,19 @@
           <div class="box-header with-border">
             <h3 class="box-title">Rental Summary</h3>
           </div>
+          @foreach ($rentDetails as $data)
           <div class="box-body">
-            <p>First Name: Marlou</p>
-            <p>Middle Name: Ford</p>
-            <p>Last Name: Caballar</p>
-            <p>Contact Number: 09176541786</p>
-            <p>Destination: Manila</p>
-            <p>Number of Days: 3</p>
-            <p>Departure Date: 02-23-2018</p>
-            <p>Departure Time: 1:00 PM</p>
-              
+            <p>First Name: {{ $data[0] }}</p>
+            <p>Middle Name: {{ $data[1] }}</p>
+            <p>Last Name: {{ $data[2] }}</p>
+            <p>Contact Number: {{ $data[3] }}</p>
+            <p>Destination: {{ $data[4] }}</p>
+            <p>Number of Days: {{ $data[5] }}</p>
+            <p>Departure Date: {{ $data[6] }}</p>
+            <p>Departure Time: {{ $data[7] }}</p>
+            @endforeach
               <div class = "col-md-6">
-            <button class="btn btn-info"><i class="fa fa-angle-left"></i> Back</button>
+            <a href="/home/rental/create" class="btn btn-info"><i class="fa fa-angle-left"></i> Back</a>
               </div>
             <button class="btn btn-success"><i class="fa fa-send"></i> Submit</button>
               </div>
