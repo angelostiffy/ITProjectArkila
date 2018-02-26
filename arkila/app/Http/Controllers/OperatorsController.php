@@ -122,7 +122,7 @@ class OperatorsController extends Controller
             'provincial_address' => $request->provincialAddress,
             'birth_date' => $request->birthDate,
             'birth_place' => $request->birthPlace,
-            'age' => $request->birthPlace,
+            'age' => $request->birthDate,
             'gender' => $request->gender,
             'citizenship' => $request->citizenship,
             'civil_status' => $request->civilStatus,
