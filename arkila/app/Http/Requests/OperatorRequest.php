@@ -28,7 +28,7 @@ class OperatorRequest extends FormRequest
     public function rules()
     {
 
-        $operator = Member::operators()->where('member_id',$this->opId);
+        $operator = Member::allOperators()->where('member_id',$this->opId);
         switch($this->method())
         {
             case 'POST':
