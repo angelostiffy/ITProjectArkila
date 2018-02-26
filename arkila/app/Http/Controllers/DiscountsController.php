@@ -60,11 +60,12 @@ class DiscountsController extends Controller
     public function update(FeesAndDeduction $discount)
     {
         $this->validate(request(),[
-            "description" => "unique:fees_and_deductions,description,".$discount->fad_id.",fad_id|required|max:30",
-            "amount" => ['required',new checkCurrency]
+            "editDiscountAmount" => ['required',new checkCurrency, 'numeric','min:1'],
         ]);
 
-        $discount->update(request(["description","amount"]));
+        $discount->update([
+           'amount' => request('editDiscountAmount'),
+        ]);
         return redirect('/home/settings');
     }
 

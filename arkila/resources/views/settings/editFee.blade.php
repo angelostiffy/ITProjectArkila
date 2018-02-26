@@ -1,7 +1,8 @@
 @extends('layouts.form')
 @section('title', 'Edit Fee')
 @section('back-link')
-@section('form-action', '#')
+@section('form-action', route('fees.update', [$fee->fad_id]))
+@section('method_field', method_field('PATCH'))
 @section('form-title', 'Edit Fee')
 @section('form-body')
 
@@ -17,15 +18,15 @@
 
 @endsection
 @section('form-btn')
- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Save Changes</button>
+ <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Save Changes</a>
 @endsection
 
 @section('modal-title','Alert')
 @section('modal-body')
-<p>Are you sure you want to change the fee of *insert Description* ?</p>
+<p>Are you sure you want to change the fare of *insert Description* ?</p>
 @endsection
 
 @section('modal-btn')
-<a href="" type="button" class="btn btn-primary">Yes</a>
-<button class="btn btn-default" data-dismiss="modal">No</button>
+<button type="submit" class="btn btn-primary">Yes</button>
+<button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
 @endsection
