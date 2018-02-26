@@ -38,7 +38,7 @@ class TerminalController extends Controller
             "terminals" => request('addTerminalName'),
         ]);
 
-        return redirect('settings.index');
+        return redirect('/home/settings');
     }
 
 
@@ -60,9 +60,17 @@ class TerminalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Terminal $terminal)
     {
-        //
+        $this->validate(request(),[
+            "editTerminalName" => 'unique:terminal,terminals,'.$terminal->id.',terminals|required|max:40',
+        ]);
+
+        $terminal->update([
+            'terminals' => request('editTerminalName'),
+        ]);
+
+        return redirect('/home/settings');
     }
 
     /**

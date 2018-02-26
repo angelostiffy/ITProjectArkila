@@ -1,7 +1,7 @@
 @extends('layouts.form')
 @section('title', 'Create New Terminal')
-@section('back-link', 'home/settings')
-@section('form-action', '/home/settings/terminal')
+@section('back-link', '/home/settings')
+@section('form-action', route('terminal.store'))
 @section('form-title', 'Create Terminal')
 @section('form-body')
 
@@ -22,6 +22,6 @@
 @endsection
 
 @section('modal-btn')
-<button type="button" class="btn btn-primary">Yes</a>
+<button type="submit" class="btn btn-primary">Yes</a>
 <button class="btn btn-default" data-dismiss="modal">No</button>
 @endsection
