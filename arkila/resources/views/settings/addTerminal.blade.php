@@ -1,12 +1,13 @@
 @extends('layouts.form')
 @section('title', 'Create New Terminal')
 @section('back-link', '#')
-@section('form-action', '#')
+@section('form-action', '/home/settings/terminal')
 @section('form-title', 'Create Terminal')
 @section('form-body')
 
        <div class="form-group">
         <label>Terminal Name:</label>
+        {{csrf_field()}}
         <input type="text" class="form-control" name="addTerminalName">
       </div>
 

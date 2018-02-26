@@ -13,29 +13,15 @@ use Response;
 class DestinationController extends Controller
 {
 
-    public function createTerminal()
-    {
-        return view('settings.addTerminal');
-    }
-
-    public function createDestination()
+    public function create()
     {
         return view('settings.createDestination');
     }
 
-    public function storeTerminal()
-    {
-
-    }
-
-    public function storeDestination()
-    {
-        
-    }
     public function store()
     {
         $this->validate(request(),[
-            "destination" => "unique:destinations,description|required|max:40",
+            "destination" => "unique:destination,description|required|max:40",
             "terminal" => [
                 'required',
                 Rule::in(['Cabanatuan City', 'San Jose City']),
@@ -53,13 +39,11 @@ class DestinationController extends Controller
         return redirect('/home/settings');
     }
     
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function edit()
+    {
+
+    }
+
     public function update(Request $request, $id)
     {
         // $destination = request('editDestination');
@@ -120,12 +104,6 @@ class DestinationController extends Controller
         // return redirect('/home/settings');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Destination $destination)
     {
         $destination->delete();
