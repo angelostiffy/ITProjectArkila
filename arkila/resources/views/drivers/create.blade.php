@@ -109,12 +109,6 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Age:</label>
-                                <input value="{{old('age')}}" name="age" type="number" class="form-control" placeholder="Age">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
                                 <label>Birthdate:</label>
                                 <div class="input-group date">
                                     <div class="input-group-addon">
@@ -130,8 +124,7 @@
                                 <input value="{{old('birthPlace')}}" name="birthPlace" type="text" class="form-control" placeholder="Birthplace">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                    
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Gender:</label>
@@ -147,6 +140,9 @@
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                    <div class="row">    
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Citizenship:</label>
@@ -163,14 +159,15 @@
                                </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                   
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>SSS No:</label>
                                 <input value="{{old('sss')}}" name="sss" type="text" class="form-control" placeholder="SSS No.">
                             </div>
                         </div>
+                    </div>
+                    <div class="row">    
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>License No:</label>
