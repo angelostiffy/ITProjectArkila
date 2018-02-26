@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('email')->unique()->nullable();
             $table->string('password');
-            $table->enum('user_type' ['Driver', 'Customer', 'Admin', 'Super-Admin'])
+            $table->enum('user_type' ,['Driver', 'Customer', 'Admin', 'Super-Admin']);
             $table->rememberToken();
             $table->timestamps();
         });

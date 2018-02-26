@@ -56,9 +56,7 @@
                 </section>
                 <!-- /.content -->
                 <form id="@yield('form-id')" action="@yield('form-action')" method="POST">
-                {{csrf_field()}}
                 <section class="content">
-                    
                 @yield('form-body')
 
                 <div class="modal fade" id="form-modal">
