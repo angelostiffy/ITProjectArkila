@@ -55,7 +55,8 @@
 
                 </section>
                 <!-- /.content -->
-                <form action="@yield('form-action')" method="post">
+                <form action="@yield('form-action')" method="POST">
+                    {{csrf_field()}}
                 <section class="content">
                     <div class="login-box">
                         <div class="login-logo">

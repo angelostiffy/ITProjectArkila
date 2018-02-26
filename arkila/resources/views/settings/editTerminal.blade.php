@@ -7,7 +7,7 @@
 
     <div class="form-group">
         <label>Terminal Name:</label>
-        <input type="text" class="form-control" name="editTerminalName">
+        <input type="text" class="form-control" name="editTerminalName" value="{{$terminal->terminals}}">
     </div>
 
 @endsection

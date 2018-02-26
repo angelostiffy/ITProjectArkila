@@ -27,6 +27,7 @@ Route::resource('home/announcements', 'AnnouncementsController');
 
 //Operators
 Route::resource('home/operators', 'OperatorsController');
+Route::get('home/operators/profile/{operator}','OperatorsController@showProfile')->name('operators.showProfile');
 
 /************ Drivers ******************************/
 Route::resource('home/drivers', 'DriversController');
@@ -61,10 +62,10 @@ Route::resource('home/settings/terminal', 'TerminalController', [
 ]);
 
 Route::resource('home/settings/fees', 'FeesController', [
-    'except' => ['index','show']
+    'except' => ['index',]
 ]);
 Route::resource('home/settings/discounts', 'DiscountsController', [
-    'except' => ['index','show']
+    'except' => ['index']
 ]);
 Route::get('home/settings', 'HomeController@settings');
 /****************************************************/

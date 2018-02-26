@@ -5,6 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use App\Member;
+use App\Rules\checkAge;
+
 
 class OperatorRequest extends FormRequest
 {
@@ -26,7 +28,7 @@ class OperatorRequest extends FormRequest
     public function rules()
     {
 
-        $operator = Member::find(request('opId'));
+        $operator = Member::operators()->where('member_id',$this->opId);
         switch($this->method())
         {
             case 'POST':
@@ -38,9 +40,8 @@ class OperatorRequest extends FormRequest
                     'contactNumber' => 'numeric|digits:10',
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
-                    'birthDate' => 'required|date|before:today',
+                    'birthDate' => ['required','date', new checkAge],
                     'birthPlace' => 'required|max:50',
-                    'age' => 'required|numeric',
                     'gender' => [
                         'required',
                         Rule::in(['Male', 'Female'])
@@ -50,18 +51,18 @@ class OperatorRequest extends FormRequest
                         'required',
                         Rule::in(['Single', 'Married', 'Divorced']) 
                     ],
-                    'spouse' => 'required_with:spouseBirthDate|max:120',
-                    'spouseBirthDate' => 'required_with:spouse|nullable|date|before:today',
+                    'nameOfSpouse' => 'required_with:spouseBirthDate|max:120',
+                    'spouseBirthDate' => 'required_with:nameOfSpouse|nullable|date|before:today',
                     'fathersName' => 'required_with:fatherOccupation|max:120',
                     'fatherOccupation' => 'required_with:fathersName|max:50',
                     'mothersName' => 'required_with:motherOccupation|max:120',
                     'motherOccupation' => 'required_with:mothersName|max:50',
-                    'personInCaseOfEmergency' => 'required|max:120',
-                    'emergencyAddress' => 'required|max:50',
-                    'emergencyContactNumber' => 'required|numeric|digits:10',
+                    'contactPerson' => 'required|max:120',
+                    'contactPersonAddress' => 'required|max:50',
+                    'contactPersonContactNumber' => 'required|numeric|digits:10',
                     'sss' => 'unique:member,SSS|required|max:10',
-                    'driverLicense' => 'required_with:driverLicenseExpiryDate|max:20',
-                    'driverLicenseExpiryDate' => 'required_with:driverLicense|nullable|date|before:today',
+                    'licenseNo' => 'required_with:licenseExpiryDate|max:20',
+                    'licenseExpiryDate' => 'required_with:licenseNo|nullable|date|after:today',
                     'children.*' => 'required_with:childrenBDay.*|distinct',
                     'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
                 ];
@@ -75,8 +76,7 @@ class OperatorRequest extends FormRequest
                     'contactNumber' => 'numeric|digits:10',
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
-                    'age' => 'required|numeric',
-                    'birthDate' => 'required|date|before:today',
+                    'birthDate' => ['required','date', new checkAge],
                     'birthPlace' => 'required|max:50',
                     'gender' => [
                         'required',

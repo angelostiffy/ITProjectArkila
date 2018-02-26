@@ -36,36 +36,24 @@
         }
     </style>
 @endsection
-@section('title', 'Driver Registration')
-@section('form-id', 'regForm')
-@section('form-action',route('drivers.store'))
+@section('title', 'Operator Registration')
+@section('form-id','regForm')
+@section('form-action',route('operators.store'))
 @section('form-body')
-<div class="box box-warning">
+<div class="box box-primary">
         <div class="box-header with-border text-center">
             <a href="" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
             <h3 class="box-title">
-                Driver Registration
+                Operator Registration
             </h3>
         </div>
+
         <div class="box-body">
 
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">
                     <h4>Personal Information</h4>
                     @include('message.error')
-                    <div class="row">
-                        <div class="col-md-4">
-                        <div class=" form-group">
-                            <label>Choose Operator:</label>
-                            <select name="operator" id="" class="form-control select2">
-                                <option value='' @if(!old('operator')) {{'selected'}} @endif>No Operator</option>
-                                @foreach($operators as $operator)
-                                    <option value={{$operator->member_id}} @if($operator->member_id == old('operator')) {{'selected'}}@endif>{{$operator->full_name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -107,6 +95,12 @@
                         </div>
                     </div>
                     <div class="row">
+                        <!-- <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Age:</label>
+                                <input value="{{old('age')}}" name="age" type="number" class="form-control" placeholder="Age">
+                            </div>
+                        </div> -->
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Birthdate:</label>
@@ -125,24 +119,24 @@
                             </div>
                         </div>
                     
+                    
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Gender:</label>
                                 <div class="radio">
                                     <label for=""> Male</label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="gender"  value="Male" class="flat-blue" @if(old('gender') == 'Male') {{'checked'}}@endif>
+                                        <input @if(old('gender') == 'Male') {{'checked'}} @endif type="radio" name="gender"  value="Male" class="flat-blue">
                                     </label>
                                     <label for="">Female</label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="gender" value="Female" class="flat-blue" @if(old('gender') == 'Female') {{'checked'}}@endif>
+                                        <input @if(old('gender') == 'Female') {{'checked'}} @endif type="radio" name="gender" value="Female" class="flat-blue">
                                     </label>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                    <div class="row">    
+                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Citizenship:</label>
@@ -153,21 +147,23 @@
                             <div class="form-group">
                                 <label>Civil Status:</label>
                                 <select name="civilStatus" class="form-control">
-                                   <option value="Single" @if(old('civilStatus') == 'Single') {{'selected'}} @endif>Single</option>
-                                   <option value="Married" @if(old('civilStatus') == 'Married') {{'selected'}} @endif>Married</option>
-                                   <option value="Divorced" @if(old('civilStatus') == 'Divorced') {{'selected'}} @endif>Divorced</option>
+                                   <option @if(old('civilStatus') == 'Single') {{'selected'}} @endif>Single</option>
+                                   <option @if(old('civilStatus') == 'Married') {{'selected'}} @endif>Married</option>
+                                   <option @if(old('civilStatus') == 'Divorced') {{'selected'}} @endif>Divorced</option>
+                                   <option @if(old('civilStatus') == 'Widowed') {{'selected'}} @endif>Widowed</option>
                                </select>
                             </div>
                         </div>
-                   
+                    
+                    
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>SSS No:</label>
                                 <input value="{{old('sss')}}" name="sss" type="text" class="form-control" placeholder="SSS No.">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">    
+                    </div> 
+                    <div class="row">   
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>License No:</label>
@@ -309,9 +305,9 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="pull-right">
-                                                <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
-                                            </div>
+                                        <div class="pull-right">
+                                        <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
+                                    </div>
                                         </td>
 
                                     </tr>
@@ -339,7 +335,7 @@
                     </div>
                 </div>
         </div>
-    </div> 
+    </div>
 @endsection
 @section('scripts')
 @parent
@@ -446,20 +442,21 @@
             x[n].className += " active";
         }
     </script>
-
     <script>
     $(function () {
 
-        $('.select2').select2();
+        $('.select2').select2()
 
         $('#datepicker').datepicker({
           autoclose: true
-        });
+        })
 
         $('input[type="checkbox"].flat-blue, input[type="radio"].flat-blue').iCheck({
           checkboxClass: 'icheckbox_flat-blue',
           radioClass   : 'iradio_flat-blue'
-        });
+        })
     })
     </script>
+
+    
 @endsection

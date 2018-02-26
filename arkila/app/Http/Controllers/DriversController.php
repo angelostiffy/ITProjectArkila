@@ -17,7 +17,7 @@ class DriversController extends Controller
     {
         $drivers = Member::drivers()->get();
 
-        return view('drivers.index', compact('drivers'));
+        return view('drivers.driverList', compact('drivers'));
     }
 
     /**
@@ -40,41 +40,42 @@ class DriversController extends Controller
      */
     public function store(DriverRequest $request)
     {
-        $emContactNumber = '+63'.$request->emergencyContactNumber;
-        $perContactNumber = '+63'.$request->contactNumber;
+
+        $children = array_combine($request->children,$request->childrenBDay);
+
         $createdDriver = Member::create([
             'last_name'=> $request->lastName,
             'first_name' => $request->firstName,
             'operator_id' => $request->operator,
             'middle_name' => $request->middleName,
-            'contact_number' => $perContactNumber,
-            'role' => 'Operator',
+            'contact_number' => $request->contactNumber,
+            'role' => 'Driver',
             'address' => $request->address,
             'provincial_address' => $request->provincialAddress,
             'birth_date' => $request->birthDate,
             'birth_place' => $request->birthPlace,
-            'age' => $request->age,
+            'age' => $request->birthPlace,
             'gender' => $request->gender,
             'citizenship' => $request->citizenship,
             'civil_status' => $request->civilStatus,
             'number_of_children' => $request->noChild,//
-            'spouse' => $request->spouse,
+            'spouse' => $request->nameOfSpouse,
             'spouse_birthdate' => $request->spouseBirthDate,
             'father_name' => $request->fathersName,
             'father_occupation' => $request->fatherOccupation,
             'mother_name' => $request->mothersName,
             'mother_occupation' => $request->motherOccupation,
-            'person_in_case_of_emergency' => $request->personInCaseOfEmergency,
-            'emergency_address' => $request->emergencyAddress,
-            'emergency_contactno' => $emContactNumber,
+            'person_in_case_of_emergency' => $request->contactPerson,
+            'emergency_address' => $request->contactPersonAddress,
+            'emergency_contactno' => $request->contactPersonContactNumber,
             'SSS' => $request->sss,
-            'license_number' => $request->driverLicense,
-            'expiry_date' => $request->driverLicenseExpiryDate,
+            'license_number' => $request->licenseNo,
+            'expiry_date' => $request->licenseExpiryDate,
+            'number_of_children' => sizeof($children)
         ]);
 
-        for($i = 0; $i < sizeof($request->children); $i++){
-            $createdDriver->addChildren($request->children[$i],$request->childrenBDay[$i]);
-        }
+        $createdDriver->addChildren($children);
+
 
         return redirect('/home/drivers')->with('success', 'Information created successfully');
         //
@@ -118,20 +119,20 @@ class DriversController extends Controller
     public function update(DriverRequest $request, Driver $driver)
     {
 
-        $emContactNumber = '+63'.$request->emergencyContactNumber;
-        $perContactNumber = '+63'.$request->contactNumber;
+        $children = array_combine($request->children,$request->childrenBDay);
+
         $driver->update([
             'last_name'=> $request->lastName,
             'first_name' => $request->firstName,
             'operator_id' => $request->operator,
             'middle_name' => $request->middleName,
-            'contact_number' => $perContactNumber,
-            'role' => 'Operator',
+            'contact_number' => $request->contactNumber,
+            'role' => 'Driver',
             'address' => $request->address,
             'provincial_address' => $request->provincialAddress,
             'birth_date' => $request->birthDate,
             'birth_place' => $request->birthPlace,
-            'age' => $request->age,
+            'age' => $request->birthPlace,
             'gender' => $request->gender,
             'citizenship' => $request->citizenship,
             'civil_status' => $request->civilStatus,
@@ -144,15 +145,15 @@ class DriversController extends Controller
             'mother_occupation' => $request->motherOccupation,
             'person_in_case_of_emergency' => $request->personInCaseOfEmergency,
             'emergency_address' => $request->emergencyAddress,
-            'emergency_contactno' => $emContactNumber,
+            'emergency_contactno' => $request->emergencyContactNumber,
             'SSS' => $request->sss,
             'license_number' => $request->driverLicense,
             'expiry_date' => $request->driverLicenseExpiryDate,
+            'number_of_children' => sizeof($children)
         ]);
 
-//        for($i = 0; $i < sizeof($request->children); $i++){
-//            $driver->addChildren($request->children[$i],$request->childrenBDay[$i]);
-//        }
+        $driver->children()->delete();
+        $driver->addChildren($children);
 
         return redirect()->route('drivers.show',compact('driver'))->with('success', 'Information updated successfully');
 

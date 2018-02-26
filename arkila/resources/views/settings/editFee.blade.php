@@ -6,13 +6,13 @@
 @section('form-body')
 
 	<div>
-	 	<label for="">Description:</label>
-	 	<p>*insert Description*</p>
+	 	<label for="description">Description:</label>
+	 	<p>{{$fee->description}}</p>
 	</div>
 
     <div class="form-group">
         <label>Amount:</label>
-        <input type="number" class="form-control" name="editFeeAmount" step = "0.25" min="0">
+        <input type="number" class="form-control" name="editFeeAmount" step = "0.25" min="0" value="{{$fee->amount}}">
     </div>
 
 @endsection
