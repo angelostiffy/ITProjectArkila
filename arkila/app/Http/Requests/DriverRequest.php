@@ -27,11 +27,12 @@ class DriverRequest extends FormRequest
      */
     public function rules()
     {
-        $driver = Member::drivers()->where('member_id',$this->member_id);
+        $driver = $this->drivers;
         switch($this->method())
         {
             case 'POST':
             {
+
                 return [
                     'lastName' => 'required|max:35',
                     'firstName' => 'required|max:35',
@@ -40,7 +41,7 @@ class DriverRequest extends FormRequest
                     'contactNumber' => 'numeric|digits:10',
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
-                    'birthDate' => ['required','date', new checkAge],
+                    'birthDate' => ['required','date_format:m/d/Y','after:1/1/1918', new checkAge],
                     'birthPlace' => 'required|max:50',
                     'gender' => [
                         'required',
@@ -62,7 +63,7 @@ class DriverRequest extends FormRequest
                     'contactPersonContactNumber' => 'required|numeric|digits:10',
                     'sss' => 'unique:member,SSS|required|max:10',
                     'licenseNo' => 'required|max:20',
-                    'licenseExpiryDate' => 'required|date|before:today',
+                    'licenseExpiryDate' => 'required|date|after:today',
                     'children.*' => 'required_with:childrenBDay.*|distinct',
                     'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
                 ];

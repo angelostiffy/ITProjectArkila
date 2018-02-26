@@ -38,11 +38,17 @@
 @endsection
 @section('title', 'Driver Registration')
 @section('form-id', 'regForm')
-@section('form-action',route('drivers.store'))
+
+@if(isset($operators))
+    @section('form-action',route('drivers.store'))
+@else
+    @section('form-action',route('drivers.storeFromOperator',[$operator->member_id]))
+@endif
+
 @section('form-body')
 <div class="box box-warning">
         <div class="box-header with-border text-center">
-            <a href="" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+            <a href="{{URL::previous()}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
             <h3 class="box-title">
                 Driver Registration
             </h3>
@@ -56,13 +62,18 @@
                     <div class="row">
                         <div class="col-md-4">
                         <div class=" form-group">
-                            <label>Choose Operator:</label>
-                            <select name="operator" id="" class="form-control select2">
-                                <option value='' @if(!old('operator')) {{'selected'}} @endif>No Operator</option>
-                                @foreach($operators as $operator)
-                                    <option value={{$operator->member_id}} @if($operator->member_id == old('operator')) {{'selected'}}@endif>{{$operator->full_name}}</option>
-                                @endforeach
-                            </select>
+                            @if(isset($operators))
+                                <label>Choose Operator:</label>
+                                <select name="operator" id="" class="form-control select2">
+                                    <option value='' @if(!old('operator')) {{'selected'}} @endif>No Operator</option>
+                                    @foreach($operators as $operator)
+                                        <option value={{$operator->member_id}} @if($operator->member_id == old('operator')) {{'selected'}}@endif>{{$operator->full_name}}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <label for"opName">Operator Name:</label>
+                                <span id="opName">{{$operator->full_name}}</span>
+                            @endif
                         </div>
                         </div>
                     </div>

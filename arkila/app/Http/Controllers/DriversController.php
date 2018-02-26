@@ -54,7 +54,7 @@ class DriversController extends Controller
             'provincial_address' => $request->provincialAddress,
             'birth_date' => $request->birthDate,
             'birth_place' => $request->birthPlace,
-            'age' => $request->birthPlace,
+            'age' => $request->birthDate,
             'gender' => $request->gender,
             'citizenship' => $request->citizenship,
             'civil_status' => $request->civilStatus,
@@ -80,7 +80,11 @@ class DriversController extends Controller
         //
     }
 
-    public function createFromOperator(Member $operator, DriverRequest $request){
+    public function createFromOperator(Member $operator){
+        return view('drivers.create',compact('operator'));
+    }
+
+    public function storeFromOperator(Member $operator, DriverRequest $request){
 
         $children = array_combine($request->children,$request->childrenBDay);
 
@@ -94,7 +98,7 @@ class DriversController extends Controller
             'provincial_address' => $request->provincialAddress,
             'birth_date' => $request->birthDate,
             'birth_place' => $request->birthPlace,
-            'age' => $request->birthPlace,
+            'age' => $request->birthDate,
             'gender' => $request->gender,
             'citizenship' => $request->citizenship,
             'civil_status' => $request->civilStatus,
@@ -112,7 +116,7 @@ class DriversController extends Controller
             'expiry_date' => $request->licenseExpiryDate,
             'number_of_children' => sizeof($children)
         ]);
-        $createdDriver->addChildren($children);
+        $operator->addChildren($children);
         return redirect(route('operators.showProfile',[$operator->member_id]));
     }
 
