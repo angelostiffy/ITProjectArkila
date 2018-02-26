@@ -1,8 +1,9 @@
 @extends('layouts.form')
 @section('title', 'Edit Destination')
-@section('back-link')
-@section('form-action', '#')
-@section('form-title', 'Add Destination')
+@section('back-link', '/home/settings')
+@section('form-action', route('destinations.update', [$destination->destination_id]))
+@section('method_field', method_field('PATCH'))
+@section('form-title', 'Edit Destination')
 @section('form-body')
 	 <div>
 	 	<label for="destination">Description:</label>
@@ -25,6 +26,6 @@
 @endsection
 
 @section('modal-btn')
-<a href="" type="button" class="btn btn-primary">Yes</a>
+<button type="submit" class="btn btn-primary">Yes</button>
 <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
 @endsection

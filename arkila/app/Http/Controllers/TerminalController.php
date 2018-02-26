@@ -67,7 +67,7 @@ class TerminalController extends Controller
         ]);
 
         $terminal->update([
-            'terminals' => request('editTerminalName'),
+            'description' => request('editTerminalName'),
         ]);
 
         return redirect('/home/settings');
@@ -79,8 +79,9 @@ class TerminalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Terminal $terminal)
     {
-        //
+        $terminal->delete();
+        return back();
     }
 }
