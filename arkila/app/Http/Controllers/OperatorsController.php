@@ -80,11 +80,16 @@ class OperatorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Member $operator)
+    public function show(Member $operator){
+        $children = $operator->children()->get();
+        return view('operatos.show',compact('operator','children'));
+    }
+
+    public function showProfile(Member $operator)
     {
         $drivers = Member::drivers()->where('operator_id',$operator)->get();
         $vans = $operator->van();
-        return view('operators.show',compact('operator', 'drivers', 'vans'));
+        return view('operators.OperatorProfile',compact('operator', 'drivers', 'vans'));
     }
 
     /**

@@ -13,8 +13,6 @@ class Van extends Model
     protected $fillable = [
     	'plate_number',
         'model',
-        'operator_id',
-        'driver_id',
         'seating_capacity',
 	];  
 	//

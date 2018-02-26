@@ -42,6 +42,8 @@ class DriversController extends Controller
     {
         $emContactNumber = '+63'.$request->emergencyContactNumber;
         $perContactNumber = '+63'.$request->contactNumber;
+        $children = array_combine($request->children,$request->ChildrenBDay);
+
         $createdDriver = Member::create([
             'last_name'=> $request->lastName,
             'first_name' => $request->firstName,
@@ -72,9 +74,8 @@ class DriversController extends Controller
             'expiry_date' => $request->driverLicenseExpiryDate,
         ]);
 
-        for($i = 0; $i < sizeof($request->children); $i++){
-            $createdDriver->addChildren($request->children[$i],$request->childrenBDay[$i]);
-        }
+        $createdDriver->addChildren($children);
+
 
         return redirect('/home/drivers')->with('success', 'Information created successfully');
         //
@@ -120,6 +121,8 @@ class DriversController extends Controller
 
         $emContactNumber = '+63'.$request->emergencyContactNumber;
         $perContactNumber = '+63'.$request->contactNumber;
+        $children = array_combine($request->children,$request->ChildrenBDay);
+
         $driver->update([
             'last_name'=> $request->lastName,
             'first_name' => $request->firstName,
@@ -150,9 +153,8 @@ class DriversController extends Controller
             'expiry_date' => $request->driverLicenseExpiryDate,
         ]);
 
-//        for($i = 0; $i < sizeof($request->children); $i++){
-//            $driver->addChildren($request->children[$i],$request->childrenBDay[$i]);
-//        }
+        $driver->children()->delete();
+        $driver->addChildren($children);
 
         return redirect()->route('drivers.show',compact('driver'))->with('success', 'Information updated successfully');
 
