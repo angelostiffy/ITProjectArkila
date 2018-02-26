@@ -1,7 +1,10 @@
-@extends('layouts.master') @section('title', 'Rent Van') @section('content-header', 'Rent Van') @section('content')
+@extends('layouts.form_lg') 
+@section('title', 'Rent Van') 
+@section('form-body')
 <div class="box box-primary">
     <div class="box-header">
-        <h3>Van Rental</h3>
+        <a href="" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+        <h3 class="box-title">Van Rental</h3>
     </div>
     <div class="box-body">
         <form id="regForm" action="/action_page.php">

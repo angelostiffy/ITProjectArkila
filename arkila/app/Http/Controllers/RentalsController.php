@@ -14,7 +14,7 @@ class RentalsController extends Controller
     public function index()
     {
         //
-        return view('rental.index');
+        return view('rental.RentVan');
     }
 
     /**
