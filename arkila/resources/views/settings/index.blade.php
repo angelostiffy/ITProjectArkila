@@ -56,8 +56,12 @@
                       <td>{{$terminal->terminals}}</td>
                       <td>
                         <div class="form-group">
-                          <a href="home/settings/terminal/{{$terminal->terminal_id}}/edit-terminal" class="btn btn-info"><i class="fa fa-edit"></i>Edit</a>
+                          <a href="/home/settings/terminal/{{$terminal->terminal_id}}/edit" class="btn btn-info"><i class="fa fa-edit"></i>Edit</a>
+                          <form action="/home/settings/terminal/{{$terminal->terminal_id}}" method="POST">
+                            {{csrf_field()}}
+                            <input type="hidden" name="_method" value="DELETE">
                           <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-terminal"><i class="fa fa-trash"></i>Delete</button>
+                          </form>
                         </div>
                       </td>
                     </tr>
@@ -68,12 +72,12 @@
         <!-- Destinations Tab -->
               <div class="tab-pane" id="destinationTab">
                 <div>
-                   <a href="home/settings/destinations/create" class="btn btn-success"><i class="fa fa-plus"> </i> Add Destination </a>
+                   <a href="/home/settings/destinations/create" class="btn btn-success"><i class="fa fa-plus"> </i> Add Destination </a>
                 </div>
                   <table id="destinations" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th></th>
+                      
                       <th>Name</th>
                       <th>Fare</th>
                       <th>Terminal</th>
@@ -88,8 +92,12 @@
                       <td>{{$destination->terminals}}</td>
                       <td>
                         <div class="form-group">
-                          <a href="editDestination.html" class="btn btn-info"><i class="fa fa-edit" ></i>Edit</a>
+                          <a href="/home/settings/destinations/{{$destination->destination_id}}/edit" class="btn btn-info"><i class="fa fa-edit" ></i>Edit</a>
+                          <form action="/home/settings/destinations/{{$destination->destination_id}}" method="POST">
+                          {{csrf_field()}}
+                          <input type="hidden" name="_method" value="DELETE">
                           <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-destination"><i class="fa fa-trash"></i>Delete</button>
+                          </form>
                         </div>
                       </td>
                     </tr>
@@ -101,7 +109,7 @@
           <!-- Fee Tab -->
                 <div class="tab-pane" id="feeTab">
                   <div>
-                   <a href="addFee.html" class="btn btn-success"><i class="fa fa-plus"> </i> Add Fee </a>
+                   <a href="/home/settings/fees/create" class="btn btn-success"><i class="fa fa-plus"> </i> Add Fee </a>
                   </div>
                     <table id="fees" class="table table-bordered table-striped">
                       <thead>
@@ -117,8 +125,12 @@
                         <td>{{$fee->description}}</td>
                         <td>{{$fee->amount}}</td>
                         <td>
-                        <button class="btn btn-info"><i class="fa fa-edit"></i> Edit</button>
+                        <a href="/home/settings/fees/{{$fee->fad_id}}/edit" class="btn btn-info"><i class="fa fa-edit"></i> Edit</a>
+                        <form action="/home/settings/fees/{{$fee->fad_id}}" method="POST">
+                        {{csrf_field()}}
+                        <input type="hidden" name="_method" value="DELETE">
                         <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                        </form>
                         </td>
                       </tr>
                       @endforeach
@@ -128,7 +140,7 @@
           <!-- Discount Tab -->
             <div class="tab-pane" id="discountTab">
               <div>
-                   <a href="addDiscount.html" class="btn btn-success"><i class="fa fa-plus"> </i> Add Discount </a>
+                   <a href="/home/settings/discounts/create" class="btn btn-success"><i class="fa fa-plus"> </i> Add Discount </a>
                 </div>
                     <table id="discounts" class="table table-bordered table-striped">
                       <thead>
@@ -144,8 +156,12 @@
                         <td>{{$discount->description}}</td>
                         <td>{{$discount->amount}}</td>
                         <td>
-                        <a href="editDiscount.html" class="btn btn-info" ><i class="fa fa-edit"></i> Edit</a>
+                        <a href="/home/settings/discounts/{{$discount->fad_id}}/edit" class="btn btn-info" ><i class="fa fa-edit"></i> Edit</a>
+                        <form action="/home/settings/discounts/{{$discount->fad_id}}" method="POST">
+                        {{csrf_field()}}
+                        <input type="hidden" name="_method" value="DELETE">
                         <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-discount"><i class="fa fa-trash"></i> Delete</button>
+                        </form>
                         </td>
                       </tr>
                       @endforeach

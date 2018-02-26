@@ -5,13 +5,13 @@
 @section('form-title', 'Edit Discount')
 @section('form-body')
 	<div>
-	 	<label for="">Description:</label>
-	 	<p>*insert Description*</p>
+	 	<label for="description">Description:</label>
+	 	<p>{{$discount->description}}</p>
 	 </div>
 
     <div class="form-group">
         <label>Amount:</label>
-        <input type="number" class="form-control" class="editDiscountAmount" step = "0.25" min="0">
+        <input type="number" class="form-control" class="editDiscountAmount" step = "0.25" min="0" value="{{$discount->amount}}">
     </div>
 
 @endsection
