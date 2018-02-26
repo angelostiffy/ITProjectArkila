@@ -18,11 +18,7 @@
             <div class="box-body box-profile">
               <img class="profile-user-img img-responsive img-circle" src="dist/img/user4-128x128.jpg" alt="User profile picture">
 
-              <h3 class="profile-username text-center">{{ $operator->full_name }}</h3>
-
-              <p class="text-muted text-center">ganda</p>
-                              
-                
+              <h3 class="profile-username text-center">{{ $operator->full_name }}</h3>                                          
                 <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
                   <b>ID</b> <a class="pull-right">{{ $operator->member_id }}</a>
