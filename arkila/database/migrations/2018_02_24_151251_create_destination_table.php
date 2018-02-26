@@ -25,7 +25,7 @@ class CreateDestinationTable extends Migration
             
             $table->foreign('terminal_id')
             ->references('terminal_id')->on('terminal')
-            ->onDelete('restrict')
+            ->onDelete('cascade')
             ->onUpdate('cascade');
         });
     }

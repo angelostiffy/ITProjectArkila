@@ -56,8 +56,8 @@
                       <td>{{$terminal->terminals}}</td>
                       <td>
                         <div class="form-group">
-                          <a href="/home/settings/terminal/{{$terminal->terminal_id}}/edit" class="btn btn-info"><i class="fa fa-edit"></i>Edit</a>
-                          <form action="/home/settings/terminal/{{$terminal->terminal_id}}" method="POST">
+                          <a href="{{ route('terminal.edit', [$terminal->terminal_id]) }}" class="btn btn-info"><i class="fa fa-edit"></i>Edit</a>
+                          <form action="{{ route('terminal.destroy',[$terminal->terminal_id]) }}" method="POST">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">
                           <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-terminal"><i class="fa fa-trash"></i>Delete</button>
@@ -92,8 +92,8 @@
                       <td>{{$destination->terminals}}</td>
                       <td>
                         <div class="form-group">
-                          <a href="/home/settings/destinations/{{$destination->destination_id}}/edit" class="btn btn-info"><i class="fa fa-edit" ></i>Edit</a>
-                          <form action="/home/settings/destinations/{{$destination->destination_id}}" method="POST">
+                          <a href="{{ route('destinations.edit', [$destination->destination_id]) }}" class="btn btn-info"><i class="fa fa-edit" ></i>Edit</a>
+                          <form action="{{ route('destinations.destroy', [$destination->destination_id]) }}" method="POST">
                           {{csrf_field()}}
                           <input type="hidden" name="_method" value="DELETE">
                           <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-destination"><i class="fa fa-trash"></i>Delete</button>
@@ -125,8 +125,8 @@
                         <td>{{$fee->description}}</td>
                         <td>{{$fee->amount}}</td>
                         <td>
-                        <a href="/home/settings/fees/{{$fee->fad_id}}/edit" class="btn btn-info"><i class="fa fa-edit"></i> Edit</a>
-                        <form action="/home/settings/fees/{{$fee->fad_id}}" method="POST">
+                        <a href="{{ route('fees.edit', [$fee->fad_id]) }}" class="btn btn-info"><i class="fa fa-edit"></i> Edit</a>
+                        <form action="{{ route('fees.destroy', [$fee->fad_id]) }}" method="POST">
                         {{csrf_field()}}
                         <input type="hidden" name="_method" value="DELETE">
                         <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
@@ -156,8 +156,8 @@
                         <td>{{$discount->description}}</td>
                         <td>{{$discount->amount}}</td>
                         <td>
-                        <a href="/home/settings/discounts/{{$discount->fad_id}}/edit" class="btn btn-info" ><i class="fa fa-edit"></i> Edit</a>
-                        <form action="/home/settings/discounts/{{$discount->fad_id}}" method="POST">
+                        <a href="{{ route('discounts.edit', [$discount->fad_id]) }}" class="btn btn-info" ><i class="fa fa-edit"></i> Edit</a>
+                        <form action="{{ route('discounts.destroy', [$discount->fad_id]) }}" method="POST">
                         {{csrf_field()}}
                         <input type="hidden" name="_method" value="DELETE">
                         <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-discount"><i class="fa fa-trash"></i> Delete</button>

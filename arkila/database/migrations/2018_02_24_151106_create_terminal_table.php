@@ -16,7 +16,7 @@ class CreateTerminalTable extends Migration
         Schema::create('terminal', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('terminal_id', 10);
-            $table->string('terminals', 50);
+            $table->string('description', 50);
             $table->timestamps();
         });
     }
