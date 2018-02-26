@@ -5,6 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use App\Member;
+use App\Rules\checkAge;
+
 
 class OperatorRequest extends FormRequest
 {
@@ -38,9 +40,8 @@ class OperatorRequest extends FormRequest
                     'contactNumber' => 'numeric|digits:10',
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
-                    'birthDate' => 'required|date|before:today',
+                    'birthDate' => ['required','date', new checkAge],
                     'birthPlace' => 'required|max:50',
-                    'age' => 'required|numeric',
                     'gender' => [
                         'required',
                         Rule::in(['Male', 'Female'])
@@ -61,7 +62,7 @@ class OperatorRequest extends FormRequest
                     'contactPersonContactNumber' => 'required|numeric|digits:10',
                     'sss' => 'unique:member,SSS|required|max:10',
                     'licenseNo' => 'required_with:licenseExpiryDate|max:20',
-                    'licenseExpiryDate' => 'required_with:licenseNo|nullable|date|before:today',
+                    'licenseExpiryDate' => 'required_with:licenseNo|nullable|date|after:today',
                     'children.*' => 'required_with:childrenBDay.*|distinct',
                     'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
                 ];
@@ -75,8 +76,7 @@ class OperatorRequest extends FormRequest
                     'contactNumber' => 'numeric|digits:10',
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
-                    'age' => 'required|numeric',
-                    'birthDate' => 'required|date|before:today',
+                    'birthDate' => ['required','date', new checkAge],
                     'birthPlace' => 'required|max:50',
                     'gender' => [
                         'required',

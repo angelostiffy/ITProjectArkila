@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 class RentalsController extends Controller
 {
     /**
@@ -14,7 +15,7 @@ class RentalsController extends Controller
     public function index()
     {
         //
-        return view('rental.index');
+        return view('rental.RentVan');
     }
 
     /**
@@ -27,6 +28,13 @@ class RentalsController extends Controller
         return view('rental.create');
     }
 
+    public function getSummary(Request $request) {
+        $rentDetails = $request->all();
+        $object = (object) $rentDetails;
+        dd($object);
+
+        return view('rental.getSummary', compact('object'));
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -44,9 +52,9 @@ class RentalsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+
     }
 
     /**

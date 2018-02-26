@@ -62,6 +62,10 @@ class Member extends Model
         $this->attributes['contact_number'] = '+63'.$value;
     }
 
+    public function setAgeAttribute($value){
+        $this->attributes['age'] = Carbon::parse($value)->age;
+    }
+
     public function setEmergencyContactnoAttribute($value){
         $this->attributes['emergency_contactno'] = '+63'.$value;
     }

@@ -49,7 +49,7 @@ class OperatorsController extends Controller
             'provincial_address' => $request->provincialAddress,
             'birth_date' => $request->birthDate,
             'birth_place' => $request->birthPlace,
-            'age' => $request->age,
+            'age' => $request->birthDate,
             'gender' => $request->gender,
             'citizenship' => $request->citizenship,
             'civil_status' => $request->civilStatus,
@@ -124,7 +124,7 @@ class OperatorsController extends Controller
             'provincial_address' => $request->provincialAddress,
             'birth_date' => $request->birthDate,
             'birth_place' => $request->birthPlace,
-            'age' => $request->age,
+            'age' => $request->birthPlace,
             'gender' => $request->gender,
             'citizenship' => $request->citizenship,
             'civil_status' => $request->civilStatus,
@@ -146,8 +146,6 @@ class OperatorsController extends Controller
         $operator->addChildren($children);
 
         return redirect()->route('operators.show', compact('operator'))->with('success', 'Information updated successfully');
-
-        return back()->withInput();
     }
 
     /**

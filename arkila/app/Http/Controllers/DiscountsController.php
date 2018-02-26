@@ -26,13 +26,13 @@ class DiscountsController extends Controller
     public function store()
     {
         $this->validate(request(),[
-            "description" => "unique:fees_and_deductions,description|required|max:30",
-            "amount" => ['required',new checkCurrency,'numeric','min:0']
+            "addDiscountDesc" => "unique:fees_and_deduction,description|required|max:30",
+            "addDiscountAmount" => ['required',new checkCurrency,'numeric','min:0']
         ]);
 
         FeesAndDeduction::create([
-            "description" => request('description'),
-            "amount" =>request('amount'),
+            "description" => request('addDiscountDesc'),
+            "amount" =>request('addDiscountAmount'),
             "type" => "Discount"
         ]);
 

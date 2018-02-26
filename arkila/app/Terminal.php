@@ -9,6 +9,9 @@ class Terminal extends Model
     //
     protected $table = 'terminal';
     protected $primaryKey = 'terminal_id';
+    protected $guarded = [
+    	'terminal_id',
+    ];
 
     public function destination()
     {
