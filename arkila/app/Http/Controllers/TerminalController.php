@@ -19,7 +19,7 @@ class TerminalController extends Controller
      */
     public function create()
     {
-        return view('settings.addTerminal');
+        return view('settings.createTerminal');
     }
 
     /**

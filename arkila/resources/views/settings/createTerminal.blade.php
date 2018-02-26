@@ -1,10 +1,11 @@
 @extends('layouts.form')
 @section('title', 'Create New Terminal')
-@section('back-link', '#')
-@section('form-action', '#')
+@section('back-link', 'home/settings')
+@section('form-action', '/home/settings/terminal')
 @section('form-title', 'Create Terminal')
 @section('form-body')
 
+		
        <div class="form-group">
         <label>Terminal Name:</label>
         <input type="text" class="form-control" name="addTerminalName">
@@ -12,7 +13,7 @@
 
 @endsection
 @section('form-btn')
-<a href="" class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Create</a>
+<a  class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Create</a>
 @endsection
 
 @section('modal-title','Alert')
@@ -21,6 +22,6 @@
 @endsection
 
 @section('modal-btn')
-<a href="" type="button" class="btn btn-primary">Yes</a>
+<button type="button" class="btn btn-primary">Yes</a>
 <button class="btn btn-default" data-dismiss="modal">No</button>
 @endsection
