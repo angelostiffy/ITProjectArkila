@@ -1,6 +1,6 @@
 @extends('layouts.form')
 @section('title', 'Edit Terminal')
-@section('back-link')
+@section('back-link', '/home/settings')
 @section('form-action', route('terminal.update', [$terminal->terminal_id]))
 @section('method_field', method_field('PATCH'))
 @section('form-title', 'Edit Terminal')

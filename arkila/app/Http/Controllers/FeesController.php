@@ -63,11 +63,13 @@ class FeesController extends Controller
     public function update(FeesAndDeduction $fee)
     {
         $this->validate(request(),[
-            "description" => "unique:fees_and_deductions,description,".$fee->fad_id.",fad_id|required|max:30",
-            "amount" => ['required',new checkCurrency]
+            "editFeeAmount" => ['required',new checkCurrency],
         ]);
 
-        $fee->update(request(["description","amount"]));
+        $fee->update([
+            'amount' => request("editFeeAmount"),
+        ]);
+        
         return redirect('/home/settings');
     }
 

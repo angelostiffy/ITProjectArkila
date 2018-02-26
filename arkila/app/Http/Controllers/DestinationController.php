@@ -24,7 +24,7 @@ class DestinationController extends Controller
         $this->validate(request(),[
             "addDestination" => "unique:destination,description|required|max:40",
             "addDestinationTerminal" => ['required', new checkTerminal, 'max:40'],
-            "addDestinationFare" => ['required', new checkCurrency, 'numeric','min:0']
+            "addDestinationFare" => ['required', new checkCurrency, 'numeric','min:1']
         ]);
 
 
@@ -42,64 +42,17 @@ class DestinationController extends Controller
         return view('settings.editDestination', compact('destination'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Destination $destination)
     {
-        // $destination = request('editDestination');
-        // $terminal = request('editTerminal');
-        // $amount = request('editAmountDestination');
-        // dd(compact('destination', 'terminal', 'amount'));
-        // $this->validate(request(),[
-        //     "editDes" => "unique:destinations,description,".$destination->destination_id.",destination_id|required|max:40",
-        //     "editTerminal" => [
-        //         'required',
-        //         Rule::in(['Cabanatuan City', 'San Jose City']),
-        //         'max:40'
-        //     ],
-        //     "editAmountDestination" => ['required', new checkCurrency, 'numeric','min:0'],
-        // ]);
-
-        // $validator = Validator::make($request->all(), [
-        //     "editDes" => "unique:destinations,description,".$destination->destination_id.",destination_id|required|max:40",
-        //     "editTerminal" => [
-        //         'required',
-        //         Rule::in(['Cabanatuan City', 'San Jose City']),
-        //         'max:40'
-        //     ],
-        //     "editAmountDestination" => ['required', new checkCurrency, 'numeric','min:0'],
-        // ]);
-        // $destination = new Destination;
-        $validator = Validator::make($request->all(), [
-            "editDes" => "unique:destinations,description,".$id.",destination_id|required|max:40",
-            "editTerminal" => [
-                'required',
-                Rule::in(['Cabanatuan City', 'San Jose City']),
-                'max:40'
-            ],
-            "editAmountDestination" => ['required', new checkCurrency, 'numeric','min:0'],
+        $this->validate(request(),[
+            "editDestinationFare" => ['required', new checkCurrency, 'numeric','min:0'],
         ]);
-        // dd($validator->fails());
-        if($validator->fails()){
-            return Response::json(array('errors' => $validator->getMessageBag()->toArray()));
-        }else{
-            $destination = Destination::find($id);
-            $destination->description = $request->editDes;
-            $destination->terminal = $request->editTerminal;
-            $destination->amount = $request->editAmountDestination;
-            $destination->save();
-
             
-            
-            // $destination->update([
-            //     'description' => request('editDes'),
-            //     'terminal' => request('editTerminal'),
-            //     'amount' => request('editAmountDestination'),
-            // ]);
+        $destination->update([
+            'amount' => request('editDestinationFare'),
+        ]);
 
-            return response()->json($destination);
-        }
-
-        
-        // return redirect('/home/settings');
+        return redirect('/home/settings');
     }
 
     public function destroy(Destination $destination)
