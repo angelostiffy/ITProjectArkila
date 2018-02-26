@@ -39,6 +39,9 @@
     <![endif]-->
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        <!-- style.css -->
+    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
+
     @show
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
@@ -84,6 +87,21 @@
                 </section>
                 </form>
             </div>
+                    <!-- TEST LANG FLASHING ERRORS -->
+                @if ($flash = session('message'))
+                <div class="alert alert-success" id="flash-msg" role="alert">
+                    {{ $flash }}
+                </div>
+                @endif
+                @if(!empty($errors->first()))
+                <div class="row col-lg-12">
+                    <div id="error" class="alert alert-danger">
+                        <span>{{ $errors->first() }}</span>
+                    </div>
+                </div>
+                @endif
+            <!-- test langggg -->
+
             <!-- /.container -->
         </div>
         <!-- /.content-wrapper -->

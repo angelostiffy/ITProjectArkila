@@ -17,9 +17,12 @@ class CreateRentalTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('rent_id');
             $table->string('plate_number', 8);
-            $table->string('name', 120);
+            $table->string('first_name', 50);
+            $table->string('last_name', 50);
+            $table->string('middle_name', 50);
             $table->string('departure_date');
             $table->string('departure_time', 5);
+            $table->smallInteger('number_of_days');
             $table->string('destination');
             $table->string('contact_number', 13);
             $table->enum('rent_type', ['Online', 'Walk-in']);
