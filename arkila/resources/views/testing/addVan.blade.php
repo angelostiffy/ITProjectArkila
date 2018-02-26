@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @extends('layouts.form') @section('title', 'Add Van')
 @section('back-link','facebook.com')
   @section('form-title', 'Add Van') @section('form-body')
@@ -12,3 +13,7 @@
 <button type="submit" class="btn btn-primary"> Yes</button>
 <button type="submit" class="btn btn-primary"> No</button>
 @endsection
+=======
+@extends('layouts.form') 
+@section('title', 'Add Van')
+>>>>>>> e659552172b02782c45b98eefbeab76a9e69fab3

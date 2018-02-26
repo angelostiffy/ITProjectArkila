@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\FeesAndDeduction;
 use App\Destination;
+use App\Terminal;
 class HomeController extends Controller
 {
 //    /**   
@@ -30,10 +31,11 @@ class HomeController extends Controller
     public function settings(){
         $fees = FeesAndDeduction::latest()->where('type','Fee')->get();
         $discounts = FeesAndDeduction::latest()->where('type','Discount')->get();
-        $destinations = Destination::all();
+        $destinations = Destination::join('terminal', 'destination.terminal_id', '=', 'terminal.terminal_id')->select('terminal.terminals', 'destination.destination_id','destination.description', 'destination.amount')->get();
+        $terminals = Terminal::all();
 
         
 
-        return view('settings.index', compact('fees','destinations','discounts'));
+        return view('settings.index', compact('fees','destinations', 'terminals', 'discounts'));
     }
 }

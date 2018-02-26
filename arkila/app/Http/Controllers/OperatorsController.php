@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Validator;
-use App\Operator;
-use App\Van;
-use Illuminate\Http\Request;
+use App\Member;
 use App\Http\Requests\OperatorRequest;
 
 class OperatorsController extends Controller
@@ -17,8 +14,8 @@ class OperatorsController extends Controller
      */
     public function index()
     {
-        $operators = Operator::all();
-        return view('operators.index', ['operators' => $operators]); 
+        $operators = Member::operators()->get();
+        return view('operators.index', compact('operators'));
     }
 
     /**
@@ -34,64 +31,72 @@ class OperatorsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  OperatorRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(OperatorRequest $request)
     {
 
-        $emContactNumber = '+63'.request('emergencyContactNo');
-        $perContactNumber = '+63'.request('contactNumber');
-        Operator::create([
-            'first_name' => $request->firstName,
+        $children = array_combine($request->children,$request->childrenBDay);
+
+        $createdOperator = Member::create([
             'last_name'=> $request->lastName,
+            'first_name' => $request->firstName,
             'middle_name' => $request->middleName,
+            'contact_number' => $request->contactNumber,
+            'role' => 'Operator',
             'address' => $request->address,
-            'contact_number' => $perContactNumber,
             'provincial_address' => $request->provincialAddress,
-            'age' => $request->age,
             'birth_date' => $request->birthDate,
             'birth_place' => $request->birthPlace,
+            'age' => $request->age,
             'gender' => $request->gender,
             'citizenship' => $request->citizenship,
-            'civil_status' => $request->cStatus,
-            'number_of_children' => $request->noChild,
-            'spouse' => $request->spouse,
+            'civil_status' => $request->civilStatus,
+            'number_of_children' => $request->noChild,//
+            'spouse' => $request->nameOfSpouse,
             'spouse_birthdate' => $request->spouseBirthDate,
-            'father_name' => $request->father,
+            'father_name' => $request->fathersName,
             'father_occupation' => $request->fatherOccupation,
-            'mother_name' => $request->mother,
+            'mother_name' => $request->mothersName,
             'mother_occupation' => $request->motherOccupation,
-            'person_in_case_of_emergency' => $request->pCaseofEmergency,
-            'emergency_address' => $request->emergencyAddress,
-            'emergency_contactno' => $emContactNumber,
-            'SSS' => $request->sssId, 
+            'person_in_case_of_emergency' => $request->contactPerson,
+            'emergency_address' => $request->contactPersonAddress,
+            'emergency_contactno' => $request->contactPersonContactNumber,
+            'SSS' => $request->sss,
+            'license_number' => $request->licenseNo,
+            'expiry_date' => $request->licenseExpiryDate,
         ]);
-        
 
+        $createdOperator->addChildren($children);
         return redirect('/home/operators')->with('success', 'Information created successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Member  $operator
      * @return \Illuminate\Http\Response
      */
-    public function show(Operator $operator)
+    public function show(Member $operator){
+        $children = $operator->children()->get();
+        return view('operatos.show',compact('operator','children'));
+    }
+
+    public function showProfile(Member $operator)
     {
-        $drivers = Driver::latest()->where('operator_id', $operator)->get();
-        $vans = Van::latest()->where('operator_id', $operator)->get();
-        return view('operators.show',compact('operator', 'drivers', 'vans'));
+        $drivers = Member::drivers()->where('operator_id',$operator->member_id)->get();
+        $vans = $operator->van();
+        return view('operators.showProfile',compact('operator', 'drivers', 'vans'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Member $operator
      * @return \Illuminate\Http\Response
      */
-    public function edit(Operator $operator)
+    public function edit(Member $operator)
     {
         return view('operators.edit', compact('operator'));
     }
@@ -99,79 +104,48 @@ class OperatorsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  OperatorRequest  $request
+     * @param  Member  $operator
      * @return \Illuminate\Http\Response
      */
-    public function update(Operator $operator, OperatorRequest $request)
+    public function update(Member $operator, OperatorRequest $request)
     {
-        // $this->validate(request(),[
-        //     'firstName' => 'required|max:35',
-        //     'lastName' => 'required|max:35',
-        //     'middleName' => 'required|max:35',
-        //     'address' => 'required|max:100',
-        //     'contactNumber' => 'numeric|digits:10',
-        //     'provincialAddress' => 'required|max:100',
-        //     'age' => 'required|numeric',
-        //     'birthDate' => 'required|date',
-        //     'birthPlace' => 'required|max:50',
-        //     'gender' => [
-        //         'required',
-        //         Rule::in(['Male', 'Female'])
-        //     ],
-        //     'citizenship' => 'required|max:35',
-        //     'cStatus' => [
-        //         'required',
-        //         Rule::in(['Single', 'Married', 'Divorced']) 
-        //     ],
-        //     'noChild' => 'required|max:3',
-        //     'spouse' => 'max:120',
-        //     'spouseBirthDate' => 'date',
-        //     'father' => 'max:120',
-        //     'fatherOccupation' => 'max:50',
-        //     'mother' => 'max:120',
-        //     'motherOccupation' => 'max:50',
-        //     'pCaseofEmergency' => 'required|max:120',
-        //     'emergencyAddress' => 'required|max:50',
-        //     'emergencyContactNo' => 'required|numeric|digits:10',
-        //     'sssId' => 'required',    
-        // ]);
 
-        
-
-
-        $emContactNumber = '+63'.request('emergencyContactNo');
-        $perContactNumber = '+63'.request('contactNumber');
+        $children = array_combine($request->children,$request->ChildrenBDay);
 
         $operator->update([
-            'first_name' => $request->firstName,
             'last_name'=> $request->lastName,
+            'first_name' => $request->firstName,
+            'operator_id' => $request->operator,
             'middle_name' => $request->middleName,
+            'contact_number' => $request->contactNumber,
+            'role' => 'Operator',
             'address' => $request->address,
-            'contact_number' => $perContactNumber,
             'provincial_address' => $request->provincialAddress,
-            'age' => $request->age,
             'birth_date' => $request->birthDate,
             'birth_place' => $request->birthPlace,
+            'age' => $request->age,
             'gender' => $request->gender,
             'citizenship' => $request->citizenship,
-            'civil_status' => $request->cStatus,
-            'number_of_children' => $request->noChild,
+            'civil_status' => $request->civilStatus,
+            'number_of_children' => $request->noChild,//
             'spouse' => $request->spouse,
             'spouse_birthdate' => $request->spouseBirthDate,
-            'father_name' => $request->father,
+            'father_name' => $request->fathersName,
             'father_occupation' => $request->fatherOccupation,
-            'mother_name' => $request->mother,
+            'mother_name' => $request->mothersName,
             'mother_occupation' => $request->motherOccupation,
-            'person_in_case_of_emergency' => $request->pCaseofEmergency,
+            'person_in_case_of_emergency' => $request->personInCaseOfEmergency,
             'emergency_address' => $request->emergencyAddress,
-            'emergency_contactno' => $emContactNumber,
-            'SSS' => $request->sssId, 
+            'emergency_contactno' => $request->emergencyContactNumber,
+            'SSS' => $request->sss,
+            'license_number' => $request->driverLicense,
+            'expiry_date' => $request->driverLicenseExpiryDate,
         ]);
-             
-        if($operator){
-            return redirect()->route('operators.show', ['operator' => $operator->operator_id])->with('success', 'Information updated successfully');       
-        }
+        $operator->children()->delete();
+        $operator->addChildren($children);
+
+        return redirect()->route('operators.show', compact('operator'))->with('success', 'Information updated successfully');
 
         return back()->withInput();
     }
@@ -179,15 +153,13 @@ class OperatorsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Member  $operator
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Operator $operator)
+    public function destroy(Member $operator)
     {
-        $findOperator = Operator::find($operator->operator_id);
-        if($findOperator->delete()){
-            return redirect()->route('operators.index');
-        }
-        
+        $operator->drivers()->update(['operator_id'=>null]);
+        $operator->delete();
+        return redirect()->route('operators.index');
     }
 }

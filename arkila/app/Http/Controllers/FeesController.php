@@ -16,7 +16,7 @@ class FeesController extends Controller
      */
     public function create()
     {
-        return view('settings.createFees');
+        return view('settings.createFee');
     }
 
     /**
@@ -49,7 +49,8 @@ class FeesController extends Controller
      */
     public function edit(FeesAndDeduction $fee)
     {
-        return view('settings.editFees',compact('fee'));
+        
+        return view('settings.editFee',compact('fee'));
     }
 
     /**

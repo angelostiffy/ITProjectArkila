@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Member;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,14 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+        Route::bind('operator',function($value){
+            return Member::operators()->where('member_id',$value)->first() ?? abort(404);
+        });
+
+        Route::bind('driver', function($value){
+            return Member::drivers()->where('member_id',$value)->first() ?? abort(404);
+        });
     }
 
     /**

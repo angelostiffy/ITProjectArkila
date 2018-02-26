@@ -14,7 +14,7 @@ class DiscountsController extends Controller
      */
     public function create()
     {
-        return view('settings.createDiscounts');
+        return view('settings.createDiscount');
     }
 
     /**
@@ -47,7 +47,7 @@ class DiscountsController extends Controller
      */
     public function edit(FeesAndDeduction $discount)
     {
-        return view('settings.editDiscounts',compact('discount'));
+        return view('settings.editDiscount', compact('discount'));
     }
 
     /**
