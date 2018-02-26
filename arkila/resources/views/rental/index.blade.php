@@ -1,7 +1,8 @@
 @extends('layouts.master')
-@section('title', 'Add Driver')
-@section('content-header', 'Add Driver')
+@section('title', 'Rental List')
+@section('content-header', 'Rental List')
 @section('content')
+<a href="/home/rental/create" class="btn btn-sm btn-primary btn-create">Create New</a>
 <section class="content">
           <div class="box">
             <!-- /.box-header -->
