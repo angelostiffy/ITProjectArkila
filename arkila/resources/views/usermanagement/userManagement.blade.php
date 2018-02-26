@@ -30,7 +30,7 @@
                 <div class="box-body">
 
                 <div class="center-block">
-                <button class="btn btn-primary"><i class="glyphicon glyphicon-plus">Add </i></button>
+                <a href="#" button class="btn btn-primary" style="margin-bottom: 2%;"><i class="glyphicon glyphicon-plus">Add </i></a>
 
                 </div>    
 
@@ -145,7 +145,7 @@
         $('.example1').DataTable()
         $('#adminTable').DataTable({
             'paging': true,
-            'lengthChange': false,
+            'lengthChange': true,
             'searching': true,
             'ordering': true,
             'info': true,
