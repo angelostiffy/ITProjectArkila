@@ -1,6 +1,6 @@
 @extends('layouts.form')
 @section('title', 'Create New Fee')
-@section('back-link', '/home/settings')
+@section('back-link', URL::previous())
 @section('form-action', route('fees.store'))
 @section('form-title', 'Create Fee')
 @section('form-body')

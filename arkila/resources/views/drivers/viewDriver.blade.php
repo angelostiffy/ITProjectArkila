@@ -150,7 +150,7 @@
                     </div>
                      </form>
                     <div class="box-footer">
-                <button class="btn btn-primary pull-right" onclick="grayer('f_1',true);">Save changes</button>
+                <button class="btn btn-primary pull-right">Save changes</button>
                     </div>
         </div>
         </div>

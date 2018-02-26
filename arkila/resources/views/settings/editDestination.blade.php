@@ -1,6 +1,7 @@
 @extends('layouts.form')
+@include('message.error')
 @section('title', 'Edit Destination')
-@section('back-link', '/home/settings')
+@section('back-link', URL::previous())
 @section('form-action', route('destinations.update', [$destination->destination_id]))
 @section('method_field', method_field('PATCH'))
 @section('form-title', 'Edit Destination')

@@ -31,13 +31,14 @@ class TerminalController extends Controller
     public function store()
     {
         $this->validate(request(),[
-            "addTerminalName" => 'unique:terminal,terminals|required|max:40',
+            "addTerminalName" => 'unique:terminal,description|required|max:40',
         ]);
 
         Terminal::create([
-            "terminals" => request('addTerminalName'),
+            "description" => request('addTerminalName'),
         ]);
 
+        session()->flash('message', 'Terminal created successfully');
         return redirect('/home/settings');
     }
 
@@ -63,13 +64,14 @@ class TerminalController extends Controller
     public function update(Terminal $terminal)
     {
         $this->validate(request(),[
-            "editTerminalName" => 'unique:terminal,terminals,'.$terminal->id.',terminals|required|max:40',
+            "editTerminalName" => 'unique:terminal,description,'.$terminal->id.',description|required|max:40',
         ]);
 
         $terminal->update([
             'description' => request('editTerminalName'),
         ]);
 
+        session()->flash('message', 'Terminal updated successfully');
         return redirect('/home/settings');
     }
 
@@ -82,6 +84,7 @@ class TerminalController extends Controller
     public function destroy(Terminal $terminal)
     {
         $terminal->delete();
+        session()->flash('message', 'Terminal deleted successfully');
         return back();
     }
 }
