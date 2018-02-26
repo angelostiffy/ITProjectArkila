@@ -9,24 +9,31 @@
 @section('form-body')
           
                     <div class="form-group">
-                      <label for="payor">User name:</label>
+                      <label for="uName">User name:</label>
                       <input type="text" class="form-control" id="uName">
                     </div>
                     <div class="form-group">
-                      <label for="Particulars">Name:</label>
+                      <label for="name">Name:</label>
                       <input type="text" class="form-control" id="name">
                     </div>
                     <div class="form-group">
-                      <label for="Particulars">Email Address:</label>
+                      <label for="email">Email Address:</label>
                       <input type="text" class="form-control" id="email">
                     </div>
                     <div class="form-group">
-                      <label for="or">Password:</label>
+                      <label for="password">Password:</label>
                       <input type="Password" class="form-control" id="password">
                     </div>
                     <div class="form-group">
-                      <label for="amount">Confirm Password:</label>
+                      <label for="cPassword">Confirm Password:</label>
                       <input type="Password" class="form-control" id="cPassword">
+                    </div>
+                    <div class="form-group">
+                      <label for="terminal">Terminal:</label>
+                      <select class="form-control" id="terminal">
+                        <option>1</option>
+                        <option>2</option>
+                      </select>
                     </div>
                     
 @endsection
