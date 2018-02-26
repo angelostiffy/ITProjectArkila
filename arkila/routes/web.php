@@ -76,4 +76,3 @@ Route::resource('home/test', 'TestController');
 Route::resource('home/testing', 'TestingController');
 Route::resource('home/reservations', 'ReservationsController');
 Route::resource('home/rental', 'RentalsController');
-Route::post('/home/rental/getSummary', 'RentalsController@getSummary');

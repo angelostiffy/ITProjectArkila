@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Rental;
 class Van extends Model
 {
     protected $table = 'van';
@@ -20,5 +20,8 @@ class Van extends Model
     public function member(){
         return $this->belongsToMany(Van::class,'member_van','plate_number','member_id')
             ->withPivot('role');
+    }
+    public function rental(){
+    	return $this->hasOne(Rental::Class, 'rent_id');
     }
 }

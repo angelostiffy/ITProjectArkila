@@ -1,0 +1,12 @@
+div#flash-msg {
+position: absolute;
+bottom: 40px;
+z-index: 10;
+right: 20px;
+}
+div#error {
+position: absolute;
+bottom: 40px;
+z-index: 10;
+right: 20px;
+}

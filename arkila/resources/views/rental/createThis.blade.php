@@ -131,7 +131,7 @@
                     <div class = "row">
                            <dl class = "dl-horizontal">
                            <dt>Name:</dt>
-                            <dd>Caballar, Randall Elijah Foronda</dd>
+                            <p>skjdskj</p>
                             <dt>Contact Number:</dt>
                             <dd>09991238473</dd>
                             <dt>Destination:</dt>
@@ -160,7 +160,7 @@
             <div style="overflow:auto;">
                     <div style="float:right;">
                         <button type="button" id="prevBtn" onclick="nextPrev(-1)" class = "btn btn-default">Previous</button>
-                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class = "btn btn-primary">Next</button>
+                        <button type="button" id="nextBtn" onclick="nextPrev(1); getData();" class = "btn btn-primary">Next</button>
                     </div>
                 </div>
         </div>
