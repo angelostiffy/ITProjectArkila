@@ -49,7 +49,7 @@
                                 <form action="{{ route('operators.destroy', [$operator->member_id]) }}" method="POST" >
                                  {{ csrf_field() }}
                                     {{method_field('DELETE')}}
-                                  <a href="/home/operators/{{ $operator->member_id }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
+                                  <a href="{{ route('operators.showProfile', [$operator->member_id]) }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
                                  <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</i></button>
                                 </form>
                   </div>

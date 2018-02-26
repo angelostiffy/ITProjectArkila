@@ -27,6 +27,7 @@ Route::resource('home/announcements', 'AnnouncementsController');
 
 //Operators
 Route::resource('home/operators', 'OperatorsController');
+Route::get('home/operators/profile/{operator}','OperatorsController@showProfile')->name('operators.showProfile');
 
 /************ Drivers ******************************/
 Route::resource('home/drivers', 'DriversController');
@@ -73,3 +74,4 @@ Route::resource('home/test', 'TestController');
 Route::resource('home/testing', 'TestingController');
 Route::resource('home/reservations', 'ReservationsController');
 Route::resource('home/rental', 'RentalsController');
+Route::post('/home/rental/getSummary', 'RentalsController@getSummary');

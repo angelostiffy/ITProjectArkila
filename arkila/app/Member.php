@@ -35,11 +35,11 @@ class Member extends Model
 
 
     public function getContactNumberAttribute($value){
-        return substr($value, 3);
+        return '0'.substr($value, 3);
     }
 
     public function getEmergencyContactnoAttribute($value){
-        return substr($value, 3);
+        return '0'.substr($value, 3);
     }
 
     public function getFullNameAttribute(){
@@ -56,6 +56,18 @@ class Member extends Model
 
     public function setExpiryDateAttribute($value){
         $this->attributes['expiry_date'] = Carbon::parse($value);
+    }
+
+    public function setContactNumberAttribute($value){
+        $this->attributes['contact_number'] = '+63'.$value;
+    }
+
+    public function setAgeAttribute($value){
+        $this->attributes['age'] = Carbon::parse($value)->age;
+    }
+
+    public function setEmergencyContactnoAttribute($value){
+        $this->attributes['emergency_contactno'] = '+63'.$value;
     }
 
 }
