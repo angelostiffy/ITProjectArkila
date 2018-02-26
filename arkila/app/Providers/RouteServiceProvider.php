@@ -29,11 +29,11 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::bind('operator',function($value){
-            return Member::operators()->where('member_id',$value)->first() ?? abort(404);
+            return Member::allOperators()->where('member_id',$value)->first() ?? abort(404);
         });
 
         Route::bind('driver', function($value){
-            return Member::drivers()->where('member_id',$value)->first() ?? abort(404);
+            return Member::allDrivers()->where('member_id',$value)->first() ?? abort(404);
         });
     }
 

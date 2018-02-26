@@ -33,8 +33,8 @@ Route::get('home/operators/profile/{operator}','OperatorsController@showProfile'
 Route::resource('home/drivers', 'DriversController');
 
 //Adding a driver to a specific operator
-Route::get('home/operators/{operator}/drivers/create', 'DriversController@createUsingOperator');
-Route::post('home/operators/{operator}/drivers/', 'DriversController@storeUsingOperator');
+Route::get('home/operators/{operator}/drivers/create', 'DriversController@createFromOperator');
+Route::post('home/operators/{operator}/drivers/', 'DriversController@storeFromOperator');
 
 //Adding a driver to a specific van
 Route::get('home/operators/{van}/drivers/create', 'DriversController@createUsingVan');
