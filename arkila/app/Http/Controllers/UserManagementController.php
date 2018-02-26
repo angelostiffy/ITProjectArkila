@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TestController extends Controller
+class UserManagementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class TestController extends Controller
      */
     public function index()
     {
-        return view('usermanagement.userManagement');
+        return view('usermanagement.editAdmin');
     }
 
     /**
@@ -34,9 +34,7 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        $anak = $request->children;
-        $bday = $request->date;
-        dd(compact('anak', 'bday'));
+        //
     }
 
     /**
