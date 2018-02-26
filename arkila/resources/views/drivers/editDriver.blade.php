@@ -2,7 +2,7 @@
 @section('content')
   <div class="content-wrapper">
        <section class="content-header">
-        <a href="driverList.html" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Back</a>
+        <a href="driverList.html" class="btn btn-outline-primary"><i class="fa fa-arrow-circle-left"></i> Back</a>
     </section>
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -155,7 +155,7 @@
                     </div>
                      </form>
                     <div class="box-footer">
-                <button type="button" class="btn btn-primary pull-right">Save changes</button>
+                <button type="button" class="btn btn-outline-primary pull-right">Save changes</button>
                     </div>
         </div>
         

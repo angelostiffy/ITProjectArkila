@@ -4,7 +4,7 @@
                 
                  <div class="box ">
                  <div class="box box-header">
-                     <h3 style="margin-right: 10px; display: inline-block;"><strong>Edit Driver Information</strong></h3><button class="btn btn-info" onclick="grayer('f_1',false);" style="float: right; margin-top: 2%;"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                     <h3 style="margin-right: 10px; display: inline-block;"><strong>Edit Driver Information</strong></h3><button class="btn btn-outline-info" onclick="grayer('f_1',false);" style="float: right; margin-top: 2%;"><i class="fa fa-pencil-square-o"></i> Edit</button>
                  </div>
                 <form id="f_1" action="#" onsubmit="return false;" class="form-horizontal">
                  <div class="box-body">
@@ -150,7 +150,7 @@
                     </div>
                      </form>
                     <div class="box-footer">
-                <button class="btn btn-primary pull-right" onclick="grayer('f_1',true);">Save changes</button>
+                <button class="btn btn-outline-primary pull-right" onclick="grayer('f_1',true);">Save changes</button>
                     </div>
         </div>
         </div>

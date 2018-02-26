@@ -42,7 +42,7 @@
 @section('form-body')
 <div class="box box-warning">
         <div class="box-header with-border text-center">
-            <a href="" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+            <a href="" class="pull-left btn btn-outline-default"><i class="fa  fa-chevron-left"></i></a>
             <h3 class="box-title">
                 Driver Registration
             </h3>
@@ -266,7 +266,7 @@
                                     <th>Birthdate</th>
                                     <th>
                                         <div class="pull-right">
-                                            <button type="button" class="btn btn-info" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Item</button>
+                                            <button type="button" class="btn btn-outline-info" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Item</button>
                                         </div>
                                     </th>
                                 </thead>
@@ -289,7 +289,7 @@
                                             </td>
                                             <td>
                                                 <div class="pull-right">
-                                                    <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
+                                                    <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-outline-danger'>Delete</button>
                                                 </div>
                                             </td>
 
@@ -310,7 +310,7 @@
                                         </td>
                                         <td>
                                             <div class="pull-right">
-                                                <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
+                                                <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-outline-danger'>Delete</button>
                                             </div>
                                         </td>
 
@@ -334,8 +334,8 @@
         <div class="box-footer">
             <div style="overflow:auto;">
                     <div style="float:right;">
-                        <button type="button" id="prevBtn" onclick="nextPrev(-1)" class = "btn btn-default">Previous</button>
-                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class = "btn btn-primary">Next</button>
+                        <button type="button" id="prevBtn" onclick="nextPrev(-1)" class = "btn btn-outline-default">Previous</button>
+                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class = "btn btn-outline-primary">Next</button>
                     </div>
                 </div>
         </div>
