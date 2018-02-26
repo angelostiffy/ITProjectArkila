@@ -19,27 +19,36 @@ class Member extends Model
         return $this->hasMany(Dependent::class,'member_id','member_id');
     }
 
+    public function operator(){
+        return $this->belongsTo(Member::class, 'operator_id');
+    }
+
+    public function drivers(){
+        return $this->hasMany(Member::class, 'operator_id','member_id');
+    }
+
     public function addChildren($children){
         foreach($children as $children_name=>$birthdate){
             $this->children()->create(compact('children_name','birthdate'));
         }
     }
 
-    public static function scopeOperators($query){
+
+    public static function scopeAllOperators($query){
         return $query->where('role','Operator');
     }
 
-    public static function scopeDrivers($query){
+    public static function scopeAllDrivers($query){
         return $query->where('role','Driver');
     }
 
 
-    public function getContactNumberAttribute($value){
-        return '0'.substr($value, 3);
+    public function getEditContactNumberAttribute($value){
+        return substr($value, 3);
     }
 
-    public function getEmergencyContactnoAttribute($value){
-        return '0'.substr($value, 3);
+    public function getEditEmergencyContactnoAttribute($value){
+        return substr($value, 3);
     }
 
     public function getFullNameAttribute(){
