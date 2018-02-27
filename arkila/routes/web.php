@@ -42,9 +42,7 @@ Route::post('home/operators/{van}/drivers/', 'DriversController@storeUsingVan');
 /****************************************************/
 
 /************ Vans ******************************/
-Route::resource('home/vans', 'VansController', [
-    'except' => ['index','create','store']
-]);
+Route::resource('home/vans', 'VansController');
 //Creating Vans
 Route::get('home/operators/{operator}/vans/create', 'VansController@create');
 Route::post('home/operators/{operator}/vans', 'VansController@store');

@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Van;
-use App\Driver;
-use App\Operator;
-use App\Rules\checkDriver;
-use App\Rules\checkOperator;
+use App\Member;
 
 class VansController extends Controller {
 
@@ -19,6 +15,8 @@ class VansController extends Controller {
     public function create(Operator $operator)
     {
         $drivers = Driver::all()->where('operator_id',$operator);
+        Member::drivers()->van();
+
         return view('vans.create',compact('drivers','operator'));
     }
 
@@ -66,7 +64,7 @@ class VansController extends Controller {
      */
     public function edit(Van $van)
     {
-        $drivers = Driver::all()->where('operator_id', $van->operator_id);
+
         return view('vans.edit', compact('van','drivers','operators'));
     }
 
