@@ -17,8 +17,9 @@ class RentalsController extends Controller
     public function index()
     {
         //
+        $rentals = Rental::all();
         $vans = Van::all();
-        return view('rental.index', compact('vans'));
+        return view('rental.index', compact('vans', 'rentals'));
     }
 
     /**
