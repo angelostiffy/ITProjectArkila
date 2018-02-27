@@ -8,7 +8,7 @@
 @section('content')
 @section('form-body')
           
-<<<<<<< HEAD
+
   <div class="form-group">
     <label for="payor">User name:</label>
     <span>Span</span>
@@ -24,7 +24,6 @@
 
   <div>
   <button type="button" class="btn btn-danger" data-dismiss="modal">Reset Password</button> </div>                 
-=======
                     <div class="form-group">
                       <label for="payor">User name:</label>
                       <span>Span</span>
@@ -82,7 +81,7 @@
                         </div>
                         <!-- /. box -->
                     </div>
->>>>>>> 7163025ec3012a43a06be59d74c4834411fa1400
+
 
                    
 @endsection
