@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-<h1> Announcement <span class="pull-right"><a href="/home/announcements/create" class="btn btn-sm btn-outline-primary btn-create">Create New</a></span></h1>
+<h1> Announcement <span class="pull-right"><a href="/home/announcements/create" class="btn btn-sm btn-primary btn-create">Create New</a></span></h1>
 
 @foreach ($announcements->sortByDesc('created_at') as $announcement)
     <div class="form-group"> 
@@ -13,7 +13,7 @@
         <form method="POST" action="/home/announcements/{{$announcement->announcement_id}}">
             {{csrf_field()}}
             {{method_field('DELETE')}}
-            <a href="/home/announcements/{{ $announcement->announcement_id }}/edit/" class="btn btn-sm btn-primary btn-outline-create">Edit</a>
+            <a href="/home/announcements/{{ $announcement->announcement_id }}/edit/" class="btn btn-sm btn-primary btn-create">Edit</a>
             <button class="btn btn-sm btn-outline-danger">Delete</button>
         </form> 
     </div>

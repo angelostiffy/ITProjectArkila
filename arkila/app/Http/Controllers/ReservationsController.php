@@ -58,8 +58,8 @@ class ReservationsController extends Controller
         ]);
         session()->flash('message', 'Reservation was created successfully');
 
-        return redirect('/home/reservations/')->with('success', 'Information created successfully');
-        return redirect()->back()->withErrors();
+        return redirect('/home/reservations/');
+        // return redirect()->back()->withErrors();
     }
     /**
      * Display the specified resource.

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Van;
 
 class Rental extends Model
 {
@@ -11,4 +12,8 @@ class Rental extends Model
     protected $guarded = [
         'rent_id',
     ];
+
+    public function van(){
+    	return $this->belongsTo(Van::Class, 'plate_number');
+    }
 }

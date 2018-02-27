@@ -128,8 +128,6 @@ class DriversController extends Controller
      */
     public function show(Driver $driver)
     {
-
-        
         return view('drivers.show',compact('driver'));
         //
     }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Rental;
+use App\Van;
+use App\Http\Requests\RentalRequest;
 
 class RentalsController extends Controller
 {
@@ -15,7 +17,8 @@ class RentalsController extends Controller
     public function index()
     {
         //
-        return view('rental.RentVan');
+        $vans = Van::all();
+        return view('rental.index', compact('vans'));
     }
 
     /**
@@ -25,15 +28,8 @@ class RentalsController extends Controller
      */
     public function create()
     {
-        return view('rental.create');
-    }
-
-    public function getSummary(Request $request) {
-        $rentDetails = $request->all();
-        $object = (object) $rentDetails;
-        dd($object);
-
-        return view('rental.getSummary', compact('object'));
+        $vans = Van::all();
+        return view('rental.create', compact('vans'));
     }
     /**
      * Store a newly created resource in storage.
@@ -41,32 +37,51 @@ class RentalsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RentalRequest $request)
     {
-        //
-    }
+        $perContactNumber = '+63'.request('contactNumber');
+        $type = 'Walk-in';
+
+        Rental::create([
+            'last_name' => $request->lastName,
+            'first_name' => $request->firstName,
+            'middle_name' => $request->middleName,
+            'plate_number' => $request->model,
+            'departure_date' => $request->date,
+            'departure_time' => $request->time,
+            'destination' => $request->destination,
+            'number_of_days' => $request->days,
+            'contact_number' => $perContactNumber,
+            'rent_type' => $type,
+    
+        ]);
+        session()->flash('message', 'Reservation was created successfully');
+    
+        return redirect('/home/rental/');
+
+    }    
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function show(Request $request)
     {
 
-    }
+    }    
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function edit($id)
     {
         //
-    }
+    }    
 
     /**
      * Update the specified resource in storage.
@@ -74,10 +89,10 @@ class RentalsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
