@@ -50,8 +50,6 @@ Route::get('home/operators/{operator}/vans/create', 'VansController@create');
 Route::post('home/operators/{operator}/vans', 'VansController@store');
 /****************************************************/
 
-
-
 /************ Settings ******************************/
 Route::resource('home/settings/destinations', 'DestinationController', [
 	'except' => ['index']
@@ -68,6 +66,10 @@ Route::resource('home/settings/discounts', 'DiscountsController', [
     'except' => ['index']
 ]);
 Route::get('home/settings', 'HomeController@settings');
+/****************************************************/
+
+/************ User Management ******************************/
+Route::resource('home/user-management', 'UserManagementController');
 /****************************************************/
 
 Route::resource('home/test', 'TestController');
