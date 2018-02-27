@@ -1,6 +1,6 @@
 @extends('layouts.form')
 @section('title', 'Create New Destination')
-@section('back-link', '/home/settings')
+@section('back-link', URL::previous())
 @section('form-action', route('destinations.store'))
 @section('form-title', 'Create Destination')
 @section('form-body')

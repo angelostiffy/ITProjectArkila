@@ -1,7 +1,7 @@
 @extends('layouts.form')
 @include('message.error')
 @section('title', 'Edit Discount')
-@section('back-link')
+@section('back-link', URL::previous())
 @section('form-action', route('discounts.update', [$discount->fad_id]))
 @section('method_field', method_field('PATCH'))
 @section('form-title', 'Edit Discount')
