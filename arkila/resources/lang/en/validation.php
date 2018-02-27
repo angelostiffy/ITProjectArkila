@@ -104,12 +104,12 @@ return [
             'rule-name' => 'custom-message',
         ],
         'children.*' => [
-            'required_with' => 'Incomplete Information Entered. Every entered name in the children field must have their birth date be entered in the Birth date field ',
+            'required_with' => "Incomplete Information Entered. Every entered Birth date in the Birth date field must have their name be entered in the Childrens name field",
             'distinct' => "There has been a duplicated name in the children name field",
 
         ],
         'childrenBDay.*' => [
-            'required_with' => "Incomplete Information Entered. Every entered Birth date in the Birth date field must have their name be entered in the Childrens name field",
+            'required_with' => 'Incomplete Information Entered. Every entered name in the children field must have their birth date be entered in the Birth date field ',
             'before' => "Every entered Birth Date of the Children must be a date before or equal to the date today",
             'date' => "Every Entered Birth Date in the BirthDate field of the Children must be a date"
             ],

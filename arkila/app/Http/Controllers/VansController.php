@@ -7,6 +7,19 @@ use App\Member;
 
 class VansController extends Controller {
 
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $vans = Van::all();
+        return view('vans.index', compact('vans'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *

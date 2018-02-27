@@ -43,16 +43,28 @@ class Member extends Model
     }
 
 
-    public function getEditContactNumberAttribute($value){
-        return substr($value, 3);
+    public function getEditContactNumberAttribute(){
+        return substr($this->contact_number, 3);
     }
 
-    public function getEditEmergencyContactnoAttribute($value){
-        return substr($value, 3);
+    public function getEditEmergencyContactnoAttribute(){
+        return substr($this->emergency_contactno, 3);
     }
 
     public function getFullNameAttribute(){
         return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function getBirthDateAttribute($value){
+        return  Carbon::parse($value)->format('m/d/Y');
+    }
+
+    public function getSpouseBirthdateAttribute($value){
+        return Carbon::parse($value)->format('m/d/Y');
+    }
+
+    public function getExpiryDateAttribute($value){
+        return Carbon::parse($value)->format('m/d/Y');
     }
 
     public function setBirthDateAttribute($value){
