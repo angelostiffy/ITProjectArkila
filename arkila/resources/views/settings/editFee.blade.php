@@ -1,4 +1,5 @@
 @extends('layouts.form')
+@include('message.error')
 @section('title', 'Edit Fee')
 @section('back-link')
 @section('form-action', route('fees.update', [$fee->fad_id]))

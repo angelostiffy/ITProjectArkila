@@ -34,6 +34,7 @@ class DestinationController extends Controller
             "amount" => request('addDestinationFare')
         ]);
 
+        session()->flash('message', 'Destination created successfully');
         return redirect('/home/settings');
     }
     
@@ -52,12 +53,14 @@ class DestinationController extends Controller
             'amount' => request('editDestinationFare'),
         ]);
 
+        session()->flash('message','Destination updated successfully');
         return redirect('/home/settings');
     }
 
     public function destroy(Destination $destination)
     {
         $destination->delete();
+        session()->flash('message', 'Destination created successfully');
         return back();
     }
 }

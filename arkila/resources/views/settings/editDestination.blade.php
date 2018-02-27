@@ -1,4 +1,5 @@
 @extends('layouts.form')
+@include('message.error')
 @section('title', 'Edit Destination')
 @section('back-link', '/home/settings')
 @section('form-action', route('destinations.update', [$destination->destination_id]))

@@ -38,6 +38,7 @@ class TerminalController extends Controller
             "description" => request('addTerminalName'),
         ]);
 
+        session()->flash('message', 'Terminal created successfully');
         return redirect('/home/settings');
     }
 
@@ -70,6 +71,7 @@ class TerminalController extends Controller
             'description' => request('editTerminalName'),
         ]);
 
+        session()->flash('message', 'Terminal updated successfully');
         return redirect('/home/settings');
     }
 
@@ -82,6 +84,7 @@ class TerminalController extends Controller
     public function destroy(Terminal $terminal)
     {
         $terminal->delete();
+        session()->flash('message', 'Terminal deleted successfully');
         return back();
     }
 }
