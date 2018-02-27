@@ -24,8 +24,8 @@ class AdminUserManagementController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            "fullName" => "required|max:50",
             "userName" => "required|max:15",
+            "fullName" => "required|max:50",
             "userEmail" => "email",
             "password" => "required|confirmed",
             "addUserTerminal" => ['required', new checkTerminal, 'max:40']

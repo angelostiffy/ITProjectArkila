@@ -88,7 +88,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Civil Status:</label>
+                                <label>Type of Van:</label>
                                 <select class="form-control" name="model" id="model">
                                     <option value="" disabled selected>Select Model</option>
                                 @foreach ($vans as $van)
@@ -140,8 +140,8 @@
                             <dd id="contactView"></dd>
                             <dt>Destination:</dt>
                             <dd id="destView"></dd>
-                            <dt>Type of Van:</dt>
-                            <dd id="vanView"></dd>
+                            <dt>Plate Number:</dt>
+                            <dd id="vanView">Hello</dd>
                             <dt>Number of Days:</dt>
                             <dd id="daysView">5</dd>
                             <dt>Departure Date:</dt>
