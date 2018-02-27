@@ -40,7 +40,7 @@
 @endsection
 @section('form-btn')     
    <button type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
-   <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+   <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
 
 @endsection
 

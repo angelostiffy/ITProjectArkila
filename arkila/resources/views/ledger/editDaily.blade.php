@@ -41,7 +41,7 @@
 <!-- h1 contains the link kung san galing -->
     <!-- <h1>  <span><a href="../dailyLedger.html"s><i class="fa fa-arrow-circle-left"></i></a></span> Edit Revenue/Expense</h1> -->                   
                     <button type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
     
 @endsection
 
