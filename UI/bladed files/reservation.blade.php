@@ -15,7 +15,6 @@
                             <div class="nav-tabs-custom">
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a href="#tab_1" data-toggle="tab">Online Reservation</a></li>
-                                    <li><a href="#tab_2" data-toggle="tab">Walk-in Reservation</a></li>
                                     <li><a href="#tab_3" data-toggle="tab">List of Reservations</a></li>
 
                                 </ul>
@@ -60,9 +59,9 @@
                                     <!-- /.tab-pane -->
                                     <div class="tab-pane" id="tab_2">
 
-                                        <label>Destination</label>
+                                       
                                         <div class="form-group">
-
+                                             <label>Destination</label>
                                             <select class="form-control select2 select2-hidden-accessible" style="width: 50%;" tabindex="-1" aria-hidden="true">
                                               <option selected="selected">Alabama</option>
                                               <option>Alaska</option>
@@ -148,6 +147,9 @@
 
 
                                     <div class="tab-pane" id="tab_3">
+                                        <div class="form-group">
+                                            <a href="./pages/addWalkInReservation.blade.php" class = "btn btn-outline-danger">Add Walk-in Reservation</a>
+                                        </div>
                                         <table class="table table-bordered table-striped example1">
                                             <thead>
                                                 <tr>
@@ -203,7 +205,6 @@
                     </div>
                 </div>
             </section>
-
 
 @endsection
 
