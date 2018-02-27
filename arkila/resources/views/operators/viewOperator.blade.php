@@ -8,179 +8,227 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
 
-    <div class="box ">
-                    <div class="box box-header">
-                        <h3 style="margin-right: 10px; display: inline-block;"><strong>View Operator Information</strong></h3><button class="btn btn-info" style="float: right; margin-top: 2%;"><i class="fa fa-pencil-square-o"></i> Edit</button>
+<div class="content-wrapper">
+        <!-- Content Wrapper. Contains page content -->
+            <section class="content-header">
+                <div class="box box-warning">
+                    <div class="box-header with-border text-center">
+                        <a href="" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+                        <h3 class="box-title">
+                            View Operator Information
+                        </h3>
                     </div>
-                    <form id="f_1" action="#" onsubmit="return false;" class="form-horizontal">
+
+                    <form id="regForm" action="/action_page.php">
                         <div class="box-body">
-                            <div class="box box-header">
+
+                            <!-- One "tab" for each step in the form: -->
+                            <div class="tab">
                                 <h4>Personal Information</h4>
+                                <div class="tab">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="operatorLastName">Last Name:</label>
+                                            <p id="driverLastName" name="driverLastName" type="text" class="form-control" placeholder="Last Name"p
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contactNumberO">Contact Number:</label>
+                                            <p id="contactNumberO" name="contactNumberO" type="text" class="form-control" placeholder="Contact Number"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ageO">Age:</label>
+                                            <p id="ageO" name="ageO" type="number" class="form-control" placeholder="Age"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="genderO">Gender:</label>
+                                            <div class="radio">
+                                                <label for="genderMaleO"> Male</label>
+                                                <label class="radio-inline">
+                        <input type="radio" name="genderMaleO" id="genderMaleO" value="male" class="flat-blue">
+                        </label>
+                                                <label for="genderFemaleO">Female</label>
+                                                <label class="radio-inline">
+                        <input type="radio" name="genderFemaleO" id="genderFemaleO" value="female" class="flat-blue">
+                          
+                        </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sssO">SSS No:</label>
+                                            <p id="sssO" name="sssO" type="text" class="form-control" placeholder="SSS No."></p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="operatorFirstName">First Name:</label>
+                                            <p id="operatorFirstName" name="operatorFirstName" type="text" class="form-control" placeholder="First Name"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="addressO">Address:</label>
+                                            <p id="addressO" name="addressO" type="text" class="form-control" placeholder="Address"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="birthdateO">Birthdate:</label>
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <p id="birthdateO" name="birthdateO" type="text" class="form-control pull-right datepicker"></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="citizenshipO">Citizenship:</label>
+                                            <p id="citizenshipO" name="citizenshipO" type="text" class="form-control" placeholder="Citizenship"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="licenseNoO">License No:</label>
+                                            <p id="licenseNoO" name="licenseNoO" type="text" class="form-control" placeholder="License No."></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="operatorMiddleName">Middle Name:</label>
+                                            <p id="operatorMiddleName" name="operatorMiddleName" type="text" class="form-control" placeholder="Middle Name"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="provincialAddressO">Provincial Address:</label>
+                                            <p id="provincialAddressO" name="provincialAddressO" type="text" class="form-control" placeholder="Provincial Address"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="birthplaceO">Birthplace:</label>
+                                            <p id="birthplaceO" name="birthplaceO" type="text" class="form-control" placeholder="Birthplace"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="civilStatusO">Civil Status:</label>
+                                            <select id="civilStatusO" name="civilStatusO" class="form-control">
+                       <option>Single</option>
+                       <option>Married</option>
+                       <option>Divorced</option>
+                       <option>Widowed</option>
+                   </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="licenseExpiryDateO">License Expiry Date:</label>
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <p id="licenseExpiryDateO" name="licenseExpiryDateO" type="text" class="form-control pull-right datepicker"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="operatorName" class="control-label col-sm-4">Operator Name</label>
-                                    <div class="col-sm-4">
-                                        <p id="operatorName" name="operatorName" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="ageO" class="control-label col-sm-4">Age</label>
-                                    <div class="col-sm-4">
-                                        <p id="ageO" name="ageO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="birthDateO" class="control-label col-sm-4">Date of birth</label>
-                                    <div class="col-sm-4">
-                                        <p id="birthDateO" name="birthDateO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="birthPlaceO" class="control-label col-sm-4">Place of birth</label>
-                                    <div class="col-sm-4">
-                                        <p id="birthPlaceO" name="birthPlaceO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="contactNumberO" class="control-label col-sm-4">Contact number</label>
-                                    <div class="col-sm-4">
-                                        <p id="contactNumberO" name="contactNumberO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="addressO" class="control-label col-sm-4">Address</label>
-                                    <div class="col-sm-4">
-                                        <p id="addressO" name="addressO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="provincialAddressO" class="control-label col-sm-4">Provincial address</label>
-                                    <div class="col-sm-4">
-                                        <p id="provincialAddressO" name="provincialAddressO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="sssO" class="control-label col-sm-4">SSS number</label>
-                                    <div class="col-sm-4">
-                                        <p id="sssO" name="sssO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="genderO" class="control-label col-sm-4">Gender</label>
-                                    <div class="col-sm-4">
-                                        <p id="genderO" name="genderO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="citizenshipO" class="control-label col-sm-4">Citizenship</label>
-                                    <div class="col-sm-4">
-                                        <p id="citizenshipO" name="citizenshipO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="civilStatusO" class="control-label col-sm-4">Civil status</label>
-                                    <div class="col-sm-4">
-                                        <p id="civilStatusO" name="civilStatusO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box-body">
-
-                            <div class="box box-header">
+                            <div class="tab">
                                 <h4>Family Information</h4>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="fatherNameO" class="control-label col-sm-4">Name of Father</label>
-                                    <div class="col-sm-4">
-                                        <p id="fatherNameO" name="fatherNameO" class="control-label pull-right"></p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="spouseNameO">Name of Spouse:</label>
+                                            <p id="spouseNameO" name="spouseNameO" type="text" class="form-control" placeholder="Name of Spouse"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fathersNameO">Fathers Name:</label>
+                                            <p id="fathersNameO" name="fathersNameO" type="text" class="form-control" placeholder="Fathers Name"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mothersNameO">Mothers Name:</label>
+                                            <p id="mothersNameO" name="mothersNameO" type="number" class="form-control" placeholder="Mothers Name"></p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="fatherOccupationO" class="control-label col-sm-4">Occupation of Father</label>
-                                    <div class="col-sm-4">
-                                        <p id="fatherOccupationO" name="fatherOccupationO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="motherNameO" class="control-label col-sm-4">Name of Mother</label>
-                                    <div class="col-sm-4">
-                                        <p id="motherNameO" name="motherNameO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="motherOccupationO" class="control-label col-sm-4">Occupation of Mother</label>
-                                    <div class="col-sm-4">
-                                        <p id="motherOccupationO" name="motherOccupationO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="personCasedOfEmergencyO" class="control-label col-sm-4">Contact person</label>
-                                    <div class="col-sm-4">
-                                        <p id="personCasedOfEmergencyO" name="personCasedOfEmergencyO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="emergencyContactO" class="control-label col-sm-4">Emergency contact no.</label>
-                                    <div class="col-sm-4">
-                                        <p id="emergencyContactO" name="emergencyContactO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="emergencyAddressO" class="control-label col-sm-4">Emergency address</label>
-                                    <div class="col-sm-4">
-                                        <p id="emergencyAddressO" name="emergencyAddressO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="spouseO" class="control-label col-sm-4">Spouse</label>
-                                    <div class="col-sm-4">
-                                        <p id="spouseO" name="spouseO" class="control-label pull-right"></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="spouseBirthdateO" class="control-label col-sm-4">Spouse birthdate</label>
-                                    <div class="col-sm-4">
-                                        <p id="spouseBirthdateO" name="spouseBirthdateO" class="control-label pull-right">asdas</p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="numberOfChildrenO" class="control-label col-sm-4">Number of children</label>
-                                    <div class="col-sm-4">
-                                        <p id="numberOfChildrenO" name="numberOfChildrenO" class="control-label pull-right">asdasdasd</p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="numberOfChildrenO" class="control-label col-sm-4">Names of children</label>
-                                    <div class="col-sm-4">
-                                        <ul class="control-label pull-right" style="list-style: none;">
-                                            <li>akoasdasdasdasdas</li>
-                                            <li>ako</li>
-                                            <li>ako</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="spouseBirthDateO">Birthdate of Spouse:</label>
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <p id="spouseBirthDateO" name="spouseBirthDateO" type="text" class="form-control pull-right datepicker"></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="occupationFatherO">Occupation:</label>
+                                            <p id="occupationFatherO" name="occupationFatherO" type="text" class="form-control" placeholder="Occupation"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="occupationMotherO">Occupation:</label>
+                                            <p id="occupationMotherO" name="occupationMotherO" type="text" class="form-control" placeholder="Occupation"></p>
+                                        </div>
 
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="contactPersonO">Contact Person</label>
+                                            <p id="contactPersonO" name="contactPersonO" type="text" class="form-control" placeholder="Contact Person In Case of Emergency"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="addressO">Address</label>
+                                            <p id="addressO" name="addressO" type="text" class="form-control" placeholder="Address"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="contactNumberO">Contact Number</label>
+                                            <p id="contactNumberO" name="contactNumberO" type="text" class="form-control" placeholder="Contact Number"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <Label for="dependentsO">Dependents:</Label>
+                                        <table class="table table-hover custab">
+                                            <thead>
+                                                <th>Name</th>
+                                                <th>Birthdate</th>
+                                                
+                                            </thead>
+                                            <tbody id="childrens">
+                                                <tr>
+                                                    <td>
+                                                        <p type="text" placeholder="Name of Child" class="form-control"></p>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group date">
+                                                            <div class="input-group-addon">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </div>
+                                                            <p type="text" class="form-control pull-right datepicker"></p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="pull-right">
+                                                            <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
                             </div>
 
+
+                            <!-- Circles which indicates the steps of the form: -->
+                            <div style="text-align:center;margin-top:40px;">
+                                <span class="step"></span>
+                                <span class="step"></span>
+                            </div>
                         </div>
+                        <div class="box-footer">
+                        </div>
+                    </form>
                 </div>
+                </form>
+        </div>
     </form>
-    <div class="box-footer">
-        <button type="button" class="btn btn-outline-primary pull-right" onclick="grayer('f_1',true);">Save changes</button>
-    </div>
 
 
 

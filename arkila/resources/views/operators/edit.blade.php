@@ -9,199 +9,228 @@
 
 @stop
 @section('content')            
-                
-            <a href="{{route('operators.showProfile',[$operator->member_id])}}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Back</a>
-                 <div class="box ">
-                    <div class="box box-header">
-                        <h3><strong>Edit Operator Information</strong></h3>
+                <div class="box box-warning">
+                    <div class="box-header with-border text-center">
+                        <a href="" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+                        <h3 class="box-title">
+                            Edit Operator Information
+                        </h3>
                     </div>
 
-                    <form action="" class="form-horizontal">
+                    <form id="regForm" action="/action_page.php">
                         <div class="box-body">
 
-                            <div class="box box-header">
+                            <!-- One "tab" for each step in the form: -->
+                            <div class="tab">
                                 <h4>Personal Information</h4>
+                                <div class="tab">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="operatorLastName">Last Name:</label>
+                                            <input id="driverLastName" name="driverLastName" type="text" class="form-control" placeholder="Last Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contactNumberO">Contact Number:</label>
+                                            <input id="contactNumberO" name="contactNumberO" type="text" class="form-control" placeholder="Contact Number">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ageO">Age:</label>
+                                            <input id="ageO" name="ageO" type="number" class="form-control" placeholder="Age">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="genderO">Gender:</label>
+                                            <div class="radio">
+                                                <label for="genderMaleO"> Male</label>
+                                                <label class="radio-inline">
+                        <input type="radio" name="genderMaleO" id="genderMaleO" value="male" class="flat-blue">
+                        </label>
+                                                <label for="genderFemaleO">Female</label>
+                                                <label class="radio-inline">
+                        <input type="radio" name="genderFemaleO" id="genderFemaleO" value="female" class="flat-blue">
+                          
+                        </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sssO">SSS No:</label>
+                                            <input id="sssO" name="sssO" type="text" class="form-control" placeholder="SSS No.">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="operatorFirstName">First Name:</label>
+                                            <input id="operatorFirstName" name="operatorFirstName" type="text" class="form-control" placeholder="First Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="addressO">Address:</label>
+                                            <input id="addressO" name="addressO" type="text" class="form-control" placeholder="Address">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="birthdateO">Birthdate:</label>
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input id="birthdateO" name="birthdateO" type="text" class="form-control pull-right datepicker">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="citizenshipO">Citizenship:</label>
+                                            <input id="citizenshipO" name="citizenshipO" type="text" class="form-control" placeholder="Citizenship">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="licenseNoO">License No:</label>
+                                            <input id="licenseNoO" name="licenseNoO" type="text" class="form-control" placeholder="License No.">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="operatorMiddleName">Middle Name:</label>
+                                            <input id="operatorMiddleName" name="operatorMiddleName" type="text" class="form-control" placeholder="Middle Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="provincialAddressO">Provincial Address:</label>
+                                            <input id="provincialAddressO" name="provincialAddressO" type="text" class="form-control" placeholder="Provincial Address">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="birthplaceO">Birthplace:</label>
+                                            <input id="birthplaceO" name="birthplaceO" type="text" class="form-control" placeholder="Birthplace">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="civilStatusO">Civil Status:</label>
+                                            <select id="civilStatusO" name="civilStatusO" class="form-control">
+                       <option>Single</option>
+                       <option>Married</option>
+                       <option>Divorced</option>
+                       <option>Widowed</option>
+                   </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="licenseExpiryDateO">License Expiry Date:</label>
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input id="licenseExpiryDateO" name="licenseExpiryDateO" type="text" class="form-control pull-right datepicker">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="operatorName" class="control-label col-sm-4">Operator Name</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="operatorName" name="operatorName" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="ageO" class="control-label col-sm-4">Age</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="ageO" name="ageO" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="birthDateO" class="control-label col-sm-4">Date of birth</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="birthDateO" name="birthDateO" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="" class="control-label col-sm-4">Place of birth</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="" name="" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-
-
-                                <div class="form-group">
-                                    <label for="contactNumberO" class="control-label col-sm-4">Contact number</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="contactNumberO" name="contactNumberO" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="addressO" class="control-label col-sm-4">Address</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="addressO" name="addressO" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="provincialAddressO" class="control-label col-sm-4">Provincial address</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="provincialAddressO" name="provincialAddressO" class="form-control">
-                                    </div>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label for="sssO" class="control-label col-sm-4">SSS number</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="sssO" name="sssO" class="form-control">
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="genderO" class="control-label col-sm-4">Gender</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="genderO" name="genderO" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="citizenshipO" class="control-label col-sm-4">Citizenship</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="citizenshipO" name="citizenshipO" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="civilStatusO" class="control-label col-sm-4">Civil status</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="civilStatusO" name="civilStatusO" class="form-control">
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="box-body">
-
-                            <div class="box box-header">
+                            <div class="tab">
                                 <h4>Family Information</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="spouseNameO">Name of Spouse:</label>
+                                            <input id="spouseNameO" name="spouseNameO" type="text" class="form-control" placeholder="Name of Spouse">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fathersNameO">Fathers Name:</label>
+                                            <input id="fathersNameO" name="fathersNameO" type="text" class="form-control" placeholder="Fathers Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mothersNameO">Mothers Name:</label>
+                                            <input id="mothersNameO" name="mothersNameO" type="number" class="form-control" placeholder="Mothers Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="spouseBirthDateO">Birthdate of Spouse:</label>
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input id="spouseBirthDateO" name="spouseBirthDateO" type="text" class="form-control pull-right datepicker">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="occupationFatherO">Occupation:</label>
+                                            <input id="occupationFatherO" name="occupationFatherO" type="text" class="form-control" placeholder="Occupation">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="occupationMotherO">Occupation:</label>
+                                            <input id="occupationMotherO" name="occupationMotherO" type="text" class="form-control" placeholder="Occupation">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="contactPersonO">Contact Person</label>
+                                            <input id="contactPersonO" name="contactPersonO" type="text" class="form-control" placeholder="Contact Person In Case of Emergency">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="addressO">Address</label>
+                                            <input id="addressO" name="addressO" type="text" class="form-control" placeholder="Address">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="contactNumberO">Contact Number</label>
+                                            <input id="contactNumberO" name="contactNumberO" type="text" class="form-control" placeholder="Contact Number">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <Label for="dependentsO">Dependents:</Label>
+                                        <table class="table table-hover custab">
+                                            <thead>
+                                                <th>Name</th>
+                                                <th>Birthdate</th>
+                                                <th>
+                                                    <div class="pull-right">
+                                                        <button type="button" class="btn btn-info" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Item</button>
+                                                    </div>
+                                                </th>
+                                            </thead>
+                                            <tbody id="childrens">
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" placeholder="Name of Child" class="form-control">
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group date">
+                                                            <div class="input-group-addon">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </div>
+                                                            <input type="text" class="form-control pull-right datepicker">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="pull-right">
+                                                            <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-4">
-
-                                <div class="form-group">
-                                    <label for="fatherNameO" class="control-label col-sm-4">Name of Father</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="fatherNameO" name="fatherNameO" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="fatherOccupationO" class="control-label col-sm-4">Occupation of Father</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="fatherOccupationO" name="fatherOccupationO" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="motherNameO" class="control-label col-sm-4">Name of Mother</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="motherNameO" name="motherNameO" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="motherOccupationO" class="control-label col-sm-4">Occupation of Mother</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="motherOccupationO" name="motherOccupationO" class="form-control">
-                                    </div>
-                                </div>
 
 
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="personCasedOfEmergencyO" class="control-label col-sm-4">Contact person</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="personCasedOfEmergencyO" name="personCasedOfEmergencyO" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="emergencyContactO" class="control-label col-sm-4">Emergency contact no.</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="emergencyContactO" name="emergencyContactO" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="emergencyAddressO" class="control-label col-sm-4">Emergency address</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="emergencyAddressO" name="emergencyAddressO" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="spouseO" class="control-label col-sm-4">Spouse</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="spouseO" name="spouseO" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="spouseBirthdateO" class="control-label col-sm-4">Spouse birthdate</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="spouseBirthdateO" name="spouseBirthdateO" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="numberOfChildrenO" class="control-label col-sm-4">Number of children</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" id="numberOfChildrenO" name="numberOfChildrenO" class="form-control">
-                                    </div>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label for="namesOfChildrenO" class="control-label col-sm-4">Names of children</label>
-                                    <div id="root" class="col-sm-4">
-
-                                        <li v-for="name in names" v-text="name"></li>
-
-                                        <input id="input" type="text" v-model="newName">
-                                        <button type="button" class="btn btn-primary" @click="addName">add</button>
-                                    </div>
-                                </div>
-
-
-
-
+                            <!-- Circles which indicates the steps of the form: -->
+                            <div style="text-align:center;margin-top:40px;">
+                                <span class="step"></span>
+                                <span class="step"></span>
                             </div>
                         </div>
+                        <div class="box-footer">
+                        </div>
+                    </form>
                 </div>
-                    <div class="box-footer">
-                <button type="button" class="btn btn-primary pull-right">Save changes</button>
-                    </div>
-        </div>
+                </form>
+                <div class="box-footer">
+                    <button type="button" class="btn btn-primary pull-right">Save changes</button>
+                </div>
         </div>
     
     
