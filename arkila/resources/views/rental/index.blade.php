@@ -1,6 +1,14 @@
 @extends('layouts.master')
 @section('title', 'Rental List')
 @section('content-header', 'Rental List')
+@section('links')
+@parent
+<!-- DataTables -->
+<link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+<!-- additional CSS -->
+<link rel="stylesheet" href="tripModal.css"> 
+
+@stop
 @section('content')
 <a href="/home/rental/create" class="btn btn-sm btn-primary btn-create">Create New</a>
 <section class="content">
@@ -20,8 +28,9 @@
                 </tr>
                 </thead>
                 <tbody>
+                @foreach($rentals as $rental)
                 <tr>
-                  <td>Miguel Delos Santos</td>
+                  <td>{{ $rental->full_name }}</td>
                   <td>Dagupan, Pangasinan</td>
                   <td>02-17-2018</td>
                   <td>8:00 AM</td>
@@ -36,7 +45,8 @@
                     </div>
                   </td>
                 </tr>
-                <tr>
+                @endforeach
+                <!-- <tr>
                   <td>Randall Caballar</td>
                   <td>San Juan, La Union</td>
                   <td>03-20-2018</td>
@@ -65,7 +75,7 @@
                         <button class="btn btn-info"><i class="fa fa-edit"></i> Edit</button>
                     </div>
                   </td>
-                </tr>
+                </tr> -->
                 
          
                 </tbody>
@@ -78,6 +88,11 @@
 @endsection
 @section('scripts')
 @parent
+
+    <!-- DataTables -->
+    <script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}")></script>
+    <script src="{{ URL::asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+            
 <script>
 
 $(function () {

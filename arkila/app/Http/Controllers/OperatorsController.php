@@ -70,7 +70,7 @@ class OperatorsController extends Controller
         ]);
 
         $createdOperator->addChildren($children);
-        return redirect('/home/operators')->with('success', 'Information created successfully');
+        return redirect(route('operators.index'))->with('success', 'Information created successfully');
     }
 
     /**
@@ -80,7 +80,7 @@ class OperatorsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Member $operator){
-        return view('operatrs.show',compact('operator'));
+        return view('operators.show',compact('operator'));
     }
 
     public function showProfile(Member $operator)
