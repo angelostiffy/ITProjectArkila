@@ -11,12 +11,12 @@
 @section('content-header', 'Driver List')
         
 @section('content')
-   <button class="btn btn-outline-success">Add Driver <i class="fa fa-plus-circle"></i></button>
+   <button class="btn btn-success">Add Driver <i class="fa fa-plus-circle"></i></button>
     <section class="content">
           <div class="box">
             <!-- /.box-header -->
             <div class="box-body">
-             <button class="btn btn-outline-success">Add Driver <i class="fa fa-plus-circle"></i></button>
+             <button class="btn btn-success">Add Driver <i class="fa fa-plus-circle"></i></button>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -39,8 +39,8 @@
                   <td>15</td>
                   <td>
                     <div class="text-center">
-                        <a href="viewDriver.html" class="btn btn-outline-primary"><i class="fa fa-eye"></i>View</a>
-                        <a href="editDriver.html" class="btn btn-outline-info"><i class="fa fa-pencil-square-o"></i>Edit</a>
+                        <a href="viewDriver.html" class="btn btn-primary"><i class="fa fa-eye"></i>View</a>
+                        <a href="editDriver.html" class="btn btn-info"><i class="fa fa-pencil-square-o"></i>Edit</a>
                         <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</i></button>
                     </div>
                   </td>

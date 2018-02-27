@@ -38,11 +38,17 @@
 @endsection
 @section('title', 'Driver Registration')
 @section('form-id', 'regForm')
-@section('form-action',route('drivers.store'))
+
+@if(isset($operators))
+    @section('form-action',route('drivers.store'))
+@else
+    @section('form-action',route('drivers.storeFromOperator',[$operator->member_id]))
+@endif
+
 @section('form-body')
 <div class="box box-warning">
         <div class="box-header with-border text-center">
-            <a href="" class="pull-left btn btn-outline-default"><i class="fa  fa-chevron-left"></i></a>
+            <a href="{{URL::previous()}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
             <h3 class="box-title">
                 Driver Registration
             </h3>
@@ -56,13 +62,18 @@
                     <div class="row">
                         <div class="col-md-4">
                         <div class=" form-group">
-                            <label>Choose Operator:</label>
-                            <select name="operator" id="" class="form-control select2">
-                                <option value='' @if(!old('operator')) {{'selected'}} @endif>No Operator</option>
-                                @foreach($operators as $operator)
-                                    <option value={{$operator->member_id}} @if($operator->member_id == old('operator')) {{'selected'}}@endif>{{$operator->full_name}}</option>
-                                @endforeach
-                            </select>
+                            @if(isset($operators))
+                                <label>Choose Operator:</label>
+                                <select name="operator" id="" class="form-control select2">
+                                    <option value='' @if(!old('operator')) {{'selected'}} @endif>No Operator</option>
+                                    @foreach($operators as $operator)
+                                        <option value={{$operator->member_id}} @if($operator->member_id == old('operator')) {{'selected'}}@endif>{{$operator->full_name}}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <label for"opName">Operator Name:</label>
+                                <span id="opName">{{$operator->full_name}}</span>
+                            @endif
                         </div>
                         </div>
                     </div>
@@ -266,7 +277,7 @@
                                     <th>Birthdate</th>
                                     <th>
                                         <div class="pull-right">
-                                            <button type="button" class="btn btn-outline-info" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Item</button>
+                                            <button type="button" class="btn btn-info" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Item</button>
                                         </div>
                                     </th>
                                 </thead>
@@ -289,7 +300,7 @@
                                             </td>
                                             <td>
                                                 <div class="pull-right">
-                                                    <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-outline-danger'>Delete</button>
+                                                    <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
                                                 </div>
                                             </td>
 
@@ -310,7 +321,7 @@
                                         </td>
                                         <td>
                                             <div class="pull-right">
-                                                <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-outline-danger'>Delete</button>
+                                                <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
                                             </div>
                                         </td>
 
@@ -334,8 +345,8 @@
         <div class="box-footer">
             <div style="overflow:auto;">
                     <div style="float:right;">
-                        <button type="button" id="prevBtn" onclick="nextPrev(-1)" class = "btn btn-outline-default">Previous</button>
-                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class = "btn btn-outline-primary">Next</button>
+                        <button type="button" id="prevBtn" onclick="nextPrev(-1)" class = "btn btn-default">Previous</button>
+                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class = "btn btn-primary">Next</button>
                     </div>
                 </div>
         </div>
