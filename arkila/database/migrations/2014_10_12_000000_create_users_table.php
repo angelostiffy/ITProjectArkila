@@ -21,8 +21,15 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->enum('status', ['enable', 'disable']);
             $table->enum('user_type', ['Driver', 'Customer', 'Admin', 'Super-Admin']);
+            $table->integer('terminal_id')->unsigned()->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('terminal_id')
+            ->references('terminal_id')->on('terminal')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
         });
     }
 
