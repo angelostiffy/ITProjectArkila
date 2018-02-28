@@ -12,7 +12,15 @@
 */
 
 //Made by Randall
+
 Route::get('/randall', 'VansController@index');
+
+Route::get('/randall', function(){
+    return view('operators.edit2NiRandall');
+});
+Route::get('/teo', function(){
+    return view('rental.newcreate');
+});
 
 
 
