@@ -11,6 +11,12 @@
 |
 */
 
+//Made by Randall
+Route::get('/randall', function(){
+    return view('operators.edit2NiRandall');
+});
+
+
 
 Route::get('/', function () {
     return view('welcome');

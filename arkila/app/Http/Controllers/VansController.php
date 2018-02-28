@@ -7,15 +7,31 @@ use App\Member;
 
 class VansController extends Controller {
 
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $vans = Van::all();
+        return view('vans.index', compact('vans'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Operator $operator)
+    public function createFromOperator(Member $operator)
     {
-        $drivers = Driver::all()->where('operator_id',$operator);
-        Member::drivers()->van();
+        $drivers = $operator->drivers()
+            ->whereNotIn('member_id', function($query){
+        $query->select('member_id')
+            ->from('member_van');
+        })->get();
 
         return view('vans.create',compact('drivers','operator'));
     }
@@ -26,22 +42,27 @@ class VansController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Operator $operator)
+    public function storeFromOperator(Member $operator)
     {
         $this->validate(request(), [
+            "driver" => 'exists:member|unique:member_van,member_id',
             "plateNumber" => 'unique:vans,plate_number|required|between:6,8',
             "model" =>  'required',
             "seatingCapacity" => 'required|between:2,10|numeric'
         ]);
 
-        $operator->addVan([
+
+        $van = Van::create([
             'plate_number' => request('plateNumber'),
             'model' => request('model'),
             'seating_capacity' => request('seatingCapacity')
         ]);
 
+        $van->member()->attach($operator->member_id);
+        $van->member()->attach(request('driver'));
+
     	session()->flash('message','Van successfully created');
-    	return redirect('home/operators/'.$operator);
+    	return redirect(route('operators.show',[$operator->member_id]));
 
     }
 
@@ -75,7 +96,7 @@ class VansController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Van $van)
+    public function update(Member $van)
     {
         $this->validate(request(), [
             "plateNumber" => 'unique:vans,plate_number,'.$van->plate_number.',plate_number|required|between:6,8',
@@ -94,7 +115,7 @@ class VansController extends Controller {
         ]);
 
     	session()->flash('message','Van '.request('plateNumber').'Successfully Edited');
-    	return redirect('home/vans');
+    	return redirect(route('vans.index'));
     }
 
     /**
@@ -103,8 +124,9 @@ class VansController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Van $van)
+    public function destroy(Member $van)
     {
+        $van->detach();
         $van->delete();
     	return back();
     }

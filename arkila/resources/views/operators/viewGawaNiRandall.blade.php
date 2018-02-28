@@ -1,16 +1,21 @@
-@extends('layouts.master') @section('title', 'index') @section('links') @parent
+@extends('layouts.master') @section('title', 'View Operator') @section('links') @parent
 <!-- DataTables -->
 <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 <!-- additional CSS -->
 <link rel="stylesheet" href="operatorStyle.css"> @stop @section('content')
 
 <a href="operatorProfile.html" class="btn btn-outline-primary"><i class="fa fa-arrow-circle-left"></i> Back</a>
+<!-- Content Header (Page header) -->
+<section class="content-header">
 
+<div class="content-wrapper">
+        <!-- Content Wrapper. Contains page content -->
+            <section class="content-header">
                 <div class="box box-warning">
                     <div class="box-header with-border text-center">
                         <a href="" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
                         <h3 class="box-title">
-                            View Driver Information
+                            View Operator Information
                         </h3>
                     </div>
 
@@ -23,93 +28,78 @@
                                 <div class="tab">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="driverLastName">Last Name:</label>
-                                            <p id="driverLastName" name="driverLastName" type="text" class="form-control" placeholder="Last Name"p
+                                            <label for="operatorLastName">Last Name:</label>
+                                            <p id="driverLastName" name="driverLastName" type="text" class="form-control" placeholder="Last Name">{{$operator->last_name}} </p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="contactNumberD">Contact Number:</label>
-                                            <p id="contactNumberD" name="contactNumberD" type="text" class="form-control" placeholder="Contact Number"></p>
+                                            <label for="contactNumberO">Contact Number:</label>
+                                            <p id="contactNumberO" name="contactNumberO" type="text" class="form-control" placeholder="Contact Number">{{$operator->edit_contact_number}}</p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="ageD">Age:</label>
-                                            <p id="ageD" name="ageD" type="number" class="form-control" placeholder="Age"></p>
+                                            <label for="ageO">Age:</label>
+                                            <p id="ageO" name="ageO" type="number" class="form-control" placeholder="Age">{{$operator->age}}</p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="genderD">Gender:</label>
-                                            <div class="radio">
-                                                <label for="genderMaleD"> Male</label>
-                                                <label class="radio-inline">
-                        <input type="radio" name="genderMaleD" id="genderMaleD" value="male" class="flat-blue">
-                        </label>
-                                                <label for="genderFemaleD">Female</label>
-                                                <label class="radio-inline">
-                        <input type="radio" name="genderFemaleD" id="genderFemaleD" value="female" class="flat-blue">
-                          
-                        </label>
-                                            </div>
+                                            <label for="genderO">Gender:</label>
+                <p>{{$operator->gender}}</p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="sssD">SSS No:</label>
-                                            <p id="sssD" name="sssD" type="text" class="form-control" placeholder="SSS No."></p>
+                                            <label for="sssO">SSS No:</label>
+                                            <p id="sssO" name="sssO" type="text" class="form-control" placeholder="SSS No.">{{$operator->SSS}}</p>
                                         </div>
                                     </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="driverFirstName">First Name:</label>
-                                            <p id="driverFirstName" name="driverFirstName" type="text" class="form-control" placeholder="First Name"></p>
+                                            <label for="operatorFirstName">First Name:</label>
+                                            <p id="operatorFirstName" name="operatorFirstName" type="text" class="form-control" placeholder="First Name">{{$operator->first_name}}</p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="addressD">Address:</label>
-                                            <p id="addressD" name="addressD" type="text" class="form-control" placeholder="Address"></p>
+                                            <label for="addressO">Address:</label>
+                                            <p id="addressO" name="addressO" type="text" class="form-control" placeholder="Address">{{$operator->address}}</p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="birthdateD">Birthdate:</label>
+                                            <label for="birthdateO">Birthdate:</label>
                                             <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <p id="birthdateD" name="birthdateD" type="text" class="form-control pull-right datepicker"></p>
+                                                <p id="birthdateO" name="birthdateO" type="text" class="form-control pull-right datepicker">{{$operator->birth_date}}</p>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="citizenshipD">Citizenship:</label>
-                                            <p id="citizenshipD" name="citizenshipD" type="text" class="form-control" placeholder="Citizenship"></p>
+                                            <label for="citizenshipO">Citizenship:</label>
+                                            <p id="citizenshipO" name="citizenshipO" type="text" class="form-control" placeholder="Citizenship">{{$operator->citizenship}}</p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="licenseNoD">License No:</label>
-                                            <p id="licenseNoD" name="licenseNoD" type="text" class="form-control" placeholder="License No."></p>
+                                            <label for="licenseNoO">License No:</label>
+                                            <p id="licenseNoO" name="licenseNoO" type="text" class="form-control" placeholder="License No.">{{$operator->license_number}}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="driverMiddleName">Middle Name:</label>
-                                            <p id="driverMiddleName" name="driverMiddleName" type="text" class="form-control" placeholder="Middle Name"></p>
+                                            <label for="operatorMiddleName">Middle Name:</label>
+                                            <p id="operatorMiddleName" name="operatorMiddleName" type="text" class="form-control" placeholder="Middle Name">{{$operator->middle_name}}</p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="provincialAddressD">Provincial Address:</label>
-                                            <p id="provincialAddressD" name="provincialAddressD" type="text" class="form-control" placeholder="Provincial Address"></p>
+                                            <label for="provincialAddressO">Provincial Address:</label>
+                                            <p id="provincialAddressO" name="provincialAddressO" type="text" class="form-control" placeholder="Provincial Address">{{$operator->provincial_address}}</p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="birthplaceD">Birthplace:</label>
-                                            <p id="birthplaceD" name="birthplaceD" type="text" class="form-control" placeholder="Birthplace"></p>
+                                            <label for="birthplaceO">Birthplace:</label>
+                                            <p id="birthplaceO" name="birthplaceO" type="text" class="form-control" placeholder="Birthplace">{{$operator->birth_place}}</p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="civilStatusD">Civil Status:</label>
-                                            <select id="civilStatusD" name="civilStatusD" class="form-control">
-                       <option>Single</option>
-                       <option>Married</option>
-                       <option>Divorced</option>
-                       <option>Widowed</option>
-                   </select>
+                                            <label for="civilStatusO">Civil Status:</label>
+   <p>{{$operator->civil_status}}</p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="licenseExpiryDateD">License Expiry Date:</label>
+                                            <label for="licenseExpiryDateO">License Expiry Date:</label>
                                             <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <p id="licenseExpiryDateD" name="licenseExpiryDateD" type="text" class="form-control pull-right datepicker"></p>
+                                                <p id="licenseExpiryDateO" name="licenseExpiryDateO" type="text" class="form-control pull-right datepicker">{{$operator->expiry_date}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -120,35 +110,35 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="spouseNameD">Name of Spouse:</label>
-                                            <p id="spouseNameD" name="spouseNameD" type="text" class="form-control" placeholder="Name of Spouse"></p>
+                                            <label for="spouseNameO">Name of Spouse:</label>
+                                            <p id="spouseNameO" name="spouseNameO" type="text" class="form-control" placeholder="Name of Spouse">{{$operator->spouse}}</p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="fathersNameD">Fathers Name:</label>
-                                            <p id="fathersNameD" name="fathersNameD" type="text" class="form-control" placeholder="Fathers Name"></p>
+                                            <label for="fathersNameO">Fathers Name:</label>
+                                            <p id="fathersNameO" name="fathersNameO" type="text" class="form-control" placeholder="Fathers Name">{{$operator->father_name}}</p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="mothersNameD">Mothers Name:</label>
-                                            <p id="mothersNameD" name="mothersNameD" type="number" class="form-control" placeholder="Mothers Name"></p>
+                                            <label for="mothersNameO">Mothers Name:</label>
+                                            <p id="mothersNameO" name="mothersNameO" type="number" class="form-control" placeholder="Mothers Name">{{$operator->mother_name}}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="spouseBirthDateD">Birthdate of Spouse:</label>
+                                            <label for="spouseBirthDateO">Birthdate of Spouse:</label>
                                             <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <p id="spouseBirthDateD" name="spouseBirthDateD" type="text" class="form-control pull-right datepicker"></p>
+                                                <p id="spouseBirthDateO" name="spouseBirthDateO" type="text" class="form-control pull-right datepicker">{{$operator->spouse_birthdate}}</p>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="occupationFatherD">Occupation:</label>
-                                            <p id="occupationFatherD" name="occupationFatherD" type="text" class="form-control" placeholder="Occupation"></p>
+                                            <label for="occupationFatherO">Occupation:</label>
+                                            <p id="occupationFatherO" name="occupationFatherO" type="text" class="form-control" placeholder="Occupation">{{$operator->father_occupation}}</p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="occupationMotherD">Occupation:</label>
-                                            <p id="occupationMotherD" name="occupationMotherD" type="text" class="form-control" placeholder="Occupation"></p>
+                                            <label for="occupationMotherO">Occupation:</label>
+                                            <p id="occupationMotherO" name="occupationMotherO" type="text" class="form-control" placeholder="Occupation">{{$operator->mother_occupation}}</p>
                                         </div>
 
                                     </div>
@@ -157,20 +147,20 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="contactPersonD">Contact Person</label>
-                                            <p id="contactPersonD" name="contactPersonD" type="text" class="form-control" placeholder="Contact Person In Case of Emergency"></p>
+                                            <label for="contactPersonO">Contact Person</label>
+                                            <p id="contactPersonO" name="contactPersonO" type="text" class="form-control" placeholder="Contact Person In Case of Emergency">{{$operator->person_in_case_of_emergency}}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="addressD">Address</label>
-                                            <p id="addressD" name="addressD" type="text" class="form-control" placeholder="Address"></p>
+                                            <label for="addressO">Address</label>
+                                            <p id="addressO" name="addressO" type="text" class="form-control" placeholder="Address">{{$operator->emergency_address}}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="contactNumberD">Contact Number</label>
-                                            <p id="contactNumberD" name="contactNumberD" type="text" class="form-control" placeholder="Contact Number"></p>
+                                            <label for="contactNumberO">Contact Number</label>
+                                            <p id="contactNumberO" name="contactNumberO" type="text" class="form-control" placeholder="Contact Number">{{$operator->emergency_contactno}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -184,16 +174,18 @@
                                                 
                                             </thead>
                                             <tbody id="childrens">
+                                            @if($operator->children)
+                                                @foreach($operator->children as $child)
                                                 <tr>
                                                     <td>
-                                                        <p type="text" placeholder="Name of Child" class="form-control"></p>
+                                                        <p type="text" placeholder="Name of Child" class="form-control">{{$child->child_name}}</p>
                                                     </td>
                                                     <td>
                                                         <div class="input-group date">
                                                             <div class="input-group-addon">
                                                                 <i class="fa fa-calendar"></i>
                                                             </div>
-                                                            <p type="text" class="form-control pull-right datepicker"></p>
+                                                            <p type="text" class="form-control pull-right datepicker">{{$child->birthdate}}</p>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -203,6 +195,9 @@
                                                     </td>
 
                                                 </tr>
+                                                @endforeach
+                                                @endif
+
                                             </tbody>
                                         </table>
 
@@ -223,27 +218,28 @@
                 </div>
                 </form>
         </div>
-</form>
-</div>
-</div>
+    </form>
 
-@stop @section('scripts') @parent
 
-<!-- DataTables -->
-<script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ URL::asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-<script>
-    $(function() {
-        $('#driver').DataTable()
-        $('#van').DataTable({
-            'paging': true,
-            'lengthChange': true,
-            'searching': true,
-            'ordering': true,
-            'info': true,
-            'autoWidth': true
+
+
+    @stop @section('scripts') @parent
+
+    <!-- DataTables -->
+    <script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <script>
+        $(function() {
+            $('#driver').DataTable()
+            $('#van').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true
+            })
         })
-    })
-</script>
+    </script>
 
-@stop
+    @stop

@@ -59,8 +59,8 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> User Management</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> Operators</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> Vans and Drivers</a></li>>
+                            <li><a href="{{route('operators.index')}}"><i class="fa fa-circle-o text-aqua"></i> Operators</a></li>
+                            <li><a href="{{route('drivers.index')}}"><i class="fa fa-circle-o text-aqua"></i> Vans and Drivers</a></li>>
                         </ul>
                     </li>
                     <li>

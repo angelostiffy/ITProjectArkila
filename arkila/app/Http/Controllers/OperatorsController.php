@@ -80,7 +80,7 @@ class OperatorsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Member $operator){
-        return view('operators.show',compact('operator'));
+        return view('operators.viewGawaNiRandall',compact('operator'));
     }
 
     public function showProfile(Member $operator)
@@ -109,12 +109,12 @@ class OperatorsController extends Controller
     public function update(Member $operator, OperatorRequest $request)
     {
 
-        $children = array_combine($request->children,$request->ChildrenBDay);
+        $children = array_combine($request->children,$request->childrenBDay);
 
-        $operator->update([
+
+        $operator -> update([
             'last_name'=> $request->lastName,
             'first_name' => $request->firstName,
-            'operator_id' => $request->operator,
             'middle_name' => $request->middleName,
             'contact_number' => $request->contactNumber,
             'role' => 'Operator',
@@ -126,20 +126,21 @@ class OperatorsController extends Controller
             'gender' => $request->gender,
             'citizenship' => $request->citizenship,
             'civil_status' => $request->civilStatus,
-            'spouse' => $request->spouse,
+            'spouse' => $request->nameOfSpouse,
             'spouse_birthdate' => $request->spouseBirthDate,
             'father_name' => $request->fathersName,
             'father_occupation' => $request->fatherOccupation,
             'mother_name' => $request->mothersName,
             'mother_occupation' => $request->motherOccupation,
-            'person_in_case_of_emergency' => $request->personInCaseOfEmergency,
-            'emergency_address' => $request->emergencyAddress,
-            'emergency_contactno' => $request->emergencyContactNumber,
+            'person_in_case_of_emergency' => $request->contactPerson,
+            'emergency_address' => $request->contactPersonAddress,
+            'emergency_contactno' => $request->contactPersonContactNumber,
             'SSS' => $request->sss,
-            'license_number' => $request->driverLicense,
-            'expiry_date' => $request->driverLicenseExpiryDate,
+            'license_number' => $request->licenseNo,
+            'expiry_date' => $request->licenseExpiryDate,
             'number_of_children' => sizeof($children)
         ]);
+
         $operator->children()->delete();
         $operator->addChildren($children);
 
