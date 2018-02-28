@@ -49,15 +49,15 @@ Route::get('home/operators/{operator}/drivers/create', 'DriversController@create
 Route::post('home/operators/{operator}/drivers/', 'DriversController@storeFromOperator')->name('drivers.storeFromOperator');
 
 //Adding a driver to a specific van
-Route::get('home/operators/{van}/drivers/create', 'DriversController@createUsingVan');
-Route::post('home/operators/{van}/drivers/', 'DriversController@storeUsingVan');
+Route::get('home/vans/{van}/drivers/create', 'DriversController@createFromVan')->name('drivers.createFromVan');
+Route::post('home/vans/{van}/drivers/', 'DriversController@storeFromVan')->name('drivers.storeFromVan');
 /****************************************************/
 
 /************ Vans ******************************/
 Route::resource('home/vans', 'VansController');
 //Creating Vans
-Route::get('home/operators/{operator}/vans/create', 'VansController@create');
-Route::post('home/operators/{operator}/vans', 'VansController@store');
+Route::get('home/operators/{operator}/vans/create', 'VansController@createFromOperator')->name('vans.createFromOperator');
+Route::post('home/operators/{operator}/vans', 'VansController@storeFromOperator')->name('vans.storeFromOperator');;
 /****************************************************/
 
 /************ Settings ******************************/
