@@ -13,7 +13,7 @@ class TestingController extends Controller
      */
     public function index()
     {
-        return view('testing.index');
+        return view('testing.addVan');
     }
 
     /**
