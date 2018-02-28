@@ -1,38 +1,13 @@
-<<<<<<< HEAD
-@extends('layouts.master') @section('title', 'Driver List') @section('links') @parent
-<!-- DataTables -->
-<link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
-<!-- additional CSS -->
-<link rel="stylesheet" href="operatorStyle.css"> @stop @section('content-header', 'Driver List') @section('content')
-<section class="content">
-    <div class="box">
-        <div class="box-header">
-            <button class="btn btn-success">Add Driver <i class="fa fa-plus-circle"></i></button>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <table id="example1" class="table table-bordered table-striped">
-=======
-@extends('layouts.master')
-@section('title', 'Driver List')
-@section('links')
-@parent
-  <!-- DataTables -->
-  <link rel= "stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
-  <!-- additional CSS -->
-  <link rel="stylesheet" href="operatorStyle.css"> 
-
-@stop
+@extends('layouts.master') @section('title', 'Driver List') 
 @section('content-header', 'Driver List')
         
 @section('content')
-   <a href="{{route('drivers.create')}}" class="btn btn-success">Add Driver <i class="fa fa-plus-circle"></i></a>
     <section class="content">
           <div class="box">
             <!-- /.box-header -->
             <div class="box-body">
              <button href="{{route('drivers.create')}}" class="btn btn-success">Add Driver <i class="fa fa-plus-circle"></i></button>
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="driverList" class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Driver ID</th>
@@ -45,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-<<<<<<< HEAD
+
                     <tr>
                         <th>pugss</th>
                         <td>pug</td>
@@ -91,13 +66,10 @@
 </section>
 @stop @section('scripts') @parent
 
-<!-- DataTables -->
-<script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ URL::asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
 <script>
     $(function() {
         $('#example2').DataTable()
-        $('#example1').DataTable({
+        $('#driverList').DataTable({
             'paging': true,
             'lengthChange': true,
             'searching': true,

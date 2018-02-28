@@ -12,9 +12,7 @@
 */
 
 //Made by Randall
-Route::get('/randall', function(){
-    return view('operators.edit2NiRandall');
-});
+Route::get('/randall', 'VansController@index');
 
 
 
