@@ -72,14 +72,16 @@
                                 @yield('form-body')
                                 
                                     <!-- FORM -->
+                                
+                                
+                            </div>
+                            <!-- /.login-box-body -->
+                            <div class="box-footer">
+                                    @yield('others') 
                                 <div class="form-group pull-right">
                                     @yield('form-btn')
                                 </div>
-
-                                <a href="#">lorem</a><br>
-                                <a href="#" class="text-center">lorem</a>
                             </div>
-                            <!-- /.login-box-body -->
                         </div>
 
                         <div class="modal fade" id="form-modal">
@@ -88,7 +90,7 @@
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title"> @yield('modal-title') </h4>
+                                        <h3 class="modal-title"> @yield('modal-title') </h3>
                                     </div>
                                     <div class="modal-body">
                                         @yield('modal-body')
