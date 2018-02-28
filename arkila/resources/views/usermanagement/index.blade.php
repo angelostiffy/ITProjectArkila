@@ -30,7 +30,7 @@
                 <div class="box-body">
 
                 <div class="center-block">
-                <a href="#" button class="btn btn-primary" style="margin-bottom: 2%;"><i class="glyphicon glyphicon-plus">Add </i></a>
+                <a href="/home/user-management/admin/create" button class="btn btn-primary" style="margin-bottom: 2%;"><i class="glyphicon glyphicon-plus">Add </i></a>
 
                 </div>    
 
@@ -44,11 +44,11 @@
                 </tr>
                 </thead>
                 <tbody>
-
+                @foreach($userAdmins as $userAdmin)
                 <tr>
-                    <td></td>  
-                    <td></td>      
-                    <td></td>
+                    <td>{{$userAdmin->name}}</td>  
+                    <td>{{$userAdmin->username}}</td>      
+                    <td>{{$userAdmin->description}}</td>
                     <td class="center-block">
                     <div class="center-block">
                          <button class="btn btn-default"><i class="glyphicon glyphicon-cog"></i></button>
@@ -56,6 +56,7 @@
                     </div>
                     </td>
                 </tr>
+                @endforeach
             </table>
             </div>
 

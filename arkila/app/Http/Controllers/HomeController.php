@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\FeesAndDeduction;
 use App\Destination;
 use App\Terminal;
+use App\User;
 class HomeController extends Controller
 {
 //    /**   
@@ -37,5 +38,12 @@ class HomeController extends Controller
         
 
         return view('settings.index', compact('fees','destinations', 'terminals', 'discounts'));
+    }
+
+    public function usermanagement()
+    {
+        $userAdmins = User::join('terminal', 'users.terminal_id', '=', 'terminal.terminal_id')->where('users.user_type', '=', 'Admin')->select('users.id as userid','users.name', 'users.username', 'terminal.terminal_id', 'terminal.description')->get();
+
+        return view('usermanagement.index', compact('userAdmins'));
     }
 }
