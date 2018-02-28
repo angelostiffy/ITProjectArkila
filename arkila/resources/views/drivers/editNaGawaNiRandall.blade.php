@@ -1,8 +1,6 @@
-@extends('layouts.master') @section('title', 'index') @section('links') @parent
+@extends('layouts.master') @section('title', 'Edit Driver Information') @section('links') @parent
 <!-- DataTables -->
-<link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
-<!-- additional CSS -->
-<link rel="stylesheet" href="operatorStyle.css"> @stop @section('content')
+<link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"> @stop @section('content')
 
 <div class="box box-warning">
     <div class="box-header with-border text-center">
@@ -18,7 +16,7 @@
             <!-- One "tab" for each step in the form: -->
             <div class="tab">
                 <h4>Personal Information</h4>
-                <div class="row">
+                <div class="tab">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="driverLastName">Last Name:</label>
@@ -37,11 +35,11 @@
                             <div class="radio">
                                 <label for="genderMaleD"> Male</label>
                                 <label class="radio-inline">
-                        <input type="radio" name="genderMaleD" id="genderMaleD" value="male" class="flat-blue">
+                        <input type="radio" name="genderD" id="genderMaleD" value="male" class="flat-blue">
                         </label>
                                 <label for="genderMaleF">Female</label>
                                 <label class="radio-inline">
-                        <input type="radio" name="genderMaleF" id="genderMaleF" value="female" class="flat-blue">
+                        <input type="radio" name="genderD" id="genderMaleF" value="female" class="flat-blue">
                           
                         </label>
                             </div>
@@ -114,7 +112,7 @@
             </div>
             <div class="tab">
                 <h4>Family Information</h4>
-                <div class="row">
+                <div class="tab">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="spouseNameD">Name of Spouse:</label>
@@ -151,7 +149,7 @@
                     </div>
 
                 </div>
-                <div class="row">
+                <div class="tab">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="contactPersonD">Contact Person</label>
@@ -171,7 +169,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="tab">
                     <div class="col-md-12">
                         <Label for="dependentsD">Dependents:</Label>
                         <table class="table table-hover custab">
@@ -202,91 +200,60 @@
                                             <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
                                         </div>
                                     </td>
-
                                 </tr>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
-
-
-            <!-- Circles which indicates the steps of the form: -->
-            <div style="text-align:center;margin-top:40px;">
-                <span class="step"></span>
-                <span class="step"></span>
-            </div>
-        </div>
-        <div class="box-footer">
         </div>
     </form>
-</div>
-</form>
-<div class="box-footer">
-    <button type="button" class="btn btn-primary pull-right">Save changes</button>
 </div>
 
 @stop @section('scripts') @parent
 
-<!-- DataTables -->
-<script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ URL::asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+
 <script>
-    $(function() {
-        $('#driver').DataTable()
-        $('#van').DataTable({
-            'paging': true,
-            'lengthChange': true,
-            'searching': true,
-            'ordering': true,
-            'info': true,
-            'autoWidth': true
+    $(cloneDatePicker());
+
+    function cloneDatePicker() {
+
+        //Date picker
+        $('.datepicker').datepicker({
+            autoclose: true
         })
-    })
+
+    }
+
+
+
+    function addItem() {
+        var tablebody = document.getElementById('childrens');
+        if (tablebody.rows.length == 1) {
+            tablebody.rows[0].cells[tablebody.rows[0].cells.length - 1].children[0].children[0].style.display = "";
+        }
+
+
+        var tablebody = document.getElementById('childrens');
+        var iClone = tablebody.children[0].cloneNode(true);
+        for (var i = 0; i < iClone.cells.length; i++) {
+            iClone.cells[i].children[0].value = "";
+            iClone.cells[1].children[0].children[1].value = "";
+
+        }
+        tablebody.appendChild(iClone);
+        cloneDatePicker();
+    }
+
+
+    function rmv() {
+        var tabRow = document.getElementById("childrens");
+        if (tabRow.rows.length == 1) {
+            tabRow.rows[0].cells[tabRow.rows[0].cells.length - 1].children[0].children[0].style.display = "none";
+        } else {
+            tabRow.rows[0].cells[tabRow.rows[0].cells.length - 1].children[0].children[0].style.display = "";
+        }
+    }
 </script>
-
-    <script>
-        $(cloneDatePicker());
-
-        function cloneDatePicker() {
-
-            //Date picker
-            $('.datepicker').datepicker({
-                autoclose: true
-            })
-
-        }
-
-
-
-        function addItem() {
-            var tablebody = document.getElementById('childrens');
-            if (tablebody.rows.length == 1) {
-                tablebody.rows[0].cells[tablebody.rows[0].cells.length - 1].children[0].children[0].style.display = "";
-            }
-
-
-            var tablebody = document.getElementById('childrens');
-            var iClone = tablebody.children[0].cloneNode(true);
-            for (var i = 0; i < iClone.cells.length; i++) {
-                iClone.cells[i].children[0].value = "";
-                iClone.cells[1].children[0].children[1].value = "";
-
-            }
-            tablebody.appendChild(iClone);
-            cloneDatePicker();
-        }
-
-
-        function rmv() {
-            var tabRow = document.getElementById("childrens");
-            if (tabRow.rows.length == 1) {
-                tabRow.rows[0].cells[tabRow.rows[0].cells.length - 1].children[0].children[0].style.display = "none";
-            } else {
-                tabRow.rows[0].cells[tabRow.rows[0].cells.length - 1].children[0].children[0].style.display = "";
-            }
-        }
-    </script>
 
 @stop

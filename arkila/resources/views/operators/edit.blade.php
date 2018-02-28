@@ -1,4 +1,4 @@
-@extends('layouts.form_lg') 
+@extends('layouts.master') 
 @section('links')
 @parent
 <style>

@@ -1,4 +1,4 @@
-@extends('vans.master')
+@extends('vans.oldvan.master')
 
 @section('content')
     @include('message.error')

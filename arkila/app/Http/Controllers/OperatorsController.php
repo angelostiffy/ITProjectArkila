@@ -15,7 +15,7 @@ class OperatorsController extends Controller
     public function index()
     {
         $operators = Member::allOperators()->get();
-        return view('operators.view', compact('operators'));
+        return view('operators.showProfile', compact('operators'));
     }
 
     /**

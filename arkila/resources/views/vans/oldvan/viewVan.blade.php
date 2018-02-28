@@ -1,5 +1,5 @@
-@extends('vans.master')
-@section('table')
+@extends('vans.oldvan.master')
+@section('content')
     <section class="content-header">
                 
                  <div class="box ">
