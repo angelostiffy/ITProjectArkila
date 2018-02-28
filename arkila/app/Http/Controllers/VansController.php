@@ -19,7 +19,10 @@ class VansController extends Controller {
         return view('vans.index', compact('vans'));
     }
 
-
+    public function create(){
+        $operators = Member::allOperators()->get();
+        return view('vans.create');
+    }
     /**
      * Show the form for creating a new resource.
      *
