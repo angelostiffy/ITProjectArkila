@@ -1,6 +1,38 @@
 @extends('layouts.form_lg')
 @section('links')
 @parent
+<style>
+        /* Mark input boxes that gets an error on validation: */
+
+        /* Hide all steps by default: */
+
+        .tab {
+            display: none;
+        }
+
+        /* Make circles that indicate the steps of the form: */
+
+        .step {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbbbbb;
+            border: none;
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.5;
+        }
+
+        .step.active {
+            opacity: 1;
+        }
+
+        /* Mark the steps that are finished and valid: */
+
+        .step.finish {
+            background-color: #4CAF50;
+        }
+    </style>
 @endsection
 @section('title', 'Walk-In')
 @section('form-id', 'Walk-in Reservation')
