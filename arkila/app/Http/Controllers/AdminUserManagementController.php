@@ -25,7 +25,7 @@ class AdminUserManagementController extends Controller
     {
         $this->validate(request(), [
             "fullName" => "required|max:50",
-            "userName" => "required|max:15",
+            "userName" => "unique:users,username|required|max:15",
             "userEmail" => "email",
             "password" => "required|confirmed",
             "addUserTerminal" => ['required', new checkTerminal, 'max:40']
