@@ -25,7 +25,7 @@ class CreateRentalTable extends Migration
             $table->smallInteger('number_of_days');
             $table->string('destination');
             $table->string('contact_number', 13);
-            $table->enum('status', ['Departed', 'Pending', 'Declined'])
+            $table->enum('status', ['Departed', 'Pending', 'Declined', 'Cancelled', 'Paid'])
             ->default('Pending');
             $table->enum('rent_type', ['Online', 'Walk-in']);
             $table->timestamps();

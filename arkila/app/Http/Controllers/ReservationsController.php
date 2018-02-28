@@ -19,7 +19,7 @@ class ReservationsController extends Controller
         //
         $reservations = Reservation::all();
         $destinations = Destination::all();
-        return view('reservations.walkIn', compact('reservations', 'destinations'));
+        return view('reservations.index', compact('reservations', 'destinations'));
     }
 
     /**

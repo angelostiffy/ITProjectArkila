@@ -36,7 +36,7 @@
 @endsection
 @section('title', 'Rent Van')
 @section('form-id', 'regForm')
-@section('form-action', route('rental.index'))
+@section('form-action', route('rental.store'))
 @section('form-method', 'POST')
 @section('form-body')
 
@@ -117,6 +117,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
+                        <div class = "bootstrap-timepicker">
                             <div class="form-group">
                                 <label>Departure Time:</label>
                                  <div class="input-group">
@@ -124,6 +125,7 @@
 
                     <div class="input-group-addon">
                       <i class="fa fa-clock-o"></i>
+                    </div>
                     </div>
                   </div>
                             </div>
