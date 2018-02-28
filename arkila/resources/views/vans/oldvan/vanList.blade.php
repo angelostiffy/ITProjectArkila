@@ -1,5 +1,13 @@
-@extends('vans.master')
-@section('table')
+@extends('layouts.master') 
+@section('title', 'index') 
+@section('links') @parent
+<!-- DataTables -->
+<link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+<!-- additional CSS -->
+<link rel="stylesheet" href="operatorStyle.css"> 
+@stop 
+@section('content-header', 'Van List')
+@section('content')
     <section class="content">
           <div class="box">
             <!-- /.box-header -->
@@ -80,18 +88,23 @@
             <!-- /.box-body -->
           </div>
     </section>
-    
+@stop @section('scripts') @parent
+
+<!-- DataTables -->
+<script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
 <script>
-  $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
+    $(function() {
+        $('#driver').DataTable()
+        $('#van').DataTable({
+            'paging': true,
+            'lengthChange': true,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': true
+        })
     })
-  })
 </script>
-@endsection
+
+@stop

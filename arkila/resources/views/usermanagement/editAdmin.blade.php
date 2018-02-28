@@ -24,18 +24,7 @@
 
   <div>
   <button type="button" class="btn btn-danger" data-dismiss="modal">Reset Password</button> </div>                 
-                    <div class="form-group">
-                      <label for="payor">User name:</label>
-                      <span>Span</span>
-                    </div>
-                    <div class="form-group">
-                      <label for="Particulars">Name:</label>
-                      <span>Yuki Marfil</span>
-                    </div>
-                    <div class="form-group">
-                      <label for="Particulars">Email Address:</label>
-                      <span>yuki@grkngc.com</span>
-                    </div>
+              
                     
                     
                     
