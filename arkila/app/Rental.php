@@ -16,4 +16,9 @@ class Rental extends Model
     public function van(){
     	return $this->belongsTo(Van::Class, 'plate_number');
     }
+
+    public function getFullNameAttribute(){
+        return "{$this->first_name} {$this->last_name}";
+    }
+
 }

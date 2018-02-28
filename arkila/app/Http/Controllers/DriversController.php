@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Member;
+use App\Van;
 use App\Http\Requests\DriverRequest;
 
 
@@ -120,6 +121,13 @@ class DriversController extends Controller
         return redirect(route('operators.showProfile',[$operator->member_id]));
     }
 
+    public function createFromVan(Van $van){
+        return view('drivers.create',compact('van'));
+    }
+
+    public function storeFromVan(Van $van,DriverRequest $request){
+
+    }
     /**
      * Display the specified resource.
      *

@@ -27,7 +27,7 @@ class DriverRequest extends FormRequest
      */
     public function rules()
     {
-        $driver = Member::allDriver()->where('member_id',$this->member_id);
+        $driver = Member::allDrivers()->where('member_id',$this->member_id);
         switch($this->method())
         {
             case 'POST':
