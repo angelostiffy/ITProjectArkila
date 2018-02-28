@@ -15,7 +15,6 @@
                             <div class="nav-tabs-custom">
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a href="#tab_1" data-toggle="tab">Online Reservation</a></li>
-                                    <li><a href="#tab_2" data-toggle="tab">Walk-in Reservation</a></li>
                                     <li><a href="#tab_3" data-toggle="tab">List of Reservations</a></li>
 
                                 </ul>
@@ -23,85 +22,62 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tab_1">
                                         <b>Details:</b>
-                                        @foreach($reservations->where('type', 'Online')->sortByDesc('status') as $reservation)
                                         <table class="table table-bordered table-striped example1">
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
                                                     <th>Contact Number</th>
-                                                    <th>Departure Date</th>
-                                                    <th>Departure Time</th>
                                                     <th>Destination</th>
-                                                    <th>Status</th>
+                                                    <th>Date</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            @foreach ($reservations as $reservation)
                                                 <tr>
                                                     <td>{{ $reservation->name }}</td>
                                                     <td>{{ $reservation->contact_number }}</td>
-                                                    <td>{{ $reservation->departure_date }}</td>
-                                                    <td>{{ $reservation->departure_time }}</td>
                                                     <td>{{ $reservation->destination->description }}</td>
-                                                    <td>{{ $reservation->status }}</td>
+                                                    <td>{{ $reservation->departure_date }}</td>
                                                     <td class="center-block">
                                                         <div class="center-block">
-                                                        <form action="{{ route('reservations.update', $reservation->id) }}" method="POST">
-                                                            {{ csrf_field() }}
-                                                            {{ method_field('PATCH') }}
-
-                                                            @if ($reservation->status == 'Pending')
-                                                                <button class="btn btn-success" type="submit" name="butt" value="Approved"><i class="fa fa-check"></i> Approve</button>
-                                                                <button class="btn btn-danger" type="submit" name="butt" value="Declined"><i class="fa fa-close"></i> Decline</i></button>
-                                                            @elseif ($reservation->status == 'Approved')
-                                                                <button class="btn btn-success" type="submit" name="butt" value="Paid"><i class="fa fa-check"></i> Paid</button>
-                                                                <button class="btn btn-danger" type="submit" name="butt" value="Cancelled"><i class="fa fa-close"></i> Cancel</i></button>
-                                                            @else
-                                                            <form method="POST" action="/home/reservations/{{$reservation->reservation_id}}" class="delete">
-                                                                {{csrf_field()}}
-                                                                {{method_field('DELETE')}}
-                                                                <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</i></button>
-                                                            </form>
-
-                                                            @endif
-                                                        </form>
+                                                            <button class="btn btn-success"><i class="fa fa-check"></i> Approve</button>
+                                                            <button class="btn btn-danger"><i class="fa fa-close"></i> Decline</i></button>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                @endforeach
+                                            </tbody>
                                         </table>
-                                        @endforeach
                                     </div>
 
                                     <!-- /.tab-pane -->
                                     <div class="tab-pane" id="tab_2">
-                            <form method="POST" action="{{route('reservations.index')}}">
-                                {{csrf_field()}}            
-                                <input type="hidden" name="type" value="Walk-in">
 
-                                        <label>Destination</label>
+                                       
                                         <div class="form-group">
-                                            <select name="dest" id="dest" style="width: 200px">
-                                              <option></option>
-                                              @foreach($destinations as $destination)
-                                              <option value="{{ $destination->destination_id }}" @if($destination->destination_id == old('dest') ) {{'selected'}} @endif>{{ $destination->description }}</option>
-                                    @endforeach
+                                             <label>Destination</label>
+                                            <select class="form-control select2 select2-hidden-accessible" style="width: 50%;" tabindex="-1" aria-hidden="true">
+                                              <option selected="selected">Alabama</option>
+                                              <option>Alaska</option>
+                                              <option>California</option>
+                                              <option>Delaware</option>
+                                              <option>Tennessee</option>
+                                              <option>Texas</option>
+                                              <option>Washington</option>
                                             </select>
+
+
                                         </div>
 
-
                                         <div class="form-group fixMarginRight ">
-                                        <label>Full Name</label>
-                                        <div class="form-group">
-                                                <input type="text" name="name" id="name" class="form-control" max=15 min=1 value="{{ old('name') }}">
-                                            </div>
-
                                             <label>Departure Date:</label>
 
                                             <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" name="date" id="date" class="form-control pull-right" id="datepicker" value="{{ old('date') }}">
+                                                <input type="text" class="form-control pull-right" id="datepicker">
                                             </div>
 
                                             <!-- time Picker -->
@@ -110,7 +86,7 @@
                                                     <label>Time picker:</label>
 
                                                     <div class="input-group">
-                                                        <input type="text" name="time" id="time" class="form-control timepicker" value="{{ old('time') }}">
+                                                        <input type="text" class="form-control timepicker">
 
                                                         <div class="input-group-addon">
                                                             <i class="fa fa-clock-o"></i>
@@ -123,77 +99,96 @@
 
                                             <label>Number of Seats</label>
                                             <div class="form-group">
-                                                <input type="number" name="seat" id="seat" class="form-control" max=15 min=1 value="{{ old('seat') }}">
+                                                <input type="number" class="form-control" max=15 min=1>
                                             </div>
                                             <!-- /.input group -->
-                                            <label>Contact Number</label>
-                                            <div class="form-group">
-                                                <input type="number" name="contact" class="form-control" value="{{ old('contact') }}">
+                                        </div>
+
+                                        <div>
+                                            <!-- Trigger the modal with a button -->
+                                            <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Submit</button>
+
+                                            <!-- Modal -->
+                                            <div id="myModal" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h4 class="modal-title">Walk-in Reservation Information</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Origin: Baguio City</p>
+                                                            <p> Destination: Cabanatuan </p>
+                                                            <p>Preferred date: 01/17/17</p>
+                                                            <p>Departure time: 2:30 PM</p>
+                                                            <p> Total Passengers :2 </p>
+
+                                                            <p>Fare Amount: PHP 350.00</p>
+                                                            <p>Total Passenger : 2 </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
-                                        
-                                                <!-- <button type="button" class="btn btn-primary btn-md">Submit</button> -->
-                                                <input type="submit" class="btn btn-info" value="Submit" onclick="return ConfirmSubmit()">                                        
-                                            </form>
-                                            
-                                        </div>
-                                    
+
+                                    </div>
+
 
                                     <div class="tab-pane" id="tab_3">
-                                    @foreach($reservations->sortByDesc('created_at') as $reservation)
+                                        <div class="form-group">
+                                            <a href="/home/reservations/create" class = "btn btn-outline-danger">Add Walk-in Reservation</a>
+                                        </div>
                                         <table class="table table-bordered table-striped example1">
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
                                                     <th>Destination</th>
-                                                    <th>Date and Time</th>
-                                                    <th># of Seats</th>
-                                                    <th>Amount</th>
+                                                    <th>Time</th>
+                                                    <th>Number of Seats</th>
                                                     <th>Contact Number</th>
-                                                    <th>Transaction</th>
-                                                    <th>Status</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>{{ $reservation->name }}</td>
-                                                    <td>{{ $reservation->destination->description }}</td>
-                                                    <td>{{ $reservation->departure_date . ' ' . $reservation->departure_time}}</td>
-                                                    <td>{{ $reservation->number_of_seats }}</td>
-                                                
-                                                    <td>{{ $reservation->amount }}</td>
-                                                    <td>{{ $reservation->contact_number }}</td>
-                                                    <td>{{ $reservation->type }}</td>
-                                                    <td>{{ $reservation->status }}</td>
-
+                                                    <td>Randall</td>
+                                                    <td>Marcos Highway</td>
+                                                    <td>9:00 pm</td>
+                                                    <td>15</td>
+                                                    <td>65656566565</td>
                                                     <td class="center-block">
                                                         <div class="center-block">
-                                                            <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
-                                                                {{ csrf_field() }}
-                                                                {{ method_field('PATCH') }}
-
-                                                                @if ($reservation->status == 'Pending')
-                                                                    <button class="btn btn-success" type="submit" name="butt" value="Approved"><i class="fa fa-check"></i> Approve</button>
-                                                                    <button class="btn btn-danger" type="submit" name="butt" value="Declined"><i class="fa fa-close"></i> Decline</i></button>
-                                                                @elseif ($reservation->status == 'Approved')
-                                                                    <button class="btn btn-success" type="submit" name="butt" value="Paid"><i class="fa fa-check"></i> Paid</button>
-                                                                    <button class="btn btn-danger" type="submit" name="butt" value="Cancelled"><i class="fa fa-close"></i> Cancel</i></button>
-                                                                @else
-                                                                <form method="POST" action="/home/reservations/{{$reservation->reservation_id}}" class="delete">
-                                                                        {{csrf_field()}}
-                                                                        {{method_field('DELETE')}}
-                                                                        <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</i></button>
-                                                                    </form>
-                                                                @endif
-                                                            </form>
+                                                            <button class="btn btn-success"><i class="fa fa-check"></i> Paid</button>
+                                                            </button>
 
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>Randall;</td>
+                                                    <td>Marcos hHighway</td>
+                                                    <td>9:10 pm</td>
+                                                    <td>05</td>
+                                                    <td>656566565</td>
+                                                    <td class="center-block">
+                                                        <div class="center-block">
+                                                            <button class="btn btn-success"><i class="fa fa-check"></i> Paid</button>
+                                                            <button class="btn btn-danger"><i class="fa fa-close"></i> Declined</button>
+
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
                                             </tbody>
                                         </table>
-                                        @endforeach
                                     </div>
 
                                     <!-- /.box-body -->
@@ -206,15 +201,10 @@
                 </div>
             </section>
 
-
 @endsection
 
 @section('scripts')
 @parent
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-
 <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
@@ -304,33 +294,6 @@
       showInputs: false
     })
   })
-                                                                                                                  
-    $("#dest").select2({
-        placeholder: 'Select destination',
-        allowClear: true
-    })
-
-
-    function ConfirmDelete()
-    {
-        var x = confirm("Delete this request?");
-        if (x)
-        return true;
-        else
-        return false;
-    }
-
-    function ConfirmSubmit()
-    {
-        var x = confirm("You are about to submit this reservation request, this action can not be undone. Do you want to continue?");
-        if (x)
-        return true;
-        else
-        return false;
-    }
-
-
 </script>
-
 
 @endsection

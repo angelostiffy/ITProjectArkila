@@ -34,18 +34,18 @@
         }
     </style>
 @endsection
-@section('title', 'Walk-In')
-@section('form-id', 'Walk-in Reservation')
-@section('form-action', route('rental.index'))
+@section('title', 'Rent Van')
+@section('form-id', 'regForm')
+@section('form-action', route('reservations.store'))
 @section('form-method', 'POST')
 @section('form-body')
 
-                     
+                               {{csrf_field()}}     
 <div class="box box-warning">
         <div class="box-header with-border text-center">
             <a href="{{ URL::previous() }}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
             <h3 class="box-title">
-                Walk-In Reservation
+                Rent a Van
             </h3>
         </div>
         <div class="box-body">
@@ -54,81 +54,78 @@
                 <div class="tab">
                     <h4>Trip Information</h4>
                     <div class="row">
-                         <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Full Name:</label>
-                                <input type="text" class="form-control" placeholder="Full Name" name="firstName" id="firstName" value="{{ old('firstName') }}">
-                            </div>
-                        </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Destination</label>
-                                <select name="dest" class="form-control" id="dest">
-                                    <option>Laos</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Departure Date:</label>
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input type="text" name="date" id="date" class="form-control pull-right" value="">
-                                    </div>
+                                <label>Name:</label>
+                                <input type="text" class="form-control" placeholder="Name" name="name" id="name" value="{{ old('name') }}">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                              <div class="form-group">
-                                <div class="bootstrap-timepicker">
-                                    <div class="form-group">
-                                        <label>Time picker:</label>
-                                            <div class="input-group">
-                                                <input type="text" name="time" id="time" class="form-control timepicker" value="">
-
-                                                 <div class="input-group-addon">
-                                                    <i class="fa fa-clock-o"></i>
-                                                 </div>
-                                            </div>
-                                                    <!-- /.input group -->
-                                    </div>
-                                                <!-- /.form group -->
-                                </div>
-                             </div>
-                        </div>
-                        <div class="col-md-4">
-                             <div class="form-group">
-                                <label>Number of Seats:</label>
-                                <input type="number" class="form-control" placeholder="Number of Seats" name="destination" max="15" min="1" id="destination" value="{{ old('destination') }}">
+                                <label>Contact Number:</label>
+                                <input type="text" class="form-control" placeholder="Contact Number" name="contact" id="contactNumber" value="{{ old('contactNumber') }}">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Contact Number</label>
-                                <input type="text" class="form-control" placeholder="Contact Number" name="destination" id="destination" value="{{ old('destination') }}">
-
+                                <label>Destination:</label>
+                                <select class="form-control" name="dest" id="dest">
+                                    <option value="" disabled selected>Select Destination</option>
+                                @foreach ($destinations as $destination)
+                                   <option value="{{ $destination->destination_id }}" @if($destination->destination_id == old('dest') ) {{'selected'}} @endif>{{ $destination->description }}</option>
+                                   @endforeach
+                               </select>
                             </div>
                         </div>
                     </div>
-           </div>
-    
-            <div class="tab">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Number of Seats:</label>
+                                <input type="number" class="form-control" placeholder="Number of Seats" name="seat" id="seat" value="{{ old('seat') }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Departure Date:</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right" id = "datepicker" name="date" value="{{ old('date') }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        <div class = "bootstrap-timepicker">
+                            <div class="form-group">
+                                <label>Departure Time:</label>
+                                 <div class="input-group">
+                    <input type="text" class="form-control" id = "timepicker" name="time" value="{{ old('time') }}">
+
+                    <div class="input-group-addon">
+                      <i class="fa fa-clock-o"></i>
+                    </div>
+                    </div>
+                  </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <div class="tab">
                     <h4>Summary</h4>
                     <div class = "row">
                            <dl class = "dl-horizontal">
                            <dt>Name:</dt>
                             <dd id="nameView"></dd>
-                            <dt>Contact Number:</dt>
-                            <dd id="contactView"></dd>
                             <dt>Destination:</dt>
                             <dd id="destView"></dd>
-                            <dt>Type of Van:</dt>
-                            <dd id="vanView"></dd>
                             <dt>Number of Days:</dt>
-                            <dd id="daysView">5</dd>
+                            <dd id="seatView"></dd>
+                            <dt>Contact Number:</dt>
+                            <dd id="contactView"></dd>
                             <dt>Departure Date:</dt>
                             <dd id="dateView"></dd>
                             <dt>Departure Time:</dt>
@@ -137,7 +134,6 @@
                         </div>
                     
                 </div>
-
 
                 
                 <!-- Circles which indicates the steps of the form: -->
@@ -153,7 +149,6 @@
                         <button type="button" id="nextBtn" onclick="nextPrev(1); getData();" class = "btn btn-primary">Next</button>
                     </div>
                 </div>
-                </form>
         </div>
     </div> 
 @endsection
@@ -240,25 +235,17 @@
         }
 
         function getData() {
-            var firstName = document.getElementById('firstName').value;
-            var lastName = document.getElementById('lastName').value;
-            var middleName = document.getElementById('middleName').value;
-
-            if(firstName !== '' && lastName !== '' && middleName !== '') {
-                document.getElementById('nameView').textContent = lastName + ', ' + firstName + ' ' + middleName;
-            }
+            var name = document.getElementById('name').value;
+            document.getElementById('nameView').textContent = name;
 
             var contactNumber = document.getElementById('contactNumber').value;
             document.getElementById('contactView').textContent = contactNumber;
 
-            var destination = document.getElementById('destination').value;
+            var destination = document.getElementById('dest').value;
             document.getElementById('destView').textContent = destination;
 
-            var vanType = document.getElementById('model').value;
-            document.getElementById('vanView').textContent = vanType;
-
-            var days = document.getElementById('days').value;
-            document.getElementById('daysView').textContent = days;
+            var seat = document.getElementById('seat').value;
+            document.getElementById('seatView').textContent = seat;
 
             var date = document.getElementById('datepicker').value;
             document.getElementById('dateView').textContent = date;
