@@ -39,28 +39,24 @@
     <![endif]-->
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-        <!-- style.css -->
+    <!-- style.css -->
     <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
 
     @show
 </head>
+
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-blue layout-top-nav">
     <div class="wrapper">
-
         @include('layouts.partials.header_2')
-
         <!-- Full Width Column -->
         <div class="content-wrapper">
             <div class="container">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
 
-                </section>
-                <!-- /.content -->
                 <form id="@yield('form-id')" action="@yield('form-action')" method="POST">
                 {{csrf_field()}}
                 @yield('method_field')
+
                 <section class="content">
                 @yield('form-body')
 
@@ -69,25 +65,30 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span></button>
+                                <span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title"> @yield('modal-title') </h4>
                             </div>
+                            <!-- /.modal-header -->
                             <div class="modal-body">
                                 @yield('modal-body')
                             </div>
+                            <!-- /.modal-body -->
                             <div class="modal-footer">
                                 @yield('modal-btn')
                             </div>
+                            <!--/.modal-foorer -->
                         </div>
                         <!-- /.modal-content -->
                     </div>
                     <!-- /.modal-dialog -->
                 </div>
-        <!-- /.modal -->
+                <!-- /.modal -->
                 </section>
                 </form>
             </div>
-                    <!-- TEST LANG FLASHING ERRORS -->
+            <!-- /.container -->
+
+                <!-- TEST LANG FLASHING ERRORS -->
                 @if ($flash = session('message'))
                 <div class="alert alert-success" id="flash-msg" role="alert">
                     {{ $flash }}
@@ -101,14 +102,10 @@
                 </div>
                 @endif
             <!-- test langggg -->
-
-            <!-- /.container -->
         </div>
         <!-- /.content-wrapper -->
 
-        
         @include('layouts.partials.footer')
-
     </div>
     <!-- ./wrapper -->
 

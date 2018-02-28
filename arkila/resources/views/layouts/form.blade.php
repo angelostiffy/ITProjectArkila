@@ -39,8 +39,11 @@
     <![endif]-->
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!-- style.css -->
+    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
     @show
 </head>
+
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-blue layout-top-nav">
     <div class="wrapper">
@@ -50,63 +53,58 @@
         <!-- Full Width Column -->
         <div class="content-wrapper">
             <div class="container">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-
-                </section>
-                <!-- /.content -->
                 <form action="@yield('form-action')" method="POST">
                 {{csrf_field()}}
                 @yield('method_field')
-                <section class="content">
-                    <div class="login-box">
-                        <div class="login-logo">
-                            <div class="col-md-1">
-                                <h1><a href= @yield('back-link') ><i class="fa fa-arrow-circle-left"></i></a></h1>
+                    <section class="content">
+                        <div class="login-box">
+                            <div class="login-logo">
+                                <div class="col-md-1">
+                                    <h1><a href= @yield('back-link') ><i class="fa fa-arrow-circle-left"></i></a></h1>
+                                </div>
+                                <div class="col-md-11">
+                                    <h1>
+                                        @yield('form-title')
+                                    </h1>
+                                </div>
                             </div>
-                            <div class="col-md-11">
-                                <h1>
-                                    @yield('form-title')
-                                </h1>
+                            <div class="login-box-body">
+                                @yield('form-body')
+                                
+                                    <!-- FORM -->
+                                
+                                
                             </div>
-                        </div>
-                        <div class="login-box-body">
-                            @yield('form-body')
-                            
-                                <!-- FORM -->
+                            <!-- /.login-box-body -->
+                            <div class="box-footer">
+                                    @yield('others') 
                                 <div class="form-group pull-right">
                                     @yield('form-btn')
                                 </div>
-
-                            
-                            <a href="#">lorem</a><br>
-                            <a href="#" class="text-center">lorem</a>
-
+                            </div>
                         </div>
-                        <!-- /.login-box-body -->
-                    </div>
 
-                    <div class="modal fade" id="form-modal">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"> @yield('modal-title') </h4>
-                    </div>
-                    <div class="modal-body">
-                        @yield('modal-body')
-                    </div>
-                    <div class="modal-footer">
-                        @yield('modal-btn')
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-                </section>
+                        <div class="modal fade" id="form-modal">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                        <h3 class="modal-title"> @yield('modal-title') </h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        @yield('modal-body')
+                                    </div>
+                                    <div class="modal-footer">
+                                        @yield('modal-btn')
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+                    </section>
                 </form>
             </div>
             <!-- /.container -->
@@ -115,7 +113,6 @@
 
         
         @include('layouts.partials.footer')
-
     </div>
     <!-- ./wrapper -->
 

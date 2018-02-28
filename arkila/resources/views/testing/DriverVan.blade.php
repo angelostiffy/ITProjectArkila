@@ -36,15 +36,24 @@
         }
     </style>
 @endsection
-@section('title', 'Operator Registration')
-@section('form-id','regForm')
-@section('form-action','#')
+@section('title', 'Driver Registration')
+@section('form-id', 'regForm')
+
+@if ( isset($operator) )
+    @section('form-action',route('drivers.storeFromOperator',[$operator->member_id]))
+@elseif ( isset($van) )
+    @section('form-action',route('drivers.storeFromVan',[$van->plate_number]))
+@else
+    @section('form-action',route('drivers.store'))
+@endif
+
+
 @section('form-body')
-<div class="box box-primary">
+<div class="box box-warning">
         <div class="box-header with-border text-center">
-            <a href="" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+            <a href="{{URL::previous()}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
             <h3 class="box-title">
-                Operator Registration
+                Driver Registration
             </h3>
         </div>
         <div class="box-body">
@@ -52,24 +61,50 @@
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">
                     <h4>Personal Information</h4>
-                    
+                    @include('message.error')
+                    <div class="row">
+                        <div class="col-md-4">
+                        <div class=" form-group">
+                            @if(isset($operator))
+                                <label for"opName">Operator Name:</label>
+                                <span id="opName">{{$operator->full_name}}</span>
+                            @else
+                                <label>Choose Operator:</label>
+                                <select name="operator" id="" class="form-control select2">
+                                    <option value='' @if(!old('operator')) {{'selected'}} @endif>No Operator</option>
+                                    @foreach($operators as $operator)
+                                        <option value={{$operator->member_id}} @if($operator->member_id == old('operator')) {{'selected'}}@endif>{{$operator->full_name}}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                        </div>
+                        <!-- drivervan -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Van Unit</label>
+                                <span id="">dito yung name ng van</span>
+                            </div>
+                        </div>
+                        <!-- /drivervan -->
+                    </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Last Name:</label>
-                                <input type="text" class="form-control" placeholder="Last Name">
+                                <input value="{{old('lastName')}}" name="lastName" type="text" class="form-control" placeholder="Last Name">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>First Name:</label>
-                                <input type="text" class="form-control" placeholder="First Name">
+                                <input value="{{old('firstName')}}" name="firstName" type="text" class="form-control" placeholder="First Name">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Middle Name:</label>
-                                <input type="text" class="form-control" placeholder="Middle Name">
+                                <input value="{{old('middleName')}}" name="middleName" type="text" class="form-control" placeholder="Middle Name">
                             </div>
                         </div>
                     </div>
@@ -77,29 +112,23 @@
                         <div class="col-md-4">
                              <div class="form-group">
                                 <label>Contact Number:</label>
-                                <input type="text" class="form-control" placeholder="Contact Number">
+                                <input value="{{old('contactNumber')}}" name="contactNumber" type="text" class="form-control" placeholder="Contact Number">
                             </div>
                         </div>
                         <div class="col-md-4">
                              <div class="form-group">
                                 <label>Address:</label>
-                                <input type="text" class="form-control" placeholder="Address">
+                                <input value="{{old('address')}}" name="address" type="text" class="form-control" placeholder="Address">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Provincial Address:</label>
-                                <input type="text" class="form-control" placeholder="Provincial Address">
+                                <input value="{{old('provincialAddress')}}" name="provincialAddress" type="text" class="form-control" placeholder="Provincial Address">
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Age:</label>
-                                <input type="number" class="form-control" placeholder="Age">
-                            </div>
-                        </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Birthdate:</label>
@@ -107,62 +136,64 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" class="form-control pull-right datepicker">
+                                    <input value="{{old('birthDate')}}" name="birthDate" type="text" class="form-control pull-right datepicker">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Birthplace:</label>
-                                <input type="text" class="form-control" placeholder="Birthplace">
+                                <input value="{{old('birthPlace')}}" name="birthPlace" type="text" class="form-control" placeholder="Birthplace">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                    
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Gender:</label>
                                 <div class="radio">
                                     <label for=""> Male</label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="gender"  value="male" class="flat-blue">
+                                        <input type="radio" name="gender"  value="Male" class="flat-blue" @if(old('gender') == 'Male') {{'checked'}}@endif>
                                     </label>
                                     <label for="">Female</label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="gender" value="female" class="flat-blue">
+                                        <input type="radio" name="gender" value="Female" class="flat-blue" @if(old('gender') == 'Female') {{'checked'}}@endif>
                                     </label>
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                    <div class="row">    
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Citizenship:</label>
-                                <input type="text" class="form-control" placeholder="Citizenship">
+                                <input value="{{old('citizenship')}}" name="citizenship" type="text" class="form-control" placeholder="Citizenship">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Civil Status:</label>
-                                <select class="form-control">
-                                   <option>Single</option>
-                                   <option>Married</option>
-                                   <option>Divorced</option>
-                                   <option>Widowed</option>
+                                <select name="civilStatus" class="form-control">
+                                   <option value="Single" @if(old('civilStatus') == 'Single') {{'selected'}} @endif>Single</option>
+                                   <option value="Married" @if(old('civilStatus') == 'Married') {{'selected'}} @endif>Married</option>
+                                   <option value="Divorced" @if(old('civilStatus') == 'Divorced') {{'selected'}} @endif>Divorced</option>
                                </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                   
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>SSS No:</label>
-                                <input type="text" class="form-control" placeholder="SSS No.">
+                                <input value="{{old('sss')}}" name="sss" type="text" class="form-control" placeholder="SSS No.">
                             </div>
                         </div>
+                    </div>
+                    <div class="row">    
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>License No:</label>
-                                <input type="text" class="form-control" placeholder="License No.">
+                                <input value="{{old('licenseNo')}}" name="licenseNo" type="text" class="form-control" placeholder="License No.">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -172,7 +203,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" class="form-control pull-right datepicker">
+                                    <input value="{{old('licenseExpiryDate')}}" name="licenseExpiryDate" type="text" class="form-control pull-right datepicker">
                                 </div>
                             </div>
                         </div>
@@ -184,7 +215,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Name of Spouse:</label>
-                                <input type="text" class="form-control" placeholder="Name of Spouse">
+                                <input value="{{old('nameOfSpouse')}}" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -194,7 +225,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" class="form-control pull-right datepicker">
+                                    <input value="{{old('spouseBirthDate')}}" name="spouseBirthDate" type="text" class="form-control pull-right datepicker">
                                 </div>
                             </div>
                         </div>
@@ -203,13 +234,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Fathers Name:</label>
-                                <input type="text" class="form-control" placeholder="Fathers Name">
+                                <input value="{{old('fathersName')}}" name="fathersName" type="text" class="form-control" placeholder="Fathers Name">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Occupation:</label>
-                                <input type="text" class="form-control" placeholder="Occupation">
+                                <input value="{{old('fatherOccupation')}}" name="fatherOccupation" type="text" class="form-control" placeholder="Occupation">
                             </div>
                         </div>
                     </div>
@@ -217,13 +248,13 @@
                         <div class="col-md-6">
                              <div class="form-group">
                                 <label>Mothers Name:</label>
-                                <input type="number" class="form-control" placeholder="Mothers Name">
+                                <input value="{{old('mothersName')}}" name="mothersName" type="text" class="form-control" placeholder="Mothers Name">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Occupation:</label>
-                                <input type="text" class="form-control" placeholder="Occupation">
+                                <input value="{{old('motherOccupation')}}" name="motherOccupation" type="text" class="form-control" placeholder="Occupation">
                             </div>
                         </div>
                     </div>
@@ -232,19 +263,19 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Contact Person</label>
-                                <input type="text" class="form-control" placeholder="Contact Person In Case of Emergency">
+                                <input value="{{old('contactPerson')}}" name="contactPerson" type="text" class="form-control" placeholder="Contact Person In Case of Emergency">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Address</label>
-                                <input type="text" class="form-control" placeholder="Address">
+                                <input value="{{old('contactPersonAddress')}}" name="contactPersonAddress" type="text" class="form-control" placeholder="Address">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Contact Number</label>
-                                <input type="text" class="form-control" placeholder="Contact Number">
+                                <input value="{{old('contactPersonContactNumber')}}" name="contactPersonContactNumber" type="text" class="form-control" placeholder="Contact Number">
                             </div>
                         </div>
                     </div>
@@ -262,25 +293,52 @@
                                     </th>
                                 </thead>
                                 <tbody id="childrens">
+
+                                @if(old('children'))
+
+                                    @for($i = 0; $i < count(old('children')); $i++)
+                                        <tr>
+                                            <td>
+                                                <input value="{{old('children.'.$i)}}" name="children[]" type="text" placeholder="Name of Child" class="form-control">
+                                            </td>
+                                            <td>
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input value="{{old('childrenBDay.'.$i)}}" name="childrenBDay[]" type="text" class="form-control pull-right datepicker">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="pull-right">
+                                                    <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    @endfor
+                                @else
                                     <tr>
                                         <td>
-                                            <input type="text" placeholder="Name of Child" class="form-control">
+                                            <input name="children[]" type="text" placeholder="Name of Child" class="form-control">
                                         </td>
                                         <td>
                                             <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker">
+                                                <input name="childrenBDay[]" type="text" class="form-control pull-right datepicker">
                                             </div>
                                         </td>
                                         <td>
-                                        <div class="pull-right">
-                                        <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
-                                    </div>
+                                            <div class="pull-right">
+                                                <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
+                                            </div>
                                         </td>
 
                                     </tr>
+                                @endif
+
                                 </tbody>
                             </table>
 
@@ -303,7 +361,7 @@
                     </div>
                 </div>
         </div>
-    </div>
+    </div> 
 @endsection
 @section('scripts')
 @parent
@@ -410,21 +468,20 @@
             x[n].className += " active";
         }
     </script>
+
     <script>
     $(function () {
 
-        $('.select2').select2()
+        $('.select2').select2();
 
         $('#datepicker').datepicker({
           autoclose: true
-        })
+        });
 
         $('input[type="checkbox"].flat-blue, input[type="radio"].flat-blue').iCheck({
           checkboxClass: 'icheckbox_flat-blue',
           radioClass   : 'iradio_flat-blue'
-        })
+        });
     })
     </script>
-
-    
 @endsection

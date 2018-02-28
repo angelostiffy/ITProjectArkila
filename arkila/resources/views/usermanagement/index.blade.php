@@ -51,7 +51,7 @@
                     <td>{{$userAdmin->description}}</td>
                     <td class="center-block">
                     <div class="center-block">
-                         <button class="btn btn-default"><i class="glyphicon glyphicon-cog"></i></button>
+                         <a href="/home/user-management/admin/{{$userAdmin->userid}}" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i></a>
 
                     </div>
                     </td>
@@ -78,10 +78,10 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($userDrivers as $userDriver)    
                     <tr>
-
-                    <td></td>
-                    <td></td>
+                    <td>{{$userDriver->name}}</td>
+                    <td>{{$userDriver->username}}</td>
                     
                     <td class="center-block">
                     <div class="center-block">
@@ -89,7 +89,8 @@
 
                     </div>
                     </td>
-
+                    </tr>
+                    @endforeach
                 </table>
             </div>
             </div>
@@ -108,17 +109,19 @@
                 </tr>
                 </thead>
                 <tbody>
+                @foreach($userCustomers as $userCustomer)
                 <tr>
-
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{$userCustomer->name}}</td>
+                <td>{{$userCustomer->username}}</td>
+                <td>{{$userCustomer->email}}</td>
                 <td class="center-block">
                     <div class="center-block">
                          <button class="btn btn-default"><i class="glyphicon glyphicon-cog"></i></button>
 
                     </div>
                 </td>
+                @endforeach
+                </tr>
                 </table>
                 </div>
                 </div>
