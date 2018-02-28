@@ -4,79 +4,59 @@
 @section('links')
 @parent
   <link rel="stylesheet" href="public\css\myOwnStyle.css">
-  @stop
+
+@stop
 @section('content')
 @section('form-body')
           
 
-  <div class="form-group">
-    <label for="payor">User name:</label>
-    <span>Span</span>
+<div class="form-group">
+  <label for="payor">User name:</label>
+  <span>Span</span>
+</div>
+<div class="form-group">
+  <label for="Particulars">Name:</label>
+  <span>Yuki Marfil</span>
+</div>
+<div class="form-group">
+  <label for="Particulars">Email Address:</label>
+  <span>yuki@grkngc.com</span>
+</div>          
+
+
+<div class="well">                          
+  <div class="box-body no-padding">
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#"><i class="fa fa-inbox"></i> Enable/Disable Account
+        <span class="label pull-right">         
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </span></a>
+      </li>
+    </ul>
   </div>
-  <div class="form-group">
-    <label for="Particulars">Name:</label>
-    <span>Yuki Marfil</span>
-  </div>
-  <div class="form-group">
-    <label for="Particulars">Email Address:</label>
-    <span>yuki@grkngc.com</span>
-  </div>
 
-  <div>
-  <button type="button" class="btn btn-danger" data-dismiss="modal">Reset Password</button> </div>                 
-              
-                    
-                    
-                    
-                    <div class="col-md-4">
-                        <div class="box box-solid">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Advanced Features</h3>
+  <button type="button" class="btn btn-danger btn-block" style="margin-top:5%" data-toggle="modal" data-target="#form-modal">Reset Password</button>  
 
-                                <div class="box-tools">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                                </div>
-                            </div>
-                            <div class="box-body no-padding">
-                                <ul class="nav nav-pills nav-stacked">
-                                    <li><a href="#"><i class="fa fa-inbox"></i> Online Reservation Feature
-                  <span class="label pull-right">         
-                      <label class="switch">
-                          <input type="checkbox">
-                          <span class="slider round"></span>
-                      </label>
-                  </span></a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-inbox"></i> Walk-in Reservation Feature
-                  <span class="label pull-right">         
-                      <label class="switch">
-                          <input type="checkbox">
-                          <span class="slider round"></span>
-                      </label>
-                  </span></a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-inbox"></i> Van Rental Feature
-                  <span class="label pull-right">         
-                      <label class="switch">
-                          <input type="checkbox">
-                          <span class="slider round"></span>
-                      </label>
-                  </span></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- /.box-body -->
-                        </div>
-                        <!-- /. box -->
-                    </div>
+  @section('modal-title','Alert')
+  @section('modal-body')
+    <p>Are you sure you want to Reset "NAME"'s password?</p>
+  @endsection
 
+  @section('modal-btn')
+    <button type="submit" class="btn btn-primary">Yes</button>
+    <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+  @endsection 
 
+</div>
                    
 @endsection
-@section('form-btn')     
+@section('form-btn')  
+
    <button type="button" class="btn btn-primary" data-dismiss="modal">Save Changes</button>
-   <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+   <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
 
 @endsection
 
