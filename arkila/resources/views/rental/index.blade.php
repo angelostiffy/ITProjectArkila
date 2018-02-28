@@ -31,11 +31,11 @@
                 @foreach($rentals as $rental)
                 <tr>
                   <td>{{ $rental->full_name }}</td>
-                  <td>Dagupan, Pangasinan</td>
-                  <td>02-17-2018</td>
-                  <td>8:00 AM</td>
-                  <td>09966581956</td>
-                  <td>Declined</td>
+                  <td>{{ $rental->destination }}</td>
+                  <td>{{ $rental->departure_date }}</td>
+                  <td>{{ $rental->departure_time }}</td>
+                  <td>{{ $rental->contact_number }}</td>
+                  <td>{{ $rental->status }}</td>
                   <td>
                     <div class="text-center">
                         <a href="operatorProfile.html" class="btn btn-success "><i class="fa fa-automobile"></i> Depart</a>

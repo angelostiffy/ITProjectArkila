@@ -11,6 +11,12 @@
 |
 */
 
+//Made by Randall
+Route::get('/randall', function(){
+    return view('operators.edit2NiRandall');
+});
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -67,7 +73,11 @@ Route::get('home/settings', 'HomeController@settings');
 /****************************************************/
 
 /************ User Management ******************************/
-Route::resource('home/user-management', 'UserManagementController');
+Route::get('home/user-management', 'HomeController@usermanagement');
+
+Route::resource('home/user-management/admin', 'AdminUserManagementController', [
+	'except' => ['index']
+]);
 /****************************************************/
 
 Route::resource('home/test', 'TestController');

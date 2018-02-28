@@ -81,6 +81,7 @@ class DriversController extends Controller
         //
     }
 
+
     public function createFromOperator(Member $operator){
         return view('drivers.create',compact('operator'));
     }
@@ -134,7 +135,7 @@ class DriversController extends Controller
      * @param  \App\Driver  $driver
      * @return \Illuminate\Http\Response
      */
-    public function show(Driver $driver)
+    public function show(Member $driver)
     {
         return view('drivers.show',compact('driver'));
         //
@@ -146,10 +147,10 @@ class DriversController extends Controller
      * @param  \App\Driver  $driver
      * @return \Illuminate\Http\Response
      */
-    public function edit(Driver $driver)
+    public function edit(Member $driver)
     {        
-        $operator = Member::allOperators();
-        return view('drivers.edit', compact('driver', 'operator'));
+        $operators = Member::allOperators()->get();
+        return view('drivers.edit', compact('driver', 'operators'));
         
         //
     }
@@ -161,7 +162,7 @@ class DriversController extends Controller
      * @param  \App\Driver  $driver
      * @return \Illuminate\Http\Response
      */
-    public function update(DriverRequest $request, Driver $driver)
+    public function update(DriverRequest $request, Member $driver)
     {
 
         $children = array_combine($request->children,$request->childrenBDay);
@@ -177,30 +178,28 @@ class DriversController extends Controller
             'provincial_address' => $request->provincialAddress,
             'birth_date' => $request->birthDate,
             'birth_place' => $request->birthPlace,
-            'age' => $request->birthPlace,
+            'age' => $request->birthDate,
             'gender' => $request->gender,
             'citizenship' => $request->citizenship,
             'civil_status' => $request->civilStatus,
-            'number_of_children' => $request->noChild,//
-            'spouse' => $request->spouse,
+            'spouse' => $request->nameOfSpouse,
             'spouse_birthdate' => $request->spouseBirthDate,
             'father_name' => $request->fathersName,
             'father_occupation' => $request->fatherOccupation,
             'mother_name' => $request->mothersName,
             'mother_occupation' => $request->motherOccupation,
-            'person_in_case_of_emergency' => $request->personInCaseOfEmergency,
-            'emergency_address' => $request->emergencyAddress,
-            'emergency_contactno' => $request->emergencyContactNumber,
+            'person_in_case_of_emergency' => $request->contactPerson,
+            'emergency_address' => $request->contactPersonAddress,
+            'emergency_contactno' => $request->contactPersonContactNumber,
             'SSS' => $request->sss,
-            'license_number' => $request->driverLicense,
-            'expiry_date' => $request->driverLicenseExpiryDate,
+            'license_number' => $request->licenseNo,
+            'expiry_date' => $request->licenseExpiryDate,
             'number_of_children' => sizeof($children)
         ]);
-
         $driver->children()->delete();
         $driver->addChildren($children);
 
-        return redirect()->route('drivers.show',compact('driver'))->with('success', 'Information updated successfully');
+        return redirect()->route('drivers.index',compact('driver'))->with('success', 'Information updated successfully');
 
     }
 

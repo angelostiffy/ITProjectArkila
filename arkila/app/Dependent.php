@@ -22,4 +22,8 @@ class Dependent extends Model
         $this->attributes['birthdate'] = Carbon::parse($value);
     }
 
+    public function getBirthdateAttribute($value){
+        return  Carbon::parse($value)->format('m/d/Y');
+    }
+
 }

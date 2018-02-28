@@ -15,18 +15,16 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('username');
+            $table->string('name', 50);
+            $table->string('username', 15)->unique();
             $table->string('email')->unique()->nullable();
             $table->string('password');
-<<<<<<< HEAD
+
             $table->enum('user_type', ['Driver', 'Customer', 'Admin', 'Super-Admin']);
             $table->enum('status', ['enable', 'disable']);
-=======
-            $table->enum('status', ['enable', 'disable']);
-            $table->enum('user_type', ['Driver', 'Customer', 'Admin', 'Super-Admin']);
+
             $table->integer('terminal_id')->unsigned()->nullable();
->>>>>>> 9cc3f2647c8521a13e054a5f52cbdb8b45dbcecb
+
             $table->rememberToken();
             $table->timestamps();
 

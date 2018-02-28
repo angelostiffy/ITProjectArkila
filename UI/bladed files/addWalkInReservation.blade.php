@@ -7,82 +7,75 @@
   @stop
 @section('content')
 @section('form-body')
-                                            <div class="form-group">
-                                             <label>Destination</label>
-                                            <select class="form-control select2 select2-hidden-accessible" style="width: 50%;" tabindex="-1" aria-hidden="true">
-                                              <option selected="selected">Alabama</option>
-                                              <option>Alaska</option>
-                                              <option>California</option>
-                                              <option>Delaware</option>
-                                              <option>Tennessee</option>
-                                              <option>Texas</option>
-                                              <option>Washington</option>
-                                            </select>
 
+        <div class="form-group">
+            <label>Destination</label>
+                <select class="form-control select2 select2-hidden-accessible" style="width: 50%;" tabindex="-1" aria-hidden="true">
+                    <option selected="selected">Alabama</option>
+                    <option>Alaska</option>
+                    <option>California</option>
+                    <option>Delaware</option>
+                    <option>Tennessee</option>
+                    <option>Texas</option>
+                    <option>Washington</option>
+                </select>
+        </div>
 
-                                        </div>
+        <div class="form-group fixMarginRight ">
+            <label>Departure Date:</label>
+                <div class="input-group date">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right" id="datepicker">
+                </div>
 
-                                        <div class="form-group fixMarginRight ">
-                                            <label>Departure Date:</label>
+         <!-- time Picker -->
+        <div class="bootstrap-timepicker">
+            <div class="form-group">
+                <label>Time picker:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control timepicker">
+                            <div class="input-group-addon">
+                                <i class="fa fa-clock-o"></i>
+                             </div>
+                    </div>
+                    <!-- /.input group -->
+                </div>
+             <!-- /.form group -->
+        </div>
 
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right" id="datepicker">
-                                            </div>
-
-                                            <!-- time Picker -->
-                                            <div class="bootstrap-timepicker">
-                                                <div class="form-group">
-                                                    <label>Time picker:</label>
-
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control timepicker">
-
-                                                        <div class="input-group-addon">
-                                                            <i class="fa fa-clock-o"></i>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.input group -->
-                                                </div>
-                                                <!-- /.form group -->
-                                            </div>
-
-                                            <label>Number of Seats</label>
-                                            <div class="form-group">
-                                                <input type="number" class="form-control" max=15 min=1>
-                                            </div>
-                                            <!-- /.input group -->
-                                        </div>
+        <div class="form-group">
+            <label>Number of Seats</label>
+            <input type="number" class="form-control" max=15 min=1>
+        </div>
+            <!-- /.input group -->
+        </div>
           
-                         <div id="myModal" class="modal fade" role="dialog">
-                                                <div class="modal-dialog">
-
-                                                    <!-- Modal content-->
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                            <h4 class="modal-title">Walk-in Reservation Information</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>Origin: Baguio City</p>
-                                                            <p> Destination: Cabanatuan </p>
-                                                            <p>Preferred date: 01/17/17</p>
-                                                            <p>Departure time: 2:30 PM</p>
-                                                            <p> Total Passengers :2 </p>
-
-                                                            <p>Fare Amount: PHP 350.00</p>
-                                                            <p>Total Passenger : 2 </p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
-                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                 <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Walk-in Reservation Information</h4>
+                    </div>
+                        <div class="modal-body">
+                            <p>Origin: Baguio City</p>
+                            <p> Destination: Cabanatuan </p>
+                            <p>Preferred date: 01/17/17</p>
+                            <p>Departure time: 2:30 PM</p>
+                            <p> Total Passengers :2 </p>
+                            <p>Fare Amount: PHP 350.00</p>
+                            <p>Total Passenger : 2 </p>
+                        </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                </div>
+            </div>
+        </div>
                         
                         
 @endsection
