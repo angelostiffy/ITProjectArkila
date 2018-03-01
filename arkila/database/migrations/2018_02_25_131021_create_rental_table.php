@@ -21,7 +21,7 @@ class CreateRentalTable extends Migration
             $table->string('last_name', 50);
             $table->string('middle_name', 50);
             $table->string('departure_date');
-            $table->string('departure_time', 5);
+            $table->string('departure_time', 8);
             $table->smallInteger('number_of_days');
             $table->string('destination');
             $table->string('contact_number', 13);
