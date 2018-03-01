@@ -31,7 +31,7 @@
     </div>
 @endsection 
 @section('others')
-<input name="addDriver" type="checkbox"> <span>Add new driver to this van unit</span>
+<input name="addDriver" type="checkbox" class="minimal"> <span>Add new driver to this van unit</span>
 @endsection
 
 
@@ -51,6 +51,10 @@
 	<script>
     $(function () {
         $('.select2').select2()
-    })
+
+        $('input[type="checkbox"].minimal').iCheck({
+            checkboxClass: 'icheckbox_minimal-blue',
+        })
+    });
 	</script>
 @endsection

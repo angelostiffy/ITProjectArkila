@@ -39,6 +39,7 @@
 <div class="form-group">
        <span id ="checkBox">
            <input name="addDriver" type="checkbox" class="minimal"> <span>Add new driver to this van unit</span>
+
        </span>
 
 
@@ -59,19 +60,39 @@
 	@parent
 	<script>
         $(function () {
-            $('.select2').select2()
+            $('.select2').select2();
 
             $('input[type="checkbox"].minimal').iCheck({
-            checkboxClass: 'icheckbox_minimal-blue',
-            })
+            checkboxClass: 'icheckbox_minimal-blue'
+            });
+
+            checkBoxChecker();
     });
 
         $('#driver').on('change', function() {
             if(this.value.trim().length === 0 && $('#checkBox').is(':empty')){
-                    $('#checkBox').append('<input type="checkbox" class="minimal"> <span>Add new driver to this van unit</span>');
+                    $('#checkBox').append('<input name="addDriver" type="checkbox" class="minimal"> <span>Add new driver to this van unit</span>');
             }else{
                     $('#checkBox').empty();
             }
+            $('input[type="checkbox"].minimal').iCheck({
+                checkboxClass: 'icheckbox_minimal-blue'
+            });
+            checkBoxChecker();
         });
+
+
+        function checkBoxChecker(){
+            $('input[name="addDriver"]').on('ifChecked', function(){
+                $('#driver').prop('disabled', true);
+            });
+
+            $('input[name="addDriver"]').on('ifUnchecked', function(){
+                $('#driver').prop('disabled', false);
+            });
+        }
+
 	</script>
 @endsection
+
+

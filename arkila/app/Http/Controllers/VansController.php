@@ -25,10 +25,6 @@ class VansController extends Controller {
 
     }
 
-    public function create(){
-        $operators = Member::allOperators()->get();
-        return view('vans.create');
-    }
     /**
      * Show the form for creating a new resource.
      *
