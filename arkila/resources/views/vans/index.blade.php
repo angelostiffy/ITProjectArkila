@@ -6,7 +6,7 @@
 <div class="box">
     <!-- /.box-header -->
     <div class="box-body">
-    	<div class="cold-md-6">
+    	<div class="col-md-6">
     		<a href="" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create Van</a>
     	</div>
         <table id="van" class="table table-bordered table-striped">
@@ -24,23 +24,21 @@
                 @foreach($vans as $van)
 						<tr>
 							<td>{{$van->plate_number}}</td>
-							<td>{{
-								$van->driver()->first()->full_name ?? $van->driver()->first()
-							
-							}}</td>
-							<td></td>
+							<td>
+							{{ $van->driver()->first()->full_name ?? $van->driver()->first() }}
+							</td>
+							<td>{{ $van->operator()->first()->full_name }}</td>
 							<td>{{$van->model}}</td>
 							<td>{{$van->seating_capacity}}</td>
 							<td>
 								<div class="text-center">
-		                            <a href="home/vans/{{$van->plate_number}}" class="btn btn-primary"><i class="fa fa-eye"></i>View</a>
-		                            <a href="/home/vans/{{$van->plate_number}}/edit" class="btn btn-info"><i class="fa fa-pencil-square-o"></i>Edit</a>
-		                            <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</i></button>
-
-		                            <form method="POST" action="/home/vans/{{$van->plate_number}}">
+									<form method="POST" action="{{route('vans.destroy',[$van->plate_number])}}">
 									{{csrf_field()}}
 									{{method_field('DELETE')}}
-									<button>Delete</button>
+		                            <a href="home/vans/{{$van->plate_number}}" class="btn btn-primary"><i class="fa fa-eye"></i>View</a>
+		                            <a href="/home/vans/{{$van->plate_number}}/edit" class="btn btn-info"><i class="fa fa-pencil-square-o"></i>Edit</a>
+
+									<button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
 								</form>
 		                        </div>
 							</td>

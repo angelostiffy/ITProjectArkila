@@ -45,8 +45,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> Rental</a></li>
-                            <li><a href="$"><i class="fa fa-circle-o text-aqua"></i> Reservation</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Rental</a></li>
+                            <li><a href="$"><i class="fa fa-circle-o"></i> Reservation</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -58,9 +58,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> User Management</a></li>
-                            <li><a href="{{route('operators.index')}}"><i class="fa fa-circle-o text-aqua"></i> Operators</a></li>
-                            <li><a href="{{route('drivers.index')}}"><i class="fa fa-circle-o text-aqua"></i> Vans and Drivers</a></li>>
+                            <li><a href="{{route('operators.index')}}"><i class="fa fa-circle-o"></i> Operators</a></li>
+                            <li><a href="{{route('drivers.index')}}"><i class="fa fa-circle-o"></i> Vans and Drivers</a></li>>
                         </ul>
                     </li>
                     <li>
@@ -68,12 +67,16 @@
                             <i class="fa fa-bus"></i> <span>Trips</span>
                         </a>
                     </li>
-                    <li class="treeview">
+                    <li>
                         <a href="#">
                             <i class="fa fa-calculator"></i> <span>Accounting</span>
                         </a>
                     </li>
-
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-male"></i> <span>User Management</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="#">
                             <i class="fa fa-gear"></i> <span>Settings</span>

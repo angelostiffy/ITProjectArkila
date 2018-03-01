@@ -18,15 +18,9 @@ class VansController extends Controller {
     public function index()
     {
         $vans = Van::all();
-<<<<<<< HEAD
+
         return view('vans.index', compact('vans'));
-=======
 
-        return view('vans.oldvan.vanList', compact('vans'));
-
-        return view('vans.DriverVan', compact('vans'));
-
->>>>>>> 9ffe7158e703776011db816faff772a0aed5da2e
     }
 
 
