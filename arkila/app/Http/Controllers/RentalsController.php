@@ -41,7 +41,6 @@ class RentalsController extends Controller
     public function store(RentalRequest $request)
     {
         $perContactNumber = '+63'.request('contactNumber');
-        $type = 'Walk-in';
 
         Rental::create([
             'last_name' => $request->lastName,
@@ -53,12 +52,13 @@ class RentalsController extends Controller
             'destination' => $request->destination,
             'number_of_days' => $request->days,
             'contact_number' => $perContactNumber,
-            'rent_type' => $type,
+            'rent_type' => 'Walk-in',
+            'status' => 'Paid',
     
         ]);
-        session()->flash('message', 'Reservation was created successfully');
+        session()->flash('message', 'Rental was created successfully');
     
-        return redirect('/home/rental/');
+        return redirect('/home/rental/create');
 
     }    
 
@@ -91,9 +91,14 @@ class RentalsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */ 
-    public function update(Request $request, $id)
+    public function update(Rental $rental)
     {
+        $rental->update([
+            'status' => request('click'),
+        ]);
 
+        return redirect()->back()->with('message', 'Rental request marked '. request('click'));
+        
     }
 
     /**
@@ -102,8 +107,10 @@ class RentalsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Rental $rental)
     {
-        //
+        $rental->delete();
+        return back()->with('message', 'Successfully Deleted');
+
     }
 }

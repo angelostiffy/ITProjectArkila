@@ -48,20 +48,11 @@ class AdminUserManagementController extends Controller
         return redirect('/home/user-management');
     }
 
-    public function show($id)
-    {
-        return view('usermanagement.editAdmin');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
-        //
+        $user = User::where('id', $id)->admin()->get();
+        return view('usermanagement.editAdmin', compact('user'));
     }
 
     /**
@@ -85,5 +76,10 @@ class AdminUserManagementController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changeStatus()
+    {
+
     }
 }

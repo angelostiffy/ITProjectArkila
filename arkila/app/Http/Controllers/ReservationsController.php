@@ -19,7 +19,7 @@ class ReservationsController extends Controller
         //
         $reservations = Reservation::all();
         $destinations = Destination::all();
-        return view('reservations.walkIn', compact('reservations', 'destinations'));
+        return view('reservations.create', compact('reservations', 'destinations'));
     }
 
     /**
@@ -29,7 +29,8 @@ class ReservationsController extends Controller
      */
     public function create()
     {
-        //
+        $destinations = Destination::all();
+        return view('reservations.create', compact('destinations'));
     }
 
     /**
@@ -53,7 +54,7 @@ class ReservationsController extends Controller
             'number_of_seats' => $request->seat,
             'contact_number' => $perContactNumber,
             'amount' => $amount,
-            'type' => $request->type,
+            'type' => 'Walk-in',
 
         ]);
         session()->flash('message', 'Reservation was created successfully');

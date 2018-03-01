@@ -17,11 +17,20 @@ class Van extends Model
 	];  
 	//
 
-    public function member(){
-        return $this->belongsToMany(Van::class,'member_van','plate_number','member_id')
-            ->withPivot('role');
+    public function members(){
+        return $this->belongsToMany(Member::class,'member_van','plate_number','member_id');
     }
     public function rental(){
     	return $this->hasOne(Rental::Class, 'rent_id');
     }
+
+    public function driver(){
+        return $this->members()->where('role','Driver');
+    }
+
+    public function operator(){
+        return $this->members()->where('role','Operator');
+    }
+
+
 }
