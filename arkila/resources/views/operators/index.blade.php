@@ -4,6 +4,7 @@
         <div class="col col-md-6">
             <a href="/home/operators/create" class="btn btn-primary btn-create"><i class="fa fa-plus-circle"></i> Create New</a>
         </div>
+        <!-- /.col -->
         <table id="operatorList" class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -34,13 +35,16 @@
                                 <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</i></button>
                             </form>
                         </div>
+                        <!-- /.text -->
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+    <!-- /.box-body -->
 </div>
+<!-- /.box -->
 @stop @section('scripts') @parent
 
 <!-- DataTables -->

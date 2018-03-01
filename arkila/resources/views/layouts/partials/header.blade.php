@@ -189,15 +189,19 @@
                         <!-- About Me Box -->
                         <div class="box box-primary">
                             <div class="pull-left">
-                                
-                                </div>
-                                
-                                <div class="pull-right">
-                                       <div class="box-header with-border">
-                                        <a href="#" class="btn btn-default btn-block">Sign out</a>
-                                    
-                                </div>
+
                             </div>
+
+                            <div class="pull-right">
+                                <div class="box-header with-border">
+                                    <a href="#" class="btn btn-default btn-block">Sign out</a>
+
+                                </div>
+                                <!-- /.box-header -->
+                            </div>
+                            <!-- /.pull-right -->
+                        </div>
+                        <!-- /.box -->
                     </ul>
                 </li>
                 <!-- Control Sidebar Toggle Button -->
@@ -205,6 +209,6 @@
                     <a href="#" data-toggle="control-sidebar"><i class="fa fa-list-ol"></i></a>
                 </li>
             </ul>
-            
+
     </nav>
 </header>
