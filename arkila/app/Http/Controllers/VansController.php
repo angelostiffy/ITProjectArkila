@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\checkDriver;
+use App\Rules\checkOperator;
 use App\Van;
 use App\Member;
 
@@ -16,7 +18,11 @@ class VansController extends Controller {
     public function index()
     {
         $vans = Van::all();
+
         return view('vans.oldvan.vanList', compact('vans'));
+
+        return view('vans.DriverVan', compact('vans'));
+
     }
 
 
@@ -25,15 +31,41 @@ class VansController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
+    public function create(){
+        $operators = Member::allOperators()->get();
+
+        return view('vans.create',compact('operators'));
+    }
+
+    public function store(){
+
+        $this->validate(request(), [
+            "operator" => ['numeric','exists:member,member_id',new checkOperator],
+            "plateNumber" => 'unique:van,plate_number|required|between:6,8',
+            "vanModel" =>  'required',
+            "seatingCapacity" => 'required|between:2,10|numeric'
+        ]);
+
+        $van = Van::create([
+            'plate_number' => request('plateNumber'),
+            'model' => request('vanModel'),
+            'seating_capacity' => request('seatingCapacity')
+        ]);
+        $van->members()->attach(request('operator'));
+
+        if(request('addDriver') === 'on'){
+            return redirect(route('drivers.createFromVan',[$van->plate_number]));
+        }
+        else{
+            return redirect(route('vans.index'));
+        }
+    }
+
     public function createFromOperator(Member $operator)
     {
-        $drivers = $operator->drivers()
-            ->whereNotIn('member_id', function($query){
-        $query->select('member_id')
-            ->from('member_van');
-        })->get();
+        $drivers = $operator->drivers()->doesntHave('van')->get();
 
-        return view('vans.create',compact('drivers','operator'));
+        return view('vans.addVanSP',compact('drivers','operator'));
     }
 
     /**
@@ -45,24 +77,31 @@ class VansController extends Controller {
     public function storeFromOperator(Member $operator)
     {
         $this->validate(request(), [
-            "driver" => 'exists:member|unique:member_van,member_id',
-            "plateNumber" => 'unique:vans,plate_number|required|between:6,8',
-            "model" =>  'required',
+            "driver" => ['nullable','numeric','exists:member,member_id','unique:member_van,member_id',new checkDriver],
+            "plateNumber" => 'unique:van,plate_number|required|between:6,8',
+            "vanModel" =>  'required',
             "seatingCapacity" => 'required|between:2,10|numeric'
         ]);
 
 
         $van = Van::create([
             'plate_number' => request('plateNumber'),
-            'model' => request('model'),
+            'model' => request('vanModel'),
             'seating_capacity' => request('seatingCapacity')
         ]);
 
-        $van->member()->attach($operator->member_id);
-        $van->member()->attach(request('driver'));
+        $van->members()->attach($operator->member_id);
+        session()->flash('message','Van successfully created');
 
-    	session()->flash('message','Van successfully created');
-    	return redirect(route('operators.show',[$operator->member_id]));
+        if(request('addDriver') === 'on'){
+            return redirect(route('drivers.createFromVan',[$van->plate_number]));
+        }else{
+            $van->members()->attach(request('driver'));
+            return redirect(route('operators.showProfile',[$operator->member_id]));
+        }
+
+
+
 
     }
 

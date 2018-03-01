@@ -35,6 +35,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('driver', function($value){
             return Member::allDrivers()->where('member_id',$value)->first() ?? abort(404);
         });
+
     }
 
     /**

@@ -128,6 +128,40 @@ class DriversController extends Controller
 
     public function storeFromVan(Van $van,DriverRequest $request){
 
+        $children = array_combine($request->children,$request->childrenBDay);
+
+        $driver = Member::create([
+            'last_name'=> $request->lastName,
+            'first_name' => $request->firstName,
+            'middle_name' => $request->middleName,
+            'contact_number' => $request->contactNumber,
+            'role' => 'Driver',
+            'operator_id' => $van->operator()->first()->member_id,
+            'address' => $request->address,
+            'provincial_address' => $request->provincialAddress,
+            'birth_date' => $request->birthDate,
+            'birth_place' => $request->birthPlace,
+            'age' => $request->birthDate,
+            'gender' => $request->gender,
+            'citizenship' => $request->citizenship,
+            'civil_status' => $request->civilStatus,
+            'spouse' => $request->nameOfSpouse,
+            'spouse_birthdate' => $request->spouseBirthDate,
+            'father_name' => $request->fathersName,
+            'father_occupation' => $request->fatherOccupation,
+            'mother_name' => $request->mothersName,
+            'mother_occupation' => $request->motherOccupation,
+            'person_in_case_of_emergency' => $request->contactPerson,
+            'emergency_address' => $request->contactPersonAddress,
+            'emergency_contactno' => $request->contactPersonContactNumber,
+            'SSS' => $request->sss,
+            'license_number' => $request->licenseNo,
+            'expiry_date' => $request->licenseExpiryDate,
+            'number_of_children' => sizeof($children)
+        ]);
+
+        $van->members()->attach($driver);
+        return redirect(route('operators.showProfile',[$van->operator()->first()->member_id]));
     }
     /**
      * Display the specified resource.
