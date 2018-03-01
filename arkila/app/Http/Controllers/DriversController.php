@@ -18,7 +18,7 @@ class DriversController extends Controller
     {
         $drivers = Member::allDrivers()->get();
 
-        return view('drivers.editNaGawaNiRandall', compact('drivers'));
+        return view('drivers.index', compact('drivers'));
     }
 
     /**
