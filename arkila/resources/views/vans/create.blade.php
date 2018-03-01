@@ -36,7 +36,7 @@
 
 
 @section('form-btn')
-<button class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Add unit</button>
+<a class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Add unit</a>
 @endsection 
 @section('modal-title', 'Alert') 
 @section('modal-body')
