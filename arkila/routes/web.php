@@ -52,6 +52,9 @@ Route::post('home/operators/{operator}/drivers/', 'DriversController@storeFromOp
 //Adding a driver to a specific van
 Route::get('home/vans/{van}/drivers/create', 'DriversController@createFromVan')->name('drivers.createFromVan');
 Route::post('home/vans/{van}/drivers/', 'DriversController@storeFromVan')->name('drivers.storeFromVan');
+
+//Give the list of certain drivers
+Route::post('/listDrivers','VansController@listDrivers')->name('vans.listDrivers');
 /****************************************************/
 
 /************ Vans ******************************/
