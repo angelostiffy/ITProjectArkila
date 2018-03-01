@@ -13,10 +13,11 @@
 
 //Made by Randall
 
-Route::get('/randall', 'VansController@index');
+//Route::get('/randall', 'VansController@index');
+Route::get('/randall', 'RandallController@index');
 
 Route::get('/randall', function(){
-    return view('operators.edit2NiRandall');
+    return view('operators.showProfile');
 });
 Route::get('/teo', function(){
     return view('rental.newcreate');
