@@ -39,8 +39,12 @@ class AnnouncementsController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate(request(), [
+            "announce" =>  'max:499',
+        ]);
+
         Announcement::create([
-            'description' => request('announce'),
+            'description' => $request->announce,
             'viewer' => request('viewer'),
         ]);
 

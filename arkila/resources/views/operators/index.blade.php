@@ -1,21 +1,10 @@
-@extends('layouts.master') @section('title', 'index') @section('links') @parent
-<!-- DataTables -->
-<link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
-<!-- additional CSS -->
-<link rel="stylesheet" href="operatorStyle.css"> @stop @section('content')
+@extends('layouts.master') @section('title', 'List of Operators') @section('content-header', 'List of Operators')@section('content')
 <div class="box">
-    <!-- /.box-header -->
-    <div class="box-header">
-        <div class="row">
-            <div class="col col-xs-6">
-                <h3 class="panel-title">List of Operators</h3>
-            </div>
-        </div>
-    </div>
     <div class="box-body">
         <div class="col col-md-6">
-            <a href="/home/operators/create" class="btn btn-sm btn-primary btn-create">Create New</a>
+            <a href="/home/operators/create" class="btn btn-primary btn-create"><i class="fa fa-plus-circle"></i> Create New</a>
         </div>
+        <!-- /.col -->
         <table id="operatorList" class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -43,18 +32,19 @@
                             <form action="{{ route('operators.destroy', [$operator->member_id]) }}" method="POST">
                                 {{ csrf_field() }} {{method_field('DELETE')}}
                                 <a href="{{ route('operators.showProfile', [$operator->member_id]) }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
-                                <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</i></button>
+                                <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</i></button>
                             </form>
                         </div>
+                        <!-- /.text -->
                     </td>
                 </tr>
                 @endforeach
-
             </tbody>
         </table>
     </div>
     <!-- /.box-body -->
 </div>
+<!-- /.box -->
 @stop @section('scripts') @parent
 
 <!-- DataTables -->

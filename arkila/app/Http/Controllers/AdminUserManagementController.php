@@ -13,7 +13,10 @@ use App\User;
 class AdminUserManagementController extends Controller
 {
     
-    
+    public function index()
+    {
+        return view('admin.editProfile'));
+    }
 
     public function create()
     {

@@ -15,7 +15,7 @@ class CreateAnnouncementTable extends Migration
     {
         Schema::create('announcement', function (Blueprint $table) {
             $table->increments('announcement_id');
-            $table->string('description');
+            $table->string('description', 500);
             $table->enum('viewer', ['Public','Driver Only', 'Customer Only', 'Only Me']);
             $table->timestamps();
         });
