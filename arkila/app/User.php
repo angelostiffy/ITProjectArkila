@@ -29,6 +29,21 @@ class User extends Authenticatable
 
     public function terminal()
     {
-        $this->hasOne(Terminal::class, 'terminal_id');
+        return $this->hasOne(Terminal::class, 'terminal_id');
+    }
+
+    public function scopeAdmin($query)
+    {
+        return $query->where('user_type', '=','Admin');
+    }
+
+    public function scopeDriver($query)
+    {
+        return $query->where('user_type', '=', 'Driver');   
+    }
+
+    public function scopeCustomer($query)
+    {
+        return $query->where('user_type', '=', 'Customer');   
     }
 }
