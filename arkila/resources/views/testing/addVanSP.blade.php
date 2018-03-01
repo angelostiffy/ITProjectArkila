@@ -5,13 +5,7 @@
 @section('form-title', 'Add Van') 
 @section('form-body')
 	<div class="form-group">
-	<label for="">Operator:</label>
-    <select name="" id="" class="form-control select2">
-    	<option value="">awdawdaw</option>
-    	<option value="">awdawd</option>
-    	<option value="">awdwa</option>
-    	<option value="">awdaw</option>
-    	<option value=""></option>
+	<label for="">Operator:</label> <span>Operator Name</span>
     </select>
     </div>
 	<div class="form-group">
@@ -20,18 +14,30 @@
     </div>
     <div class="form-group">
 	<label for="">Van Model</label>
-    <input type="text" class="form-control" placeholder=" Van Model"> 
+    <input type="text" class="form-control" placeholder="Van Model"> 
     </div>
 
     <div class="form-group">
 	<label for="">Seating Capacity</label>
-    <input type="number" class="form-control" placeholder="Seating Capacity" max="15" min="1">
+    <input type="number" class="form-control" placeholder="Seating Capacity" max="16" min="1">
+    </div>
+    
+    <div class="form-group">
+    <label for="">Driver</label>
+    <select name="" id="" class="form-control select2">
+        <option value=""></option>
+        <option value="">d1</option>
+        <option value="">d2</option>
+        <option value="">d3</option>
+        <option value="">d4</option>
+    </select>
     </div>
 @endsection 
-@section('others')
-<input type="checkbox"> <span>Add new driver to this van unit</span>
-@endsection
 
+@section('others')
+<div class="form-group">
+<input type="checkbox" class="minimal"> <span>Add new driver to this van unit</span>
+@endsection
 
 @section('form-btn')
 <a href="changeDriver.html" class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Add unit</a> 
@@ -47,8 +53,12 @@
 @section('scripts')
 	@parent
 	<script>
-    $(function () {
-        $('.select2').select2()
+        $(function () {
+            $('.select2').select2()
+
+            $('input[type="checkbox"].minimal').iCheck({
+            checkboxClass: 'icheckbox_minimal-blue',
+            })
     })
 	</script>
 @endsection
