@@ -189,9 +189,7 @@
                         <!-- About Me Box -->
                         <div class="box box-primary">
                             <div class="pull-left">
-                                <div class="box-header with-border">
-                                    <a href="{{route('operators.edit',[$operator->member_id])}}" class="btn btn-block btn-info"><b>Edit Information</b></a>
-                                </div>
+                                
                                 </div>
                                 
                                 <div class="pull-right">
