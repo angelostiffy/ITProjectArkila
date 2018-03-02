@@ -1,5 +1,8 @@
 @extends('layouts.form')
 @section('title', 'Manange Users')
+@section('back-link', URL::previous())
+@section('form-action', route('admin.update', [$user->id]))
+@section('method_field', method_field('PATCH'))
 @section('form-title', 'Manage Account')
 @section('links')
 @parent
@@ -11,16 +14,16 @@
           
 
 <div class="form-group">
-  <label for="payor">User name:</label>
-  <span>Span</span>
+  <label for="payor">User name:</libel>
+  <span name="username">{{$user->username}}</span>
 </div>
 <div class="form-group">
   <label for="Particulars">Name:</label>
-  <span>Yuki Marfil</span>
+  <span name="fullname">{{$user->name}}</span>
 </div>
 <div class="form-group">
   <label for="Particulars">Email Address:</label>
-  <span>yuki@grkngc.com</span>
+  <span name="email">{{$user->email}}</span>
 </div>          
 
 
@@ -30,7 +33,7 @@
       <li><a href="#"><i class="fa fa-inbox"></i> Enable/Disable Account
         <span class="label pull-right">         
           <label class="switch">
-            <input type="checkbox">
+            <input type="checkbox" class="status" data-id="{{$user->id}}" @if ($user->status == 'enable') checked @endif>
             <span class="slider round"></span>
           </label>
         </span></a>
@@ -52,12 +55,6 @@
 
 </div>
                    
-@endsection
-@section('form-btn')  
-
-   <button type="button" class="btn btn-primary" data-dismiss="modal">Save Changes</button>
-   <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
-
 @endsection
 
 @section('scripts')
@@ -126,4 +123,24 @@
             border-radius: 80%;
         }
     </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('.status').on('click', function(event){
+          id = $(this).data('id');
+          $.ajax({
+            type: 'POST',
+            url: "{{ URL::route('changeStatus') }}",
+            data: {
+              '_token': $('input[name=_token]').val(),
+              'id': id
+            },
+            success: function(data){
+              //empty
+            },
+          });
+        });
+      });
+    </script>
 @endsection

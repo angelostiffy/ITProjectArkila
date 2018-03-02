@@ -80,10 +80,10 @@ Route::get('home/settings', 'HomeController@settings');
 
 /************ User Management ******************************/
 Route::get('home/user-management', 'HomeController@usermanagement');
-
 Route::resource('home/user-management/admin', 'AdminUserManagementController', [
-	'except' => ['index']
+	'except' => ['index','destroy']
 ]);
+Route::post('home/user-management/admin/change-status', array('as' => 'changeStatus','uses' => 'AdminUserManagementController@changeStatus'));
 /****************************************************/
 
 Route::resource('home/test', 'TestController');

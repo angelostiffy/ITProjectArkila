@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Request;
 use App\Rules\checkUserName;
-use App\Rules\checkEmail;
 use App\Rules\checkTerminal;
+use App\Rules\checkEmail;
+use App\Mail\ResetPasswordMail;
 use App\Terminal;
 use App\User;
 
 class AdminUserManagementController extends Controller
 {
-    
-    
-
+ 
     public function create()
     {
          $terminals = Terminal::all();
@@ -51,35 +52,41 @@ class AdminUserManagementController extends Controller
     
     public function edit($id)
     {
-        $user = User::where('id', $id)->admin()->get();
+        $user = User::where('id', $id)->admin()->first();
         return view('usermanagement.editAdmin', compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
-        //
+        //dd($user->id);
+        $user = User::find($id);
+        $user->password = Hash::make(str_random(8));
+        $user->save();
+
+        Mail::to('932a782243-eb8d48@inbox.mailtrap.io')->send(new ResetPasswordMail);
+
+        session()->flash('message', 'Reset Password Successful! A Reset Password Link Has Been Sent to the User.');
+        return redirect('/home/user-management'); 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 
     public function changeStatus()
     {
+        $id = Input::get('id');
 
+        $user = User::findOrFail($id);
+        if($user->status === "enable"){
+            $user->status = "disable";
+            session()->flash('message', 'User successfully enabled!');
+        }elseif($user->status === "disable"){
+            $user->status = "enable";
+
+            session()->flash('message', 'User successfully disabled!');
+        }
+        
+        $user->save();
+        return response()->json($user); 
     }
 }
