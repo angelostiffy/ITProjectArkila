@@ -47,13 +47,13 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Name:</label>
-                        <input type="text" class="form-control" placeholder="Name" name="name" id="name" value="{{ old('name') }}">
+                        <input type="text" class="form-control" placeholder="Name" name="name" id="name" value="{{ old('name') }}"min='1' max='50' required>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Contact Number:</label>
-                        <input type="text" class="form-control" placeholder="Contact Number" name="contact" id="contactNumber" value="{{ old('contact') }}">
+                        <input type="text" class="form-control" placeholder="Contact Number" name="contact" id="contactNumber" value="{{ old('contact') }}" required>
                     </div>
                 </div>
                 
@@ -64,7 +64,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" class="form-control pull-right datepicker" id="datepicker" name="date" value="{{ old('date') }}">
+                            <input type="text" class="form-control pull-right datepicker" id="datepicker" name="date" value="{{ old('date') }}" required>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Destination:</label>
-                        <select class="form-control" name="dest" id="dest">
+                        <select class="form-control" name="dest" id="dest" required>
                                     <option value="" disabled selected>Select Destination</option>
                                 @foreach ($destinations as $destination)
                                    <option value="{{ $destination->description }}" @if($destination->description == old('dest') ) {{'selected'}} @endif>{{ $destination->description }}</option>
@@ -84,7 +84,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Number of Seats:</label>
-                        <input type="number" class="form-control" placeholder="Number of Seats" name="seat" id="seat" value="{{ old('seat') }}">
+                        <input type="number" class="form-control" placeholder="Number of Seats" name="seat" id="seat" value="{{ old('seat') }}" required>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -92,7 +92,7 @@
                         <div class="form-group">
                             <label>Departure Time:</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="timepicker" name="time" value="{{ old('time') }}">
+                                <input type="text" class="form-control" id="timepicker" name="time" value="{{ old('time') }}" required>
                                 <div class="input-group-addon">
                                     <i class="fa fa-clock-o"></i>
                                 </div>

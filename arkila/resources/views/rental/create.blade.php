@@ -92,7 +92,7 @@
                                 <select class="form-control" name="model" id="model">
                                     <option value="" disabled selected>Select Model</option>
                                 @foreach ($vans as $van)
-                                   <option value="{{ $van->plate_number }}" @if($van->plate_number == old('model') ) {{'selected'}} @endif>{{ $van->model }}</option>
+                                   <option value="{{ $van->model }}" @if($van->model == old('model') ) {{'selected'}} @endif>{{ $van->model }}</option>
                                    @endforeach
                                </select>
                             </div>
@@ -142,7 +142,7 @@
                             <dd id="contactView"></dd>
                             <dt>Destination:</dt>
                             <dd id="destView"></dd>
-                            <dt>Plate Number:</dt>
+                            <dt>Van Model:</dt>
                             <dd id="vanView"></dd>
                             <dt>Number of Days:</dt>
                             <dd id="daysView"></dd>

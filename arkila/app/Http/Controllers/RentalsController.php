@@ -40,13 +40,19 @@ class RentalsController extends Controller
      */
     public function store(RentalRequest $request)
     {
+        $findPlateNo = Van::all();
+        $modelReq = $request->model;
+        foreach ($findPlateNo->where('model', $modelReq) as $find) {
+            $findPlateNo = $find->plate_number;
+        }
+
         $perContactNumber = '+63'.request('contactNumber');
 
         Rental::create([
             'last_name' => $request->lastName,
             'first_name' => $request->firstName,
             'middle_name' => $request->middleName,
-            'plate_number' => $request->model,
+            'plate_number' => $findPlateNo,
             'departure_date' => $request->date,
             'departure_time' => $request->time,
             'destination' => $request->destination,
