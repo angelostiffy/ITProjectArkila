@@ -1,11 +1,11 @@
-@extends('vans.master')
+@extends('layouts.master')
 
 
 
 
 
 
-@section('table')
+@section('content')
           <h2>Section title</h2>
           <div class="table-responsive">
             <table class="table table-striped">
@@ -24,7 +24,7 @@
 
 						<tr>
 							<td>{{$van->plate_number}}</td>
-							<td>{{$van->members->where('role','Driver')->first()->full_name}}</td>
+							<td>{{$van->members->where('role','Driver')->first()->full_name ?? $van->members->where('role','Driver')->first()}}</td>
 							<td>{{$van->members->where('role','Operator')->first()->full_name}}</td>
 							<td>{{$van->model}}</td>
 							<td>{{$van->seating_capacity}}</td>

@@ -19,9 +19,7 @@ class VansController extends Controller {
     {
         $vans = Van::all();
 
-        return view('vans.oldvan.vanList', compact('vans'));
-
-        return view('vans.DriverVan', compact('vans'));
+        return view('vans.index', compact('vans'));
 
     }
 
@@ -45,10 +43,10 @@ class VansController extends Controller {
 
 
     public function store(){
-
         $this->validate(request(), [
             "operator" => ['numeric','exists:member,member_id',new checkOperator],
-            "plateNumber" => 'unique:van,plate_number|required|between:6,8',
+            "driver" => ['numeric','exists:member,member_id',new checkDriver],
+            "plateNumber" => ['unique:van,plate_number','required','between:6,8'],
             "vanModel" =>  'required',
             "seatingCapacity" => 'required|between:2,10|numeric'
         ]);
@@ -58,12 +56,13 @@ class VansController extends Controller {
             'model' => request('vanModel'),
             'seating_capacity' => request('seatingCapacity')
         ]);
-        $van->members()->attach(request('operator'));
 
         if(request('addDriver') === 'on'){
             return redirect(route('drivers.createFromVan',[$van->plate_number]));
         }
         else{
+            $van->members()->attach(request('operator'));
+            $van->members()->attach(request('driver'));
             return redirect(route('vans.index'));
         }
     }
@@ -124,8 +123,8 @@ class VansController extends Controller {
      */
     public function edit(Van $van)
     {
-
-        return view('vans.edit', compact('van','drivers','operators'));
+        $operators = Member::allOperators()->get();
+        return view('vans.edit', compact('van','operators'));
     }
 
     /**
