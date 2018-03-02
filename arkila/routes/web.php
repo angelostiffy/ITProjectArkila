@@ -23,6 +23,8 @@ Route::get('/teo', function(){
     return view('rental.newcreate');
 });
 
+Route::resource('/angelo', 'EmailtestController');
+
 
 
 Route::get('/', function () {
