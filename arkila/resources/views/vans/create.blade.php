@@ -71,7 +71,7 @@
 @endsection
 
 @section('form-btn')
-<a href="changeDriver.html" class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Add unit</a>
+<a class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Add unit</a>
 @endsection 
 @section('modal-title', 'Alert') 
 @section('modal-body')
