@@ -53,7 +53,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Contact Number:</label>
-                        <input type="text" class="form-control" placeholder="Contact Number" name="contact" id="contactNumber" value="{{ old('contactNumber') }}">
+                        <input type="text" class="form-control" placeholder="Contact Number" name="contact" id="contactNumber" value="{{ old('contact') }}">
                     </div>
                 </div>
                 
@@ -76,7 +76,7 @@
                         <select class="form-control" name="dest" id="dest">
                                     <option value="" disabled selected>Select Destination</option>
                                 @foreach ($destinations as $destination)
-                                   <option value="{{ $destination->destination_id }}" @if($destination->destination_id == old('dest') ) {{'selected'}} @endif>{{ $destination->description }}</option>
+                                   <option value="{{ $destination->description }}" @if($destination->description == old('dest') ) {{'selected'}} @endif>{{ $destination->description }}</option>
                                    @endforeach
                         </select>
                     </div>
@@ -103,9 +103,9 @@
             </div>
         </div>
     </div>
-    <div class="tab">
+    <div class="tab ">
         <h4>Summary</h4>
-        <div class="row">
+        <div class="row ">
             <dl class="dl-horizontal">
                 <dt>Name:</dt>
                 <dd id="nameView"></dd>
@@ -126,14 +126,15 @@
         <span class="step"></span>
         <span class="step"></span>
     </div>
-</div>
-<div class="box-footer">
+
+<div class="box box-footer">
     <div style="overflow:auto;">
         <div style="float:right;">
             <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-default">Previous</button>
             <button type="button" id="nextBtn" onclick="nextPrev(1); getData();" class="btn btn-primary">Next</button>
         </div>
     </div>
+</div>
 </div>
 </div>
 @endsection @section('scripts') @parent

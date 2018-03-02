@@ -23,7 +23,6 @@ class VansController extends Controller {
 
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
@@ -31,9 +30,17 @@ class VansController extends Controller {
      */
     public function create(){
         $operators = Member::allOperators()->get();
-
         return view('vans.create',compact('operators'));
     }
+
+    public function createFromOperator(Member $operator)
+    {
+        $drivers = $operator->drivers()->doesntHave('van')->get();
+
+        return view('vans.create',compact('drivers','operator'));
+    }
+
+
 
     public function store(){
 
@@ -59,12 +66,7 @@ class VansController extends Controller {
         }
     }
 
-    public function createFromOperator(Member $operator)
-    {
-        $drivers = $operator->drivers()->doesntHave('van')->get();
 
-        return view('vans.addVanSP',compact('drivers','operator'));
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -97,8 +99,6 @@ class VansController extends Controller {
             $van->members()->attach(request('driver'));
             return redirect(route('operators.showProfile',[$operator->member_id]));
         }
-
-
 
 
     }
@@ -166,5 +166,26 @@ class VansController extends Controller {
         $van->detach();
         $van->delete();
     	return back();
+    }
+
+    public function listDrivers(){
+        $operator = Member::find(request('driver'));
+
+        if($operator != null) {
+            $driversArr = [];
+            $drivers = $operator->drivers()->doesntHave('van')->get();
+            foreach($drivers as $driver){
+                array_push($driversArr, [
+                    "id" => $driver->member_id,
+                    "name" => $driver->full_name
+                ]);
+            }
+            return response()->json($driversArr);
+        }
+        else{
+            return "Operator Not Found";
+        }
+
+
     }
 }

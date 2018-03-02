@@ -52,6 +52,9 @@ Route::post('home/operators/{operator}/drivers/', 'DriversController@storeFromOp
 //Adding a driver to a specific van
 Route::get('home/vans/{van}/drivers/create', 'DriversController@createFromVan')->name('drivers.createFromVan');
 Route::post('home/vans/{van}/drivers/', 'DriversController@storeFromVan')->name('drivers.storeFromVan');
+
+//Give the list of certain drivers
+Route::post('/listDrivers','VansController@listDrivers')->name('vans.listDrivers');
 /****************************************************/
 
 /************ Vans ******************************/
@@ -81,10 +84,10 @@ Route::get('home/settings', 'HomeController@settings');
 
 /************ User Management ******************************/
 Route::get('home/user-management', 'HomeController@usermanagement');
-
 Route::resource('home/user-management/admin', 'AdminUserManagementController', [
-	'except' => ['index']
+	'except' => ['index','destroy']
 ]);
+Route::post('home/user-management/admin/change-status', array('as' => 'changeStatus','uses' => 'AdminUserManagementController@changeStatus'));
 /****************************************************/
 
 Route::resource('home/test', 'TestController');

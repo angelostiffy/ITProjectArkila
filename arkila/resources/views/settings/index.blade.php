@@ -1,6 +1,6 @@
 @extends('layouts.master') @section('title', 'Settings') @section('content')
 
-<row>
+<div class="row">
     <div class="col-md-4">
         <div class="box box-solid">
             <div class="box-header with-border">
@@ -224,7 +224,7 @@
             </div>
             <!-- /.col -->
     </div>
-    </row>
+    </div>
 
     @endsection @section('scripts') @parent
 
