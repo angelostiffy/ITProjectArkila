@@ -19,12 +19,9 @@ class VansController extends Controller {
     {
         $vans = Van::all();
 
-        return view('vans.oldvan.vanList', compact('vans'));
-
-        return view('vans.DriverVan', compact('vans'));
+        return view('vans.index', compact('vans'));
 
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -33,15 +30,23 @@ class VansController extends Controller {
      */
     public function create(){
         $operators = Member::allOperators()->get();
-
         return view('vans.create',compact('operators'));
     }
 
-    public function store(){
+    public function createFromOperator(Member $operator)
+    {
+        $drivers = $operator->drivers()->doesntHave('van')->get();
 
+        return view('vans.create',compact('drivers','operator'));
+    }
+
+
+
+    public function store(){
         $this->validate(request(), [
             "operator" => ['numeric','exists:member,member_id',new checkOperator],
-            "plateNumber" => 'unique:van,plate_number|required|between:6,8',
+            "driver" => ['numeric','exists:member,member_id',new checkDriver],
+            "plateNumber" => ['unique:van,plate_number','required','between:6,8'],
             "vanModel" =>  'required',
             "seatingCapacity" => 'required|between:2,10|numeric'
         ]);
@@ -51,22 +56,18 @@ class VansController extends Controller {
             'model' => request('vanModel'),
             'seating_capacity' => request('seatingCapacity')
         ]);
-        $van->members()->attach(request('operator'));
 
         if(request('addDriver') === 'on'){
             return redirect(route('drivers.createFromVan',[$van->plate_number]));
         }
         else{
+            $van->members()->attach(request('operator'));
+            $van->members()->attach(request('driver'));
             return redirect(route('vans.index'));
         }
     }
 
-    public function createFromOperator(Member $operator)
-    {
-        $drivers = $operator->drivers()->doesntHave('van')->get();
 
-        return view('vans.addVanSP',compact('drivers','operator'));
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -101,8 +102,6 @@ class VansController extends Controller {
         }
 
 
-
-
     }
 
     /**
@@ -124,8 +123,8 @@ class VansController extends Controller {
      */
     public function edit(Van $van)
     {
-
-        return view('vans.edit', compact('van','drivers','operators'));
+        $operators = Member::allOperators()->get();
+        return view('vans.edit', compact('van','operators'));
     }
 
     /**
@@ -168,5 +167,26 @@ class VansController extends Controller {
         $van->detach();
         $van->delete();
     	return back();
+    }
+
+    public function listDrivers(){
+        $operator = Member::find(request('driver'));
+
+        if($operator != null) {
+            $driversArr = [];
+            $drivers = $operator->drivers()->doesntHave('van')->get();
+            foreach($drivers as $driver){
+                array_push($driversArr, [
+                    "id" => $driver->member_id,
+                    "name" => $driver->full_name
+                ]);
+            }
+            return response()->json($driversArr);
+        }
+        else{
+            return "Operator Not Found";
+        }
+
+
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.form')
 @section('title', 'Manange Users')
 @section('back-link', URL::previous())
-@section('form-action', route('admin.update', [$admin_user->id]))
+@section('form-action', route('driver.update', [$driver_user->id]))
 @section('method_field', method_field('PATCH'))
 @section('form-title', 'Manage Account')
 @section('links')
@@ -15,15 +15,15 @@
 
 <div class="form-group">
   <label for="payor">User name:</libel>
-  <span name="username">{{$admin_user->username}}</span>
+  <span name="username">{{$driver_user->username}}</span>
 </div>
 <div class="form-group">
   <label for="Particulars">Name:</label>
-  <span name="fullname">{{$admin_user->name}}</span>
+  <span name="fullname">{{$driver_user->name}}</span>
 </div>
 <div class="form-group">
   <label for="Particulars">Email Address:</label>
-  <span name="email">{{$admin_user->email}}</span>
+  <span name="email">{{$driver_user->email}}</span>
 </div>          
 
 
@@ -33,7 +33,7 @@
       <li><a href="#"><i class="fa fa-inbox"></i> Enable/Disable Account
         <span class="label pull-right">         
           <label class="switch">
-            <input type="checkbox" class="status" data-id="{{$admin_user->id}}" @if ($admin_user->status == 'enable') checked @endif>
+            <input type="checkbox" class="status" data-id="{{$driver_user->id}}" @if ($driver_user->status == 'enable') checked @endif>
             <span class="slider round"></span>
           </label>
         </span></a>
@@ -59,71 +59,70 @@
 
 @section('scripts')
 @parent
-
     <style>
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 40px;
-            height: 20px;
-        }
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+    }
 
-        /* Hide default HTML checkbox */
+    /* Hide default HTML checkbox */
 
-        .switch input {
-            display: none;
-        }
+    .switch input {
+        display: none;
+    }
 
-        /* The slider */
+    /* The slider */
 
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: gray;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: gray;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
 
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 15px;
-            width: 18px;
-            left: 5px;
-            bottom: 3px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 15px;
+        width: 18px;
+        left: 5px;
+        bottom: 3px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
 
-        input:checked+.slider {
-            background-color: #0275d8;
-        }
+    input:checked+.slider {
+        background-color: #0275d8;
+    }
 
-        input:focus+.slider {
-            box-shadow: 0 0 1px #2196F3;
-        }
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
 
-        input:checked+.slider:before {
-            -webkit-transform: translateX(13px);
-            -ms-transform: translateX(13px);
-            transform: translateX(13px);
-        }
+    input:checked+.slider:before {
+        -webkit-transform: translateX(13px);
+        -ms-transform: translateX(13px);
+        transform: translateX(13px);
+    }
 
-        /* Rounded sliders */
+    /* Rounded sliders */
 
-        .slider.round {
-            border-radius: 100px;
-        }
+    .slider.round {
+        border-radius: 100px;
+    }
 
-        .slider.round:before {
-            border-radius: 80%;
-        }
-    </style>
+    .slider.round:before {
+        border-radius: 80%;
+    }
+</style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
@@ -132,7 +131,7 @@
           id = $(this).data('id');
           $.ajax({
             type: 'POST',
-            url: "{{ URL::route('changeAdminStatus') }}",
+            url: "{{ URL::route('changeDriverStatus') }}",
             data: {
               '_token': $('input[name=_token]').val(),
               'id': id
@@ -144,5 +143,4 @@
         });
       });
     </script>
-
 @endsection
