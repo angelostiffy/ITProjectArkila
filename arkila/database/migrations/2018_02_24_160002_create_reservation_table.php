@@ -19,11 +19,11 @@ class CreateReservationTable extends Migration
             ->unsigned();
             $table->string('name', 70);
             $table->string('departure_date', 10);
-            $table->string('departure_time', 5);
+            $table->string('departure_time', 8);
             $table->smallInteger('number_of_seats');
             $table->string('contact_number', 13);
             $table->decimal('amount', 7, 2);
-            $table->enum('status', ['Pending', 'Approved', 'Declined', 'Paid', 'Cancelled']);
+            $table->enum('status', ['Pending', 'Departed', 'Declined', 'Paid', 'Cancelled']);
             $table->enum('type', ['Walk-in', 'Online']);
 
             $table->timestamps();

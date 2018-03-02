@@ -24,8 +24,8 @@
 
 						<tr>
 							<td>{{$van->plate_number}}</td>
-							<td>{{$van->members->where('role','Driver')->first()->full_name}}</td>
-							<td>{{$van->members->where('role','Operator')->first()->full_name}}</td>
+							<td>{{$van->driver->full_name}}</td>
+							<td>{{$van->operator->full_name}}</td>
 							<td>{{$van->model}}</td>
 							<td>{{$van->seating_capacity}}</td>
 							<td><a href="/home/vans/{{$van->plate_number}}/edit"><button>Edit</button></a></td>

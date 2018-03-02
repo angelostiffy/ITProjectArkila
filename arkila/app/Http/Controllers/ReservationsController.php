@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ReservationRequest;
 use App\Reservation;
 use App\Destination;
+use Carbon\Carbon;
 
 class ReservationsController extends Controller
 {
@@ -19,7 +20,7 @@ class ReservationsController extends Controller
         //
         $reservations = Reservation::all();
         $destinations = Destination::all();
-        return view('reservations.walkIn', compact('reservations', 'destinations'));
+        return view('reservations.index', compact('reservations', 'destinations'));
     }
 
     /**
@@ -29,7 +30,9 @@ class ReservationsController extends Controller
      */
     public function create()
     {
-        //
+        $destinations = Destination::all();
+        
+        return view('reservations.create', compact('destinations'));
     }
 
     /**
@@ -41,19 +44,32 @@ class ReservationsController extends Controller
     public function store(ReservationRequest $request)
     {
         $seat = $request->seat;
-        $amount = 100*$seat;
+        $destinationReq = $request->dest;
+        $reserveAmount = Reservation::all();
+        $findDest = Destination::all();
+        foreach ($reserveAmount as $amounts) {
+            $amount = $amounts->destination->amount;
+        }
+        $total = $seat*$amount;
 
+        foreach ($findDest->where('description', $destinationReq) as $find) {
+            $findThis = $find->destination_id;
+        }
+        
+        $timeRequest = new Carbon(request('time'));
+        $timeFormatted = $timeRequest->format('h:i A');
         $perContactNumber = '+63'.request('contact');
 
         Reservation::create([
             'name' => $request->name,
             'departure_date' => $request->date,
-            'departure_time' => $request->time,
-            'destination_id' => $request->dest,
+            'departure_time' => $timeFormatted,
+            'destination_id' => $findThis,
             'number_of_seats' => $request->seat,
             'contact_number' => $perContactNumber,
-            'amount' => $amount,
-            'type' => $request->type,
+            'amount' => $total,
+            'type' => 'Walk-in',
+            'status' => 'Paid',
 
         ]);
         session()->flash('message', 'Reservation was created successfully');

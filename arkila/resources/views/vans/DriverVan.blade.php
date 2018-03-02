@@ -68,22 +68,7 @@
                             @if(isset($operator))
                                 <label for"opName">Operator Name:</label>
                                 <span id="opName">{{$operator->full_name}}</span>
-                            @elseif(isset($van))
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Van Unit</label>
-                                        <span id="">{{ $van->plate_number}}</span>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Operator of the Van Unit</label>
-                                        <span id="">{{ $van->operator->first()->full_name}}</span>
-                                    </div>
-                                </div>
-
-                                @else
+                            @else
                                 <label>Choose Operator:</label>
                                 <select name="operator" id="" class="form-control select2">
                                     <option value='' @if(!old('operator')) {{'selected'}} @endif>No Operator</option>
@@ -94,6 +79,9 @@
                             @endif
                         </div>
                         </div>
+                        <!-- drivervan -->
+
+                        <!-- /drivervan -->
                     </div>
                     <div class="row">
                         <div class="col-md-4">

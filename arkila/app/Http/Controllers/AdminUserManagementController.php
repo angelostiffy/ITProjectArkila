@@ -15,7 +15,7 @@ use App\User;
 
 class AdminUserManagementController extends Controller
 {
- 
+
     public function create()
     {
          $terminals = Terminal::all();

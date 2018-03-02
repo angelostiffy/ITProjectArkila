@@ -36,7 +36,7 @@
 @endsection
 @section('title', 'Rent Van')
 @section('form-id', 'regForm')
-@section('form-action', route('rental.index'))
+@section('form-action', route('rental.store'))
 @section('form-method', 'POST')
 @section('form-body')
 
@@ -117,6 +117,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
+                        <div class = "bootstrap-timepicker">
                             <div class="form-group">
                                 <label>Departure Time:</label>
                                  <div class="input-group">
@@ -124,6 +125,7 @@
 
                     <div class="input-group-addon">
                       <i class="fa fa-clock-o"></i>
+                    </div>
                     </div>
                   </div>
                             </div>
@@ -141,9 +143,9 @@
                             <dt>Destination:</dt>
                             <dd id="destView"></dd>
                             <dt>Plate Number:</dt>
-                            <dd id="vanView">Hello</dd>
+                            <dd id="vanView"></dd>
                             <dt>Number of Days:</dt>
-                            <dd id="daysView">5</dd>
+                            <dd id="daysView"></dd>
                             <dt>Departure Date:</dt>
                             <dd id="dateView"></dd>
                             <dt>Departure Time:</dt>
@@ -167,7 +169,6 @@
                         <button type="button" id="nextBtn" onclick="nextPrev(1); getData();" class = "btn btn-primary">Next</button>
                     </div>
                 </div>
-                </form>
         </div>
     </div> 
 @endsection
