@@ -72,20 +72,17 @@
                             <i class="fa fa-calculator"></i> <span>Accounting</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-male"></i> <span>User Management</span>
-                        </a>
-                    </li>
+                    <li class="header">SETTING</li>
                     <li>
                         <a href="#">
                             <i class="fa fa-gear"></i> <span>Settings</span>
                         </a>
                     </li>
-                    <li class="header">LABELS</li>
-                    <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-                    <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-                    <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-male"></i> <span>User Management</span>
+                        </a>
+                    </li>
                 </ul>
             </section>
             <!-- /.sidebar -->

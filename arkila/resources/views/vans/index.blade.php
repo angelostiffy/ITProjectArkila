@@ -7,7 +7,7 @@
     <!-- /.box-header -->
     <div class="box-body">
     	<div class="col-md-6">
-    		<a href="" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create Van</a>
+    		<a href="{{route('vans.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create Van</a>
     	</div>
         <table id="van" class="table table-bordered table-striped">
             <thead>
