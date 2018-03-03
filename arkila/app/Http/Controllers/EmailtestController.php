@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DriverUserManagement extends Controller
+class EmailtestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class DriverUserManagement extends Controller
      */
     public function index()
     {
-        //
+        return view('emailtest.reset');
     }
 
     /**

@@ -28,9 +28,9 @@
                                                     <th>Name</th>
                                                     <th>Contact Number</th>
                                                     <th>Destination</th>
-                                                    <th>Date</th>
+                                                    <th>Preferred Date</th>
                                                     <th>Time</th>
-                                                    <th>Amount to Pay</th>
+                                                    <th>Amount</th>
                                                     <th>Status</th>
                                                     <th>Actions</th>
                                                 </tr>
@@ -52,12 +52,12 @@
                                                         {{ method_field('PATCH') }}
 
                                                         @if ($reservation->status == 'Pending')
-                                                            <button class="btn btn-success" type="submit" name="butt" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
-                                                            <button class="btn btn-danger" type="submit" name="butt" value="Declined"><i class="fa fa-close"></i> Decline</i></button>
+                                                            <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
+                                                            <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Declined"><i class="fa fa-close"></i> Decline</i></button>
 
                                                         @elseif ($reservation->status == 'Paid')
-                                                            <button class="btn btn-success" type="submit" name="butt" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
-                                                            <button class="btn btn-danger" type="submit" name="butt" value="Cancelled"><i class="fa fa-close"></i> Cancel</i></button>
+                                                            <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
+                                                            <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</i></button>
 
                                                         @else
                                                             <form method="POST" action="/home/reservations/{{$reservation->reservation_id}}" class="delete">
@@ -81,16 +81,16 @@
                                         <div class="form-group">
                                             <a href="/home/reservations/create" class = "btn btn-outline-danger">Add Walk-in Reservation</a>
                                         </div>
-                                        <table class="table table-bordered table-striped example1">
+                                        <table class="table table-bordered table-striped" id=example2>
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
                                                     <th>Contact Number</th>
                                                     <th>Destination</th>
-                                                    <th>Departure Date</th>
+                                                    <th>Preffered Date</th>
                                                     <th>Time</th>
-                                                    <th>Amount to Pay</th>
-                                                    <th></th>
+                                                    <th>Amount</th>
+                                                    <th>Status</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -114,8 +114,9 @@
                                                         {{ method_field('PATCH') }}
 
                                                         @if ($reservation->status == 'Paid')
-                                                            <button class="btn btn-success" type="submit" name="butt" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
-                                                            <button class="btn btn-danger" type="submit" name="butt" value="Cancelled"><i class="fa fa-close"></i> Cancel</i></button>
+                                                            <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
+                                                            <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</i></button>
+                                                    </form>
                                                         @else
                                                         <form method="POST" action="/home/reservations/{{$reservation->reservation_id}}" class="delete">
                                                                 {{csrf_field()}}
@@ -123,7 +124,6 @@
                                                                 <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</i></button>
                                                             </form>
                                                         @endif
-                                                    </form>
 
                                                 </div>
                                             </td>
@@ -237,6 +237,26 @@
       showInputs: false
     })
   })
+
+        function ConfirmDelete()
+        {
+            var x = confirm("Delete this request?");
+            if (x)
+            return true;
+            else
+            return false;
+        }
+
+        function ConfirmStatus()
+        {
+            var x = confirm("Change status?");
+
+            if (x)
+            return true;
+            else
+            return false;
+
+        }
 </script>
 
 @endsection

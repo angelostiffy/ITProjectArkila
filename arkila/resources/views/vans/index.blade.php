@@ -10,6 +10,46 @@
     	<div class="col-md-6">
     		<a href="{{route('vans.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create Van</a>
     	</div>
+
+    	<div class="modal fade" id="modal-default">
+                    <div class="modal-dialog" style="width:400px;">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title"> YUNG OPERATOR NAME</h4>
+                            </div>
+                            <!-- /.modal-header -->
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="box box-default">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Choose Driver</h3>
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body center-block">
+                                            <div class="form-group ">
+                                                <select name="drivers" class="form-control"></select>
+                                            </div>
+                                            <!-- /.form-group -->
+                                        </div>
+                                        <!-- /.box-body -->
+                                        <div class="box-footer">
+                                            <button type="submit" name="search" id="search-btn" class="btn btn-primary pull-right"> Submit </button>
+                                        </div>
+                                        <!-- /.box-footer -->
+                                    </div>
+                                    <!-- /.box -->
+                                </div>
+                                <!-- /.container-fluid -->
+                            </div>
+                            <!-- /.modal-body -->
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+
         <table id="van" class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -40,14 +80,15 @@
 		                            <a href="home/vans/{{$van->plate_number}}" class="btn btn-primary"><i class="fa fa-eye"></i>View</a>
 
                                         @if($van->driver()->first())
-		                                        <button name="listDriver" value="{{ $van->operator()->first()->member_id }}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i>Change Driver</button>
+		                                        <button name="listDriver" value="{{ $van->operator()->first()->member_id }}" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Change Driver</button>
                                         @else
-                                            <a href="{{ route('drivers.createFromVan',[$van->plate_number] ) }}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i>Add Driver</a>
+                                            <a href="{{ route('drivers.createFromVan',[$van->plate_number] ) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Add Driver</a>
                                         @endif
 
-									<button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+									<button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</button>
 								</form>
 		                        </div>
+
 							</td>
 						</tr>
 					@endforeach

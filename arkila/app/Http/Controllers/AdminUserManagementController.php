@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\ResetPasswordMail;
 use Illuminate\Http\Request;
 use App\Rules\checkUserName;
 use App\Rules\checkTerminal;
 use App\Rules\checkEmail;
-use App\Mail\ResetPasswordMail;
 use App\Terminal;
 use App\User;
 
@@ -50,19 +50,19 @@ class AdminUserManagementController extends Controller
     }
 
     
-    public function edit($id)
+    public function edit(User $admin_user)
     {
-        $user = User::where('id', $id)->admin()->first();
-        return view('usermanagement.editAdmin', compact('user'));
+        // $user = User::where('id', $id)->admin()->first();
+        return view('usermanagement.editAdmin', compact('admin_user'));
     }
 
-    
-    public function update(Request $request, $id)
+    //User $
+    public function update(User $admin_user)
     {
         //dd($user->id);
-        $user = User::find($id);
-        $user->password = Hash::make(str_random(8));
-        $user->save();
+        
+        $admin_user->password = Hash::make(str_random(8));
+        $admin_user->save();
 
         Mail::to('932a782243-eb8d48@inbox.mailtrap.io')->send(new ResetPasswordMail);
 
@@ -70,9 +70,8 @@ class AdminUserManagementController extends Controller
         return redirect('/home/user-management'); 
     }
 
-    
 
-    public function changeStatus()
+    public function changeAdminStatus()
     {
         $id = Input::get('id');
 

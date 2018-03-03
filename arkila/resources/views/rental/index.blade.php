@@ -24,7 +24,7 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tab_1">
                                         <b>Details:</b>
-                                        <table id="example2" class="table table-bordered table-striped ">
+                                        <table class="table table-bordered table-striped example1">
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
@@ -32,18 +32,22 @@
                                                     <th>Date</th>
                                                     <th>Time</th>
                                                     <th>Contact Number </th>
+                                                    <th>Van Model </th>
                                                     <th>Status</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             @foreach($rentals->sortByDesc('status')->where('rent_type', 'Online') as $rental)
+
+                                                @if ($rental->status == 'Pending' | $rental->status == 'Paid')
                                                 <tr>
                                                 <td>{{ $rental->full_name }}</td>
                                                 <td>{{ $rental->destination }}</td>
                                                 <td>{{ $rental->departure_date }}</td>
                                                 <td>{{ $rental->departure_time }}</td>
                                                 <td>{{ $rental->contact_number }}</td>
+                                                <td>{{ $rental->van->model }}</td>
                                                 <td>{{ $rental->status }}</td>    
                                                 <td class="center-block">
                                                 <div class="text-center">
@@ -64,6 +68,7 @@
                                                         <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-trash"></i> Delete</i></button>
                                                       </form>                          
                                                   @endif
+                                                  @endif
                                                  </form>
                                               </td>
                                              </tr>
@@ -77,7 +82,7 @@
                                         <div class="form-group">
                                             <a href="/home/rental/create" class = "btn btn-outline-danger">Add Walk-in Reservation</a>
                                         </div>
-                                        <table id="example3" class="table table-bordered table-striped">
+                                        <table id=example2 class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
@@ -85,6 +90,7 @@
                                                     <th>Date</th>
                                                     <th>Time</th>
                                                     <th>Contact Number</th>
+                                                    <th>Van Model</th>
                                                     <th>Status</th> 
                                                     <th>Actions</th>
                                                 </tr>
@@ -99,6 +105,7 @@
                                             <td>{{ $rental->departure_date }}</td>
                                             <td>{{ $rental->departure_time }}</td>
                                             <td>{{ $rental->contact_number }}</td>
+                                            <td>{{ $rental->van->model }}</td>
                                             <td>{{ $rental->status }}</td>    
                                             <td class="center-block">
                                             <div class="center-block">
@@ -139,28 +146,20 @@
 @endsection
 @section('scripts')
 @parent          
-  <script>
-
-$(function () {
-    $('#example1').DataTable()
+<script>
+  $(function () {
+    $('.example1').DataTable()
     $('#example2').DataTable({
       'paging'      : true,
-      'lengthChange': false,
+      'lengthChange': true,
       'searching'   : true,
       'ordering'    : true,
       'info'        : true,
-      'autoWidth'   : false
-    })
-    $('#example3').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
+      'autoWidth'   : true
     })
   })
-    
+  
+
      var currentTab = 0; // Current tab is set to be the first tab (0)
         showTab(currentTab); // Display the crurrent tab
 
@@ -219,34 +218,6 @@ $(function () {
             x[n].className += " active";
         }
 
-        function getData() {
-            var firstName = document.getElementById('firstName').value;
-            var lastName = document.getElementById('lastName').value;
-            var middleName = document.getElementById('middleName').value;
-
-            if(firstName !== '' && lastName !== '' && middleName !== '') {
-                document.getElementById('nameView').textContent = lastName + ', ' + firstName + ' ' + middleName;
-            }
-
-            var contactNumber = document.getElementById('contactNumber').value;
-            document.getElementById('contactView').textContent = contactNumber;
-
-            var destination = document.getElementById('destination').value;
-            document.getElementById('destView').textContent = destination;
-
-            var vanType = document.getElementById('model').value;
-            document.getElementById('vanView').textContent = vanType;
-
-            var days = document.getElementById('days').value;
-            document.getElementById('daysView').textContent = days;
-
-            var date = document.getElementById('datepicker').value;
-            document.getElementById('dateView').textContent = date;
-
-            var time = document.getElementById('timepicker').value;
-            document.getElementById('timeView').textContent = time;
-        }
-
         function ConfirmDelete()
         {
             var x = confirm("Delete this request?");
@@ -256,14 +227,6 @@ $(function () {
             return false;
         }
 
-        function ConfirmSubmit()
-        {
-            var x = confirm("You are about to submit this reservation request, this action can not be undone. Do you want to continue?");
-            if (x)
-            return true;
-            else
-            return false;
-        }
         function ConfirmStatus()
         {
             var x = confirm("Change status?");

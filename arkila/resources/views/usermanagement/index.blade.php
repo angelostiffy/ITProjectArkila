@@ -85,7 +85,7 @@
                     
                     <td class="center-block">
                     <div class="center-block">
-                        <button class="btn btn-default"><i class="glyphicon glyphicon-cog">View</i></button>
+                        <a href="/home/user-management/driver/{{$userDriver->id}}" class="btn btn-default"><i class="glyphicon glyphicon-cog">View</i></a>
 
                     </div>
                     </td>
@@ -116,7 +116,7 @@
                 <td>{{$userCustomer->email}}</td>
                 <td class="center-block">
                     <div class="center-block">
-                         <button class="btn btn-default"><i class="glyphicon glyphicon-cog"></i></button>
+                         <a href="/home/user-management/customer/{{$userCustomer->id}}" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>View</a>
 
                     </div>
                 </td>
