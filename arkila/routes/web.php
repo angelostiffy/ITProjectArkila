@@ -84,10 +84,25 @@ Route::get('home/settings', 'HomeController@settings');
 
 /************ User Management ******************************/
 Route::get('home/user-management', 'HomeController@usermanagement');
+
 Route::resource('home/user-management/admin', 'AdminUserManagementController', [
-	'except' => ['index','destroy']
+	'except' => ['index','destroy'],
+	'parameters' => ['admin' => 'admin_user']	
 ]);
-Route::post('home/user-management/admin/change-status', array('as' => 'changeStatus','uses' => 'AdminUserManagementController@changeStatus'));
+Route::post('home/user-management/admin/change-status', array('as' => 'changeAdminStatus','uses' => 'AdminUserManagementController@changeAdminStatus'));
+
+Route::resource('home/user-management/driver', 'UserDriversManagementController', [
+	'except' => ['index','store', 'create','edit','destroy'],
+	'parameters' => ['driver' => 'driver_user']	
+
+]);
+Route::post('home/user-management/drivers/change-status', array('as' => 'changeDriverStatus','uses' => 'UserDriversManagementController@changeDriverStatus'));
+
+Route::resource('home/user-management/customer', 'CustomerUserManagementController', [
+	'except' => ['index','store', 'create','edit','destroy'],
+	'parameters' => ['customer' => 'customer_user']	
+]);
+Route::post('home/user-management/customer/change-status', array('as' => 'changeCustomerStatus','uses' => 'CustomerUserManagementController@changeCustomerStatus'));
 /****************************************************/
 
 Route::resource('home/test', 'TestController');
