@@ -10,6 +10,51 @@
     	<div class="col-md-6">
     		<a href="{{route('vans.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create Van</a>
     	</div>
+
+    	<div class="modal fade" id="modal-default">
+                    <div class="modal-dialog" style="width:400px;">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title"> YUNG OPERATOR NAME</h4>
+                            </div>
+                            <!-- /.modal-header -->
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="box box-default">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Choose Driver</h3>
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body center-block">
+                                            <div class="form-group ">
+                                                <select class="form-control">
+                                                  <option selected="selected">Shaina</option>
+                                                  <option>Marie</option>
+                                                  <option>Retuya</option>
+                                                  <option>Ganda</option>
+                                                </select>
+                                            </div>
+                                            <!-- /.form-group -->
+                                        </div>
+                                        <!-- /.box-body -->
+                                        <div class="box-footer">
+                                            <button type="submit" name="search" id="search-btn" class="btn btn-primary pull-right"> Submit </button>
+                                        </div>
+                                        <!-- /.box-footer -->
+                                    </div>
+                                    <!-- /.box -->
+                                </div>
+                                <!-- /.container-fluid -->
+                            </div>
+                            <!-- /.modal-body -->
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+
         <table id="van" class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -34,15 +79,10 @@
 							<td>{{$van->seating_capacity}}</td>
 							<td>
 								<div class="text-center">
-									<form method="POST" action="{{route('vans.destroy',[$van->plate_number])}}">
-									{{csrf_field()}}
-									{{method_field('DELETE')}}
-		                            <a href="home/vans/{{$van->plate_number}}" class="btn btn-primary"><i class="fa fa-eye"></i>View</a>
-		                            <a href="/home/vans/{{$van->plate_number}}/edit" class="btn btn-info"><i class="fa fa-pencil-square-o"></i>Edit</a>
-
-									<button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
-								</form>
-		                        </div>
+                                    <a href="changeDriver.html" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-pencil-square-o"></i> Change Driver</a>
+                                    <a href="viewVanOperator.html" class="btn btn-default"><i class="fa fa-eye"></i>View</a>
+                                    <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</i></button>
+                                </div>
 							</td>
 						</tr>
 					@endforeach
