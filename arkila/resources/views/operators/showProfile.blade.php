@@ -23,9 +23,9 @@
 
         <!-- About Me Box -->
         <div class="box box-primary">
-            <div class="box-header with-border">
-                <a href="{{route('operators.edit',[$operator->member_id])}}" class="btn btn-block btn-info"><b>Edit Information</b></a>
-                <a href="{{route('operators.show',[$operator->member_id])}}" class="btn btn-primary btn-block"><b>View All Information</b></a>
+            <div class="box-header with-border">       
+                <a href="{{route('operators.show',[$operator->member_id])}}" class="btn btn-default btn-block"><b>View All Information</b></a>
+                <a href="{{route('operators.edit',[$operator->member_id])}}" class="btn btn-block btn-primary"><b>Edit Information</b></a>
                 <div class="modal fade" id="modal-default">
                     <div class="modal-dialog" style="width:400px;">
                         <div class="modal-content">
@@ -87,7 +87,7 @@
                     <div class="box">
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <a href="{{route('drivers.createFromOperator',[$operator->member_id])}}" class="btn btn-success" style="margin-bottom:-5%;"><i class="fa fa-plus-circle"></i> Add Driver</a>
+                            <a href="{{route('drivers.createFromOperator',[$operator->member_id])}}" class="btn btn-primary" style="margin-bottom:-5%;"><i class="fa fa-plus-circle"></i> Add Driver</a>
                             <table id="driver" class="table table-bordered table-striped">
 
                                 <thead>
@@ -109,9 +109,10 @@
 
                                             <form action="{{route('drivers.destroy',[$driver->member_id])}}" method="POST">
                                                 <div class="text-center">
-                                                    <a href="{{route('drivers.show',[$driver->member_id])}}" class="btn btn-primary"><i class="fa fa-eye"></i>View</a>
-                                                    <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i>Edit</a> {{ csrf_field() }} {{method_field('DELETE')}}
-                                                    <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</i></button>
+                                                    <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Edit</a>
+                                                    <a href="{{route('drivers.show',[$driver->member_id])}}" class="btn btn-default"><i class="fa fa-eye"></i>View</a>
+                                                    {{ csrf_field() }} {{method_field('DELETE')}}
+                                                    <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</i></button>
                                             </form>
 
                                         </td>
@@ -126,12 +127,11 @@
                         <!-- /.box -->
                     </div>
                     <!-- /.tab-pane -->
-                </div>
-                <!-- /.tab-content -->
+                
                 <div class="tab-pane" id="vans">
                     <div class="box">
                         <div class="box-header">
-                            <button class="btn btn-success" style="margin-bottom:-8%;"><i class="fa fa-plus-circle"></i> Add Van</button>
+                            <button class="btn btn-primary" style="margin-bottom:-8%;"><i class="fa fa-plus-circle"></i> Add Van</button>
                         </div>
                         <div class="box-body">
                             <table id="van" class="table table-bordered table-striped">
@@ -151,9 +151,9 @@
                                         <td>{{$van->contact_number}}</td>
                                         <td>
                                             <div class="text-center">
-                                                <a href="changeDriver.html" class="btn btn-info" data-toggle="modal" data-target="#modal-default"><i class="fa fa-eye"></i> Change Driver</a>
-                                                <a href="viewVanOperator.html" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>View</a>
-                                                <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</i></button>
+                                                <a href="changeDriver.html" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-pencil-square-o"></i> Change Driver</a>
+                                                <a href="viewVanOperator.html" class="btn btn-default"><i class="fa fa-eye"></i>View</a>
+                                                <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</i></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -167,6 +167,8 @@
                     <!-- /.box -->
                 </div>
                 <!-- /.tab-pane -->
+    </div>
+                <!-- /.tab-content -->          
             </div>
             <!-- /.nav-tabs-custom -->
         </div>
