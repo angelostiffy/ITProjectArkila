@@ -80,7 +80,7 @@
 		                            <a href="home/vans/{{$van->plate_number}}" class="btn btn-primary"><i class="fa fa-eye"></i>View</a>
 
                                         @if($van->driver()->first())
-		                                        <button name="listDriver" value="{{ $van->operator()->first()->member_id }}" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Change Driver</button>
+		                                        <a name="listDriver" value="{{ $van->operator()->first()->member_id }}" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Change Driver</a>
                                         @else
                                             <a href="{{ route('drivers.createFromVan',[$van->plate_number] ) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Add Driver</a>
                                         @endif
@@ -112,19 +112,22 @@
         })
     });
 
-    $('select[name="listDriver"]').on('click',function(){
+    $('a[name="listDriver"]').on('click',function(){
+
         $.ajax({
             method:'POST',
             url: '{{route("vans.listDrivers")}}',
             data: {
                 '_token': '{{csrf_token()}}',
-                'operator':$('select[name="listDriver"]').val()
+                'operator':$(this).val()
             },
             success: function(drivers){
-                $('[name="driver"]').append('<option value="">None</option>');
+                $('a[name="driver"]').append('<option value="">None</option>');
+
                 drivers.forEach(function(driverObj){
-                    $('[name="driver"]').append('<option value='+driverObj.id+'> '+driverObj.name+'</option>');
-                })
+                    $('a[name="driver"]').append('<option value='+driverObj.id+'> '+driverObj.name+'</option>');
+                });
+
             }
 
         });
