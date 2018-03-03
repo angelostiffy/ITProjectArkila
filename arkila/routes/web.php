@@ -25,6 +25,9 @@ Route::get('/teo', function(){
 
 Route::resource('/angelo', 'EmailtestController');
 
+Route::get('/demo', function(){
+  return new App\Mail\ResetPasswordMail();
+});
 
 
 Route::get('/', function () {
@@ -89,20 +92,20 @@ Route::get('home/user-management', 'HomeController@usermanagement');
 
 Route::resource('home/user-management/admin', 'AdminUserManagementController', [
 	'except' => ['index','destroy'],
-	'parameters' => ['admin' => 'admin_user']	
+	'parameters' => ['admin' => 'admin_user']
 ]);
 Route::post('home/user-management/admin/change-status', array('as' => 'changeAdminStatus','uses' => 'AdminUserManagementController@changeAdminStatus'));
 
 Route::resource('home/user-management/driver', 'UserDriversManagementController', [
 	'except' => ['index','store', 'create','edit','destroy'],
-	'parameters' => ['driver' => 'driver_user']	
+	'parameters' => ['driver' => 'driver_user']
 
 ]);
 Route::post('home/user-management/drivers/change-status', array('as' => 'changeDriverStatus','uses' => 'UserDriversManagementController@changeDriverStatus'));
 
 Route::resource('home/user-management/customer', 'CustomerUserManagementController', [
 	'except' => ['index','store', 'create','edit','destroy'],
-	'parameters' => ['customer' => 'customer_user']	
+	'parameters' => ['customer' => 'customer_user']
 ]);
 Route::post('home/user-management/customer/change-status', array('as' => 'changeCustomerStatus','uses' => 'CustomerUserManagementController@changeCustomerStatus'));
 /****************************************************/
