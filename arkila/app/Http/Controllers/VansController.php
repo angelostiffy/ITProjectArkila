@@ -135,8 +135,9 @@ class VansController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Member $van)
+    public function update(Van $van)
     {
+
         $this->validate(request(), [
             "plateNumber" => 'unique:vans,plate_number,'.$van->plate_number.',plate_number|required|between:6,8',
             "model" =>  'required',
