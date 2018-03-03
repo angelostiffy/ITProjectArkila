@@ -28,7 +28,7 @@ class FeesController extends Controller
     public function store()
     {
         $this->validate(request(),[
-            "addFeesDesc" => "unique:fees_and_deduction,description|required|max:30",
+            "addFeesDesc" => "unique:fees_and_deduction,description|alpha|required|max:30",
             "addFeeAmount" => ['required',new checkCurrency,'numeric','min:0']
         ]);
 

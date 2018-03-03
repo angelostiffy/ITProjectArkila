@@ -31,7 +31,7 @@ class TerminalController extends Controller
     public function store()
     {
         $this->validate(request(),[
-            "addTerminalName" => 'unique:terminal,description|required|max:40',
+            "addTerminalName" => 'unique:terminal,description|alpha|required|max:40',
         ]);
 
         Terminal::create([
