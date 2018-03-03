@@ -45,7 +45,7 @@ class VansController extends Controller {
     public function store(){
         $this->validate(request(), [
             "operator" => ['numeric','exists:member,member_id',new checkOperator],
-            "driver" => ['numeric','exists:member,member_id',new checkDriver],
+            "driver" => ['nullable','numeric','exists:member,member_id',new checkDriver],
             "plateNumber" => ['unique:van,plate_number','required','between:6,8'],
             "vanModel" =>  'required',
             "seatingCapacity" => 'required|between:2,10|numeric'
@@ -56,12 +56,13 @@ class VansController extends Controller {
             'model' => request('vanModel'),
             'seating_capacity' => request('seatingCapacity')
         ]);
+        $van->members()->attach(request('operator'));
 
         if(request('addDriver') === 'on'){
             return redirect(route('drivers.createFromVan',[$van->plate_number]));
         }
         else{
-            $van->members()->attach(request('operator'));
+
             $van->members()->attach(request('driver'));
             return redirect(route('vans.index'));
         }
@@ -162,9 +163,9 @@ class VansController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Member $van)
+    public function destroy(Van $van)
     {
-        $van->detach();
+        $van->members()->detach();
         $van->delete();
     	return back();
     }
@@ -190,3 +191,4 @@ class VansController extends Controller {
 
     }
 }
+

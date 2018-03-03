@@ -38,7 +38,12 @@
 									{{csrf_field()}}
 									{{method_field('DELETE')}}
 		                            <a href="home/vans/{{$van->plate_number}}" class="btn btn-primary"><i class="fa fa-eye"></i>View</a>
-		                            <a href="/home/vans/{{$van->plate_number}}/edit" class="btn btn-info"><i class="fa fa-pencil-square-o"></i>Edit</a>
+
+                                        @if($van->driver()->first())
+		                                        <button name="listDriver" value="{{ $van->operator()->first()->member_id }}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i>Change Driver</button>
+                                        @else
+                                            <a href="{{ route('drivers.createFromVan',[$van->plate_number] ) }}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i>Add Driver</a>
+                                        @endif
 
 									<button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
 								</form>
@@ -64,7 +69,25 @@
             'info': true,
             'autoWidth': true
         })
-    })
+    });
+
+    $('select[name="listDriver"]').on('click',function(){
+        $.ajax({
+            method:'POST',
+            url: '{{route("vans.listDrivers")}}',
+            data: {
+                '_token': '{{csrf_token()}}',
+                'operator':$('select[name="listDriver"]').val()
+            },
+            success: function(drivers){
+                $('[name="driver"]').append('<option value="">None</option>');
+                drivers.forEach(function(driverObj){
+                    $('[name="driver"]').append('<option value='+driverObj.id+'> '+driverObj.name+'</option>');
+                })
+            }
+
+        });
+    });
 </script>
 
 @stop
