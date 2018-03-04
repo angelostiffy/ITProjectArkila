@@ -1,17 +1,20 @@
 @extends('layouts.master')
 @section('title', 'Announcements')
-@section('content-header', 'Announcements')
 @section('content')
 
-
-    @foreach ($announcements->sortByDesc('created_at') as $key => $announcement)
+    @if ($announcements->count() > 0)
+    @foreach ($announcements->sortByDesc('created_at') as $announcement)
+    <h1>Announcements</h1>
         <div class="box box-warning">
                     <div class="box-header with-border bg-yellow">
-                        <h4>Announcement {{ $key }}</h4>
+                        <h4>Title: {{ $announcement->title }}</h4>
                         <h6>Viewer: {{ $announcement->viewer }} </h6>
                     </div>
                     <div class="box-body">
-                        <p>Created: {{ $announcement->created_at }}</p> 
+                        <p>Created: {{ $announcement->created_at->format('Y-m-d h:i:s A') }}</p> 
+                       @if ($announcement->created_at->ne($announcement->updated_at))
+                        <p>Updated: {{ $announcement->updated_at->format('Y-m-d h:i:s A') }}</p> 
+                       @endif
                         <p>{{ $announcement->description }}</p>
                     </div>
 
@@ -31,6 +34,9 @@
         </form>
           @endforeach
     <!-- /.content -->
+        @else
+            <h1>No Announcements</h1>
+            @endif
        
  
 @endsection
