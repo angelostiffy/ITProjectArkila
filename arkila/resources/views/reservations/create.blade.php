@@ -1,4 +1,5 @@
 @extends('layouts.form_lg') @section('links') @parent
+
 <style>
     /* Mark input boxes that gets an error on validation: */
 
@@ -32,6 +33,7 @@
     }
 </style>
 @endsection @section('title', 'Rent Van') @section('form-id', 'regForm') @section('form-action', route('reservations.store')) @section('form-method', 'POST') @section('form-body') {{csrf_field()}}
+@include('message.error')
 <div class="box box-warning">
     <div class="box-header with-border text-center">
         <a href="{{ URL::previous() }}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
