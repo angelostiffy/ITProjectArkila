@@ -179,14 +179,16 @@ ol.example li.placeholder:before {
                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
 
                 <ol id ="queue" class="rectangle-list limited_drop_targets">
+                  @foreach ($trips as $trip)
                   <li>
-                    <a href="">AAA
+                    <a href="">{{ $trip->van->plate_number }}
                     <span class="badge badge-warning badge-pill">
-                    CC
+                    {{ $trip->remarks }}
                     </span>
                     </a> 
                   </li>
-                  <li><a href="">BBB</a></li>
+                  @endforeach
+                  <!-- <li><a href="">BBB</a></li>
                   <li><a href="">CCC</a></li>
                   <li><a href="">DDD</a></li>
                   <li><a href="">EEE</a></li>
@@ -196,7 +198,7 @@ ol.example li.placeholder:before {
                   <span class="badge badge-error badge-pill pull-right">ER</span>
                   </a></li>
                   <li><a href="">III</a></li>
-                  <li><a href="">JJJ</a></li>
+                  <li><a href="">JJJ</a></li> -->
                 </ol>
             </div>
           </div>
