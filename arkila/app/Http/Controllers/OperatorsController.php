@@ -37,8 +37,6 @@ class OperatorsController extends Controller
     public function store(OperatorRequest $request)
     {
 
-        $children = array_combine($request->children,$request->childrenBDay);
-
         $createdOperator = Member::create([
             'last_name'=> $request->lastName,
             'first_name' => $request->firstName,
@@ -65,11 +63,19 @@ class OperatorsController extends Controller
             'SSS' => $request->sss,
             'license_number' => $request->licenseNo,
             'expiry_date' => $request->licenseExpiryDate,
-            'number_of_children' => sizeof($children)
 
         ]);
 
-        $createdOperator->addChildren($children);
+        if($this->arrayChecker($request->children) && $this->arrayChecker($request->childrenBDay))
+        {
+            $children = array_combine($request->children,$request->childrenBDay);
+            $createdOperator->addChildren($children);
+            $createdOperator->update([
+                'number_of_children' => sizeof($children)
+            ]);
+        }
+
+
         return redirect(route('operators.index'))->with('success', 'Information created successfully');
     }
 
@@ -96,7 +102,7 @@ class OperatorsController extends Controller
      */
     public function edit(Member $operator)
     {
-        return view('operators.edit', compact('operator'));
+        return view('operators.edit2niRandall', compact('operator'));
     }
 
     /**
@@ -108,9 +114,6 @@ class OperatorsController extends Controller
      */
     public function update(Member $operator, OperatorRequest $request)
     {
-
-        $children = array_combine($request->children,$request->childrenBDay);
-
 
         $operator -> update([
             'last_name'=> $request->lastName,
@@ -138,11 +141,17 @@ class OperatorsController extends Controller
             'SSS' => $request->sss,
             'license_number' => $request->licenseNo,
             'expiry_date' => $request->licenseExpiryDate,
-            'number_of_children' => sizeof($children)
         ]);
 
-        $operator->children()->delete();
-        $operator->addChildren($children);
+        if($this->arrayChecker($request->children) && $this->arrayChecker($request->childrenBDay))
+        {
+            $children = array_combine($request->children,$request->childrenBDay);
+            $operator->children()->delete();
+            $operator->addChildren($children);
+            $operator->update([
+                'number_of_children' => sizeof($children)
+            ]);
+        }
 
         return redirect()->route('operators.show', compact('operator'))->with('success', 'Information updated successfully');
     }
@@ -156,7 +165,26 @@ class OperatorsController extends Controller
     public function destroy(Member $operator)
     {
         $operator->drivers()->update(['operator_id'=>null]);
+        $operator->van()->detach();
         $operator->delete();
         return redirect()->route('operators.index');
+    }
+
+    private function arrayChecker($array){
+        $result = true;
+
+        if (is_array($array) || is_object($array))
+        {
+            foreach($array as $arrayContent){
+                if(is_null($arrayContent)){
+                    $result = false;
+                    break;
+                }
+            }
+        }else{
+            $result= false;
+        }
+
+        return $result;
     }
 }

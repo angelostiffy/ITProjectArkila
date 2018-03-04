@@ -4,7 +4,7 @@
 <!-- additional CSS -->
 <link rel="stylesheet" href="operatorStyle.css"> @stop @section('content')
 
-<a href="operatorProfile.html" class="btn btn-outline-primary"><i class="fa fa-arrow-circle-left"></i> Back</a>
+<a href="{{URL::previous()}}" class="btn btn-outline-primary"><i class="fa fa-arrow-circle-left"></i> Back</a>
 
                 <div class="box box-warning">
                     <div class="box-header with-border text-center">

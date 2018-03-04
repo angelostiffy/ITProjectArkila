@@ -48,7 +48,7 @@ class VansController extends Controller {
             "driver" => ['nullable','numeric','exists:member,member_id',new checkDriver],
             "plateNumber" => ['unique:van,plate_number','required','between:6,8'],
             "vanModel" =>  'required',
-            "seatingCapacity" => 'required|between:2,10|numeric'
+            "seatingCapacity" => 'required|between:2,15|numeric'
         ]);
 
         $van = Van::create([
@@ -82,7 +82,7 @@ class VansController extends Controller {
             "driver" => ['nullable','numeric','exists:member,member_id','unique:member_van,member_id',new checkDriver],
             "plateNumber" => 'unique:van,plate_number|required|between:6,8',
             "vanModel" =>  'required',
-            "seatingCapacity" => 'required|between:2,10|numeric'
+            "seatingCapacity" => 'required|between:2,15|numeric'
         ]);
 
 
@@ -139,23 +139,18 @@ class VansController extends Controller {
     {
 
         $this->validate(request(), [
-            "plateNumber" => 'unique:vans,plate_number,'.$van->plate_number.',plate_number|required|between:6,8',
-            "model" =>  'required',
-            "operator" => 'exists:operators,operator_id|required|numeric',
-            "driver" => 'exists:drivers,driver_id|numeric',
-            "seatingCapacity" => 'required|between:2,10|numeric'
+            "driver" => ['nullable','numeric','exists:member,member_id',new checkDriver],
         ]);
+        $driver = $van->driver()->first();
 
-        $van->update([
-            'plate_number' => request('plateNumber'),
-            'model' => request('model'),
-            'operator_id' => request('operator'),
-            'driver_id' => request('driver'),
-            'seating_capacity' => request('seatingCapacity')
-        ]);
+        if($driver){
+            $van->members()->detach($driver->member_id);
+        }
+
+        $van->members()->attach(request('driver'));
 
     	session()->flash('message','Van '.request('plateNumber').'Successfully Edited');
-    	return redirect(route('vans.index'));
+    	return back();
     }
 
     /**
@@ -172,7 +167,7 @@ class VansController extends Controller {
     }
 
     public function listDrivers(){
-        $operator = Member::find(request('driver'));
+        $operator = Member::find(request('operator'));
 
         if($operator != null) {
             $driversArr = [];
@@ -190,6 +185,25 @@ class VansController extends Controller {
         }
 
 
+    }
+
+    public function vanInfo(){
+        $van = Van::find(request('van'));
+
+        if($van != null){
+            $vanInfo = [
+                'plateNumber' => $van->plate_number,
+                'vanModel' => $van->model,
+                'seatingCapacity' => $van->seating_capacity,
+                'operatorOfVan' => $van->operator()->first()->full_name,
+                'driverOfVan' => $van->driver()->first()->full_name ?? $van->driver()->first()
+            ];
+
+            return response()->json($vanInfo);
+        }
+        else{
+            return "Van not found";
+        }
     }
 }
 

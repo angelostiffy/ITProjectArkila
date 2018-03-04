@@ -66,7 +66,10 @@ Route::post('/listDrivers','VansController@listDrivers')->name('vans.listDrivers
 Route::resource('home/vans', 'VansController');
 //Creating Vans
 Route::get('home/operators/{operator}/vans/create', 'VansController@createFromOperator')->name('vans.createFromOperator');
-Route::post('home/operators/{operator}/vans', 'VansController@storeFromOperator')->name('vans.storeFromOperator');;
+Route::post('home/operators/{operator}/vans', 'VansController@storeFromOperator')->name('vans.storeFromOperator');
+
+//Give the info of a van
+Route::post('/vanInfo','VansController@vanInfo')->name('vans.vanInfo');
 /****************************************************/
 
 /************ Settings ******************************/

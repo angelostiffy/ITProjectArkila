@@ -133,11 +133,12 @@ $('select[name="operator"]').on('change',function(){
                 url: '{{route("vans.listDrivers")}}',
                 data: {
                     '_token': '{{csrf_token()}}',
-                    'driver':$('select[name="operator"]').val()
+                    'operator':$('select[name="operator"]').val()
                 },
                 success: function(drivers){
                     $('[name="driver"]').append('<option value="">None</option>');
                     drivers.forEach(function(driverObj){
+
                         $('[name="driver"]').append('<option value='+driverObj.id+'> '+driverObj.name+'</option>');
                     })
                 }

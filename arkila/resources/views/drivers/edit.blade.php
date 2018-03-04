@@ -298,7 +298,7 @@
 
                                         </tr>
                                     @endfor
-                                @else
+                                @elseif ($driver->children->first())
                                     @foreach($driver->children as $child)
                                         <tr>
                                             <td>
@@ -320,6 +320,26 @@
 
                                         </tr>
                                     @endforeach
+                                @else
+                                        <tr>
+                                            <td>
+                                                <input name="children[]" type="text" placeholder="Name of Child" class="form-control">
+                                            </td>
+                                            <td>
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input name="childrenBDay[]" type="text" class="form-control pull-right datepicker">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="pull-right">
+                                                    <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
+                                                </div>
+                                            </td>
+
+                                        </tr>
                                 @endif
 
                                 </tbody>

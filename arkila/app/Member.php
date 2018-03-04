@@ -60,7 +60,13 @@ class Member extends Model
     }
 
     public function getSpouseBirthdateAttribute($value){
-        return Carbon::parse($value)->format('m/d/Y');
+        if(is_null($value)){
+            return null;
+        }
+        else {
+            return Carbon::parse($value)->format('m/d/Y');
+        }
+
     }
 
     public function getExpiryDateAttribute($value){
@@ -72,7 +78,13 @@ class Member extends Model
     }
 
     public function setSpouseBirthdateAttribute($value){
-        $this->attributes['spouse_birthdate'] = Carbon::parse($value);
+        if(is_null($value)){
+            $this->attributes['spouse_birthdate'] = $value;
+        }
+        else{
+            $this->attributes['spouse_birthdate'] = Carbon::parse($value);
+        }
+
     }
 
     public function setExpiryDateAttribute($value){
