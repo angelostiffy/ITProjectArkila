@@ -29,7 +29,7 @@ class ReservationRequest extends FormRequest
             "name" => "required|max:50",
             "date" => "required|date_format:m/d/Y|after_or_equal:today",
             "dest" => "required",
-            "time" => 'required|numeric',
+            "time" => 'required',
             "seat" => "required|numeric|digits_between:1,2",
             "contact" => "required|numeric|digits:10",
             "amount" => [new checkCurrency,'numeric','min:0'],

@@ -41,8 +41,8 @@
 
 @if ( isset($operator) )
     @section('form-action',route('drivers.storeFromOperator',[$operator->member_id]))
-@elseif ( isset($van) )
-    @section('form-action',route('drivers.storeFromVan',[$van->plate_number]))
+@elseif ( isset($vanNd) )
+    @section('form-action',route('drivers.storeFromVan',[$vanNd->plate_number]))
 @else
     @section('form-action',route('drivers.store'))
 @endif
@@ -68,18 +68,18 @@
                             @if(isset($operator))
                                 <label for"opName">Operator Name:</label>
                                 <span id="opName">{{$operator->full_name}}</span>
-                            @elseif(isset($van))
+                            @elseif(isset($vanNd))
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Van Unit</label>
-                                        <span id="">{{ $van->plate_number}}</span>
+                                        <span id="">{{ $vanNd->plate_number}}</span>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Operator of the Van Unit</label>
-                                        <span id="">{{ $van->operator->first()->full_name}}</span>
+                                        <span id="">{{ $vanNd->operator->first()->full_name}}</span>
                                     </div>
                                 </div>
 

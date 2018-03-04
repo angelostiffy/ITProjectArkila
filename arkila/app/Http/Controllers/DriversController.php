@@ -122,11 +122,11 @@ class DriversController extends Controller
         return redirect(route('operators.showProfile',[$operator->member_id]));
     }
 
-    public function createFromVan(Van $van){
-        return view('drivers.create',compact('van'));
+    public function createFromVan(Van $vanNd){
+        return view('drivers.create',compact('vanNd'));
     }
 
-    public function storeFromVan(Van $van,DriverRequest $request){
+    public function storeFromVan(Van $vanNd,DriverRequest $request){
 
         $children = array_combine($request->children,$request->childrenBDay);
 
@@ -136,7 +136,7 @@ class DriversController extends Controller
             'middle_name' => $request->middleName,
             'contact_number' => $request->contactNumber,
             'role' => 'Driver',
-            'operator_id' => $van->operator()->first()->member_id,
+            'operator_id' => $vanNd->operator()->first()->member_id,
             'address' => $request->address,
             'provincial_address' => $request->provincialAddress,
             'birth_date' => $request->birthDate,
@@ -160,8 +160,8 @@ class DriversController extends Controller
             'number_of_children' => sizeof($children)
         ]);
 
-        $van->members()->attach($driver);
-        return redirect(route('operators.showProfile',[$van->operator()->first()->member_id]));
+        $vanNd->members()->attach($driver);
+        return redirect(route('operators.showProfile',[$vanNd->operator()->first()->member_id]));
     }
     /**
      * Display the specified resource.

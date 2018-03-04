@@ -5,7 +5,10 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use App\Member;
+
+use App\Van;
 use App\User;
+
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -34,6 +37,10 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('driver', function($value){
             return Member::allDrivers()->where('member_id',$value)->first() ?? abort(404);
+        });
+
+        Route::bind('vanNd',function($value) {
+            return is_null(Van::find($value)->driver()->first()) ? $value : abort(404);
         });
 
         Route::bind('driver_user', function($value){
