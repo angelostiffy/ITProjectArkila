@@ -28,7 +28,7 @@
                 
             <!-- Modal -->
             <div id="myModal" class="modal fade" role="dialog">
-              <div class="modal-dialog">
+              <div class="modal-dialog modal-sm">
 
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -40,7 +40,7 @@
                     <p>Are you sure you want to delete this announcement?</p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>  
                     <form method="POST" action="/home/announcements/{{$announcement->announcement_id}}">
                             {{csrf_field()}}
                             {{method_field('DELETE')}}
