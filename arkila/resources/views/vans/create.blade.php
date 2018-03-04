@@ -1,12 +1,14 @@
 
 @extends('layouts.form') 
 @section('title', 'Add Van')
-@section('back-link',URL::previous())
+
 
 @if(isset($operators))
     @section('form-action',route('vans.store'))
+    @section('back-link',route('vans.index'))
 @else
     @section('form-action',route('vans.storeFromOperator',[$operator->member_id]))
+    @section('back-link', route('operators.showProfile',[$operator->member_id]))
 @endif
 @section('form-title', 'Add Van')
 @section('form-body')

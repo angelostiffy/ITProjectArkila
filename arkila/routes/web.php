@@ -63,7 +63,9 @@ Route::post('/listDrivers','VansController@listDrivers')->name('vans.listDrivers
 /****************************************************/
 
 /************ Vans ******************************/
-Route::resource('home/vans', 'VansController');
+Route::resource('home/vans', 'VansController', [
+    'except' => ['show']
+]);
 //Creating Vans
 Route::get('home/operators/{operator}/vans/create', 'VansController@createFromOperator')->name('vans.createFromOperator');
 Route::post('home/operators/{operator}/vans', 'VansController@storeFromOperator')->name('vans.storeFromOperator');

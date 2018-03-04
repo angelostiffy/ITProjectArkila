@@ -4,7 +4,7 @@
 <!-- additional CSS -->
 <link rel="stylesheet" href="operatorStyle.css"> @stop @section('content')
 
-<a href="{{URL::previous()}}" class="btn btn-outline-primary"><i class="fa fa-arrow-circle-left"></i> Back</a>
+<a href="@if(session()->get('opLink') && session()->get('opLink') == URL::previous()) {{session()->get('opLink')}} @else {{ route('drivers.index') }} @endif" class="btn btn-outline-primary"><i class="fa fa-arrow-circle-left"></i> Back</a>
 
                 <div class="box box-warning">
                     <div class="box-header with-border text-center">

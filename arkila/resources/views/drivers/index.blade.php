@@ -1,4 +1,5 @@
 @extends('layouts.master') @section('title', 'Driver List') @section('content-header', 'Driver List') @section('content')
+    @if(session()->get('opLink')) {{ session()->forget('opLink') }} @endif
 <div class="box">
     <div class="box-body">
         <a href="{{route('drivers.create')}}" class="btn btn-primary">Add Driver <i class="fa fa-plus-circle"></i></a>

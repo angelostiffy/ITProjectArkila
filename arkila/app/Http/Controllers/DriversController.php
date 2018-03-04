@@ -135,6 +135,13 @@ class DriversController extends Controller
     }
 
     public function createFromVan(Van $vanNd){
+        if(session()->get('type') == 'createFromIndex'){
+            session(['vanBack'=> route('vans.index')]);
+        }else{
+            session(['vanBack'=> route('operators.showProfile',[session()->get('type')])]);
+        }
+        session()->forget('type');
+
         return view('drivers.create',compact('vanNd'));
     }
 
@@ -179,7 +186,13 @@ class DriversController extends Controller
         }
 
         $vanNd->members()->attach($driver);
-        return redirect(route('operators.showProfile',[$vanNd->operator()->first()->member_id]));
+
+        if(session()->get('vanBack') && session()->get('vanBack') == route('operators.showProfile',[$vanNd->operator->first()->member_id])){
+            return redirect(route('operators.showProfile',[$vanNd->operator->first()->member_id]));
+        }else{
+            return redirect(route('vans.index'));
+        }
+
     }
     /**
      * Display the specified resource.
@@ -256,8 +269,16 @@ class DriversController extends Controller
             ]);
         }
 
+        if(session()->get('opLink')){
+            $routeOP = session()->get('opLink');
+            session()->forget('opLink');
+            return redirect($routeOP);
 
-        return redirect(route('drivers.index'));
+        }
+        else{
+            return redirect(route('drivers.index'));
+        }
+
 
     }
 

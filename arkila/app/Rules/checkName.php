@@ -25,7 +25,7 @@ class checkName implements Rule
      */
     public function passes($attribute, $value)
     {
-        return (preg_match('/^[a-zA-Z][a-zA-Z\s-]+[a-zA-Z]$/',$value));
+        return (preg_match('/^[a-zA-Z]$|^[a-zA-Z][a-zA-Z\s-]*[a-zA-Z]$/',$value));
     }
 
     /**
@@ -35,6 +35,6 @@ class checkName implements Rule
      */
     public function message()
     {
-        return 'Invalid name entered. The :attribute field must only contain alphabetic characters, spaces or dashes';
+        return 'Invalid name entered. The :attribute field can only consist of alphabetic characters, spaces or dashes and it must be a valid name ';
     }
 }

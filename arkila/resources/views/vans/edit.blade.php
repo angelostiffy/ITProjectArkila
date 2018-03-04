@@ -2,6 +2,7 @@
 @extends('layouts.form') 
 @section('title', 'Add Van Driver')
 @section('back-link',URL::previous())
+{{session(['link' => URL::previous()])}}
 @section('form-action',route('vans.update',[$van->plate_number]))
 
 @section('form-title', 'Add Van-Driver')
@@ -34,7 +35,7 @@
 
         <select name="driver" id="driver" class="form-control select2">
             <option value="">None</option>
-            @foreach($van->driver()->get() as $driver)
+            @foreach($van->operator()->first()->drivers()->doesntHave('van')->get() as $driver)
                 <option value="{{$driver->member_id}}">{{$driver->full_name}}</option>
             @endforeach
 

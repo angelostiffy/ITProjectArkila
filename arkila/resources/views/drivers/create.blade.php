@@ -41,17 +41,24 @@
 
 @if ( isset($operator) )
     @section('form-action',route('drivers.storeFromOperator',[$operator->member_id]))
+    @section('backRef') {{ route('operators.showProfile',[$operator->member_id]) }} @endsection
 @elseif ( isset($vanNd) )
     @section('form-action',route('drivers.storeFromVan',[$vanNd->plate_number]))
+    @if(session()->get('vanBack'))
+        @section('backRef') {{ session()->get('vanBack') }} @endsection
+    @else
+        @section('backRef') {{ route('vans.index') }} @endsection
+    @endif
 @else
     @section('form-action',route('drivers.store'))
+    @section('backRef') {{ route('drivers.index',[$operator->member_id]) }} @endsection
 @endif
 
 
 @section('form-body')
 <div class="box box-warning">
         <div class="box-header with-border text-center">
-            <a href="{{URL::previous()}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+            <a href="@yield('backRef')" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
             <h3 class="box-title">
                 Driver Registration
             </h3>

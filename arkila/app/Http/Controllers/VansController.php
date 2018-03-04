@@ -59,6 +59,7 @@ class VansController extends Controller {
         $van->members()->attach(request('operator'));
 
         if(request('addDriver') === 'on'){
+            session(['type' => 'createFromIndex']);
             return redirect(route('drivers.createFromVan',[$van->plate_number]));
         }
         else{
@@ -96,6 +97,7 @@ class VansController extends Controller {
         session()->flash('message','Van successfully created');
 
         if(request('addDriver') === 'on'){
+            session(['type' => $operator->member_id]);
             return redirect(route('drivers.createFromVan',[$van->plate_number]));
         }else{
             $van->members()->attach(request('driver'));
@@ -105,16 +107,7 @@ class VansController extends Controller {
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Van $van)
-    {
-        return view('vans.show', compact('van'));
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -150,7 +143,7 @@ class VansController extends Controller {
             $van->members()->attach(request('driver'));
 
             session()->flash('message','Van '.request('plateNumber').'Successfully Edited');
-            return back();
+            return redirect(session()->get('link'));
         }
         else{
             return redirect(route('drivers.createFromVan',[$van->plate_number]));
