@@ -4,6 +4,7 @@
 @section('form-action', route('discounts.store'))
 @section('form-title', 'Create Discount')
 @section('form-body')
+				  @include('message.error')
                   <div class="form-group">
                     <label>Description:</label>
                     <input type="text" class="form-control" name="addDiscountDesc" >

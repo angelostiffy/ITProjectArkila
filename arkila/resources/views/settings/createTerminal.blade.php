@@ -5,7 +5,7 @@
 @section('form-title', 'Create Terminal')
 @section('form-body')
 
-		
+		@include('message.error')
        <div class="form-group">
         <label>Terminal Name:</label>
         <input type="text" class="form-control" name="addTerminalName">
