@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\checkAge;
+use App\Rules\checkName;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -32,10 +33,10 @@ class DriverRequest extends FormRequest
             {
 
                 return [
-                    'lastName' => 'required|alpha_dash|max:35',
-                    'firstName' => 'required|alpha_dash|max:35',
+                    'lastName' => ['required',new checkName,'max:35'],
+                    'firstName' => ['required',new checkName,'max:35'],
                     'operator' => 'nullable|exists:member,member_id|numeric',
-                    'middleName' => 'required|alpha_dash|max:35',
+                    'middleName' => ['required',new checkName,'max:35'],
                     'contactNumber' => 'digits:10',
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
@@ -50,19 +51,19 @@ class DriverRequest extends FormRequest
                         'required',
                         Rule::in(['Single', 'Married', 'Divorced'])
                     ],
-                    'nameOfSpouse' => 'alpha_dash|required_with:spouseBirthDate|max:120',
+                    'nameOfSpouse' => [new checkName,'required_with:spouseBirthDate','max:120'],
                     'spouseBirthDate' => 'required_with:nameOfSpouse|nullable|date|before:today',
-                    'fathersName' => 'alpha_dash|required_with:fatherOccupation|max:120',
+                    'fathersName' => [new checkName,'required_with:fatherOccupation','max:120'],
                     'fatherOccupation' => 'required_with:fathersName|max:50',
-                    'mothersName' => 'alpha_dash|required_with:motherOccupation|max:120',
+                    'mothersName' => [new checkName,'required_with:motherOccupation','max:120'],
                     'motherOccupation' => 'required_with:mothersName|max:50',
-                    'contactPerson' => 'alpha_dash|required|max:120',
+                    'contactPerson' => [new checkName,'required','max:120'],
                     'contactPersonAddress' => 'required|max:50',
                     'contactPersonContactNumber' => 'required|digits:10',
                     'sss' => 'unique:member,SSS|required|max:10',
                     'licenseNo' => 'required|max:20',
                     'licenseExpiryDate' => 'required|date|after:today',
-                    'children.*' => 'required_with:childrenBDay.*|distinct',
+                    'children.*' => [new checkName,'required_with:childrenBDay.*','distinct'],
                     'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
                 ];
             }
@@ -70,10 +71,10 @@ class DriverRequest extends FormRequest
             {
 
                 return [
-                    'lastName' => 'required|alpha_dash|max:35',
-                    'firstName' => 'required|alpha_dash|max:35',
+                    'lastName' => ['required',new checkName,'max:35'],
+                    'firstName' => ['required',new checkName,'max:35'],
                     'operator' => 'nullable|exists:member,member_id|numeric',
-                    'middleName' => 'required|max:35',
+                    'middleName' => ['required',new checkName,'max:35'],
                     'contactNumber' => 'digits:10',
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
@@ -88,19 +89,19 @@ class DriverRequest extends FormRequest
                         'required',
                         Rule::in(['Single', 'Married', 'Divorced'])
                     ],
-                    'nameOfSpouse' => 'alpha_dash|required_with:spouseBirthDate|max:120',
+                    'nameOfSpouse' => [new checkName,'required_with:spouseBirthDate','max:120'],
                     'spouseBirthDate' => 'required_with:nameOfSpouse|nullable|date|before:today',
-                    'fathersName' => 'alpha_dash|required_with:fatherOccupation|max:120',
+                    'fathersName' => [new checkName,'required_with:fatherOccupation','max:120'],
                     'fatherOccupation' => 'required_with:fathersName|max:50',
-                    'mothersName' => 'alpha_dash|required_with:motherOccupation|max:120',
+                    'mothersName' => [new checkName,'required_with:motherOccupation','max:120'],
                     'motherOccupation' => 'required_with:mothersName|max:50',
-                    'contactPerson' => 'alpha_dash|required|max:120',
+                    'contactPerson' => [new checkName,'required','max:120'],
                     'contactPersonAddress' => 'required|max:50',
                     'contactPersonContactNumber' => 'required|digits:10',
                     'sss' => 'unique:member,SSS,'.$this->route('driver')->member_id.',member_id|required|max:10',
                     'licenseNo' => 'required|max:20',
                     'licenseExpiryDate' => 'required|date|after:today',
-                    'children.*' => 'required_with:childrenBDay.*|distinct',
+                    'children.*' => [new checkName, 'required_with:childrenBDay.*','distinct'],
                     'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
                 ];
             }
