@@ -28,6 +28,6 @@ class ResetPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.index');
+        return $this->view('emails.reset');
     }
 }

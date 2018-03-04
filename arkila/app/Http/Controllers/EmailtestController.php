@@ -13,7 +13,7 @@ class EmailtestController extends Controller
      */
     public function index()
     {
-        return view('emailtest.reset');
+        return view('emailtest.index');
     }
 
     /**
