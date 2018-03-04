@@ -28,8 +28,8 @@ class FeesController extends Controller
     public function store()
     {
         $this->validate(request(),[
-            "addFeesDesc" => "unique:fees_and_deduction,description|alpha|required|max:30",
-            "addFeeAmount" => ['required',new checkCurrency,'numeric','min:0']
+            "addFeesDesc" => "unique:fees_and_deduction,description|regex:/^[\pL\s\-]+$/u|required|max:30",
+            "addFeeAmount" => ['required',new checkCurrency,'numeric','min:1']
         ]);
 
         FeesAndDeduction::create([
@@ -64,7 +64,7 @@ class FeesController extends Controller
     public function update(FeesAndDeduction $fee)
     {
         $this->validate(request(),[
-            "editFeeAmount" => ['required',new checkCurrency],
+            "editFeeAmount" => ['required',new checkCurrency, 'numeric', 'min:1'],
         ]);
 
         $fee->update([
