@@ -1,11 +1,11 @@
 @extends('layouts.form')
-@include('message.error')
 @section('title', 'Edit Fee')
 @section('back-link', URL::previous())
 @section('form-action', route('fees.update', [$fee->fad_id]))
 @section('method_field', method_field('PATCH'))
 @section('form-title', 'Edit Fee')
 @section('form-body')
+	@include('message.error')
 
 	<div>
 	 	<label for="description">Description:</label>

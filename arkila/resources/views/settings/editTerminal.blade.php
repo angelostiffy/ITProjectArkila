@@ -1,5 +1,4 @@
 @extends('layouts.form')
-@include('message.error')
 @section('title', 'Edit Terminal')
 @section('back-link', URL::previous())
 @section('form-action', route('terminal.update', [$terminal->terminal_id]))
@@ -8,8 +7,8 @@
 @section('form-body')
 
 	
-	
-    <div class="form-group">
+	@include('message.error')
+	    <div class="form-group">
         <label>Terminal Name:</label>
         <input type="text" class="form-control" name="editTerminalName" value="{{$terminal->description}}">
     </div>

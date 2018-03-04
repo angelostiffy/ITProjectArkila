@@ -22,7 +22,7 @@ class DestinationController extends Controller
     public function store()
     {
         $this->validate(request(),[
-            "addDestination" => "unique:destination,description|alpha_dash|required|max:40",
+            "addDestination" => "unique:destination,description|regex:/^[\pL\s\-]+$/u|required|max:40",
             "addDestinationTerminal" => ['required', new checkTerminal, 'max:40'],
             "addDestinationFare" => ['required', new checkCurrency, 'numeric','min:1']
         ]);
@@ -46,7 +46,7 @@ class DestinationController extends Controller
     public function update(Destination $destination)
     {
         $this->validate(request(),[
-            "editDestinationFare" => ['required', new checkCurrency, 'numeric','min:0'],
+            "editDestinationFare" => ['required', new checkCurrency, 'numeric','min:1'],
         ]);
             
         $destination->update([
