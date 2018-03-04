@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Trip;
 
 class TripsController extends Controller
 {
@@ -13,7 +14,8 @@ class TripsController extends Controller
      */
     public function index()
     {
-        return view('trips.index');
+        $trips = Trip::all();
+        return view('triptest.queue', compact('trips'));
     }
 
     /**

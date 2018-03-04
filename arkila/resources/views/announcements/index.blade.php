@@ -8,24 +8,21 @@
                     <div class="box-header with-border bg-light">
                         <h4>Title: {{ $announcement->title }}</h4>
                         <h6>Viewer: {{ $announcement->viewer }} </h6>
-                        <h6>Created: {{ $announcement->created_at }}</h6>
+                        <h6>Created: {{ $announcement->created_at->format('Y-m-d h:i:s A') }}</h6>
+                        @if ($announcement->created_at->ne($announcement->updated_at))
+                        <h6>Updated: {{ $announcement->updated_at->format('Y-m-d h:i:s A') }}</h6> 
+                       @endif
+
                     </div>
                     <div class="box-body">
-                        <p>Created: {{ $announcement->created_at->format('Y-m-d h:i:s A') }}</p> 
-                       @if ($announcement->created_at->ne($announcement->updated_at))
-                        <p>Updated: {{ $announcement->updated_at->format('Y-m-d h:i:s A') }}</p> 
-                       @endif
                         <p>{{ $announcement->description }}</p>
                     </div>
 
                     <div class="box-footer">
                         <div class="pull-right">
-                        <form method="POST" action="/home/announcements/{{$announcement->announcement_id}}">
-                            {{csrf_field()}}
-                            {{method_field('DELETE')}}
                             <a href="/home/announcements/{{ $announcement->announcement_id }}/edit/" class="btn btn-primary btn-create"><i class="fa fa-pencil"></i>Edit</a>
                             <button class="btn btn-outline-danger btn-create" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash"></i>Delete</button>
-                        </form>    
+                        
                         </div>
                     </div>
                 
@@ -44,7 +41,11 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-outline-danger">Delete</button>  
+                    <form method="POST" action="/home/announcements/{{$announcement->announcement_id}}">
+                            {{csrf_field()}}
+                            {{method_field('DELETE')}}
+                    <button type="submit" class="btn btn-outline-danger">Delete</button>  
+                    </form>    
                   </div>
                 </div>
 
