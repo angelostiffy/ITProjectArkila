@@ -6,7 +6,7 @@
 
     @foreach ($announcements->sortByDesc('created_at') as $key => $announcement)
         <div class="box box-warning">
-                    <div class="box-header with-border bg-yellow">
+                    <div class="box-header with-border bg-light">
                         <h4>Announcement {{ $key }}</h4>
                         <h6>Viewer: {{ $announcement->viewer }} </h6>
                     </div>
