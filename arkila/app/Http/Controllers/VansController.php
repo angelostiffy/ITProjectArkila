@@ -143,9 +143,21 @@ class VansController extends Controller {
             $van->members()->attach(request('driver'));
 
             session()->flash('message','Van '.request('plateNumber').'Successfully Edited');
-            return redirect(session()->get('link'));
+
+            if(session()->get('opLink')){
+                return redirect(session()->get('opLink'));
+            }
+            else{
+                return redirect(route('vans.index'));
+            }
+
         }
         else{
+            if(session()->get('opLink')){
+                session(['type' => $van->operator->first()->member_id]);
+            }else{
+                session(['type' => 'createFromIndex']);
+            }
             return redirect(route('drivers.createFromVan',[$van->plate_number]));
         }
     }

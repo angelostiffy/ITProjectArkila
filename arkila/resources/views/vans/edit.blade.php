@@ -1,8 +1,12 @@
 
 @extends('layouts.form') 
 @section('title', 'Add Van Driver')
-@section('back-link',URL::previous())
-{{session(['link' => URL::previous()])}}
+
+@if(session()->get('opLink'))
+    @section('back-link',session()->get('opLink'))
+@else
+    @section('back-link',route('vans.index') )
+@endif
 @section('form-action',route('vans.update',[$van->plate_number]))
 
 @section('form-title', 'Add Van-Driver')
