@@ -145,17 +145,22 @@ ol.example li.placeholder:before {
               <div class="box-body">
                     
                       <label for="">Van Unit</label>
-                      <select name="" id="" class="form-control">
-                          <option value="">AAA-123</option>
-                          <option value="">AAA-1234</option>
+                      <select name="" id="" class="form-control select2">
+                          @foreach ($vans as $van)
+                            <option>{{ $van->plate_number }}</option>
+                          @endforeach
                        </select>
+
+                       <label for="">Destination</label>
+                      <select name="" id="" class="form-control">
+                          @foreach ($destinations as $destination)
+                            <option>{{ $destination->description }}</option>
+                          @endforeach
+                      </select>
+
+
                        <label for="">Driver</label>
                       <select name="" id="" class="form-control">
-                          <option value=""></option>
-                          <option value=""></option>
-                          <option value=""></option>
-                          <option value=""></option>
-                          <option value=""></option>
                       </select>
               </div>
               <div class="box-footer">
@@ -239,6 +244,9 @@ ol.example li.placeholder:before {
 
 @section('scripts')
   @parent
+  <script>
+    $('.select2').select2();
+  </script>
   <script src="{{ URL::asset('/js/jquery-sortable.js') }}"></script>
     <!-- List sortable -->
     <script>
@@ -284,4 +292,5 @@ ol.example li.placeholder:before {
             }
     </script>
  --}}
+
 @endsection

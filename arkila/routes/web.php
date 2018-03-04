@@ -25,6 +25,8 @@ Route::get('/teo', function(){
 
 Route::resource('/angelo', 'EmailtestController');
 
+Route::get('/dixon', 'TripsController@index');
+
 Route::get('/demo', function(){
   return new App\Mail\ResetPasswordMail();
 });

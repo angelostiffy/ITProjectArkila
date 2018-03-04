@@ -14,6 +14,10 @@ class Trip extends Model
     ];
 
     public function van(){
-    	return $this->belongsTo(Van::Class, 'plate_number');
+    	return $this->belongsTo(Van::class, 'plate_number');
+    }
+
+    public function destination(){
+    	return $this->belongsTo(Destination::class, 'destination_id');
     }
 }

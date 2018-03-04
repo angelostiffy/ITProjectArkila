@@ -19,5 +19,9 @@ class Destination extends Model
     public function terminal(){
     	return $this->belongsTo(Terminal::class, 'terminal_id');
     }
+
+    public function trip(){
+        return $this->hasMany(Trip::class, 'trip_id');
+    }
     //
 }
