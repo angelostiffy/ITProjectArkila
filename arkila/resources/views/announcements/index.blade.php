@@ -9,6 +9,7 @@
                     <div class="box-header with-border bg-yellow">
                         <h4>Title: {{ $announcement->title }}</h4>
                         <h6>Viewer: {{ $announcement->viewer }} </h6>
+                        <h6>Created: {{ $announcement->created_at }}</h6>
                     </div>
                     <div class="box-body">
                         <p>Created: {{ $announcement->created_at->format('Y-m-d h:i:s A') }}</p> 
@@ -23,8 +24,8 @@
                     <form method="POST" action="/home/announcements/{{$announcement->announcement_id}}">
                             {{csrf_field()}}
                             {{method_field('DELETE')}}
-                            <a href="/home/announcements/{{ $announcement->announcement_id }}/edit/" class="btn btn-sm btn-primary btn-create">Edit</a>
-                            <button class="btn btn-sm btn-outline-danger btn-create">Delete</button>
+                            <a href="/home/announcements/{{ $announcement->announcement_id }}/edit/" class="btn btn-sm btn-primary btn-create"><i class="fa fa-pencil"></i>Edit</a>
+                            <button class="btn btn-sm btn-outline-danger btn-create"><i class="fa fa-trash"></i>Delete</button>
                         </div>
                     </div>
                 

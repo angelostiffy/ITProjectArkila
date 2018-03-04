@@ -1,7 +1,7 @@
 @extends('layouts.master') @section('title', 'Driver List') @section('content-header', 'Driver List') @section('content')
 <div class="box">
     <div class="box-body">
-        <button href="{{route('drivers.create')}}" class="btn btn-primary">Add Driver <i class="fa fa-plus-circle"></i></button>
+        <a href="{{route('drivers.create')}}" class="btn btn-primary">Add Driver <i class="fa fa-plus-circle"></i></a>
         <table id="driverList" class="table table-bordered table-striped">
             <thead>
                 <tr>

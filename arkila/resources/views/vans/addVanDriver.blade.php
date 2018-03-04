@@ -1,62 +1,38 @@
 
 @extends('layouts.form') 
-@section('title', 'Add Van')
+@section('title', 'Add Van Driver')
 @section('back-link',URL::previous())
 
-@if(isset($operators))
-    @section('form-action',route('vans.store'))
-@else
-    @section('form-action',route('vans.storeFromOperator',[$operator->member_id]))
-@endif
-@section('form-title', 'Add Van')
+
+@section('form-title', 'Add Van-Driver')
 @section('form-body')
     @include('message.error')
 
-    @if(isset($operators))
-        <div class="form-group">
-            <label for="">Operator:</label>
-            <select name="operator" id="" class="form-control select2">
-                @foreach($operators as $operator)
-                    <option value="{{$operator->member_id}}">{{$operator->full_name}}</option>
-                @endforeach
-            </select>
-        </div>
-    @else
-
-	    <div class="form-group">
-	        <label for="">Operator:</label> <span>{{$operator->full_name}}</span>
-        </select>
+    <div class="form-group">
+        <label for="">Operator:</label> <span></span>
+    
     </div>
-    @endif
-
+    
 	<div class="form-group">
-	<label for="">Plate Number:</label>
-    <input value="{{old('plateNumber')}}" name="plateNumber" type="text" class="form-control" placeholder="Plate Number">
+        <label for="">Plate Number:</label>
+        <input value="" name="plateNumber" type="text" class="form-control" placeholder="Plate Number" disabled>
     </div>
     <div class="form-group">
-	<label for="">Van Model</label>
-    <input value="{{old('vanModel')}}" name="vanModel" type="text" class="form-control" placeholder="Van Model">
+        <label for="">Van Model</label>
+        <input value="" name="vanModel" type="text" class="form-control" placeholder="Van Model" disabled>
     </div>
 
     <div class="form-group">
-	<label for="">Seating Capacity</label>
-    <input value="{{old('seatingCapacity')}}" name="seatingCapacity" type="number" class="form-control" placeholder="Seating Capacity" max="16" min="1">
+        <label for="">Seating Capacity</label>
+        <input value="" name="seatingCapacity" type="number" class="form-control" placeholder="Seating Capacity" max="16" min="1" disabled>
+      
     </div>
     
     <div class="form-group">
     <label for="">Driver</label>
 
-        @if(isset($operators))
-            <select name="driver" id="driver" class="form-control select2"></select>
-        @else
-            <select name="driver" id="driver" class="form-control select2">
-                <option value="">None</option>
-                @foreach($drivers as $driver)
-                    <option value="{{$driver->member_id}}">{{$driver->full_name}}</option>
-                @endforeach
-            </select>
-        @endif
-
+        <select name="driver" id="driver" class="form-control select2"></select>
+        
     </div>
 @endsection 
 
@@ -71,7 +47,7 @@
 @endsection
 
 @section('form-btn')
-<a class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Add unit</a>
+<a class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Add Van-Driver</a>
 @endsection 
 @section('modal-title', 'Alert') 
 @section('modal-body')
