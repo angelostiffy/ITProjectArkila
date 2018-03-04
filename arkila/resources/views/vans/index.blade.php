@@ -141,7 +141,7 @@
                                         @if($van->driver()->first())
 		                                        <a name="listDriver" data-val="{{ $van->operator()->first()->member_id }}" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Change Driver</a>
                                         @else
-                                            <a href="{{ route('drivers.createFromVan',[$van->plate_number] ) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Add Driver</a>
+                                            <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Add Driver</a>
                                         @endif
                                         <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-default" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i>View</a>
 									<button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</button>

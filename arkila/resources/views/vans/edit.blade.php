@@ -2,36 +2,43 @@
 @extends('layouts.form') 
 @section('title', 'Add Van Driver')
 @section('back-link',URL::previous())
-
+@section('form-action',route('vans.update',[$van->plate_number]))
 
 @section('form-title', 'Add Van-Driver')
+@section('method_field',method_field("PATCH"))
 @section('form-body')
     @include('message.error')
 
     <div class="form-group">
-        <label for="">Operator:</label> <span></span>
+        <label for="">Operator:</label> <span>{{ $van->operator()->first()->full_name }}</span>
     
     </div>
     
 	<div class="form-group">
         <label for="">Plate Number:</label>
-        <input value="" name="plateNumber" type="text" class="form-control" placeholder="Plate Number" disabled>
+        <input value="{{$van->plate_number}}" name="plateNumber" type="text" class="form-control" placeholder="Plate Number" disabled>
     </div>
     <div class="form-group">
         <label for="">Van Model</label>
-        <input value="" name="vanModel" type="text" class="form-control" placeholder="Van Model" disabled>
+        <input value="{{$van->model}}" name="vanModel" type="text" class="form-control" placeholder="Van Model" disabled>
     </div>
 
     <div class="form-group">
         <label for="">Seating Capacity</label>
-        <input value="" name="seatingCapacity" type="number" class="form-control" placeholder="Seating Capacity" max="16" min="1" disabled>
+        <input value="{{$van->seating_capacity}}" name="seatingCapacity" type="number" class="form-control" placeholder="Seating Capacity" max="16" min="1" disabled>
       
     </div>
     
     <div class="form-group">
     <label for="">Driver</label>
 
-        <select name="driver" id="driver" class="form-control select2"></select>
+        <select name="driver" id="driver" class="form-control select2">
+            <option value="">None</option>
+            @foreach($van->driver()->get() as $driver)
+                <option value="{{$driver->member_id}}">{{$driver->full_name}}</option>
+            @endforeach
+
+        </select>
         
     </div>
 @endsection 
@@ -68,10 +75,6 @@
             });
 
             checkBoxChecker();
-            @if(isset($operators))
-                $('select[name="driver"]').empty();
-                listDrivers();
-            @endif
     });
 
         $('#driver').on('change', function() {
@@ -96,32 +99,7 @@
                 $('#driver').prop('disabled', false);
             });
         }
-@if(isset($operators))
 
-$('select[name="operator"]').on('change',function(){
-    $('select[name="driver"]').empty();
-    listDrivers();
-});
-
- function listDrivers(){
-            $.ajax({
-                method:'POST',
-                url: '{{route("vans.listDrivers")}}',
-                data: {
-                    '_token': '{{csrf_token()}}',
-                    'operator':$('select[name="operator"]').val()
-                },
-                success: function(drivers){
-                    $('[name="driver"]').append('<option value="">None</option>');
-                    drivers.forEach(function(driverObj){
-
-                        $('[name="driver"]').append('<option value='+driverObj.id+'> '+driverObj.name+'</option>');
-                    })
-                }
-
-            });
-}
-        @endif
 	</script>
 @endsection
 

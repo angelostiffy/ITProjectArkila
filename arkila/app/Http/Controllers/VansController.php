@@ -47,8 +47,8 @@ class VansController extends Controller {
             "operator" => ['numeric','exists:member,member_id',new checkOperator],
             "driver" => ['nullable','numeric','exists:member,member_id',new checkDriver],
             "plateNumber" => ['unique:van,plate_number','required','between:6,8'],
-            "vanModel" =>  'required',
-            "seatingCapacity" => 'required|between:2,15|numeric'
+            "vanModel" =>  'required|max:50',
+            "seatingCapacity" => 'required|between:10,15|numeric'
         ]);
 
         $van = Van::create([
@@ -81,8 +81,8 @@ class VansController extends Controller {
         $this->validate(request(), [
             "driver" => ['nullable','numeric','exists:member,member_id','unique:member_van,member_id',new checkDriver],
             "plateNumber" => 'unique:van,plate_number|required|between:6,8',
-            "vanModel" =>  'required',
-            "seatingCapacity" => 'required|between:2,15|numeric'
+            "vanModel" =>  'required|max:50',
+            "seatingCapacity" => 'required|between:10,15|numeric'
         ]);
 
 
@@ -124,8 +124,8 @@ class VansController extends Controller {
      */
     public function edit(Van $van)
     {
-        $operators = Member::allOperators()->get();
-        return view('vans.edit', compact('van','operators'));
+
+        return view('vans.edit', compact('van'));
     }
 
     /**
@@ -137,20 +137,24 @@ class VansController extends Controller {
      */
     public function update(Van $van)
     {
+        if(request('addDriver') != 'on'){
+            $this->validate(request(), [
+                "driver" => ['nullable','numeric','exists:member,member_id',new checkDriver],
+            ]);
+            $driver = $van->driver()->first();
 
-        $this->validate(request(), [
-            "driver" => ['nullable','numeric','exists:member,member_id',new checkDriver],
-        ]);
-        $driver = $van->driver()->first();
+            if($driver){
+                $van->members()->detach($driver->member_id);
+            }
 
-        if($driver){
-            $van->members()->detach($driver->member_id);
+            $van->members()->attach(request('driver'));
+
+            session()->flash('message','Van '.request('plateNumber').'Successfully Edited');
+            return back();
         }
-
-        $van->members()->attach(request('driver'));
-
-    	session()->flash('message','Van '.request('plateNumber').'Successfully Edited');
-    	return back();
+        else{
+            return redirect(route('drivers.createFromVan',[$van->plate_number]));
+        }
     }
 
     /**
