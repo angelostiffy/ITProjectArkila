@@ -31,16 +31,16 @@
 
 	<div class="form-group">
 	<label for="">Plate Number:</label>
-    <input name="plateNumber" type="text" class="form-control" placeholder="Plate Number">
+    <input value="{{old('plateNumber')}}" name="plateNumber" type="text" class="form-control" placeholder="Plate Number">
     </div>
     <div class="form-group">
 	<label for="">Van Model</label>
-    <input name="vanModel" type="text" class="form-control" placeholder="Van Model">
+    <input value="{{old('vanModel')}}" name="vanModel" type="text" class="form-control" placeholder="Van Model">
     </div>
 
     <div class="form-group">
 	<label for="">Seating Capacity</label>
-    <input name="seatingCapacity" type="number" class="form-control" placeholder="Seating Capacity" max="16" min="1">
+    <input value="{{old('seatingCapacity')}}" name="seatingCapacity" type="number" class="form-control" placeholder="Seating Capacity" max="16" min="1">
     </div>
     
     <div class="form-group">
