@@ -86,7 +86,7 @@ class OperatorsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Member $operator){
-        return view('operators.viewGawaNiRandall',compact('operator'));
+        return view('operators.show',compact('operator'));
     }
 
     public function showProfile(Member $operator)
@@ -102,7 +102,7 @@ class OperatorsController extends Controller
      */
     public function edit(Member $operator)
     {
-        return view('operators.edit2niRandall', compact('operator'));
+        return view('operators.edit', compact('operator'));
     }
 
     /**
@@ -114,7 +114,6 @@ class OperatorsController extends Controller
      */
     public function update(Member $operator, OperatorRequest $request)
     {
-
         $operator -> update([
             'last_name'=> $request->lastName,
             'first_name' => $request->firstName,
