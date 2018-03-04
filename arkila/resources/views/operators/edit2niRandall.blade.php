@@ -172,7 +172,7 @@
                                 <th>Birthdate</th>
                                 <th>
                                     <div class="pull-right">
-                                        <button type="button" class="btn btn-info" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Children</button>
+                                        <button type="button" class="btn btn-primary" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Children</button>
                                     </div>
                                 </th>
                             </thead>
@@ -243,15 +243,19 @@
 
                                 </tr>
                             @endif
-
+                                
 
 
                             </tbody>
                         </table>
+                          
+                        <button class="btn btn-default pull-right" style="margin: 1% 1%">Cancel</button>
+                        <button class="btn btn-primary pull-right"  style="margin: 1% 0%">Save Changes</button> 
+
                     </div>
                 </div>
             </div>
-        </div>
+        </div>     
     </form>
 </div>
 

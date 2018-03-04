@@ -46,7 +46,7 @@
         <div class="box-header with-border text-center">
             <a href="{{URL::previous()}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
             <h3 class="box-title">
-                Driver Registration
+                Edit Driver's Information
             </h3>
         </div>
         <div class="box-body">

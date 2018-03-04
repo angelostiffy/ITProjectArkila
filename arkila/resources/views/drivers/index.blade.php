@@ -1,7 +1,7 @@
 @extends('layouts.master') @section('title', 'Driver List') @section('content-header', 'Driver List') @section('content')
 <div class="box">
     <div class="box-body">
-        <button href="{{route('drivers.create')}}" class="btn btn-success">Add Driver <i class="fa fa-plus-circle"></i></button>
+        <button href="{{route('drivers.create')}}" class="btn btn-primary">Add Driver <i class="fa fa-plus-circle"></i></button>
         <table id="driverList" class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -25,14 +25,16 @@
                     <td>{{$driver->address}}</td>
                     <td>{{$driver->age}}</td>
                     <td>
-                        <div class="text-center">
-                            <a href="{{route('drivers.show',[$driver->member_id])}}" class="btn btn-primary"><i class="fa fa-eye"></i>View</a>
-                            <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i>Edit</a>
-                            <form action="{{route('drivers.destroy',[$driver->member_id])}}" method="POST">
+                        <form action="{{route('drivers.destroy',[$driver->member_id])}}" method="POST">
                                 {{csrf_field()}} {{method_field("DELETE")}}
-                                <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</i></button>
-                            </form>
+                        <div class="text-center">
+                            <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Edit</a>
+                            <a href="{{route('drivers.show',[$driver->member_id])}}" class="btn btn-default"><i class="fa fa-eye"></i>View</a>  
+                            
+                                <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</button>
+                            
                         </div>
+                            </form>
                         <!-- /.text-->
                     </td>
                 </tr>
