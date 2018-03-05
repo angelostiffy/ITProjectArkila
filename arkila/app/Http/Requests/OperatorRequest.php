@@ -40,7 +40,7 @@ class OperatorRequest extends FormRequest
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
                     'birthDate' => ['required','date_format:m/d/Y','after:1/1/1918', new checkAge],
-                    'birthPlace' => 'alpha|required|max:50',
+                    'birthPlace' => [new checkName,'required','max:50'],
                     'gender' => [
                         'required',
                         Rule::in(['Male', 'Female'])
@@ -77,7 +77,7 @@ class OperatorRequest extends FormRequest
                         'address' => 'required|max:100',
                         'provincialAddress' => 'required|max:100',
                         'birthDate' => ['required','date_format:m/d/Y','after:1/1/1918', new checkAge],
-                        'birthPlace' => 'alpha|required|max:50',
+                        'birthPlace' => [new checkName,'required','max:50'],
                         'gender' => [
                             'required',
                             Rule::in(['Male', 'Female'])

@@ -35,6 +35,6 @@ class checkName implements Rule
      */
     public function message()
     {
-        return 'Invalid name entered. The :attribute field can only consist of alphabetic characters, spaces or dashes and it must be a valid name ';
+        return 'The :attribute field can only consist of alphabetic characters, spaces or dashes ';
     }
 }
