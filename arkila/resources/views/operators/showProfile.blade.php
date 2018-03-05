@@ -168,26 +168,62 @@
                                         <td>{{$driver->contact_number}}</td>
                                         <td>
 
-                                            <form action="{{route('drivers.destroy',[$driver->member_id])}}" method="POST">
+                                            
                                                 <div class="text-center">
                                                     <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Edit</a>
                                                     <a href="{{route('drivers.show',[$driver->member_id])}}" class="btn btn-default"><i class="fa fa-eye"></i>View</a>
-                                                    {{ csrf_field() }} {{method_field('DELETE')}}
-                                                    <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</i></button>
-                                            </form>
-
+                                                   
+                                                    <button class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteDriver"><i class="fa fa-trash"></i> Delete</button>
+                                                </div>
+                                                
                                         </td>
                                     </tr>
+                                    
+                                    <!--DELETE MODAL MIGUEL-->
+                                    <div class="modal fade" id="deleteDriver">
+                                        <div class="modal-dialog">
+                                            <div class="col-md-offset-2 col-md-8">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-red">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title"> Confirm</h4>
+                                                    </div>
+                                                    <div class="modal-body row" style="margin: 0% 1%;">
+                                                       <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
+                                                           <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
+                                                       </div>
+                                                       <div class="col-md-10">
+                                                        <p style="font-size: 110%;">Are you sure you want to delete "yung user para pogi"</p>
+                                                       </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <form action="{{route('drivers.destroy',[$driver->member_id])}}" method="POST">
+                                                             {{ csrf_field() }} {{method_field('DELETE')}}
+                                                            
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                                            <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal -->
                                     @endforeach
 
                                 </tbody>
                             </table>
-                            </div>
+                            
                             <!-- /.box-body -->
                         </div>
                         <!-- /.box -->
                     </div>
                     <!-- /.tab-pane -->
+                </div>
                 
                 <div class="tab-pane" id="vans">
                     <div class="box">
@@ -214,23 +250,58 @@
                                         <td>{{$van->seating_capacity}}</td>
                                         <td>
                                             <div class="text-center">
-                                                <form method="POST" action="{{route('vans.destroy',[$van->plate_number])}}">
-                                                    {{csrf_field()}}
-                                                    {{method_field('DELETE')}}
-
+                                                
                                                     @if($van->driver()->first())
                                                         <a name="listDriver" data-val="{{ $van->operator()->first()->member_id }}" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Change Driver</a>
                                                     @else
                                                         <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Add Driver</a>
                                                     @endif
                                                     <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-default" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i>View</a>
-                                                    <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</button>
-                                                </form>
+                                                    <button class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteVan"><i class="fa fa-trash"></i> Delete</button>
+                                                
                                             </div>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    
+                                    <!--DELETE MODAL MIGUEL-->
+                                    <div class="modal fade" id="deleteVan">
+                                        <div class="modal-dialog">
+                                            <div class="col-md-offset-2 col-md-8">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-red">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title"> Confirm</h4>
+                                                    </div>
+                                                    <div class="modal-body row" style="margin: 0% 1%;">
+                                                       <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
+                                                           <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
+                                                       </div>
+                                                       <div class="col-md-10">
+                                                        <p style="font-size: 110%;">Are you sure you want to delete "yung user para pogi"</p>
+                                                       </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        
+                                                       <form method="POST" action="{{route('vans.destroy',[$van->plate_number])}}">
+                                                            {{csrf_field()}}
+                                                            {{method_field('DELETE')}}
 
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                                            <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal -->
+                                    
+                                    @endforeach
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -239,7 +310,7 @@
                     <!-- /.box -->
                 </div>
                 <!-- /.tab-pane -->
-    </div>
+            </div>
                 <!-- /.tab-content -->          
             </div>
             <!-- /.nav-tabs-custom -->
@@ -248,39 +319,7 @@
     </div>
     <!-- /.row -->
 
-<!--DELETE MODAL MIGUEL-->
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteWarning">Delete</button>
-
-
-        <div class="modal fade" id="deleteWarning">
-            <div class="modal-dialog">
-                <div class="col-md-offset-2 col-md-8">
-                    <div class="modal-content">
-                        <div class="modal-header bg-red">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title"> Confirm</h4>
-                        </div>
-                        <div class="modal-body row" style="margin: 0% 1%;">
-                           <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
-                               <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
-                           </div>
-                           <div class="col-md-10">
-                            <p style="font-size: 110%;">Are you sure you want to delete "yung user para pogi"</p>
-                           </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                            <button type="button" class="btn btn-danger" style="width:22%;">Yes</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
+    
 
     @stop @section('scripts') @parent
 
