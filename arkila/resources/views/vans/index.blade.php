@@ -95,7 +95,7 @@
                                 </div>
                                 <!-- /.box-body -->
                                 <div class="box-footer">
-                                    <button type="submit" name="search" id="search-btn" class="btn btn-default pull-right"> Back </button>
+                                    <button type="submit" name="search" id="search-btn" class="btn btn-default pull-right" data-dismiss="modal"> Back </button>
                                 </div>
                                 <!-- /.box-footer -->
                             </div>
