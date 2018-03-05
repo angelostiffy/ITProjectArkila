@@ -45,16 +45,14 @@ class ReservationsController extends Controller
     {
         $seat = $request->seat;
         $destinationReq = $request->dest;
-        $reserveAmount = Reservation::all();
         $findDest = Destination::all();
-        foreach ($reserveAmount as $amounts) {
-            $amount = $amounts->destination->amount;
-        }
-        $total = $seat*$amount;
-
+        
         foreach ($findDest->where('description', $destinationReq) as $find) {
             $findThis = $find->destination_id;
+            $findAmount = $find->amount;
         }
+        $total = $findAmount*$seat;
+        
         
         $timeRequest = new Carbon(request('time'));
         $timeFormatted = $timeRequest->format('h:i A');
@@ -73,7 +71,6 @@ class ReservationsController extends Controller
 
         ]);
         session()->flash('message', 'Reservation was created successfully');
-
         return redirect('/home/reservations/');
         // return redirect()->back()->withErrors();
     }
