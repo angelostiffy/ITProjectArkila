@@ -193,7 +193,6 @@
             <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-        
 <script>
     $(function() {
         $('#van').DataTable({
