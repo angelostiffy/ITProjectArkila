@@ -50,14 +50,14 @@ class OperatorRequest extends FormRequest
                     'citizenship' => 'alpha|required|max:35',
                     'civilStatus' => [
                         'required',
-                        Rule::in(['Single', 'Married', 'Divorced']) 
+                        Rule::in(['Single', 'Married', 'Divorced', 'Widowed'])
                     ],
                     'nameOfSpouse' => ['required_with:spouseBirthDate','max:120', 'nullable',new checkName],
                     'spouseBirthDate' => 'required_with:nameOfSpouse|nullable|date|before:today',
                     'fathersName' => ['required_with:fatherOccupation','max:120', 'nullable',new checkName],
-                    'fatherOccupation' => ['required_with:fathersName','max:50',new checkOccupation],
+                    'fatherOccupation' => ['required_with:fathersName','max:50', 'nullable', new checkOccupation],
                     'mothersName' => ['required_with:motherOccupation','max:120', 'nullable',new checkName],
-                    'motherOccupation' => ['required_with:mothersName','max:50', new checkOccupation],
+                    'motherOccupation' => ['required_with:mothersName','max:50', 'nullable', new checkOccupation],
                     'contactPerson' => ['required','max:120', 'nullable', new checkName],
                     'contactPersonAddress' => 'required|max:50',
                     'contactPersonContactNumber' => 'required|digits:10',
@@ -87,14 +87,14 @@ class OperatorRequest extends FormRequest
                         'citizenship' => 'alpha|required|max:35',
                         'civilStatus' => [
                             'required',
-                            Rule::in(['Single', 'Married', 'Divorced'])
+                            Rule::in(['Single', 'Married', 'Divorced', 'Widowed'])
                         ],
                         'nameOfSpouse' => ['required_with:spouseBirthDate','max:120', 'nullable', new checkName],
                         'spouseBirthDate' => 'required_with:nameOfSpouse|nullable|date|before:today',
                         'fathersName' => ['required_with:fatherOccupation','max:120', 'nullable', new checkName],
-                        'fatherOccupation' => ['required_with:fathersName','max:50', new checkOccupation],
+                        'fatherOccupation' => ['required_with:fathersName','max:50', 'nullable', new checkOccupation],
                         'mothersName' => ['required_with:motherOccupation','max:120', 'nullable',new checkName],
-                        'motherOccupation' => ['required_with:mothersName','max:50', new checkOccupation],
+                        'motherOccupation' => ['required_with:mothersName','max:50', 'nullable', new checkOccupation],
                         'contactPerson' => ['required','max:120', 'nullable', new checkName],
                         'contactPersonAddress' => 'required|max:50',
                         'contactPersonContactNumber' => 'required|digits:10',
