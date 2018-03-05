@@ -17,6 +17,13 @@
             <div class="tab">
                 <h4>Personal Information</h4>
                 <div class="tab">
+                     
+                       <div class="form-group" style="width:31%;">
+                                <label>Choose Operator:</label>
+                                <select name="operator" id="" class="form-control select2">
+                                    <option value=''>No Operator</option>
+                                </select>
+                        </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="operatorLastName">Last Name:</label>

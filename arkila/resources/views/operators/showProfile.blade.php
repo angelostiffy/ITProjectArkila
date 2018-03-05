@@ -248,7 +248,39 @@
     </div>
     <!-- /.row -->
 
+<!--DELETE MODAL MIGUEL-->
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteWarning">Delete</button>
 
+
+        <div class="modal fade" id="deleteWarning">
+            <div class="modal-dialog">
+                <div class="col-md-offset-2 col-md-8">
+                    <div class="modal-content">
+                        <div class="modal-header bg-red">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"> Confirm</h4>
+                        </div>
+                        <div class="modal-body row" style="margin: 0% 1%;">
+                           <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
+                               <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
+                           </div>
+                           <div class="col-md-10">
+                            <p style="font-size: 110%;">Are you sure you want to delete "yung user para pogi"</p>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-danger" style="width:22%;">Yes</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
 
     @stop @section('scripts') @parent
 
