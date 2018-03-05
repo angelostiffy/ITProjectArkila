@@ -22,7 +22,7 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tab_1">
                                         <b>Details:</b>
-                                        <table class="table table-bordered table-striped example1">
+                                        <table class="table table-bordered table-striped" id="onlineReservation">
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
@@ -79,9 +79,9 @@
  
                                     <div class="tab-pane" id="tab_2">
                                         <div class="form-group">
-                                            <a href="/home/reservations/create" class = "btn btn-outline-danger">Add Walk-in Reservation</a>
+                                            <a href="/home/reservations/create" class = "btn btn-primary">Add Walk-in Reservation</a>
                                         </div>
-                                        <table class="table table-bordered table-striped" id=example2>
+                                        <table class="table table-bordered table-striped" id="listReservation">
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
@@ -160,15 +160,28 @@
 <script src="plugins/iCheck/icheck.min.js"></script>
  <script>
   $(function () {
-    $('.example1').DataTable()
-    $('#example2').DataTable({
+    $('#onlineReservation').DataTable({
       'paging'      : true,
       'lengthChange': true,
       'searching'   : true,
       'ordering'    : true,
       'info'        : true,
-      'autoWidth'   : true
+      'autoWidth'   : true,
+      "order": [[ 3, "asc" ]]
+        
     })
+      
+    $('#listReservation').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true,
+      "order": [[ 3, "asc" ]]
+        
+    })  
+      
   })
 </script>
 <script>
