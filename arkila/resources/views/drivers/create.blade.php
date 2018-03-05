@@ -51,7 +51,7 @@
     @endif
 @else
     @section('form-action',route('drivers.store'))
-    @section('backRef') {{ route('drivers.index',[$operator->member_id]) }} @endsection
+    @section('backRef') {{ route('drivers.index') }} @endsection
 @endif
 
 
