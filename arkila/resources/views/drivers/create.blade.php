@@ -73,7 +73,7 @@
                         <div class="col-md-4">
                         <div class=" form-group">
                             @if(isset($operator))
-                                <label for"opName">Operator Name:</label>
+                                <label for="opName">Operator Name:</label>
                                 <span id="opName">{{$operator->full_name}}</span>
                             @elseif(isset($vanNd))
                                 <div class="col-md-4">
