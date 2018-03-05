@@ -35,6 +35,6 @@ class checkLicenseNumber implements Rule
      */
     public function message()
     {
-        return 'The entered License number must be in a valid format.';
+        return 'The entered Plate number must be in a valid format.';
     }
 }
