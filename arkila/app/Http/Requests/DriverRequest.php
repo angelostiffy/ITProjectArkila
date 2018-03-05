@@ -3,7 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Rules\checkAge;
+use App\Rules\checkLicenseNumber;
 use App\Rules\checkName;
+use App\Rules\checkOccupation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -54,14 +56,14 @@ class DriverRequest extends FormRequest
                     'nameOfSpouse' => ['required_with:spouseBirthDate','max:120', 'nullable',new checkName],
                     'spouseBirthDate' => 'required_with:nameOfSpouse|nullable|date|before:today',
                     'fathersName' => ['required_with:fatherOccupation','max:120', 'nullable',new checkName],
-                    'fatherOccupation' => 'required_with:fathersName|max:50',
+                    'fatherOccupation' => ['required_with:fathersName','max:50',new checkOccupation],
                     'mothersName' => ['required_with:motherOccupation','max:120', 'nullable',new checkName],
-                    'motherOccupation' => 'required_with:mothersName|max:50',
+                    'motherOccupation' => ['required_with:mothersName','max:50',new checkOccupation],
                     'contactPerson' => ['required','max:120', new checkName],
                     'contactPersonAddress' => 'required|max:50',
                     'contactPersonContactNumber' => 'required|digits:10',
                     'sss' => 'unique:member,SSS|required|max:10',
-                    'licenseNo' => 'required|max:20',
+                    'licenseNo' => ['required','max:20',new checkLicenseNumber],
                     'licenseExpiryDate' => 'required|date|after:today',
                     'children.*' => ['required_with:childrenBDay.*','distinct', 'nullable',new checkName],
                     'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
@@ -92,14 +94,14 @@ class DriverRequest extends FormRequest
                     'nameOfSpouse' => ['required_with:spouseBirthDate','max:120', 'nullable',new checkName],
                     'spouseBirthDate' => 'required_with:nameOfSpouse|nullable|date|before:today',
                     'fathersName' => ['required_with:fatherOccupation','max:120', 'nullable',new checkName],
-                    'fatherOccupation' => 'required_with:fathersName|max:50',
+                    'fatherOccupation' => ['required_with:fathersName','max:50', new checkOccupation],
                     'mothersName' => ['required_with:motherOccupation','max:120', 'nullable',new checkName],
-                    'motherOccupation' => 'required_with:mothersName|max:50',
+                    'motherOccupation' => ['required_with:mothersName','max:50', new checkOccupation],
                     'contactPerson' => ['required','max:120', 'nullable',new checkName],
                     'contactPersonAddress' => 'required|max:50',
                     'contactPersonContactNumber' => 'required|digits:10',
                     'sss' => 'unique:member,SSS,'.$this->route('driver')->member_id.',member_id|required|max:10',
-                    'licenseNo' => 'required|max:20',
+                    'licenseNo' => ['required','max:20',new checkLicenseNumber],
                     'licenseExpiryDate' => 'required|date|after:today',
                     'children.*' => ['required_with:childrenBDay.*','distinct', 'nullable',new checkName],
                     'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'

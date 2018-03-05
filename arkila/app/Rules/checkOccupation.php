@@ -25,7 +25,7 @@ class checkOccupation implements Rule
      */
     public function passes($attribute, $value)
     {
-        //
+        return (preg_match('/^([a-zA-Z- ()])+([a-zA-Z])+$/',$value));
     }
 
     /**
@@ -35,6 +35,6 @@ class checkOccupation implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'The entered occupation is invalid, it must not contain any numbers.';
     }
 }
