@@ -179,13 +179,13 @@ ol.example li.placeholder:before {
               </h3 class="box-title">Van Queue</h3>
             </div>
             <div class="box-body">
-                <pre id="serialize_output"></pre>
+                
 
                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
 
-                <ol id ="queue" class="rectangle-list limited_drop_targets">
+                <ol id ="queue" class="rectangle-list serialization">
                   @foreach ($trips as $trip)
-                  <li>
+                  <li data-plate="{{ $trip->van->plate_number }}" data-remark="{{ $trip->remarks }}">
                     <a href="">{{ $trip->van->plate_number }}
                     <span class="badge badge-warning badge-pill">
                     {{ $trip->remarks }}
@@ -208,6 +208,10 @@ ol.example li.placeholder:before {
             </div>
           </div>
         </div>
+
+        <div class="col-md-4">
+          <pre id="serialize_output2"></pre>
+        </div>
                
          <div class="col-md-4">
           <!-- Special Unit -->
@@ -218,7 +222,7 @@ ol.example li.placeholder:before {
             <div class="box-body">
                 <pre id="serialize_output"></pre>
 
-                <ol id = "special" class="rectangle-list limited_drop_targets">
+                <ol id = "special" class="rectangle-list ">
                   <li>
                     <a href="">AAA
                     <span class="badge badge-warning badge-pill">
@@ -244,30 +248,27 @@ ol.example li.placeholder:before {
 
 @section('scripts')
   @parent
+
   <script>
     $('.select2').select2();
   </script>
+
   <script src="{{ URL::asset('/js/jquery-sortable.js') }}"></script>
     <!-- List sortable -->
     <script>
-      var group = $("ol.limited_drop_targets").sortable({
-        group: 'limited_drop_targets+',
-        isValidTarget: function  ($item, container) {
-          if($item.is(".highlight"))
-            return true;
-          else
-            return $item.parent("ol")[0] == container.el[0];
-        },
+      var group = $("ol.serialization").sortable({
+        group: 'serialization',
+        delay: 500,
         onDrop: function ($item, container, _super) {
-          $('#serialize_output').text(
-            group.sortable("serialize").get().join("\n"));
+          var data = group.sortable("serialize").get();
+
+          var jsonString = JSON.stringify(data, null, ' ');
+
+
+          $('#serialize_output2').text(jsonString);
           _super($item, container);
-                   },
-        serialize: function (parent, children, isContainer) {
-          return isContainer ? children.join() : parent.text();
-        },
-        tolerance: 6,
-        distance: 10,
+
+        }
       });
     </script>
 
