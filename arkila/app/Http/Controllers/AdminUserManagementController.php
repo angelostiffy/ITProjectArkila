@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -28,13 +29,12 @@ class AdminUserManagementController extends Controller
         $this->validate(request(), [
 
             "fullName" => "required|max:50",
-            "userName" => ['required',new checkUserName, 'max:15'],
+            "userName" => [new checkUserName, 'required', 'max:15'],
 
             "userEmail" => "email|unique:users,email",
             "password" => "required|confirmed",
             "addUserTerminal" => ['required', new checkTerminal, 'max:40']
         ]);
-
         User::create([
             'username' => request('userName'),
             'name' => request('fullName'),
@@ -49,7 +49,7 @@ class AdminUserManagementController extends Controller
         return redirect('/home/user-management');
     }
 
-    
+
     public function edit(User $admin_user)
     {
         // $user = User::where('id', $id)->admin()->first();
@@ -60,14 +60,14 @@ class AdminUserManagementController extends Controller
     public function update(User $admin_user)
     {
         //dd($user->id);
-        
+
         $admin_user->password = Hash::make(str_random(8));
         $admin_user->save();
 
-        Mail::to('932a782243-eb8d48@inbox.mailtrap.io')->send(new ResetPasswordMail);
+        Mail::to('932a782243-eb8d48@inbox.mailtrap.io')->send(new ResetPasswordMail(request('_token'), $admin_user->email));
 
         session()->flash('message', 'Reset Password Successful! A Reset Password Link Has Been Sent to the User.');
-        return redirect('/home/user-management'); 
+        return redirect('/home/user-management');
     }
 
 
@@ -84,8 +84,8 @@ class AdminUserManagementController extends Controller
 
             session()->flash('message', 'User successfully disabled!');
         }
-        
+
         $user->save();
-        return response()->json($user); 
+        return response()->json($user);
     }
 }

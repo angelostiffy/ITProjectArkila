@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
 class User extends Authenticatable
 {
     use Notifiable;
@@ -40,11 +39,11 @@ class User extends Authenticatable
 
     public function scopeDriver($query)
     {
-        return $query->where('user_type', '=', 'Driver');   
+        return $query->where('user_type', '=', 'Driver');
     }
 
     public function scopeCustomer($query)
     {
-        return $query->where('user_type', '=', 'Customer');   
+        return $query->where('user_type', '=', 'Customer');
     }
 }
