@@ -1,4 +1,6 @@
-@extends('layouts.master') @section('title', 'Show Profile') @section('content')
+@extends('layouts.master')
+@section('title', 'Archive')
+@section('content')
     {{session(['opLink'=> Request::url()])}} 
 <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">

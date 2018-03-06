@@ -44,6 +44,7 @@ class CreateMemberTable extends Migration
             $table->string('emergency_contactno', 13);
             $table->string('SSS', 20);
             $table->string('license_number', 20)->nullable();
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->date('expiry_date')->nullable();
             $table->timestamps();
 

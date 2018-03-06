@@ -16,7 +16,8 @@ class CreateTripTable extends Migration
         Schema::create('trip', function (Blueprint $table) {
             $table->engine="InnoDB";
             $table->increments('trip_id');
-            $table->integer('driver_id');
+            $table->integer('driver_id')
+            ->unsigned();
             $table->integer('destination_id')
             ->unsigned();
             $table->string('plate_number');

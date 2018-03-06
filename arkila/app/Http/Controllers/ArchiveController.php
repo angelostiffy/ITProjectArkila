@@ -13,7 +13,7 @@ class ArchiveController extends Controller
      */
     public function index()
     {
-        //
+        return view('archive.archiveDriverVan');
     }
 
     /**
