@@ -38,7 +38,6 @@ Route::get('/', function () {
 
 
 });
-Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('home/ledger', 'DailyLedgerController');
@@ -104,6 +103,11 @@ Route::resource('home/user-management/admin', 'AdminUserManagementController', [
 ]);
 Route::post('home/user-management/admin/change-status', array('as' => 'changeAdminStatus','uses' => 'AdminUserManagementController@changeAdminStatus'));
 
+Route::get('password/reset/{token}/{email}', array('as' => 'getResetPass', 'uses' => 'Auth\ResetPasswordController@showResetForm'));
+Route::post('password/reset', array('as' => 'resetPass', 'uses' => 'Auth\ResetPasswordController@reset'));
+
+Route::patch('home/user-management/admin/{admin_user}/{token?}', 'AdminUserManagementController@update');
+
 Route::resource('home/user-management/driver', 'UserDriversManagementController', [
 	'except' => ['index','store', 'create','edit','destroy'],
 	'parameters' => ['driver' => 'driver_user']
@@ -123,3 +127,7 @@ Route::resource('home/testing', 'TestingController');
 Route::resource('home/reservations', 'ReservationsController');
 Route::resource('home/rental', 'RentalsController');
 Route::resource('home/triptest', 'TripsController');
+
+/* Trips */
+Route::resource('home/trips', 'TripsController');
+Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');

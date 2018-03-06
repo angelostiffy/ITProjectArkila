@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Trip;
-use App\Van;
-use App\Destination;
 
-class TripsController extends Controller
+class ArchiveController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +13,7 @@ class TripsController extends Controller
      */
     public function index()
     {
-        $trips = Trip::all();
-        $vans = Van::all();
-        $destinations = Destination::all();
-        return view('trips.queue', compact('trips','vans','destinations'));
+        //
     }
 
     /**
@@ -86,22 +80,5 @@ class TripsController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function updateVanQueue(){
-        $vans = request('vanQueue');
-        if(is_array($vans)) {
-            foreach($vans[0] as $key => $vanInfo){
-                if($van = Van::find($vanInfo['plate'])){
-                   $van->updateVanQueue($key);
-                }
-            }
-            return "Updated";
-        }
-        else{
-            return "Operator Not Found";
-        }
-
-
     }
 }

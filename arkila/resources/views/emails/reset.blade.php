@@ -7,19 +7,15 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <form class="form-horizontal" action="/action_page.php">
-                <div class="row form-group">
-                    <label class="control-label col-sm-3">Old Password:</label>
-                    <div class="col-sm-9">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter old password">
-                    </div>
-                    <!-- /.col -->
-                </div>
+            <form class="form-horizontal" action="{{ route('resetPass') }}" method="POST">
+              {{csrf_field()}}
+              <input type="hidden" name="_token" value="{{$token}}">
+              <input type="hidden" name="_method" value="PATCH">
                 <!-- /.row -->
                 <div class="row form-group">
                     <label class="control-label col-sm-3">New Password:</label>
                     <div class="col-sm-9">
-                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Enter new password">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter new password">
                     </div>
                     <!-- /.col -->
                 </div>

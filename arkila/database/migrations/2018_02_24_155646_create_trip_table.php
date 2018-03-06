@@ -15,17 +15,17 @@ class CreateTripTable extends Migration
     {
         Schema::create('trip', function (Blueprint $table) {
             $table->engine="InnoDB";
-
             $table->increments('trip_id');
+            $table->integer('driver_id');
             $table->integer('destination_id')
             ->unsigned();
             $table->string('plate_number');
 
-            $table->enum('remarks', ['OB', 'CC', 'ER']);
+            $table->enum('remarks', ['OB', 'CC', 'ER'])->nullable();
             $table->enum('status', ['Departed', 'On Queue', 'On Deck']);
-            $table->smallInteger('total_passengers');
-            $table->integer('total_booking_fee');
-            $table->date('date_departed');
+            $table->smallInteger('total_passengers')->nullable();
+            $table->integer('total_booking_fee')->nullable();
+            $table->date('date_departed')->nullable();
             $table->integer('queue_number');
 
             $table->foreign('destination_id')
@@ -35,6 +35,11 @@ class CreateTripTable extends Migration
 
             $table->foreign('plate_number')
             ->references('plate_number')->on('van')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
+
+            $table->foreign('driver_id')
+            ->references('member_id')->on('member')
             ->onDelete('restrict')
             ->onUpdate('cascade');
 

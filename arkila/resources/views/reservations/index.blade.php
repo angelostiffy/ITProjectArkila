@@ -22,9 +22,10 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tab_1">
                                         <b>Details:</b>
-                                        <table class="table table-bordered table-striped" id="onlineReservation">
+                                        <table class="table table-bordered table-striped listReservation">
                                             <thead>
                                                 <tr>
+                                                    <th>ID</th>
                                                     <th>Name</th>
                                                     <th>Contact Number</th>
                                                     <th>Destination</th>
@@ -38,6 +39,7 @@
                                             <tbody>
                                             @foreach ($reservations->where('type', 'Online') as $reservation)
                                                 <tr>
+                                                    <td>{{ $reservation->id }}</td>
                                                     <td>{{ $reservation->name }}</td>
                                                     <td>{{ $reservation->contact_number }}</td>
                                                     <td>{{ $reservation->destination->description }}</td>
@@ -81,9 +83,10 @@
                                         <div class="form-group">
                                             <a href="/home/reservations/create" class = "btn btn-primary">Add Walk-in Reservation</a>
                                         </div>
-                                        <table class="table table-bordered table-striped" id="listReservation">
+                                        <table class="table table-bordered table-striped listReservation">
                                             <thead>
                                                 <tr>
+                                                    <th>ID</th>
                                                     <th>Name</th>
                                                     <th>Contact Number</th>
                                                     <th>Destination</th>
@@ -100,6 +103,7 @@
 
                                             @if ($reservation->status == 'Paid' | $reservation->status == 'Departed' | $reservation->status == 'Cancelled' )
                                                 <tr>
+                                                <td>{{ $reservation->id }}</td>
                                                 <td>{{ $reservation->name }}</td>
                                                 <td>{{ $reservation->contact_number }}</td>
                                                 <td>{{ $reservation->destination->description }}</td>
@@ -160,27 +164,16 @@
 <script src="plugins/iCheck/icheck.min.js"></script>
  <script>
   $(function () {
-    $('#onlineReservation').DataTable({
+    $('.listReservation').DataTable({
       'paging'      : true,
       'lengthChange': true,
       'searching'   : true,
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : true,
-      "order": [[ 3, "asc" ]]
+      "order": [[ 1, "desc" ]]
         
     })
-      
-    $('#listReservation').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : true,
-      "order": [[ 3, "asc" ]]
-        
-    })  
       
   })
 </script>

@@ -88,20 +88,6 @@
             </div>
             <!-- /.container -->
 
-                <!-- TEST LANG FLASHING ERRORS -->
-                @if ($flash = session('message'))
-                <div class="alert alert-success" id="flash-msg" role="alert">
-                    {{ $flash }}
-                </div>
-                @endif
-                @if(!empty($errors->first()))
-                <div class="row col-lg-12">
-                    <div id="error" class="alert alert-danger">
-                        <span>{{ $errors->first() }}</span>
-                    </div>
-                </div>
-                @endif
-            <!-- test langggg -->
         </div>
         <!-- /.content-wrapper -->
 

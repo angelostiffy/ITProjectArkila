@@ -26,6 +26,7 @@
                             <table class="table table-bordered table-striped rentalTable">
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>Name</th>
                                         <th>Destination</th>
                                         <th>Date</th>
@@ -39,6 +40,7 @@
                                 <tbody>
                                     @foreach($rentals->sortByDesc('status')->where('rent_type', 'Online') as $rental) @if ($rental->status == 'Pending' | $rental->status == 'Paid')
                                     <tr>
+                                        <td>{{ $rental->rent_id }}</td>
                                         <td>{{ $rental->full_name }}</td>
                                         <td>{{ $rental->destination }}</td>
                                         <td>{{ $rental->departure_date }}</td>
@@ -81,6 +83,7 @@
                                 <table id="listRent" class="table table-bordered table-striped rentalTable">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Name</th>
                                             <th>Destination</th>
                                             <th>Date</th>
@@ -96,6 +99,7 @@
                                         
                                             @if ($rental->status == 'Paid' | $rental->status == 'Cancelled' | $rental->status == 'Departed')
                                             <tr>
+                                                <td>{{ $rental->rent_id }}</td>
                                                 <td>{{ $rental->full_name }}</td>
                                                 <td>{{ $rental->destination }}</td>
                                                 <td>{{ $rental->departure_date }}</td>
