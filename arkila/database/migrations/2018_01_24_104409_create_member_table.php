@@ -31,7 +31,7 @@ class CreateMemberTable extends Migration
             $table->smallInteger('age');
             $table->enum('gender', ['Male', 'Female']);
             $table->string('citizenship', 35);
-            $table->enum('civil_status', ['Single', 'Married', 'Divorced']);
+            $table->enum('civil_status', ['Single', 'Married', 'Divorced', 'Widowed']);
             $table->smallInteger('number_of_children')->nullable();
             $table->string('spouse', 120)->nullable();
             $table->date('spouse_birthdate')->nullable();
