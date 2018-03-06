@@ -13,7 +13,8 @@
 
 //Made by Randall
 
-//Route::get('/randall', 'VansController@index');
+//Route::get('/randall', 'VansController@index')
+Route::get('/driver-test', 'DriverViewTestController@index');
 Route::get('/randall', 'RandallController@index');
 
 Route::get('/randall', function(){
