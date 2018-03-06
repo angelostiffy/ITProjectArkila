@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
-class ResetPasswordController extends Controller
+class PasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -20,16 +19,11 @@ class ResetPasswordController extends Controller
     */
 
     use ResetsPasswords;
+    
+    protected $redirectTo = '/';
 
     /**
-     * Where to redirect users after resetting their password.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
+     * Create a new password controller instance.
      *
      * @return void
      */
