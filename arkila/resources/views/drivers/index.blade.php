@@ -1,7 +1,7 @@
-@extends('layouts.master') @section('title', 'Driver List') @section('content-header', 'Driver List') @section('content')
+@extends('layouts.master') @section('title', 'Driver List') @section('content-header', 'Driver List') @section('content') @if(session()->get('opLink')) {{ session()->forget('opLink') }} @endif
 <div class="box">
     <div class="box-body">
-        <button href="{{route('drivers.create')}}" class="btn btn-success">Add Driver <i class="fa fa-plus-circle"></i></button>
+        <a href="{{route('drivers.create')}}" class="btn btn-primary">Add Driver <i class="fa fa-plus-circle"></i></a>
         <table id="driverList" class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -26,12 +26,11 @@
                     <td>{{$driver->age}}</td>
                     <td>
                         <div class="text-center">
-                            <a href="{{route('drivers.show',[$driver->member_id])}}" class="btn btn-primary"><i class="fa fa-eye"></i>View</a>
-                            <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i>Edit</a>
-                            <form action="{{route('drivers.destroy',[$driver->member_id])}}" method="POST">
-                                {{csrf_field()}} {{method_field("DELETE")}}
-                                <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</i></button>
-                            </form>
+                            <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Edit</a>
+                            <a href="{{route('drivers.show',[$driver->member_id])}}" class="btn btn-default"><i class="fa fa-eye"></i>View</a>
+
+                            <button type="button" data-toggle="modal" data-target="#deleteWarning" class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</button>
+
                         </div>
                         <!-- /.text-->
                     </td>
@@ -43,6 +42,43 @@
     <!-- /.box-body -->
 </div>
 <!-- /.box-->
+
+
+<!-- Modal for Delete-->
+<div class="modal fade" id="deleteWarning">
+    <div class="modal-dialog">
+        <div class="col-md-offset-2 col-md-8">
+            <div class="modal-content">
+                <div class="modal-header bg-red">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"> Confirm</h4>
+                </div>
+                <div class="modal-body row" style="margin: 0% 1%;">
+                    <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
+                        <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
+                    </div>
+                    <div class="col-md-10">
+                        <p style="font-size: 110%;">Are you sure you want to delete "yung user"</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <form action="{{route('drivers.destroy',[$driver->member_id])}}" method="POST">
+                        {{csrf_field()}} {{method_field("DELETE")}}
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
+                    </form>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
 @stop @section('scripts') @parent
 
 <script>

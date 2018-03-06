@@ -11,6 +11,7 @@
 {{ method_field('PATCH')}}
 
 <div class="form-group">
+    <input type="text" name="title" value="{{ $announcement->title }}">
     <label>Viewer: {{ $announcement->announcement_id}}</label> 
     <select name="viewer">
         <option value="Public"{{ $announcement->viewer == 'Public' ? 'selected="selected"' : '' }}>Public</option>

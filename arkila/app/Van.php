@@ -32,5 +32,8 @@ class Van extends Model
         return $this->members()->where('role','Operator');
     }
 
+    public function trip(){
+    	return $this->hasOne(Trip::Class, 'trip_id');
+    }
 
 }

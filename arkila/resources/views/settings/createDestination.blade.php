@@ -4,6 +4,7 @@
 @section('form-action', route('destinations.store'))
 @section('form-title', 'Create Destination')
 @section('form-body')
+                  @include('message.error')
                   <div class="form-group">
                     <label>Destination:</label>
                     <input name="addDestination" type="text" class="form-control">

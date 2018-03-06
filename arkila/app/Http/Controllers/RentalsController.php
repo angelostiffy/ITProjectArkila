@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Rental;
+use Carbon\Carbon;
 use App\Van;
 use App\Http\Requests\RentalRequest;
 

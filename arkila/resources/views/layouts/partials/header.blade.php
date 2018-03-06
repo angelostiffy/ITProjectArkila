@@ -145,7 +145,6 @@
                         <form method="post" action="{{ route('announcements.index') }}">
                             {{ csrf_field() }}
                             <li class="header box-body">Enter Announcement:
-
                                 <span class="pull-right">
                                         <select name="viewer">
                                             <option value="Public">Public</option>
@@ -153,12 +152,18 @@
                                             <option value="Customer Only">Customer Only</option>
                                             <option value="Only Me">Only Me</option>
                                         </select>
-                                    </span>
+                                </span>
                             </li>
-
                             <li class="box-body">
+                                <div class="form-group">
+                                    <label for="">Title:</label>
+                                    <input type="text" name="title" class="form-control">
+                                </div>
                                 <!-- inner menu: contains the actual data -->
-                                <textarea name="announce" rows="5" class="form-control" placeholder=""></textarea>
+                                <div class="form-group">
+                                    <label for="">Message:</label>
+                                    <textarea name="announce" rows="5" class="form-control" placeholder=""></textarea>
+                                </div>
                             </li>
                             <li class="footer box-body pull-right">
                                 <button class="btn btn-warning">ANNOUNCE</button>

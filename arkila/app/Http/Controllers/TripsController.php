@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Trip;
+use App\Van;
+use App\Destination;
 
-class TestController extends Controller
+class TripsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +16,10 @@ class TestController extends Controller
      */
     public function index()
     {
-        return view('vans.addVanDriver');
+        $trips = Trip::all();
+        $vans = Van::all();
+        $destinations = Destination::all();
+        return view('triptest.queue', compact('trips','vans','destinations'));
     }
 
     /**
@@ -34,9 +40,7 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        $anak = $request->children;
-        $bday = $request->date;
-        dd(compact('anak', 'bday'));
+        //
     }
 
     /**
@@ -82,5 +86,26 @@ class TestController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function vanQueue(){
+        $operator = Van::find(request('plate_number'));
+
+        if($operator != null) {
+            $driversArr = [];
+            $drivers = $operator->drivers()->doesntHave('van')->get();
+            foreach($drivers as $driver){
+                array_push($driversArr, [
+                    "id" => $driver->member_id,
+                    "name" => $driver->full_name
+                ]);
+            }
+            return response()->json($driversArr);
+        }
+        else{
+            return "Operator Not Found";
+        }
+
+
     }
 }

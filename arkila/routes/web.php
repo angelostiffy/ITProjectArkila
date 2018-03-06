@@ -25,6 +25,8 @@ Route::get('/teo', function(){
 
 Route::resource('/angelo', 'EmailtestController');
 
+Route::get('/dixon', 'TripsController@index');
+
 Route::get('/demo', function(){
   return new App\Mail\ResetPasswordMail();
 });
@@ -62,10 +64,15 @@ Route::post('/listDrivers','VansController@listDrivers')->name('vans.listDrivers
 /****************************************************/
 
 /************ Vans ******************************/
-Route::resource('home/vans', 'VansController');
+Route::resource('home/vans', 'VansController', [
+    'except' => ['show']
+]);
 //Creating Vans
 Route::get('home/operators/{operator}/vans/create', 'VansController@createFromOperator')->name('vans.createFromOperator');
-Route::post('home/operators/{operator}/vans', 'VansController@storeFromOperator')->name('vans.storeFromOperator');;
+Route::post('home/operators/{operator}/vans', 'VansController@storeFromOperator')->name('vans.storeFromOperator');
+
+//Give the info of a van
+Route::post('/vanInfo','VansController@vanInfo')->name('vans.vanInfo');
 /****************************************************/
 
 /************ Settings ******************************/
@@ -118,3 +125,4 @@ Route::resource('home/test', 'TestController');
 Route::resource('home/testing', 'TestingController');
 Route::resource('home/reservations', 'ReservationsController');
 Route::resource('home/rental', 'RentalsController');
+Route::resource('home/triptest', 'TripsController');

@@ -1,12 +1,14 @@
 
 @extends('layouts.form') 
 @section('title', 'Add Van')
-@section('back-link',URL::previous())
+
 
 @if(isset($operators))
     @section('form-action',route('vans.store'))
+    @section('back-link',route('vans.index'))
 @else
     @section('form-action',route('vans.storeFromOperator',[$operator->member_id]))
+    @section('back-link', route('operators.showProfile',[$operator->member_id]))
 @endif
 @section('form-title', 'Add Van')
 @section('form-body')
@@ -31,16 +33,16 @@
 
 	<div class="form-group">
 	<label for="">Plate Number:</label>
-    <input name="plateNumber" type="text" class="form-control" placeholder="Plate Number">
+    <input value="{{old('plateNumber')}}" name="plateNumber" type="text" class="form-control" placeholder="Plate Number">
     </div>
     <div class="form-group">
 	<label for="">Van Model</label>
-    <input name="vanModel" type="text" class="form-control" placeholder="Van Model">
+    <input value="{{old('vanModel')}}" name="vanModel" type="text" class="form-control" placeholder="Van Model">
     </div>
 
     <div class="form-group">
 	<label for="">Seating Capacity</label>
-    <input name="seatingCapacity" type="number" class="form-control" placeholder="Seating Capacity" max="16" min="1">
+    <input value="{{old('seatingCapacity')}}" name="seatingCapacity" type="number" class="form-control" placeholder="Seating Capacity" max="16" min="1">
     </div>
     
     <div class="form-group">
@@ -133,11 +135,12 @@ $('select[name="operator"]').on('change',function(){
                 url: '{{route("vans.listDrivers")}}',
                 data: {
                     '_token': '{{csrf_token()}}',
-                    'driver':$('select[name="operator"]').val()
+                    'operator':$('select[name="operator"]').val()
                 },
                 success: function(drivers){
                     $('[name="driver"]').append('<option value="">None</option>');
                     drivers.forEach(function(driverObj){
+
                         $('[name="driver"]').append('<option value='+driverObj.id+'> '+driverObj.name+'</option>');
                     })
                 }

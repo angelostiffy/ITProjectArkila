@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Announcement;
+use Carbon\Carbon;
+
 
 class AnnouncementsController extends Controller
 {
@@ -15,7 +17,9 @@ class AnnouncementsController extends Controller
     public function index()
     {
         //
+
         $announcements = Announcement::all();
+
         return view('announcements.index', compact('announcements'));
     }
 
@@ -42,10 +46,15 @@ class AnnouncementsController extends Controller
         $this->validate(request(), [
             "announce" =>  'max:499',
         ]);
+        $current_time = \Carbon\Carbon::now();
+        $dateNow = $current_time->setTimezone('Asia/Manila')->format('Y-m-d H:i:s');
 
         Announcement::create([
+            'title' => $request->title,
             'description' => $request->announce,
             'viewer' => request('viewer'),
+            'created_at' => $dateNow,
+            'updated_at' => $dateNow,
         ]);
 
         return redirect('/home/announcements/')->with('success', 'Information created successfully');
@@ -85,9 +94,15 @@ class AnnouncementsController extends Controller
     public function update(Announcement $announcement)
     {
         //
+        $current_time = \Carbon\Carbon::now();
+        $dateNow = $current_time->setTimezone('Asia/Manila')->format('Y-m-d H:i:s');
+
         $announcement->update([
+            'title' => request('title'),
             'description' => request('announce'),
             'viewer' => request('viewer'),
+            'updated_at' => $dateNow,
+
         ]);
         return redirect('/home/announcements/')->with('success', 'Information was updated successfully');
     }

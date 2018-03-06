@@ -42,8 +42,6 @@ class DriversController extends Controller
     public function store(DriverRequest $request)
     {
 
-        $children = array_combine($request->children,$request->childrenBDay);
-
         $createdDriver = Member::create([
             'last_name'=> $request->lastName,
             'first_name' => $request->firstName,
@@ -71,10 +69,18 @@ class DriversController extends Controller
             'SSS' => $request->sss,
             'license_number' => $request->licenseNo,
             'expiry_date' => $request->licenseExpiryDate,
-            'number_of_children' => sizeof($children)
         ]);
 
-        $createdDriver->addChildren($children);
+        if($this->arrayChecker($request->children) && $this->arrayChecker($request->childrenBDay))
+        {
+
+            $children = array_combine($request->children,$request->childrenBDay);
+            $createdDriver->addChildren($children);
+            $createdDriver->update([
+                'number_of_children' => sizeof($children)
+            ]);
+        }
+
 
 
         return redirect(route('drivers.index'))->with('success', 'Information created successfully');
@@ -87,8 +93,6 @@ class DriversController extends Controller
     }
 
     public function storeFromOperator(Member $operator, DriverRequest $request){
-
-        $children = array_combine($request->children,$request->childrenBDay);
 
         $operator->drivers()->create([
             'last_name'=> $request->lastName,
@@ -116,19 +120,32 @@ class DriversController extends Controller
             'SSS' => $request->sss,
             'license_number' => $request->licenseNo,
             'expiry_date' => $request->licenseExpiryDate,
-            'number_of_children' => sizeof($children)
         ]);
-        $operator->addChildren($children);
+
+        if($this->arrayChecker($request->children) && $this->arrayChecker($request->childrenBDay))
+        {
+            $children = array_combine($request->children,$request->childrenBDay);
+            $operator->addChildren($children);
+            $operator->update([
+                'number_of_children' => sizeof($children)
+            ]);
+        }
+
         return redirect(route('operators.showProfile',[$operator->member_id]));
     }
 
     public function createFromVan(Van $vanNd){
+        if(session()->get('type') == 'createFromIndex'){
+            session(['vanBack'=> route('vans.index')]);
+        }else{
+            session(['vanBack'=> route('operators.showProfile',[session()->get('type')])]);
+        }
+        session()->forget('type');
+
         return view('drivers.create',compact('vanNd'));
     }
 
     public function storeFromVan(Van $vanNd,DriverRequest $request){
-
-        $children = array_combine($request->children,$request->childrenBDay);
 
         $driver = Member::create([
             'last_name'=> $request->lastName,
@@ -157,11 +174,25 @@ class DriversController extends Controller
             'SSS' => $request->sss,
             'license_number' => $request->licenseNo,
             'expiry_date' => $request->licenseExpiryDate,
-            'number_of_children' => sizeof($children)
         ]);
 
+        if($this->arrayChecker($request->children) && $this->arrayChecker($request->childrenBDay))
+        {
+            $children = array_combine($request->children,$request->childrenBDay);
+            $driver->addChildren($children);
+            $driver->update([
+                'number_of_children' => sizeof($children)
+            ]);
+        }
+
         $vanNd->members()->attach($driver);
-        return redirect(route('operators.showProfile',[$vanNd->operator()->first()->member_id]));
+
+        if(session()->get('vanBack') && session()->get('vanBack') == route('operators.showProfile',[$vanNd->operator->first()->member_id])){
+            return redirect(route('operators.showProfile',[$vanNd->operator->first()->member_id]));
+        }else{
+            return redirect(route('vans.index'));
+        }
+
     }
     /**
      * Display the specified resource.
@@ -198,9 +229,6 @@ class DriversController extends Controller
      */
     public function update(DriverRequest $request, Member $driver)
     {
-
-        $children = array_combine($request->children,$request->childrenBDay);
-
         $driver->update([
             'last_name'=> $request->lastName,
             'first_name' => $request->firstName,
@@ -228,12 +256,29 @@ class DriversController extends Controller
             'SSS' => $request->sss,
             'license_number' => $request->licenseNo,
             'expiry_date' => $request->licenseExpiryDate,
-            'number_of_children' => sizeof($children)
         ]);
-        $driver->children()->delete();
-        $driver->addChildren($children);
 
-        return redirect()->route('drivers.index',compact('driver'))->with('success', 'Information updated successfully');
+        if($this->arrayChecker($request->children) && $this->arrayChecker($request->childrenBDay))
+        {
+
+            $children = array_combine($request->children,$request->childrenBDay);
+            $driver->children()->delete();
+            $driver->addChildren($children);
+            $driver->update([
+                'number_of_children' => sizeof($children)
+            ]);
+        }
+
+        if(session()->get('opLink')){
+            $routeOP = session()->get('opLink');
+            session()->forget('opLink');
+            return redirect($routeOP);
+
+        }
+        else{
+            return redirect(route('drivers.index'));
+        }
+
 
     }
 
@@ -245,8 +290,27 @@ class DriversController extends Controller
      */
     public function destroy(Member $driver)
     {
+        $driver->van()->detach();
         $driver->delete();
         return back();
 
+    }
+
+    private function arrayChecker($array){
+        $result = true;
+
+        if (is_array($array) || is_object($array))
+        {
+            foreach($array as $arrayContent){
+                if(is_null($arrayContent)){
+                    $result = false;
+                    break;
+                }
+            }
+        }else{
+            $result= false;
+        }
+
+        return $result;
     }
 }

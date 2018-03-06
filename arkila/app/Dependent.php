@@ -19,11 +19,23 @@ class Dependent extends Model
         return $this->belongsTo(Member::class,'member_id','member_id');
     }
     public function setBirthdateAttribute($value){
-        $this->attributes['birthdate'] = Carbon::parse($value);
+        if(is_null($value)){
+            $this->attributes['birthdate'] = $value;
+        }
+        else{
+            $this->attributes['birthdate'] = Carbon::parse($value);
+        }
+
     }
 
     public function getBirthdateAttribute($value){
-        return  Carbon::parse($value)->format('m/d/Y');
+        if(is_null($value)){
+            return $value;
+        }
+        else{
+            return  Carbon::parse($value)->format('m/d/Y');
+        }
+
     }
 
 }
