@@ -11,7 +11,7 @@
 @stop
 @section('content')
 @section('form-body')
-          
+
 
 <div class="form-group">
   <label for="payor">User name:</libel>
@@ -24,14 +24,15 @@
 <div class="form-group">
   <label for="Particulars">Email Address:</label>
   <span name="email">{{$admin_user->email}}</span>
-</div>          
+</div>
+   
 
 
-<div class="well">                          
+<div class="well">
   <div class="box-body no-padding">
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#"><i class="fa fa-inbox"></i> Enable/Disable Account
-        <span class="label pull-right">         
+        <span class="label pull-right">
           <label class="switch">
             <input type="checkbox" class="status" data-id="{{$admin_user->id}}" @if ($admin_user->status == 'enable') checked @endif>
             <span class="slider round"></span>
@@ -41,7 +42,7 @@
     </ul>
   </div>
 
-  <button type="button" class="btn btn-danger btn-block" style="margin-top:5%" data-toggle="modal" data-target="#form-modal">Reset Password</button>  
+  <button type="button" class="btn btn-danger btn-block" style="margin-top:5%" data-toggle="modal" data-target="#form-modal">Reset Password</button>
 
   @section('modal-title','Alert')
   @section('modal-body')
@@ -51,10 +52,10 @@
   @section('modal-btn')
     <button type="submit" class="btn btn-primary">Yes</button>
     <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-  @endsection 
+  @endsection
 
 </div>
-                   
+
 @endsection
 
 @section('scripts')

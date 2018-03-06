@@ -49,6 +49,7 @@
             </h3>
         </div>
         <div class="box-body">
+        @include('message.error')
 
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">

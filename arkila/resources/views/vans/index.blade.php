@@ -95,7 +95,7 @@
                                 </div>
                                 <!-- /.box-body -->
                                 <div class="box-footer">
-                                    <button type="submit" name="search" id="search-btn" class="btn btn-default pull-right"> Back </button>
+                                    <button type="submit" name="search" id="search-btn" class="btn btn-default pull-right" data-dismiss="modal"> Back </button>
                                 </div>
                                 <!-- /.box-footer -->
                             </div>
@@ -125,31 +125,62 @@
                 @foreach($vans as $van)
 						<tr>
 							<td>{{$van->plate_number}}</td>
-
 							<td>
 							{{ $van->driver()->first()->full_name ?? $van->driver()->first() }}
 							</td>
-							<td>{{ $van->operator()->first()->full_name }}</td>
+							<td>{{ $van->operator()->first()->full_name ??  $van->operator()->first()}}</td>
 							<td>{{$van->model}}</td>
 							<td>{{$van->seating_capacity}}</td>
 							<td>
 								<div class="text-center">
-									<form method="POST" action="{{route('vans.destroy',[$van->plate_number])}}">
-									{{csrf_field()}}
-									{{method_field('DELETE')}}
-
+									
                                         @if($van->driver()->first())
-		                                        <a name="listDriver" data-val="{{ $van->operator()->first()->member_id }}" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Change Driver</a>
+		                                        <a name="listDriver" data-val="{{ $van->operator()->first()->member_id ?? $van->operator()->first()}}" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Change Driver</a>
                                         @else
                                             <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Add Driver</a>
                                         @endif
                                         <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-default" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i>View</a>
-									<button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</button>
-								</form>
+                                       <button class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteWarning"><i class="fa fa-trash"></i> Delete</button>
+
 		                        </div>
 
 							</td>
 						</tr>
+                        
+                        <!-- MODAL DELETION -->
+                        <div class="modal fade" id="deleteWarning">
+                        <div class="modal-dialog">
+                            <div class="col-md-offset-2 col-md-8">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-red">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title"> Confirm</h4>
+                                    </div>
+                                    <div class="modal-body row" style="margin: 0% 1%;">
+                                       <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
+                                           <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
+                                       </div>
+                                       <div class="col-md-10">
+                                        <p style="font-size: 110%;">Are you sure you want to delete "yung user para pogi"</p>
+                                       </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form method="POST" action="{{route('vans.destroy',[$van->plate_number])}}">
+                                            {{csrf_field()}}
+                                            {{method_field('DELETE')}}
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                            <button type="submit" class="btn btn-danger" style="width:22%;">Yes</button>
+                                        </form>    
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
 					@endforeach
             </tbody>
         </table>

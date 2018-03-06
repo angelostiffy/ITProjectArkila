@@ -32,16 +32,16 @@
         background-color: #4CAF50;
     }
 </style>
-@endsection @section('title', 'Rent Van') @section('form-id', 'regForm') @section('form-action', route('reservations.store')) @section('form-method', 'POST') @section('form-body') {{csrf_field()}}
-@include('message.error')
+@endsection @section('title', 'Book a Seat') @section('form-id', 'regForm') @section('form-action', route('reservations.store')) @section('form-method', 'POST') @section('form-body') {{csrf_field()}}
 <div class="box box-warning">
     <div class="box-header with-border text-center">
         <a href="{{ URL::previous() }}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
         <h3 class="box-title">
-            Rent a Van
+            Book a Seat
         </h3>
     </div>
     <div class="box-body">
+@include('message.error')
 
         <div class="tab">
             <h4>Trip Information</h4>

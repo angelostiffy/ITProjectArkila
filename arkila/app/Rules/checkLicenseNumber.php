@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class checkName implements Rule
+class checkLicenseNumber implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,7 +25,7 @@ class checkName implements Rule
      */
     public function passes($attribute, $value)
     {
-        return (preg_match('/^[a-zA-Z]$|^[a-zA-Z][a-zA-Z\s-]*[a-zA-Z]$/',$value));
+        return (preg_match('/^[A-Z\d]+$|^([A-Z\d])+[- ]([A-Z\d])+$/',$value));
     }
 
     /**
@@ -35,6 +35,6 @@ class checkName implements Rule
      */
     public function message()
     {
-        return 'The :attribute field can only consist of alphabetic characters, spaces or dashes ';
+        return 'The entered Plate number must be in a valid format.';
     }
 }

@@ -8,154 +8,155 @@
 
 
 @section('content')
-        <section class="content">
-                <div class="box">
+<section class="content">
+    <div class="box">
 
-                    <div class="box-body">
-                        <div class="col-xl-6">
-                            <!-- Custom Tabs -->
-                            <div class="nav-tabs-custom">
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#tab_1" data-toggle="tab">Online Rental</a></li>
-                                    <li><a href="#tab_2" data-toggle="tab">List of Rentals</a></li>
+        <div class="box-body">
+            <div class="col-xl-6">
+                <!-- Custom Tabs -->
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab_1" data-toggle="tab">Online Rental</a></li>
+                        <li><a href="#tab_2" data-toggle="tab">List of Rentals</a></li>
 
-                                </ul>
+                    </ul>
 
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="tab_1">
-                                        <b>Details:</b>
-                                        <table class="table table-bordered table-striped example1">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Destination</th>
-                                                    <th>Date</th>
-                                                    <th>Time</th>
-                                                    <th>Contact Number </th>
-                                                    <th>Van Model </th>
-                                                    <th>Status</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($rentals->sortByDesc('status')->where('rent_type', 'Online') as $rental)
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_1">
+                            <table class="table table-bordered table-striped rentalTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Destination</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Contact Number </th>
+                                        <th>Van Model </th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($rentals->sortByDesc('status')->where('rent_type', 'Online') as $rental) @if ($rental->status == 'Pending' | $rental->status == 'Paid')
+                                    <tr>
+                                        <td>{{ $rental->rent_id }}</td>
+                                        <td>{{ $rental->full_name }}</td>
+                                        <td>{{ $rental->destination }}</td>
+                                        <td>{{ $rental->departure_date }}</td>
+                                        <td>{{ $rental->departure_time }}</td>
+                                        <td>{{ $rental->contact_number }}</td>
+                                        <td>{{ $rental->van->model }}</td>
+                                        <td>{{ $rental->status }}</td>
+                                        <td class="center-block">
+                                            <div class="text-center">
+                                                <form action="{{ route('rental.update', $rental->rent_id) }}" method="POST">
+                                                {{ csrf_field() }} {{ method_field('PATCH') }} 
 
-                                                @if ($rental->status == 'Pending' | $rental->status == 'Paid')
-                                                <tr>
+                                                @if ($rental->status == 'Pending')
+                                                    <button class="btn btn-success" name="click" onclick="return ConfirmStatus()" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
+                                                    <button class="btn btn-outline-danger" name="click" onclick="return ConfirmStatus()" value="Declined"><i class="fa fa-close"></i> Decline</button>
+                                                </form>
+                                                
+                                                @elseif ($rental->status == 'Paid')
+                                                    <button class="btn btn-primary" name="click" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
+                                                    <button class="btn btn-outline-danger" name="click" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button> @else
+                                                    <form method="POST" action="/home/rental/{{ $rental->rent_id }}" class="delete">
+                                                        {{csrf_field()}} {{method_field('DELETE')}}
+                                                        <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-trash"></i> Delete</i></button>
+                                                    </form>
+                                                @endif 
+                                            @endif
+                                                
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            </div>
+
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="tab_2">
+                                <div class="col col-md-6">
+                                    <a href="/home/rental/create" class="btn btn-primary">Add Rental</a>
+                                </div>
+                                <table id="listRent" class="table table-bordered table-striped rentalTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Destination</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Contact Number</th>
+                                            <th>Van Model</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($rentals->sortByDesc('status') as $rental) 
+                                        
+                                            @if ($rental->status == 'Paid' | $rental->status == 'Cancelled' | $rental->status == 'Departed')
+                                            <tr>
+                                                <td>{{ $rental->rent_id }}</td>
                                                 <td>{{ $rental->full_name }}</td>
                                                 <td>{{ $rental->destination }}</td>
                                                 <td>{{ $rental->departure_date }}</td>
                                                 <td>{{ $rental->departure_time }}</td>
                                                 <td>{{ $rental->contact_number }}</td>
                                                 <td>{{ $rental->van->model }}</td>
-                                                <td>{{ $rental->status }}</td>    
+                                                <td>{{ $rental->status }}</td>
                                                 <td class="center-block">
-                                                <div class="text-center">
-                                                <form action="{{ route('rental.update', $rental->rent_id) }}" method="POST">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('PATCH') }}
-                          
-                                                  @if ($rental->status == 'Pending')
-                                                      <button class="btn btn-success" name="click" onclick="return ConfirmStatus()" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
-                                                      <button class="btn btn-danger" name="click" onclick="return ConfirmStatus()" value="Declined"><i class="fa fa-close"></i> Decline</button>
-                                                  @elseif ($rental->status == 'Paid')
-                                                      <button class="btn btn-success" name="click" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
-                                                      <button class="btn btn-danger" name="click" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button>
-                                                  @else
-                                                      <form method="POST" action="/home/rental/{{ $rental->rent_id }}" class="delete">
-                                                           {{csrf_field()}}
-                                                           {{method_field('DELETE')}}
-                                                        <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-trash"></i> Delete</i></button>
-                                                      </form>                          
-                                                  @endif
-                                                  @endif
-                                                 </form>
-                                              </td>
-                                             </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                    <div class="center-block">
+                                                        <form action="{{ route('rental.update', $rental->rent_id) }}" method="POST" class="form-action">
+                                                            {{ csrf_field() }} {{ method_field('PATCH') }}
 
-                                    <!-- /.tab-pane -->
-                                    <div class="tab-pane" id="tab_2">
-                                        <div class="form-group">
-                                            <a href="/home/rental/create" class = "btn btn-outline-danger">Add Walk-in Reservation</a>
-                                        </div>
-                                        <table id=example2 class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Destination</th>
-                                                    <th>Date</th>
-                                                    <th>Time</th>
-                                                    <th>Contact Number</th>
-                                                    <th>Van Model</th>
-                                                    <th>Status</th> 
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($rentals->sortByDesc('status') as $rental)
-
-                                            @if ($rental->status == 'Paid' | $rental->status == 'Cancelled' | $rental->status == 'Departed')
-                                            <tr>
-                                            <td>{{ $rental->full_name }}</td>
-                                            <td>{{ $rental->destination }}</td>
-                                            <td>{{ $rental->departure_date }}</td>
-                                            <td>{{ $rental->departure_time }}</td>
-                                            <td>{{ $rental->contact_number }}</td>
-                                            <td>{{ $rental->van->model }}</td>
-                                            <td>{{ $rental->status }}</td>    
-                                            <td class="center-block">
-                                            <div class="center-block">
-                                    <form action="{{ route('rental.update', $rental->rent_id) }}" method="POST" class="form-action">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('PATCH') }}
-
-                                            @if ($rental->status == 'Paid')
-                                                        <button class="btn btn-success" name="click" id="depart" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart </button>
-                                                        <button class="btn btn-danger" name="click" id="depart" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel </button>
-                                                    </form>
-                                            @else
-                                                  <form method="POST" action="/home/rental/{{ $rental->rent_id }}" class="delete">
-                                                       {{csrf_field()}}
-                                                       {{method_field('DELETE')}}
-                                                    <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-trash"></i> Delete</i></button>
-                                                  </form>
-                                            @endif
-                                                  </div>
-                                              </td>                        
+                                                        @if ($rental->status == 'Paid')
+                                                            <button class="btn btn-primary" name="click" id="depart" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart </button>
+                                                            <button class="btn btn-outline-danger" name="click" id="depart" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel </button>
+                                                        </form>
+                                                        @else
+                                                        <form method="POST" action="/home/rental/{{ $rental->rent_id }}" class="delete">
+                                                            {{csrf_field()}} {{method_field('DELETE')}}
+                                                            <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-trash"></i> Delete</i></button>
+                                                        </form>
+                                                        @endif
+                                                    </div>
+                                                </td>
                                             </tr>
                                             @endif
-                                            </tbody>
-                                            @endforeach
-                                        </table>
-                                    
-                                    <!-- /.box-body -->
-                                </div>
-                            </div>
-                            <!-- /.tab-pane -->
-                        </div>
-                        <!-- /.tab-content -->
-                    </div>
-                </div>
-            </section>
+                        
+                                     @endforeach
+                                    </tbody>
+                                   
+                                </table>
 
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+                    </div>
+                    <!-- /.tab-content -->
+                </div>
+            </div>
+</section>
                             
 @endsection
 @section('scripts')
 @parent          
 <script>
+    
   $(function () {
-    $('.example1').DataTable()
-    $('#example2').DataTable({
+    
+    $('.rentalTable').DataTable({
       'paging'      : true,
-      'lengthChange': true,
+      'lengthChange': false,
       'searching'   : true,
       'ordering'    : true,
       'info'        : true,
-      'autoWidth'   : true
+      'autoWidth'   : true,
+      'order'       : [[ 1, "desc" ]] 
     })
   })
   

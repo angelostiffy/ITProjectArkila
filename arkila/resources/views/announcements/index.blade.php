@@ -35,18 +35,15 @@
                     <p>Are you sure you want to delete this announcement?</p>
                 </div>
                 <div class="modal-footer">
-
                     <form method="POST" action="/home/announcements/{{$announcement->announcement_id}}">
                         {{csrf_field()}} {{method_field('DELETE')}}
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
-
     <!-- /.box-body -->
 </div>
 </form>

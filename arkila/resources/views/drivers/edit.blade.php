@@ -1,4 +1,4 @@
-@extends('layouts.master') @section('title', 'Edit Driver Information') @section('links') @parent
+    @extends('layouts.master') @section('title', 'Edit Driver Information') @section('links') @parent
 <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"> @stop @section('content')
 <div class="box box-warning">
     <div class="box-header with-border text-center">
@@ -17,6 +17,25 @@
             <div class="tab">
                 <h4>Personal Information</h4>
                 <div class="tab">
+                     
+                       <div class="form-group" style="width:31%;">
+                           <label>Choose Operator:</label>
+                           
+                                <select name="operator" id="" class="form-control select2">
+                                    <option value=''>No Operator</option>
+                                    @foreach($operators as $operator)
+                                        <option value="{{$operator->member_id}}"
+                                        @if(old('operator') == $operator->member_id)
+                                            {{'selected'}}
+                                                @elseif($driver->operator != null)
+                                                @if($driver->operator->member_id == $operator->member_id)
+                                                    {{'selected'}}
+                                                @endif
+                                                @endif
+                                        >{{$operator->full_name}}</option>
+                                    @endforeach
+                                </select>
+                        </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="operatorLastName">Last Name:</label>

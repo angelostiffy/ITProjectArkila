@@ -26,18 +26,49 @@
                     <td>{{ $operator->address }}</td>
                     <td>{{ $operator->age }}</td>
                     <td>
-
                         <div class="text-center">
-
-                            <form action="{{ route('operators.destroy', [$operator->member_id]) }}" method="POST">
-                                {{ csrf_field() }} {{method_field('DELETE')}}
-                                <a href="{{ route('operators.showProfile', [$operator->member_id]) }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
-                                <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</i></button>
-                            </form>
+                            <a href="{{ route('operators.showProfile', [$operator->member_id]) }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
+                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteWarning"><i class="fa fa-trash"></i> Delete</button>
                         </div>
                         <!-- /.text -->
                     </td>
                 </tr>
+                <!-- Modal for Delete-->
+                <div class="modal fade" id="deleteWarning">
+                    <div class="modal-dialog">
+                        <div class="col-md-offset-2 col-md-8">
+                            <div class="modal-content">
+                                <div class="modal-header bg-red">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title"> Confirm</h4>
+                                </div>
+                                <div class="modal-body row" style="margin: 0% 1%;">
+                                    <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
+                                        <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <p style="font-size: 110%;">Are you sure you want to delete "yung user"</p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    @if($operators && $operator)
+                                    <form action="{{ route('operators.destroy', [$operator->member_id]) }}" method="POST">
+                                        {{ csrf_field() }} {{method_field('DELETE')}}
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                        <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
+                                    </form>
+                                    @endif
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                
                 @endforeach
             </tbody>
         </table>
@@ -45,6 +76,7 @@
     <!-- /.box-body -->
 </div>
 <!-- /.box -->
+
 @stop @section('scripts') @parent
 
 <!-- DataTables -->
@@ -58,7 +90,8 @@
             'searching': true,
             'ordering': true,
             'info': true,
-            'autoWidth': true
+            'autoWidth': true,
+            "order": [[ 1, "desc" ]]
         })
     })
 </script>
