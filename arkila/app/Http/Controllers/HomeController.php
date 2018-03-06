@@ -7,6 +7,8 @@ use App\FeesAndDeduction;
 use App\Destination;
 use App\Terminal;
 use App\User;
+use App\Member;
+
 class HomeController extends Controller
 {
 //    /**   
@@ -46,5 +48,12 @@ class HomeController extends Controller
         $userDrivers = User::driver()->where('users.terminal_id','=', null)->get();
         $userCustomers = User::customer()->where('users.terminal_id','=', null)->get();
         return view('usermanagement.index', compact('userAdmins', 'userDrivers', 'userCustomers'));
+    }
+
+    public function archive() {
+        $drivers = Member::latest()->where('status', 'Inactive')->get();
+
+        return view('archive.index', compact('drivers'));
+        
     }
 }
