@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class checkLicenseNumber implements Rule
+class checkPlateNumber implements Rule
 {
     /**
      * Create a new rule instance.
@@ -35,6 +35,6 @@ class checkLicenseNumber implements Rule
      */
     public function message()
     {
-        return 'The entered Plate number must be in a valid format.';
+        return 'The entered plate number must be in a valid format.';
     }
 }

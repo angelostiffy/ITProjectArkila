@@ -13,7 +13,8 @@
 
 //Made by Randall
 
-//Route::get('/randall', 'VansController@index');
+//Route::get('/randall', 'VansController@index')
+Route::get('/driver-test', 'DriverViewTestController@index');
 Route::get('/randall', 'RandallController@index');
 
 Route::get('/randall', function(){
@@ -124,6 +125,8 @@ Route::post('home/user-management/customer/change-status', array('as' => 'change
 Route::resource('home/test', 'TestController');
 Route::resource('home/testing', 'TestingController');
 Route::resource('home/reservations', 'ReservationsController');
+Route::resource('home/archive', 'ArchiveController');
+
 Route::resource('home/rental', 'RentalsController');
 Route::resource('home/triptest', 'TripsController');
 
