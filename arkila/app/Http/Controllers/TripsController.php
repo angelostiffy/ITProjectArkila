@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Trip;
 use App\Van;
 use App\Destination;
+use App\Member;
 
 class TripsController extends Controller
 {
@@ -19,7 +20,8 @@ class TripsController extends Controller
         $trips = Trip::all();
         $vans = Van::all();
         $destinations = Destination::all();
-        return view('trips.queue', compact('trips','vans','destinations'));
+        $drivers = Member::allDrivers()->get();
+        return view('trips.queue', compact('trips','vans','destinations','drivers'));
     }
 
     /**

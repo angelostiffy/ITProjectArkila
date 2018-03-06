@@ -145,29 +145,48 @@ ol.example li.placeholder:before {
               <div class="box-body">
                     
                       <label for="">Van Unit</label>
-                      <select name="" id="" class="form-control select2">
-                          @foreach ($vans as $van)
-                            <option>{{ $van->plate_number }}</option>
-                          @endforeach
+                      <select @if($vans->first() == null) {{'disabled'}} @endif name="van" id="" class="form-control select2">
+                          @if($vans->first() != null)
+                              @foreach ($vans as $van)
+                                <option value="{{$van->plate_number}}">{{ $van->plate_number }}</option>
+                              @endforeach
+                          @else
+                              <option> No Available Data</option>
+                          @endif
                        </select>
 
                        <label for="">Destination</label>
-                      <select name="" id="" class="form-control">
-                          @foreach ($destinations as $destination)
-                            <option>{{ $destination->description }}</option>
-                          @endforeach
+                      <select @if($destinations->first() == null) {{'disabled'}} @endif name="destination" id="" class="form-control">
+                          @if($destinations->first() != null)
+                            @foreach ($destinations as $destination)
+                                <option value="{{$destination->destination_id}}">{{ $destination->description }}</option>
+                            @endforeach
+                          @else
+                              <option> No Available Data</option>
+                          @endif
+
                       </select>
 
 
                        <label for="">Driver</label>
-                      <select name="" id="" class="form-control">
+                      <select @if($drivers->first() == null) {{'disabled'}} @endif name="driver" id="" class="form-control">
+                          @if($drivers->first() != null)
+                              @foreach ($drivers as $driver)
+                                  <option value="{{$driver->full_name}}">{{ $driver->description }}</option>
+                              @endforeach
+                          @else
+                              <option> No Available Data</option>
+                          @endif
                       </select>
               </div>
+                  @if($vans->first() != null || $destinations->first() !=null || $drivers ->first() !=null)
               <div class="box-footer">
                   <div class="pull-right">
                       <button class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add to Queue</button>
                   </div>
               </div>
+                      @endif
+
               </form>
             </div>
         </div>
