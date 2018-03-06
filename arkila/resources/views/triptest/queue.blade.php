@@ -249,27 +249,41 @@ ol.example li.placeholder:before {
 @section('scripts')
   @parent
 
-  <script>
+{{--   <script>
     $('.select2').select2();
-  </script>
-
-  <script src="{{ URL::asset('/js/jquery-sortable.js') }}"></script>
+  </script> --}}
+{{-- 
+  <script src="{{ URL::asset('/js/jquery-sortable.js') }}"></script> --}}
     <!-- List sortable -->
     <script>
       var group = $("ol.serialization").sortable({
         group: 'serialization',
         delay: 500,
         onDrop: function ($item, container, _super) {
-          var data = group.sortable("serialize").get();
+          var queue = group.sortable("serialize").get();
 
-          var jsonString = JSON.stringify(data, null, ' ');
-
+          var jsonString = JSON.stringify(queue, null, ' ');
 
           $('#serialize_output2').text(jsonString);
           _super($item, container);
 
+          $.ajax({
+            method:'POST',
+            url: '{{route("trips.updateVanQueue")}}',
+            data: {
+                '_token': '{{csrf_token()}}',
+                'vanQueue': queue
+            },
+            success: function(vanInfo){
+               console.log(vanInfo);
+            }
+
+        });
+
         }
       });
+
+
     </script>
 
  {{--    <script>

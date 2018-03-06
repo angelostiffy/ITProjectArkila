@@ -88,19 +88,18 @@ class TripsController extends Controller
         //
     }
 
-    public function vanQueue(){
-        $operator = Van::find(request('plate_number'));
+    public function updateVanQueue(){
+        $vans = request('vanQueue');
+        if(is_array($vans)) {
+            foreach($vans[0] as $key => $vanInfo){
+                if($van = Van::find($vanInfo['plate'])){
 
-        if($operator != null) {
-            $driversArr = [];
-            $drivers = $operator->drivers()->doesntHave('van')->get();
-            foreach($drivers as $driver){
-                array_push($driversArr, [
-                    "id" => $driver->member_id,
-                    "name" => $driver->full_name
-                ]);
+                    $van->update([
+                        'queue_number' => $key
+                    ]);
+                }
             }
-            return response()->json($driversArr);
+            return "Updated";
         }
         else{
             return "Operator Not Found";

@@ -126,3 +126,7 @@ Route::resource('home/testing', 'TestingController');
 Route::resource('home/reservations', 'ReservationsController');
 Route::resource('home/rental', 'RentalsController');
 Route::resource('home/triptest', 'TripsController');
+
+/* Trips */
+Route::resource('home/trips', 'TripsController');
+Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
