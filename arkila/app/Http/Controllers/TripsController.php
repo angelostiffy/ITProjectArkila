@@ -19,7 +19,7 @@ class TripsController extends Controller
         $trips = Trip::all();
         $vans = Van::all();
         $destinations = Destination::all();
-        return view('triptest.queue', compact('trips','vans','destinations'));
+        return view('trips.queue', compact('trips','vans','destinations'));
     }
 
     /**
@@ -93,10 +93,7 @@ class TripsController extends Controller
         if(is_array($vans)) {
             foreach($vans[0] as $key => $vanInfo){
                 if($van = Van::find($vanInfo['plate'])){
-
-                    $van->update([
-                        'queue_number' => $key
-                    ]);
+                   $van->updateVanQueue($key);
                 }
             }
             return "Updated";

@@ -252,8 +252,8 @@ ol.example li.placeholder:before {
 {{--   <script>
     $('.select2').select2();
   </script> --}}
-{{-- 
-  <script src="{{ URL::asset('/js/jquery-sortable.js') }}"></script> --}}
+
+  <script src="{{ URL::asset('/js/jquery-sortable.js') }}"></script>
     <!-- List sortable -->
     <script>
       var group = $("ol.serialization").sortable({
