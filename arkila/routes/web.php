@@ -134,7 +134,7 @@ Route::resource('home/triptest', 'TripsController');
 
 
 /* Trips */
-Route::post('home/trips/store/{destination},{van},{driver}');
+Route::post('home/trips/{destination}/{van}/{driver}', 'TripsController@store')->name('trips.store');
 Route::resource('home/trips', 'TripsController',[
     'except' =>['store']
 ]);

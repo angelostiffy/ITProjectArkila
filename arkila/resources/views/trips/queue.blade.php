@@ -148,15 +148,15 @@
                           @endif
                       </select>
               </div>
-                  @if($vans->first() != null && $destinations->first() !=null && $drivers ->first() !=null)
-              <div class="box-footer">
-                  <div class="pull-right">
-                      <button id="addQueueButt" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add to Queue</button>
-                  </div>
-              </div>
-                      @endif
+                @if($vans->first() != null && $destinations->first() !=null && $drivers ->first() !=null)
 
-              </form>
+                      <div class="box-footer">
+                          <div class="pull-right">
+                              <button id="addQueueButt" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add to Queue</button>
+                          </div>
+                      </div>
+                @endif
+
             </div>
         </div>
 <div id='connected'>

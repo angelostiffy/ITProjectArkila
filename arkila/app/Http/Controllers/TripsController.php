@@ -42,17 +42,21 @@ class TripsController extends Controller
      */
     public function store(Destination $destination, Van $van, Member $driver )
     {
-        $queueNumber = Trip::where('destination_id',$destination)->count();
+        if(){
+            $queueNumber = Trip::where('destination_id',$destination->destination_id)->count();
 
-        Trip::create([
-            'destination_id' => $destination,
-            'plate_number' => $van,
-            'driver_id' => $driver,
-            'status' => 'On Queue',
-            'queue_number' => $queueNumber
-        ]);
+            Trip::create([
+                'destination_id' => $destination->destination_id,
+                'plate_number' => $van->plate_number,
+                'driver_id' => $driver->member_id,
+                'queue_number' => $queueNumber
+            ]);
+            return 'success';
+        }
+        else{
 
-        return 'success';
+        }
+
     }
 
     /**
