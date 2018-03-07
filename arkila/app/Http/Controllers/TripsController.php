@@ -40,9 +40,19 @@ class TripsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Destination $destination, Van $van, Member $driver )
     {
-        //
+        $queueNumber = Trip::where('destination_id',$destination)->count();
+
+        Trip::create([
+            'destination_id' => $destination,
+            'plate_number' => $van,
+            'driver_id' => $driver,
+            'status' => 'On Queue',
+            'queue_number' => $queueNumber
+        ]);
+
+        return 'success';
     }
 
     /**

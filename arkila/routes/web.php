@@ -136,5 +136,8 @@ Route::resource('home/triptest', 'TripsController');
 
 
 /* Trips */
-Route::resource('home/trips', 'TripsController');
+Route::post('home/trips/store/{destination},{van},{driver}');
+Route::resource('home/trips', 'TripsController',[
+    'except' =>['store']
+]);
 Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
