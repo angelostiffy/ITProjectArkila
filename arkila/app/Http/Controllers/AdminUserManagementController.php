@@ -60,11 +60,11 @@ class AdminUserManagementController extends Controller
     public function update(User $admin_user)
     {
         //dd($user->id);
-
-        $admin_user->password = Hash::make(str_random(8));
+        $defaultpassword = "admin!@bantrans;"
+        $admin_user->password = Hash::make($defaultpassword);
         $admin_user->save();
 
-        Mail::to('932a782243-eb8d48@inbox.mailtrap.io')->send(new ResetPasswordMail(request('_token'), $admin_user->email));
+        //Mail::to('932a782243-eb8d48@inbox.mailtrap.io')->send(new ResetPasswordMail(request('_token'), $admin_user->email));
 
         session()->flash('message', 'Reset Password Successful! A Reset Password Link Has Been Sent to the User.');
         return redirect('/home/user-management');

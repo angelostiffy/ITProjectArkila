@@ -102,10 +102,10 @@ Route::resource('home/user-management/admin', 'AdminUserManagementController', [
 ]);
 Route::post('home/user-management/admin/change-status', array('as' => 'changeAdminStatus','uses' => 'AdminUserManagementController@changeAdminStatus'));
 
-Route::get('password/reset/{token}/{email}', array('as' => 'getResetPass', 'uses' => 'Auth\ResetPasswordController@showResetForm'));
-Route::post('password/reset', array('as' => 'resetPass', 'uses' => 'Auth\ResetPasswordController@reset'));
+//Route::get('password/reset/{token}/{email}', array('as' => 'getResetPass', 'uses' => 'Auth\ResetPasswordController@showResetForm'));
+//Route::post('password/reset', array('as' => 'resetPass', 'uses' => 'Auth\ResetPasswordController@reset'));
 
-Route::patch('home/user-management/admin/{admin_user}/{token?}', 'AdminUserManagementController@update');
+//Route::patch('home/user-management/admin/{admin_user}/{token}', 'AdminUserManagementController@update');
 
 Route::resource('home/user-management/driver', 'UserDriversManagementController', [
 	'except' => ['index','store', 'create','edit','destroy'],
