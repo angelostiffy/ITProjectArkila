@@ -23,7 +23,7 @@ class CreateTripTable extends Migration
             $table->string('plate_number');
 
             $table->enum('remarks', ['OB', 'CC', 'ER'])->nullable();
-            $table->enum('status', ['Departed', 'On Queue', 'On Deck']);
+            $table->enum('status', ['Departed', 'On Queue'])->default('On Queue');
             $table->smallInteger('total_passengers')->nullable();
             $table->integer('total_booking_fee')->nullable();
             $table->date('date_departed')->nullable();
