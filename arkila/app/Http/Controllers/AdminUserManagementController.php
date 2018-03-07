@@ -61,6 +61,7 @@ class AdminUserManagementController extends Controller
     {
         //dd($user->id);
         $defaultpassword = "admin!@bantrans";
+
         $admin_user->password = Hash::make($defaultpassword);
         $admin_user->save();
 

@@ -20,6 +20,7 @@ class CreateVanTable extends Migration
 
             $table->string('model');       
             $table->string('seating_capacity', 2);
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
 
 
             $table->timestamps();

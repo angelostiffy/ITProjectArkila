@@ -21,6 +21,7 @@ class CustomerUserManagementController extends Controller
     public function update(User $customer_user)
     {
         $defaultpassword = "customer!@bantrans";
+
         $customer_user->password = Hash::make($defaultpassword);
         $customer_user->save();
 
