@@ -28,13 +28,13 @@
                     <td>
                         <div class="text-center">
                             <a href="{{ route('operators.showProfile', [$operator->member_id]) }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
-                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteWarning"><i class="fa fa-trash"></i> Delete</button>
+                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#{{ 'deleteWarning'.$operator->member_id }}"><i class="fa fa-trash"></i> Delete</button>
                         </div>
                         <!-- /.text -->
                     </td>
                 </tr>
                 <!-- Modal for Delete-->
-                <div class="modal fade" id="deleteWarning">
+                <div class="modal fade" id="{{ 'deleteWarning'.$operator->member_id }}">
                     <div class="modal-dialog">
                         <div class="col-md-offset-2 col-md-8">
                             <div class="modal-content">
@@ -48,7 +48,7 @@
                                         <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
                                     </div>
                                     <div class="col-md-10">
-                                        <p style="font-size: 110%;">Are you sure you want to delete "yung user"</p>
+                                        <p style="font-size: 110%;">Are you sure you want to delete "{{ $operator->full_name }}"</p>
                                     </div>
                                 </div>
                                 <div class="modal-footer">

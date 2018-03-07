@@ -63,7 +63,7 @@ class DriverRequest extends FormRequest
                     'contactPersonAddress' => 'required|max:50',
                     'contactPersonContactNumber' => 'required|digits:10',
                     'sss' => 'unique:member,SSS|required|max:10',
-                    'licenseNo' => ['required','max:20',new checkLicenseNumber],
+                    'licenseNo' => ['required','max:20'],
                     'licenseExpiryDate' => 'required|date|after:today',
                     'children.*' => ['required_with:childrenBDay.*','distinct', 'nullable',new checkName],
                     'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
@@ -101,7 +101,7 @@ class DriverRequest extends FormRequest
                     'contactPersonAddress' => 'required|max:50',
                     'contactPersonContactNumber' => 'required|digits:10',
                     'sss' => 'unique:member,SSS,'.$this->route('driver')->member_id.',member_id|required|max:10',
-                    'licenseNo' => ['required','max:20',new checkLicenseNumber],
+                    'licenseNo' => ['required','max:20'],
                     'licenseExpiryDate' => 'required|date|after:today',
                     'children.*' => ['required_with:childrenBDay.*','distinct', 'nullable',new checkName],
                     'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'

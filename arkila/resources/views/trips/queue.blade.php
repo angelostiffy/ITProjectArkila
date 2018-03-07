@@ -145,29 +145,48 @@ ol.example li.placeholder:before {
               <div class="box-body">
                     
                       <label for="">Van Unit</label>
-                      <select name="" id="" class="form-control select2">
-                          @foreach ($vans as $van)
-                            <option>{{ $van->plate_number }}</option>
-                          @endforeach
+                      <select @if($vans->first() == null) {{'disabled'}} @endif name="van" id="" class="form-control select2">
+                          @if($vans->first() != null)
+                              @foreach ($vans as $van)
+                                <option value="{{$van->plate_number}}">{{ $van->plate_number }}</option>
+                              @endforeach
+                          @else
+                              <option> No Available Data</option>
+                          @endif
                        </select>
 
                        <label for="">Destination</label>
-                      <select name="" id="" class="form-control">
-                          @foreach ($destinations as $destination)
-                            <option>{{ $destination->description }}</option>
-                          @endforeach
+                      <select @if($destinations->first() == null) {{'disabled'}} @endif name="destination" id="" class="form-control">
+                          @if($destinations->first() != null)
+                            @foreach ($destinations as $destination)
+                                <option value="{{$destination->destination_id}}">{{ $destination->description }}</option>
+                            @endforeach
+                          @else
+                              <option> No Available Data</option>
+                          @endif
+
                       </select>
 
 
                        <label for="">Driver</label>
-                      <select name="" id="" class="form-control">
+                      <select @if($drivers->first() == null) {{'disabled'}} @endif name="driver" id="" class="form-control">
+                          @if($drivers->first() != null)
+                              @foreach ($drivers as $driver)
+                                  <option value="{{$driver->full_name}}">{{ $driver->description }}</option>
+                              @endforeach
+                          @else
+                              <option> No Available Data</option>
+                          @endif
                       </select>
               </div>
+                  @if($vans->first() != null || $destinations->first() !=null || $drivers ->first() !=null)
               <div class="box-footer">
                   <div class="pull-right">
                       <button class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add to Queue</button>
                   </div>
               </div>
+                      @endif
+
               </form>
             </div>
         </div>
@@ -179,13 +198,13 @@ ol.example li.placeholder:before {
               </h3 class="box-title">Van Queue</h3>
             </div>
             <div class="box-body">
-                <pre id="serialize_output"></pre>
+                
 
                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
 
-                <ol id ="queue" class="rectangle-list limited_drop_targets">
+                <ol id ="queue" class="rectangle-list serialization">
                   @foreach ($trips as $trip)
-                  <li>
+                  <li data-plate="{{ $trip->van->plate_number }}" data-remark="{{ $trip->remarks }}">
                     <a href="">{{ $trip->van->plate_number }}
                     <span class="badge badge-warning badge-pill">
                     {{ $trip->remarks }}
@@ -208,6 +227,10 @@ ol.example li.placeholder:before {
             </div>
           </div>
         </div>
+
+        <div class="col-md-4">
+          <pre id="serialize_output2"></pre>
+        </div>
                
          <div class="col-md-4">
           <!-- Special Unit -->
@@ -218,7 +241,7 @@ ol.example li.placeholder:before {
             <div class="box-body">
                 <pre id="serialize_output"></pre>
 
-                <ol id = "special" class="rectangle-list limited_drop_targets">
+                <ol id = "special" class="rectangle-list ">
                   <li>
                     <a href="">AAA
                     <span class="badge badge-warning badge-pill">
@@ -244,31 +267,42 @@ ol.example li.placeholder:before {
 
 @section('scripts')
   @parent
-  <script>
+
+{{--   <script>
     $('.select2').select2();
-  </script>
+  </script> --}}
+
   <script src="{{ URL::asset('/js/jquery-sortable.js') }}"></script>
     <!-- List sortable -->
     <script>
-      var group = $("ol.limited_drop_targets").sortable({
-        group: 'limited_drop_targets+',
-        isValidTarget: function  ($item, container) {
-          if($item.is(".highlight"))
-            return true;
-          else
-            return $item.parent("ol")[0] == container.el[0];
-        },
+      var group = $("ol.serialization").sortable({
+        group: 'serialization',
+        delay: 500,
         onDrop: function ($item, container, _super) {
-          $('#serialize_output').text(
-            group.sortable("serialize").get().join("\n"));
+          var queue = group.sortable("serialize").get();
+
+          var jsonString = JSON.stringify(queue, null, ' ');
+
+          $('#serialize_output2').text(jsonString);
           _super($item, container);
-                   },
-        serialize: function (parent, children, isContainer) {
-          return isContainer ? children.join() : parent.text();
-        },
-        tolerance: 6,
-        distance: 10,
+
+          $.ajax({
+            method:'POST',
+            url: '{{route("trips.updateVanQueue")}}',
+            data: {
+                '_token': '{{csrf_token()}}',
+                'vanQueue': queue
+            },
+            success: function(vanInfo){
+               console.log(vanInfo);
+            }
+
+        });
+
+        }
       });
+
+
     </script>
 
  {{--    <script>
