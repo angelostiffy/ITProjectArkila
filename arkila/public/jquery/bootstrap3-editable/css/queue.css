@@ -1,0 +1,9 @@
+.editable-queue {
+    display: block;
+    margin-bottom: 5px;  
+}
+
+.editable-queue span {
+    width: 70px;  
+    display: inline-block;
+}

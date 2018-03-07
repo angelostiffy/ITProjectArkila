@@ -162,82 +162,52 @@
             </div>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-4">
           <!-- Van Queue Box -->
           <div class="box box-primary">
             <div class="box-header">
-              </h3 class="box-title">Van Queue</h3>
+              <h3 class="box-title">San Jose</h3>
             </div>
             <div class="box-body">
-                
-
-                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
 
                 <ol id ="queue" class="rectangle-list serialization">
                   @foreach ($trips as $trip)
-                    <li data-plate="{{ $trip->van->plate_number }}" data-remark="{{ $trip->remarks }}">
+                    <li data-plate="{{ $trip->van->plate_number }}" data-remark="{{ $trip->remarks }}" data-dest="Cabanatuan">
                       <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                           {{ $trip->van->plate_number }}
                         </div>
-                      <div class="col-md-8">
+                      <div class="col-md-7">
                         <div class="pull-right">
+                          
                           <a href="" id="bgu - 50" data-type="select" data-title="Update Remark" class="remark-editable btn btn-outline-secondary btn-sm editable" value="OB" data-original-title="" title="">{{ $trip->remarks }}</a>
                           <a href="" class="" data-toggle="modal" data-target="#modal-default"><i class="fa fa-remove"></i></a>
                         </div>
                       </div>
                     </li>
                   @endforeach
-                  <!-- <li><a href="">BBB</a></li>
-                  <li><a href="">CCC</a></li>
-                  <li><a href="">DDD</a></li>
-                  <li><a href="">EEE</a></li>
-                  <li><a href="">FFF</a></li>
-                  <li><a href="">GGG</a></li>
-                  <li><a href="">HHH
-                  <span class="badge badge-error badge-pill pull-right">ER</span>
-                  </a></li>
-                  <li><a href="">III</a></li>
-                  <li><a href="">JJJ</a></li> -->
                 </ol>
             </div>
           </div>
-        </div>
-
-        <div class="col-md-4">
-          <pre id="serialize_output2"></pre>
         </div>
                
          <div class="col-md-4">
           <!-- Special Unit -->
           <div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title">Special Unit</h3>
+              <h3 class="box-title">Cabanatuan</h3>
             </div>
             <div class="box-body">
-                <pre id="serialize_output"></pre>
 
-                <ol id = "special" class="rectangle-list serialization">
-                  <li>
-                    <a href="">AAA
-                    <span class="badge badge-warning badge-pill">
-                    CC
-                    </span>
-                    </a> 
-                    <button type="button" class="close pull-right" >
-                    <span aria-hidden="true">×</span></button>
-                  </li>
-                  <li><a href="">BBB</a></li>
-                  <li><a href="">CCC</a></li>
-                  <li><a href="">DDD</a></li>
-                  <li><a href="">EEE</a></li>
-                  <li><a href="">FFF</a></li>
+                <ol id = "S" class="rectangle-list serialization">
+                  
                   
                 </ol>
               </div>
              </div>
         </div>
       </div>
+        <pre id="serialize_output2"></pre>
 
       <div class="modal fade" id="modal-default">
           <div class="modal-dialog modal-sm">
@@ -302,7 +272,7 @@
 
   <script>
     $('.remark-editable').editable({
-       value: $('#').attr('value'),
+       value: 'NULL',
         source: [
               {value: 'NULL', text: 'Give remark'},
               {value: 'CC', text: 'CC'},
