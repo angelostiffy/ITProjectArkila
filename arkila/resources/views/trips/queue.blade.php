@@ -4,6 +4,8 @@
 
 @section('links')
   @parent
+  <link rel="stylesheet" href="{{ URL::asset('/jquery/bootstrap3-editable/css/bootstrap-editable.css') }}">
+
     <style>
     ol {
     counter-reset: li; /* Initiate a counter */
@@ -160,7 +162,7 @@
               </form>
             </div>
         </div>
-<div id='connected'>
+
         <div class="col-md-5">
           <!-- Van Queue Box -->
           <div class="box box-primary">
@@ -174,12 +176,18 @@
 
                 <ol id ="queue" class="rectangle-list serialization">
                   @foreach ($trips as $trip)
-                  <li data-plate="{{ $trip->van->plate_number }}" data-remark="{{ $trip->remarks }}">
-                    {{ $trip->van->plate_number }}
-                    <a class="badge badge-warning badge-pill pull-right"> 
-                    {{ $trip->remarks }}
-                    </a>
-                  </li>
+                    <li data-plate="{{ $trip->van->plate_number }}" data-remark="{{ $trip->remarks }}">
+                      <div class="row">
+                        <div class="col-md-4">
+                          {{ $trip->van->plate_number }}
+                        </div>
+                      <div class="col-md-8">
+                        <div class="pull-right">
+                          <a href="" id="bgu - 50" data-type="select" data-title="Update Remark" class="remark-editable btn btn-outline-secondary btn-sm editable" value="OB" data-original-title="" title="">{{ $trip->remarks }}</a>
+                          <a href="" class="" data-toggle="modal" data-target="#modal-default"><i class="fa fa-remove"></i></a>
+                        </div>
+                      </div>
+                    </li>
                   @endforeach
                   <!-- <li><a href="">BBB</a></li>
                   <li><a href="">CCC</a></li>
@@ -231,7 +239,28 @@
              </div>
         </div>
       </div>
+
+      <div class="modal fade" id="modal-default">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-info"></i> Alert</h4>
+              </div>
+              <div class="modal-body">
+                <p>Will be deleted</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
         </div>
+        <!-- /.modal -->
 @endsection
 
 @section('scripts')
@@ -240,8 +269,8 @@
 {{--   <script>
     $('.select2').select2();
   </script> --}}
-
-  <script src="{{ URL::asset('/js/jquery-sortable.js') }}"></script>
+  <script src="{{ URL::asset('/jquery/bootstrap3-editable/js/bootstrap-editable.min.js') }}"></script>
+  <script src="{{ URL::asset('/jquery/jquery-sortable.js') }}"></script>
     <!-- List sortable -->
     <script>
       var group = $("ol.serialization").sortable({
@@ -270,13 +299,20 @@
 
         }
       });
+</script>
 
-      $(function  () {
-  $("ol.example").sortable();
-});
+  <script>
+    $('.remark-editable').editable({
+       value: $('#{{$trip->van->plate_number}}').attr('value'),    
+        source: [
+              {value: 'NULL', text: 'Give remark'},
+              {value: 'CC', text: 'CC'},
+              {value: 'ER', text: 'ER'},
+              {value: 'OB', text: 'OB'}
+           ]
 
-
-    </script>
+    });
+  </script>
 
  {{--    <script>
           function myFunction() {
