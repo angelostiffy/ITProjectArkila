@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
   		$this->call(DestinationTableSeeder::class);
         $this->call(VanTableSeeder::class);
         $this->call(TripTableSeeder::class);
+        $this->call(DriverTableSeeder::class);
     }
 }

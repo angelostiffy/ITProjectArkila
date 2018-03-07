@@ -14,7 +14,7 @@
 //Made by Randall
 
 //Route::get('/randall', 'VansController@index')
-Route::get('/driver-test', 'DriverViewTestController@index');
+//Route::resource('/driver-test', 'DriverViewTestController');
 Route::get('/randall', 'RandallController@index');
 
 Route::get('/randall', function(){
@@ -136,3 +136,13 @@ Route::resource('home/triptest', 'TripsController');
 /* Trips */
 Route::resource('home/trips', 'TripsController');
 Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
+
+/*************************************Driver Module****************************/
+
+/********************Dashboard************************/
+Route::get('home/driver', 'HomeController@driverDashboard');
+
+
+/******************************************************/
+
+/******************************************************************************/

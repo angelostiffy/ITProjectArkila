@@ -95,7 +95,7 @@ class TripsController extends Controller
         if(is_array($vans)) {
             foreach($vans[0] as $key => $vanInfo){
                 if($van = Van::find($vanInfo['plate'])){
-                   $van->updateVanQueue($key);
+                   $van->updateQueue($key);
                 }
             }
             return "Updated";

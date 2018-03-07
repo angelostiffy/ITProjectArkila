@@ -15,7 +15,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Van::class, function (Faker $faker) {
     return [
-        'plate_number' => $faker->bothify('??? - ###'),
+        'plate_number' => $faker->unique()->bothify('??? - ####'),
         'model' => $faker->word,
         'seating_capacity'=> $faker->numberBetween($min = 13, $max = 15),
     ];
