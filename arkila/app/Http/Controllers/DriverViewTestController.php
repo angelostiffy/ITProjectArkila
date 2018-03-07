@@ -13,7 +13,7 @@ class DriverViewTestController extends Controller
      */
     public function index()
     {
-        return view('drivermodule.index');
+        return view('');
     }
 
     /**

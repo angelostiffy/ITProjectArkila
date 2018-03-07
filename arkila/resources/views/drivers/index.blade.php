@@ -16,7 +16,7 @@
             </thead>
             <tbody>
 
-                @foreach($drivers as $driver)
+                @foreach($drivers->where('status','Active') as $driver)
                 <tr>
                     <th>{{$driver->member_id}}</th>
                     <td>{{$driver->operator_id}}</td>

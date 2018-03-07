@@ -60,7 +60,8 @@ class AdminUserManagementController extends Controller
     public function update(User $admin_user)
     {
         //dd($user->id);
-        $defaultpassword = "admin!@bantrans;"
+        $defaultpassword = "admin!@bantrans";
+
         $admin_user->password = Hash::make($defaultpassword);
         $admin_user->save();
 

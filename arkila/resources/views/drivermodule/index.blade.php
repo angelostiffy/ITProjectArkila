@@ -1,6 +1,6 @@
-@extends('layouts.driver') 
+@extends('layouts.driver')
 @section('title', 'Driver Home')
-   
+
 @section('content-title', 'Driver Home')
 @section('content')
                 <div class="col-md-6 ">
@@ -10,28 +10,44 @@
                         <div id="home-slider" class="carousel slide box-trip" data-ride="carousel">
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
-                                <div class="item active">
+                                  <div class="item  active">
+                                      <div class="box">
+                                          <div class="box-header with-border text-center">
+                                              <h4>{{$announcements->first()->title}}</h4>
+                                          </div>
+                                            <div class="box-body text-center">
+                                              <div style="width:70%; margin-left:15%;">
+                                                  <p>{{$announcements->first()->description}}</p>
+                                              </div>
+                                          </div>
 
-                                    <div class="box">
-                                        <div class="box-header with-border text-center">
-                                            <h4>Announcement Title</h4>
-                                        </div>
-                                        <div class="box-body text-center">
-                                            <div style="width:70%; margin-left:15%;">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis accusamus cumque necessitatibus placeat alias libero ullam modi non dolorem, nulla, nobis sint iure et rerum debitis doloremque voluptatum sunt maxime.</p>
-                                                
+                                          <div class="box-footer text-center">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#seeMoreAnnouncements">See more</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  @foreach($announcements as $announcement)
+                                  @if($announcement == $announcements->first())
+                                    @continue
+                                  @else
+                                  <div class="item">
+                                      <div class="box">
+                                          <div class="box-header with-border text-center">
+                                              <h4>{{$announcement->title}}</h4>
+                                          </div>
+                                            <div class="box-body text-center">
+                                              <div style="width:70%; margin-left:15%;">
+                                                  <p>{{$announcement->description}}</p>
+                                              </div>
+                                          </div>
 
-                                            </div>
-                                        </div>
-                                        <div class="box-footer text-center">
-                                            
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#seeMoreAnnouncements">See more</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
+                                          <div class="box-footer text-center">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#seeMoreAnnouncements">See more</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  @endif
+                                  @endforeach
                             </div>
 
                             <!-- Controls -->
@@ -64,57 +80,18 @@
                                         <th>Remark</th>
                                     </tr>
                                 </thead>
-
+                                @foreach($trips as $trip)
                                 <tr>
-                                    <td><i class="fa fa-star text-yellow"></i> 1</td>
-                                    <td>MMM-123</td>
-                                    <td></td>
+                                    <td>
+                                      @if($trip->queueId == 1 || $trip->queueId == 2 )
+                                        <i class="fa fa-star text-yellow"></i>
+                                      @endif
+                                        {{$trip->queueId}}
+                                    </td>
+                                    <td>{{$trip->plate_number}}</td>
+                                    <td>{{$trip->remarks}}</td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>NNN-123</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>OOO-123</td>
-                                    <td>ER</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>PPP-123</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>QQQ-123</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>RRR-123</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>SSS-123</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>TTT-123</td>
-                                    <td>OB</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>UUU-123</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>VVV-123</td>
-                                    <td>OB</td>
-                                </tr>
+                                @endforeach
                             </table>
 
                             <!-- /.control-sidebar-menu -->
@@ -123,7 +100,7 @@
                     </div>
                 </div>
 
-    
+
 
         <div class="modal fade" id="seeMoreAnnouncements">
             <div class="modal-dialog" style="margin-top:150px;">

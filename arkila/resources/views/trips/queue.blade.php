@@ -113,11 +113,10 @@
               <div class="box-header with-border">
                   <h3 class="box-title">Add Driver to Queue</h3>
               </div>
-              <form action="">
               <div class="box-body">
                     
                       <label for="">Van Unit</label>
-                      <select @if($vans->first() == null) {{'disabled'}} @endif name="van" id="" class="form-control select2">
+                      <select @if($vans->first() == null) {{'disabled'}} @endif name="van" id="van" class="form-control select2">
                           @if($vans->first() != null)
                               @foreach ($vans as $van)
                                 <option value="{{$van->plate_number}}">{{ $van->plate_number }}</option>
@@ -128,7 +127,7 @@
                        </select>
 
                        <label for="">Destination</label>
-                      <select @if($destinations->first() == null) {{'disabled'}} @endif name="destination" id="" class="form-control">
+                      <select @if($destinations->first() == null) {{'disabled'}} @endif name="destination" id="destination" class="form-control">
                           @if($destinations->first() != null)
                             @foreach ($destinations as $destination)
                                 <option value="{{$destination->destination_id}}">{{ $destination->description }}</option>
@@ -141,20 +140,20 @@
 
 
                        <label for="">Driver</label>
-                      <select @if($drivers->first() == null) {{'disabled'}} @endif name="driver" id="" class="form-control">
+                      <select @if($drivers->first() == null) {{'disabled'}} @endif name="driver" id="driver" class="form-control">
                           @if($drivers->first() != null)
                               @foreach ($drivers as $driver)
-                                  <option value="{{$driver->full_name}}">{{ $driver->full_name }}</option>
+                                  <option value="{{$driver->member_id}}">{{ $driver->full_name }}</option>
                               @endforeach
                           @else
                               <option> No Available Data</option>
                           @endif
                       </select>
               </div>
-                  @if($vans->first() != null || $destinations->first() !=null || $drivers ->first() !=null)
+                  @if($vans->first() != null && $destinations->first() !=null && $drivers ->first() !=null)
               <div class="box-footer">
                   <div class="pull-right">
-                      <button class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add to Queue</button>
+                      <button id="addQueueButt" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add to Queue</button>
                   </div>
               </div>
                       @endif
@@ -313,6 +312,30 @@
 
     });
   </script>
+
+<script>
+      $('#addQueueButt').on('click', function() {
+          var destination = $('#destination').val();
+          var van = $('#van').val();
+          var driver = $('#driver').val();
+
+          if( destination != "" && van != "" && driver != ""){
+              $.ajax({
+                  method:'POST',
+                  url: '/home/trips/'+destination+'/'+van+'/'+driver,
+                  data: {
+                      '_token': '{{csrf_token()}}'
+                  },
+                  success: function(vanInfo){
+                      console.log(vanInfo);
+                  }
+
+              });
+
+          }
+      });
+    </script>
+>>>>>>> cd44f90f91e4f0807dd140057909ba0e2fdb6a10
 
  {{--    <script>
           function myFunction() {
