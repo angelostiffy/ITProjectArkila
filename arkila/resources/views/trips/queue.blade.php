@@ -110,11 +110,11 @@
       <div class="row">
         <div class="col-md-3">
             <div class="box box-solid">
+
               <div class="box-header with-border">
                   <h3 class="box-title">Add Driver to Queue</h3>
               </div>
               <div class="box-body">
-                    
                       <label for="">Van Unit</label>
                       <select @if($vans->first() == null) {{'disabled'}} @endif name="van" id="van" class="form-control select2">
                           @if($vans->first() != null)
@@ -180,7 +180,7 @@
                       <div class="col-md-7">
                         <div class="pull-right">
                           
-                          <a href="" id="bgu - 50" data-type="select" data-title="Update Remark" class="remark-editable btn btn-outline-secondary btn-sm editable" value="OB" data-original-title="" title="">{{ $trip->remarks }}</a>
+                          <a href="" name="{{$trip->van->plate_number}}" data-type="select" data-title="Update Remark" class="remark-editable btn btn-outline-secondary btn-sm editable" value="OB" data-original-title="" title="">{{ $trip->remarks }}</a>
                           <a href="" class="" data-toggle="modal" data-target="#modal-default"><i class="fa fa-remove"></i></a>
                         </div>
                       </div>
@@ -268,11 +268,10 @@
 
         }
       });
-</script>
 
-  <script>
+      @foreach($vans as $van)
     $('.remark-editable').editable({
-       value: 'NULL',
+       value: "@if(is_null($van->remarks)){{"NULL"}}@else{{$van->remarks}}@endif",
         source: [
               {value: 'NULL', text: 'Give remark'},
               {value: 'CC', text: 'CC'},
@@ -281,30 +280,29 @@
            ]
 
     });
-  </script>
+    @endforeach
 
-<script>
-      {{--$('#addQueueButt').on('click', function() {--}}
-          {{--var destination = $('#destination').val();--}}
-          {{--var van = $('#van').val();--}}
-          {{--var driver = $('#driver').val();--}}
+      $('#addQueueButt').on('click', function() {
+          var destination = $('#destination').val();
+          var van = $('#van').val();
+          var driver = $('#driver').val();
 
-          {{--if( destination != "" && van != "" && driver != ""){--}}
-              {{--$.ajax({--}}
-                  {{--method:'POST',--}}
-                  {{--url: '/home/trips/'+destination+'/'+van+'/'+driver,--}}
-                  {{--data: {--}}
-                      {{--'_token': '{{csrf_token()}}'--}}
-                  {{--},--}}
-                  {{--success: function(vanInfo){--}}
-                      {{--alert(vanInfo);--}}
-                  {{--}--}}
+          if( destination != "" && van != "" && driver != ""){
+              $.ajax({
+                  method:'POST',
+                  url: '/home/trips/'+destination+'/'+van+'/'+driver,
+                  data: {
+                      '_token': '{{csrf_token()}}'
+                  },
+                  success: function(vanInfo){
+                      location.reload();
+                  }
 
-              {{--});--}}
+              });
 
-          {{--}--}}
-      {{--});--}}
-    </script>
+          }
+      });
+
 
  {{--    <script>
           function myFunction() {
@@ -327,5 +325,5 @@
             }
     </script>
  --}}
-
+</script>
 @endsection

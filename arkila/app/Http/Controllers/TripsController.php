@@ -42,7 +42,9 @@ class TripsController extends Controller
      */
     public function store(Destination $destination, Van $van, Member $driver )
     {
-        if(!(Trip::where('destination_id',$destination->destination_id)->whereNotNull('queue_number'))){
+        if( is_null(Trip::where('destination_id',$destination->destination_id)
+            ->where('plate_number',$van->plate_number)
+            ->whereNotNull('queue_number')->first()) ){
             $queueNumber = Trip::where('destination_id',$destination->destination_id)->count();
 
             Trip::create([
@@ -52,11 +54,11 @@ class TripsController extends Controller
                 'queue_number' => $queueNumber
             ]);
             session()->flash('success', 'Van Succesfully Added to the queue');
-            return back();
+            return 'success';
         }
         else{
-            session()->flash('error', 'Van Succesfully Added to the queue');
-            return back();
+            session()->flash('error', 'Van is already on the Queue');
+            return 'Van is already on the Queue';
         }
 
     }
