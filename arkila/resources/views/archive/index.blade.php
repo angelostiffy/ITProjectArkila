@@ -19,17 +19,19 @@
                                         <th>Name</th>
                                         <th>Age</th>
                                         <th>Contact Number</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        
+                                @foreach ($drivers as $driver)
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{ $driver->full_name }}</td>
+                                        <td>{{ $driver->age }}</td>
+                                        <td>{{ $driver->contact_number }}</td>
+                                        <td>{{ $driver->status }}</td>
                                         <td>
-
+                                
                                             
                                                 <div class="text-center">
                                                     
@@ -40,7 +42,7 @@
                                                 
                                         </td>
                                     </tr>
-                                    
+                                    @endforeach
                                     <!--DELETE MODAL MIGUEL-->
                                     <div class="modal fade" id="deleteDriver">
                                         <div class="modal-dialog">

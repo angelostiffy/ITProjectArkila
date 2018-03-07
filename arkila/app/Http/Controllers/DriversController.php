@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Member;
 use App\Van;
 use App\Http\Requests\DriverRequest;
+use Illuminate\Http\Request;
 
 
 class DriversController extends Controller
@@ -228,35 +229,35 @@ class DriversController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(DriverRequest $request, Member $driver)
-    {
-        $driver->update([
-            'last_name'=> $request->lastName,
-            'first_name' => $request->firstName,
-            'operator_id' => $request->operator,
-            'middle_name' => $request->middleName,
-            'contact_number' => $request->contactNumber,
-            'role' => 'Driver',
-            'address' => $request->address,
-            'provincial_address' => $request->provincialAddress,
-            'birth_date' => $request->birthDate,
-            'birth_place' => $request->birthPlace,
-            'age' => $request->birthDate,
-            'gender' => $request->gender,
-            'citizenship' => $request->citizenship,
-            'civil_status' => $request->civilStatus,
-            'spouse' => $request->nameOfSpouse,
-            'spouse_birthdate' => $request->spouseBirthDate,
-            'father_name' => $request->fathersName,
-            'father_occupation' => $request->fatherOccupation,
-            'mother_name' => $request->mothersName,
-            'mother_occupation' => $request->motherOccupation,
-            'person_in_case_of_emergency' => $request->contactPerson,
-            'emergency_address' => $request->contactPersonAddress,
-            'emergency_contactno' => $request->contactPersonContactNumber,
-            'SSS' => $request->sss,
-            'license_number' => $request->licenseNo,
-            'expiry_date' => $request->licenseExpiryDate,
-        ]);
+    {   
+            $driver->update([
+                'last_name'=> $request->lastName,
+                'first_name' => $request->firstName,
+                'operator_id' => $request->operator,
+                'middle_name' => $request->middleName,
+                'contact_number' => $request->contactNumber,
+                'role' => 'Driver',
+                'address' => $request->address,
+                'provincial_address' => $request->provincialAddress,
+                'birth_date' => $request->birthDate,
+                'birth_place' => $request->birthPlace,
+                'age' => $request->birthDate,
+                'gender' => $request->gender,
+                'citizenship' => $request->citizenship,
+                'civil_status' => $request->civilStatus,
+                'spouse' => $request->nameOfSpouse,
+                'spouse_birthdate' => $request->spouseBirthDate,
+                'father_name' => $request->fathersName,
+                'father_occupation' => $request->fatherOccupation,
+                'mother_name' => $request->mothersName,
+                'mother_occupation' => $request->motherOccupation,
+                'person_in_case_of_emergency' => $request->contactPerson,
+                'emergency_address' => $request->contactPersonAddress,
+                'emergency_contactno' => $request->contactPersonContactNumber,
+                'SSS' => $request->sss,
+                'license_number' => $request->licenseNo,
+                'expiry_date' => $request->licenseExpiryDate,
+            ]);
 
         if($this->arrayChecker($request->children) && $this->arrayChecker($request->childrenBDay))
         {
@@ -290,9 +291,6 @@ class DriversController extends Controller
      */
     public function destroy(Member $driver)
     {
-        $driver->van()->detach();
-        $driver->delete();
-        return back();
 
     }
 
@@ -313,4 +311,16 @@ class DriversController extends Controller
 
         return $result;
     }
+
+    public function archiveDelete(Request $request, Member $driver)
+    {
+        if ($request->driverArc == 'Arch') {
+            $driver->update([
+                'status' => 'Inactive',
+            ]);
+            return redirect(route('drivers.index'));
+
+        }
+    }
+
 }

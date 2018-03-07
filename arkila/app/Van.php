@@ -36,7 +36,7 @@ class Van extends Model
     	return $this->hasMany(Trip::Class, 'plate_number');
     }
 
-    public function updateVanQueue($queue_number){
+    public function updateQueue($queue_number){
          $this->trips()->where('queue_number','!=',null)->first()->update(compact('queue_number'));
     }
 

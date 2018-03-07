@@ -8,7 +8,12 @@ use App\FeesAndDeduction;
 use App\Destination;
 use App\Terminal;
 use App\User;
+
 use App\Trip;
+
+use App\Member;
+
+
 class HomeController extends Controller
 {
 //    /**
@@ -50,6 +55,7 @@ class HomeController extends Controller
         return view('usermanagement.index', compact('userAdmins', 'userDrivers', 'userCustomers'));
     }
 
+
     public function driverDashboard()
     {
         $announcements = Announcement::where('viewer', '=', 'Public')->orWhere('viewer', '=', 'Driver Only')->get();
@@ -62,5 +68,12 @@ class HomeController extends Controller
                       ->orderBy('trip.created_at')
                       ->select('trip.trip_id as trip_id', 'trip.queue_number as queueId', 'trip.plate_number as plate_number', 'trip.remarks as remarks')->get();
         return view('drivermodule.index', compact('announcements', 'trips'));
+      }
+    public function archive() {
+        $drivers = Member::latest()->where('status', 'Inactive')->get();
+
+        return view('archive.index', compact('drivers'));
+        
+
     }
 }
