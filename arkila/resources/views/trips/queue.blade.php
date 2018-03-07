@@ -5,130 +5,100 @@
 @section('links')
   @parent
     <style>
-      ol {
-      counter-reset: li; /* Initiate a counter */
-      list-style: none; /* Remove default numbering */
-      *list-style: decimal; /* Keep using default numbering for IE6/7 */
-      font: 15px 'trebuchet MS', 'lucida sans';
-      padding: 0;
-      margin-bottom: 4em;
-      text-shadow: 0 1px 0 rgba(255,255,255,.5);
-      }
+    ol {
+    counter-reset: li; /* Initiate a counter */
+    list-style: none; /* Remove default numbering */
+    *list-style: decimal; /* Keep using default numbering for IE6/7 */
+    font: 15px 'trebuchet MS', 'lucida sans';
+    padding: 0;
+    margin-bottom: 4em;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    }
 
-      ol ol {
-          margin: 0 0 0 2em; /* Add some left margin for inner lists */
-      }
+    ol ol {
+        margin: 0 0 0 2em; /* Add some left margin for inner lists */
+    }
 
 
-      .rectangle-list a{
-      position: relative;
-      display: block;
-      padding: .4em .4em .4em .8em;
-      *padding: .4em;
-      margin: .5em 0 .5em 2.5em;
-      background: #ddd;
-      color: #444;
-      text-decoration: none;
-      transition: all .3s ease-out;   
-  }
+    .rectangle-list li{
 
-  .rectangle-list a:hover{
-      background: #eee;
-  }   
-
-  .rectangle-list a:before{
-      content: counter(li);
-      counter-increment: li;
-      position: absolute; 
-      left: -2.5em;
-      top: 50%;
-      margin-top: -1em;
-      background: #fa8072;
-      height: 2em;
-      width: 2em;
-      line-height: 2em;
-      text-align: center;
-      font-weight: bold;
-  }
-
-  .rectangle-list li:first-child a:before{
-      background: #02ea6e;
-  }
-
-  
-
-  .rectangle-list a:after{
-      position: absolute; 
-      content: '';
-      border: .5em solid transparent;
-      left: -1em;
-      top: 50%;
-      margin-top: -.5em;
-      transition: all .3s ease-out;               
-  }
-
-  .rectangle-list a:hover:after{
-      left: -.5em;
-      border-left-color: #fa8072;             
-  }
-
-  .rectangle-list li:first-child a:hover:after{
-      border-left-color: #02ea6e;
-  }   
-
-  /* SEARCH LIST; */
-
-  #myInput {
-      background-image: url('/css/searchicon.png'); /* Add a search icon to input */
-      background-position: 10px 12px; /* Position the search icon */
-      background-repeat: no-repeat; /* Do not repeat the icon image */
-      width: 100%; /* Full-width */
-      font-size: 16px; /* Increase font-size */
-      padding: 12px 20px 12px 40px; /* Add some padding */
-      border: 1px solid #ddd; /* Add a grey border */
-      margin-bottom: 12px; /* Add some space below the input */
-  }
-
-  #myUL {
-      /* Remove default list styling */
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-  }
-
-  #myUL li a {
-      border: 1px solid #ddd; /* Add a border to all links */
-      margin-top: -1px; /* Prevent double borders */
-      background-color: #f6f6f6; /* Grey background color */
-      padding: 12px; /* Add some padding */
-      text-decoration: none; /* Remove default text underline */
-      font-size: 18px; /* Increase the font-size */
-      color: black; /* Add a black text color */
-      display: block; /* Make it into a block element to fill the whole list */
-  }
-
-  #myUL li a:hover:not(.header) {
-      background-color: #eee; /* Add a hover effect to all links, except for headers */
-  }
-
-  body.dragging, body.dragging * {
-  cursor: move !important;
+    counter-increment: step-counter;
+    position: relative;
+    display: block;
+    padding: .4em .4em .4em .8em;
+    *padding: .4em;
+    margin: .5em 0 .5em 2.5em;
+    background: #ddd;
+    color: #444;
+    text-decoration: none;   
 }
 
-.dragged {
-  position: absolute;
-  opacity: 0.5;
-  z-index: 2000;
+.rectangle-list li:hover{
+    background: #eee;
+}   
+
+.rectangle-list li:before{
+    content: counter(step-counter);
+    position: absolute; 
+    left: -2.5em;
+    top: 50%;
+    margin-top: -1em;
+    background: #fa8072;
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    text-align: center;
+    font-weight: bold;
 }
 
-ol.example li.placeholder {
-  position: relative;
-  /** More li styles **/
+.rectangle-list li:after{
+    position: absolute; 
+    content: '';
+    border: .5em solid transparent;
+    left: -1em;
+    top: 50%;
+    margin-top: -.5em;
+    transition: all .3s ease-out;               
 }
-ol.example li.placeholder:before {
-  position: absolute;
-  /** Define arrowhead **/
-} 
+
+.rectangle-list li:hover:after{
+    left: -.5em;
+    border-left-color: #fa8072;             
+}   
+
+/* SEARCH LIST; */
+
+#myInput {
+    background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myUL {
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border: 1px solid #ddd; /* Add a border to all links */
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6; /* Grey background color */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove default text underline */
+    font-size: 18px; /* Increase the font-size */
+    color: black; /* Add a black text color */
+    display: block; /* Make it into a block element to fill the whole list */
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee; /* Add a hover effect to all links, except for headers */
   </style>
 @endsection
 
@@ -172,7 +142,7 @@ ol.example li.placeholder:before {
                       <select @if($drivers->first() == null) {{'disabled'}} @endif name="driver" id="" class="form-control">
                           @if($drivers->first() != null)
                               @foreach ($drivers as $driver)
-                                  <option value="{{$driver->full_name}}">{{ $driver->description }}</option>
+                                  <option value="{{$driver->full_name}}">{{ $driver->full_name }}</option>
                               @endforeach
                           @else
                               <option> No Available Data</option>
@@ -205,11 +175,10 @@ ol.example li.placeholder:before {
                 <ol id ="queue" class="rectangle-list serialization">
                   @foreach ($trips as $trip)
                   <li data-plate="{{ $trip->van->plate_number }}" data-remark="{{ $trip->remarks }}">
-                    <a href="">{{ $trip->van->plate_number }}
-                    <span class="badge badge-warning badge-pill">
+                    {{ $trip->van->plate_number }}
+                    <a class="badge badge-warning badge-pill pull-right"> 
                     {{ $trip->remarks }}
-                    </span>
-                    </a> 
+                    </a>
                   </li>
                   @endforeach
                   <!-- <li><a href="">BBB</a></li>
@@ -241,14 +210,14 @@ ol.example li.placeholder:before {
             <div class="box-body">
                 <pre id="serialize_output"></pre>
 
-                <ol id = "special" class="rectangle-list ">
+                <ol id = "special" class="rectangle-list serialization">
                   <li>
                     <a href="">AAA
                     <span class="badge badge-warning badge-pill">
                     CC
                     </span>
                     </a> 
-                    <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close pull-right" >
                     <span aria-hidden="true">×</span></button>
                   </li>
                   <li><a href="">BBB</a></li>
@@ -301,6 +270,10 @@ ol.example li.placeholder:before {
 
         }
       });
+
+      $(function  () {
+  $("ol.example").sortable();
+});
 
 
     </script>
