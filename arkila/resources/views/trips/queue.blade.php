@@ -302,7 +302,7 @@
 
   <script>
     $('.remark-editable').editable({
-       value: $('#{{$trip->van->plate_number}}').attr('value'),    
+       value: $('#').attr('value'),
         source: [
               {value: 'NULL', text: 'Give remark'},
               {value: 'CC', text: 'CC'},
@@ -314,28 +314,27 @@
   </script>
 
 <script>
-      $('#addQueueButt').on('click', function() {
-          var destination = $('#destination').val();
-          var van = $('#van').val();
-          var driver = $('#driver').val();
+      {{--$('#addQueueButt').on('click', function() {--}}
+          {{--var destination = $('#destination').val();--}}
+          {{--var van = $('#van').val();--}}
+          {{--var driver = $('#driver').val();--}}
 
-          if( destination != "" && van != "" && driver != ""){
-              $.ajax({
-                  method:'POST',
-                  url: '/home/trips/'+destination+'/'+van+'/'+driver,
-                  data: {
-                      '_token': '{{csrf_token()}}'
-                  },
-                  success: function(vanInfo){
-                      console.log(vanInfo);
-                  }
+          {{--if( destination != "" && van != "" && driver != ""){--}}
+              {{--$.ajax({--}}
+                  {{--method:'POST',--}}
+                  {{--url: '/home/trips/'+destination+'/'+van+'/'+driver,--}}
+                  {{--data: {--}}
+                      {{--'_token': '{{csrf_token()}}'--}}
+                  {{--},--}}
+                  {{--success: function(vanInfo){--}}
+                      {{--alert(vanInfo);--}}
+                  {{--}--}}
 
-              });
+              {{--});--}}
 
-          }
-      });
+          {{--}--}}
+      {{--});--}}
     </script>
->>>>>>> cd44f90f91e4f0807dd140057909ba0e2fdb6a10
 
  {{--    <script>
           function myFunction() {

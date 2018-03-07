@@ -17,7 +17,7 @@ class TripsController extends Controller
      */
     public function index()
     {
-        $trips = Trip::all();
+        $trips = Trip::whereNotNull('queue_number')->get();
         $vans = Van::all();
         $destinations = Destination::all();
         $drivers = Member::allDrivers()->get();
@@ -42,7 +42,7 @@ class TripsController extends Controller
      */
     public function store(Destination $destination, Van $van, Member $driver )
     {
-        if(){
+        if(!(Trip::where('destination_id',$destination->destination_id)->whereNotNull('queue_number'))){
             $queueNumber = Trip::where('destination_id',$destination->destination_id)->count();
 
             Trip::create([
@@ -51,10 +51,12 @@ class TripsController extends Controller
                 'driver_id' => $driver->member_id,
                 'queue_number' => $queueNumber
             ]);
-            return 'success';
+            session()->flash('success', 'Van Succesfully Added to the queue');
+            return back();
         }
         else{
-
+            session()->flash('error', 'Van Succesfully Added to the queue');
+            return back();
         }
 
     }
@@ -99,9 +101,12 @@ class TripsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Trip $trip)
     {
-        //
+        $trip->delete();
+
+        session()->flash('success', 'Trip Successfully Deleted');
+        return back();
     }
 
     public function updateVanQueue(){
