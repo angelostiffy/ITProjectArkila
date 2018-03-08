@@ -18,7 +18,7 @@
 Route::get('/randall', 'RandallController@index');
 
 Route::get('/driver-profile', function(){
-    return view('drivermodule.profile.driverProfile');
+    return view('drivermodule.report.driverReport');
 });
 Route::get('/teo', function(){
     return view('rental.newcreate');
