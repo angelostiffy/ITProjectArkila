@@ -342,7 +342,7 @@
                                                         {{method_field('DELETE')}}
 
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                                        <button type="submit" name="driverArc" value="Arch " class="btn btn-danger" style="width:22%;">Delete</button>
+                                                        <button type="submit" name="driverArc" value="Arch" class="btn btn-danger" style="width:22%;">Delete</button>
                                                     </form>
                                                 </div>
                                             </div>
