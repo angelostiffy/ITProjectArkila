@@ -10,16 +10,14 @@
                         <div id="home-slider" class="carousel slide box-trip" data-ride="carousel">
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
-                              @foreach($announcements as $announcement)
-                                  @if($announcement->first())
-                                  <div class="item active">
+                                  <div class="item  active">
                                       <div class="box">
                                           <div class="box-header with-border text-center">
-                                              <h4>{{$announcement->title}}</h4>
+                                              <h4>{{$announcements->first()->title}}</h4>
                                           </div>
                                             <div class="box-body text-center">
                                               <div style="width:70%; margin-left:15%;">
-                                                  <p>{{$announcement->description}}</p>
+                                                  <p>{{$announcements->first()->description}}</p>
                                               </div>
                                           </div>
 
@@ -28,6 +26,9 @@
                                           </div>
                                       </div>
                                   </div>
+                                  @foreach($announcements as $announcement)
+                                  @if($announcement == $announcements->first())
+                                    @continue
                                   @else
                                   <div class="item">
                                       <div class="box">
@@ -46,8 +47,7 @@
                                       </div>
                                   </div>
                                   @endif
-                              @endforeach
-
+                                  @endforeach
                             </div>
 
                             <!-- Controls -->

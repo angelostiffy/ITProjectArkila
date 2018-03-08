@@ -58,7 +58,7 @@ class HomeController extends Controller
 
     public function driverDashboard()
     {
-        $announcements = Announcement::where('viewer', '=', 'Public')->orWhere('viewer', '=', 'Driver Only')->get();
+        $announcements = Announcement::latest()->where('viewer', '=', 'Public')->orWhere('viewer', '=', 'Driver Only')->get();
         // $ondeckTrip = Trip::
         $trips = Trip::join('member', 'trip.driver_id', '=', 'member.member_id')
                       ->join('destination', 'trip.destination_id', '=', 'destination.destination_id')
@@ -73,7 +73,7 @@ class HomeController extends Controller
         $drivers = Member::latest()->where('status', 'Inactive')->get();
 
         return view('archive.index', compact('drivers'));
-        
+
 
     }
 }
