@@ -72,4 +72,5 @@
     <h1>No Announcement/s as of the moment</h1>
     <p>To add announcement click on the Megaphone icon located at top right corner of the page. (beside the profile icon)</p>
 </div>
-@endif @endsection
+@endif 
+@endsection
