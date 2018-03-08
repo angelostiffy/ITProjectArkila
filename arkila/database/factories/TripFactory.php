@@ -15,6 +15,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Trip::class, function (Faker $faker) {
     return [
+        'driver_id' => $faker->randomElement(App\Member::pluck('member_id')->toArray()),
         'destination_id' => $faker->randomElement(App\Destination::pluck('destination_id')->toArray()),
         'plate_number' => $faker->randomElement(App\Van::pluck('plate_number')->toArray()),
         'remarks' => $faker->randomElement($array = array ('OB','ER','CC')),
