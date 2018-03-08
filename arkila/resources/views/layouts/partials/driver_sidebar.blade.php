@@ -15,7 +15,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="active treeview">
-                <a href="#">
+                <a href="/home/driver-dashboard">
             <i class="fa fa-home"></i> <span>Home</span>
           </a>
             </li>
@@ -32,7 +32,7 @@
           </a>
             </li>
             <li class="treeview">
-                <a href="#">
+                <a href="/home/profile">
             <i class="	fa fa-user"></i>
             <span>Profile</span>
           </a>

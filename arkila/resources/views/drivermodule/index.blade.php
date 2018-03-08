@@ -1,3 +1,4 @@
+
 @extends('layouts.driver')
 @section('title', 'Driver Home')
 
@@ -50,17 +51,17 @@
                                   @endforeach
                 <!-- /.item -->
                 @foreach($announcements as $announcement) @if($announcement == $announcements->first()) @continue @else
-                <div class="item ">
+                <div class="item">
                     <div class="box">
                         <div class="box-header with-border text-center">
                             <h4>{{$announcement->title}}</h4>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body text-center">
+                            <div style="width:70%; margin-left:15%;">
                                 <p>{{$announcement->description}}</p>
 
-
-                        </div>
+                            </div>
                         </div>
                         <!-- /.box-body -->
 
