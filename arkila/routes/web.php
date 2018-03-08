@@ -17,8 +17,8 @@
 //Route::resource('/driver-test', 'DriverViewTestController');
 Route::get('/randall', 'RandallController@index');
 
-Route::get('/randall', function(){
-    return view('operators.showProfile');
+Route::get('/driver-profile', function(){
+    return view('drivermodule.profile.driverProfile');
 });
 Route::get('/teo', function(){
     return view('rental.newcreate');
