@@ -11,6 +11,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
+          @include('message.error')
                 <!-- /.row -->
                 <div class="row form-group">
                     <label class="control-label col-sm-3">Email:</label>

@@ -11,29 +11,30 @@ use App\User;
 
 class UserDriversManagementController extends Controller
 {
-    
+
     public function show(User $driver_user)
     {
-            
+
         return view('usermanagement.editDriver', compact('driver_user'));
     }
 
     public function update(User $driver_user)
     {
-        $driver_user->password = Hash::make(str_random(8));
+        $defaultpassword = "driver!@bantrans;";
+        $driver_user->password = Hash::make($defaultpassword);
         $driver_user->save();
 
-        Mail::to('932a782243-eb8d48@inbox.mailtrap.io')->send(new ResetPasswordMail);
+        //Mail::to('932a782243-eb8d48@inbox.mailtrap.io')->send(new ResetPasswordMail);
 
         session()->flash('message', 'Reset Password Successful! A Reset Password Link Has Been Sent to the User.');
-        return redirect('/home/user-management'); 
+        return redirect('/home/user-management');
     }
 
     public function changeDriverStatus()
     {
         $id = Input::get('id');
 
-        // dd($id);    
+        // dd($id);
         $user = User::findOrFail($id);
         if($user->status === "enable"){
             $user->status = "disable";
@@ -43,10 +44,10 @@ class UserDriversManagementController extends Controller
 
             session()->flash('message', 'User successfully disabled!');
         }
-        
+
         $user->save();
-        return response()->json($user); 
+        return response()->json($user);
     }
 
-    
+
 }

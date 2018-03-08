@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Announcement;
 use App\FeesAndDeduction;
 use App\Destination;
 use App\Terminal;
 use App\User;
+
+use App\Trip;
+
+use App\Member;
+
+
 class HomeController extends Controller
 {
-//    /**   
+//    /**
 //     * Create a new controller instance.
 //     *
 //     * @return void
@@ -35,7 +42,7 @@ class HomeController extends Controller
         $destinations = Destination::join('terminal', 'destination.terminal_id', '=', 'terminal.terminal_id')->select('terminal.description as terminal', 'destination.destination_id','destination.description', 'destination.amount')->get();
         $terminals = Terminal::all();
 
-        
+
 
         return view('settings.index', compact('fees','destinations', 'terminals', 'discounts'));
     }
@@ -46,5 +53,27 @@ class HomeController extends Controller
         $userDrivers = User::driver()->where('users.terminal_id','=', null)->get();
         $userCustomers = User::customer()->where('users.terminal_id','=', null)->get();
         return view('usermanagement.index', compact('userAdmins', 'userDrivers', 'userCustomers'));
+    }
+
+
+    public function driverDashboard()
+    {
+        $announcements = Announcement::latest()->where('viewer', '=', 'Public')->orWhere('viewer', '=', 'Driver Only')->get();
+        // $ondeckTrip = Trip::
+        $trips = Trip::join('member', 'trip.driver_id', '=', 'member.member_id')
+                      ->join('destination', 'trip.destination_id', '=', 'destination.destination_id')
+                      ->join('van', 'trip.plate_number', '=', 'van.plate_number')
+                      ->where('member.operator_id', '=', null)
+                      ->where('member.role', '=', 'Driver')
+                      ->orderBy('trip.created_at')
+                      ->select('trip.trip_id as trip_id', 'trip.queue_number as queueId', 'trip.plate_number as plate_number', 'trip.remarks as remarks')->get();
+        return view('drivermodule.index', compact('announcements', 'trips'));
+      }
+    public function archive() {
+        $drivers = Member::latest()->where('status', 'Inactive')->get();
+
+        return view('archive.index', compact('drivers'));
+
+
     }
 }

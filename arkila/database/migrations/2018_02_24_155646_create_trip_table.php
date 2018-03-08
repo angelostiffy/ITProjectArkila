@@ -16,17 +16,18 @@ class CreateTripTable extends Migration
         Schema::create('trip', function (Blueprint $table) {
             $table->engine="InnoDB";
             $table->increments('trip_id');
-            $table->integer('driver_id');
+            $table->integer('driver_id')
+            ->unsigned();
             $table->integer('destination_id')
             ->unsigned();
             $table->string('plate_number');
 
             $table->enum('remarks', ['OB', 'CC', 'ER'])->nullable();
-            $table->enum('status', ['Departed', 'On Queue', 'On Deck']);
+            $table->enum('status', ['Departed', 'On Queue'])->default('On Queue');
             $table->smallInteger('total_passengers')->nullable();
             $table->integer('total_booking_fee')->nullable();
             $table->date('date_departed')->nullable();
-            $table->integer('queue_number');
+            $table->integer('queue_number')->nullable();
 
             $table->foreign('destination_id')
             ->references('destination_id')->on('destination')

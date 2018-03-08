@@ -14,7 +14,7 @@
 //Made by Randall
 
 //Route::get('/randall', 'VansController@index')
-Route::get('/driver-test', 'DriverViewTestController@index');
+//Route::resource('/driver-test', 'DriverViewTestController');
 Route::get('/randall', 'RandallController@index');
 
 Route::get('/randall', function(){
@@ -51,6 +51,7 @@ Route::get('home/operators/profile/{operator}','OperatorsController@showProfile'
 
 /************ Drivers ******************************/
 Route::resource('home/drivers', 'DriversController');
+Route::patch('home/drivers/{driver}/archive', 'DriversController@archiveDelete')->name('drivers.archiveDelete');
 
 //Adding a driver to a specific operator
 Route::get('home/operators/{operator}/drivers/create', 'DriversController@createFromOperator')->name('drivers.createFromOperator');
@@ -103,10 +104,10 @@ Route::resource('home/user-management/admin', 'AdminUserManagementController', [
 ]);
 Route::post('home/user-management/admin/change-status', array('as' => 'changeAdminStatus','uses' => 'AdminUserManagementController@changeAdminStatus'));
 
-Route::get('password/reset/{token}/{email}', array('as' => 'getResetPass', 'uses' => 'Auth\ResetPasswordController@showResetForm'));
-Route::post('password/reset', array('as' => 'resetPass', 'uses' => 'Auth\ResetPasswordController@reset'));
+//Route::get('password/reset/{token}/{email}', array('as' => 'getResetPass', 'uses' => 'Auth\ResetPasswordController@showResetForm'));
+//Route::post('password/reset', array('as' => 'resetPass', 'uses' => 'Auth\ResetPasswordController@reset'));
 
-Route::patch('home/user-management/admin/{admin_user}/{token?}', 'AdminUserManagementController@update');
+//Route::patch('home/user-management/admin/{admin_user}/{token}', 'AdminUserManagementController@update');
 
 Route::resource('home/user-management/driver', 'UserDriversManagementController', [
 	'except' => ['index','store', 'create','edit','destroy'],
@@ -125,9 +126,26 @@ Route::post('home/user-management/customer/change-status', array('as' => 'change
 Route::resource('home/test', 'TestController');
 Route::resource('home/testing', 'TestingController');
 Route::resource('home/reservations', 'ReservationsController');
+
+Route::get('home/archive', 'HomeController@archive');
+
 Route::resource('home/rental', 'RentalsController');
 Route::resource('home/triptest', 'TripsController');
 
+
 /* Trips */
-Route::resource('home/trips', 'TripsController');
+Route::post('home/trips/{destination}/{van}/{driver}', 'TripsController@store')->name('trips.store');
+Route::resource('home/trips', 'TripsController',[
+    'except' =>['store']
+]);
 Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
+
+/*************************************Driver Module****************************/
+
+/********************Dashboard************************/
+Route::get('home/driver', 'HomeController@driverDashboard');
+
+
+/******************************************************/
+
+/******************************************************************************/

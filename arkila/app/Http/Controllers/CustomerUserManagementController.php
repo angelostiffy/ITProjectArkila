@@ -14,26 +14,28 @@ class CustomerUserManagementController extends Controller
 {
     public function show(User $customer_user)
     {
-            
+
         return view('usermanagement.editCustomer', compact('customer_user'));
     }
 
     public function update(User $customer_user)
     {
-        $customer_user->password = Hash::make(str_random(8));
+        $defaultpassword = "customer!@bantrans";
+
+        $customer_user->password = Hash::make($defaultpassword);
         $customer_user->save();
 
-        Mail::to('932a782243-eb8d48@inbox.mailtrap.io')->send(new ResetPasswordMail);
+      //  Mail::to('932a782243-eb8d48@inbox.mailtrap.io')->send(new ResetPasswordMail);
 
         session()->flash('message', 'Reset Password Successful! A Reset Password Link Has Been Sent to the User.');
-        return redirect('/home/user-management'); 
+        return redirect('/home/user-management');
     }
 
     public function changeCustomerStatus()
     {
         $id = Input::get('id');
 
-        // dd($id);    
+        // dd($id);
         $user = User::findOrFail($id);
         if($user->status === "enable"){
             $user->status = "disable";
@@ -43,8 +45,8 @@ class CustomerUserManagementController extends Controller
 
             session()->flash('message', 'User successfully disabled!');
         }
-        
+
         $user->save();
-        return response()->json($user); 
+        return response()->json($user);
     }
 }

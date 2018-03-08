@@ -16,7 +16,7 @@
             </thead>
             <tbody>
 
-                @foreach($drivers as $driver)
+                @foreach($drivers->where('status','Active') as $driver)
                 <tr>
                     <th>{{$driver->member_id}}</th>
                     <td>{{$driver->operator_id}}</td>
@@ -53,10 +53,12 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <form action="{{route('drivers.destroy',[$driver->member_id])}}" method="POST">
-                                        {{csrf_field()}} {{method_field("DELETE")}}
+                                    <form action="{{route('drivers.archiveDelete', $driver->member_id)}}" method="POST">
+                                        {{csrf_field()}}
+                                        {{method_field('PATCH')}}
+
                                         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                        <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
+                                        <button type="submit" name="driverArc" value="Arch " class="btn btn-danger" style="width:22%;">Delete</button>
                                     </form>
                                 </div>
                             </div>

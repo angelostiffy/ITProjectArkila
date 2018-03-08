@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ArchiveController extends Controller
+class ArchiveDriversController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -68,7 +68,7 @@ class ArchiveController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**

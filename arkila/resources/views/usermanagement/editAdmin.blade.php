@@ -12,7 +12,7 @@
 @section('content')
 @section('form-body')
 
-
+{{csrf_field()}}
 <div class="form-group">
   <label for="payor">User name:</libel>
   <span name="username">{{$admin_user->username}}</span>
@@ -25,7 +25,7 @@
   <label for="Particulars">Email Address:</label>
   <span name="email">{{$admin_user->email}}</span>
 </div>
-   
+
 
 
 <div class="well">
