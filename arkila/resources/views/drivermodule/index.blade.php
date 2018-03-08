@@ -7,7 +7,7 @@
                 <div class="col-md-6 ">
 
                     <div class="slider">
-                        {{!! json_encode($announcements) !!}}
+                        <!-- {{!! json_encode($announcements) !!}} -->
                         <div id="home-slider" class="carousel slide box-trip" data-ride="carousel">
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
@@ -105,40 +105,12 @@
         </ul>
         <div class="tab-content">
             <div class="active tab-pane" id="cabanatuan">
-                <div class="box">
-                    <div class="box-header">
-                        <h4>Van Queue Cabanatuan</h4>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-
-                <div class="col-md-6 ">
                     <div class="box">
                         <div class="box-header">
-                            <h4>Van Queue</h4>
+                            <h4>Van Queue Cabanatuan</h4>
                             {{!! json_encode($trips)!!}}
                         </div>
-                        <div class="tab-pane active" id="control-sidebar-queue-tab">
-                            <h3 class="control-sidebar-heading" style="margin-top: 0;"></h3>
-
-                            <table class="table table-bordered dataTable text-center">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Plate No.</th>
-                                        <th>Remark</th>
-                                    </tr>
-                                </thead>
-                                @foreach($trips as $trip)
-                                <tr>
-                                    <td>
-                                      @if($trip->queueId == 0 || $trip->queueId ==  1 )
-                                        <i class="fa fa-star text-yellow"></i>
-                                      @endif
-                                        {{$trip->queueId}}
-                                    </td>
-                                    <td>{{$trip->plate_number}}</td>
-                                    <td>{{$trip->remarks}}</td>
+                        <div class="box-body">
 
                         <table class="table table-bordered dataTable text-center">
                             <thead>
@@ -151,17 +123,19 @@
                             </thead>
                             @foreach($trips as $trip)
                             <tr>
+                              @if($trip->terminaldesc == 'Cabanatuan City')
                                 <td>
                                     @if($trip->queueId == 1 || $trip->queueId == 2 )
                                     <i class="fa fa-star text-yellow"></i> @endif {{$trip->queueId}}
                                 </td>
                                 <td>{{$trip->plate_number}}</td>
                                 <td>{{$trip->remarks}}</td>
+                              @endif
                             </tr>
+
                             @endforeach
                         </table>
-
-                    </div>
+</div>
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
@@ -184,12 +158,14 @@
                             </thead>
                             @foreach($trips as $trip)
                             <tr>
+                              @if($trip->terminaldesc == 'San Jose City')
                                 <td>
                                     @if($trip->queueId == 1 || $trip->queueId == 2 )
                                     <i class="fa fa-star text-yellow"></i> @endif {{$trip->queueId}}
                                 </td>
                                 <td>{{$trip->plate_number}}</td>
                                 <td>{{$trip->remarks}}</td>
+                                @endif
                             </tr>
                             @endforeach
                         </table>
@@ -204,9 +180,19 @@
             </div>
 
                     <!-- /.tab-pane -->
+
         </div>
 
-        <!-- /.modal -->
+
+
+            <!-- /.tab-content -->
+    </div>
+
+    <!-- /.nav-tabs -->
+</div>
+<!-- /.col -->
+
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script type="text/javascript">
         $(document).ready(function (){
@@ -230,17 +216,6 @@
           });
         });
         </script>
-
-
-            <!-- /.tab-content -->
-    </div>
-
-    <!-- /.nav-tabs -->
-</div>
-
-<!-- /.col -->
-
-
 
 <div class="modal fade" id="seeMoreAnnouncements">
     <div class="modal-dialog" style="margin-top:150px;">
