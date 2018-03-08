@@ -17,7 +17,7 @@ class TripsController extends Controller
      */
     public function index()
     {
-        $trips = Trip::all();
+        $trips = Trip::whereNotNull('queue_number')->get();
         $vans = Van::all();
         $destinations = Destination::all();
         $drivers = Member::allDrivers()->get();
@@ -40,9 +40,27 @@ class TripsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Destination $destination, Van $van, Member $driver )
     {
-        //
+        if( is_null(Trip::where('destination_id',$destination->destination_id)
+            ->where('plate_number',$van->plate_number)
+            ->whereNotNull('queue_number')->first()) ){
+            $queueNumber = Trip::where('destination_id',$destination->destination_id)->count();
+
+            Trip::create([
+                'destination_id' => $destination->destination_id,
+                'plate_number' => $van->plate_number,
+                'driver_id' => $driver->member_id,
+                'queue_number' => $queueNumber
+            ]);
+            session()->flash('success', 'Van Succesfully Added to the queue');
+            return 'success';
+        }
+        else{
+            session()->flash('error', 'Van is already on the Queue');
+            return 'Van is already on the Queue';
+        }
+
     }
 
     /**
@@ -85,9 +103,12 @@ class TripsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Trip $trip)
     {
-        //
+        $trip->delete();
+
+        session()->flash('success', 'Trip Successfully Deleted');
+        return back();
     }
 
     public function updateVanQueue(){

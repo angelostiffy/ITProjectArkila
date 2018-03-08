@@ -24,6 +24,8 @@ Route::get('/teo', function(){
     return view('rental.newcreate');
 });
 
+
+
 Route::resource('/angelo', 'EmailtestController');
 
 Route::get('/dixon', 'TripsController@index');
@@ -134,7 +136,10 @@ Route::resource('home/triptest', 'TripsController');
 
 
 /* Trips */
-Route::resource('home/trips', 'TripsController');
+Route::post('home/trips/{destination}/{van}/{driver}', 'TripsController@store')->name('trips.store');
+Route::resource('home/trips', 'TripsController',[
+    'except' =>['store']
+]);
 Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
 
 /*************************************Driver Module****************************/

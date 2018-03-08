@@ -27,7 +27,7 @@ class CreateTripTable extends Migration
             $table->smallInteger('total_passengers')->nullable();
             $table->integer('total_booking_fee')->nullable();
             $table->date('date_departed')->nullable();
-            $table->integer('queue_number');
+            $table->integer('queue_number')->nullable();
 
             $table->foreign('destination_id')
             ->references('destination_id')->on('destination')

@@ -4,6 +4,8 @@
 
 @section('links')
   @parent
+  <link rel="stylesheet" href="{{ URL::asset('/jquery/bootstrap3-editable/css/bootstrap-editable.css') }}">
+
     <style>
     ol {
     counter-reset: li; /* Initiate a counter */
@@ -108,14 +110,13 @@
       <div class="row">
         <div class="col-md-3">
             <div class="box box-solid">
+
               <div class="box-header with-border">
                   <h3 class="box-title">Add Driver to Queue</h3>
               </div>
-              <form action="">
               <div class="box-body">
-                    
                       <label for="">Van Unit</label>
-                      <select @if($vans->first() == null) {{'disabled'}} @endif name="van" id="" class="form-control select2">
+                      <select @if($vans->first() == null) {{'disabled'}} @endif name="van" id="van" class="form-control select2">
                           @if($vans->first() != null)
                               @foreach ($vans as $van)
                                 <option value="{{$van->plate_number}}">{{ $van->plate_number }}</option>
@@ -126,7 +127,7 @@
                        </select>
 
                        <label for="">Destination</label>
-                      <select @if($destinations->first() == null) {{'disabled'}} @endif name="destination" id="" class="form-control">
+                      <select @if($destinations->first() == null) {{'disabled'}} @endif name="destination" id="destination" class="form-control">
                           @if($destinations->first() != null)
                             @foreach ($destinations as $destination)
                                 <option value="{{$destination->destination_id}}">{{ $destination->description }}</option>
@@ -139,99 +140,96 @@
 
 
                        <label for="">Driver</label>
-                      <select @if($drivers->first() == null) {{'disabled'}} @endif name="driver" id="" class="form-control">
+                      <select @if($drivers->first() == null) {{'disabled'}} @endif name="driver" id="driver" class="form-control">
                           @if($drivers->first() != null)
                               @foreach ($drivers as $driver)
-                                  <option value="{{$driver->full_name}}">{{ $driver->full_name }}</option>
+                                  <option value="{{$driver->member_id}}">{{ $driver->full_name }}</option>
                               @endforeach
                           @else
                               <option> No Available Data</option>
                           @endif
                       </select>
               </div>
-                  @if($vans->first() != null || $destinations->first() !=null || $drivers ->first() !=null)
-              <div class="box-footer">
-                  <div class="pull-right">
-                      <button class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add to Queue</button>
-                  </div>
-              </div>
-                      @endif
+                @if($vans->first() != null && $destinations->first() !=null && $drivers ->first() !=null)
 
-              </form>
-            </div>
-        </div>
-<div id='connected'>
-        <div class="col-md-5">
-          <!-- Van Queue Box -->
-          <div class="box box-primary">
-            <div class="box-header">
-              </h3 class="box-title">Van Queue</h3>
-            </div>
-            <div class="box-body">
-                
+                      <div class="box-footer">
+                          <div class="pull-right">
+                              <button id="addQueueButt" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add to Queue</button>
+                          </div>
+                      </div>
+                @endif
 
-                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
-
-                <ol id ="queue" class="rectangle-list serialization">
-                  @foreach ($trips as $trip)
-                  <li data-plate="{{ $trip->van->plate_number }}" data-remark="{{ $trip->remarks }}">
-                    {{ $trip->van->plate_number }}
-                    <a class="badge badge-warning badge-pill pull-right"> 
-                    {{ $trip->remarks }}
-                    </a>
-                  </li>
-                  @endforeach
-                  <!-- <li><a href="">BBB</a></li>
-                  <li><a href="">CCC</a></li>
-                  <li><a href="">DDD</a></li>
-                  <li><a href="">EEE</a></li>
-                  <li><a href="">FFF</a></li>
-                  <li><a href="">GGG</a></li>
-                  <li><a href="">HHH
-                  <span class="badge badge-error badge-pill pull-right">ER</span>
-                  </a></li>
-                  <li><a href="">III</a></li>
-                  <li><a href="">JJJ</a></li> -->
-                </ol>
             </div>
-          </div>
         </div>
 
         <div class="col-md-4">
-          <pre id="serialize_output2"></pre>
+          <!-- Van Queue Box -->
+          <div class="box box-primary">
+            <div class="box-header">
+              <h3 class="box-title">San Jose</h3>
+            </div>
+            <div class="box-body">
+
+                <ol id ="queue" class="rectangle-list serialization">
+                  @foreach ($trips as $trip)
+                    <li data-plate="{{ $trip->van->plate_number }}" data-remark="{{ $trip->remarks }}" data-dest="Cabanatuan">
+                      <div class="row">
+                        <div class="col-md-5">
+                          {{ $trip->van->plate_number }}
+                        </div>
+                      <div class="col-md-7">
+                        <div class="pull-right">
+                          
+                          <a href="" name="{{$trip->van->plate_number}}" data-type="select" data-title="Update Remark" class="remark-editable btn btn-outline-secondary btn-sm editable" value="OB" data-original-title="" title="">{{ $trip->remarks }}</a>
+                          <a href="" class="" data-toggle="modal" data-target="#modal-default"><i class="fa fa-remove"></i></a>
+                        </div>
+                      </div>
+                    </li>
+                  @endforeach
+                </ol>
+            </div>
+          </div>
         </div>
                
          <div class="col-md-4">
           <!-- Special Unit -->
           <div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title">Special Unit</h3>
+              <h3 class="box-title">Cabanatuan</h3>
             </div>
             <div class="box-body">
-                <pre id="serialize_output"></pre>
 
-                <ol id = "special" class="rectangle-list serialization">
-                  <li>
-                    <a href="">AAA
-                    <span class="badge badge-warning badge-pill">
-                    CC
-                    </span>
-                    </a> 
-                    <button type="button" class="close pull-right" >
-                    <span aria-hidden="true">×</span></button>
-                  </li>
-                  <li><a href="">BBB</a></li>
-                  <li><a href="">CCC</a></li>
-                  <li><a href="">DDD</a></li>
-                  <li><a href="">EEE</a></li>
-                  <li><a href="">FFF</a></li>
+                <ol id = "S" class="rectangle-list serialization">
+                  
                   
                 </ol>
               </div>
              </div>
         </div>
       </div>
+        <pre id="serialize_output2"></pre>
+
+      <div class="modal fade" id="modal-default">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-info"></i> Alert</h4>
+              </div>
+              <div class="modal-body">
+                <p>Will be deleted</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
         </div>
+        <!-- /.modal -->
 @endsection
 
 @section('scripts')
@@ -240,8 +238,8 @@
 {{--   <script>
     $('.select2').select2();
   </script> --}}
-
-  <script src="{{ URL::asset('/js/jquery-sortable.js') }}"></script>
+  <script src="{{ URL::asset('/jquery/bootstrap3-editable/js/bootstrap-editable.min.js') }}"></script>
+  <script src="{{ URL::asset('/jquery/jquery-sortable.js') }}"></script>
     <!-- List sortable -->
     <script>
       var group = $("ol.serialization").sortable({
@@ -271,12 +269,40 @@
         }
       });
 
-      $(function  () {
-  $("ol.example").sortable();
-});
+      @foreach($vans as $van)
+    $('.remark-editable').editable({
+       value: "@if(is_null($van->remarks)){{"NULL"}}@else{{$van->remarks}}@endif",
+        source: [
+              {value: 'NULL', text: 'Give remark'},
+              {value: 'CC', text: 'CC'},
+              {value: 'ER', text: 'ER'},
+              {value: 'OB', text: 'OB'}
+           ]
 
+    });
+    @endforeach
 
-    </script>
+      $('#addQueueButt').on('click', function() {
+          var destination = $('#destination').val();
+          var van = $('#van').val();
+          var driver = $('#driver').val();
+
+          if( destination != "" && van != "" && driver != ""){
+              $.ajax({
+                  method:'POST',
+                  url: '/home/trips/'+destination+'/'+van+'/'+driver,
+                  data: {
+                      '_token': '{{csrf_token()}}'
+                  },
+                  success: function(vanInfo){
+                      location.reload();
+                  }
+
+              });
+
+          }
+      });
+
 
  {{--    <script>
           function myFunction() {
@@ -299,5 +325,5 @@
             }
     </script>
  --}}
-
+</script>
 @endsection
