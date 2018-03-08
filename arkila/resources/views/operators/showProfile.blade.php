@@ -173,14 +173,13 @@
                                                     <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Edit</a>
                                                     <a href="{{route('drivers.show',[$driver->member_id])}}" class="btn btn-default"><i class="fa fa-eye"></i>View</a>
                                                    
-                                                    <button class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteDriver"><i class="fa fa-trash"></i> Delete</button>
-                                                </div>
-                                                
+                                                    <button class="btn btn-outline-danger" data-toggle="modal" data-target="#{{ 'deleteDriver'.$operator->member_id }}"><i class="fa fa-trash"></i> Delete</button>
+                                                </div>                                                
                                         </td>
                                     </tr>
                                     
                                     <!--DELETE MODAL MIGUEL-->
-                                    <div class="modal fade" id="deleteDriver">
+                                    <div class="modal fade" id="{{ 'deleteDriver'.$operator->member_id }}">
                                         <div class="modal-dialog">
                                             <div class="col-md-offset-2 col-md-8">
                                                 <div class="modal-content">
@@ -194,7 +193,7 @@
                                                            <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
                                                        </div>
                                                        <div class="col-md-10">
-                                                        <p style="font-size: 110%;">Are you sure you want to delete "yung user para pogi"</p>
+                                                        <p style="font-size: 110%;">Are you sure you want to delete "{{ $driver->full_name }}"</p>
                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">

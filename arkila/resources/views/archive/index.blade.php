@@ -1,7 +1,10 @@
-@extends('layouts.master') @section('title', 'Show Profile') @section('content')
+@extends('layouts.master')
+@section('title', 'Archive')
+@section('content')
     {{session(['opLink'=> Request::url()])}} 
 
 <div class="nav-tabs-custom">
+<<<<<<< HEAD:arkila/resources/views/operators/archiveDriverVan.blade.php
     <ul class="nav nav-tabs">
         <li class="active"><a href="#drivers" data-toggle="tab">Drivers</a></li>
         <li><a href="#vans" data-toggle="tab">Vans</a></li>
@@ -45,6 +48,55 @@
                                         <div class="modal-content">
                                             <div class="modal-header bg-red">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+=======
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#drivers" data-toggle="tab">Drivers</a></li>
+                <li><a href="#vans" data-toggle="tab">Vans</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="active tab-pane" id="drivers">
+                    <div class="box">
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table class="table table-bordered table-striped driverVan">
+
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Age</th>
+                                        <th>Contact Number</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($drivers as $driver)
+                                    <tr>
+                                        <td>{{ $driver->full_name }}</td>
+                                        <td>{{ $driver->age }}</td>
+                                        <td>{{ $driver->contact_number }}</td>
+                                        <td>{{ $driver->status }}</td>
+                                        <td>
+                                
+                                            
+                                                <div class="text-center">
+                                                    
+                                                    <a href="#" class="btn btn-default"><i class="fa fa-eye"></i>View</a>
+                                                   
+                                                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteDriver"><i class="fa fa-trash"></i> Delete</button>
+                                                </div>
+                                                
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    <!--DELETE MODAL MIGUEL-->
+                                    <div class="modal fade" id="deleteDriver">
+                                        <div class="modal-dialog">
+                                            <div class="col-md-offset-2 col-md-8">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-red">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+>>>>>>> bcbd6aa24e25549d0d82058e844471b2a383e5b5:arkila/resources/views/archive/index.blade.php
                                               <span aria-hidden="true">&times;</span></button>
                                                 <h4 class="modal-title"> Confirm</h4>
                                             </div>

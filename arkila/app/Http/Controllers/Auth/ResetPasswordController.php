@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Http\Request;
+use Password;
+use Auth;
 
 class ResetPasswordController extends Controller
 {
@@ -37,4 +39,11 @@ class ResetPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+    // 
+    // protected function broker()
+    // {
+    //   return Password::broker('admins');
+    // }
+
+
 }

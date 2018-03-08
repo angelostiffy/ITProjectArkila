@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Rules\checkDriver;
-use App\Rules\checkLicenseNumber;
+use App\Rules\checkPlateNumber;
 use App\Rules\checkOperator;
 use App\Van;
 use App\Member;
@@ -47,7 +47,7 @@ class VansController extends Controller {
         $this->validate(request(), [
             "operator" => ['numeric','exists:member,member_id',new checkOperator],
             "driver" => ['nullable','numeric','exists:member,member_id',new checkDriver],
-            "plateNumber" => [new checkLicenseNumber,'unique:van,plate_number','required','between:6,9'],
+            "plateNumber" => [new checkPlateNumber,'unique:van,plate_number','required','between:6,9'],
             "vanModel" =>  'required|max:50',
             "seatingCapacity" => 'required|between:10,15|numeric'
         ]);
@@ -82,7 +82,7 @@ class VansController extends Controller {
     {
         $this->validate(request(), [
             "driver" => ['nullable','numeric','exists:member,member_id','unique:member_van,member_id',new checkDriver],
-            "plateNumber" => [new checkLicenseNumber,'unique:van,plate_number','required','between:6,9'],
+            "plateNumber" => [new checkPlateNumber,'unique:van,plate_number','required','between:6,9'],
             "vanModel" =>  'required|max:50',
             "seatingCapacity" => 'required|between:10,15|numeric'
         ]);

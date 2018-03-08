@@ -27,6 +27,10 @@ class Member extends Model
         return $this->hasMany(Member::class, 'operator_id','member_id');
     }
 
+    public function trips(){
+      return $this->hasMany(Trip::class, 'driver_id', 'member_id');
+    }
+
     public function addChildren($children){
         foreach($children as $children_name=>$birthdate){
             $this->children()->create(compact('children_name','birthdate'));
