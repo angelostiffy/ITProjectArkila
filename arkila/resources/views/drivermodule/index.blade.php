@@ -6,7 +6,7 @@
                 <div class="col-md-6 ">
 
                     <div class="slider">
-
+                        {{!! json_encode($announcements) !!}}
                         <div id="home-slider" class="carousel slide box-trip" data-ride="carousel">
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
@@ -68,6 +68,7 @@
                     <div class="box">
                         <div class="box-header">
                             <h4>Van Queue</h4>
+                            {{!! json_encode($trips)!!}}
                         </div>
                         <div class="tab-pane active" id="control-sidebar-queue-tab">
                             <h3 class="control-sidebar-heading" style="margin-top: 0;"></h3>
@@ -83,7 +84,7 @@
                                 @foreach($trips as $trip)
                                 <tr>
                                     <td>
-                                      @if($trip->queueId == 1 || $trip->queueId == 2 )
+                                      @if($trip->queueId == 0 || $trip->queueId ==  1 )
                                         <i class="fa fa-star text-yellow"></i>
                                       @endif
                                         {{$trip->queueId}}
@@ -122,6 +123,29 @@
             <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function (){
+          var data;
+          $.ajax({
+            url: "{{URL::route('drivermodule.viewQueue')}}",
+            dataType: "json",
+            success: function(resp){
+              data = resp.trips;
+              console.log(data);
+            }
+          });
+
+          $.ajax({
+            url: "{{URL::route('drivermodule.viewAnnouncement')}}",
+            dataType: "json",
+            success: function(resp){
+              data = resp.announcements;
+              console.log(data);
+            }
+          });
+        });
+        </script>
 
 
 

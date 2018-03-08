@@ -140,8 +140,10 @@ Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVa
 /*************************************Driver Module****************************/
 
 /********************Dashboard************************/
-Route::get('home/driver', 'HomeController@driverDashboard');
+Route::get('home/driver-dashboard', 'HomeController@driverDashboard');
 
+Route::get('home/view-queue', 'DriverModuleControllers\ViewVanQueueController@showVanQueue')->name('drivermodule.viewQueue');
+Route::get('home/view-announcement', 'DriverModuleControllers\ViewAnnouncementsController@showAnnouncement')->name('drivermodule.viewAnnouncement');
 
 /******************************************************/
 

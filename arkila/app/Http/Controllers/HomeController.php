@@ -65,7 +65,8 @@ class HomeController extends Controller
                       ->join('van', 'trip.plate_number', '=', 'van.plate_number')
                       ->where('member.operator_id', '=', null)
                       ->where('member.role', '=', 'Driver')
-                      ->orderBy('trip.created_at')
+                      ->where('trip.status', '<>', 'Departed')
+                      ->orderBy('trip.created_at','asc')
                       ->select('trip.trip_id as trip_id', 'trip.queue_number as queueId', 'trip.plate_number as plate_number', 'trip.remarks as remarks')->get();
         return view('drivermodule.index', compact('announcements', 'trips'));
       }
