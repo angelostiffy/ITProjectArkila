@@ -24,6 +24,8 @@ Route::get('/teo', function(){
     return view('rental.newcreate');
 });
 
+
+
 Route::resource('/angelo', 'EmailtestController');
 
 Route::get('/dixon', 'TripsController@index');
@@ -143,7 +145,7 @@ Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVa
 /*************************************Driver Module****************************/
 
 /********************Dashboard************************/
-Route::get('home/driver', 'HomeController@driverDashboard');
+Route::get('home/driver-dashboard', 'HomeController@driverDashboard');
 
 
 /******************************************************/
