@@ -11,19 +11,18 @@
 |
 */
 
+//Auth::routes();
+
 //Made by Randall
 
 //Route::get('/randall', 'VansController@index')
 //Route::resource('/driver-test', 'DriverViewTestController');
 Route::get('/randall', 'RandallController@index');
 
-<<<<<<< HEAD
-
-=======
 Route::get('/driver-profile', function(){
     return view('drivermodule.report.driverReport');
 });
->>>>>>> c85fe4bdd30dd7c2d30299f2eb623a93e7954fc8
+
 Route::get('/teo', function(){
     return view('rental.newcreate');
 });
@@ -149,10 +148,14 @@ Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVa
 /*************************************Driver Module****************************/
 
 /********************Dashboard************************/
-Route::get('home/driver-dashboard', 'HomeController@driverDashboard');
+Route::group(['middleware' => ['auth', 'driver']], function(){
+  Route::get('home/driver-dashboard', 'DriverModuleControllers\DriverHomeController@index')->name('drivermodule.dashboard');
+  Route::get('home/view-queue', 'DriverModuleControllers\ViewVanQueueController@showVanQueue')->name('drivermodule.viewQueue');
+  Route::get('home/view-announcement', 'DriverModuleControllers\ViewAnnouncementsController@showAnnouncement')->name('drivermodule.viewAnnouncement');
+});
 
-Route::get('home/view-queue', 'DriverModuleControllers\ViewVanQueueController@showVanQueue')->name('drivermodule.viewQueue');
-Route::get('home/view-announcement', 'DriverModuleControllers\ViewAnnouncementsController@showAnnouncement')->name('drivermodule.viewAnnouncement');
+Route::get('home/try', 'PassController@index');
+
 
 Route::get('home/profile', 'DriverModuleControllers\DriverProfileController@index');
 /******************************************************/
