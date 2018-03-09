@@ -1,6 +1,26 @@
+<<<<<<< HEAD
+@extends('layouts.master') @section('title', 'Announcements') @section('content') 
+
+@include('message.error')
+
+@if ($announcements->count() > 0)
+
+@foreach ($announcements->sortByDesc('created_at') as $announcement)
+
+<div class="box box-warning">
+
+    <div class="box-header with-border bg-light">
+        <h4>Title: {{ $announcement->title }}</h4>
+        <h6>Viewer: {{ $announcement->viewer }} </h6>
+        <h6>Created: {{ $announcement->created_at->format('Y-m-d h:i:s A') }}</h6>
+        @if ($announcement->created_at->ne($announcement->updated_at))
+        <h6>Updated: {{ $announcement->updated_at->format('Y-m-d h:i:s A') }}</h6>
+        @endif
+=======
 @extends('layouts.master') 
 @section('title', 'Announcements') 
 @section('content') 
+>>>>>>> f9b9e5a532b973b940f36cd7d0ede27ec7d6b05f
 
 @if ($announcements->count() > 0) 
 
