@@ -122,7 +122,7 @@
 				</tr>
             </thead>
             <tbody>
-                @foreach($vans as $van)
+                @foreach($vans->where('status', 'Active') as $van)
 						<tr>
 							<td>{{$van->plate_number}}</td>
 							<td>
@@ -166,9 +166,9 @@
                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <form method="POST" action="{{route('vans.destroy',[$van->plate_number])}}">
+                                        <form method="POST" action="{{route('vans.archiveDelete',[$van->plate_number])}}">
                                             {{csrf_field()}}
-                                            {{method_field('DELETE')}}
+                                            {{method_field('PATCH')}}
                                             <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                                             <button type="submit" class="btn btn-danger" style="width:22%;">Yes</button>
                                         </form>    

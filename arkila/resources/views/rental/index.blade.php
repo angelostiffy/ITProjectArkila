@@ -22,7 +22,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
-                                        <th>Destination</th>
+                                        <th>Destina tion</th>
                                         <th>Date</th>
                                         <th>Time</th>
                                         <th>Contact Number</th>
@@ -51,43 +51,50 @@
                                                 </form>
                                                 @else
                                                 <button class="btn btn-danger" data-toggle="modal" data-target="#{{'deleteRental'.$rental->rent_id}}"><i class="fa fa-trash"></i>Delete
-                                                        </button> @endif
+                                                </button>
+
+                                                <!-- Modal for Delete-->
+                                                <div class="modal fade" id="{{'deleteRental'.$rental->rent_id}}">
+                                                    <div class="modal-dialog">
+                                                        <div class="col-md-offset-2 col-md-8">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header bg-red">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span></button>
+                                                                    <h4 class="modal-title"> Confirm</h4>
+                                                                </div>
+                                                                <div class="modal-body row" style="margin: 0% 1%;">
+                                                                    <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
+                                                                        <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
+                                                                    </div>
+                                                                    <div class="col-md-10">
+                                                                        <p style="font-size: 110%;">Are you sure you want to delete this Rental?</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <form method="POST" action="/home/rental/{{ $rental->rent_id }}">
+                                                                        {{csrf_field()}} {{method_field('DELETE')}}
+                                                                        
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                                                        <button type="submit" name="driverArc" value="Arch" class="btn btn-danger" style="width:22%;">Delete</button>
+                                                                        
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.col -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
+
+                                                @endif
+
                                             </div>
                                         </td>
 
-                                        <!-- Modal for Delete-->
-                                        <div class="modal fade" id="{{'deleteRental'.$rental->rent_id}}">
-                                            <div class="modal-dialog">
-                                                <div class="col-md-offset-2 col-md-8">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header bg-red">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span></button>
-                                                            <h4 class="modal-title"> Confirm</h4>
-                                                        </div>
-                                                        <div class="modal-body row" style="margin: 0% 1%;">
-                                                            <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
-                                                                <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
-                                                            </div>
-                                                            <div class="col-md-10">
-                                                                <p style="font-size: 110%;">Are you sure you want to delete this Rental?</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <form method="POST" action="/home/rental/{{ $rental->rent_id }}" class="delete">
-                                                                {{csrf_field()}} {{method_field('DELETE')}}
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                                                <button type="submit" name="driverArc" value="Arch" class="btn btn-danger" style="width:22%;">Delete</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.modal-content -->
-                                                </div>
-                                                <!-- /.col -->
-                                            </div>
-                                            <!-- /.modal-dialog -->
-                                        </div>
-                                        <!-- /.modal -->
+
 
                                     </tr>
                                     @endif @endforeach

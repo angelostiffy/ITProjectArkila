@@ -230,6 +230,23 @@ class DriversController extends Controller
      */
     public function update(DriverRequest $request, Member $driver)
     {   
+            $current_time = \Carbon\Carbon::now();
+            $dateNow = $current_time->setTimezone('Asia/Manila')->format('Y-m-d H:i:s');
+
+            $oldOperator = $driver->operator->member_id;
+            $newOperator = $request->operator;
+
+            if ($oldOperator != $newOperator) {
+                $mem = $driver->member_id;
+                $rep = Member::find($mem);
+                $newRep = $rep->replicate();
+                $newRep->SSS = '';
+                $newRep->license_number = '';
+                $newRep->status = 'Inactive';
+                $newRep->created_at = $dateNow;
+                $newRep->save();
+            }
+
             $driver->update([
                 'last_name'=> $request->lastName,
                 'first_name' => $request->firstName,
@@ -257,6 +274,8 @@ class DriversController extends Controller
                 'SSS' => $request->sss,
                 'license_number' => $request->licenseNo,
                 'expiry_date' => $request->licenseExpiryDate,
+                'updated_at' => $dateNow,
+
             ]);
 
         if($this->arrayChecker($request->children) && $this->arrayChecker($request->childrenBDay))
@@ -291,6 +310,8 @@ class DriversController extends Controller
      */
     public function destroy(Member $driver)
     {
+        $driver->delete();
+    	return back();
 
     }
 

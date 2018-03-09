@@ -44,7 +44,9 @@ class AnnouncementsController extends Controller
     {
         //
         $this->validate(request(), [
-            "announce" =>  'max:499',
+            "announce" =>  'required|max:499',
+            "title" =>  'required|max:50',
+
         ]);
         $current_time = \Carbon\Carbon::now();
         $dateNow = $current_time->setTimezone('Asia/Manila')->format('Y-m-d H:i:s');

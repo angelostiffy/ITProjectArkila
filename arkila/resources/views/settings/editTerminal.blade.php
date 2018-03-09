@@ -6,26 +6,29 @@
 @section('form-title', 'Edit Terminal')
 @section('form-body')
 
-	
-	@include('message.error')
-	    <div class="form-group">
+    <div class="form-group">
+        
+        <div style="margin-top:18%">
+            @include('message.error')
+        </div>
+        
         <label>Terminal Name:</label>
         <input type="text" class="form-control" name="editTerminalName" value="{{$terminal->description}}">
     </div>
 
 @endsection
 @section('form-btn')
-<a href="" class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Save Changes</a>
+    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Save Changes</a>
 @endsection
 
 @section('modal-title','Alert')
 @section('modal-body')
-<p>Are you sure you want to create *insert Decription* as a discount?</p>
+    <p>Are you sure you want to edit this terminal?</p>
 @endsection
 
 @section('modal-btn')
-<button type="submit" class="btn btn-primary">Yes</a>
-<button class="btn btn-primary" data-dismiss="modal">No</button>
+    <button type="submit" class="btn btn-primary">Yes</a>
+    <button class="btn btn-primary" data-dismiss="modal">No</button>
 @endsection
 
 @section('scripts')
