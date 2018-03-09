@@ -185,7 +185,8 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header bg-red">
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span></button>
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button>
                                                         <h4 class="modal-title"> Confirm</h4>
                                                     </div>
                                                     <div class="modal-body row" style="margin: 0% 1%;">

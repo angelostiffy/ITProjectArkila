@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
     <!-- Bootstrap time Picker -->
     <link rel="stylesheet" href="{{ URL::asset('adminlte/plugins/timepicker/bootstrap-timepicker.min.css') }}">
-      <!-- Select2 -->
+    <!-- Select2 -->
     <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/select2/dist/css/select2.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ URL::asset('adminlte/dist/css/AdminLTE.min.css') }}">
@@ -40,11 +40,11 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <!-- style.css -->
-    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
-    @show
+    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}"> @show
 </head>
 
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+
 <body class="hold-transition skin-blue layout-top-nav">
     <div class="wrapper">
 
@@ -54,13 +54,12 @@
         <div class="content-wrapper">
             <div class="container">
                 <form action="@yield('form-action')" method="POST">
-                {{csrf_field()}}
-                @yield('method_field')
+                    {{csrf_field()}} @yield('method_field')
                     <section class="content">
                         <div class="login-box">
                             <div class="login-logo">
                                 <div class="col-md-1">
-                                    <h1><a href= @yield('back-link') ><i class="fa fa-arrow-circle-left"></i></a></h1>
+                                    <h1><a href=@ yield( 'back-link')><i class="fa fa-arrow-circle-left"></i></a></h1>
                                 </div>
                                 <div class="col-md-11">
                                     <h1>
@@ -70,14 +69,14 @@
                             </div>
                             <div class="login-box-body">
                                 @yield('form-body')
-                                
-                                    <!-- FORM -->
-                                
-                                
+
+                                <!-- FORM -->
+
+
                             </div>
                             <!-- /.login-box-body -->
                             <div class="box-footer">
-                                    @yield('others') 
+                                @yield('others')
                                 <div class="form-group pull-right">
                                     @yield('form-btn')
                                 </div>
@@ -85,21 +84,25 @@
                         </div>
 
                         <div class="modal fade" id="form-modal">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span></button>
-                                        <h3 class="modal-title"> @yield('modal-title') </h3>
+                            <div class="modal-dialog">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-primary">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                            <h4 class="modal-title"> @yield('modal-title') </h4>
+                                        </div>
+                                        <div class="modal-body row" style="margin: 0% 1%;">
+                                            <p class="text-center" style="font-size: 150%;">@yield('modal-body')</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            @yield('modal-btn')
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                        @yield('modal-body')
-                                    </div>
-                                    <div class="modal-footer">
-                                        @yield('modal-btn')
-                                    </div>
+                                    <!-- /.modal-content -->
                                 </div>
-                                <!-- /.modal-content -->
+                                <!-- /.col -->
                             </div>
                             <!-- /.modal-dialog -->
                         </div>
@@ -111,7 +114,7 @@
         </div>
         <!-- /.content-wrapper -->
 
-        
+
         @include('layouts.partials.footer')
     </div>
     <!-- ./wrapper -->

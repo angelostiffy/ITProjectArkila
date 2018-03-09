@@ -33,6 +33,16 @@ class User extends Authenticatable
         return $this->hasOne(Terminal::class, 'terminal_id');
     }
 
+    public function scopeStatusEnable($query)
+    {
+      return $query->where('status', '=', 'enable');
+    }
+
+    public function scopeSuperAdmin($query)
+    {
+      return $query->where('user_type', '=', 'Super-Admin');
+    }
+
     public function scopeAdmin($query)
     {
         return $query->where('user_type', '=','Admin');
@@ -46,6 +56,26 @@ class User extends Authenticatable
     public function scopeCustomer($query)
     {
         return $query->where('user_type', '=', 'Customer');
+    }
+
+    public function isSuperAdmin()
+    {
+      return $this->user_type === 'Super-Admin';
+    }
+
+    public function isAdmin()
+    {
+      return $this->user_type === 'Admin';
+    }
+
+    public function isDriver()
+    {
+      return $this->user_type === 'Driver';
+    }
+
+    public function isCustomer()
+    {
+      return $this->user_type === 'Customer';
     }
 
     public function sendPasswordResetNotification($token)

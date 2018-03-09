@@ -4,12 +4,13 @@
         <div id="userImg" class="text-center">
             <img id="imgSize" src="{{ URL::asset('img/user_icon.png') }}">
         </div>
-        <form>
-            <input type="text" class="form-control" placeholder="Username" required autofocus>
-            <input type="password" class="form-control" placeholder="Password" required>
+        <form method="POST" action="/login">
+          {{csrf_field()}}
+            <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
             <div class="checkbox">
                 <label>
-                        <input type="checkbox" value="remember-me"> Remember me
+                        <input type="checkbox" value="remember"> Remember me
                 </label>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use App\User;
 class LoginController extends Controller
 {
     /*
@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -35,5 +35,31 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function showLoginForm()
+    {
+        return view('login.login');
+    }
+
+    public function username()
+    {
+      return 'username';
+    }
+
+    public function authenticated(Request $request, $user)
+    {
+        if($user->isCustomer()){
+          return redirect('home/user-management');
+        }else if($user->isDriver()){
+          return redirect(route('drivermodule.dashboard'));
+        }else if($user->isSuperAdmin()){
+          return redirect('home/vans');
+        }else if($user->isAdmin()){
+          return redirect('home/settings');
+        }else{
+          abort(404);
+        }
+        //return $user;
     }
 }

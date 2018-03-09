@@ -11,17 +11,23 @@
 |
 */
 
+Auth::routes();
+
 //Made by Randall
 
 //Route::get('/randall', 'VansController@index')
-Route::get('/driver-test', 'DriverViewTestController@index');
+//Route::resource('/driver-test', 'DriverViewTestController');
 Route::get('/randall', 'RandallController@index');
+
+Route::get('/driver-profile', function(){
+    return view('drivermodule.report.driverReport');
+});
 
 
 Route::get('/driver-profile', function(){
     return view('drivermodule.report.driverReport');
 });
-Route::get('/login', 'LoginTestController@index');
+Route::get('/login', 'Auth\LoginController@showLoginForm');
 
 
 Route::get('/driver-profile', function(){
@@ -61,7 +67,7 @@ Route::get('home/operators/profile/{operator}','OperatorsController@showProfile'
 
 /************ Drivers ******************************/
 Route::resource('home/drivers', 'DriversController');
-Route::patch('home/drivers/{driver}/archiveDriver', 'DriversController@archiveDelete')->name('drivers.archiveDelete');
+Route::patch('home/drivers/{driver}/archive', 'DriversController@archiveDelete')->name('drivers.archiveDelete');
 
 //Adding a driver to a specific operator
 Route::get('home/operators/{operator}/drivers/create', 'DriversController@createFromOperator')->name('drivers.createFromOperator');
@@ -144,20 +150,27 @@ Route::resource('home/triptest', 'TripsController');
 
 
 /* Trips */
-Route::resource('home/trips', 'TripsController');
+Route::post('home/trips/{destination}/{van}/{driver}', 'TripsController@store')->name('trips.store');
+Route::resource('home/trips', 'TripsController',[
+    'except' =>['store']
+]);
 Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
 
 
 /********Archive ********/
 Route::patch('home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
-=======
+
 /*************************************Driver Module****************************/
 
 /********************Dashboard************************/
-Route::get('home/driver-dashboard', 'HomeController@driverDashboard');
+Route::group(['middleware' => ['auth', 'driver']], function(){
+  Route::get('home/driver-dashboard', 'DriverModuleControllers\DriverHomeController@index')->name('drivermodule.dashboard');
+  Route::get('home/view-queue', 'DriverModuleControllers\ViewVanQueueController@showVanQueue')->name('drivermodule.viewQueue');
+  Route::get('home/view-announcement', 'DriverModuleControllers\ViewAnnouncementsController@showAnnouncement')->name('drivermodule.viewAnnouncement');
+});
 
-Route::get('home/view-queue', 'DriverModuleControllers\ViewVanQueueController@showVanQueue')->name('drivermodule.viewQueue');
-Route::get('home/view-announcement', 'DriverModuleControllers\ViewAnnouncementsController@showAnnouncement')->name('drivermodule.viewAnnouncement');
+Route::get('home/try', 'PassController@index');
+
 
 Route::get('home/profile', 'DriverModuleControllers\DriverProfileController@index');
 /******************************************************/

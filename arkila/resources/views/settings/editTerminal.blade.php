@@ -21,14 +21,14 @@
     <a href="" class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Save Changes</a>
 @endsection
 
-@section('modal-title','Alert')
+@section('modal-title','Confirm')
 @section('modal-body')
     <p>Are you sure you want to edit this terminal?</p>
 @endsection
 
 @section('modal-btn')
-    <button type="submit" class="btn btn-primary">Yes</a>
-    <button class="btn btn-primary" data-dismiss="modal">No</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+    <button type="submit" class="btn btn-primary" style="width:33%;">Submit</button>
 @endsection
 
 @section('scripts')
