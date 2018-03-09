@@ -75,6 +75,7 @@
                 <div class="modal-body">
                     <div class="box">
                         <div class="box-body">
+                           <form action="" method="">
                             <div class="form-group" class="control-label">
                                 <label for="">Current password:</label>
 
@@ -99,6 +100,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary btn-group-justified text-center">Submit</button>
                 </div>
+                </form>
             </div>
             <!-- /.modal-content -->
         </div>
