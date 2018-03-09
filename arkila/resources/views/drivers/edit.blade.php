@@ -15,6 +15,7 @@
         <div class="box-body">
 
             <div class="tab">
+                @include('message.error')
                 <h4>Personal Information</h4>
                 <div class="tab">
                      
