@@ -8,6 +8,10 @@
 	@include('message.error')
 
 	<div>
+        <div style="margin-top:18%">
+            @include('message.error')
+        </div>
+        
 	 	<label for="description">Description:</label>
 	 	<p>{{$fee->description}}</p>
 	</div>
@@ -19,15 +23,15 @@
 
 @endsection
 @section('form-btn')
- <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Save Changes</a>
+    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Save Changes</a>
 @endsection
 
 @section('modal-title','Alert')
 @section('modal-body')
-<p>Are you sure you want to change the fare of *insert Description* ?</p>
+    <p>Are you sure you want to change this fee?</p>
 @endsection
 
 @section('modal-btn')
-<button type="submit" class="btn btn-primary">Yes</button>
-<button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+    <button type="submit" class="btn btn-primary">Yes</button>
+    <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
 @endsection

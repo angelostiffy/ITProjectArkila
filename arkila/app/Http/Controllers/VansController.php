@@ -7,6 +7,8 @@ use App\Rules\checkPlateNumber;
 use App\Rules\checkOperator;
 use App\Van;
 use App\Member;
+use Illuminate\Http\Request;
+
 
 class VansController extends Controller {
 
@@ -174,6 +176,7 @@ class VansController extends Controller {
         $van->members()->detach();
         $van->delete();
     	return back();
+
     }
 
     public function listDrivers(){
@@ -215,5 +218,15 @@ class VansController extends Controller {
             return "Van not found";
         }
     }
-}
+
+    public function archiveDelete(Request $request, Van $van)
+    {
+        $van->update([
+           'status' => 'Inactive',
+        ]);
+        return redirect(route('vans.index'));
+
+        }
+    }
+
 

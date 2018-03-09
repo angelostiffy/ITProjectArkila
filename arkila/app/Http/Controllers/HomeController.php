@@ -8,6 +8,7 @@ use App\FeesAndDeduction;
 use App\Destination;
 use App\Terminal;
 use App\User;
+use App\Van;
 
 use App\Trip;
 
@@ -73,8 +74,9 @@ class HomeController extends Controller
       }
     public function archive() {
         $drivers = Member::latest()->where('status', 'Inactive')->get();
+        $vans = Van::latest()->where('status', 'Inactive')->get();
 
-        return view('archive.index', compact('drivers'));
+        return view('archive.index', compact('drivers', 'vans'));
 
 
     }
