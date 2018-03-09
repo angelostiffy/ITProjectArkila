@@ -20,6 +20,7 @@
                                         <th>Age</th>
                                         <th>Contact Number</th>
                                         <th>Status</th>
+                                        <th>Operator</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -30,6 +31,7 @@
                                         <td>{{ $driver->age }}</td>
                                         <td>{{ $driver->contact_number }}</td>
                                         <td>{{ $driver->status }}</td>
+                                        <td>{{ $driver->operator->full_name }}</td>
                                         <td>
                                 
                                             
@@ -37,14 +39,13 @@
                                                     
                                                     <a href="#" class="btn btn-default"><i class="fa fa-eye"></i>View</a>
                                                    
-                                                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteDriver"><i class="fa fa-trash"></i> Delete</button>
+                                                    <button class="btn btn-outline-danger" data-toggle="modal" data-target="#{{ 'deleteWarning'. $driver->member_id }}"><i class="fa fa-trash"></i> Delete</button>
                                                 </div>
                                                 
                                         </td>
                                     </tr>
-                                    @endforeach
                                     <!--DELETE MODAL MIGUEL-->
-                                    <div class="modal fade" id="deleteDriver">
+                                    <div class="modal fade" id="{{ 'deleteWarning'. $driver->member_id }}">
                                         <div class="modal-dialog">
                                             <div class="col-md-offset-2 col-md-8">
                                                 <div class="modal-content">
@@ -58,14 +59,18 @@
                                                            <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
                                                        </div>
                                                        <div class="col-md-10">
-                                                        <p style="font-size: 110%;">Are you sure you want to delete "yung user para pogi"</p>
+                                                        <p style="font-size: 110%;">Are you sure you want to delete "{{ $driver->full_name }}"</p>
                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                                            <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
-                                                        
+                                                            <form method="POST" action="{{route('drivers.destroy',[$driver->member_id])}}">
+                                                                {{csrf_field()}}
+                                                                {{method_field('DELETE')}}
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                                                <button type="submit" class="btn btn-danger" style="width:22%;">Yes</button>
+                                                            </form>    
+                                                                        
                                                     </div>
                                                 </div>
                                                 <!-- /.modal-content -->
@@ -75,6 +80,7 @@
                                         <!-- /.modal-dialog -->
                                     </div>
                                     <!-- /.modal -->
+                                    @endforeach
                                     
 
                                 </tbody>
@@ -98,18 +104,20 @@
                                     <tr>
                                         <th>Plate Number</th>
                                         <th>Driver</th>
+                                        <th>Operator</th>
                                         <th>Model</th>
                                         <th>Seating Capacity</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+                                    @foreach ($vans as $van)
                                     <tr>
-                                        <td>UTB 355</td>
-                                        <td>Clint Dalayoan</td>
-                                        <td>Toyota Hiace</td>
-                                        <td></td>
+                                        <td>{{ $van->plate_number }}</td>
+                                        <td>{{ $van->driver()->first()->full_name ?? $van->driver()->first() }}</td>
+                                        <td>{{ $van->operator()->first()->full_name ??  $van->operator()->first() }}</td>
+                                        <td>{{ $van->model }}</td>
+                                        <td>{{ $van->seating_capacity }}</td>
                                         <td>
                                             <div class="text-center">
                                                  
@@ -119,6 +127,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    @endforeach
                                     
                                     <!--DELETE MODAL MIGUEL-->
                                     <div class="modal fade" id="deleteVan">

@@ -14,7 +14,7 @@
 //Made by Randall
 
 //Route::get('/randall', 'VansController@index')
-//Route::resource('/driver-test', 'DriverViewTestController');
+Route::get('/driver-test', 'DriverViewTestController@index');
 Route::get('/randall', 'RandallController@index');
 
 Route::get('/randall', function(){
@@ -51,7 +51,7 @@ Route::get('home/operators/profile/{operator}','OperatorsController@showProfile'
 
 /************ Drivers ******************************/
 Route::resource('home/drivers', 'DriversController');
-Route::patch('home/drivers/{driver}/archive', 'DriversController@archiveDelete')->name('drivers.archiveDelete');
+Route::patch('home/drivers/{driver}/archiveDriver', 'DriversController@archiveDelete')->name('drivers.archiveDelete');
 
 //Adding a driver to a specific operator
 Route::get('home/operators/{operator}/drivers/create', 'DriversController@createFromOperator')->name('drivers.createFromOperator');
@@ -134,18 +134,8 @@ Route::resource('home/triptest', 'TripsController');
 
 
 /* Trips */
-Route::post('home/trips/{destination}/{van}/{driver}', 'TripsController@store')->name('trips.store');
-Route::resource('home/trips', 'TripsController',[
-    'except' =>['store']
-]);
+Route::resource('home/trips', 'TripsController');
 Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
 
-/*************************************Driver Module****************************/
-
-/********************Dashboard************************/
-Route::get('home/driver', 'HomeController@driverDashboard');
-
-
-/******************************************************/
-
-/******************************************************************************/
+/********Archive ********/
+Route::patch('home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');

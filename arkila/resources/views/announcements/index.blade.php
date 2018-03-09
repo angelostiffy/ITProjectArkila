@@ -1,5 +1,13 @@
-@extends('layouts.master') @section('title', 'Announcements') @section('content') @if ($announcements->count() > 0) @foreach ($announcements->sortByDesc('created_at') as $announcement)
+@extends('layouts.master') @section('title', 'Announcements') @section('content') 
+
+@include('message.error')
+
+@if ($announcements->count() > 0)
+
+@foreach ($announcements->sortByDesc('created_at') as $announcement)
+
 <div class="box box-warning">
+
     <div class="box-header with-border bg-light">
         <h4>Title: {{ $announcement->title }}</h4>
         <h6>Viewer: {{ $announcement->viewer }} </h6>
