@@ -9,7 +9,7 @@ class DriverProfileController extends Controller
 {
       public function index()
       {
-         $driver = Member::find()->allDrivers()
+         // $driver = Member::allDrivers()->where('');
         return view('drivermodule.profile.driverProfile');
       }
 }

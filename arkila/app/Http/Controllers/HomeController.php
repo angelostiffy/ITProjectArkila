@@ -17,15 +17,15 @@ use App\Member;
 
 class HomeController extends Controller
 {
-//    /**
-//     * Create a new controller instance.
-//     *
-//     * @return void
-//     */
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
+   // /**
+   //  * Create a new controller instance.
+   //  *
+   //  * @return void
+   //  */
+   // public function __construct()
+   // {
+   //     $this->middleware('auth:admin');
+   // }
 
     /**
      * Show the application dashboard.
@@ -57,21 +57,21 @@ class HomeController extends Controller
     }
 
 
-    public function driverDashboard()
-    {
-        $announcements = Announcement::latest()->where('viewer', '=', 'Public')->orWhere('viewer', '=', 'Driver Only')->get();
-        // $ondeckTrip = Trip::
-        $trips = Trip::join('member', 'trip.driver_id', '=', 'member.member_id')
-                      ->join('destination', 'trip.destination_id', '=', 'destination.destination_id')
-                      ->join('terminal', 'destination.terminal_id', '=', 'terminal.terminal_id')
-                      ->join('van', 'trip.plate_number', '=', 'van.plate_number')
-                      ->where('member.operator_id', '=', null)
-                      ->where('member.role', '=', 'Driver')
-                      ->where('trip.status', '<>', 'Departed')
-                      ->orderBy('trip.created_at','asc')
-                      ->select('trip.trip_id as trip_id', 'trip.queue_number as queueId', 'trip.plate_number as plate_number', 'trip.remarks as remarks', 'terminal.description as terminaldesc')->get();
-        return view('drivermodule.index', compact('announcements', 'trips'));
-      }
+    // public function driverDashboard()
+    // {
+    //     $announcements = Announcement::latest()->where('viewer', '=', 'Public')->orWhere('viewer', '=', 'Driver Only')->get();
+    //     // $ondeckTrip = Trip::
+    //     $trips = Trip::join('member', 'trip.driver_id', '=', 'member.member_id')
+    //                   ->join('destination', 'trip.destination_id', '=', 'destination.destination_id')
+    //                   ->join('terminal', 'destination.terminal_id', '=', 'terminal.terminal_id')
+    //                   ->join('van', 'trip.plate_number', '=', 'van.plate_number')
+    //                   ->where('member.operator_id', '=', null)
+    //                   ->where('member.role', '=', 'Driver')
+    //                   ->where('trip.status', '<>', 'Departed')
+    //                   ->orderBy('trip.created_at','asc')
+    //                   ->select('trip.trip_id as trip_id', 'trip.queue_number as queueId', 'trip.plate_number as plate_number', 'trip.remarks as remarks', 'terminal.description as terminaldesc')->get();
+    //     return view('drivermodule.index', compact('announcements', 'trips'));
+    //   }
     public function archive() {
         $drivers = Member::latest()->where('status', 'Inactive')->get();
         $vans = Van::latest()->where('status', 'Inactive')->get();
