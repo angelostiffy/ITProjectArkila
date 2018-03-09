@@ -19,15 +19,6 @@
 //Route::resource('/driver-test', 'DriverViewTestController');
 Route::get('/randall', 'RandallController@index');
 
-
-<<<<<<< HEAD
-Route::get('/driver-profile', function(){
-    return view('drivermodule.report.driverReport');
-});
-=======
-
-
-=======
 Route::get('/driver-profile', function(){
     return view('drivermodule.report.driverReport');
 });
@@ -39,16 +30,10 @@ Route::get('/driver-profile', function(){
 Route::get('/login', 'LoginTestController@index');
 
 
->>>>>>> c864eb8324fb96595aa5e771f287718ec3518b23
 Route::get('/driver-profile', function(){
     return view('drivermodule.report.driverReport');
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c864eb8324fb96595aa5e771f287718ec3518b23
->>>>>>> 488262d882c6a55daf92e5c7f8d1d973c3711511
 Route::get('/teo', function(){
     return view('rental.newcreate');
 });
@@ -171,18 +156,10 @@ Route::resource('home/trips', 'TripsController',[
 ]);
 Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
 
-<<<<<<< HEAD
-/********Archive ********/
-Route::patch('home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
-=======
-<<<<<<< HEAD
-=======
 
 /********Archive ********/
 Route::patch('home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
-=======
->>>>>>> 6cc5bb4d7e9bb54cec40977a98860e39c9e5831c
->>>>>>> 488262d882c6a55daf92e5c7f8d1d973c3711511
+
 /*************************************Driver Module****************************/
 
 /********************Dashboard************************/
