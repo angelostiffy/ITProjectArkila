@@ -6,6 +6,10 @@
 @section('form-body')
 
        <div class="form-group">
+        <div style="margin-top:18%">
+            @include('message.error')
+        </div>
+           
         <label>Terminal Name:</label>
         {{csrf_field()}}
         <input type="text" class="form-control" name="addTerminalName">
