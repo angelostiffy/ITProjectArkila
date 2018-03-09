@@ -19,7 +19,7 @@
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-envelope-o"></i>
-                                <span class="label label-success">4</span>
+                                <span class="label label-success"></span>
                             </a>
                     <ul class="dropdown-menu">
                         <li class="header">You have 4 messages</li>
@@ -97,7 +97,7 @@
                 <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-bell-o"></i>
-                                <span class="label label-warning">10</span>
+                                <span class="label label-warning"></span>
                             </a>
                     <ul class="dropdown-menu">
                         <li class="header">You have 10 notifications</li>
@@ -138,7 +138,7 @@
                 <li class="dropdown tasks-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-bullhorn"></i>
-                                <span class="label label-danger">9</span>
+                                <span class="label label-danger"></span>
                             </a>
                     <ul class="dropdown-menu">
 
@@ -164,9 +164,12 @@
                                     <label for="">Message:</label>
                                     <textarea name="announce" rows="5" class="form-control" placeholder=""></textarea>
                                 </div>
+                                <div class="pull-right">
+                                    <button class="btn btn-warning">ANNOUNCE</button>
+                                </div>
                             </li>
-                            <li class="footer box-body pull-right">
-                                <button class="btn btn-warning">ANNOUNCE</button>
+                            <li class="footer box-body text-center">
+                                <a href="">View all</a>
                             </li>
                         </form>
                     </ul>

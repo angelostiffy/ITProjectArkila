@@ -17,7 +17,7 @@ class TripsController extends Controller
      */
     public function index()
     {
-        $trips = Trip::whereNotNull('queue_number')->get();
+        $trips = Trip::whereNotNull('queue_number')->orderBy('queue_number')->get();
         $vans = Van::all();
         $destinations = Destination::all();
         $drivers = Member::allDrivers()->get();
