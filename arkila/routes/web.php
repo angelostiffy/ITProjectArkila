@@ -17,9 +17,7 @@
 //Route::resource('/driver-test', 'DriverViewTestController');
 Route::get('/randall', 'RandallController@index');
 
-Route::get('/driver-profile', function(){
-    return view('drivermodule.profile.driverProfile');
-});
+
 Route::get('/teo', function(){
     return view('rental.newcreate');
 });
@@ -150,6 +148,7 @@ Route::get('home/driver-dashboard', 'HomeController@driverDashboard');
 Route::get('home/view-queue', 'DriverModuleControllers\ViewVanQueueController@showVanQueue')->name('drivermodule.viewQueue');
 Route::get('home/view-announcement', 'DriverModuleControllers\ViewAnnouncementsController@showAnnouncement')->name('drivermodule.viewAnnouncement');
 
+Route::get('home/profile', 'DriverModuleControllers\DriverProfileController@index');
 /******************************************************/
 
 /******************************************************************************/
