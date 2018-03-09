@@ -17,13 +17,10 @@
 Route::get('/driver-test', 'DriverViewTestController@index');
 Route::get('/randall', 'RandallController@index');
 
-<<<<<<< HEAD
 
-=======
 Route::get('/driver-profile', function(){
     return view('drivermodule.report.driverReport');
 });
->>>>>>> c85fe4bdd30dd7c2d30299f2eb623a93e7954fc8
 Route::get('/teo', function(){
     return view('rental.newcreate');
 });
@@ -143,10 +140,8 @@ Route::resource('home/triptest', 'TripsController');
 Route::resource('home/trips', 'TripsController');
 Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
 
-<<<<<<< HEAD
 /********Archive ********/
 Route::patch('home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
-=======
 /*************************************Driver Module****************************/
 
 /********************Dashboard************************/
@@ -159,4 +154,3 @@ Route::get('home/profile', 'DriverModuleControllers\DriverProfileController@inde
 /******************************************************/
 
 /******************************************************************************/
->>>>>>> f9b9e5a532b973b940f36cd7d0ede27ec7d6b05f
