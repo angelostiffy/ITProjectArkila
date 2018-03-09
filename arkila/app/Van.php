@@ -14,6 +14,7 @@ class Van extends Model
     	'plate_number',
         'model',
         'seating_capacity',
+        'status',
 	];  
 	//
 

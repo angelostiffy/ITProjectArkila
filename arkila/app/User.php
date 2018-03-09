@@ -33,6 +33,16 @@ class User extends Authenticatable
         return $this->hasOne(Terminal::class, 'terminal_id');
     }
 
+    public function scopeStatusEnable($query)
+    {
+      return $query->where('status', '=', 'enable');
+    }
+
+    public function scopeSuperAdmin($query)
+    {
+      return $query->where('user_type', '=', 'Super-Admin');
+    }
+
     public function scopeAdmin($query)
     {
         return $query->where('user_type', '=','Admin');

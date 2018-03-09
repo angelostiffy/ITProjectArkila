@@ -6,7 +6,7 @@
             <thead>
                 <tr>
                     <th>Driver ID</th>
-                    <th>Operator ID</th>
+                    <th>Operator</th>
                     <th>Name</th>
                     <th>Contact Number</th>
                     <th>Address</th>
@@ -19,7 +19,7 @@
                 @foreach($drivers->where('status','Active') as $driver)
                 <tr>
                     <th>{{$driver->member_id}}</th>
-                    <td>{{$driver->operator_id}}</td>
+                    <td>{{$driver->operator->full_name}}</td>
                     <td>{{$driver->full_name}}</td>
                     <td>{{$driver->contact_number}}</td>
                     <td>{{$driver->address}}</td>
