@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @extends('layouts.master') @section('title', 'Announcements') @section('content') 
 
 @include('message.error')
@@ -15,51 +16,81 @@
         @if ($announcement->created_at->ne($announcement->updated_at))
         <h6>Updated: {{ $announcement->updated_at->format('Y-m-d h:i:s A') }}</h6>
         @endif
+=======
+@extends('layouts.master') 
+@section('title', 'Announcements') 
+@section('content') 
+>>>>>>> f9b9e5a532b973b940f36cd7d0ede27ec7d6b05f
 
-    </div>
-    <div class="box-body">
-        <p>{{ $announcement->description }}</p>
-    </div>
+@if ($announcements->count() > 0) 
 
-    <div class="box-footer">
-        <div class="pull-right">
-            <a href="/home/announcements/{{ $announcement->announcement_id }}/edit/" class="btn btn-primary btn-create"><i class="fa fa-pencil"></i>Edit</a>
-            <button class="btn btn-outline-danger btn-create" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash"></i>Delete</button>
+    @foreach ($announcements->sortByDesc('created_at') as $announcement)
+
+    <div class="box box-warning">
+        <div class="box-header with-border bg-light">
+            <h4>Title: {{ $announcement->title }}</h4>
+            <h6>Viewer: {{ $announcement->viewer }} </h6>
+            <h6>Created: {{ $announcement->created_at->format('Y-m-d h:i:s A') }}</h6>
+            @if ($announcement->created_at->ne($announcement->updated_at))
+            <h6>Updated: {{ $announcement->updated_at->format('Y-m-d h:i:s A') }}</h6>
+            @endif
 
         </div>
-    </div>
+        <div class="box-body">
+            <p>{{ $announcement->description }}</p>
+        </div>
 
-    <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-sm">
+        <div class="box-footer">
+            <div class="pull-right">
+                <a href="/home/announcements/{{ $announcement->announcement_id }}/edit/" class="btn btn-primary btn-create"><i class="fa fa-pencil"></i>Edit</a>
+                <button class="btn btn-outline-danger btn-create" data-toggle="modal" data-target="#{{'announcement'.$announcement->announcement_id}}"><i class="fa fa-trash"></i>Delete</button>
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Confirmation</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete this announcement?</p>
-                </div>
-                <div class="modal-footer">
-                    <form method="POST" action="/home/announcements/{{$announcement->announcement_id}}">
-                        {{csrf_field()}} {{method_field('DELETE')}}
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
             </div>
         </div>
+        <!-- Modal for Delete-->
+        <div class="modal fade" id="{{'announcement'.$announcement->announcement_id}}">
+            <div class="modal-dialog">
+                <div class="col-md-offset-2 col-md-8">
+                    <div class="modal-content">
+                        <div class="modal-header bg-red">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"> Confirm</h4>
+                        </div>
+                        <div class="modal-body row" style="margin: 0% 1%;">
+                            <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
+                                <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
+                            </div>
+                            <div class="col-md-10">
+                                <p style="font-size: 110%;">Are you sure you want to delete this Announcement?</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <form method="POST" action="/home/announcements/{{$announcement->announcement_id}}">
+                                {{csrf_field()}} 
+                                {{method_field('DELETE')}}
+
+                                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                <button type="submit" name="driverArc" value="Arch" class="btn btn-danger" style="width:22%;">Delete</button>
+
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->  
     </div>
-    <!-- /.box-body -->
-</div>
-</form>
-@endforeach
-<!-- /.content -->
+
+    @endforeach
+    <!-- /.content -->
 @else
 <div class="container text-center" style="margin-top: 18%">
     <h1>No Announcement/s as of the moment</h1>
     <p>To add announcement click on the Megaphone icon located at top right corner of the page. (beside the profile icon)</p>
 </div>
-@endif @endsection
+@endif 
+@endsection
