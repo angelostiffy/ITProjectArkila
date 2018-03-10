@@ -32,7 +32,7 @@
           </a>
             </li>
             <li class="treeview">
-                <a href="/home/profile">
+                <a href="{{route('drivermodule.showProfile')}}">
             <i class="	fa fa-user"></i>
             <span>Profile</span>
           </a>

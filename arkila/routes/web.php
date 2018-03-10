@@ -164,15 +164,22 @@ Route::patch('home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name
 
 /********************Dashboard************************/
 Route::group(['middleware' => ['auth', 'driver']], function(){
+  /*Driver Dashboard*/
   Route::get('home/driver-dashboard', 'DriverModuleControllers\DriverHomeController@index')->name('drivermodule.dashboard');
+  /*AJAX GET for queue and announcements*/
   Route::get('home/view-queue', 'DriverModuleControllers\ViewVanQueueController@showVanQueue')->name('drivermodule.viewQueue');
   Route::get('home/view-announcement', 'DriverModuleControllers\ViewAnnouncementsController@showAnnouncement')->name('drivermodule.viewAnnouncement');
+  /*Driver Profile*/
+  Route::get('home/profile', 'DriverModuleControllers\DriverProfileController@showDriverProfile')->name('drivermodule.showProfile');
+  Route::post('home/profile', 'DriverModuleControllers\DriverProfileController@changeNotificationStatus')->name('drivermodule.notification');
+  /*Change Password*/
+  Route::patch('home/profile/{driverid}', 'DriverModuleControllers\DriverProfileController@updatePassword')->name('drivermodule.changePassword');
 });
 
 Route::get('home/try', 'PassController@index');
 
 
-Route::get('home/profile', 'DriverModuleControllers\DriverProfileController@index');
+//Route::get('home/profile', 'DriverModuleControllers\DriverProfileController@index');
 /******************************************************/
 
 /******************************************************************************/

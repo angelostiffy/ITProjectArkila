@@ -1,4 +1,7 @@
-@extends('layouts.driver') @section('title', 'Driver Profile') @section('content-title', 'Driver Home') @section('content')
+@extends('layouts.driver')
+@section('title', 'Driver Profile')
+@section('content-title', 'Driver Home')
+@section('content')
                 <div class="col-md-offset-1 col-md-3">
 
                     <!-- Profile Image -->
@@ -6,18 +9,18 @@
                         <div class="box-body box-profile">
                             <img class="profile-user-img img-responsive img-circle" src="../dist/img/user4-128x128.jpg" alt="User profile picture">
 
-                            <h3 class="profile-username text-center">Shaina Caballar</h3>
+                            <h3 class="profile-username text-center">{{ $profile->first_name.' '.$profile->middle_name.' '.$profile->last_name }}</h3>
 
                             <p class="text-muted text-center">1232gmailcom</p>
                         </div>
                         <div class="box-footer">
-                            
-                                           
+
+
                                         <ul class="nav nav-pills nav-stacked">
                                             <li><a href="#"><i class="fa fa-bell"></i> Notifications
-                                              <span class="label pull-right">         
+                                              <span class="label pull-right">
                                                   <label class="switch">
-                                                      <input type="checkbox">
+                                                      <input type="checkbox" class="status" data-id="{{$profile->member_id}}">
                                                       <span class="slider round"></span>
                                                   </label>
                                               </span></a>
@@ -35,26 +38,26 @@
 
                 <div class="col-md-6">
                    <div class="box">
-                       
+
                     <div class="box-header">
                         <h3 class="box-title">Personal Info</h3>
                     </div>
                                        <div class="box-body">
                                         <div class="form-group" class="control-label">
                                             <label for="">Contact Number:</label>
-                                            <input value="" id="" name="" type="text" class="form-control" disabled>
+                                            <input value="{{$profile->contact_number}}" id="" name="" type="text" class="form-control" disabled>
                                         </div>
                                         <div class="form-group" class="control-label">
                                             <label for="">Address:</label>
-                                            <input value="" id="" name="" type="text" class="form-control" disabled>
+                                            <input value="{{$profile->address}}" id="" name="" type="text" class="form-control" disabled>
                                         </div>
                                         <div class="form-group" class="control-label">
                                             <label for="">Birthday:</label>
-                                            <input value="" id="" name="" type="text" class="form-control" disabled>
+                                            <input value="{{$profile->birth_date}}" id="" name="" type="text" class="form-control" disabled>
                                         </div>
                                         <div class="form-group" class="control-label">
                                             <label for="">Trips Completed:</label>
-                                            <input value="" id="" name="" type="text" class="form-control" disabled>
+                                            <input value="{{$counter}}" id="" name="" type="text" class="form-control" disabled>
                                 </div>
                                 </div>
                    </div>
@@ -128,4 +131,23 @@
             border-radius: 80%;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('.status').on('click', function(event){
+          id = $(this).data('id');
+          $.ajax({
+            type: 'POST',
+            url: "{{ URL::route('drivermodule.notification') }}",
+            data: {
+              '_token': $('input[name=_token]').val(),
+              'id': id
+            },
+            success: function(data){
+              //empty
+            },
+          });
+        });
+      });
+    </script>
 @endsection
