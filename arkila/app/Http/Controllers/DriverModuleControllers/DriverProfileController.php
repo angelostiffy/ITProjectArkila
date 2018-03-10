@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers\DriverModuleControllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Member;
 use App\Trip;
-use Illuminate\Support\Facades\Auth;
+
 
 class DriverProfileController extends Controller
 {
       public function showDriverProfile()
       {
+        $userId = Auth::id();
         $profile = Member::find(Auth::id());
         $driverTrips = Trip::all();
         $counter = 0;
@@ -21,7 +24,9 @@ class DriverProfileController extends Controller
           }
         }
 
-        return view('drivermodule.profile.driverProfile', compact('profile', 'counter'));
+
+        return view('drivermodule.profile.driverProfile', compact('profile', 'counter', 'userId'));
+
       }
 
       public function changeNotificationStatus()
@@ -30,10 +35,10 @@ class DriverProfileController extends Controller
 
           $user = Member::findOrFail($id);
           if($user->notification === "Enable"){
-              $user->status = "Disable";
+              $user->notification = "Disable";
               session()->flash('message', 'User successfully enabled!');
           }elseif($user->notification === "Disable"){
-              $user->status = "Enable";
+              $user->notification = "Enable";
 
               session()->flash('message', 'User successfully disabled!');
           }
@@ -42,8 +47,42 @@ class DriverProfileController extends Controller
           return response()->json($user);
       }
 
-      public function updatePassword(Request $request)
+      public function checkCurrentPassword()
       {
-          dd($request);
+        if(Auth::id() == request('id')){
+
+          $checkCurrentPassword = Hash::check(request('current_password'), Auth::user()->password);
+          if($checkCurrentPassword){
+            return response()->json([
+              'success' => $checkCurrentPassword
+            ]);
+          }else{
+            return response()->json([
+              'success' => $checkCurrentPassword
+            ]);
+          }
+        }
+        return response()->json([
+          'message' => 'You do not have access to that account! '
+        ]);
+      }
+
+      public function updatePassword()
+      {
+        $checkCurrentPassword = Hash::check(request('current_password'), Auth::user()->password);
+        if(!$checkCurrentPassword){
+            return redirect('/home/profile')->with('error', 'Password does not match');
+        }
+        $this->validate(request(), [
+            "password" => "required|confirmed",
+        ]);
+
+        Auth::user()->password = Hash::make(request('password'));
+        Auth::user()->save();
+        return redirect('/home/profile')->with('success', 'Successfully changed password');
+
+
+
+
       }
 }
