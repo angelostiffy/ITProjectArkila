@@ -238,11 +238,38 @@ ol.vertical{
 
                                   
                                   
-                                  <a href="" class="" data-toggle="modal" data-target="#modal-default"><i class="fa fa-remove text-red"></i></a>
+                                  <a href="" class="" data-toggle="modal" data-target="#modal-default{{$trip->trip_id}}"><i class="fa fa-remove text-red"></i></a>
                                 </div>
                               </div>
                             </div>
                           </span>
+
+                              <div class="modal fade" id="modal-default{{$trip->trip_id}}">
+                                  <div class="modal-dialog modal-sm">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span></button>
+                                              <h4 class="modal-title"><i class="fa fa-info"></i> Alert</h4>
+                                          </div>
+                                          <div class="modal-body">
+                                              <p>Will be deleted</p>
+                                          </div>
+                                          <div class="modal-footer">
+                                              <form method="POST" action="{{route('trips.destroy',[$trip->trip_id])}}">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                  {{csrf_field()}}
+                                                  {{method_field('DELETE')}}
+                                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</button>
+                                              </form>
+                                          </div>
+                                      </div>
+                                      <!-- /.modal-content -->
+                                  </div>
+                                  <!-- /.modal-dialog -->
+                              </div>
+                              <!-- /.modal -->
+
                           </li>
                         @endforeach
                     </ol>
@@ -267,18 +294,18 @@ ol.vertical{
             <div class="box-body">
 
                 <ol class="rectrangle-list">
-                  <li class="" data-plate="{{ $trip->van->plate_number}}" data-remark="{{ $trip->remarks }}">
+                  <li class="" data-plate="{{ $trip->van->plate_number ?? null}}" data-remark="{{ $trip->remarks ?? null}}">
                             <div class="row">
                               <div class="col-md-6">
                                 
                                 <p>
                                 
-                                {{ $trip->van->plate_number }}
+                                {{ $trip->van->plate_number ?? null }}
                                 </p>
                               </div>
                               <div class="col-md-6">
                                 <div class="pull-right">
-                                  <a href="" id="remark{{ $trip->trip_id}}" name="{{$trip->van->plate_number}}"  data-type="select" data-title="Update Remark" class="remark-editable btn btn-outline-secondary btn-sm editable" data-original-title="" title=""><i class="fa fa-info"></i></a>
+                                  <a href="" id="remark{{ $trip->trip_id ?? null}}" name="{{$trip->van->plate_number ?? null}}"  data-type="select" data-title="Update Remark" class="remark-editable btn btn-outline-secondary btn-sm editable" data-original-title="" title=""><i class="fa fa-info"></i></a>
 
                                   
                                   
@@ -295,27 +322,7 @@ ol.vertical{
       </div>
         <pre id="serialize_output2"></pre>
 
-      <div class="modal fade" id="modal-default">
-          <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><i class="fa fa-info"></i> Alert</h4>
-              </div>
-              <div class="modal-body">
-                <p>Will be deleted</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</button>
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
+
 @endsection
 
 @section('scripts')
@@ -329,7 +336,32 @@ ol.vertical{
   </script>
     <!-- List sortable -->
     <script>
-      var group = $("ol.serialization").sortable({
+        $(document).ready(function() {
+            $('#addQueueButt').on('click', function() {
+                var destination = $('#destination').val();
+                var van = $('#van').val();
+                var driver = $('#driver').val();
+
+                if( destination != "" && van != "" && driver != ""){
+                    $.ajax({
+                        method:'POST',
+                        url: '/home/trips/'+destination+'/'+van+'/'+driver,
+                        data: {
+                            '_token': '{{csrf_token()}}'
+                        },
+                        success: function(vanInfo){
+                            location.reload();
+                        }
+
+                    });
+
+                }
+            });
+
+
+
+
+        var group = $("ol.serialization").sortable({
         group: 'serialization',
         delay: 500,
         onDrop: function ($item, container, _super) {
@@ -381,34 +413,12 @@ ol.vertical{
           ]
       });
      @endforeach
-    
 
-      $('#addQueueButt').on('click', function() {
-          var destination = $('#destination').val();
-          var van = $('#van').val();
-          var driver = $('#driver').val();
-
-          if( destination != "" && van != "" && driver != ""){
-              $.ajax({
-                  method:'POST',
-                  url: '/home/trips/'+destination+'/'+van+'/'+driver,
-                  data: {
-                      '_token': '{{csrf_token()}}'
-                  },
-                  success: function(vanInfo){
-                      location.reload();
-                  }
-
-              });
-
-          }
-      });
-
-
-
+        });
 </script>
 
 <script>
+
           function myFunction() {
                 // Declare variables
                 var input, filter, ol, li, span, i;
