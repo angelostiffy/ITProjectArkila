@@ -16,9 +16,8 @@ Auth::routes();
 //Made by Randall
 
 //Route::get('/randall', 'VansController@index')
-Route::get('/driver-test', 'DriverViewTestController@index');
+//Route::resource('/driver-test', 'DriverViewTestController');
 Route::get('/randall', 'RandallController@index');
-
 
 Route::get('/driver-profile', function(){
     return view('drivermodule.report.driverReport');
@@ -34,7 +33,6 @@ Route::get('/login', 'Auth\LoginController@showLoginForm');
 Route::get('/driver-profile', function(){
     return view('drivermodule.report.driverReport');
 });
-
 
 Route::get('/teo', function(){
     return view('rental.newcreate');
@@ -69,7 +67,7 @@ Route::get('home/operators/profile/{operator}','OperatorsController@showProfile'
 
 /************ Drivers ******************************/
 Route::resource('home/drivers', 'DriversController');
-Route::patch('home/drivers/{driver}/archiveDriver', 'DriversController@archiveDelete')->name('drivers.archiveDelete');
+Route::patch('home/drivers/{driver}/archive', 'DriversController@archiveDelete')->name('drivers.archiveDelete');
 
 //Adding a driver to a specific operator
 Route::get('home/operators/{operator}/drivers/create', 'DriversController@createFromOperator')->name('drivers.createFromOperator');
@@ -152,7 +150,10 @@ Route::resource('home/triptest', 'TripsController');
 
 
 /* Trips */
-Route::resource('home/trips', 'TripsController');
+Route::post('home/trips/{destination}/{van}/{driver}', 'TripsController@store')->name('trips.store');
+Route::resource('home/trips', 'TripsController',[
+    'except' =>['store']
+]);
 Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
 
 

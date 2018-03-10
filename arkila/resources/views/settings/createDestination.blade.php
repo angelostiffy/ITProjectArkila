@@ -34,12 +34,12 @@
     <a href="" data-toggle="modal" data-target="#form-modal" class="btn btn-primary">Create</a>
 @endsection
 
-@section('modal-title','Alert')
+@section('modal-title','Confirm')
 @section('modal-body')
     <p>Are you sure you want to add this destination?</p>
 @endsection
 
 @section('modal-btn')
-    <button type="submit" type="button" class="btn btn-primary">Yes</a>
-    <button class="btn btn-primary" data-dismiss="modal">No</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+    <button type="submit" class="btn btn-primary" style="width:33%;">Submit</button>
 @endsection
