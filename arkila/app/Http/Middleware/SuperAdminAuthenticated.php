@@ -16,11 +16,11 @@ class SuperAdminAuthenticated
     public function handle($request, Closure $next)
     {
         if(Auth::check()){
-          if(Auth::user()->customer()){
+          if(Auth::user()->isCustomer()){
             return redirect('home/user-management');
-          }else if(Auth::user()->driver()){
+          }else if(Auth::user()->isDriver()){
             return redirect(route('drivermodule.dashboard'));
-          }else if(Auth::user()->admin()){
+          }else if(Auth::user()->isAdmin()){
             return redirect('home/settings');
           }else{
             return $next($request);

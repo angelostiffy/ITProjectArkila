@@ -16,11 +16,11 @@ class DriverAuthenticated
     public function handle($request, Closure $next)
     {
       if(Auth::check()){
-        if(Auth::user()->superAdmin()){
+        if(Auth::user()->isSuperAdmin()){
           return redirect('home/vans');
-        }else if(Auth::user()->admin()){
+        }else if(Auth::user()->isAdmin()){
           return redirect('home/settings');
-        }else if(Auth::user()->customer()){
+        }else if(Auth::user()->isCustomer()){
           return redirect('user-management');
         }else{
           return $next($request);

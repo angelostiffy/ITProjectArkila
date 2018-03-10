@@ -11,7 +11,7 @@
 |
 */
 
-//Auth::routes();
+Auth::routes();
 
 //Made by Randall
 
@@ -28,7 +28,7 @@ Route::get('/driver-profile', function(){
 Route::get('/driver-profile', function(){
     return view('drivermodule.report.driverReport');
 });
-Route::get('/login', 'LoginTestController@index');
+Route::get('/login', 'Auth\LoginController@showLoginForm');
 
 
 Route::get('/driver-profile', function(){
@@ -158,7 +158,7 @@ Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVa
 
 /********Archive ********/
 Route::patch('home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
-=======
+
 /*************************************Driver Module****************************/
 
 /********************Dashboard************************/

@@ -37,18 +37,29 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function showLoginForm()
+    {
+        return view('login.login');
+    }
+
+    public function username()
+    {
+      return 'username';
+    }
+
     public function authenticated(Request $request, $user)
     {
-        if(Auth::user()->customer()){
+        if($user->isCustomer()){
           return redirect('home/user-management');
-        }else if(Auth::user()->driver()){
+        }else if($user->isDriver()){
           return redirect(route('drivermodule.dashboard'));
-        }else if(Auth::user()->superAdmin()){
+        }else if($user->isSuperAdmin()){
           return redirect('home/vans');
-        }else if(Auth::user()->admin()){
+        }else if($user->isAdmin()){
           return redirect('home/settings');
         }else{
           abort(404);
         }
+        //return $user;
     }
 }

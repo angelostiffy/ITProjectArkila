@@ -58,6 +58,26 @@ class User extends Authenticatable
         return $query->where('user_type', '=', 'Customer');
     }
 
+    public function isSuperAdmin()
+    {
+      return $this->user_type === 'Super-Admin';
+    }
+
+    public function isAdmin()
+    {
+      return $this->user_type === 'Admin';
+    }
+
+    public function isDriver()
+    {
+      return $this->user_type === 'Driver';
+    }
+
+    public function isCustomer()
+    {
+      return $this->user_type === 'Customer';
+    }
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));

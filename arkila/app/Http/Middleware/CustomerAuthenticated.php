@@ -15,12 +15,12 @@ class CustomerAuthenticated
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);if(Auth::check()){
-          if(Auth::user()->driver()){
+        if(Auth::check()){
+          if(Auth::user()->isDriver()){
             return redirect(route('drivermodule.dashboard'));
-          }else if(Auth::user()->superAdmin()){
+          }else if(Auth::user()->isSuperAdmin()){
             return redirect('home/vans');
-          }else if(Auth::user()->admin()){
+          }else if(Auth::user()->isAdmin()){
             return redirect('home/settings');
           }else{
             return $next($request);
