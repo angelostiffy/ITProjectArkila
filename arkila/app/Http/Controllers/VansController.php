@@ -67,8 +67,9 @@ class VansController extends Controller {
             return redirect(route('drivers.createFromVan',[$van->plate_number]));
         }
         else{
-
-            $van->members()->attach(request('driver'));
+            if(request('driver')){
+                $van->members()->attach(request('driver'));
+            }
             return redirect(route('vans.index'));
         }
     }

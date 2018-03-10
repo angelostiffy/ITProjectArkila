@@ -150,9 +150,13 @@ Route::resource('home/triptest', 'TripsController');
 
 
 /* Trips */
-Route::post('home/trips/{destination}/{van}/{driver}', 'TripsController@store')->name('trips.store');
+Route::post('home/trips/{destination}/{van}/{member}', 'TripsController@store')->name('trips.store');
+
+Route::patch('home/trips/{trip}')->name('trips.updateRemarks');
+Route::patch('home/trips/{trip}/{destination}')->name('trips.updateDestination');
+
 Route::resource('home/trips', 'TripsController',[
-    'except' =>['store']
+    'except' =>['store','update']
 ]);
 Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
 
