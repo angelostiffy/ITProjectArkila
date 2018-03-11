@@ -6,6 +6,7 @@ use App\Trip;
 use App\Van;
 use App\Destination;
 use App\Member;
+use App\Terminal;
 use Illuminate\Validation\Rule;
 
 class TripsController extends Controller
@@ -17,6 +18,7 @@ class TripsController extends Controller
      */
     public function index()
     {
+        $terminals = Terminal::all();
         $destinations = Destination::all();
         $trips = Trip::whereNotNull('queue_number')->orderBy('queue_number')->get();
 
@@ -34,7 +36,7 @@ class TripsController extends Controller
 
 
         ;
-        return view('trips.queue', compact('trips','vans','destinations','drivers'));
+        return view('trips.queue', compact('terminals','trips','vans','destinations','drivers'));
     }
 
     /**
