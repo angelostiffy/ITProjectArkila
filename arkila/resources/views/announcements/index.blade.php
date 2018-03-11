@@ -8,16 +8,16 @@
 
     <div class="box box-warning">
         <div class="box-header with-border bg-light">
-            <h4>Title: {{ $announcement->title }}</h4>
-            <h6>Viewer: {{ $announcement->viewer }} </h6>
-            <h6>Created: {{ $announcement->created_at->format('Y-m-d h:i:s A') }}</h6>
+            <h3>Title: {{ $announcement->title }}</h3>
+            <h5>Viewer: {{ $announcement->viewer }} </h5>
+            <h5>Created: {{ $announcement->created_at->format('Y-m-d h:i:s A') }}</h5>
             @if ($announcement->created_at->ne($announcement->updated_at))
-            <h6>Updated: {{ $announcement->updated_at->format('Y-m-d h:i:s A') }}</h6>
+            <h5>Updated: {{ $announcement->updated_at->format('Y-m-d h:i:s A') }}</h5>
             @endif
 
         </div>
-        <div class="box-body">
-            <p>{{ $announcement->description }}</p>
+        <div class="box-body" style=" display:inline-block;">
+            <p style="font-size:10">{{ $announcement->description }}</p>
         </div>
 
         <div class="box-footer">
