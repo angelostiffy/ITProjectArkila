@@ -15,7 +15,7 @@ class CreateVantripTable extends Migration
     {
         Schema::create('vantrip', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('member_id')
+            $table->integer('trip_id')
             ->unsigned()
             ->nullable();
             $table->string('plate_number')
