@@ -71,22 +71,6 @@ return [
     |
     */
 
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\User::class->customer(),
-        ],
-
-        'admins' => [
-            'driver' => 'eloquent',
-            'model' => App\User::class->admin(),
-        ],
-
-        'drivers' => [
-            'driver' => 'eloquent',
-            'model' => App\User::class->driver(),
-        ],
-    ],
 
     /*
     |--------------------------------------------------------------------------

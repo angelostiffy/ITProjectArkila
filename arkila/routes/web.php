@@ -157,13 +157,11 @@ Route::resource('home/trips', 'TripsController',[
 ]);
 Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
 
-<<<<<<< HEAD
-=======
+
 
 /********Archive ********/
 Route::patch('home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
-=======
->>>>>>> 6cc5bb4d7e9bb54cec40977a98860e39c9e5831c
+
 /*************************************Driver Module****************************/
 
 /********************Dashboard************************/
