@@ -7,5 +7,8 @@ use App\Http\Controllers\Controller;
 
 class CreateReportController extends Controller
 {
-    //
+  public function index()
+  {
+    return view('drivermodule.report.driverReport');
+  }
 }

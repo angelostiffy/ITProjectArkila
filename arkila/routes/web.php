@@ -19,9 +19,9 @@ Auth::routes();
 //Route::resource('/driver-test', 'DriverViewTestController');
 Route::get('/randall', 'RandallController@index');
 
-Route::get('/driver-profile', function(){
-    return view('drivermodule.report.driverReport');
-});
+// Route::get('/driver-profile', function(){
+//     return view('drivermodule.report.driverReport');
+// });
 
 
 Route::get('/driver-profile', function(){
@@ -179,6 +179,9 @@ Route::group(['middleware' => ['auth', 'driver']], function(){
   /*Change Password*/
   Route::patch('home/profile/change-password/{driverid}', 'DriverModuleControllers\DriverProfileController@updatePassword')->name('drivermodule.changePassword');
   Route::post('home/profile/change-password', 'DriverModuleControllers\DriverProfileController@checkCurrentPassword')->name('drivermodule.checkCurrentPassword');
+  /*Trip Log/Create Report*/
+  Route::get('home/create-report', 'DriverModuleControllers\CreateReportController@index')->name('drivermodule.viewCreateReport');
+
 });
 
 Route::get('home/try', 'PassController@index');
