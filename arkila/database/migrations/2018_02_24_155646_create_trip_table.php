@@ -20,6 +20,8 @@ class CreateTripTable extends Migration
             ->unsigned();
             $table->integer('destination_id')
             ->unsigned();
+            $table->integer('terminal_id')
+            ->unsigned();
             $table->string('plate_number');
 
             $table->enum('remarks', ['OB', 'CC', 'ER'])->nullable();
