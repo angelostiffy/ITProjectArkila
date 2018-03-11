@@ -51,7 +51,7 @@ class OperatorRequest extends FormRequest
                         'required',
                         Rule::in(['Single', 'Married', 'Divorced', 'Widowed'])
                     ],
-                    'nameOfSpouse' => ['required_with:spouseBirthDate','max:120', 'nullable',new checkName],
+                    'nameOfSpouse' => ['required_if:civilStatus,Married','required_with:spouseBirthDate','max:120', 'nullable',new checkName],
                     'spouseBirthDate' => 'required_with:nameOfSpouse|nullable|date|before:today',
                     'fathersName' => ['required_with:fatherOccupation','max:120', 'nullable',new checkName],
                     'fatherOccupation' => ['required_with:fathersName','max:50', 'nullable', new checkOccupation],
@@ -88,7 +88,7 @@ class OperatorRequest extends FormRequest
                             'required',
                             Rule::in(['Single', 'Married', 'Divorced', 'Widowed'])
                         ],
-                        'nameOfSpouse' => ['required_with:spouseBirthDate','max:120', 'nullable', new checkName],
+                        'nameOfSpouse' => ['required_if:civilStatus,Married','required_with:spouseBirthDate','max:120', 'nullable', new checkName],
                         'spouseBirthDate' => 'required_with:nameOfSpouse|nullable|date|before:today',
                         'fathersName' => ['required_with:fatherOccupation','max:120', 'nullable', new checkName],
                         'fatherOccupation' => ['required_with:fathersName','max:50', 'nullable', new checkOccupation],

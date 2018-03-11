@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
+use Illuminate\Http\Request;
+use Auth;
+use Closure;
 class LoginController extends Controller
 {
     /*
@@ -37,18 +40,37 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function showLoginForm()
+    {
+        return view('login.login');
+    }
+
+    public function username()
+    {
+      return 'username';
+    }
+
     public function authenticated(Request $request, $user)
     {
-        if(Auth::user()->customer()){
+        if($user->isCustomer() && $user->isEnable()){
           return redirect('home/user-management');
-        }else if(Auth::user()->driver()){
-          return redirect(route('drivermodule.dashboard'));
-        }else if(Auth::user()->superAdmin()){
-          return redirect('home/vans');
-        }else if(Auth::user()->admin()){
-          return redirect('home/settings');
-        }else{
-          abort(404);
         }
+
+        if($user->isDriver() && $user->isEnable()){
+          return redirect(route('drivermodule.dashboard'));
+        }
+
+        if($user->isSuperAdmin() && $user->isEnable()){
+          return redirect('home/vans');
+        }
+
+        if($user->isAdmin() && $user->isEnable()){
+          return redirect('home/settings');
+        }
+        // else{
+        //   abort(404);
+        // }
+        //return $user;
+        abort(404);
     }
 }

@@ -10,6 +10,7 @@ use App\Member;
 use Illuminate\Http\Request;
 
 
+
 class VansController extends Controller {
 
 
@@ -66,8 +67,9 @@ class VansController extends Controller {
             return redirect(route('drivers.createFromVan',[$van->plate_number]));
         }
         else{
-
-            $van->members()->attach(request('driver'));
+            if(request('driver')){
+                $van->members()->attach(request('driver'));
+            }
             return redirect(route('vans.index'));
         }
     }
@@ -131,8 +133,25 @@ class VansController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Van $van)
+    public function update(Request $request, Van $van)
     {
+        $current_time = \Carbon\Carbon::now();
+        $dateNow = $current_time->setTimezone('Asia/Manila')->format('Y-m-d H:i:s');
+
+        $oldVan = $van->driver()->first()->member_id ?? $van->driver()->first();
+        $newVan = $request->driver;
+
+        if ($oldVan != $newVan)
+        {
+            $mem = $van->plate_number;
+            $rep = Van::find($mem);
+            $newRep = $rep->replicate();
+            $newRep->status = 'Inactive';
+            $newRep->created_at = $dateNow;
+            $newRep->save();
+
+        }
+
         if(request('addDriver') != 'on'){
             $this->validate(request(), [
                 "driver" => ['nullable','numeric','exists:member,member_id',new checkDriver],

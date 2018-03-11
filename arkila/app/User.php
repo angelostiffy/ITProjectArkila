@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username','email', 'password', 'terminal_id', 'user_type'
+        'name', 'username','email', 'password', 'terminal_id', 'user_type', 'status'
     ];
 
     /**
@@ -56,6 +56,31 @@ class User extends Authenticatable
     public function scopeCustomer($query)
     {
         return $query->where('user_type', '=', 'Customer');
+    }
+
+    public function isEnable()
+    {
+      return $this->status === 'enable';
+    }
+
+    public function isSuperAdmin()
+    {
+      return $this->user_type === 'Super-Admin';
+    }
+
+    public function isAdmin()
+    {
+      return $this->user_type === 'Admin';
+    }
+
+    public function isDriver()
+    {
+      return $this->user_type === 'Driver';
+    }
+
+    public function isCustomer()
+    {
+      return $this->user_type === 'Customer';
     }
 
     public function sendPasswordResetNotification($token)

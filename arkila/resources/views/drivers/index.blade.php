@@ -19,7 +19,7 @@
                 @foreach($drivers->where('status','Active') as $driver)
                 <tr>
                     <th>{{$driver->member_id}}</th>
-                    <td>{{$driver->operator->full_name}}</td>
+                    <td>{{$driver->operator->full_name ?? null}}</td>
                     <td>{{$driver->full_name}}</td>
                     <td>{{$driver->contact_number}}</td>
                     <td>{{$driver->address}}</td>
@@ -93,7 +93,8 @@
             'ordering': true,
             'info': true,
             'autoWidth': true
-        })
+        });
+
     })
 </script>
 

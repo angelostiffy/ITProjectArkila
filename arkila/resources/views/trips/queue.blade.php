@@ -7,8 +7,51 @@
   <link rel="stylesheet" href="{{ URL::asset('/jquery/bootstrap3-editable/css/bootstrap-editable.css') }}">
 
     <style>
+    
+    body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+ol.vertical{
+  margin: 0 0 9px 0;
+  min-height: 10px;
+}
+  ol.vertical li{
+    display: block;
+    color: $linkColor;
+    background: $grayLighter;
+  }
+
+
+  ol.vertical li.placeholder{
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+  ol.vertical li.placeholder:before{
+      position: absolute;
+      content: "";
+      width: 0;
+      height: 0;
+      margin-top: -5px;
+      right: -8px;
+      top: -4px;
+      border: 8px solid transparent;
+      border-right-color: black;
+      border-left: none;
+    }
+
+
+
     ol {
-    counter-reset: li; /* Initiate a counter */
+     /* Initiate a counter */
     list-style: none; /* Remove default numbering */
     *list-style: decimal; /* Keep using default numbering for IE6/7 */
     font: 15px 'trebuchet MS', 'lucida sans';
@@ -22,9 +65,7 @@
     }
 
 
-    .rectangle-list li{
-
-    counter-increment: step-counter;
+   .rectangle-list span{
     position: relative;
     display: block;
     padding: .4em .4em .4em .8em;
@@ -32,15 +73,16 @@
     margin: .5em 0 .5em 2.5em;
     background: #ddd;
     color: #444;
-    text-decoration: none;   
+    text-decoration: none;
+    transition: all .3s ease-out;   
 }
 
-.rectangle-list li:hover{
+.rectangle-list span:hover{
     background: #eee;
 }   
 
-.rectangle-list li:before{
-    content: counter(step-counter);
+.queuenum a{
+    counter-increment: li;
     position: absolute; 
     left: -2.5em;
     top: 50%;
@@ -51,9 +93,10 @@
     line-height: 2em;
     text-align: center;
     font-weight: bold;
+    color: black;
 }
 
-.rectangle-list li:after{
+.queuenum a:before{
     position: absolute; 
     content: '';
     border: .5em solid transparent;
@@ -63,23 +106,15 @@
     transition: all .3s ease-out;               
 }
 
-.rectangle-list li:hover:after{
-    left: -.5em;
-    border-left-color: #fa8072;             
-}   
+#queue-list:first-child{
+  background: yellow;
+}
 
+.dropped{
+  background: #a3feb6;
+}
 /* SEARCH LIST; */
 
-#myInput {
-    background-image: url('/css/searchicon.png'); /* Add a search icon to input */
-    background-position: 10px 12px; /* Position the search icon */
-    background-repeat: no-repeat; /* Do not repeat the icon image */
-    width: 100%; /* Full-width */
-    font-size: 16px; /* Increase font-size */
-    padding: 12px 20px 12px 40px; /* Add some padding */
-    border: 1px solid #ddd; /* Add a grey border */
-    margin-bottom: 12px; /* Add some space below the input */
-}
 
 #myUL {
     /* Remove default list styling */
@@ -162,45 +197,123 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
           <!-- Van Queue Box -->
-          <div class="box box-primary">
+          <div class="box box-solid">
             <div class="box-header">
-              <h3 class="box-title">San Jose</h3>
+              <h3 class="box-title">Van Queue</h3>
             </div>
             <div class="box-body">
 
-                <ol id ="queue" class="rectangle-list serialization">
-                  @foreach ($trips as $trip)
-                    <li data-plate="{{ $trip->van->plate_number }}" data-remark="{{ $trip->remarks }}" data-dest="Cabanatuan">
-                      <div class="row">
-                        <div class="col-md-5">
-                          {{ $trip->van->plate_number }}
-                        </div>
-                      <div class="col-md-7">
-                        <div class="pull-right">
-                          
-                          <a href="" name="{{$trip->van->plate_number}}" data-type="select" data-title="Update Remark" class="remark-editable btn btn-outline-secondary btn-sm editable" value="OB" data-original-title="" title="">{{ $trip->remarks }}</a>
-                          <a href="" class="" data-toggle="modal" data-target="#modal-default"><i class="fa fa-remove"></i></a>
-                        </div>
-                      </div>
-                    </li>
-                  @endforeach
-                </ol>
+              <div class="nav-tabs-custom ">
+                <ul class="nav nav-tabs ">
+                  <li class="tab-menu active" id="vanQueueTab-menu"><a href="#cabanatuanQueueTab" data-toggle="tab">Cabanatuan City</a></li>
+                  <li class="tab-menu" id="privilegeTab-menu"><a href="#sanjoseQueueTab" data-toggle="tab">San Jose City</a></li>
+                </ul>
+                <div class="tab-content">
+                <!-- Cabanatuan Queue Tab -->
+                  <div class="tab-pane active" id="cabanatuanQueueTab">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                      <input type="email" id="queueSearch" class="form-control" placeholder="Search in queue" onkeyup="myFunction()">
+                    </div>
+                    <ol id ="queue-list" class="vertical rectangle-list serialization">
+                        @foreach ($trips as $trip)
+                          <li class="" data-plate="{{ $trip->van->plate_number}}" data-remark="{{ $trip->remarks }}">
+                            <span class="dropped">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="queuenum">
+                                  <a href="" id="queue{{ $trip->trip_id}}" name="{{$trip->van->plate_number}}" data-type="select" data-title="Queue number" class="queue-editable">{{ $trip->queue_number }}</a>
+                                </div>
+                                
+                                <p>
+                                  <a href="" ><i class="fa fa-map-marker inline"></i></a>
+                                {{ $trip->van->plate_number }}
+                                </p>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="pull-right">
+                                  <a href="" id="remark{{ $trip->trip_id}}" name="{{$trip->van->plate_number}}"  data-type="select" data-title="Update Remark" class="remark-editable btn btn-outline-secondary btn-sm editable" data-original-title="" title="">{{ $trip->remarks }}</a>
+
+                                  
+                                  
+                                  <a href="" class="" data-toggle="modal" data-target="#modal-default{{$trip->trip_id}}"><i class="fa fa-remove text-red"></i></a>
+                                </div>
+                              </div>
+                            </div>
+                          </span>
+
+                              <div class="modal fade" id="modal-default{{$trip->trip_id}}">
+                                  <div class="modal-dialog modal-sm">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span></button>
+                                              <h4 class="modal-title"><i class="fa fa-info"></i> Alert</h4>
+                                          </div>
+                                          <div class="modal-body">
+                                              <p>Will be deleted</p>
+                                          </div>
+                                          <div class="modal-footer">
+                                              <form method="POST" action="{{route('trips.destroy',[$trip->trip_id])}}">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                  {{csrf_field()}}
+                                                  {{method_field('DELETE')}}
+                                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</button>
+                                              </form>
+                                          </div>
+                                      </div>
+                                      <!-- /.modal-content -->
+                                  </div>
+                                  <!-- /.modal-dialog -->
+                              </div>
+                              <!-- /.modal -->
+
+                          </li>
+                        @endforeach
+                    </ol>
+                  </div>
+                  <div class="tab-pane" id="sanjoseQueueTab">
+                    
+                  </div>
+                </div>
+              </div>
+
+              
             </div>
           </div>
         </div>
                
-         <div class="col-md-4">
+         <div class="col-md-3">
           <!-- Special Unit -->
           <div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title">Cabanatuan</h3>
+              <h3 class="box-title">Special Units</h3>
             </div>
             <div class="box-body">
 
-                <ol id = "S" class="rectangle-list serialization">
-                  
+                <ol class="rectrangle-list">
+                  <li class="" data-plate="{{ $trip->van->plate_number ?? null}}" data-remark="{{ $trip->remarks ?? null}}">
+                            <div class="row">
+                              <div class="col-md-6">
+                                
+                                <p>
+                                
+                                {{ $trip->van->plate_number ?? null }}
+                                </p>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="pull-right">
+                                  <a href="" id="remark{{ $trip->trip_id ?? null}}" name="{{$trip->van->plate_number ?? null}}"  data-type="select" data-title="Update Remark" class="remark-editable btn btn-outline-secondary btn-sm editable" data-original-title="" title=""><i class="fa fa-info"></i></a>
+
+                                  
+                                  
+                                  <a href="" class="" data-toggle="modal" data-target="#modal-default"><i class="fa fa-remove text-red"></i></a>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
                   
                 </ol>
               </div>
@@ -209,40 +322,46 @@
       </div>
         <pre id="serialize_output2"></pre>
 
-      <div class="modal fade" id="modal-default">
-          <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><i class="fa fa-info"></i> Alert</h4>
-              </div>
-              <div class="modal-body">
-                <p>Will be deleted</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</button>
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
+
 @endsection
 
 @section('scripts')
   @parent
 
-{{--   <script>
-    $('.select2').select2();
-  </script> --}}
+  
   <script src="{{ URL::asset('/jquery/bootstrap3-editable/js/bootstrap-editable.min.js') }}"></script>
   <script src="{{ URL::asset('/jquery/jquery-sortable.js') }}"></script>
+  <script>
+    $('.select2').select2();
+  </script>
     <!-- List sortable -->
     <script>
-      var group = $("ol.serialization").sortable({
+        $(document).ready(function() {
+            $('#addQueueButt').on('click', function() {
+                var destination = $('#destination').val();
+                var van = $('#van').val();
+                var driver = $('#driver').val();
+
+                if( destination != "" && van != "" && driver != ""){
+                    $.ajax({
+                        method:'POST',
+                        url: '/home/trips/'+destination+'/'+van+'/'+driver,
+                        data: {
+                            '_token': '{{csrf_token()}}'
+                        },
+                        success: function(vanInfo){
+                            location.reload();
+                        }
+
+                    });
+
+                }
+            });
+
+
+
+
+        var group = $("ol.serialization").sortable({
         group: 'serialization',
         delay: 500,
         onDrop: function ($item, container, _super) {
@@ -269,54 +388,49 @@
         }
       });
 
-      @foreach($vans as $van)
-    $('.remark-editable').editable({
-       value: "@if(is_null($van->remarks)){{"NULL"}}@else{{$van->remarks}}@endif",
-        source: [
-              {value: 'NULL', text: 'Give remark'},
-              {value: 'CC', text: 'CC'},
-              {value: 'ER', text: 'ER'},
-              {value: 'OB', text: 'OB'}
-           ]
+    @foreach($trips as $trip)
 
-    });
-    @endforeach
-
-      $('#addQueueButt').on('click', function() {
-          var destination = $('#destination').val();
-          var van = $('#van').val();
-          var driver = $('#driver').val();
-
-          if( destination != "" && van != "" && driver != ""){
-              $.ajax({
-                  method:'POST',
-                  url: '/home/trips/'+destination+'/'+van+'/'+driver,
-                  data: {
-                      '_token': '{{csrf_token()}}'
-                  },
-                  success: function(vanInfo){
-                      location.reload();
-                  }
-
-              });
-
-          }
+      $('#remark'+{{$trip->trip_id}}).editable({
+         value: "@if(is_null($trip->remarks)){{'NULL'}}@else{{$trip->remarks}}@endif",
+          source: [
+                {value: 'NULL', text: 'Give Remarks'},
+                {value: 'CC', text: 'CC'},
+                {value: 'ER', text: 'ER'},
+                {value: 'OB', text: 'OB'}
+             ]
       });
 
 
- {{--    <script>
+    @endforeach
+
+     @foreach($trips as $trip)
+      $('#queue'+{{$trip->trip_id}}).editable({
+          value: {{ $trip->queue_number }},
+          source: [
+          @foreach($trips as $trip)
+                  {value: '{{ $trip->queue_number }}', text: '{{ $trip->queue_number }}' },
+          @endforeach
+          ]
+      });
+     @endforeach
+
+        });
+</script>
+
+<script>
+
           function myFunction() {
                 // Declare variables
-                var input, filter, ul, li, a, i;
-                input = document.getElementById('myInput');
+                var input, filter, ol, li, span, i;
+                input = document.getElementById('queueSearch');
                 filter = input.value.toUpperCase();
-                ul = document.getElementById("myUL");
-                li = ul.getElementsByTagName('li');
+                ol = document.getElementById('queue-list');
+                li = ol.getElementsByTagName('li');
 
                 // Loop through all list items, and hide those who don't match the search query
                 for (i = 0; i < li.length; i++) {
-                    a = li[i].getElementsByTagName("a")[0];
-                    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    span = li[i].getElementsByTagName("span")[0];
+                    if (span.innerHTML.toUpperCase().indexOf(filter) > -1) {
                         li[i].style.display = "";
                     } else {
                         li[i].style.display = "none";
@@ -324,6 +438,5 @@
                 }
             }
     </script>
- --}}
-</script>
+
 @endsection

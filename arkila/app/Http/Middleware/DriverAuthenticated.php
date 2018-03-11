@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class DriverAuthenticated
 {
@@ -16,13 +17,19 @@ class DriverAuthenticated
     public function handle($request, Closure $next)
     {
       if(Auth::check()){
-        if(Auth::user()->superAdmin()){
+        if(Auth::user()->isSuperAdmin() && Auth::user()->isEnable()){
           return redirect('home/vans');
-        }else if(Auth::user()->admin()){
+        }
+
+        if(Auth::user()->isAdmin() && Auth::user()->isEnable()){
           return redirect('home/settings');
-        }else if(Auth::user()->customer()){
+        }
+
+        if(Auth::user()->isCustomer() && Auth::user()->isEnable()){
           return redirect('user-management');
-        }else{
+        }
+
+        if(Auth::user()->isDriver() && Auth::user()->isEnable()){
           return $next($request);
         }
       }

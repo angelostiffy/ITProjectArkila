@@ -32,7 +32,7 @@
           </a>
             </li>
             <li class="treeview">
-                <a href="/home/profile">
+                <a href="{{route('drivermodule.showProfile')}}">
             <i class="	fa fa-user"></i>
             <span>Profile</span>
           </a>
@@ -45,10 +45,14 @@
             </li>
 
             <li class="treeview">
-                <a href="#">
+                <a href="{{route('logout')}}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
             <i class="fa fa-sign-out"></i>
             <span>Sign Out</span>
           </a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            {{csrf_field()}}
+          </form>
             </li>
 
 

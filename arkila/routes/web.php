@@ -11,7 +11,7 @@
 |
 */
 
-//Auth::routes();
+Auth::routes();
 
 //Made by Randall
 
@@ -27,13 +27,12 @@ Route::get('/driver-profile', function(){
 Route::get('/driver-profile', function(){
     return view('drivermodule.report.driverReport');
 });
-Route::get('/login', 'LoginTestController@index');
+Route::get('/login', 'Auth\LoginController@showLoginForm');
 
 
 Route::get('/driver-profile', function(){
     return view('drivermodule.report.driverReport');
 });
-
 
 Route::get('/teo', function(){
     return view('rental.newcreate');
@@ -151,12 +150,15 @@ Route::resource('home/triptest', 'TripsController');
 
 
 /* Trips */
-Route::post('home/trips/{destination}/{van}/{driver}', 'TripsController@store')->name('trips.store');
+Route::post('home/trips/{destination}/{van}/{member}', 'TripsController@store')->name('trips.store');
+
+Route::patch('home/trips/{trip}')->name('trips.updateRemarks');
+Route::patch('home/trips/{trip}/{destination}')->name('trips.updateDestination');
+
 Route::resource('home/trips', 'TripsController',[
-    'except' =>['store']
+    'except' =>['store','update']
 ]);
 Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
-
 
 
 /********Archive ********/
@@ -166,15 +168,23 @@ Route::patch('home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name
 
 /********************Dashboard************************/
 Route::group(['middleware' => ['auth', 'driver']], function(){
+  /*Driver Dashboard*/
   Route::get('home/driver-dashboard', 'DriverModuleControllers\DriverHomeController@index')->name('drivermodule.dashboard');
+  /*AJAX GET for queue and announcements*/
   Route::get('home/view-queue', 'DriverModuleControllers\ViewVanQueueController@showVanQueue')->name('drivermodule.viewQueue');
   Route::get('home/view-announcement', 'DriverModuleControllers\ViewAnnouncementsController@showAnnouncement')->name('drivermodule.viewAnnouncement');
+  /*Driver Profile*/
+  Route::get('home/profile', 'DriverModuleControllers\DriverProfileController@showDriverProfile')->name('drivermodule.showProfile');
+  Route::post('home/profile', 'DriverModuleControllers\DriverProfileController@changeNotificationStatus')->name('drivermodule.notification');
+  /*Change Password*/
+  Route::patch('home/profile/change-password/{driverid}', 'DriverModuleControllers\DriverProfileController@updatePassword')->name('drivermodule.changePassword');
+  Route::post('home/profile/change-password', 'DriverModuleControllers\DriverProfileController@checkCurrentPassword')->name('drivermodule.checkCurrentPassword');
 });
 
 Route::get('home/try', 'PassController@index');
 
 
-Route::get('home/profile', 'DriverModuleControllers\DriverProfileController@index');
+//Route::get('home/profile', 'DriverModuleControllers\DriverProfileController@index');
 /******************************************************/
 
 /******************************************************************************/

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Trip;
 use App\Van;
 use App\Destination;
 use App\Member;
+use Illuminate\Validation\Rule;
 
 class TripsController extends Controller
 {
@@ -17,10 +17,23 @@ class TripsController extends Controller
      */
     public function index()
     {
-        $trips = Trip::whereNotNull('queue_number')->get();
-        $vans = Van::all();
         $destinations = Destination::all();
-        $drivers = Member::allDrivers()->get();
+        $trips = Trip::whereNotNull('queue_number')->orderBy('queue_number')->get();
+
+        $drivers = Member::whereNotIn('member_id', function($query){
+            $query->select('driver_id')
+                ->from('trip')
+                ->whereNotNull('queue_number');
+        })->get();
+
+        $vans = Van::whereNotIn('plate_number', function($query){
+            $query->select('plate_number')
+                ->from('trip')
+                ->whereNotNull('queue_number');
+        })->get();
+
+
+        ;
         return view('trips.queue', compact('trips','vans','destinations','drivers'));
     }
 
@@ -40,7 +53,7 @@ class TripsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Destination $destination, Van $van, Member $driver )
+    public function store(Destination $destination, Van $van, Member $member )
     {
         if( is_null(Trip::where('destination_id',$destination->destination_id)
             ->where('plate_number',$van->plate_number)
@@ -50,7 +63,7 @@ class TripsController extends Controller
             Trip::create([
                 'destination_id' => $destination->destination_id,
                 'plate_number' => $van->plate_number,
-                'driver_id' => $driver->member_id,
+                'driver_id' => $member->member_id,
                 'queue_number' => $queueNumber
             ]);
             session()->flash('success', 'Van Succesfully Added to the queue');
@@ -92,9 +105,21 @@ class TripsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateRemarks(Trip $trip)
     {
-        //
+        $this->validate(request(),[
+            'remarks' => [Rule::in('OB','CC','ER')]
+        ]);
+
+        $trip->update([request('remarks')]);
+
+        return "Success";
+    }
+
+    public function updateDestination(Trip $trip, Destination $destination){
+        $trip->update([
+            'destination_id' => 'destination'
+        ]);
     }
 
     /**
