@@ -301,7 +301,7 @@
             }
         });
     });
-    
+
     function cloneDatePicker() {
 
         //Date picker
