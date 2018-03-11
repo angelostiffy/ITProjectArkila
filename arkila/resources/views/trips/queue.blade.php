@@ -146,7 +146,7 @@ ol.vertical{
         <div class="col-md-3">
             <div class="box box-solid">
 
-              <div class="box-header with-border">
+              <div class="box-header with-border bg-blue">
                   <h3 class="box-title">Add Driver to Queue</h3>
               </div>
               <div class="box-body">
@@ -193,102 +193,9 @@ ol.vertical{
                           </div>
                       </div>
                 @endif
-
-            </div>
-        </div>
-
-        <div class="col-md-6">
-          <!-- Van Queue Box -->
-          <div class="box box-solid">
-            <div class="box-header">
-              <h3 class="box-title">Van Queue</h3>
-            </div>
-            <div class="box-body">
-
-              <div class="nav-tabs-custom ">
-                <ul class="nav nav-tabs ">
-                  <li class="tab-menu active" id="vanQueueTab-menu"><a href="#cabanatuanQueueTab" data-toggle="tab">Cabanatuan City</a></li>
-                  <li class="tab-menu" id="privilegeTab-menu"><a href="#sanjoseQueueTab" data-toggle="tab">San Jose City</a></li>
-                </ul>
-                <div class="tab-content">
-                <!-- Cabanatuan Queue Tab -->
-                  <div class="tab-pane active" id="cabanatuanQueueTab">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                      <input type="email" id="queueSearch" class="form-control" placeholder="Search in queue" onkeyup="myFunction()">
-                    </div>
-                    <ol id ="queue-list" class="vertical rectangle-list serialization">
-                        @foreach ($trips as $trip)
-                          <li class="" data-plate="{{ $trip->van->plate_number}}" data-remark="{{ $trip->remarks }}">
-                            <span class="dropped">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <div class="queuenum">
-                                  <a href="" id="queue{{ $trip->trip_id}}" name="{{$trip->van->plate_number}}" data-type="select" data-title="Queue number" class="queue-editable">{{ $trip->queue_number }}</a>
-                                </div>
-                                
-                                <p>
-                                  <a href="" ><i class="fa fa-map-marker inline"></i></a>
-                                {{ $trip->van->plate_number }}
-                                </p>
-                              </div>
-                              <div class="col-md-6">
-                                <div class="pull-right">
-                                  <a href="" id="remark{{ $trip->trip_id}}" name="{{$trip->van->plate_number}}"  data-type="select" data-title="Update Remark" class="remark-editable btn btn-outline-secondary btn-sm editable" data-original-title="" title="">{{ $trip->remarks }}</a>
-
-                                  
-                                  
-                                  <a href="" class="" data-toggle="modal" data-target="#modal-default{{$trip->trip_id}}"><i class="fa fa-remove text-red"></i></a>
-                                </div>
-                              </div>
-                            </div>
-                          </span>
-
-                              <div class="modal fade" id="modal-default{{$trip->trip_id}}">
-                                  <div class="modal-dialog modal-sm">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                  <span aria-hidden="true">&times;</span></button>
-                                              <h4 class="modal-title"><i class="fa fa-info"></i> Alert</h4>
-                                          </div>
-                                          <div class="modal-body">
-                                              <p>Will be deleted</p>
-                                          </div>
-                                          <div class="modal-footer">
-                                              <form method="POST" action="{{route('trips.destroy',[$trip->trip_id])}}">
-                                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                  {{csrf_field()}}
-                                                  {{method_field('DELETE')}}
-                                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</button>
-                                              </form>
-                                          </div>
-                                      </div>
-                                      <!-- /.modal-content -->
-                                  </div>
-                                  <!-- /.modal-dialog -->
-                              </div>
-                              <!-- /.modal -->
-
-                          </li>
-                        @endforeach
-                    </ol>
-                  </div>
-                  <div class="tab-pane" id="sanjoseQueueTab">
-                    
-                  </div>
-                </div>
-              </div>
-
-              
-            </div>
-          </div>
-        </div>
-               
-         <div class="col-md-3">
-          <!-- Special Unit -->
-          <div class="box box-primary">
-            <div class="box-header">
+                {{-- 
+            Special Unit --}}
+            <div class="box-header with-border bg-yellow">
               <h3 class="box-title">Special Units</h3>
             </div>
             <div class="box-body">
@@ -319,6 +226,111 @@ ol.vertical{
               </div>
              </div>
         </div>
+
+        <div class="col-md-9">
+          <!-- Van Queue Box -->
+          <div class="box box-solid">
+            <div class="box-header  bg-blue">
+              <h3 class="box-title">Queue</h3>
+            </div>
+            <div class="box-body">
+              <div class="row">
+              <div class="col-md-4">
+                  <div class="box box-solid">
+                    <div class="box-header text-center bg-gray">
+                      <h3 class="box-title">Terminals</h3>
+                    </div>
+                  <ul class="nav nav-stacked">
+                    @foreach ($terminals as $terminal)
+                    <li><a href="#{{$terminal->terminal_id}}" data-toggle="tab">{{$terminal->description}}</a></li>
+                    @endforeach
+                  </ul>
+                  </div>
+                </div>
+              <div class="col-md-8">
+                <div class="tab-content">
+                <!-- Cabanatuan Queue Tab -->
+                @foreach($terminals as $terminal)
+                  <div class="tab-pane" id="{{$terminal->terminal_id}}">
+                    <div class="box box-solid">
+                      <div class="box-header text-center bg-gray">
+                        <h3 class="box-title">{{$terminal->description}}</h3>
+                      </div>
+                      <div class="box-body">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                      <input type="email" id="queueSearch" class="form-control" placeholder="Search in queue" onkeyup="myFunction()">
+                    </div>
+                    <ol id ="queue-list" class="vertical rectangle-list serialization">
+                        @foreach ($trips as $trip)
+                          <li class="" data-plate="{{ $trip->van->plate_number}}" data-remark="{{ $trip->remarks }}">
+                            <span class="dropped">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="queuenum">
+                                  <a href="" id="queue{{ $trip->trip_id}}" name="{{$trip->van->plate_number}}" data-type="select" data-title="Queue number" class="queue-editable">{{ $trip->queue_number }}</a>
+                                </div>
+                                
+                                <p>
+                                  <a href="" ><i class="fa fa-map-marker inline"></i></a>
+                                {{ $trip->van->plate_number }}
+                                </p>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="pull-right">
+                                  <a href="" id="remark{{ $trip->trip_id}}" name="{{$trip->van->plate_number}}"  data-type="select" data-title="Update Remark" class="remark-editable btn btn-outline-secondary btn-sm editable" data-original-title="" title="">{{ $trip->remarks }}</a>
+
+                                  
+                                  
+                                  <a href="" class="" data-toggle="modal" data-target="#modal{{$trip->trip_id}}"><i class="fa fa-remove text-red"></i></a>
+                                </div>
+                              </div>
+                            </div>
+                          </span>
+
+                              <div class="modal fade" id="modal{{$trip->trip_id}}">
+                                  <div class="modal-dialog modal-sm">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h4 class="modal-title text-yellow"><i class="fa fa-warning"></i> Alert</h4>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span></button>
+                                              
+                                          </div>
+                                          <div class="modal-body">
+                                              <p><strong>{{$trip->van->plate_number}}</strong> will be remove from the list.</p>
+                                          </div>
+                                          <div class="modal-footer">
+                                              <form method="POST" action="{{route('trips.destroy',[$trip->trip_id])}}">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                  {{csrf_field()}}
+                                                  {{method_field('DELETE')}}
+                                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i>Confirm</button>
+                                              </form>
+                                          </div>
+                                      </div>
+                                      <!-- /.modal-content -->
+                                  </div>
+                                  <!-- /.modal-dialog -->
+                              </div>
+                              <!-- /.modal -->
+
+                          </li>
+                        @endforeach
+                    </ol>
+                  </div>
+                  </div>
+                  </div>
+                @endforeach
+                    
+                  </div>
+              </div>
+              </div>
+                
+          </div>
+        </div>
+        </div>
+         
       </div>
         <pre id="serialize_output2"></pre>
 
