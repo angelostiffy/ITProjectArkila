@@ -26,7 +26,9 @@
             </table>
 
         </div>
+        <!-- /.box -->
     </div>
+    <!-- /.desktop -->
 
     <div class="mobile_device_480px">
 
@@ -49,6 +51,7 @@
                         <button type="button" class="btn btn-xs btn-primary pull-right" data-toggle="modal" data-target="#seeLogDetails"><i class="fa fa-eye"></i> View</button>
                     </li>
                 </div>
+                <!-- /.list -->
 
 
             </div>
@@ -57,7 +60,9 @@
         <!-- /.box -->
 
     </div>
+    <!-- /.mobile -->
 </div>
+<!-- /.content -->
 
 <!--        SEE DETAILS MODAL-->
 <div class="modal fade" id="seeLogDetails">
@@ -141,38 +146,38 @@
 </div>
 <!-- /.modal -->
 @endsection @section('scripts') @parent
-    <style>
-        /* if desktop */
+<style>
+    /* if desktop */
 
+    .mobile_device_380px {
+        display: none;
+    }
+
+    .mobile_device_480px {
+        display: none;
+    }
+
+
+    /* if mobile device max width 380px */
+
+    @media only screen and (max-device-width: 380px) {
         .mobile_device_380px {
+            display: block;
+        }
+        .desktop {
             display: none;
         }
+    }
 
+    /* if mobile device max width 480px */
+
+    @media only screen and (max-device-width: 480px) {
         .mobile_device_480px {
+            display: block;
+        }
+        .desktop {
             display: none;
         }
-
-
-        /* if mobile device max width 380px */
-
-        @media only screen and (max-device-width: 380px) {
-            .mobile_device_380px {
-                display: block;
-            }
-            .desktop {
-                display: none;
-            }
-        }
-
-        /* if mobile device max width 480px */
-
-        @media only screen and (max-device-width: 480px) {
-            .mobile_device_480px {
-                display: block;
-            }
-            .desktop {
-                display: none;
-            }
-        }
-    </style>
+    }
+</style>
 @endsection
