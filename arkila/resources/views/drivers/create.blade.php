@@ -189,10 +189,11 @@
                             <div class="form-group">
                                 <label>Civil Status:</label>
                                 <select name="civilStatus" class="form-control">
-                                   <option value="Single" @if(old('civilStatus') == 'Single') {{'selected'}} @endif>Single</option>
-                                   <option value="Married" @if(old('civilStatus') == 'Married') {{'selected'}} @endif>Married</option>
-                                   <option value="Divorced" @if(old('civilStatus') == 'Divorced') {{'selected'}} @endif>Divorced</option>
-                               </select>
+                                    <option @if(old('civilStatus') == 'Single') {{'selected'}} @endif>Single</option>
+                                    <option @if(old('civilStatus') == 'Married') {{'selected'}} @endif>Married</option>
+                                    <option @if(old('civilStatus') == 'Divorced') {{'selected'}} @endif>Divorced</option>
+                                    <option @if(old('civilStatus') == 'Widowed') {{'selected'}} @endif>Widowed</option>
+                                </select>
                             </div>
                         </div>
                    
@@ -302,7 +303,7 @@
                                     <th>Birthdate</th>
                                     <th>
                                         <div class="pull-right">
-                                            <button type="button" class="btn btn-info" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Item</button>
+                                            <button type="button" class="btn btn-info" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Children</button>
                                         </div>
                                     </th>
                                 </thead>
@@ -379,9 +380,29 @@
 @endsection
 @section('scripts')
 @parent
- <script>    
+ <script>
 
-        $(cloneDatePicker());
+     $(document).ready(function(){
+         cloneDatePicker();
+
+         if($('select[name="civilStatus"]').val() == "Single"){
+             $('input[name="nameOfSpouse"]').prop('disabled',true);
+             $('input[name="spouseBirthDate"]').prop('disabled', true);
+         }else{
+             $('input[name="nameOfSpouse"]').prop('disabled',false);
+             $('input[name="spouseBirthDate"]').prop('disabled', false);
+         }
+
+         $('select[name="civilStatus"]').change(function(){
+             if($('select[name="civilStatus"]').val()== "Single"){
+                 $('input[name="nameOfSpouse"]').prop('disabled',true);
+                 $('input[name="spouseBirthDate"]').prop('disabled', true);
+             }else{
+                 $('input[name="nameOfSpouse"]').prop('disabled',false);
+                 $('input[name="spouseBirthDate"]').prop('disabled', false);
+             }
+         });
+     });
 
         function cloneDatePicker() {
 
