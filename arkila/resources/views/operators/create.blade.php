@@ -339,29 +339,43 @@
 @endsection
 @section('scripts')
 @parent
- <script>    
+ <script>
 
-        $(document).ready(function(){
-            cloneDatePicker();
+     $(document).ready(function(){
+         cloneDatePicker();
+         switch($('select[name="civilStatus"]').val()){
+             case "Single":
+                 $('input[name="nameOfSpouse"]').prop('disabled',true);
+                 $('input[name="spouseBirthDate"]').prop('disabled', true);
+                 break;
+             case "Divorced":
+                 $('input[name="nameOfSpouse"]').prop('disabled',true);
+                 $('input[name="spouseBirthDate"]').prop('disabled', true);
+                 break;
+             default:
+                 $('input[name="nameOfSpouse"]').prop('disabled',false);
+                 $('input[name="spouseBirthDate"]').prop('disabled', false);
+                 break;
+         }
 
-            if($('select[name="civilStatus"]').val() == "Single"){
-                $('input[name="nameOfSpouse"]').prop('disabled',true);
-                $('input[name="spouseBirthDate"]').prop('disabled', true);
-            }else{
-                $('input[name="nameOfSpouse"]').prop('disabled',false);
-                $('input[name="spouseBirthDate"]').prop('disabled', false);
-            }
 
-            $('select[name="civilStatus"]').change(function(){
-                if($('select[name="civilStatus"]').val()== "Single"){
-                    $('input[name="nameOfSpouse"]').prop('disabled',true);
-                    $('input[name="spouseBirthDate"]').prop('disabled', true);
-                }else{
-                    $('input[name="nameOfSpouse"]').prop('disabled',false);
-                    $('input[name="spouseBirthDate"]').prop('disabled', false);
-                }
-            });
-        });
+         $('select[name="civilStatus"]').change(function(){
+             switch($('select[name="civilStatus"]').val()){
+                 case "Single":
+                     $('input[name="nameOfSpouse"]').prop('disabled',true);
+                     $('input[name="spouseBirthDate"]').prop('disabled', true);
+                     break;
+                 case "Divorced":
+                     $('input[name="nameOfSpouse"]').prop('disabled',true);
+                     $('input[name="spouseBirthDate"]').prop('disabled', true);
+                     break;
+                 default:
+                     $('input[name="nameOfSpouse"]').prop('disabled',false);
+                     $('input[name="spouseBirthDate"]').prop('disabled', false);
+                     break;
+             }
+         });
+     });
 
         function cloneDatePicker() {
 
