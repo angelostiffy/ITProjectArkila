@@ -15,7 +15,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="active treeview">
-                <a href="/home/driver-dashboard">
+                <a href="{{route('drivermodule.dashboard')}}">
             <i class="fa fa-home"></i> <span>Home</span>
           </a>
             </li>
@@ -26,7 +26,7 @@
           </a>
             </li>
             <li class="treeview">
-                <a href="#">
+                <a href="{{route('drivermodule.viewCreateReport')}}">
             <i class="fa fa-plus"></i>
             <span>Create Report</span>
           </a>
