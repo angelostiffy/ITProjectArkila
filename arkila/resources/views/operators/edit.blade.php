@@ -266,7 +266,27 @@
 @stop @section('scripts') @parent
 
 <script>
-    $(cloneDatePicker());
+    $(document).ready(function(){
+        cloneDatePicker();
+
+        if($('select[name="civilStatus"]').val() == "Single"){
+            $('input[name="nameOfSpouse"]').prop('disabled',true);
+            $('input[name="spouseBirthDate"]').prop('disabled', true);
+        }else{
+            $('input[name="nameOfSpouse"]').prop('disabled',false);
+            $('input[name="spouseBirthDate"]').prop('disabled', false);
+        }
+
+        $('select[name="civilStatus"]').change(function(){
+            if($('select[name="civilStatus"]').val()== "Single"){
+                $('input[name="nameOfSpouse"]').prop('disabled',true);
+                $('input[name="spouseBirthDate"]').prop('disabled', true);
+            }else{
+                $('input[name="nameOfSpouse"]').prop('disabled',false);
+                $('input[name="spouseBirthDate"]').prop('disabled', false);
+            }
+        });
+    });
 
     function cloneDatePicker() {
 

@@ -262,7 +262,7 @@
                                     <th>Birthdate</th>
                                     <th>
                                         <div class="pull-right">
-                                            <button type="button" class="btn btn-info" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Item</button>
+                                            <button type="button" class="btn btn-info" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Children</button>
                                         </div>
                                     </th>
                                 </thead>
@@ -341,7 +341,27 @@
 @parent
  <script>    
 
-        $(cloneDatePicker());
+        $(document).ready(function(){
+            cloneDatePicker();
+
+            if($('select[name="civilStatus"]').val() == "Single"){
+                $('input[name="nameOfSpouse"]').prop('disabled',true);
+                $('input[name="spouseBirthDate"]').prop('disabled', true);
+            }else{
+                $('input[name="nameOfSpouse"]').prop('disabled',false);
+                $('input[name="spouseBirthDate"]').prop('disabled', false);
+            }
+
+            $('select[name="civilStatus"]').change(function(){
+                if($('select[name="civilStatus"]').val()== "Single"){
+                    $('input[name="nameOfSpouse"]').prop('disabled',true);
+                    $('input[name="spouseBirthDate"]').prop('disabled', true);
+                }else{
+                    $('input[name="nameOfSpouse"]').prop('disabled',false);
+                    $('input[name="spouseBirthDate"]').prop('disabled', false);
+                }
+            });
+        });
 
         function cloneDatePicker() {
 
@@ -351,6 +371,7 @@
             })
 
         }
+
 
 
 
