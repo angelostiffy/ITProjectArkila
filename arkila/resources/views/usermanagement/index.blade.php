@@ -28,11 +28,10 @@
             <div class="tab-content">
             <div class="tab-pane active" id="tab_1">
                 <div class="box-body">
-
-                <div class="center-block">
-                <a href="/home/user-management/admin/create" button class="btn btn-primary" style="margin-bottom: 2%;"><i class="glyphicon glyphicon-plus">Add </i></a>
-
-                </div>    
+                    
+                <div class="col col-md-6">
+                    <a href="/home/user-management/admin/create" class="btn btn-primary btn-create"><i class="fa fa-plus-circle"></i> Create New</a>
+                </div>
 
                 <table id="adminTable" class="table table-bordered table-striped">
                 <thead>
@@ -50,10 +49,9 @@
                     <td>{{$userAdmin->username}}</td>      
                     <td>{{$userAdmin->description}}</td>
                     <td class="center-block">
-                    <div class="center-block">
-                         <a href="/home/user-management/admin/{{$userAdmin->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i></a>
-
-                    </div>
+                        <div class="text-center">
+                             <a href="/home/user-management/admin/{{$userAdmin->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
@@ -84,10 +82,9 @@
                     <td>{{$userDriver->username}}</td>
                     
                     <td class="center-block">
-                    <div class="center-block">
-                        <a href="/home/user-management/driver/{{$userDriver->id}}" class="btn btn-default"><i class="glyphicon glyphicon-cog">View</i></a>
-
-                    </div>
+                        <div class="text-center">
+                             <a href="/home/user-management/admin/{{$userAdmin->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
+                        </div>
                     </td>
                     </tr>
                     @endforeach
@@ -115,9 +112,8 @@
                 <td>{{$userCustomer->username}}</td>
                 <td>{{$userCustomer->email}}</td>
                 <td class="center-block">
-                    <div class="center-block">
-                         <a href="/home/user-management/customer/{{$userCustomer->id}}" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>View</a>
-
+                    <div class="text-center">
+                         <a href="/home/user-management/admin/{{$userAdmin->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
                     </div>
                 </td>
                 @endforeach
@@ -149,7 +145,7 @@
         $('.example1').DataTable()
         $('#adminTable').DataTable({
             'paging': true,
-            'lengthChange': true,
+            'lengthChange': false,
             'searching': true,
             'ordering': true,
             'info': true,

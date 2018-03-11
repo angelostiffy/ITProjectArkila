@@ -1,5 +1,11 @@
-@extends('layouts.master') @section('title', 'Edit Operator Information') @section('links') @parent
-<link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"> @stop @section('content')
+@extends('layouts.master')
+@section('title', 'Edit Operator Information') 
+@section('links') 
+@parent
+<link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"> 
+@stop 
+@section('content')
+
 <div class="box box-warning">
     <div class="box-header with-border text-center">
         <a href="{{route('operators.showProfile',[$operator->member_id])}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>

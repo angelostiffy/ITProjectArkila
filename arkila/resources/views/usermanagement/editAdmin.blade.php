@@ -14,7 +14,7 @@
 
 {{csrf_field()}}
 <div class="form-group">
-  <label for="payor">User name:</libel>
+  <label for="payor">User name:</label>
   <span name="username">{{$admin_user->username}}</span>
 </div>
 <div class="form-group">
