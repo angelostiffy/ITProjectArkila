@@ -33,6 +33,11 @@ class CreateTripTable extends Migration
             ->references('destination_id')->on('destination')
             ->onDelete('restrict')
             ->onUpdate('cascade');
+            
+            $table->foreign('terminal_id')
+            ->references('terminal_id')->on('terminal')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
 
             $table->foreign('plate_number')
             ->references('plate_number')->on('van')
