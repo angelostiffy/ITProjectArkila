@@ -14,7 +14,7 @@
 
      <div class="form-group">
         <label>Fare:</label>
-        <input type="number" class="form-control" name="editDestinationFare" step = "0.25" min="0" value="{{$destination->amount}}">
+        <input type="number" class="form-control" name="editDestinationFare" step = "0.25" min="1" max="5000" value="{{$destination->amount}}">
      </div>
 
 @endsection
