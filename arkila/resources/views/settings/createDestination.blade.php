@@ -12,7 +12,7 @@
         </div>
 
         <label>Destination:</label>
-        <input name="addDestination" type="text" class="form-control">
+        <input name="addDestination" type="text" class="form-control" maxlength="30">
     </div>
     <div class="form-group">
         <label>Terminal:</label>
@@ -26,7 +26,7 @@
     </div>
     <div class="form-group">
         <label>Fare:</label>
-        <input type="number" class="form-control" name="addDestinationFare" step="0.25" min="0" placeholder="Php 0.00">
+        <input type="number" class="form-control" name="addDestinationFare" step="0.25" placeholder="Php 0.00" min="1" max="200">
     </div>
 
 @endsection
