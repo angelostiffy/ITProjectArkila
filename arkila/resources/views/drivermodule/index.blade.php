@@ -193,29 +193,7 @@
 <!-- /.col -->
 
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script type="text/javascript">
-        $(document).ready(function (){
-          var data;
-          $.ajax({
-            url: "{{URL::route('drivermodule.viewQueue')}}",
-            dataType: "json",
-            success: function(resp){
-              data = resp.trips;
-              console.log(data);
-            }
-          });
 
-          $.ajax({
-            url: "{{URL::route('drivermodule.viewAnnouncement')}}",
-            dataType: "json",
-            success: function(resp){
-              data = resp.announcements;
-              console.log(data);
-            }
-          });
-        });
-        </script>
 
 <div class="modal fade" id="seeMoreAnnouncements">
     <div class="modal-dialog" style="margin-top:150px;">
@@ -240,5 +218,28 @@
 </div>
 <!-- /.modal -->
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function (){
+  var data;
+  $.ajax({
+    url: "{{URL::route('drivermodule.viewQueue')}}",
+    dataType: "json",
+    success: function(resp){
+      data = resp.trips;
+      console.log(data);
+    }
+  });
+
+  $.ajax({
+    url: "{{URL::route('drivermodule.viewAnnouncement')}}",
+    dataType: "json",
+    success: function(resp){
+      data = resp.announcements;
+      console.log(data);
+    }
+  });
+});
+</script>
 
 @endsection
