@@ -1,7 +1,7 @@
-@extends('layouts.master') @section('title', 'Driver List') @section('content-header', 'Driver List') @section('content') @if(session()->get('opLink')) {{ session()->forget('opLink') }} @endif
+@extends('layouts.master') @section('title', 'List of Drivers') @section('content-header', 'List of Drivers') @section('content') @if(session()->get('opLink')) {{ session()->forget('opLink') }} @endif
 <div class="box">
     <div class="box-body">
-        <a href="{{route('drivers.create')}}" class="btn btn-primary">Add Driver <i class="fa fa-plus-circle"></i></a>
+        <a href="{{route('drivers.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create New</a>
         <table id="driverList" class="table table-bordered table-striped">
             <thead>
                 <tr>
