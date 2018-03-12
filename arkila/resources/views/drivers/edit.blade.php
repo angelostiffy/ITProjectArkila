@@ -1,4 +1,4 @@
-    @extends('layouts.master') @section('title', 'Edit Driver Information') @section('links') @parent
+ @extends('layouts.master') @section('title', 'Edit Driver Information') @section('links') @parent
 <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"> @stop @section('content')
 <div class="box box-warning">
     <div class="box-header with-border text-center">
@@ -9,8 +9,7 @@
     </div>
 
     <form method="POST" id="regForm" action="{{route('drivers.update',[$driver->member_id])}}">
-        {{csrf_field()}}
-        {{method_field("PATCH")}}
+        {{csrf_field()}} {{method_field("PATCH")}}
 
         <div class="box-body">
 
@@ -19,11 +18,11 @@
                 <h4>Personal Information</h4>
                 <div class="tab">
                     <div class="col-md-4">
-                     
-                       <div class="form-group">
-                           <label>Choose Operator:</label>
-                           
-                                <select name="operator" id="" class="form-control select2">
+
+                        <div class="form-group">
+                            <label>Choose Operator:</label>
+
+                            <select name="operator" id="" class="form-control select2">
                                     <option value=''>No Operator</option>
                                     @foreach($operators as $operator)
                                         <option value="{{$operator->member_id}}"
@@ -40,11 +39,11 @@
                         </div>
                         <div class="form-group">
                             <label for="operatorLastName">Last Name:</label>
-                            <input value= "{{old('lastName') ?? $driver->last_name }}" id="driverLastName" name="lastName" type="text" class="form-control" placeholder="Last Name">
+                            <input value="{{old('lastName') ?? $driver->last_name }}" id="driverLastName" name="lastName" type="text" class="form-control" placeholder="Last Name">
                         </div>
                         <div class="form-group">
                             <label for="contactNumberO">Contact Number:</label>
-                            <input  value = "{{old('contactNumber') ?? $driver->edit_contact_number }}" id="contactNumberO" name="contactNumber" type="text" class="form-control" placeholder="Contact Number">
+                            <input value="{{old('contactNumber') ?? $driver->edit_contact_number }}" id="contactNumberO" name="contactNumber" type="text" class="form-control" placeholder="Contact Number">
                         </div>
 
                         <div class="form-group">
@@ -90,17 +89,17 @@
                         </div>
                         <div class="form-group">
                             <label for="licenseNoO">License No:</label>
-                            <input id="licenseNoO" value="{{  old('licenseNo') ?? $driver->license_number }}"  name="licenseNo" type="text" class="form-control" placeholder="License No.">
+                            <input id="licenseNoO" value="{{  old('licenseNo') ?? $driver->license_number }}" name="licenseNo" type="text" class="form-control" placeholder="License No.">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="operatorMiddleName">Middle Name:</label>
-                            <input id="operatorMiddleName" value="{{  old('middleName')  ?? $driver->middle_name }}"  name="middleName" type="text" class="form-control" placeholder="Middle Name">
+                            <input id="operatorMiddleName" value="{{  old('middleName')  ?? $driver->middle_name }}" name="middleName" type="text" class="form-control" placeholder="Middle Name">
                         </div>
                         <div class="form-group">
                             <label for="provincialAddressO">Provincial Address:</label>
-                            <input value="{{old('provincialAddress') ?? $driver->provincial_address }}"  id="provincialAddress" name="provincialAddress" type="text" class="form-control" placeholder="Provincial Address">
+                            <input value="{{old('provincialAddress') ?? $driver->provincial_address }}" id="provincialAddress" name="provincialAddress" type="text" class="form-control" placeholder="Provincial Address">
                         </div>
                         <div class="form-group">
                             <label for="birthplaceO">Birthplace:</label>
@@ -133,11 +132,11 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="spouseNameO">Name of Spouse:</label>
-                            <input value="{{ old('nameOfSpouse') ?? $driver->spouse }}"  id="spouseNameO" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse">
+                            <input value="{{ old('nameOfSpouse') ?? $driver->spouse }}" id="spouseNameO" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse">
                         </div>
                         <div class="form-group">
                             <label for="fathersNameO">Fathers Name:</label>
-                            <input value="{{ old('fathersName') ?? $driver->father_name }}"  id="fathersNameO" name="fathersName" type="text" class="form-control" placeholder="Fathers Name">
+                            <input value="{{ old('fathersName') ?? $driver->father_name }}" id="fathersNameO" name="fathersName" type="text" class="form-control" placeholder="Fathers Name">
                         </div>
                         <div class="form-group">
                             <label for="mothersNameO">Mothers Name:</label>
@@ -176,7 +175,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="addressO">Address</label>
-                            <input  value="{{ old('contactPersonAddress') ?? $driver->emergency_address }}" id="addressO" name="contactPersonAddress" type="text" class="form-control" placeholder="Address">
+                            <input value="{{ old('contactPersonAddress') ?? $driver->emergency_address }}" id="addressO" name="contactPersonAddress" type="text" class="form-control" placeholder="Address">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -187,64 +186,59 @@
                     </div>
                 </div>
                 <div class="tab" style="margin-left:5px;">
-                        <Label for="dependentsO">Dependents:</Label>
-                        <table class="table table-hover custab">
-                            <thead>
-                                <th>Name</th>
-                                <th>Birthdate</th>
-                                <th>
-                                    <div class="pull-right">
-                                        <button type="button" class="btn btn-primary" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Children</button>
+                    <Label for="dependentsO">Dependents:</Label>
+                    <table class="table table-hover custab">
+                        <thead>
+                            <th>Name</th>
+                            <th>Birthdate</th>
+                            <th>
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-primary" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Children</button>
+                                </div>
+                            </th>
+                        </thead>
+                        <tbody id="childrens">
+                            @if(old('children')) @for($i = 0; $i
+                            < count(old( 'children')); $i++) <tr>
+                                <td>
+                                    <input value="{{old('children.'.$i)}}" name="children[]" type="text" placeholder="Name of Child" class="form-control">
+                                </td>
+                                <td>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input value="{{old('childrenBDay.'.$i)}}" name="childrenBDay[]" type="text" class="form-control pull-right datepicker">
                                     </div>
-                                </th>
-                            </thead>
-                            <tbody id="childrens">
-                            @if(old('children'))
+                                </td>
+                                <td>
+                                    <div class="pull-right">
+                                        <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
+                                    </div>
+                                </td>
 
-                                @for($i = 0; $i < count(old('children')); $i++)
-                                    <tr>
-                                        <td>
-                                            <input value="{{old('children.'.$i)}}" name="children[]" type="text" placeholder="Name of Child" class="form-control">
-                                        </td>
-                                        <td>
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input value="{{old('childrenBDay.'.$i)}}" name="childrenBDay[]" type="text" class="form-control pull-right datepicker">
+                                </tr>
+                                @endfor @elseif ($driver->children->first()) @foreach($driver->children as $child)
+                                <tr>
+                                    <td>
+                                        <input value="{{$child->children_name}}" name="children[]" type="text" placeholder="Name of Child" class="form-control">
+                                    </td>
+                                    <td>
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div class="pull-right">
-                                                <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
-                                            </div>
-                                        </td>
+                                            <input value="{{$child->birthdate}}" name="childrenBDay[]" type="text" class="form-control pull-right datepicker">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="pull-right">
+                                            <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
+                                        </div>
+                                    </td>
 
-                                    </tr>
-                                @endfor
-                            @elseif ($driver->children->first())
-                                @foreach($driver->children as $child)
-                                    <tr>
-                                        <td>
-                                            <input value="{{$child->children_name}}" name="children[]" type="text" placeholder="Name of Child" class="form-control">
-                                        </td>
-                                        <td>
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input value="{{$child->birthdate}}" name="childrenBDay[]" type="text" class="form-control pull-right datepicker">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="pull-right">
-                                                <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
-                                            </div>
-                                        </td>
-
-                                    </tr>
-                                @endforeach
-                            @else
+                                </tr>
+                                @endforeach @else
                                 <tr>
                                     <td>
                                         <input name="children[]" type="text" placeholder="Name of Child" class="form-control">
@@ -264,18 +258,18 @@
                                     </td>
 
                                 </tr>
-                            @endif
-                                
+                                @endif
 
 
-                            </tbody>
-                        </table>
-                          
-                        <button class="btn btn-default pull-right" style="margin: 1% 1%">Cancel</button>
-                        <button class="btn btn-primary pull-right"  style="margin: 1% 0%">Save Changes</button>
+
+                        </tbody>
+                    </table>
+
+                    <button class="btn btn-default pull-right" style="margin: 1% 1%">Cancel</button>
+                    <button class="btn btn-primary pull-right" style="margin: 1% 0%">Save Changes</button>
                 </div>
             </div>
-        </div>     
+        </div>
     </form>
 </div>
 
@@ -283,39 +277,39 @@
 @stop @section('scripts') @parent
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         cloneDatePicker();
 
-        $(document).ready(function(){
+        $(document).ready(function() {
             cloneDatePicker();
-            switch($('select[name="civilStatus"]').val()){
+            switch ($('select[name="civilStatus"]').val()) {
                 case "Single":
-                    $('input[name="nameOfSpouse"]').prop('disabled',true);
+                    $('input[name="nameOfSpouse"]').prop('disabled', true);
                     $('input[name="spouseBirthDate"]').prop('disabled', true);
                     break;
                 case "Divorced":
-                    $('input[name="nameOfSpouse"]').prop('disabled',true);
+                    $('input[name="nameOfSpouse"]').prop('disabled', true);
                     $('input[name="spouseBirthDate"]').prop('disabled', true);
                     break;
                 default:
-                    $('input[name="nameOfSpouse"]').prop('disabled',false);
+                    $('input[name="nameOfSpouse"]').prop('disabled', false);
                     $('input[name="spouseBirthDate"]').prop('disabled', false);
                     break;
             }
 
 
-            $('select[name="civilStatus"]').change(function(){
-                switch($('select[name="civilStatus"]').val()){
+            $('select[name="civilStatus"]').change(function() {
+                switch ($('select[name="civilStatus"]').val()) {
                     case "Single":
-                        $('input[name="nameOfSpouse"]').prop('disabled',true);
+                        $('input[name="nameOfSpouse"]').prop('disabled', true);
                         $('input[name="spouseBirthDate"]').prop('disabled', true);
                         break;
                     case "Divorced":
-                        $('input[name="nameOfSpouse"]').prop('disabled',true);
+                        $('input[name="nameOfSpouse"]').prop('disabled', true);
                         $('input[name="spouseBirthDate"]').prop('disabled', true);
                         break;
                     default:
-                        $('input[name="nameOfSpouse"]').prop('disabled',false);
+                        $('input[name="nameOfSpouse"]').prop('disabled', false);
                         $('input[name="spouseBirthDate"]').prop('disabled', false);
                         break;
                 }
