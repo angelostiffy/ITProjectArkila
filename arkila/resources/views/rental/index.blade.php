@@ -1,4 +1,4 @@
-@extends('layouts.master') @section('title', 'Rental List') @section('content-header', 'Rental List') @section('links') @parent @stop @section('content')
+@extends('layouts.master') @section('title', 'List of Rentals') @section('content-header', 'List of Rentals') @section('links') @parent @stop @section('content')
 <section class="content">
     <div class="box">
         <div class="box-body">
@@ -6,7 +6,7 @@
                 <!-- Custom Tabs -->
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab_1" data-toggle="tab">List of Rentals</a></li>
+                        <li class="active"><a href="#tab_1" data-toggle="tab">Walk-in Rental</a></li>
                         <li><a href="#tab_2" data-toggle="tab">Online Rental</a></li>
 
                     </ul>
@@ -15,7 +15,7 @@
                         <div class="tab-pane active" id="tab_1">
 
                             <div class="col col-md-6">
-                                <a href="/home/rental/create" class="btn btn-primary">Add Rental</a>
+                                <a href="/home/rental/create" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create New</a>
                             </div>
                             <table id="listRent" class="table table-bordered table-striped rentalTable">
                                 <thead>
