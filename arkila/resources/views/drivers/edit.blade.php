@@ -18,8 +18,9 @@
                 @include('message.error')
                 <h4>Personal Information</h4>
                 <div class="tab">
+                    <div class="col-md-4">
                      
-                       <div class="form-group" style="width:31%;">
+                       <div class="form-group">
                            <label>Choose Operator:</label>
                            
                                 <select name="operator" id="" class="form-control select2">
@@ -37,7 +38,6 @@
                                     @endforeach
                                 </select>
                         </div>
-                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="operatorLastName">Last Name:</label>
                             <input value= "{{old('lastName') ?? $driver->last_name }}" id="driverLastName" name="lastName" type="text" class="form-control" placeholder="Last Name">
@@ -186,8 +186,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab">
-                    <div class="col-md-12">
+                <div class="tab" style="margin-left:5px;">
                         <Label for="dependentsO">Dependents:</Label>
                         <table class="table table-hover custab">
                             <thead>
@@ -273,9 +272,7 @@
                         </table>
                           
                         <button class="btn btn-default pull-right" style="margin: 1% 1%">Cancel</button>
-                        <button class="btn btn-primary pull-right"  style="margin: 1% 0%">Save Changes</button> 
-
-                    </div>
+                        <button class="btn btn-primary pull-right"  style="margin: 1% 0%">Save Changes</button>
                 </div>
             </div>
         </div>     
