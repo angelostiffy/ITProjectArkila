@@ -22,7 +22,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
-                                        <th>Destina tion</th>
+                                        <th>Destination</th>
                                         <th>Date</th>
                                         <th>Time</th>
                                         <th>Contact Number</th>
