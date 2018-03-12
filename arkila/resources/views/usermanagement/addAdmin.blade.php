@@ -17,7 +17,7 @@
     </div>
     
     <div class="form-group">
-        <label for="uName">User name:</label>
+        <label for="uName">Username:</label>
         <input type="text" class="form-control" name="userName" maxlength="15" required>
     </div>
     <div class="form-group">
