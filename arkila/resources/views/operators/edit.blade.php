@@ -26,11 +26,11 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="operatorLastName">Last Name:</label>
-                            <input value= "{{old('lastName') ?? $operator->last_name }}" id="driverLastName" name="lastName" type="text" class="form-control" placeholder="Last Name">
+                            <input value= "{{old('lastName') ?? $operator->last_name }}" id="driverLastName" name="lastName" type="text" class="form-control" placeholder="Last Name" maxlength="35">
                         </div>
                         <div class="form-group">
                             <label for="contactNumberO">Contact Number:</label>
-                            <input  value = "{{old('contactNumber') ?? $operator->edit_contact_number }}" id="contactNumberO" name="contactNumber" type="text" class="form-control" placeholder="Contact Number">
+                            <input  value = "{{old('contactNumber') ?? $operator->edit_contact_number }}" id="contactNumberO" name="contactNumber" type="text" class="form-control" placeholder="Contact Number" maxlength="10">
                         </div>
 
                         <div class="form-group">
@@ -49,17 +49,17 @@
                         </div>
                         <div class="form-group">
                             <label for="sssO">SSS No:</label>
-                            <input id="sssO" name="sss" value="{{  old('sss') ?? $operator->SSS }}" type="text" class="form-control" placeholder="SSS No.">
+                            <input id="sssO" name="sss" value="{{  old('sss') ?? $operator->SSS }}" type="text" class="form-control" placeholder="SSS No." maxlength="10">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="operatorFirstName">First Name:</label>
-                            <input id="operatorFirstName" value="{{old('firstName')  ?? $operator->first_name}}" name="firstName" type="text" class="form-control" placeholder="First Name">
+                            <input id="operatorFirstName" value="{{old('firstName')  ?? $operator->first_name}}" name="firstName" type="text" class="form-control" placeholder="First Name" maxlength="35">
                         </div>
                         <div class="form-group">
                             <label for="addressO">Address:</label>
-                            <input id="addressO" value="{{old('address') ?? $operator->address }}" name="address" type="text" class="form-control" placeholder="Address">
+                            <input id="addressO" value="{{old('address') ?? $operator->address }}" name="address" type="text" class="form-control" placeholder="Address" maxlength="100">
                         </div>
                         <div class="form-group">
                             <label for="birthdateO">Birthdate:</label>
@@ -72,25 +72,25 @@
                         </div>
                         <div class="form-group">
                             <label for="citizenshipO">Citizenship:</label>
-                            <input value="{{ old('citizenship') ?? $operator->citizenship }}" id="citizenshipO" name="citizenship" type="text" class="form-control" placeholder="Citizenship">
+                            <input value="{{ old('citizenship') ?? $operator->citizenship }}" id="citizenshipO" name="citizenship" type="text" class="form-control" placeholder="Citizenship" maxlength="35">
                         </div>
                         <div class="form-group">
                             <label for="licenseNoO">License No:</label>
-                            <input id="licenseNoO" value="{{  old('licenseNo') ?? $operator->license_number }}"  name="licenseNo" type="text" class="form-control" placeholder="License No.">
+                            <input id="licenseNoO" value="{{  old('licenseNo') ?? $operator->license_number }}"  name="licenseNo" type="text" class="form-control" placeholder="License No." maxlength="20">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="operatorMiddleName">Middle Name:</label>
-                            <input id="operatorMiddleName" value="{{  old('middleName')  ?? $operator->middle_name }}"  name="middleName" type="text" class="form-control" placeholder="Middle Name">
+                            <input id="operatorMiddleName" value="{{  old('middleName')  ?? $operator->middle_name }}"  name="middleName" type="text" class="form-control" placeholder="Middle Name" maxlength="35">
                         </div>
                         <div class="form-group">
                             <label for="provincialAddressO">Provincial Address:</label>
-                            <input value="{{old('provincialAddress') ?? $operator->provincial_address }}"  id="provincialAddress" name="provincialAddress" type="text" class="form-control" placeholder="Provincial Address">
+                            <input value="{{old('provincialAddress') ?? $operator->provincial_address }}"  id="provincialAddress" name="provincialAddress" type="text" class="form-control" placeholder="Provincial Address" maxlength="100">
                         </div>
                         <div class="form-group">
                             <label for="birthplaceO">Birthplace:</label>
-                            <input value="{{old('birthPlace') ?? $operator->birth_place }}" id="birthplaceO" name="birthPlace" type="text" class="form-control" placeholder="Birthplace">
+                            <input value="{{old('birthPlace') ?? $operator->birth_place }}" id="birthplaceO" name="birthPlace" type="text" class="form-control" placeholder="Birthplace" maxlength="50">
                         </div>
                         <div class="form-group">
                             <label for="civilStatusO">Civil Status:</label>
@@ -119,15 +119,15 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="spouseNameO">Name of Spouse:</label>
-                            <input value="{{ old('nameOfSpouse') ?? $operator->spouse }}"  id="spouseNameO" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse">
+                            <input value="{{ old('nameOfSpouse') ?? $operator->spouse }}"  id="spouseNameO" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse" maxlength="120">
                         </div>
                         <div class="form-group">
                             <label for="fathersNameO">Fathers Name:</label>
-                            <input value="{{ old('fathersName') ?? $operator->father_name }}"  id="fathersNameO" name="fathersName" type="text" class="form-control" placeholder="Fathers Name">
+                            <input value="{{ old('fathersName') ?? $operator->father_name }}"  id="fathersNameO" name="fathersName" type="text" class="form-control" placeholder="Fathers Name" maxlength="120">
                         </div>
                         <div class="form-group">
                             <label for="mothersNameO">Mothers Name:</label>
-                            <input value=" {{ old('mothersName') ?? $operator->mother_name }}" id="mothersNameO" name="mothersName" type="text" class="form-control" placeholder="Mothers Name">
+                            <input value=" {{ old('mothersName') ?? $operator->mother_name }}" id="mothersNameO" name="mothersName" type="text" class="form-control" placeholder="Mothers Name" maxlength="120">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -142,11 +142,11 @@
                         </div>
                         <div class="form-group">
                             <label for="occupationFatherO">Occupation:</label>
-                            <input value="{{  old('fatherOccupation') ?? $operator->father_occupation }}" id="occupationFatherO" name="fatherOccupation" type="text" class="form-control" placeholder="Occupation">
+                            <input value="{{  old('fatherOccupation') ?? $operator->father_occupation }}" id="occupationFatherO" name="fatherOccupation" type="text" class="form-control" placeholder="Occupation" maxlength="50">
                         </div>
                         <div class="form-group">
                             <label for="occupationMotherO">Occupation:</label>
-                            <input value="{{ old('motherOccupation') ?? $operator->mother_occupation }}" id="occupationMotherO" name="motherOccupation" type="text" class="form-control" placeholder="Occupation">
+                            <input value="{{ old('motherOccupation') ?? $operator->mother_occupation }}" id="occupationMotherO" name="motherOccupation" type="text" class="form-control" placeholder="Occupation" maxlength="50">
                         </div>
 
                     </div>
@@ -156,19 +156,19 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="contactPersonO">Contact Person</label>
-                            <input value="{{ old('contactPerson') ?? $operator->person_in_case_of_emergency }}" id="contactPersonO" name="contactPerson" type="text" class="form-control" placeholder="Contact Person In Case of Emergency">
+                            <input value="{{ old('contactPerson') ?? $operator->person_in_case_of_emergency }}" id="contactPersonO" name="contactPerson" type="text" class="form-control" placeholder="Contact Person In Case of Emergency" maxlength="120">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="addressO">Address</label>
-                            <input  value="{{ old('contactPersonAddress') ?? $operator->emergency_address }}" id="addressO" name="contactPersonAddress" type="text" class="form-control" placeholder="Address">
+                            <input  value="{{ old('contactPersonAddress') ?? $operator->emergency_address }}" id="addressO" name="contactPersonAddress" type="text" class="form-control" placeholder="Address" maxlength="50">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="contactNumberO">Contact Number</label>
-                            <input value="{{ old('contactPersonContactNumber') ?? $operator->edit_emergency_contactno }}" id="contactNumberO" name="contactPersonContactNumber" type="text" class="form-control" placeholder="Contact Number">
+                            <input value="{{ old('contactPersonContactNumber') ?? $operator->edit_emergency_contactno }}" id="contactNumberO" name="contactPersonContactNumber" type="text" class="form-control" placeholder="Contact Number" maxlength="10">
                         </div>
                     </div>
                 </div>
@@ -191,7 +191,7 @@
                                 @for($i = 0; $i < count(old('children')); $i++)
                                     <tr>
                                         <td>
-                                            <input value="{{old('children.'.$i)}}" name="children[]" type="text" placeholder="Name of Child" class="form-control">
+                                            <input value="{{old('children.'.$i)}}" name="children[]" type="text" placeholder="Name of Child" class="form-control" maxlength="120">
                                         </td>
                                         <td>
                                             <div class="input-group date">
@@ -213,7 +213,7 @@
                                 @foreach($operator->children as $child)
                                     <tr>
                                         <td>
-                                            <input value="{{$child->children_name}}" name="children[]" type="text" placeholder="Name of Child" class="form-control">
+                                            <input value="{{$child->children_name}}" name="children[]" type="text" placeholder="Name of Child" class="form-control" maxlength="120">
                                         </td>
                                         <td>
                                             <div class="input-group date">
@@ -234,7 +234,7 @@
                             @else
                                 <tr>
                                     <td>
-                                        <input name="children[]" type="text" placeholder="Name of Child" class="form-control">
+                                        <input name="children[]" type="text" placeholder="Name of Child" class="form-control" maxlength="120">
                                     </td>
                                     <td>
                                         <div class="input-group date">
