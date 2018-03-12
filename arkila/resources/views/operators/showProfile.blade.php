@@ -148,7 +148,11 @@
                     <div class="box">
                         <!-- /.box-header -->
                         <div class="box-body">
+                        @if ($operator->drivers->count() < $operator->van->count())
                             <a href="{{route('drivers.createFromOperator',[$operator->member_id])}}" class="btn btn-primary" style="margin-bottom:-5%;"><i class="fa fa-plus-circle"></i> Add Driver</a>
+                        @else
+                            <button class="btn btn-primary disabled" style="margin-bottom:-5%;"><i class="fa fa-plus-circle"></i> Add Driver </button>
+                        @endif    
                             <table id="driver" class="table table-bordered table-striped">
 
                                 <thead>
