@@ -19,8 +19,9 @@ class TripsController extends Controller
     public function index()
     {
         $terminals = Terminal::all();
-        $destinations = Destination::all();
-        $trips = Trip::whereNotNull('queue_number')->orderBy('queue_number')->get();
+        $trips = Trip::where('terminal_id',1)
+            ->whereNotNull('queue_number')
+            ->orderBy('queue_number')->get();
 
         $drivers = Member::whereNotIn('member_id', function($query){
             $query->select('driver_id')
@@ -35,7 +36,6 @@ class TripsController extends Controller
         })->get();
 
 
-        ;
         return view('trips.queue', compact('terminals','trips','vans','destinations','drivers'));
     }
 
@@ -55,15 +55,15 @@ class TripsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Destination $destination, Van $van, Member $member )
+    public function store(Terminal $destination, Van $van, Member $member )
     {
-        if( is_null(Trip::where('destination_id',$destination->destination_id)
+        if( is_null(Trip::where('terminal_id',$destination->terminal_id)
             ->where('plate_number',$van->plate_number)
             ->whereNotNull('queue_number')->first()) ){
-            $queueNumber = Trip::where('destination_id',$destination->destination_id)->count();
+            $queueNumber = Trip::where('terminal_id',$destination->terminal_id)->count()+1;
 
             Trip::create([
-                'destination_id' => $destination->destination_id,
+                'terminal_id' => $destination->terminal_id,
                 'plate_number' => $van->plate_number,
                 'driver_id' => $member->member_id,
                 'queue_number' => $queueNumber
@@ -153,5 +153,16 @@ class TripsController extends Controller
         }
 
 
+    }
+
+    public function showTrips(Terminal $terminal)
+    {
+        $trips = [];
+
+        foreach($terminal->trips as $trip){
+                array_push($trips, $trip);
+        }
+
+        return response()->json($trips);
     }
 }

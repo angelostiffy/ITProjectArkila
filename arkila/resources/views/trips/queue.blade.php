@@ -162,10 +162,10 @@ ol.vertical{
                        </select>
 
                        <label for="">Destination</label>
-                      <select @if($destinations->first() == null) {{'disabled'}} @endif name="destination" id="destination" class="form-control">
-                          @if($destinations->first() != null)
-                            @foreach ($destinations as $destination)
-                                <option value="{{$destination->destination_id}}">{{ $destination->description }}</option>
+                      <select @if($terminals->first() == null) {{'disabled'}} @endif name="destination" id="destination" class="form-control">
+                          @if($terminals->first() != null)
+                            @foreach ($terminals as $terminal)
+                                <option value="{{$terminal->terminal_id}}">{{ $terminal->description }}</option>
                             @endforeach
                           @else
                               <option> No Available Data</option>
@@ -185,7 +185,7 @@ ol.vertical{
                           @endif
                       </select>
               </div>
-                @if($vans->first() != null && $destinations->first() !=null && $drivers ->first() !=null)
+                @if($vans->first() != null && $terminals->first() !=null && $drivers ->first() !=null)
 
                       <div class="box-footer">
                           <div class="pull-right">
@@ -240,9 +240,9 @@ ol.vertical{
                     <div class="box-header text-center bg-gray">
                       <h3 class="box-title">Terminals</h3>
                     </div>
-                  <ul class="nav nav-stacked">
+                  <ul id="destinationTerminals" class="nav nav-stacked">
                     @foreach ($terminals as $terminal)
-                    <li><a href="#{{$terminal->terminal_id}}" data-toggle="tab">{{$terminal->description}}</a></li>
+                    <li data-val="{{$terminal->terminal_id}}"><a href="#{{$terminal->terminal_id}}" data-toggle="tab">{{$terminal->description}}</a></li>
                     @endforeach
                   </ul>
                   </div>
@@ -426,6 +426,29 @@ ol.vertical{
       });
      @endforeach
 
+
+     $("#destinationTerminals li").on('click',function(e){
+         alert($(e.currentTarget).data('val'));
+
+         $.ajax({
+             method:'GET',
+             url: '/showTrips/'+$(e.currentTarget).data('val'),
+             {{--data: {--}}
+                 {{--'_token': '{{csrf_token()}}'--}}
+             {{--},--}}
+             success: function(trips){
+                 console.log(trips);
+
+                 for(var i=0; i< trips.length; i++){
+
+                 }
+
+
+             }
+
+         });
+
+     });
         });
 </script>
 

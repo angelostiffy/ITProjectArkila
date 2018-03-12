@@ -18,8 +18,6 @@ class CreateTripTable extends Migration
             $table->increments('trip_id');
             $table->integer('driver_id')
             ->unsigned();
-            $table->integer('destination_id')
-            ->unsigned();
             $table->integer('terminal_id')
             ->unsigned();
             $table->string('plate_number');
@@ -31,11 +29,7 @@ class CreateTripTable extends Migration
             $table->date('date_departed')->nullable();
             $table->integer('queue_number')->nullable();
 
-            $table->foreign('destination_id')
-            ->references('destination_id')->on('destination')
-            ->onDelete('restrict')
-            ->onUpdate('cascade');
-            
+
             $table->foreign('terminal_id')
             ->references('terminal_id')->on('terminal')
             ->onDelete('restrict')
