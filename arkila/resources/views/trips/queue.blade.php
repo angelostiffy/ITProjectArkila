@@ -212,6 +212,7 @@ ol.vertical{
                               </div>
                               <div class="col-md-6">
                                 <div class="pull-right">
+
                                   <a href="" id="remark{{ $trip->trip_id ?? null}}" name="{{$trip->van->plate_number ?? null}}"  data-type="select" data-title="Update Remark" class="remark-editable btn btn-outline-secondary btn-sm editable" data-original-title="" title=""><i class="fa fa-info"></i></a>
 
                                   
@@ -242,7 +243,7 @@ ol.vertical{
                     </div>
                   <ul id="destinationTerminals" class="nav nav-stacked">
                     @foreach ($terminals as $terminal)
-                    <li data-val="{{$terminal->terminal_id}}"><a href="#{{$terminal->terminal_id}}" data-toggle="tab">{{$terminal->description}}</a></li>
+                    <li class="@if($terminals->first() == $terminal){{'active'}} @else {{''}}@endif" data-val="{{$terminal->terminal_id}}"><a href="#{{$terminal->terminal_id}}" data-toggle="tab">{{$terminal->description}}</a></li>
                     @endforeach
                   </ul>
                   </div>
@@ -251,7 +252,7 @@ ol.vertical{
                 <div class="tab-content">
                 <!-- Cabanatuan Queue Tab -->
                 @foreach($terminals as $terminal)
-                  <div class="tab-pane" id="{{$terminal->terminal_id}}">
+                  <div class="tab-pane @if($terminals->first() == $terminal) {{'active'}} @else {{''}} @endif" id="{{$terminal->terminal_id}}">
                     <div class="box box-solid">
                       <div class="box-header text-center bg-gray">
                         <h3 class="box-title">{{$terminal->description}}</h3>
@@ -262,7 +263,7 @@ ol.vertical{
                       <input type="email" id="queueSearch" class="form-control" placeholder="Search in queue" onkeyup="myFunction()">
                     </div>
                     <ol id ="queue-list" class="vertical rectangle-list serialization">
-                        @foreach ($trips as $trip)
+                        @foreach ($trips->where('terminal_id',$terminal->terminal_id) as $trip)
                           <li class="" data-plate="{{ $trip->van->plate_number}}" data-remark="{{ $trip->remarks }}">
                             <span class="dropped">
                             <div class="row">
@@ -361,7 +362,7 @@ ol.vertical{
                         data: {
                             '_token': '{{csrf_token()}}'
                         },
-                        success: function(vanInfo){
+                        success: function(){
                             location.reload();
                         }
 
@@ -411,7 +412,15 @@ ol.vertical{
                 {value: 'OB', text: 'OB'}
              ]
       });
-
+                    $('.editable-submit').on('click',function(e){
+                        alert('asdsa');
+                    });
+                    $('#remark'+{{$trip->trip_id}}).editable('submit',{
+                        url: '/home/trips/'+$('#remark'+{{$trip->trip_id}}).editable('getValue').{{'remark'.$trip->trip_id}},
+                        type: 'PATCH',
+                        success: '',
+                        error: ''
+                    });
 
     @endforeach
 
@@ -424,31 +433,22 @@ ol.vertical{
           @endforeach
           ]
       });
+
+      {{--$('#queue'+{{$trip->trip_id}}).click(function(){--}}
+          {{--$('#queue'+{{$trip->trip_id}}).editable('submit',{--}}
+              {{--url: '',--}}
+              {{--success: '',--}}
+              {{--error: '',--}}
+
+
+          {{--});--}}
+
+      {{--});--}}
+
+
+
      @endforeach
 
-
-     $("#destinationTerminals li").on('click',function(e){
-         alert($(e.currentTarget).data('val'));
-
-         $.ajax({
-             method:'GET',
-             url: '/showTrips/'+$(e.currentTarget).data('val'),
-             {{--data: {--}}
-                 {{--'_token': '{{csrf_token()}}'--}}
-             {{--},--}}
-             success: function(trips){
-                 console.log(trips);
-
-                 for(var i=0; i< trips.length; i++){
-
-                 }
-
-
-             }
-
-         });
-
-     });
         });
 </script>
 
