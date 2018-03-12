@@ -13,14 +13,16 @@ class Terminal extends Model
     	'terminal_id',
     ];
 
-    public function user()
-    {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 
-    public function destination()
-    {
+    public function destination() {
     	return $this->hasMany(Destination::class, 'destination_id');
+    }
+
+    public function trips(){
+        return $this->hasMany(Trip::class,'terminal_id');
     }
 
 }

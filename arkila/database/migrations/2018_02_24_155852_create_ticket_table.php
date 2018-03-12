@@ -19,6 +19,9 @@ class CreateTicketTable extends Migration
             ->unsigned();
             $table->integer('fad_id')
             ->unsigned();
+            $table->integer('trip_id')
+            ->unsigned();
+
             $table->enum('status', ['Pending', 'Cancelled', 'Departed']);
 
 
@@ -29,6 +32,11 @@ class CreateTicketTable extends Migration
 
             $table->foreign('fad_id')
             ->references('fad_id')->on('fees_and_deduction')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
+
+            $table->foreign('trip_id')
+            ->references('trip_id')->on('trip')
             ->onDelete('restrict')
             ->onUpdate('cascade');
 

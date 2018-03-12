@@ -15,7 +15,7 @@
 </div>
 <div class="form-group">
     <label>Amount:</label>
-    <input type="number" class="form-control" name="addDiscountAmount" step="0.25" min="0" placeholder="Php 0.00">
+    <input type="number" class="form-control" name="addDiscountAmount" step="0.25" min="1" max="200" placeholder="Php 0.00">
 </div>
 
 @endsection

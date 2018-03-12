@@ -159,6 +159,7 @@ Route::resource('home/trips', 'TripsController',[
     'except' =>['store','update']
 ]);
 Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
+Route::get('/showTrips/{terminal}', 'TripsController@showTrips');
 
 
 /********Archive ********/

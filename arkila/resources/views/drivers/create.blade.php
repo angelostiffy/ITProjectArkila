@@ -106,19 +106,19 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Last Name:</label>
-                                <input value="{{old('lastName')}}" name="lastName" type="text" class="form-control" placeholder="Last Name">
+                                <input value="{{old('lastName')}}" name="lastName" type="text" class="form-control" placeholder="Last Name" maxlength="35">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>First Name:</label>
-                                <input value="{{old('firstName')}}" name="firstName" type="text" class="form-control" placeholder="First Name">
+                                <input value="{{old('firstName')}}" name="firstName" type="text" class="form-control" placeholder="First Name" maxlength="35">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Middle Name:</label>
-                                <input value="{{old('middleName')}}" name="middleName" type="text" class="form-control" placeholder="Middle Name">
+                                <input value="{{old('middleName')}}" name="middleName" type="text" class="form-control" placeholder="Middle Name" maxlength="35">
                             </div>
                         </div>
                     </div>
@@ -126,19 +126,19 @@
                         <div class="col-md-4">
                              <div class="form-group">
                                 <label>Contact Number:</label>
-                                <input value="{{old('contactNumber')}}" name="contactNumber" type="text" class="form-control" placeholder="Contact Number">
+                                <input value="{{old('contactNumber')}}" name="contactNumber" type="text" class="form-control" placeholder="Contact Number" maxlength="10">
                             </div>
                         </div>
                         <div class="col-md-4">
                              <div class="form-group">
                                 <label>Address:</label>
-                                <input value="{{old('address')}}" name="address" type="text" class="form-control" placeholder="Address">
+                                <input value="{{old('address')}}" name="address" type="text" class="form-control" placeholder="Address" maxlength="100">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Provincial Address:</label>
-                                <input value="{{old('provincialAddress')}}" name="provincialAddress" type="text" class="form-control" placeholder="Provincial Address">
+                                <input value="{{old('provincialAddress')}}" name="provincialAddress" type="text" class="form-control" placeholder="Provincial Address" maxlength="100">
                             </div>
                         </div>
                     </div>
@@ -157,7 +157,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Birthplace:</label>
-                                <input value="{{old('birthPlace')}}" name="birthPlace" type="text" class="form-control" placeholder="Birthplace">
+                                <input value="{{old('birthPlace')}}" name="birthPlace" type="text" class="form-control" placeholder="Birthplace" maxlength="50">
                             </div>
                         </div>
                     
@@ -182,24 +182,25 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Citizenship:</label>
-                                <input value="{{old('citizenship')}}" name="citizenship" type="text" class="form-control" placeholder="Citizenship">
+                                <input value="{{old('citizenship')}}" name="citizenship" type="text" class="form-control" placeholder="Citizenship" maxlength="35">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Civil Status:</label>
                                 <select name="civilStatus" class="form-control">
-                                   <option value="Single" @if(old('civilStatus') == 'Single') {{'selected'}} @endif>Single</option>
-                                   <option value="Married" @if(old('civilStatus') == 'Married') {{'selected'}} @endif>Married</option>
-                                   <option value="Divorced" @if(old('civilStatus') == 'Divorced') {{'selected'}} @endif>Divorced</option>
-                               </select>
+                                    <option @if(old('civilStatus') == 'Single') {{'selected'}} @endif>Single</option>
+                                    <option @if(old('civilStatus') == 'Married') {{'selected'}} @endif>Married</option>
+                                    <option @if(old('civilStatus') == 'Divorced') {{'selected'}} @endif>Divorced</option>
+                                    <option @if(old('civilStatus') == 'Widowed') {{'selected'}} @endif>Widowed</option>
+                                </select>
                             </div>
                         </div>
                    
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>SSS No:</label>
-                                <input value="{{old('sss')}}" name="sss" type="text" class="form-control" placeholder="SSS No.">
+                                <input value="{{old('sss')}}" name="sss" type="text" class="form-control" placeholder="SSS No." maxlength="10">
                             </div>
                         </div>
                     </div>
@@ -207,7 +208,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>License No:</label>
-                                <input value="{{old('licenseNo')}}" name="licenseNo" type="text" class="form-control" placeholder="License No.">
+                                <input value="{{old('licenseNo')}}" name="licenseNo" type="text" class="form-control" placeholder="License No." maxlength="20">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -229,7 +230,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Name of Spouse:</label>
-                                <input value="{{old('nameOfSpouse')}}" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse">
+                                <input value="{{old('nameOfSpouse')}}" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse" maxlength="120">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -248,13 +249,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Fathers Name:</label>
-                                <input value="{{old('fathersName')}}" name="fathersName" type="text" class="form-control" placeholder="Fathers Name">
+                                <input value="{{old('fathersName')}}" name="fathersName" type="text" class="form-control" placeholder="Fathers Name" maxlength="120">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Occupation:</label>
-                                <input value="{{old('fatherOccupation')}}" name="fatherOccupation" type="text" class="form-control" placeholder="Occupation">
+                                <input value="{{old('fatherOccupation')}}" name="fatherOccupation" type="text" class="form-control" placeholder="Occupation" maxlength="50">
                             </div>
                         </div>
                     </div>
@@ -262,13 +263,13 @@
                         <div class="col-md-6">
                              <div class="form-group">
                                 <label>Mothers Name:</label>
-                                <input value="{{old('mothersName')}}" name="mothersName" type="text" class="form-control" placeholder="Mothers Name">
+                                <input value="{{old('mothersName')}}" name="mothersName" type="text" class="form-control" placeholder="Mothers Name" maxlength="120">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Occupation:</label>
-                                <input value="{{old('motherOccupation')}}" name="motherOccupation" type="text" class="form-control" placeholder="Occupation">
+                                <input value="{{old('motherOccupation')}}" name="motherOccupation" type="text" class="form-control" placeholder="Occupation" maxlength="50">
                             </div>
                         </div>
                     </div>
@@ -277,19 +278,19 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Contact Person</label>
-                                <input value="{{old('contactPerson')}}" name="contactPerson" type="text" class="form-control" placeholder="Contact Person In Case of Emergency">
+                                <input value="{{old('contactPerson')}}" name="contactPerson" type="text" class="form-control" placeholder="Contact Person In Case of Emergency" maxlength="120">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Address</label>
-                                <input value="{{old('contactPersonAddress')}}" name="contactPersonAddress" type="text" class="form-control" placeholder="Address">
+                                <input value="{{old('contactPersonAddress')}}" name="contactPersonAddress" type="text" class="form-control" placeholder="Address" maxlength="50">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Contact Number</label>
-                                <input value="{{old('contactPersonContactNumber')}}" name="contactPersonContactNumber" type="text" class="form-control" placeholder="Contact Number">
+                                <input value="{{old('contactPersonContactNumber')}}" name="contactPersonContactNumber" type="text" class="form-control" placeholder="Contact Number" maxlength="10">
                             </div>
                         </div>
                     </div>
@@ -302,7 +303,7 @@
                                     <th>Birthdate</th>
                                     <th>
                                         <div class="pull-right">
-                                            <button type="button" class="btn btn-info" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Item</button>
+                                            <button type="button" class="btn btn-info" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Children</button>
                                         </div>
                                     </th>
                                 </thead>
@@ -334,7 +335,7 @@
                                 @else
                                     <tr>
                                         <td>
-                                            <input name="children[]" type="text" placeholder="Name of Child" class="form-control">
+                                            <input name="children[]" type="text" placeholder="Name of Child" class="form-control" maxlength="120">
                                         </td>
                                         <td>
                                             <div class="input-group date">
@@ -379,9 +380,43 @@
 @endsection
 @section('scripts')
 @parent
- <script>    
+ <script>
 
-        $(cloneDatePicker());
+     $(document).ready(function(){
+         cloneDatePicker();
+         switch($('select[name="civilStatus"]').val()){
+             case "Single":
+                 $('input[name="nameOfSpouse"]').prop('disabled',true);
+                 $('input[name="spouseBirthDate"]').prop('disabled', true);
+                 break;
+             case "Divorced":
+                 $('input[name="nameOfSpouse"]').prop('disabled',true);
+                 $('input[name="spouseBirthDate"]').prop('disabled', true);
+                 break;
+             default:
+                 $('input[name="nameOfSpouse"]').prop('disabled',false);
+                 $('input[name="spouseBirthDate"]').prop('disabled', false);
+                 break;
+         }
+
+
+         $('select[name="civilStatus"]').change(function(){
+             switch($('select[name="civilStatus"]').val()){
+                 case "Single":
+                     $('input[name="nameOfSpouse"]').prop('disabled',true);
+                     $('input[name="spouseBirthDate"]').prop('disabled', true);
+                     break;
+                 case "Divorced":
+                     $('input[name="nameOfSpouse"]').prop('disabled',true);
+                     $('input[name="spouseBirthDate"]').prop('disabled', true);
+                     break;
+                 default:
+                     $('input[name="nameOfSpouse"]').prop('disabled',false);
+                     $('input[name="spouseBirthDate"]').prop('disabled', false);
+                     break;
+             }
+         });
+     });
 
         function cloneDatePicker() {
 

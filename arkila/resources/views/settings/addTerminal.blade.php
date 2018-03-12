@@ -12,7 +12,7 @@
            
         <label>Terminal Name:</label>
         {{csrf_field()}}
-        <input type="text" class="form-control" name="addTerminalName">
+        <input type="text" class="form-control" name="addTerminalName" maxlength="30">
       </div>
 
 @endsection

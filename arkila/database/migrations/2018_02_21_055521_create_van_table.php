@@ -18,7 +18,8 @@ class CreateVanTable extends Migration
             $table->string('plate_number', 8)
             ->unique();
 
-            $table->string('model');       
+            $table->integer('model_id')
+            ->unsigned();       
             $table->string('seating_capacity', 2);
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
 
@@ -26,6 +27,11 @@ class CreateVanTable extends Migration
             $table->timestamps();
 
             $table->primary('plate_number');
+
+            $table->foreign('model_id')
+            ->references('model_id')->on('van_model')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
 
 
         });
