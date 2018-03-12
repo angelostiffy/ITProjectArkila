@@ -63,7 +63,7 @@ class OperatorRequest extends FormRequest
                     'sss' => 'unique:member,SSS|required|max:10',
                     'licenseNo' => ['required_with:licenseExpiryDate','max:20'],
                     'licenseExpiryDate' => 'required_with:licenseNo|nullable|date|after:today',
-                    'children.*' => ['required_with:childrenBDay.*','distinct', 'nullable', new checkName],
+                    'children.*' => ['required_with:childrenBDay.*','distinct', 'nullable', new checkName, 'max:120'],
                     'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
                 ];
             }
@@ -100,7 +100,7 @@ class OperatorRequest extends FormRequest
                         'sss' => 'unique:member,SSS,'.$this->route('operator')->member_id.',member_id|required|max:10',
                         'licenseNo' => ['required_with:licenseExpiryDate','max:20'],
                         'licenseExpiryDate' => 'required_with:licenseNo|nullable|date|after:today',
-                        'children.*' => ['required_with:childrenBDay.*','distinct', 'nullable', new checkName],
+                        'children.*' => ['required_with:childrenBDay.*','distinct', 'nullable', new checkName,'max:120'],
                         'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
                     ];
 

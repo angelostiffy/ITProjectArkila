@@ -19,8 +19,7 @@ class TripsController extends Controller
     public function index()
     {
         $terminals = Terminal::all();
-        $trips = Trip::where('terminal_id',1)
-            ->whereNotNull('queue_number')
+        $trips = Trip::whereNotNull('queue_number')
             ->orderBy('queue_number')->get();
 
         $drivers = Member::whereNotIn('member_id', function($query){
@@ -60,7 +59,9 @@ class TripsController extends Controller
         if( is_null(Trip::where('terminal_id',$destination->terminal_id)
             ->where('plate_number',$van->plate_number)
             ->whereNotNull('queue_number')->first()) ){
-            $queueNumber = Trip::where('terminal_id',$destination->terminal_id)->count()+1;
+            $queueNumber = Trip::where('terminal_id',$destination->terminal_id)
+                ->whereNotNull('queue_number')
+                    ->count()+1;
 
             Trip::create([
                 'terminal_id' => $destination->terminal_id,
@@ -155,14 +156,4 @@ class TripsController extends Controller
 
     }
 
-    public function showTrips(Terminal $terminal)
-    {
-        $trips = [];
-
-        foreach($terminal->trips as $trip){
-                array_push($trips, $trip);
-        }
-
-        return response()->json($trips);
-    }
 }
