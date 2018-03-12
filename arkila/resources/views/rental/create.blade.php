@@ -58,19 +58,19 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Last Name:</label>
-                                <input type="text" class="form-control" placeholder="Last Name" name="lastName" id="lastName" value="{{ old('lastName') }}">
+                                <input type="text" class="form-control" placeholder="Last Name" name="lastName" id="lastName" value="{{ old('lastName') }}" maxlength="35">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>First Name:</label>
-                                <input type="text" class="form-control" placeholder="First Name" name="firstName" id="firstName" value="{{ old('firstName') }}">
+                                <input type="text" class="form-control" placeholder="First Name" name="firstName" id="firstName" value="{{ old('firstName') }}" maxlength="35">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Middle Name:</label>
-                                <input type="text" class="form-control" placeholder="Middle Name" name="middleName" id="middleName" value="{{ old('middleName') }}">
+                                <input type="text" class="form-control" placeholder="Middle Name" name="middleName" id="middleName" value="{{ old('middleName') }}" maxlength="35">
                             </div>
                         </div>
                     </div>
@@ -78,13 +78,13 @@
                         <div class="col-md-4">
                              <div class="form-group">
                                 <label>Contact Number:</label>
-                                <input type="text" class="form-control" placeholder="Contact Number" name="contactNumber" id="contactNumber" value="{{ old('contactNumber') }}">
+                                <input type="text" class="form-control" placeholder="Contact Number" name="contactNumber" id="contactNumber" value="{{ old('contactNumber') }}" maxlength="10">
                             </div>
                         </div>
                         <div class="col-md-4">
                              <div class="form-group">
                                 <label>Destination:</label>
-                                <input type="text" class="form-control" placeholder="Destination" name="destination" id="destination" value="{{ old('destination') }}">
+                                <input type="text" class="form-control" placeholder="Destination" name="destination" id="destination" value="{{ old('destination') }}" maxlength="35">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -103,7 +103,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Number of Days:</label>
-                                <input type="number" class="form-control" placeholder="Number of Days" name="days" id="days" value="{{ old('days') }}">
+                                <input type="number" class="form-control" placeholder="Number of Days" name="days" id="days" value="{{ old('days') }}" min="1" max="15">
                             </div>
                         </div>
                         <div class="col-md-4">

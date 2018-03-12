@@ -17,7 +17,7 @@
 
         </div>
         <div class="box-body" style=" display:inline-block;">
-            <p style="font-size:10">{{ $announcement->description }}</p>
+            <div style="font-size:10">{{ $announcement->description }}</div >
         </div>
 
         <div class="box-footer">
