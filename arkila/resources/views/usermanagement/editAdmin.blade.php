@@ -44,14 +44,14 @@
 
   <button type="button" class="btn btn-danger btn-block" style="margin-top:5%" data-toggle="modal" data-target="#form-modal">Reset Password</button>
 
-  @section('modal-title','Alert')
+  @section('modal-title','Confirm')
   @section('modal-body')
-    <p>Are you sure you want to Reset "NAME"'s password?</p>
+    <p>Are you sure you want to reset {{ $admin_user->name }}'s password?</p>
   @endsection
 
-  @section('modal-btn')
-    <button type="submit" class="btn btn-primary">Yes</button>
-    <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+  @section('modal-btn')   
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+    <button type="submit" class="btn btn-danger" style="width:40%">Reset Password</button>
   @endsection
 
 </div>
@@ -67,6 +67,10 @@
             display: inline-block;
             width: 40px;
             height: 20px;
+        }
+        
+        .modal-header.bg-primary {
+            background-color: #dd4b39 !important;
         }
 
         /* Hide default HTML checkbox */

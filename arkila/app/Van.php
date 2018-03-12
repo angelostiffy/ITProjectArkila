@@ -25,6 +25,11 @@ class Van extends Model
     	return $this->hasOne(Rental::Class, 'rent_id');
     }
 
+    public function vanmodel() {
+        return $this->belongsTo(VanModel::Class, 'model_id');
+            
+    }
+
     public function driver(){
         return $this->members()->where('role','Driver');
     }

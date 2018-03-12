@@ -28,8 +28,8 @@ class AdminUserManagementController extends Controller
     {
         $this->validate(request(), [
 
-            "fullName" => "required|max:50",
-            "userName" => [new checkUserName, 'required', 'max:15'],
+            "fullName" => "required|alpha|max:50",
+            "userName" => "unique:users,username|required|max:15",
 
             "userEmail" => "email|unique:users,email",
             "password" => "required|confirmed",

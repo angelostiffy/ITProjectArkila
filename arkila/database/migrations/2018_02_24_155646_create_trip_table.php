@@ -24,6 +24,7 @@ class CreateTripTable extends Migration
 
             $table->enum('remarks', ['OB', 'CC', 'ER'])->nullable();
             $table->enum('status', ['Departed', 'On Queue'])->default('On Queue');
+            $table->integer('community_fund', 10);
             $table->smallInteger('total_passengers')->nullable();
             $table->integer('total_booking_fee')->nullable();
             $table->date('date_departed')->nullable();
