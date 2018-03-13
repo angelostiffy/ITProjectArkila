@@ -43,7 +43,7 @@ class ReservationRequest extends FormRequest
 
         if ($dateFormatted !== $dateFormattedNow) {
                 return [
-                    "name" => [new checkName, 'required', 'max:50'],
+                    "name" => [new checkName, 'required', 'max:30'],
                     "date" => "required|date_format:m/d/Y|after_or_equal:today",
                     "dest" => "required",
                     "time" => [new checkTime, 'required'],

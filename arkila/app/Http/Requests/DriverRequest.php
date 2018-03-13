@@ -65,7 +65,7 @@ class DriverRequest extends FormRequest
                     'sss' => 'unique:member,SSS|required|max:10',
                     'licenseNo' => ['required','max:20'],
                     'licenseExpiryDate' => 'required|date|after:today',
-                    'children.*' => ['required_with:childrenBDay.*','distinct', 'nullable',new checkName],
+                    'children.*' => ['required_with:childrenBDay.*','distinct', 'nullable',new checkName, 'max:120'],
                     'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
                 ];
             }
@@ -103,7 +103,7 @@ class DriverRequest extends FormRequest
                     'sss' => 'unique:member,SSS,'.$this->route('driver')->member_id.',member_id|required|max:10',
                     'licenseNo' => ['required','max:20'],
                     'licenseExpiryDate' => 'required|date|after:today',
-                    'children.*' => ['required_with:childrenBDay.*','distinct', 'nullable',new checkName],
+                    'children.*' => ['required_with:childrenBDay.*','distinct', 'nullable',new checkName, 'max:120'],
                     'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
                 ];
             }

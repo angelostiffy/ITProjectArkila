@@ -152,7 +152,7 @@ Route::resource('home/triptest', 'TripsController');
 /* Trips */
 Route::post('home/trips/{destination}/{van}/{member}', 'TripsController@store')->name('trips.store');
 
-Route::patch('home/trips/{trip}')->name('trips.updateRemarks');
+Route::patch('home/trips/{trip}', 'TripsController@updateRemarks')->name('trips.updateRemarks');
 Route::patch('home/trips/{trip}/{destination}')->name('trips.updateDestination');
 
 Route::resource('home/trips', 'TripsController',[
@@ -181,8 +181,8 @@ Route::group(['middleware' => ['auth', 'driver']], function(){
   Route::patch('home/profile/change-password/{driverid}', 'DriverModuleControllers\DriverProfileController@updatePassword')->name('drivermodule.changePassword');
   Route::post('home/profile/change-password', 'DriverModuleControllers\DriverProfileController@checkCurrentPassword')->name('drivermodule.checkCurrentPassword');
   /*Trip Log/Create Report*/
-  Route::get('home/create-report', 'DriverModuleControllers\CreateReportController@index')->name('drivermodule.viewCreateReport');
-
+  Route::get('home/create-report', 'DriverModuleControllers\CreateReportController@createReport')->name('drivermodule.viewCreateReport');
+  Route::post('home/create-report', 'DriverModuleControllers\CreateReportController@showDestination')->name('drivermodule.showDestination');
 });
 
 Route::get('home/try', 'PassController@index');

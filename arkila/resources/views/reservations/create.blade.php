@@ -32,7 +32,12 @@
         background-color: #4CAF50;
     }
 </style>
-@endsection @section('title', 'Book a Seat') @section('form-id', 'regForm') @section('form-action', route('reservations.store')) @section('form-method', 'POST') @section('form-body') {{csrf_field()}}
+@endsection @section('title', 'Book a Seat') 
+@section('form-id', 'regForm') 
+@section('form-action', route('reservations.store')) 
+@section('form-method', 'POST') 
+@section('form-body') {{csrf_field()}}
+
 <div class="box box-warning">
     <div class="box-header with-border text-center">
         <a href="{{ URL::previous() }}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
@@ -41,7 +46,7 @@
         </h3>
     </div>
     <div class="box-body">
-@include('message.error')
+    @include('message.error')
 
         <div class="tab">
             <h4>Trip Information</h4>
@@ -49,7 +54,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Name:</label>
-                        <input type="text" class="form-control" placeholder="Name" name="name" id="name" value="{{ old('name') }}"min='1' max='50' required>
+                        <input type="text" class="form-control" placeholder="Name" name="name" id="name" value="{{ old('name') }}" maxlength='30' required>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -66,7 +71,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" class="form-control pull-right datepicker" id="datepicker" name="date" value="{{ old('date') }}" required>
+                            <input type="text" class="form-control pull-right datepicker" id="datepicker" placeholder="MM/DD/YYYY" name="date" value="{{ old('date') }}" required>
                         </div>
                     </div>
                 </div>
@@ -86,7 +91,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Number of Seats:</label>
-                        <input type="number" class="form-control" placeholder="Number of Seats" name="seat" id="seat" value="{{ old('seat') }}" required>
+                        <input type="number" class="form-control" placeholder="Number of Seats" name="seat" id="seat" value="{{ old('seat') }}" min="1" max="15" required>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -105,9 +110,9 @@
             </div>
         </div>
     </div>
-    <div class="tab ">
+    <div class="tab">
         <h4>Summary</h4>
-        <div class="row ">
+        <div class="row">
             <dl class="dl-horizontal">
                 <dt>Name:</dt>
                 <dd id="nameView"></dd>
@@ -141,11 +146,13 @@
 </div>
 @endsection @section('scripts') @parent
 <script>
-    $(function() {
 
+    $(function() {
         //Date picker
         $('#datepicker').datepicker({
-            autoclose: true
+            autoclose: true,
+            startDate: new Date()
+            // endDate: new Date('2018-04-12')
         })
 
     })
@@ -154,6 +161,7 @@
         //Date picker
         $('#timepicker').timepicker({
             showInputs: false
+            // startTime: new Time();
         })
 
     })

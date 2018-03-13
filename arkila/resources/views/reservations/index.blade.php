@@ -1,26 +1,33 @@
-@extends('layouts.master') 
-@section('title', 'Reservations') 
-@section('links') @parent
-<link rel="stylesheet" href="public\css\myOwnStyle.css"> 
-@stop 
+
+@extends('layouts.master')
+@section('title', 'Reservations')
+@section('content-header', 'Reservations')
+@section('links')
+@parent
+  <link rel="stylesheet" href="public\css\myOwnStyle.css">
+  @stop
+
 @section('content')
 
 <section class="content">
     <div class="box">
+
 
         <div class="box-body">
             <div class="col-xl-6">
                 <!-- Custom Tabs -->
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab_1" data-toggle="tab">Online Reservation</a></li>
-                        <li><a href="#tab_2" data-toggle="tab">List of Reservations</a></li>
+                        <li lass="active"><a href="#tab_2" data-toggle="tab">List of Reservations</a>
+                            <li><a href="#tab_1" data-toggle="tab">Online Reservation</a></li>
+
+
 
                     </ul>
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
-                            <b>Details:</b>
+
                             <table class="table table-bordered table-striped listReservation">
                                 <thead>
                                     <tr>
@@ -47,24 +54,21 @@
                                         <td>{{ $reservation->amount }}</td>
                                         <td>{{ $reservation->status }}</td>
                                         <td class="center-block">
-                                            
-                                                <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
-                                                    {{ csrf_field() }} {{ method_field('PATCH') }}
-                                                    
-                                                    @if ($reservation->status == 'Pending')
-                                                        <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
-                                                        <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Declined"><i class="fa fa-close"></i> Decline</button> 
-                                                    
-                                                    @elseif ($reservation->status == 'Paid')
-                                                    
-                                                        <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
-                                                        <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button> @else
-                                                        <form method="POST" action="/home/reservations/{{$reservation->reservation_id}}" class="delete">
-                                                            {{csrf_field()}} {{method_field('DELETE')}}
-                                                            <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</button>
-                                                        </form>
-                                                    @endif
+
+
+                                            <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
+                                                {{ csrf_field() }} {{ method_field('PATCH') }} @if ($reservation->status == 'Pending')
+                                                <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
+                                                <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Declined"><i class="fa fa-close"></i> Decline</button> @elseif ($reservation->status == 'Paid')
+
+                                                <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
+                                                <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button> @else
+                                                <form method="POST" action="/home/reservations/{{$reservation->reservation_id}}" class="delete">
+                                                    {{csrf_field()}} {{method_field('DELETE')}}
+                                                    <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</button>
                                                 </form>
+                                                @endif
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -77,6 +81,7 @@
                         <div class="tab-pane" id="tab_2">
                             <div class="form-group">
                                 <a href="/home/reservations/create" class="btn btn-primary">Add Walk-in Reservation</a>
+
                             </div>
                             <table class="table table-bordered table-striped listReservation">
                                 <thead>
@@ -117,12 +122,11 @@
                                                     <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</button>
                                                 </form>
                                                 @endif
-                                      
+
                                             </div>
                                         </td>
                                     </tr>
-                                    @endif 
-                                    @endforeach
+                                    @endif @endforeach
                                 </tbody>
                             </table>
                         </div>
