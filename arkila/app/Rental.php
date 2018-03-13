@@ -21,4 +21,7 @@ class Rental extends Model
         return "{$this->first_name} {$this->last_name}";
     }
 
+    public function vanmodel(){
+    	return $this->hasOne(VanModel::Class, 'model_id');
+    }
 }
