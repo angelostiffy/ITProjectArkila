@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Rental;
 use Carbon\Carbon;
 use App\Van;
+use App\VanModel;
 use App\Http\Requests\RentalRequest;
 
 class RentalsController extends Controller
@@ -30,8 +31,8 @@ class RentalsController extends Controller
      */
     public function create()
     {
-        $vans = Van::all();
-        return view('rental.create', compact('vans'));
+        $models = VanModel::all();
+        return view('rental.create', compact('models'));
     }
     /**
      * Store a newly created resource in storage.
@@ -41,10 +42,10 @@ class RentalsController extends Controller
      */
     public function store(RentalRequest $request)
     {
-        $findPlateNo = Van::all();
+        $findModel = VanModel::all();
         $modelReq = $request->model;
-        foreach ($findPlateNo->where('model', $modelReq) as $find) {
-            $findPlateNo = $find->plate_number;
+        foreach ($findModel->where('description', $modelReq) as $find) {
+            $findModelID = $find->model_id;
         }
 
         $perContactNumber = '+63'.request('contactNumber');
@@ -53,7 +54,7 @@ class RentalsController extends Controller
             'last_name' => $request->lastName,
             'first_name' => $request->firstName,
             'middle_name' => $request->middleName,
-            'plate_number' => $findPlateNo,
+            'model_id' => $findModelID,
             'departure_date' => $request->date,
             'departure_time' => $request->time,
             'destination' => $request->destination,
@@ -68,7 +69,6 @@ class RentalsController extends Controller
         return redirect('/home/rental/create');
 
     }    
-
     /**
      * Display the specified resource.
      *

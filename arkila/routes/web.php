@@ -152,7 +152,7 @@ Route::resource('home/triptest', 'TripsController');
 /* Trips */
 Route::post('home/trips/{destination}/{van}/{member}', 'TripsController@store')->name('trips.store');
 
-Route::patch('home/trips/{trip}')->name('trips.updateRemarks');
+Route::patch('home/trips/{trip}', 'TripsController@updateRemarks')->name('trips.updateRemarks');
 Route::patch('home/trips/{trip}/{destination}')->name('trips.updateDestination');
 
 Route::resource('home/trips', 'TripsController',[

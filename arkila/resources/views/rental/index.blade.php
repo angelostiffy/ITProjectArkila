@@ -40,7 +40,7 @@
                                         <td>{{ $rental->departure_date }}</td>
                                         <td>{{ $rental->departure_time }}</td>
                                         <td>{{ $rental->contact_number }}</td>
-                                        <td>{{ $rental->van->model }}</td>
+                                        <td>{{ $rental->vanmodel->description }}</td>
                                         <td>{{ $rental->status }}</td>
                                         <td class="center-block">
                                             <div class="center-block">
