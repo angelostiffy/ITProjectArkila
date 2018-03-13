@@ -182,7 +182,7 @@ Route::group(['middleware' => ['auth', 'driver']], function(){
   Route::post('home/profile/change-password', 'DriverModuleControllers\DriverProfileController@checkCurrentPassword')->name('drivermodule.checkCurrentPassword');
   /*Trip Log/Create Report*/
   Route::get('home/create-report', 'DriverModuleControllers\CreateReportController@createReport')->name('drivermodule.viewCreateReport');
-  Route::post('home/create-report', 'DriverModuleControllers\CreateReportController@showDestination')->name('drivermodule.showDestination');
+  Route::post('home/create-report', 'DriverModuleControllers\CreateReportController@storeReport')->name('drivermodule.storeReport');
 });
 
 Route::get('home/try', 'PassController@index');

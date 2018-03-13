@@ -18,6 +18,7 @@ class CreateTicketTable extends Migration
             $table->integer('destination_id')
             ->unsigned();
             $table->integer('fad_id')
+            ->nullable()
             ->unsigned();
             $table->integer('trip_id')
             ->unsigned();

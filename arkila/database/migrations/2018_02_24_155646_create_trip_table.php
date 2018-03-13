@@ -14,7 +14,6 @@ class CreateTripTable extends Migration
     public function up()
     {
         Schema::create('trip', function (Blueprint $table) {
-            $table->engine="InnoDB";
             $table->increments('trip_id');
             $table->integer('driver_id')
             ->unsigned();

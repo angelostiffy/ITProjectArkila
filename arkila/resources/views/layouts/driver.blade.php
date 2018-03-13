@@ -12,6 +12,9 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+    <!--time picker-->
+    <link rel="stylesheet" href="{{ URL::asset('adminlte/plugins/timepicker/bootstrap-timepicker.min.css') }}">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/font-awesome/css/font-awesome.min.css') }}">
     <!-- Ionicons -->
@@ -99,6 +102,8 @@
     <!-- Sparkline -->
     <script src="{{ URL::asset('adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
     <!-- jvectormap -->
+    <!-- time picker -->
+    <script src="{{ URL::asset('adminlte/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
     <script src="{{ URL::asset('adminlte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
     <script src="{{ URL::asset('adminlte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
     <!-- jQuery Knob Chart -->
