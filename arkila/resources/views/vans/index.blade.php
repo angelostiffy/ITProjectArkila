@@ -135,7 +135,7 @@
 								<div class="text-center">
 									
                                         @if($van->driver()->first())
-		                                        <a name="listDriver" data-val="{{ $van->operator()->first()->member_id ?? $van->operator()->first()}}" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Change Driver</a>
+		                                        <a name="listDriver" data-driver="{{$van->driver->first()->member_id}}" data-val="{{ $van->operator()->first()->member_id ?? $van->operator()->first()}}" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Change Driver</a>
                                         @else
                                             <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Add Driver</a>
                                         @endif
@@ -191,7 +191,7 @@
 @parent
 
 <script>
-    $(function() {
+    $(document).ready(function() {
         $('#van').DataTable({
             'paging': true,
             'lengthChange': false,
@@ -200,7 +200,7 @@
             'info': true,
             'autoWidth': true
         })
-    });
+
 
     $('a[name="listDriver"]').on('click',function(e){
         $('select[name="driver"]').empty();
@@ -209,7 +209,8 @@
             url: '{{route("vans.listDrivers")}}',
             data: {
                 '_token': '{{csrf_token()}}',
-                'operator':$(e.currentTarget).data('val')
+                'operator':$(e.currentTarget).data('val'),
+                'vanDriver': $(e.currentTarget).data('driver')
             },
             success: function(drivers){
 
@@ -244,6 +245,8 @@
 
         });
     });
+
+    });
 </script>
 
-@stop
+@endsection

@@ -111,15 +111,17 @@ class TripsController extends Controller
     public function updateRemarks(Trip $trip)
     {
         $this->validate(request(),[
-            'remarks' => [Rule::in('OB','CC','ER')]
+            'value' => [Rule::in('OB','CC','ER', "NULL")]
         ]);
 
-        $trip->update([request('remarks')]);
+        $trip->update([
+            'remarks' => request('value')
+        ]);
 
         return "Success";
     }
 
-    public function updateDestination(Trip $trip, Destination $destination){
+    public function updateDestination(Trip $trip, Terminal $destination){
         $trip->update([
             'destination_id' => 'destination'
         ]);

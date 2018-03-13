@@ -67,8 +67,18 @@ class VansController extends Controller {
             return redirect(route('drivers.createFromVan',[$van->plate_number]));
         }
         else{
+            $newDriver = Member::find(request('driver'));
+            if($newDriver->operator_id == null){
+                $newDriver->update([
+                    'operator_id' => request('operator')
+                ]);
+            }
 
-            $van->members()->attach(request('driver'));
+            if($newDriver->van()->first() != null){
+                $newDriver->van()->detach();
+            }
+
+            $van->members()->attach($newDriver);
             return redirect(route('vans.index'));
         }
     }
@@ -104,7 +114,18 @@ class VansController extends Controller {
             session(['type' => $operator->member_id]);
             return redirect(route('drivers.createFromVan',[$van->plate_number]));
         }else{
-            $van->members()->attach(request('driver'));
+            $newDriver = Member::find(request('driver'));
+            if($newDriver->operator_id == null){
+                $newDriver->update([
+                    'operator_id' => request('operator')
+                ]);
+            }
+
+            if($newDriver->van()->first() != null){
+                $newDriver->van()->detach();
+            }
+
+            $van->members()->attach($newDriver);
             return redirect(route('operators.showProfile',[$operator->member_id]));
         }
 
@@ -158,13 +179,26 @@ class VansController extends Controller {
             $this->validate(request(), [
                 "driver" => ['nullable','numeric','exists:member,member_id',new checkDriver],
             ]);
+
             $driver = $van->driver()->first();
 
             if($driver){
                 $van->members()->detach($driver->member_id);
             }
 
-            $van->members()->attach(request('driver'));
+            $newDriver = Member::find(request('driver'));
+            if($newDriver->operator_id == null){
+                $newDriver->update([
+                    'operator_id' => $van->operator()->first()->member_id
+                ]);
+            }
+
+            if($newDriver->van()->first() != null){
+                    $newDriver->van()->detach();
+            }
+
+
+            $van->members()->attach($newDriver);
 
             session()->flash('message','Van '.request('plateNumber').'Successfully Edited');
 
@@ -205,12 +239,25 @@ class VansController extends Controller {
 
         if($operator != null) {
             $driversArr = [];
-            $drivers = $operator->drivers()->doesntHave('van')->get();
+            $driverOP = $operator->drivers()->get();
+            $driverNoOP = Member::allDrivers()->whereNull('operator_id')->get();
+
+            $drivers = $driverOP->merge($driverNoOP);
+
             foreach($drivers as $driver){
-                array_push($driversArr, [
-                    "id" => $driver->member_id,
-                    "name" => $driver->full_name
-                ]);
+                if(request('vanDriver')){
+                    if($driver->member_id != request('vanDriver')){
+                        array_push($driversArr, [
+                            "id" => $driver->member_id,
+                            "name" => $driver->full_name
+                        ]);
+                    }
+                }else{
+                    array_push($driversArr, [
+                        "id" => $driver->member_id,
+                        "name" => $driver->full_name
+                    ]);
+                }
             }
             return response()->json($driversArr);
         }
