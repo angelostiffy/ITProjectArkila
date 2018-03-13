@@ -14,8 +14,10 @@ class CreateMemberTable extends Migration
     public function up()
     {
         Schema::create('member', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('member_id');
+            $table->integer('user_id')
+            ->unsigned();
+
             $table->integer('operator_id')
             ->nullable()
             ->unsigned();
@@ -49,6 +51,11 @@ class CreateMemberTable extends Migration
             $table->date('expiry_date')->nullable();
             $table->timestamps();
 
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
+
 
         });
 
@@ -58,6 +65,8 @@ class CreateMemberTable extends Migration
             ->onDelete('restrict')
             ->onUpdate('cascade'); 
                });
+
+
     }
 
     /**

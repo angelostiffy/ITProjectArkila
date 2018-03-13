@@ -32,7 +32,12 @@
         background-color: #4CAF50;
     }
 </style>
-@endsection @section('title', 'Book a Seat') @section('form-id', 'regForm') @section('form-action', route('reservations.store')) @section('form-method', 'POST') @section('form-body') {{csrf_field()}}
+@endsection @section('title', 'Book a Seat') 
+@section('form-id', 'regForm') 
+@section('form-action', route('reservations.store')) 
+@section('form-method', 'POST') 
+@section('form-body') {{csrf_field()}}
+
 <div class="box box-warning">
     <div class="box-header with-border text-center">
         <a href="{{ URL::previous() }}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
@@ -41,7 +46,7 @@
         </h3>
     </div>
     <div class="box-body">
-@include('message.error')
+    @include('message.error')
 
         <div class="tab">
             <h4>Trip Information</h4>
@@ -105,9 +110,9 @@
             </div>
         </div>
     </div>
-    <div class="tab ">
+    <div class="tab">
         <h4>Summary</h4>
-        <div class="row ">
+        <div class="row">
             <dl class="dl-horizontal">
                 <dt>Name:</dt>
                 <dd id="nameView"></dd>

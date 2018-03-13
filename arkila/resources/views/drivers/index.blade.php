@@ -80,6 +80,7 @@
 </div>
 <!-- /.box-->
 
+<button type="submit" class="btn btn-default pull-right" style="width:22%;">Print List</button>
 
 
 
