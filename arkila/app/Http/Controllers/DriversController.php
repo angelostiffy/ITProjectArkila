@@ -233,19 +233,19 @@ class DriversController extends Controller
             $current_time = \Carbon\Carbon::now();
             $dateNow = $current_time->setTimezone('Asia/Manila')->format('Y-m-d H:i:s');
 
-            $oldOperator = $driver->operator->member_id;
-            $newOperator = $request->operator;
+            // $oldOperator = $driver->operator->member_id;
+            // $newOperator = $request->operator;
 
-            if ($oldOperator != $newOperator) {
-                $mem = $driver->member_id;
-                $rep = Member::find($mem);
-                $newRep = $rep->replicate();
-                $newRep->SSS = '';
-                $newRep->license_number = '';
-                $newRep->status = 'Inactive';
-                $newRep->created_at = $dateNow;
-                $newRep->save();
-            }
+            // if ($oldOperator != $newOperator) {
+            //     $mem = $driver->member_id;
+            //     $rep = Member::find($mem);
+            //     $newRep = $rep->replicate();
+            //     $newRep->SSS = '';
+            //     $newRep->license_number = '';
+            //     $newRep->status = 'Inactive';
+            //     $newRep->created_at = $dateNow;
+            //     $newRep->save();
+            // }
 
             $driver->update([
                 'last_name'=> $request->lastName,
