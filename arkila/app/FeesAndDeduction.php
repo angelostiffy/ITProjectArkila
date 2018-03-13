@@ -11,4 +11,9 @@ class FeesAndDeduction extends Model
     protected $guarded = [
       'fad_id',
     ];
+
+    public function ticket()
+    {
+    	return $this->hasMany(Ticket::class, 'fad_id');
+    }
 }

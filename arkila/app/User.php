@@ -33,6 +33,11 @@ class User extends Authenticatable
         return $this->hasOne(Terminal::class, 'terminal_id');
     }
 
+    public function member()
+    {
+        return $this->hasOne(Member::class, 'user_id');
+    }
+
     public function scopeStatusEnable($query)
     {
       return $query->where('status', '=', 'enable');
