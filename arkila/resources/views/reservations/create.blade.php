@@ -49,7 +49,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Name:</label>
-                        <input type="text" class="form-control" placeholder="Name" name="name" id="name" value="{{ old('name') }}"min='1' max='50' required>
+                        <input type="text" class="form-control" placeholder="Name" name="name" id="name" value="{{ old('name') }}" maxlength='30' required>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -66,7 +66,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" class="form-control pull-right datepicker" id="datepicker" name="date" value="{{ old('date') }}" required>
+                            <input type="text" class="form-control pull-right datepicker" id="datepicker" placeholder="MM/DD/YYYY" name="date" value="{{ old('date') }}" required>
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Number of Seats:</label>
-                        <input type="number" class="form-control" placeholder="Number of Seats" name="seat" id="seat" value="{{ old('seat') }}" required>
+                        <input type="number" class="form-control" placeholder="Number of Seats" name="seat" id="seat" value="{{ old('seat') }}" min="1" max="15" required>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -141,11 +141,13 @@
 </div>
 @endsection @section('scripts') @parent
 <script>
-    $(function() {
 
+    $(function() {
         //Date picker
         $('#datepicker').datepicker({
-            autoclose: true
+            autoclose: true,
+            startDate: new Date()
+            // endDate: new Date('2018-04-12')
         })
 
     })
@@ -154,6 +156,7 @@
         //Date picker
         $('#timepicker').timepicker({
             showInputs: false
+            // startTime: new Time();
         })
 
     })

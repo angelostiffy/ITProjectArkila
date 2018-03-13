@@ -92,8 +92,8 @@
                                 <label>Type of Van:</label>
                                 <select class="form-control" name="model" id="model">
                                     <option value="" disabled selected>Select Model</option>
-                                @foreach ($vans as $van)
-                                   <option value="{{ $van->model }}" @if($van->model == old('model') ) {{'selected'}} @endif>{{ $van->model }}</option>
+                                @foreach ($models as $model)
+                                   <option value="{{ $model->description }}" @if($model->description == old('model') ) {{'selected'}} @endif>{{ $model->description }}</option>
                                    @endforeach
                                </select>
                             </div>

@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('title', 'Reservations')
+@section('content-header', 'Reservations')
 @section('links')
 @parent
   <link rel="stylesheet" href="public\css\myOwnStyle.css">
@@ -14,72 +15,17 @@
                             <!-- Custom Tabs -->
                             <div class="nav-tabs-custom">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#tab_1" data-toggle="tab">Online Reservation</a></li>
-                                    <li><a href="#tab_2" data-toggle="tab">List of Reservations</a></li>
+                                    <li class="active"><a href="#tab_1" data-toggle="tab">List Reservation</a></li>
+                                    <li><a href="#tab_2" data-toggle="tab">Online of Reservations</a></li>
 
                                 </ul>
 
                                 <div class="tab-content">
-                                    <div class="tab-pane active" id="tab_1">
-                                        <b>Details:</b>
-                                        <table class="table table-bordered table-striped listReservation">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Name</th>
-                                                    <th>Contact Number</th>
-                                                    <th>Destination</th>
-                                                    <th>Preferred Date</th>
-                                                    <th>Time</th>
-                                                    <th>Amount</th>
-                                                    <th>Status</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach ($reservations->where('type', 'Online') as $reservation)
-                                                <tr>
-                                                    <td>{{ $reservation->id }}</td>
-                                                    <td>{{ $reservation->name }}</td>
-                                                    <td>{{ $reservation->contact_number }}</td>
-                                                    <td>{{ $reservation->destination->description }}</td>
-                                                    <td>{{ $reservation->departure_date }}</td>
-                                                    <td>{{ $reservation->departure_time }}</td>
-                                                    <td>{{ $reservation->amount }}</td>
-                                                    <td>{{ $reservation->status }}</td>
-                                                    <td class="center-block">
-                                                        <div class="center-block">
-                                                        <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('PATCH') }}
-
-                                                        @if ($reservation->status == 'Pending')
-                                                            <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
-                                                            <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Declined"><i class="fa fa-close"></i> Decline</i></button>
-
-                                                        @elseif ($reservation->status == 'Paid')
-                                                            <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
-                                                            <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</i></button>
-
-                                                        @else
-                                                            <form method="POST" action="/home/reservations/{{$reservation->reservation_id}}" class="delete">
-                                                                    {{csrf_field()}}
-                                                                    {{method_field('DELETE')}}
-                                                                    <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</i></button>
-                                                            </form>
-                                                        @endif
-                                                            </form>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                   
 
                                     <!-- /.tab-pane -->
  
-                                    <div class="tab-pane" id="tab_2">
+                                    <div class="tab-pane active" id="tab_1">
                                         <div class="form-group">
                                             <a href="/home/reservations/create" class = "btn btn-primary">Add Walk-in Reservation</a>
                                         </div>
@@ -133,6 +79,63 @@
                                             </td>
                                         </tr>
                                                 @endif
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                     <div class="tab-pane" id="tab_2">
+                                        <b>Details:</b>
+                                        <table class="table table-bordered table-striped listReservation">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>Contact Number</th>
+                                                    <th>Destination</th>
+                                                    <th>Preferred Date</th>
+                                                    <th>Time</th>
+                                                    <th>Amount</th>
+                                                    <th>Status</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach ($reservations->where('type', 'Online') as $reservation)
+                                                <tr>
+                                                    <td>{{ $reservation->id }}</td>
+                                                    <td>{{ $reservation->name }}</td>
+                                                    <td>{{ $reservation->contact_number }}</td>
+                                                    <td>{{ $reservation->destination->description }}</td>
+                                                    <td>{{ $reservation->departure_date }}</td>
+                                                    <td>{{ $reservation->departure_time }}</td>
+                                                    <td>{{ $reservation->amount }}</td>
+                                                    <td>{{ $reservation->status }}</td>
+                                                    <td class="center-block">
+                                                        <div class="center-block">
+                                                        <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('PATCH') }}
+
+                                                        @if ($reservation->status == 'Pending')
+                                                            <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
+                                                            <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Declined"><i class="fa fa-close"></i> Decline</i></button>
+
+                                                        @elseif ($reservation->status == 'Paid')
+                                                            <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
+                                                            <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</i></button>
+
+                                                        @else
+                                                            <form method="POST" action="/home/reservations/{{$reservation->reservation_id}}" class="delete">
+                                                                    {{csrf_field()}}
+                                                                    {{method_field('DELETE')}}
+                                                                    <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</i></button>
+                                                            </form>
+                                                        @endif
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>

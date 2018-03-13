@@ -16,12 +16,14 @@ class CreateRentalTable extends Migration
         Schema::create('rental', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('rent_id');
-            $table->string('plate_number', 8);
+            $table->string('plate_number', 8)->nullable();
             $table->string('first_name', 50);
             $table->string('last_name', 50);
             $table->string('middle_name', 50);
             $table->string('departure_date');
             $table->string('departure_time', 8);
+            $table->integer('model_id')
+            ->unsigned();
             $table->smallInteger('number_of_days');
             $table->string('destination');
             $table->string('contact_number', 13);
@@ -34,6 +36,12 @@ class CreateRentalTable extends Migration
             ->references('plate_number')->on('van')
             ->onDelete('restrict')
             ->onUpdate('cascade');
+
+            $table->foreign('model_id')
+            ->references('model_id')->on('van_model')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
+            
         });
     }
 
