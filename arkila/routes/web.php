@@ -160,8 +160,7 @@ Route::resource('home/trips', 'TripsController',[
 ]);
 Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
 Route::get('/showTrips/{terminal}', 'TripsController@showTrips');
-
-
+Route::patch('/updateQueueNumber/{trip}', 'TripsController@updateQueueNumber')->name('trips.updateQueueNumber');
 /********Archive ********/
 Route::patch('home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
 

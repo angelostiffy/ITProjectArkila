@@ -7,6 +7,7 @@ use App\Rules\checkPlateNumber;
 use App\Rules\checkOperator;
 use App\Van;
 use App\Member;
+use App\VanModel;
 use Illuminate\Http\Request;
 
 
@@ -55,9 +56,13 @@ class VansController extends Controller {
             "seatingCapacity" => 'required|between:10,15|numeric'
         ]);
 
+        $vanModel = VanModel::create([
+            'description' => request('vanModel')
+        ]);
+
         $van = Van::create([
             'plate_number' => request('plateNumber'),
-            'model' => request('vanModel'),
+            'model_id' => $vanModel->model_id,
             'seating_capacity' => request('seatingCapacity')
         ]);
         $van->members()->attach(request('operator'));
@@ -100,10 +105,13 @@ class VansController extends Controller {
             "seatingCapacity" => 'required|between:10,15|numeric'
         ]);
 
+        $vanModel = VanModel::create([
+            'van_model' => request('vanModel')
+        ]);
 
         $van = Van::create([
             'plate_number' => request('plateNumber'),
-            'model' => request('vanModel'),
+            'model_id' => $vanModel,
             'seating_capacity' => request('seatingCapacity')
         ]);
 

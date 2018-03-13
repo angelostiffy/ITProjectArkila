@@ -269,7 +269,7 @@ ol.vertical{
                             <div class="row">
                               <div class="col-md-6">
                                 <div class="queuenum">
-                                  <a href="" id="queue{{ $trip->trip_id}}" name="{{$trip->van->plate_number}}" data-type="select" data-title="Queue number" class="queue-editable">{{ $trip->queue_number }}</a>
+                                  <a href="" id="queue{{ $trip->trip_id}}" class="queue-editable">{{ $trip->queue_number }}</a>
                                 </div>
                                 
                                 <p>
@@ -392,8 +392,11 @@ ol.vertical{
                 '_token': '{{csrf_token()}}',
                 'vanQueue': queue
             },
-            success: function(vanInfo){
-               console.log(vanInfo);
+            success: function(trips){
+               console.log(trips);
+               for(i = 0; i < trips.length; i++){
+                    $('#queue'+trips[i].trip_id).editable('setValue',trips[i].queue_number);
+               }
             }
 
         });
@@ -438,30 +441,43 @@ ol.vertical{
 
     @endforeach
 
-     @foreach($trips as $trip)
-      $('#queue'+{{$trip->trip_id}}).editable({
-          value: {{ $trip->queue_number }},
-          source: [
-          @foreach($trips as $trip)
-                  {value: '{{ $trip->queue_number }}', text: '{{ $trip->queue_number }}' },
-          @endforeach
-          ]
-      });
+    @foreach($trips as $trip)
 
-      {{--$('#queue'+{{$trip->trip_id}}).click(function(){--}}
-          {{--$('#queue'+{{$trip->trip_id}}).editable('submit',{--}}
-              {{--url: '',--}}
-              {{--success: '',--}}
-              {{--error: '',--}}
+              $('#queue{{$trip->trip_id}}').editable({
+                  name: 'queue',
+                  value: '{{ $trip->queue_number }}',
+                  type: 'select',
+                  title:'Queue number',
+                  url: '{{route('trips.updateQueueNumber',[$trip->trip_id])}}',
+                  pk: '{{$trip->trip_id}}',
+                  validate: function(value){
+                      if($.trim(value) == ""){
+                          return "This field is required";
+                      }
+                  },
+                    source: [
+                            @foreach($trips as $trip)
+                        {value: '{{ $trip->queue_number }}', text: '{{ $trip->queue_number }}' },
+                        @endforeach
+                    ],
+                  ajaxOptions: {
+                        type: 'PATCH',
+                        headers: { 'X-CSRF-TOKEN': '{{csrf_token()}}' }
+                  },
+                  error: function(response) {
+                        if(response.status === 500) {
+                            return 'Service unavailable. Please try later.';
+                        } else {
+                            console.log(response);
+                            return response.responseJSON.message;
+                        }
+                  },
+                  success: function(){
+                      location.reload();
+                  }
+              });
 
-
-          {{--});--}}
-
-      {{--});--}}
-
-
-
-     @endforeach
+            @endforeach
 
         });
 </script>
