@@ -186,6 +186,9 @@
         </table>
     </div>
 </div>
+
+<button type="submit" class="btn btn-default pull-right" style="width:22%;">Print List</button>
+
 @endsection 
 @section('scripts') 
 @parent
