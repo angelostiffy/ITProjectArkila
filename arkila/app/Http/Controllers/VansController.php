@@ -35,7 +35,8 @@ class VansController extends Controller {
      */
     public function create(){
         $operators = Member::allOperators()->get();
-        return view('vans.create',compact('operators'));
+        $models = VanModel::all();
+        return view('vans.create',compact('operators','models'));
     }
 
     public function createFromOperator(Member $operator)
@@ -56,9 +57,14 @@ class VansController extends Controller {
             "seatingCapacity" => 'required|between:10,15|numeric'
         ]);
 
-        $vanModel = VanModel::create([
-            'description' => request('vanModel')
-        ]);
+        if($model= VanModel::where('description',request('vanModel'))->first()){
+            $vanModel = $model;
+        }
+        else{
+            $vanModel = VanModel::create([
+                'description' => request('vanModel')
+            ]);
+        }
 
         $van = Van::create([
             'plate_number' => request('plateNumber'),
@@ -72,18 +78,20 @@ class VansController extends Controller {
             return redirect(route('drivers.createFromVan',[$van->plate_number]));
         }
         else{
-            $newDriver = Member::find(request('driver'));
-            if($newDriver->operator_id == null){
-                $newDriver->update([
-                    'operator_id' => request('operator')
-                ]);
-            }
+            if($newDriver = Member::find(request('driver'))){
 
-            if($newDriver->van()->first() != null){
-                $newDriver->van()->detach();
-            }
+                if ($newDriver->operator_id == null) {
+                    $newDriver->update([
+                        'operator_id' => request('operator')
+                    ]);
+                }
 
-            $van->members()->attach($newDriver);
+                if ($newDriver->van()->first() != null) {
+                    $newDriver->van()->detach();
+                }
+
+                $van->members()->attach($newDriver);
+            }
             return redirect(route('vans.index'));
         }
     }
@@ -105,9 +113,14 @@ class VansController extends Controller {
             "seatingCapacity" => 'required|between:10,15|numeric'
         ]);
 
-        $vanModel = VanModel::create([
-            'van_model' => request('vanModel')
-        ]);
+        if($model= VanModel::where('description',request('vanModel'))->first()){
+            $vanModel = $model;
+        }
+        else{
+            $vanModel = VanModel::create([
+                'description' => request('vanModel')
+            ]);
+        }
 
         $van = Van::create([
             'plate_number' => request('plateNumber'),
