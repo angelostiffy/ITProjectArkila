@@ -10,11 +10,11 @@
             @include('message.error')
         </div>
         <label>Description:</label>
-        <input type="text" class="form-control" name="addFeesDesc">
+        <input type="text" class="form-control" name="addFeesDesc" required>
     </div>
     <div class="form-group">
         <label>Amount:</label>
-        <input type="number" class="form-control" name="addFeeAmount" step="0.25" min="1" max="5000" placeholder="Php 0.00">
+        <input type="number" class="form-control" name="addFeeAmount" step="0.25" min="1" max="5000" placeholder="Php 0.00" required>
     </div>
 
 @endsection

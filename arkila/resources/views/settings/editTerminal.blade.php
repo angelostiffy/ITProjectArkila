@@ -13,7 +13,7 @@
         </div>
         
         <label>Terminal Name:</label>
-        <input type="text" class="form-control" name="editTerminalName" value="{{$terminal->description}}" maxlength="30">
+        <input type="text" class="form-control" name="editTerminalName" value="{{$terminal->description}}" maxlength="30" required>
     </div>
 
 @endsection
