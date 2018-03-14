@@ -1,4 +1,10 @@
-@extends('layouts.master') @section('title', 'List of Rentals') @section('content-header', 'List of Rentals') @section('links') @parent @stop @section('content')
+@extends('layouts.master') 
+@section('title', 'List of Rentals') 
+@section('content-header', 'List of Rentals') 
+@section('links') 
+    @parent 
+    @stop 
+@section('content')
 <section class="content">
     <div class="box">
         <div class="box-body">

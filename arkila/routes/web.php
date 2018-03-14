@@ -186,7 +186,7 @@ Route::group(['middleware' => ['auth', 'driver']], function(){
 
 Route::get('home/try', 'PassController@index');
 
-
+Route::get('/home/ticket', 'TicketManagementController@index');
 //Route::get('home/profile', 'DriverModuleControllers\DriverProfileController@index');
 /******************************************************/
 

@@ -124,9 +124,14 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                             <div class="form-group">
-                                <label>Contact Number:</label>
-                                <input value="{{old('contactNumber')}}" name="contactNumber" type="text" class="form-control" placeholder="Contact Number" maxlength="10">
+                            <div class="form-group">
+                                <label>Contact Number</label>
+                                <div class="input-group">
+                                  <div class="input-group-addon">
+                                    <span>+63</span>
+                                  </div>
+                                  <input type="text" name="contactNumber"  class="form-control" value="{{old('contactNumber')}}" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -290,7 +295,12 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Contact Number</label>
-                                <input value="{{old('contactPersonContactNumber')}}" name="contactPersonContactNumber" type="text" class="form-control" placeholder="Contact Number" maxlength="10">
+                                <div class="input-group">
+                                  <div class="input-group-addon">
+                                    <span>+63</span>
+                                  </div>
+                                  <input type="text" name="contactPersonContactNumber"  class="form-control" value="{{old('contactPersonContactNumber')}}" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -532,5 +542,7 @@
           radioClass   : 'iradio_flat-blue'
         });
     })
+
+    $('[data-mask]').inputmask()
     </script>
 @endsection
