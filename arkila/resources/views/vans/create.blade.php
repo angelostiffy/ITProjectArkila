@@ -37,7 +37,12 @@
     </div>
     <div class="form-group">
 	<label for="">Van Model</label>
-    <input value="{{old('vanModel')}}" name="vanModel" type="text" class="form-control" placeholder="Van Model">
+    <input list="models" value="{{old('vanModel')}}" name="vanModel" type="text" class="form-control" placeholder="Van Model">
+        <datalist id="models">
+            @foreach($models as $model)
+            <option value="{{$model->description}}">
+            @endforeach
+        </datalist>
     </div>
 
     <div class="form-group">

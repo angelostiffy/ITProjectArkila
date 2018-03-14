@@ -83,7 +83,7 @@
                     <!-- Terminal Tab -->
                     <div class="tab-pane active" id="terminalTab">
                         <div class="col-md-6 pull-left">
-                            <a href="/home/settings/terminal/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Add Terminal </a>
+                            <a href="/home/settings/terminal/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Create Terminal </a>
                         </div>
                         <table id="terminals" class="table table-bordered table-striped">
                             <thead>
@@ -150,7 +150,7 @@
                     <!-- Destinations Tab -->
                     <div class="tab-pane" id="destinationTab">
                         <div class="col-md-6 pull-left">
-                            <a href="/home/settings/destinations/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Add Destination </a>
+                            <a href="/home/settings/destinations/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Create Destination </a>
                         </div>
                         <table id="destinations" class="table table-bordered table-striped">
                             <thead>
@@ -222,7 +222,7 @@
                     <!-- Fee Tab -->
                     <div class="tab-pane" id="feeTab">
                         <div class="col-md-6 pull-left">
-                            <a href="/home/settings/fees/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Add Fee </a>
+                            <a href="/home/settings/fees/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Create Fee </a>
                         </div>
                         <table id="fees" class="table table-bordered table-striped">
                             <thead>
@@ -293,7 +293,7 @@
                     <!-- Discount Tab -->
                     <div class="tab-pane" id="discountTab">
                         <div class="col-md-6 pull-left">
-                            <a href="/home/settings/discounts/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Add Discount </a>
+                            <a href="/home/settings/discounts/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Create Discount </a>
                         </div>
                         <table id="discounts" class="table table-bordered table-striped">
                             <thead>
