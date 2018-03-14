@@ -95,26 +95,34 @@
                             <div class="box-body">
                                 
                                     <label for="">Terminal</label>
-                                    <select name="" id="" class="form-control">
-                                        <option value="">San Jose Terminal</option>
-                                        <option value="">Cabanatuan Terminal</option>
+                                    <select @if(is_null($terminals->first())){{'disabled'}}@endif name="" id="terminal" class="form-control">
+                                        @if(is_null($terminals->first()))
+                                            <option value="">No Available Data</option>
+                                        @else
+                                            @foreach($terminals as $terminal)
+                                                <option value="{{$terminal->terminal_id}}">{{$terminal->description}}</option>
+                                            @endforeach
+                                        @endif
                                      </select>
                                      <label for="">Destination</label>
-                                    <select name="" id="" class="form-control">
-                                        <option value=""></option>
-                                        <option value=""></option>
-                                        <option value=""></option>
-                                        <option value=""></option>
-                                        <option value=""></option>
+                                    <select @if(is_null($terminals->first())){{'disabled'}}@endif name="" id="destination" class="form-control">
+                                        @if(is_null($terminals->first()))
+                                            <option value="">No Available Data</option>
+                                        @endif
                                     </select>
                                     <label for="">Discount</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                          <input type="checkbox">
+                                          <input @if(is_null($discounts->first())){{'disabled'}}@endif id="checkDiscount" type="checkbox">
                                         </span>
-                                        <select name="" id="" class="form-control">
-                                        <option value="">Senior Citizen</option>
-                                        <option value="">PWD</option>
+                                        <select @if(is_null($discounts->first())){{'disabled'}}@endif name="discount" id="" class="form-control">
+                                            @if(is_null($discounts->first()))
+                                                <option value="">No Available Data</option>
+                                            @else
+                                                @foreach($discounts as $discount)
+                                                    <option value="{{$discount->fad_id}}">{{$discount->description}}</option>
+                                                @endforeach
+                                            @endif
                                      </select>
                                     </div>
                                 
@@ -366,6 +374,8 @@
 	
 
     $(function(){
+
+
      var url = window.location.href;
      var activeTab = document.location.hash
      $
@@ -387,6 +397,28 @@
       window.location.hash = this.hash;
       $('html,body').scrollTop(scrollmem);
       });
+@if(!is_null($terminals->first()))
+listDestinations();
+@endif
+
+
+        function listDestinations(){
+            $('#destination').empty();
+
+            $.ajax({
+                method:'GET',
+                url: '/listDestinations/'+$('#terminal').val(),
+                data: {
+                    '_token': '{{csrf_token()}}'
+                },
+                success: function(destinations){
+                    destinations.forEach(function(destination){
+                        $('#destination').append('<option value='+destination.id+'> '+destination.description+'</option>');
+                    });
+                }
+            });
+        }
+
     });
 </script>
 

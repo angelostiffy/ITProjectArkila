@@ -23,7 +23,7 @@ class CreateTicketTable extends Migration
             $table->integer('trip_id')
             ->unsigned();
 
-            $table->enum('status', ['Pending', 'Cancelled', 'Departed']);
+            $table->enum('status', ['Pending', 'Cancelled', 'Departed','OnBoard']);
 
 
             $table->foreign('destination_id')

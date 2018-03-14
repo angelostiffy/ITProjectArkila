@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FeesAndDeduction;
 use App\Terminal;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class TicketsController extends Controller
     public function index()
     {
         $terminals = Terminal::all();
-        return view('ticketmanagement.index',compact('terminals'));
+        $discounts = FeesAndDeduction::discounts()->get();
+        return view('ticketmanagement.index',compact('terminals','discounts'));
     }
 
     /**
