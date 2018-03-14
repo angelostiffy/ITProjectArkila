@@ -12,7 +12,7 @@
         </div>
         
         <label>Terminal Name:</label>
-        <input type="text" class="form-control" name="addTerminalName" maxlength="30">
+        <input type="text" class="form-control" name="addTerminalName" maxlength="30" required>
     </div>
 
 @endsection
