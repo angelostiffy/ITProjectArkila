@@ -89,7 +89,7 @@ class TicketsController extends Controller
     public function listDestinations(Terminal $terminal){
         $destinationArr = [];
 
-        foreach($terminal->destination as $destination){
+        foreach($terminal->destinations as $destination){
             array_push($destinationArr,[
                 'id'=> $destination->destination_id,
                 'description' => $destination->description

@@ -9,7 +9,7 @@ class Ticket extends Model
     protected $table = 'ticket';
 	protected $primaryKey = 'ticket_number';
 	protected $guarded = ['ticket_number'];
-	public function destination()
+	public function destinations()
 	{
 		return $this->belongsTo(Destination::class, 'destination_id');
 	}

@@ -105,17 +105,14 @@
                                         @endif
                                      </select>
                                      <label for="">Destination</label>
-                                    <select @if(is_null($terminals->first())){{'disabled'}}@endif name="" id="destination" class="form-control">
-                                        @if(is_null($terminals->first()))
-                                            <option value="">No Available Data</option>
-                                        @endif
+                                    <select name="" id="destination" class="form-control">
                                     </select>
                                     <label for="">Discount</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                           <input @if(is_null($discounts->first())){{'disabled'}}@endif id="checkDiscount" type="checkbox">
                                         </span>
-                                        <select @if(is_null($discounts->first())){{'disabled'}}@endif name="discount" id="" class="form-control">
+                                        <select @if(is_null($discounts->first())){{'disabled'}}@endif name="discount" id="discount" class="form-control">
                                             @if(is_null($discounts->first()))
                                                 <option value="">No Available Data</option>
                                             @else
@@ -398,10 +395,25 @@
       $('html,body').scrollTop(scrollmem);
       });
 @if(!is_null($terminals->first()))
-listDestinations();
+    $('#destination').prop('disabled',false);
+    listDestinations();
+    @else
+        $('#destination').prop('disabled',true);
+        $('#destination').append('<option>Data Not Available</option>');
 @endif
+    checkDiscountBox();
 
+        $('#checkDiscount').on('click',function(){
+            checkDiscountBox();
+        });
 
+        function checkDiscountBox(){
+            if($('#checkDiscount').is(':checked')){
+                $('#discount').prop('disabled',false);
+            }else{
+                $('#discount').prop('disabled',true);
+            }
+        }
         function listDestinations(){
             $('#destination').empty();
 
@@ -412,9 +424,17 @@ listDestinations();
                     '_token': '{{csrf_token()}}'
                 },
                 success: function(destinations){
-                    destinations.forEach(function(destination){
-                        $('#destination').append('<option value='+destination.id+'> '+destination.description+'</option>');
-                    });
+                    console.log(destinations);
+                    if(destinations.length === 0){
+                        $('#destination').prop('disabled',true);
+                        $('#destination').append('<option>Data Not Available</option>');
+                    }
+                    else{
+                        destinations.forEach(function(destination){
+                            $('#destination').append('<option value='+destination.id+'> '+destination.description+'</option>');
+                        });
+                    }
+
                 }
             });
         }
