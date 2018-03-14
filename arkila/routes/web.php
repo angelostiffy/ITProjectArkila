@@ -161,8 +161,14 @@ Route::resource('home/trips', 'TripsController',[
 Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
 Route::get('/showTrips/{terminal}', 'TripsController@showTrips');
 Route::patch('/updateQueueNumber/{trip}', 'TripsController@updateQueueNumber')->name('trips.updateQueueNumber');
+
+/* Ticket Management */
+Route::resource('home/tickets', 'TicketsController');
+Route::get('/listDestinations/{terminal}','TicketsController@listDestinations')->name('tickets.listDestinations');
 /********Archive ********/
 Route::patch('home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
+
+
 
 /*************************************Driver Module****************************/
 
@@ -184,9 +190,8 @@ Route::group(['middleware' => ['auth', 'driver']], function(){
   Route::post('home/create-report', 'DriverModuleControllers\CreateReportController@storeReport')->name('drivermodule.storeReport');
 });
 
-Route::get('home/try', 'PassController@index');
 
-Route::get('/home/ticket', 'TicketManagementController@index');
+    Route::get('home/try', 'PassController@index');
 //Route::get('home/profile', 'DriverModuleControllers\DriverProfileController@index');
 /******************************************************/
 
