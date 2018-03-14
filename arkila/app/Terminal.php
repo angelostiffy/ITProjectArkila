@@ -18,7 +18,7 @@ class Terminal extends Model
     }
 
     public function destinations() {
-    	return $this->hasMany(Destination::class, 'destination_id');
+    	return $this->hasMany(Destination::class, 'terminal_id');
     }
 
     public function trips(){

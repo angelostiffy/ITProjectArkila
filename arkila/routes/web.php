@@ -165,6 +165,7 @@ Route::patch('/updateQueueNumber/{trip}', 'TripsController@updateQueueNumber')->
 /* Ticket Management */
 Route::resource('home/tickets', 'TicketsController');
 Route::get('/listDestinations/{terminal}','TicketsController@listDestinations')->name('tickets.listDestinations');
+Route::get('/listDiscounts','TicketsController@listDiscounts')->name('tickets.listDiscounts');
 /********Archive ********/
 Route::patch('home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
 

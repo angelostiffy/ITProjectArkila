@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\FeesAndDeduction;
+use App\PhysicalTicket;
 use App\Terminal;
 use Illuminate\Http\Request;
 
@@ -97,5 +98,19 @@ class TicketsController extends Controller
         }
 
         return response()->json($destinationArr);
+    }
+
+    public function listDiscounts(){
+        $discountArr = [];
+        $discounts = FeesAndDeduction::discounts()->get();
+
+        foreach ($discounts as $discount){
+            array_push($discountArr,[
+                'id' => $discount->fad_id,
+                'description' => $discount->description
+            ]);
+        }
+
+        return response()->json($discountArr);
     }
 }

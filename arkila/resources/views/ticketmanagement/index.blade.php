@@ -110,16 +110,9 @@
                                     <label for="">Discount</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                          <input @if(is_null($discounts->first())){{'disabled'}}@endif id="checkDiscount" type="checkbox">
+                                          <input id="checkDiscount" type="checkbox">
                                         </span>
-                                        <select @if(is_null($discounts->first())){{'disabled'}}@endif name="discount" id="discount" class="form-control">
-                                            @if(is_null($discounts->first()))
-                                                <option value="">No Available Data</option>
-                                            @else
-                                                @foreach($discounts as $discount)
-                                                    <option value="{{$discount->fad_id}}">{{$discount->description}}</option>
-                                                @endforeach
-                                            @endif
+                                        <select name="discount" id="discount" class="form-control">
                                      </select>
                                     </div>
                                 
@@ -132,11 +125,6 @@
                                             <i class="fa fa-ticket"></i>
                                         </span>
                                         <select class="form-control select2" name="" id="">
-                                            <option value="" selected>C-1</option>
-                                            <option value="">C-2</option>
-                                            <option value="">C-3</option>
-                                            <option value="">C-4</option>
-                                            <option value="">C-5</option>
                                         </select>
                                         <span class="input-group-btn">
                                           <button type="button" class="btn btn-info btn-flat">Sell</button>
@@ -371,8 +359,6 @@
 	
 
     $(function(){
-
-
      var url = window.location.href;
      var activeTab = document.location.hash
      $
@@ -394,26 +380,64 @@
       window.location.hash = this.hash;
       $('html,body').scrollTop(scrollmem);
       });
-@if(!is_null($terminals->first()))
-    $('#destination').prop('disabled',false);
-    listDestinations();
+
+    @if(!is_null($terminals->first()))
+        $('#destination').prop('disabled',false);
+        $('#checkDiscount').prop('disabled',false);
+        listDestinations();
     @else
+        $('#checkDiscount').prop('disabled',true);
         $('#destination').prop('disabled',true);
         $('#destination').append('<option>Data Not Available</option>');
-@endif
+    @endif
+
     checkDiscountBox();
 
-        $('#checkDiscount').on('click',function(){
-            checkDiscountBox();
-        });
+    $('#checkDiscount').on('click',function(){
+        checkDiscountBox();
+    });
+
+    $('#terminal').on('change',function(){
+        listDestinations();
+    });
 
         function checkDiscountBox(){
             if($('#checkDiscount').is(':checked')){
                 $('#discount').prop('disabled',false);
+                listDiscounts();
             }else{
                 $('#discount').prop('disabled',true);
+                $('#discount').empty();
             }
         }
+        function listDiscounts(){
+            $('#discount').empty();
+
+            $.ajax({
+                method:'GET',
+                url: '{{route('tickets.listDiscounts')}}',
+                data: {
+                    '_token': '{{csrf_token()}}'
+                },
+                success: function(discounts){
+                    console.log(discounts);
+                    if(discounts.length === 0){
+                        $('#checkDiscount').prop('disabled',true);
+                        $('#discount').prop('disabled',true);
+                        $('#discount').append('<option>Data Not Available</option>');
+                    }
+                    else{
+                        $('#checkDiscount').prop('disabled',false);
+                        discounts.forEach(function(discounts){
+                            $('#discount').append('<option value='+discounts.id+'> '+discounts.description+'</option>');
+                        });
+                    }
+
+                }
+            });
+
+        }
+
         function listDestinations(){
             $('#destination').empty();
 
@@ -426,6 +450,7 @@
                 success: function(destinations){
                     console.log(destinations);
                     if(destinations.length === 0){
+                        $('#destination').empty();
                         $('#destination').prop('disabled',true);
                         $('#destination').append('<option>Data Not Available</option>');
                     }
