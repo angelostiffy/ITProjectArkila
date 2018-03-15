@@ -124,7 +124,7 @@
                                         <span class="input-group-addon">
                                             <i class="fa fa-ticket"></i>
                                         </span>
-                                        <select class="form-control select2" name="" id="">
+                                        <select id="ticket" class="form-control select2" name="" id="">
                                         </select>
                                         <span class="input-group-btn">
                                           <button type="button" class="btn btn-info btn-flat">Sell</button>
