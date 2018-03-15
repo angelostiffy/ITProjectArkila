@@ -148,6 +148,7 @@
                     <div class="box">
                         <!-- /.box-header -->
                         <div class="box-body">
+                            
                         @if ($operator->drivers->count() < $operator->van->count())
                             <a href="{{route('drivers.createFromOperator',[$operator->member_id])}}" class="btn btn-primary" style="margin-bottom:-5%;"><i class="fa fa-plus-circle"></i> Add Driver</a>
                         @else
@@ -231,9 +232,9 @@
                 
                 <div class="tab-pane" id="vans">
                     <div class="box">
-                        <div class="box-header">
-                            <a href="{{route('vans.createFromOperator',$operator->member_id)}}" class="btn btn-primary" style="margin-bottom:-8%;"><i class="fa fa-plus-circle"></i> Add Van</a>
-                        </div>
+                      
+                        <a style="margin-bottom: -8%; margin-left: 2%;" href="{{route('vans.createFromOperator',$operator->member_id)}}" class="btn btn-primary" style="margin-bottom:-8%;"><i class="fa fa-plus-circle"></i> Add Van</a>
+                        
                         <div class="box-body">
                             <table id="van" class="table table-bordered table-striped">
                                 <thead>
