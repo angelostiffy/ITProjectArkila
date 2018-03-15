@@ -7,7 +7,7 @@ use App\Rules\checkOccupation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use App\Rules\checkAge;
-
+use App\Rules\checkContactNum;
 
 class OperatorRequest extends FormRequest
 {
@@ -37,7 +37,7 @@ class OperatorRequest extends FormRequest
                     'lastName' => ['required',new checkName,'max:35'],
                     'firstName' => ['required',new checkName,'max:35'],
                     'middleName' => ['required',new checkName,'max:35'],
-                    'contactNumber' => 'digits:10',
+                    'contactNumber' => [new checkContactNum],
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
                     'birthDate' => ['required','date_format:m/d/Y','after:1/1/1918', new checkAge],
@@ -59,7 +59,7 @@ class OperatorRequest extends FormRequest
                     'motherOccupation' => ['required_with:mothersName','max:50', 'nullable', new checkOccupation],
                     'contactPerson' => ['required','max:120', 'nullable', new checkName],
                     'contactPersonAddress' => 'required|max:50',
-                    'contactPersonContactNumber' => 'required|digits:10',
+                    'contactPersonContactNumber' => ['required', new checkContactNum],
                     'sss' => 'unique:member,SSS|required|max:10',
                     'licenseNo' => ['required_with:licenseExpiryDate','max:20'],
                     'licenseExpiryDate' => 'required_with:licenseNo|nullable|date|after:today',
@@ -74,7 +74,7 @@ class OperatorRequest extends FormRequest
                         'lastName' => ['required',new checkName,'max:35'],
                         'firstName' => ['required',new checkName,'max:35'],
                         'middleName' => ['required',new checkName,'max:35'],
-                        'contactNumber' => 'digits:10',
+                        'contactNumber' => [new checkContactNum],
                         'address' => 'required|max:100',
                         'provincialAddress' => 'required|max:100',
                         'birthDate' => ['required','date_format:m/d/Y','after:1/1/1918', new checkAge],
@@ -96,7 +96,7 @@ class OperatorRequest extends FormRequest
                         'motherOccupation' => ['required_with:mothersName','max:50', 'nullable', new checkOccupation],
                         'contactPerson' => ['required','max:120', 'nullable', new checkName],
                         'contactPersonAddress' => 'required|max:50',
-                        'contactPersonContactNumber' => 'required|digits:10',
+                        'contactPersonContactNumber' => ['required',new checkContactNum],
                         'sss' => 'unique:member,SSS,'.$this->route('operator')->member_id.',member_id|required|max:10',
                         'licenseNo' => ['required_with:licenseExpiryDate','max:20'],
                         'licenseExpiryDate' => 'required_with:licenseNo|nullable|date|after:today',
