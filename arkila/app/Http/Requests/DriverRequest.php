@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\checkAge;
+use App\Rules\checkContactNum;
 use App\Rules\checkLicenseNumber;
 use App\Rules\checkName;
 use App\Rules\checkOccupation;
@@ -39,7 +40,7 @@ class DriverRequest extends FormRequest
                     'firstName' => ['required',new checkName,'max:35'],
                     'operator' => 'nullable|exists:member,member_id|numeric',
                     'middleName' => ['required',new checkName,'max:35'],
-                    'contactNumber' => 'digits:10',
+                    'contactNumber' => [new checkContactNum],
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
                     'birthDate' => ['required','date_format:m/d/Y','after:1/1/1918', new checkAge],
@@ -61,7 +62,7 @@ class DriverRequest extends FormRequest
                     'motherOccupation' => ['required_with:mothersName','max:50','nullable', new checkOccupation],
                     'contactPerson' => ['required','max:120', new checkName],
                     'contactPersonAddress' => 'required|max:50',
-                    'contactPersonContactNumber' => 'required|digits:10',
+                    'contactPersonContactNumber' => ['required',new checkContactNum],
                     'sss' => 'unique:member,SSS|required|max:10',
                     'licenseNo' => ['required','max:20'],
                     'licenseExpiryDate' => 'required|date|after:today',
@@ -77,7 +78,7 @@ class DriverRequest extends FormRequest
                     'firstName' => ['required',new checkName,'max:35'],
                     'operator' => 'nullable|exists:member,member_id|numeric',
                     'middleName' => ['required',new checkName,'max:35'],
-                    'contactNumber' => 'digits:10',
+                    'contactNumber' => [new checkContactNum],
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
                     'birthDate' => ['required','date_format:m/d/Y','after:1/1/1918', new checkAge],
@@ -99,7 +100,7 @@ class DriverRequest extends FormRequest
                     'motherOccupation' => ['required_with:mothersName','max:50', 'nullable',new checkOccupation],
                     'contactPerson' => ['required','max:120', 'nullable',new checkName],
                     'contactPersonAddress' => 'required|max:50',
-                    'contactPersonContactNumber' => 'required|digits:10',
+                    'contactPersonContactNumber' => ['required',new checkContactNum],
                     'sss' => 'unique:member,SSS,'.$this->route('driver')->member_id.',member_id|required|max:10',
                     'licenseNo' => ['required','max:20'],
                     'licenseExpiryDate' => 'required|date|after:today',
