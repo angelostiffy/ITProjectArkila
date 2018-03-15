@@ -1,74 +1,110 @@
-@extends('layouts.app')
-
+@extends('layouts.master')
+@section('title','Dashboard')
+@section('content-header','Dashboard')
 @section('content')
-<div class="container">
-<div class="col-md-3">
-			<div class="profile-sidebar">
-				<!-- SIDEBAR USERPIC -->
-				<div class="profile-userpic">
-					<img src="http://keenthemes.com/preview/metronic/theme/assets/admin/pages/media/profile/profile_user.jpg" class="img-responsive" alt="">
-				</div>
-				<!-- END SIDEBAR USERPIC -->
-				<!-- SIDEBAR USER TITLE -->
-				<div class="profile-usertitle">
-					<div class="profile-usertitle-name">
-						Marcus Doe
-					</div>
-					<div class="profile-usertitle-job">
-						Developer
-					</div>
-				</div>
-				<!-- END SIDEBAR USER TITLE -->
-				<!-- SIDEBAR BUTTONS -->
-				<div class="profile-userbuttons">
-					<button type="button" class="btn btn-success btn-sm">Follow</button>
-					<button type="button" class="btn btn-danger btn-sm">Message</button>
-				</div>
-				<!-- END SIDEBAR BUTTONS -->
-				<!-- SIDEBAR MENU -->
-				<div class="profile-usermenu">
-					<ul class="nav">
-						<li class="active">
-							<a href="/home/drivers">
-							<i class="glyphicon glyphicon-home"></i>
-							Driver </a>
-						</li>
-						<li>
-							<a href="/home/announcements">
-							<i class="glyphicon glyphicon-user"></i>
-							Announcements </a>
-						</li>
-						<li>
-							<a href="/home/operators" target="_blank">
-							<i class="glyphicon glyphicon-ok"></i>
-							Operator </a>
-						</li>
-						<li>
-							<a href="/home/vans">
-							<i class="glyphicon glyphicon-flag"></i>
-							Vans </a>
-						</li>
-					</ul>
-				</div>
-				<!-- END MENU -->
-			</div>
-		</div>
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    You are logged in!
-
-                    </div>
+<div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua">55</span>
+            <div class="info-box-content">
+              <span class="info-box-text text-center" style="margin: 5px;">Operators</span>
+              <span >
+                <button class="btn btn-info center-block"><i class="fa fa-eye"></i> View operators</button>
+                </span>
             </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
         </div>
-    </div>
-</div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-red">55</span>
+            <div class="info-box-content">
+              <span class="info-box-text text-center" style="margin: 5px;">Van units</span>
+              <span>
+                <button class="btn btn-danger center-block"><i class="fa fa-eye"></i> View units</button>
+              </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green">6</span>
+
+            <div class="info-box-content">
+              <span class="info-box-text text-center" style="margin: 5px;">Reservations</span>
+              <span>
+                <button class="btn btn-success center-block"><i class="fa fa-eye"></i> View requests</button>
+              </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow">1</span>
+            <div class="info-box-content">
+              <span class="info-box-text text-center" style="margin: 5px;">Rentals</span>
+              <span>
+                <button class="btn btn-warning center-block"><i class="fa fa-eye"></i> View requests</button>
+              </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+      <!-- solid sales graph -->
+      <div class="box box-solid bg-teal-gradient">
+        <div class="box-header">
+          <i class="fa fa-th"></i>
+
+          <h3 class="box-title">Sales Graph</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="box-body border-radius-none">
+          <div class="chart" id="line-chart" style="height: 250px;"></div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer no-border">
+          <div class="row">
+            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+              <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
+                     data-fgColor="#39CCCC">
+              <div class="knob-label">Mail-Orders</div>
+            </div>
+            <!-- ./col -->
+            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+              <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
+                     data-fgColor="#39CCCC">
+              <div class="knob-label">Online</div>
+            </div>
+            <!-- ./col -->
+            <div class="col-xs-4 text-center">
+              <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
+                     data-fgColor="#39CCCC">
+              <div class="knob-label">In-Store</div>
+            </div>
+            <!-- ./col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.box-footer -->
+      </div>
 @endsection
