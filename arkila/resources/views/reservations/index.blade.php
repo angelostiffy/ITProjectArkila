@@ -18,8 +18,8 @@
                 <!-- Custom Tabs -->
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li lass="active"><a href="#tab_2" data-toggle="tab">List of Reservations</a>
-                            <li><a href="#tab_1" data-toggle="tab">Online Reservation</a></li>
+                        <li lass="active"><a href="#tab_1" data-toggle="tab">List of Reservations</a>
+                            <li><a href="#tab_2" data-toggle="tab">Online Reservation</a></li>
 
 
 
@@ -27,7 +27,10 @@
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
-
+                           <div class="form-group">
+                                <a href="/home/reservations/create" class="btn btn-primary" >Add Walk-in Reservation</a>
+                           </div>
+                            
                             <table class="table table-bordered table-striped listReservation">
                                 <thead>
                                     <tr>
@@ -79,10 +82,7 @@
                         <!-- /.tab-pane -->
 
                         <div class="tab-pane" id="tab_2">
-                            <div class="form-group">
-                                <a href="/home/reservations/create" class="btn btn-primary">Add Walk-in Reservation</a>
-
-                            </div>
+                            
                             <table class="table table-bordered table-striped listReservation">
                                 <thead>
                                     <tr>
