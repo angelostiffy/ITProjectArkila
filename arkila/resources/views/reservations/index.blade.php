@@ -60,84 +60,85 @@
                                                 
                                                     
                                                 @if ($reservation->status == 'Paid')
+                                                
                                                     <button class="btn btn-primary" type="submit" name="butt" data-toggle="modal" data-target="#{{'depart'.$reservation->id}}" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
+                                                
                                                     <button class="btn btn-outline-danger" type="submit" name="butt" data-toggle="modal" data-target="#{{'cancel'.$reservation->id}}" value="Cancelled"><i class="fa fa-close"></i> Cancel</button>
                                                 
                                                 
-                                                 <!-- Modal for Cancelation-->
-                                                 <div class="modal fade" id="{{'cancel'.$reservation->id}}">
-                                                    <div class="modal-dialog">
-                                                        <div class="col-md-offset-2 col-md-8">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header bg-red">
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span></button>
-                                                                    <h4 class="modal-title"> Confirm</h4>
-                                                                </div>
-                                                                <div class="modal-body row" style="margin: 0% 1%;">
-                                                                    <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
-                                                                        <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
+                                                     <!-- Modal for Cancelation-->
+                                                     <div class="modal fade" id="{{'cancel'.$reservation->id}}">
+                                                        <div class="modal-dialog">
+                                                            <div class="col-md-offset-2 col-md-8">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header bg-red">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span></button>
+                                                                        <h4 class="modal-title"> Confirm</h4>
                                                                     </div>
-                                                                    <div class="col-md-10">
-                                                                        <p style="font-size: 110%;">Are you sure you want to cancel this reservation?</p>
+                                                                    <div class="modal-body row" style="margin: 0% 1%;">
+                                                                        <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
+                                                                            <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
+                                                                        </div>
+                                                                        <div class="col-md-10">
+                                                                            <p style="font-size: 110%;">Are you sure you want to cancel this reservation?</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                       <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
+                                                                            {{ csrf_field() }} {{ method_field('PATCH') }} 
+
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">discard</button>
+                                                                            <button type="submit" name="driverArc" value="Arch " class="btn btn-danger" style="width:22%;">Cancel</button>
+                                                                        </form>
                                                                     </div>
                                                                 </div>
-                                                                <div class="modal-footer">
-                                                                   <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
-                                                                        {{ csrf_field() }} {{ method_field('PATCH') }} 
-
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">discard</button>
-                                                                        <button type="submit" name="driverArc" value="Arch " class="btn btn-danger" style="width:22%;">Cancel</button>
-                                                                    </form>
-                                                                </div>
+                                                                <!-- /.modal-content -->
                                                             </div>
-                                                            <!-- /.modal-content -->
+                                                            <!-- /.col -->
                                                         </div>
-                                                        <!-- /.col -->
+                                                        <!-- /.modal-dialog -->
                                                     </div>
-                                                    <!-- /.modal-dialog -->
-                                                </div>
-                                                <!-- /.modal -->
-                                                
-                                                <!-- Modal for depart-->
-                                                 <div class="modal fade" id="{{'depart'.$reservation->id}}">
-                                                    <div class="modal-dialog">
-                                                        <div class="col-md-offset-2 col-md-8">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header bg-primary">
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span></button>
-                                                                    <h4 class="modal-title"> Confirm</h4>
-                                                                </div>
-                                                                <div class="modal-body row" style="margin: 0% 1%;">
-                                                                
-                                                                    <p style="font-size: 110%;">Are you sure you want to depart this reservation?</p>
-                                                                    
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                   <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
-                                                                        {{ csrf_field() }} {{ method_field('PATCH') }} 
+                                                    <!-- /.modal -->
 
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                                        <button type="submit" name="driverArc" value="Arch " class="btn btn-primary" style="width:22%;">Depart</button>
-                                                                    </form>
+                                                    <!-- Modal for depart-->
+                                                     <div class="modal fade" id="{{'depart'.$reservation->id}}">
+                                                        <div class="modal-dialog">
+                                                            <div class="col-md-offset-2 col-md-8">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header bg-primary">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span></button>
+                                                                        <h4 class="modal-title"> Confirm</h4>
+                                                                    </div>
+                                                                    <div class="modal-body row" style="margin: 0% 1%;">
+
+                                                                        <p style="font-size: 110%;">Are you sure you want to depart this reservation?</p>
+
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                       <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
+                                                                            {{ csrf_field() }} {{ method_field('PATCH') }} 
+
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                            <button type="submit" name="driverArc" value="Arch " class="btn btn-primary" style="width:22%;">Depart</button>
+                                                                        </form>
+                                                                    </div>
                                                                 </div>
+                                                                <!-- /.modal-content -->
                                                             </div>
-                                                            <!-- /.modal-content -->
+                                                            <!-- /.col -->
                                                         </div>
-                                                        <!-- /.col -->
+                                                        <!-- /.modal-dialog -->
                                                     </div>
-                                                    <!-- /.modal-dialog -->
-                                                </div>
-                                                <!-- /.modal -->
-                                    
-                                                
+                                                    <!-- /.modal -->
+
                                                 @else
                                                
                                                 <button class="btn btn-danger" data-toggle="modal" data-target="#{{'deletion'.$reservation->id}}"><i class="fa fa-close"></i> Delete</button>
                                                 
                                                 
-                                                <!-- Modal for Cancelation-->
+                                                <!-- Modal for Deletion-->
                                                  <div class="modal fade" id="{{'deletion'.$reservation->id}}">
                                                     <div class="modal-dialog">
                                                         <div class="col-md-offset-2 col-md-8">

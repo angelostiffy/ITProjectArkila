@@ -60,7 +60,12 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Contact Number:</label>
-                        <input type="text" class="form-control" placeholder="Contact Number" name="contact" id="contactNumber" value="{{ old('contact') }}" maxlength="10" required>
+                        <div class = "input-group">  
+                            <div class = "input-group-addon">
+                                <span>+63</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Contact Number" name="contact" id="contactNumber" value="{{ old('contact') }}" maxlength="10" required>
+                        </div>
                     </div>
                 </div>
                 
