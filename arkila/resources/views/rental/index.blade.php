@@ -20,9 +20,10 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
 
-                            <div class="col col-md-6">
+                            <div style="margin-bottom:1%">
                                 <a href="/home/rental/create" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create New</a>
                             </div>
+                            
                             <table id="listRent" class="table table-bordered table-striped rentalTable">
                                 <thead>
                                     <tr>
@@ -176,7 +177,7 @@
 
         $('.rentalTable').DataTable({
             'paging': true,
-            'lengthChange': false,
+            'lengthChange': true,
             'searching': true,
             'ordering': true,
             'info': true,

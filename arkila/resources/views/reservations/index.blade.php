@@ -17,20 +17,16 @@
                 <!-- Custom Tabs -->
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-
                         <li lass="active"><a href="#tab_1" data-toggle="tab">List of Reservations</a>
-                            <li><a href="#tab_2" data-toggle="tab">Online Reservation</a></li>
-
-
-
+                        <li><a href="#tab_2" data-toggle="tab">Online Reservation</a></li>
                     </ul>
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
-                           <div class="form-group">
-                                <a href="/home/reservations/create" class="btn btn-primary" >Add Walk-in Reservation</a>
-                           </div>
-                            
+                            <div style="margin-bottom:1%">
+                                <a href="/home/reservations/create" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create New</a>
+                            </div>
+
 
                             <table class="table table-bordered table-striped listReservation">
                                 <thead>
@@ -48,7 +44,8 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($reservations as $reservation) @if ($reservation->status == 'Paid' | $reservation->status == 'Departed' | $reservation->status == 'Cancelled' )
+                                    @foreach ($reservations as $reservation) 
+                                    @if ($reservation->status == 'Paid' | $reservation->status == 'Departed' | $reservation->status == 'Cancelled' )
                                     <tr>
                                         <td>{{ $reservation->id }}</td>
                                         <td>{{ $reservation->name }}</td>
@@ -60,16 +57,121 @@
                                         <td>{{ $reservation->status }}</td>
                                         <td class="center-block">
                                             <div class="center-block">
-                                                <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
-                                                    {{ csrf_field() }} {{ method_field('PATCH') }} @if ($reservation->status == 'Paid')
-                                                    <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
-                                                    <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button>
-                                                </form>
+                                                
+                                                    
+                                                @if ($reservation->status == 'Paid')
+                                                    <button class="btn btn-primary" type="submit" name="butt" data-toggle="modal" data-target="#{{'depart'.$reservation->id}}" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
+                                                    <button class="btn btn-outline-danger" type="submit" name="butt" data-toggle="modal" data-target="#{{'cancel'.$reservation->id}}" value="Cancelled"><i class="fa fa-close"></i> Cancel</button>
+                                                
+                                                
+                                                 <!-- Modal for Cancelation-->
+                                                 <div class="modal fade" id="{{'cancel'.$reservation->id}}">
+                                                    <div class="modal-dialog">
+                                                        <div class="col-md-offset-2 col-md-8">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header bg-red">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span></button>
+                                                                    <h4 class="modal-title"> Confirm</h4>
+                                                                </div>
+                                                                <div class="modal-body row" style="margin: 0% 1%;">
+                                                                    <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
+                                                                        <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
+                                                                    </div>
+                                                                    <div class="col-md-10">
+                                                                        <p style="font-size: 110%;">Are you sure you want to cancel this reservation?</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                   <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
+                                                                        {{ csrf_field() }} {{ method_field('PATCH') }} 
+
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">discard</button>
+                                                                        <button type="submit" name="driverArc" value="Arch " class="btn btn-danger" style="width:22%;">Cancel</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.col -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
+                                                
+                                                <!-- Modal for depart-->
+                                                 <div class="modal fade" id="{{'depart'.$reservation->id}}">
+                                                    <div class="modal-dialog">
+                                                        <div class="col-md-offset-2 col-md-8">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header bg-primary">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span></button>
+                                                                    <h4 class="modal-title"> Confirm</h4>
+                                                                </div>
+                                                                <div class="modal-body row" style="margin: 0% 1%;">
+                                                                
+                                                                    <p style="font-size: 110%;">Are you sure you want to depart this reservation?</p>
+                                                                    
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                   <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
+                                                                        {{ csrf_field() }} {{ method_field('PATCH') }} 
+
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                        <button type="submit" name="driverArc" value="Arch " class="btn btn-primary" style="width:22%;">Depart</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.col -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
+                                    
+                                                
                                                 @else
-                                                <form method="POST" action="/home/reservations/{{$reservation->reservation_id}}" class="delete">
-                                                    {{csrf_field()}} {{method_field('DELETE')}}
-                                                    <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</button>
-                                                </form>
+                                               
+                                                <button class="btn btn-danger" data-toggle="modal" data-target="#{{'deletion'.$reservation->id}}"><i class="fa fa-close"></i> Delete</button>
+                                                
+                                                
+                                                <!-- Modal for Cancelation-->
+                                                 <div class="modal fade" id="{{'deletion'.$reservation->id}}">
+                                                    <div class="modal-dialog">
+                                                        <div class="col-md-offset-2 col-md-8">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header bg-red">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span></button>
+                                                                    <h4 class="modal-title"> Confirm</h4>
+                                                                </div>
+                                                                <div class="modal-body row" style="margin: 0% 1%;">
+                                                                    <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
+                                                                        <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
+                                                                    </div>
+                                                                    <div class="col-md-10">
+                                                                        <p style="font-size: 110%;">Are you sure you want to delete this reservation?</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <form method="POST" action="/home/reservations/{{$reservation->reservation_id}}" class="delete">
+                                                                        {{csrf_field()}} {{method_field('DELETE')}}
+
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                        <button type="submit" name="driverArc" value="Arch " class="btn btn-danger" style="width:22%;">Delete</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.col -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
+                                                
                                                 @endif
 
                                             </div>
@@ -80,8 +182,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        
-                        <div class="tab-pane active" id="tab_2">
+
+                        <div class="tab-pane" id="tab_2">
 
                             <table class="table table-bordered table-striped listReservation">
                                 <thead>
@@ -112,16 +214,18 @@
 
 
                                             <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
-                                                {{ csrf_field() }} {{ method_field('PATCH') }} @if ($reservation->status == 'Pending')
-                                                <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
-                                                <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Declined"><i class="fa fa-close"></i> Decline</button> @elseif ($reservation->status == 'Paid')
+                                                {{ csrf_field() }} {{ method_field('PATCH') }} 
+                                                @if ($reservation->status == 'Pending')
+                                                    <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
+                                                    <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Declined"><i class="fa fa-close"></i> Decline</button> 
+                                                @elseif ($reservation->status == 'Paid')
 
-                                                <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
-                                                <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button> @else
-                                                <form method="POST" action="/home/reservations/{{$reservation->reservation_id}}" class="delete">
-                                                    {{csrf_field()}} {{method_field('DELETE')}}
-                                                    <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</button>
-                                                </form>
+                                                    <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
+                                                    <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button> @else
+                                                    <form method="POST" action="/home/reservations/{{$reservation->reservation_id}}" class="delete">
+                                                        {{csrf_field()}} {{method_field('DELETE')}}
+                                                        <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</button>
+                                                    </form>
                                                 @endif
                                             </form>
                                         </td>
@@ -129,7 +233,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>           
+                        </div>
 
                         <!-- /.box-body -->
                     </div>
@@ -140,8 +244,9 @@
         </div>
     </div>
 </section>
-
-@endsection @section('scripts') @parent
+@endsection 
+@section('scripts') 
+@parent
 <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
