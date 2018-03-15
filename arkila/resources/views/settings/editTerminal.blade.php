@@ -23,7 +23,7 @@
 
 @section('modal-title','Confirm')
 @section('modal-body')
-    <p>Are you sure you want to edit this terminal?</p>
+    <p>Are you sure you want to overwrite the changes?</p>
 @endsection
 
 @section('modal-btn')
