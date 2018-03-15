@@ -60,18 +60,18 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Contact Number:</label>
-                        <input type="text" class="form-control" placeholder="Contact Number" name="contact" id="contactNumber" value="{{ old('contact') }}" required>
+                        <input type="text" class="form-control" placeholder="Contact Number" name="contact" id="contactNumber" value="{{ old('contact') }}" maxlength="10" required>
                     </div>
                 </div>
                 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Departure Date:</label>
-                        <div class="input-group date">
+                        <div class="input-group">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" class="form-control pull-right datepicker" id="datepicker" placeholder="MM/DD/YYYY" name="date" value="{{ old('date') }}" required>
+                            <input type="text" name="date" class="form-control" placeholder="mm/dd/yyyy" value="{{old('date')}}" data-inputmask=" 'alias': 'mm/dd/yyyy'" data-mask>
                         </div>
                     </div>
                 </div>

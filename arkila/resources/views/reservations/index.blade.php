@@ -1,4 +1,3 @@
-
 @extends('layouts.master')
 @section('title', 'Reservations')
 @section('content-header', 'Reservations')
@@ -18,6 +17,7 @@
                 <!-- Custom Tabs -->
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
+
                         <li lass="active"><a href="#tab_1" data-toggle="tab">List of Reservations</a>
                             <li><a href="#tab_2" data-toggle="tab">Online Reservation</a></li>
 
@@ -31,6 +31,58 @@
                                 <a href="/home/reservations/create" class="btn btn-primary" >Add Walk-in Reservation</a>
                            </div>
                             
+
+                            <table class="table table-bordered table-striped listReservation">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Contact Number</th>
+                                        <th>Destination</th>
+                                        <th>Preffered Date</th>
+                                        <th>Time</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach ($reservations as $reservation) @if ($reservation->status == 'Paid' | $reservation->status == 'Departed' | $reservation->status == 'Cancelled' )
+                                    <tr>
+                                        <td>{{ $reservation->id }}</td>
+                                        <td>{{ $reservation->name }}</td>
+                                        <td>{{ $reservation->contact_number }}</td>
+                                        <td>{{ $reservation->destination->description }}</td>
+                                        <td>{{ $reservation->departure_date }}</td>
+                                        <td>{{ $reservation->departure_time }}</td>
+                                        <td>{{ $reservation->amount }}</td>
+                                        <td>{{ $reservation->status }}</td>
+                                        <td class="center-block">
+                                            <div class="center-block">
+                                                <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
+                                                    {{ csrf_field() }} {{ method_field('PATCH') }} @if ($reservation->status == 'Paid')
+                                                    <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
+                                                    <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button>
+                                                </form>
+                                                @else
+                                                <form method="POST" action="/home/reservations/{{$reservation->reservation_id}}" class="delete">
+                                                    {{csrf_field()}} {{method_field('DELETE')}}
+                                                    <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</button>
+                                                </form>
+                                                @endif
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endif 
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="tab-pane active" id="tab_2">
+
                             <table class="table table-bordered table-striped listReservation">
                                 <thead>
                                     <tr>
@@ -77,59 +129,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
-
-                        <!-- /.tab-pane -->
-
-                        <div class="tab-pane" id="tab_2">
-                            
-                            <table class="table table-bordered table-striped listReservation">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Contact Number</th>
-                                        <th>Destination</th>
-                                        <th>Preffered Date</th>
-                                        <th>Time</th>
-                                        <th>Amount</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach ($reservations as $reservation) @if ($reservation->status == 'Paid' | $reservation->status == 'Departed' | $reservation->status == 'Cancelled' )
-                                    <tr>
-                                        <td>{{ $reservation->id }}</td>
-                                        <td>{{ $reservation->name }}</td>
-                                        <td>{{ $reservation->contact_number }}</td>
-                                        <td>{{ $reservation->destination->description }}</td>
-                                        <td>{{ $reservation->departure_date }}</td>
-                                        <td>{{ $reservation->departure_time }}</td>
-                                        <td>{{ $reservation->amount }}</td>
-                                        <td>{{ $reservation->status }}</td>
-                                        <td class="center-block">
-                                            <div class="center-block">
-                                                <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
-                                                    {{ csrf_field() }} {{ method_field('PATCH') }} @if ($reservation->status == 'Paid')
-                                                    <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
-                                                    <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button>
-                                                </form>
-                                                @else
-                                                <form method="POST" action="/home/reservations/{{$reservation->reservation_id}}" class="delete">
-                                                    {{csrf_field()}} {{method_field('DELETE')}}
-                                                    <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</button>
-                                                </form>
-                                                @endif
-
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endif @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                        </div>           
 
                         <!-- /.box-body -->
                     </div>
