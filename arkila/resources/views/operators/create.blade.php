@@ -77,6 +77,7 @@
                     <div class="row">
                         <div class="col-md-4">
                              <div class="form-group">
+                             	<label>Contact Number:</label>
                                 <div class="input-group">
                                   <div class="input-group-addon">
                                     <span>+63</span>
@@ -175,7 +176,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input value="{{old('licenseExpiryDate')}}" name="licenseExpiryDate" type="text" class="form-control pull-right datepicker">
+                                    <input value="{{old('licenseExpiryDate')}}" name="licenseExpiryDate" type="text" class="form-control" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                 </div>
                             </div>
                         </div>
@@ -193,13 +194,11 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Birthdate of Spouse:</label>
-                                <div class="input-group date">
-                                    <div class="input-group">
+                                <div class="input-group">
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
                                   <input type="text" name="spouseBirthDate" class="form-control" placeholder="mm/dd/yyyy" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
-                                </div>
                                 </div>
                             </div>
                         </div>
