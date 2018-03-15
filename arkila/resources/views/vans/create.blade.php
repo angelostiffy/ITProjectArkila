@@ -1,7 +1,6 @@
 @extends('layouts.form') 
 @section('title', 'Add Van')
 
-
 @if(isset($operators))
     @section('form-action',route('vans.store'))
     @section('back-link',route('vans.index'))
@@ -34,7 +33,7 @@
 
 <div class="form-group">
     <label for="">Plate Number:</label>
-    <input value="{{old('plateNumber')}}" name="plateNumber" type="text" class="form-control" placeholder="Plate Number">
+    <input value="{{old('plateNumber')}}" name="plateNumber" type="text" class="form-control" placeholder="Plate Number" required>
 </div>
 <div class="form-group">
     <label for="">Van Model</label>
@@ -52,9 +51,10 @@
 </div>
 
 <div class="form-group">
-    <label for="">Driver</label> @if(isset($operators))
-    <select name="driver" id="driver" class="form-control select2"></select> @else
-    <select name="driver" id="driver" class="form-control select2">
+    <label for="">Driver</label> 
+    @if(isset($operators))
+        <select name="driver" id="driver" class="form-control select2"></select> @else
+        <select name="driver" id="driver" class="form-control select2">
         <option value="">None</option>
         @foreach($drivers as $driver)
             <option value="{{$driver->member_id}}">{{$driver->full_name}}</option>
