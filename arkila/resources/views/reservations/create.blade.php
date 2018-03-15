@@ -64,7 +64,7 @@
                             <div class = "input-group-addon">
                                 <span>+63</span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Contact Number" name="contact" id="contactNumber" value="{{ old('contact') }}" maxlength="10" required>
+                            <input type="text" class="form-control" placeholder="Contact Number" name="contactNumber" id="contactNumber" value="{{ old('contactNumber') }}" data-inputmask='"mask": "999-999-9999"' data-mask>
                         </div>
                     </div>
                 </div>
