@@ -138,8 +138,8 @@
                         </div>
                     </div> 
                 </div>
-                <div class="tab">
-                    <h4>Summary</h4>
+                <div class="tab" style="margin-left:37%; font-size: 14pt">
+                    <h4 style="margin-left:17%; margin-bottom:3%; font-size: 14pt">Summary</h4>
                     <div class = "row">
                            <dl class = "dl-horizontal">
                            <dt>Name:</dt>
