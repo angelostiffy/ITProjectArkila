@@ -71,7 +71,9 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
+               
                             <input type="text" name="date" class="form-control" placeholder="mm/dd/yyyy" value="{{old('date')}}" data-inputmask=" 'alias': 'mm/dd/yyyy'" data-mask>
+                            
                         </div>
                     </div>
                 </div>
@@ -143,19 +145,10 @@
     </div>
 </div>
 </div>
-</div>
+
 @endsection @section('scripts') @parent
 <script>
-
-    $(function() {
-        //Date picker
-        $('#datepicker').datepicker({
-            autoclose: true,
-            startDate: new Date()
-            // endDate: new Date('2018-04-12')
-        })
-
-    })
+    
     $(function() {
 
         //Date picker
@@ -247,5 +240,7 @@
         var time = document.getElementById('timepicker').value;
         document.getElementById('timeView').textContent = time;
     }
+    
+    $('[data-mask]').inputmask()
 </script>
 @endsection
