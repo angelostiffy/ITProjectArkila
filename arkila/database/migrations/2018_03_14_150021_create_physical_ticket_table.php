@@ -17,6 +17,9 @@ class CreatePhysicalTicketTable extends Migration
             $table->increments('physical_ticket_id');
             $table->integer('ticket_number')
             ->unsigned();
+            $table->integer('terminal_id')
+                ->unsigned();
+            $table->boolean('isAvailable');
             $table->timestamps();
 
 
@@ -24,6 +27,11 @@ class CreatePhysicalTicketTable extends Migration
             ->references('ticket_number')->on('ticket')
             ->onDelete('restrict')
             ->onUpdate('cascade');
+
+            $table->foreign('terminal_id')
+                ->references('terminal_id')->on('terminal')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
         });
     }

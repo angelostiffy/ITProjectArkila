@@ -26,8 +26,12 @@ class checkAge implements Rule
      */
     public function passes($attribute, $value)
     {
-        $age = Carbon::parse($value)->age;
-        return ($age >= 18 ? true:false);
+        try{
+            $age = Carbon::parse($value)->age;
+            return ($age >= 18 ? true:false);
+        }catch (\Exception $exception){
+            return false;
+        }
     }
 
     /**
