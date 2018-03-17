@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTicketTable extends Migration
+class CreateTransactionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateTicketTable extends Migration
      */
     public function up()
     {
-        Schema::create('ticket', function (Blueprint $table) {
-            $table->increments('ticket_number');
+        Schema::create('transaction', function (Blueprint $table) {
+            $table->increments('transaction_id');
+            $table->integer('ticket_id')
+            ->unsigned();
             $table->integer('destination_id')
             ->unsigned();
             $table->integer('fad_id')
@@ -25,6 +27,11 @@ class CreateTicketTable extends Migration
 
             $table->enum('status', ['Pending', 'Cancelled', 'Departed','OnBoard']);
 
+
+            $table->foreign('ticket_id')
+            ->references('ticket_id')->on('ticket')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
 
             $table->foreign('destination_id')
             ->references('destination_id')->on('destination')
@@ -52,6 +59,6 @@ class CreateTicketTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ticket');
+        Schema::dropIfExists('transaction');
     }
 }
