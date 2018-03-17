@@ -17,7 +17,7 @@
 
 @endsection
 @section('form-btn')
-    <a  class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Create</a>
+    <a  class="btn btn-primary" data-keyboard="true" data-toggle="modal" data-target="#form-modal">Create</a>
 @endsection
 
 @section('modal-title','Confirm')
@@ -28,4 +28,27 @@
 @section('modal-btn')
     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
     <button type="submit" class="btn btn-primary" style="width:33%;">Submit</button>
+@endsection
+
+@section('scripts') 
+@parent
+
+    <script>
+        $('#form-modal').modal({
+            keyboard: false,
+            show: false
+        });
+
+        $('[data-toggle^="keyboard"]').on('click.keyboard-toggle', function() {
+            var $this = $(this);
+
+            if ($this.toggleClass('active').hasClass('active')) {
+                $this.text('On');
+                $('#form-modal').data('modal').options.keyboard = true;
+            } 
+
+        });
+    
+    </script>
+
 @endsection

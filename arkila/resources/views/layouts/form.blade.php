@@ -83,7 +83,7 @@
                             </div>
                         </div>
 
-                        <div class="modal fade" id="form-modal">
+                        <div class="modal fade" id="form-modal" tabindex="-1">
                             <div class="modal-dialog">
                                 <div class="col-md-offset-2 col-md-8">
                                     <div class="modal-content">
