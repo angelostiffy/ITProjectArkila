@@ -14,6 +14,7 @@ class CreateDependentTable extends Migration
     public function up()
     {
         Schema::create('dependent', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->integer('member_id')
             ->unsigned()
             ->nullable();

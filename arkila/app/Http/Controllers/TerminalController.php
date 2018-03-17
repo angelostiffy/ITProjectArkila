@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Terminal;
+use App\Rules\checkCurrency;
 class TerminalController extends Controller
 {
     /**
@@ -32,10 +33,12 @@ class TerminalController extends Controller
     {
         $this->validate(request(),[
             "addTerminalName" => "unique:terminal,description|regex:/^[\pL\s\-]+$/u|required|max:40",
+            "bookingFee" => [new checkCurrency, "required"],
         ]);
 
         Terminal::create([
             "description" => request('addTerminalName'),
+            "booking_fee" => request('bookingFee'),
         ]);
 
         session()->flash('message', 'Terminal created successfully');
@@ -65,10 +68,12 @@ class TerminalController extends Controller
     {
         $this->validate(request(),[
             "editTerminalName" => 'unique:terminal,description,'.$terminal->id.',description|regex:/^[\pL\s\-]+$/u|required|max:40',
-        ]);
+            "editFeeAmount" => [new checkCurrency, "required"],
+            ]);
 
         $terminal->update([
             'description' => request('editTerminalName'),
+            'booking_fee' => request('editFeeAmount'),
         ]);
 
         session()->flash('message', 'Terminal updated successfully');

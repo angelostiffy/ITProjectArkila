@@ -10,9 +10,15 @@
         <div style="margin-top:18%">
             @include('message.error')
         </div>
-        
-        <label>Terminal Name:</label>
-        <input type="text" class="form-control" name="addTerminalName" maxlength="30" required>
+
+        <div class="form-group">
+            <label>Terminal Name:</label>
+            <input type="text" class="form-control" name="addTerminalName" maxlength="30" required>
+        </div>
+        <div class="form-group">
+            <label>Booking Fee:</label>
+            <input type="number" class="form-control" step="0.25" name="bookingFee" required>
+        </div>
     </div>
 
 @endsection

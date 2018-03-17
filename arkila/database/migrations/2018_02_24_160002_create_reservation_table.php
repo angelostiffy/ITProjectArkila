@@ -14,6 +14,7 @@ class CreateReservationTable extends Migration
     public function up()
     {
         Schema::create('reservation', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('destination_id')
             ->unsigned();
