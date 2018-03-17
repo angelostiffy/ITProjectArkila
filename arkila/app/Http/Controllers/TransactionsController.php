@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\FeesAndDeduction;
+use App\Ticket;
+use App\Terminal;
 use Illuminate\Http\Request;
 
-class TicketManagementController extends Controller
+class TransactionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +16,8 @@ class TicketManagementController extends Controller
      */
     public function index()
     {
-        return view('ticketmanagement.index');  
+        $terminals = Terminal::all();
+        return view('ticketmanagement.index',compact('terminals'));
     }
 
     /**
@@ -81,4 +85,46 @@ class TicketManagementController extends Controller
     {
         //
     }
+
+    public function listDestinations(Terminal $terminal){
+        $destinationArr = [];
+
+        foreach($terminal->destinations as $destination){
+            array_push($destinationArr,[
+                'id'=> $destination->destination_id,
+                'description' => $destination->description
+            ]);
+        }
+
+        return response()->json($destinationArr);
+    }
+
+    public function listDiscounts(){
+        $discountArr = [];
+        $discounts = FeesAndDeduction::discounts()->get();
+
+        foreach ($discounts as $discount){
+            array_push($discountArr,[
+                'id' => $discount->fad_id,
+                'description' => $discount->description
+            ]);
+        }
+
+        return response()->json($discountArr);
+    }
+
+    public function listTickets(Terminal $terminal){
+        $ticketsArr = [];
+        $tickets = $terminal->tickets->where('isAvailable', 1);
+
+        foreach ($tickets as $ticket){
+            array_push($ticketsArr,[
+                'id' => $ticket->ticket_id,
+                'ticket_number' => $ticket->ticket_number
+            ]);
+        }
+
+        return response()->json($ticketsArr);
+    }
+
 }
