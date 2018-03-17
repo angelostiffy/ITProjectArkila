@@ -22,80 +22,83 @@
                         <div class="box-header">
                             <h3 class="box-title">{{$terminal->description}}</h3>
                         </div>
-                        <div class="box-body">
-
-                            <div class="col-md-3">
-                                
-                                   <form action="{{route('drivermodule.storeReport')}}" id="terminal{{$terminal->terminal_id}}" method="POST" class="form-horizontal">
-                                    {{csrf_field()}} 
-                                    @foreach($destinations as $destination)
+                        
+                            <div class="box-body">
+                                <form action="{{route('drivermodule.storeReport')}}" id="terminal{{$terminal->terminal_id}}" method="POST" class="form-horizontal">
+                                <div class="col-md-6">
                                     
-                                        @if($destination->term_id == $terminal->terminal_id)
-                                    <div class='form-group'>
-                                        <label for="">{{$destination->description}}</label>
-                                        <input type="hidden" name='destination[]' value='{{$destination->destid}}'>
-                                        <input class='form-control pull-right' onblur='findTotal()' type='number' name='qty[]' id='qty{{$destination->term_id}}' style='width:30%;'>
-                                    </div>
+                                       
+                                        {{csrf_field()}} 
+                                        @foreach($destinations as $destination)
                                         
-                                        @endif
-                                        
-                                    @endforeach
-
-                            </div>
-                            <div class="col-md-6 pull-right">
-                                <div class="form-group">
-                                    <label for="departureDate">Date of Departure:</label>
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
+                                            @if($destination->term_id == $terminal->terminal_id)
+                                        <div class='form-group'>
+                                            <label for="" class="col-sm-4">{{$destination->description}}</label>
+                                            <div class="col-sm-6">
+                                            <input class='form-control pull-right' onblur='findTotal()' type='number' name='qty[]' id='qty{{$destination->term_id}}' >
+                                            </div>
+                                            <input type="hidden" name='destination[]' value='{{$destination->destid}}'>
                                         </div>
-                                        <input value="" id="" name="dateDeparted" type="text" class="form-control pull-right datepicker">
+                                            
+                                            @endif
+                                            
+                                        @endforeach
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="departureDate"  class="col-sm-4">Date of Departure:</label>
+                                        <div class="input-group date col-sm-8">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input value="" id="" name="dateDeparted" type="text" class="form-control pull-right datepicker">
+                                        </div>
+                                    </div>
+                                <div class = "bootstrap-timepicker">
+                                    <div class="form-group">
+                                        <label for="timeDepart" class="col-sm-4">Time of Departure:</label>
+                                        <div class="input-group col-sm-8">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-clock-o"></i>
+                                            </div>
+                                            <input value="" id="timepicker" name="timeDeparted" type="text" class = "form-control">
+                                        </div>
                                     </div>
                                 </div>
-                            <div class = "bootstrap-timepicker">
-                                <div class="form-group">
-                                    <label for="timeDepart">Time of Departure:</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-clock-o"></i>
-                                        </div>
-                                        <input value="" id="timepicker" name="timeDeparted" type="text" class = "form-control">
-                                    </div>
-                                </div>
-                            </div>
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <div class='form-group'>
-                                            <label for=''>Total Passengers: </label>
-                                            <input class='form-control pull-right' type='text' name='totalPassengers' id='totalPassengers'>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-offset-1 col-md-5">
-                                        <div class='form-group'>
-                                            <label for=''>Total Booking Fee: </label>
-                                            <input class='form-control pull-right' type='text' name='totalBookingFee' id='total'>
-                                        </div>
-                                    </div>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <label for="" class="col-md-2"></label>
+                                        <div class="col-md-5">
                                             <div class='form-group'>
-                                                <label for=''>Number of Customers with Student Discounts: </label>
-                                                <input class='form-control pull-right' type='number' name='numberOfSDiscounts' id='total'>
+                                                <label for=''>Total Passengers: </label>
+                                                <input class='form-control col-xs-3' type='text' name='totalPassengers' id='totalPassengers'>
                                             </div>
                                         </div>
-                                        
+                                        <div class="col-md-5">
+                                            <div class='form-group clearfix'>
+                                                <label for=''>Total Booking Fee: </label>
+                                                <input class='form-control col-xs-3' type='text' name='totalBookingFee' id='total'>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p>Number of Customers with Discount</p>
+                                    <div class="form-horizontal">
+                                            @foreach($fads as $fad)
+                                            <div class='form-group'>
+                                                <label for='' class="col-sm-4"> {{$fad->description}} Discounts: </label>
+                                                <div class="col-sm-8">
+                                                <input class='form-control col-sm-9' type='number' name='number{{$fad->description}}' id='{{$fad->fad_id}}'>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="box-footer text-center">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#discountModal{{$terminal->terminal_id}}">Submit</button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="box-footer text-center">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#discountModal{{$terminal->terminal_id}}">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            
-                        </div>
+                                                        </div>
                     </div>
                 </div>
                 
@@ -125,6 +128,7 @@
                 <!-- /.modal-dialog -->
             </div>
             </form>
+
             @endforeach
             <!-- /.modal -->
             </div>
@@ -147,6 +151,10 @@
                 tot += parseInt(arr[i].value);
         }
         document.getElementById('totalPassengers').value = tot;
+    }
+
+    function findTotalBookingFee(){
+
     }
 </script>
 

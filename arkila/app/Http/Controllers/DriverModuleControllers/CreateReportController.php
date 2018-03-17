@@ -22,7 +22,7 @@ class CreateReportController extends Controller
   {
     $terminals = Terminal::orderBy('terminal_id')->get();
     $destinations = Destination::join('terminal', 'destination.terminal_id', '=', 'terminal.terminal_id')->select('terminal.terminal_id as term_id','terminal.description as termdesc', 'destination.destination_id as destid', 'destination.description')->get();
-    $fads = FeesAndDeduction::all();
+    $fads = FeesAndDeduction::where('type','=','Discount')->get();
     return view('drivermodule.report.driverReport',compact('terminals', 'destinations', 'fads'));
 
   }
@@ -81,12 +81,12 @@ class CreateReportController extends Controller
         echo $key . " " . $innerKeys . " " . $innerValues . "<br/>";
         for($i = 1; $i <= $innerValues; $i++){
           echo $innerKeys . " " . $i . "<br/>";
-          Ticket::create([
-            'destination_id' => $innerKeys,
-            'fad_id' => ,
-            'trip_id' => ,
-            'status' => 'Departed', 
-          ]);
+          // Ticket::create([
+          //   'destination_id' => $innerKeys,
+          //   'fad_id' => ,
+          //   'trip_id' => ,
+          //   'status' => 'Departed', 
+          // ]);
         }
       }
     }
