@@ -14,6 +14,7 @@ class CreateTransactionTable extends Migration
     public function up()
     {
         Schema::create('transaction', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('transaction_id');
             $table->integer('ticket_id')
             ->unsigned();

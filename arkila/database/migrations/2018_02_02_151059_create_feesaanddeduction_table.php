@@ -14,14 +14,13 @@ class CreateFeesaanddeductionTable extends Migration
     public function up()
     {
         Schema::create('fees_and_deduction', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('fad_id');
             $table->string('description', 30);
             $table->double('amount')->unsigned();
             $table->enum('type', ['Discount', 'Fee']);
             $table->timestamps();
 
-
-            $table->engine = 'InnoDB';
         });
     }
 

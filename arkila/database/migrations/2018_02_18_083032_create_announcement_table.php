@@ -14,6 +14,7 @@ class CreateAnnouncementTable extends Migration
     public function up()
     {
         Schema::create('announcement', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('announcement_id');
             $table->string('title', 50);
             $table->string('description', 1000);
