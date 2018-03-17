@@ -17,7 +17,7 @@ class TransactionsController extends Controller
     public function index()
     {
         $terminals = Terminal::all();
-        return view('ticketmanagement.index',compact('terminals'));
+        return view('transaction.index',compact('terminals'));
     }
 
     /**
