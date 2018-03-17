@@ -32,7 +32,12 @@
         background-color: #4CAF50;
     }
 </style>
-@endsection @section('title', 'Book a Seat') @section('form-id', 'regForm') @section('form-action', route('reservations.store')) @section('form-method', 'POST') @section('form-body') {{csrf_field()}}
+@endsection @section('title', 'Book a Seat') 
+@section('form-id', 'regForm') 
+@section('form-action', route('reservations.store')) 
+@section('form-method', 'POST') 
+@section('form-body') {{csrf_field()}}
+
 <div class="box box-warning">
     <div class="box-header with-border text-center">
         <a href="{{ URL::previous() }}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
@@ -41,7 +46,7 @@
         </h3>
     </div>
     <div class="box-body">
-@include('message.error')
+    @include('message.error')
 
         <div class="tab">
             <h4>Trip Information</h4>
@@ -55,18 +60,25 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Contact Number:</label>
-                        <input type="text" class="form-control" placeholder="Contact Number" name="contact" id="contactNumber" value="{{ old('contact') }}" required>
+                        <div class = "input-group">  
+                            <div class = "input-group-addon">
+                                <span>+63</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Contact Number" name="contactNumber" id="contactNumber" value="{{ old('contactNumber') }}" data-inputmask='"mask": "999-999-9999"' data-mask>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Departure Date:</label>
-                        <div class="input-group date">
+                        <div class="input-group">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" class="form-control pull-right datepicker" id="datepicker" placeholder="MM/DD/YYYY" name="date" value="{{ old('date') }}" required>
+               
+                            <input type="text" name="date" class="form-control" placeholder="mm/dd/yyyy" value="{{old('date')}}" data-inputmask=" 'alias': 'mm/dd/yyyy'" data-mask>
+                            
                         </div>
                     </div>
                 </div>
@@ -105,9 +117,9 @@
             </div>
         </div>
     </div>
-    <div class="tab ">
-        <h4>Summary</h4>
-        <div class="row ">
+    <div class="tab" style="margin-left:37%; font-size: 14pt">
+        <h4 style="margin-left:17%; margin-bottom:3%; font-size: 14pt">Summary</h4>
+        <div class="row">
             <dl class="dl-horizontal">
                 <dt>Name:</dt>
                 <dd id="nameView"></dd>
@@ -138,19 +150,10 @@
     </div>
 </div>
 </div>
-</div>
+
 @endsection @section('scripts') @parent
 <script>
-
-    $(function() {
-        //Date picker
-        $('#datepicker').datepicker({
-            autoclose: true,
-            startDate: new Date()
-            // endDate: new Date('2018-04-12')
-        })
-
-    })
+    
     $(function() {
 
         //Date picker
@@ -242,5 +245,7 @@
         var time = document.getElementById('timepicker').value;
         document.getElementById('timeView').textContent = time;
     }
+    
+    $('[data-mask]').inputmask()
 </script>
 @endsection

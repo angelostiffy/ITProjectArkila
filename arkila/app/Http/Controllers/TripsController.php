@@ -67,6 +67,7 @@ class TripsController extends Controller
                 'terminal_id' => $destination->terminal_id,
                 'plate_number' => $van->plate_number,
                 'driver_id' => $member->member_id,
+                'remarks' => NULL,
                 'queue_number' => $queueNumber
             ]);
             session()->flash('success', 'Van Succesfully Added to the queue');
@@ -127,6 +128,75 @@ class TripsController extends Controller
         ]);
     }
 
+    public function updateQueueNumber(Trip $trip){
+        $tripsArr = [];
+        $trips = Trip::whereNotNull('queue_number')->orderBy('queue_number')->get();
+
+
+        $beingTransferredKey = $trip->queue_number;
+        $beingReplacedKey = request('value');
+
+
+        $beingTransferredVal = $trip->trip_id;
+        $beingReplacedVal = Trip::where('queue_number',request('value'))->first()->trip_id;
+
+        $tripsCount = Trip::whereNotNull('queue_number')->count();
+
+        $this->validate(request(),[
+            'value' => 'required|digits_between:1,'.$tripsCount,
+        ]);
+
+        for($i = 0,$n = 1; $i < count($trips) ; $i++,$n++){
+            $tripsArr[$n] =  $trips[$i]->trip_id;
+        }
+
+
+        $tripsArr[$beingReplacedKey] = $beingTransferredVal;
+
+
+        if($beingTransferredKey > $beingReplacedKey){
+
+            $beingReplacedKey += 1;
+
+            for($i = $beingReplacedKey; $i<= $beingTransferredKey; $i++)
+            {
+                    $beingTransferredVal =  $tripsArr[$i];
+                    $tripsArr[$i] = $beingReplacedVal;
+                    $beingReplacedVal = $beingTransferredVal;
+
+            }
+
+            foreach($tripsArr as $queueNum => $tripId){
+                $trip = Trip::find($tripId);
+
+                $trip->update([
+                    'queue_number' => $queueNum
+                ]);
+            }
+
+        }else{
+
+            $beingReplacedKey -= 1;
+
+
+            for($i = $beingReplacedKey; $i>= $beingTransferredKey; $i--) {
+                    $beingTransferredVal = $tripsArr[$i];
+                    $tripsArr[$i] = $beingReplacedVal;
+                    $beingReplacedVal = $beingTransferredVal;
+
+
+            }
+
+            foreach($tripsArr as $queueNum => $tripId){
+                $trip = Trip::find($tripId);
+
+                $trip->update([
+                    'queue_number' => $queueNum
+                ]);
+            }
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -143,13 +213,25 @@ class TripsController extends Controller
 
     public function updateVanQueue(){
         $vans = request('vanQueue');
+        $tripArr = [];
         if(is_array($vans)) {
             foreach($vans[0] as $key => $vanInfo){
                 if($van = Van::find($vanInfo['plate'])){
                    $van->updateQueue($key);
                 }
             }
-            return "Updated";
+
+            $trips = Trip::whereNotNull('queue_number')->orderBy('queue_number')->get();
+
+            foreach($trips as $trip){
+                array_push($tripArr,
+                    [
+                        'trip_id' =>$trip->trip_id,
+                       'plate_number' => $trip->plate_number,
+                       'queue_number' => $trip->queue_number
+                    ]);
+            }
+            return response()->json($tripArr);
         }
         else{
             return "Operator Not Found";

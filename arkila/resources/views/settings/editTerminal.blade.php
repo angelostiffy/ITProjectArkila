@@ -13,7 +13,7 @@
         </div>
         
         <label>Terminal Name:</label>
-        <input type="text" class="form-control" name="editTerminalName" value="{{$terminal->description}}" maxlength="30">
+        <input type="text" class="form-control" name="editTerminalName" value="{{$terminal->description}}" maxlength="30" required>
     </div>
 
 @endsection
@@ -23,7 +23,7 @@
 
 @section('modal-title','Confirm')
 @section('modal-body')
-    <p>Are you sure you want to edit this terminal?</p>
+    <p>Are you sure you want to overwrite the changes?</p>
 @endsection
 
 @section('modal-btn')

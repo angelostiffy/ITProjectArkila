@@ -1,7 +1,5 @@
-
 @extends('layouts.form') 
 @section('title', 'Add Van')
-
 
 @if(isset($operators))
     @section('form-action',route('vans.store'))
@@ -12,76 +10,79 @@
 @endif
 @section('form-title', 'Add Van')
 @section('form-body')
-    @include('message.error')
 
-    @if(isset($operators))
-        <div class="form-group">
-            <label for="">Operator:</label>
-            <select name="operator" id="" class="form-control select2">
-                @foreach($operators as $operator)
-                    <option value="{{$operator->member_id}}">{{$operator->full_name}}</option>
-                @endforeach
-            </select>
-        </div>
-    @else
-
-	    <div class="form-group">
-	        <label for="">Operator:</label> <span>{{$operator->full_name}}</span>
-        </select>
+@if(isset($operators))
+<div class="form-group">
+    <div style="margin-top:18%">
+        @include('message.error')
     </div>
+
+    <label for="">Operator:</label>
+    <select name="operator" id="" class="form-control select2">
+        @foreach($operators as $operator)
+            <option value="{{$operator->member_id}}">{{$operator->full_name}}</option>
+        @endforeach
+    </select>
+</div>
+@else
+
+<div class="form-group">
+    <label for="">Operator:</label> <span>{{$operator->full_name}}</span>
+</div>
+@endif
+
+<div class="form-group">
+    <label for="">Plate Number:</label>
+    <input value="{{old('plateNumber')}}" name="plateNumber" type="text" class="form-control" placeholder="Plate Number" required>
+</div>
+<div class="form-group">
+    <label for="">Van Model</label>
+    <input list="models" value="{{old('vanModel')}}" name="vanModel" type="text" class="form-control" placeholder="Van Model">
+    <datalist id="models">
+        @foreach($models as $model)
+        <option value="{{$model->description}}">
+        @endforeach
+    </datalist>
+</div>
+
+<div class="form-group">
+    <label for="">Seating Capacity</label>
+    <input value="{{old('seatingCapacity')}}" name="seatingCapacity" type="number" class="form-control" placeholder="Seating Capacity" max="16" min="1">
+</div>
+
+<div class="form-group">
+    <label for="">Driver</label> 
+    @if(isset($operators))
+        <select name="driver" id="driver" class="form-control select2"></select> @else
+        <select name="driver" id="driver" class="form-control select2">
+        <option value="">None</option>
+        @foreach($drivers as $driver)
+            <option value="{{$driver->member_id}}">{{$driver->full_name}}</option>
+        @endforeach
+    </select> 
     @endif
 
-	<div class="form-group">
-	<label for="">Plate Number:</label>
-    <input value="{{old('plateNumber')}}" name="plateNumber" type="text" class="form-control" placeholder="Plate Number">
-    </div>
-    <div class="form-group">
-	<label for="">Van Model</label>
-    <input value="{{old('vanModel')}}" name="vanModel" type="text" class="form-control" placeholder="Van Model">
-    </div>
-
-    <div class="form-group">
-	<label for="">Seating Capacity</label>
-    <input value="{{old('seatingCapacity')}}" name="seatingCapacity" type="number" class="form-control" placeholder="Seating Capacity" max="16" min="1">
-    </div>
-    
-    <div class="form-group">
-    <label for="">Driver</label>
-
-        @if(isset($operators))
-            <select name="driver" id="driver" class="form-control select2"></select>
-        @else
-            <select name="driver" id="driver" class="form-control select2">
-                <option value="">None</option>
-                @foreach($drivers as $driver)
-                    <option value="{{$driver->member_id}}">{{$driver->full_name}}</option>
-                @endforeach
-            </select>
-        @endif
-
-    </div>
-@endsection 
-
+</div>
+@endsection
 @section('others')
-<div class="form-group">
-       <span id ="checkBox">
+    <div class="form-group">
+        <span id="checkBox">
            <input name="addDriver" type="checkbox" class="minimal"> <span>Add new driver to this van unit</span>
 
-       </span>
-
+        </span>
 
 @endsection
 
 @section('form-btn')
-<a class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Add unit</a>
+    <a class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Add unit</a>
 @endsection 
-@section('modal-title', 'Alert') 
+@section('modal-title', 'Confirm') 
 @section('modal-body')
-<h4>Are you sure you want to add?</h4>
+    <p>Are you sure you want to add this Van?</p>
 @endsection 
 @section('modal-btn')
-<button type="submit" class="btn btn-primary"> Yes</button>
-<button type="submit" class="btn btn-default"> No</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+    <button type="submit" class="btn btn-primary" style="width:33%;">Submit</button>
 @endsection
 @section('scripts')
 	@parent

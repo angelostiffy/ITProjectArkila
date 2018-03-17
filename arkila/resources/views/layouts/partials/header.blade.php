@@ -157,12 +157,12 @@
                             <li class="box-body">
                                 <div class="form-group">
                                     <label for="">Title:</label>
-                                    <input type="text" name="title" class="form-control">
+                                    <input type="text" name="title" class="form-control" maxlength="50" required>
                                 </div>
                                 <!-- inner menu: contains the actual data -->
                                 <div class="form-group">
                                     <label for="">Message:</label>
-                                    <textarea name="announce" rows="5" class="form-control" placeholder=""></textarea>
+                                    <textarea name="announce" rows="5" class="form-control" placeholder="" maxlength="500" required></textarea>
                                 </div>
                                 <div class="pull-right">
                                     <button class="btn btn-warning">ANNOUNCE</button>

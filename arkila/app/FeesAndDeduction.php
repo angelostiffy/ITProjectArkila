@@ -16,4 +16,8 @@ class FeesAndDeduction extends Model
     {
     	return $this->hasMany(Ticket::class, 'fad_id');
     }
+
+    public static function scopeDiscounts($query){
+        return $query->where('type','Discount');
+    }
 }

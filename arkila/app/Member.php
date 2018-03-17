@@ -104,7 +104,8 @@ class Member extends Model
     }
 
     public function setContactNumberAttribute($value){
-        $this->attributes['contact_number'] = '+63'.$value;
+        $contactArr = explode('-',$value);
+        $this->attributes['contact_number'] = '+63'.$contactArr[0].$contactArr[1].$contactArr[2];
     }
 
     public function setAgeAttribute($value){
@@ -112,7 +113,8 @@ class Member extends Model
     }
 
     public function setEmergencyContactnoAttribute($value){
-        $this->attributes['emergency_contactno'] = '+63'.$value;
+        $contactArr = explode('-',$value);
+        $this->attributes['emergency_contactno'] = '+63'.$contactArr[0].$contactArr[1].$contactArr[2];
     }
 
 }

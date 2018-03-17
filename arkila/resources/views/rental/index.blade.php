@@ -1,4 +1,10 @@
-@extends('layouts.master') @section('title', 'List of Rentals') @section('content-header', 'List of Rentals') @section('links') @parent @stop @section('content')
+@extends('layouts.master') 
+@section('title', 'List of Rentals') 
+@section('content-header', 'List of Rentals') 
+@section('links') 
+    @parent 
+    @stop 
+@section('content')
 <section class="content">
     <div class="box">
         <div class="box-body">
@@ -14,9 +20,10 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
 
-                            <div class="col col-md-6">
+                            <div style="margin-bottom:1%">
                                 <a href="/home/rental/create" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create New</a>
                             </div>
+                            
                             <table id="listRent" class="table table-bordered table-striped rentalTable">
                                 <thead>
                                     <tr>
@@ -44,11 +51,77 @@
                                         <td>{{ $rental->status }}</td>
                                         <td class="center-block">
                                             <div class="center-block">
-                                                <form action="{{ route('rental.update', $rental->rent_id) }}" method="POST" class="form-action">
-                                                    {{ csrf_field() }} {{ method_field('PATCH') }} @if ($rental->status == 'Paid')
-                                                    <button class="btn btn-primary" name="click" id="depart" value="Departed"><i class="fa fa-automobile"></i> Depart </button>
-                                                    <button class="btn btn-outline-danger" name="click" id="depart" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel </button>
-                                                </form>
+                                                @if ($rental->status == 'Paid')
+                                                    <button class="btn btn-primary" name="click" id="depart" value="Departed"  data-toggle="modal" data-target="#{{'depart'.$rental->rent_id}}"><i class="fa fa-automobile"></i> Depart </button>
+                                                    <button class="btn btn-outline-danger" name="click" id="depart" value="Cancelled" data-toggle="modal" data-target="#{{'cancel'.$rental->rent_id}}"><i class="fa fa-close"></i> Cancel </button>
+                                                
+                                                    <!-- Modal for depart-->
+                                                     <div class="modal fade" id="{{'depart'.$reservation->id}}">
+                                                        <div class="modal-dialog">
+                                                            <div class="col-md-offset-2 col-md-8">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header bg-primary">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span></button>
+                                                                        <h4 class="modal-title"> Confirm</h4>
+                                                                    </div>
+                                                                    <div class="modal-body row" style="margin: 0% 1%;">
+
+                                                                        <p style="font-size: 110%;">Are you sure you want to depart this rental?</p>
+
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                       <form action="{{ route('rental.update', $rental->rent_id) }}" method="POST" class="form-action">
+                                                                            {{ csrf_field() }} {{ method_field('PATCH') }}
+                                                                           
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                            <button type="submit" name="driverArc" value="Arch " class="btn btn-primary" style="width:22%;">Depart</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.modal-content -->
+                                                            </div>
+                                                            <!-- /.col -->
+                                                        </div>
+                                                        <!-- /.modal-dialog -->
+                                                    </div>
+                                                    <!-- /.modal -->
+                                                    
+                                                    <!-- Modal for Cancelation-->
+                                                     <div class="modal fade" id="{{'cancel'.$rental->rent_id}}">
+                                                        <div class="modal-dialog">
+                                                            <div class="col-md-offset-2 col-md-8">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header bg-red">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span></button>
+                                                                        <h4 class="modal-title"> Confirm</h4>
+                                                                    </div>
+                                                                    <div class="modal-body row" style="margin: 0% 1%;">
+                                                                        <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
+                                                                            <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
+                                                                        </div>
+                                                                        <div class="col-md-10">
+                                                                            <p style="font-size: 110%;">Are you sure you want to cancel this rental?</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                       <form action="{{ route('rental.update', $rental->rent_id) }}" method="POST" class="form-action">
+                                                                            {{ csrf_field() }} {{ method_field('PATCH') }} 
+
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">discard</button>
+                                                                            <button type="submit" name="driverArc" value="Arch " class="btn btn-danger" style="width:22%;">Cancel</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.modal-content -->
+                                                            </div>
+                                                            <!-- /.col -->
+                                                        </div>
+                                                        <!-- /.modal-dialog -->
+                                                    </div>
+                                                    <!-- /.modal -->
+                                               
                                                 @else
                                                 <button class="btn btn-danger" data-toggle="modal" data-target="#{{'deleteRental'.$rental->rent_id}}"><i class="fa fa-trash"></i>Delete
                                                 </button>
@@ -170,7 +243,7 @@
 
         $('.rentalTable').DataTable({
             'paging': true,
-            'lengthChange': false,
+            'lengthChange': true,
             'searching': true,
             'ordering': true,
             'info': true,

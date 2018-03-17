@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/font-awesome/css/font-awesome.min.css') }}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/Ionicons/css/ionicons.min.css') }}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ URL::asset('adminlte/dist/css/AdminLTE.min.css') }}">
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/select2/dist/css/select2.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ URL::asset('adminlte/dist/css/AdminLTE.min.css') }}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ URL::asset('adminlte/dist/css/skins/_all-skins.min.css') }}">
@@ -59,6 +59,8 @@
     <!-- Morris.js charts -->
     <script src="{{ URL::asset('adminlte/bower_components/raphael/raphael.min.js') }}"></script>
     <script src="{{ URL::asset('adminlte/bower_components/morris.js/morris.min.js') }}"></script>
+    <!-- Select2 -->
+    <script src="{{ URL::asset('adminlte/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
     <!-- Sparkline -->
     <script src="{{ URL::asset('adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
     <!-- jvectormap -->

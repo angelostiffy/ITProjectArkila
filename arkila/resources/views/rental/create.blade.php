@@ -78,7 +78,12 @@
                         <div class="col-md-4">
                              <div class="form-group">
                                 <label>Contact Number:</label>
-                                <input type="text" class="form-control" placeholder="Contact Number" name="contactNumber" id="contactNumber" value="{{ old('contactNumber') }}" maxlength="10">
+                                <div class = "input-group">
+                                    <div class = "input-group-addon">
+                                        <span>+63</span>
+                                    </div>
+                                <input type="text" class="form-control" placeholder="Contact Number" name="contactNumber" id="contactNumber" value="{{ old('contactNumber') }}" data-inputmask='"mask": "999-999-9999"' data-mask>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -113,7 +118,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" class="form-control pull-right" id = "datepicker" name="date" value="{{ old('date') }}">
+                                    <input type="text" class="form-control" name="date" value="{{ old('date') }}" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                 </div>
                             </div>
                         </div>
@@ -133,8 +138,8 @@
                         </div>
                     </div> 
                 </div>
-                <div class="tab">
-                    <h4>Summary</h4>
+                <div class="tab" style="margin-left:37%; font-size: 14pt">
+                    <h4 style="margin-left:17%; margin-bottom:3%; font-size: 14pt">Summary</h4>
                     <div class = "row">
                            <dl class = "dl-horizontal">
                            <dt>Name:</dt>
@@ -283,5 +288,8 @@
             document.getElementById('timeView').textContent = time;
         }
         
+    </script>
+    <script>
+    $('[data-mask]').inputmask()
     </script>
 @endsection

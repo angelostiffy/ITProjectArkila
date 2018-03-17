@@ -18,7 +18,7 @@
 
     <div class="form-group">
         <label>Amount:</label>
-        <input type="number" class="form-control" name="editFeeAmount" step = "0.25" min="0" value="{{$fee->amount}}">
+        <input type="number" class="form-control" name="editFeeAmount" step = "0.25" min="1" max="5000" value="{{$fee->amount}}">
     </div>
 
 @endsection
@@ -28,7 +28,7 @@
 
 @section('modal-title','Confirm')
 @section('modal-body')
-    <p>Are you sure you want to change this fee?</p>
+    <p>Are you sure you want to overwrite the changes?</p>
 @endsection
 
 @section('modal-btn')

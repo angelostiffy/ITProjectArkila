@@ -3,9 +3,8 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use Carbon\Carbon;
 
-class checkAge implements Rule
+class checkContactNum implements Rule
 {
     /**
      * Create a new rule instance.
@@ -26,12 +25,7 @@ class checkAge implements Rule
      */
     public function passes($attribute, $value)
     {
-        try{
-            $age = Carbon::parse($value)->age;
-            return ($age >= 18 ? true:false);
-        }catch (\Exception $exception){
-            return false;
-        }
+        return (preg_match('/^\d{3}-\d{3}-\d{4}$/', $value));
     }
 
     /**
@@ -41,6 +35,6 @@ class checkAge implements Rule
      */
     public function message()
     {
-        return 'The entered birthday is invalid, the age of the person must be 18 and above.';
+        return 'The entered input must be  10 digits in the format ###-###-####';
     }
 }

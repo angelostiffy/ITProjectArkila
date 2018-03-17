@@ -14,7 +14,7 @@
 
      <div class="form-group">
         <label>Fare:</label>
-        <input type="number" class="form-control" name="editDestinationFare" step = "0.25" min="1" max="5000" value="{{$destination->amount}}">
+        <input type="number" class="form-control" name="editDestinationFare" step = "0.25" min="50"  max="5000" value="{{$destination->amount}}" required>
      </div>
 
 @endsection
@@ -24,7 +24,7 @@
 
 @section('modal-title','Confirm')
 @section('modal-body')
-    <p>Are you sure you want to edit this destination's fare?</p>
+    <p>Are you sure you want to overwrite the changes?</p>
 @endsection
 
 @section('modal-btn')
