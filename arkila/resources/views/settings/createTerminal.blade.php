@@ -17,13 +17,13 @@
         </div>
         <div class="form-group">
             <label>Booking Fee:</label>
-            <input type="number" class="form-control" step="0.25" name="bookingFee" required>
+            <input type="number" class="form-control" step="0.25" name="bookingFee" min="1" max="5000" required>
         </div>
     </div>
 
 @endsection
 @section('form-btn')
-    <a  class="btn btn-primary" data-keyboard="true" data-toggle="modal" data-target="#form-modal">Create</a>
+    <a  class="btn btn-primary" data-keyboard="true" data-toggle="modal" data-target="#form-modal" id="modalSubmit">Create</a>
 @endsection
 
 @section('modal-title','Confirm')
@@ -40,11 +40,12 @@
 @parent
 
     <script>
-       $(document).ready(function () {
-            $('#form-modal').on('shown.bs.modal', function() { 
-               generate_modal_body();
-            }) ;
-         });
+        $(document).keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+                $('#form-modal').modal('toggle');
+            }
+        });   
     </script>
 
 @endsection

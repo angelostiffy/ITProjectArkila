@@ -26,7 +26,7 @@
     </div>
     <div class="form-group">
         <label>Fare:</label>
-        <input type="number" class="form-control" name="addDestinationFare" step="0.25" placeholder="Php 0.00"  min="50" max="5000" required>
+        <input type="number" class="form-control" name="addDestinationFare" step="0.25" placeholder="Php 0.00"  min="1" max="5000" required>
     </div>
 
 @endsection
@@ -42,4 +42,18 @@
 @section('modal-btn')
     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
     <button type="submit" class="btn btn-primary" style="width:33%;">Submit</button>
+@endsection
+
+@section('scripts') 
+@parent
+
+    <script>
+        $(document).keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+                $('#form-modal').modal('toggle');
+            }
+        });   
+    </script>
+
 @endsection

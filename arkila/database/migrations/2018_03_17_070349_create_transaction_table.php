@@ -17,7 +17,8 @@ class CreateTransactionTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('transaction_id');
             $table->integer('ticket_id')
-            ->unsigned();
+            ->unsigned()
+            ->nullable();
             $table->integer('destination_id')
             ->unsigned();
             $table->integer('fad_id')

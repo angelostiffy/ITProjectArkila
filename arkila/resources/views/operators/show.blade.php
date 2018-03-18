@@ -13,7 +13,7 @@
     </div>
 
     <form id="regForm" action="/action_page.php">
-        <div class="box-body">
+        <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
 
             <!-- One "tab" for each step in the form: -->
             <div class="tab">
@@ -90,7 +90,7 @@
         </div>
 </div>
 <div class="box box-warning">
-    <div class="box-body">
+    <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
         <div class="tab">
             <h4>Family Information</h4>
             <div class="tab">
@@ -143,8 +143,12 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="tab">
+                    @if($operator->children->first())
+                        @foreach($operator->children as $child)
                     <div class="col-md-12">
+
                         <Label for="dependentsO">Dependents:</Label>
                         <table class="table table-hover custab">
                             <thead>
@@ -155,7 +159,7 @@
 
                             </thead>
                             <tbody id="childrens">
-                                @if($operator->children) @foreach($operator->children as $child)
+
                                 <tr>
                                     <td>
                                         <p placeholder="Name of Child" class="form-control" disabled>{{$child->children_name}}</p>
@@ -167,12 +171,14 @@
                                     </td>
 
                                 </tr>
-                                @endforeach @endif
+                                @endforeach
                             </tbody>
                         </table>
 
                     </div>
+                            @endif
                 </div>
+
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 @extends('layouts.master') @section('title', 'List of Operators') @section('content-header', 'List of Operators')@section('content')
 <div class="box">
-    <div class="box-body">
+    <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
         <div class="col col-md-6">
             <a href="/home/operators/create" class="btn btn-primary btn-create"><i class="fa fa-plus-circle"></i> Create New</a>
             <a href=""  class="btn btn-default"> <i class="fa fa-print"></i> Print</a>
@@ -72,8 +72,11 @@
 </div>
 <!-- /.box -->
 
+
+
 @endsection
-@section('scripts') @parent
+@section('scripts') 
+@parent
 
 <!-- DataTables -->
 <script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>

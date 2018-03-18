@@ -6,7 +6,7 @@
 @stop 
 @section('content')
 
-<div class="box box-warning">
+<div class="box box-warning" style="box-shadow: 0px 5px 10px gray;">
     <div class="box-header with-border text-center">
         <a href="{{route('operators.showProfile',[$operator->member_id])}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
         <h3 class="box-title">
@@ -30,7 +30,12 @@
                         </div>
                         <div class="form-group">
                             <label for="contactNumberO">Contact Number:</label>
-                            <input  value = "{{old('contactNumber') ?? $operator->edit_contact_number }}" id="contactNumberO" name="contactNumber" type="text" class="form-control" placeholder="Contact Number" maxlength="10">
+                            <div class = "input-group">
+                                <div class = "input-group-addon">
+                                    <span>+63</span>
+                                </div>
+                            <input  value = "{{old('contactNumber') ?? $operator->edit_contact_number }}" id="contactNumberO" name="contactNumber" type="text" class="form-control" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -63,11 +68,11 @@
                         </div>
                         <div class="form-group">
                             <label for="birthdateO">Birthdate:</label>
-                            <div class="input-group date">
+                            <div class="input-group">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                <input value="{{ old('birthDate') ?? $operator->birth_date }}" id="birthdateO" name="birthDate" type="text" class="form-control pull-right datepicker">
+                                <input value="{{ old('birthDate') ?? $operator->birth_date }}" id="birthdateO" name="birthDate" type="text" class="form-control" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                             </div>
                         </div>
                         <div class="form-group">
@@ -347,5 +352,10 @@
         }
     }
 </script>
+<script>
+    $('[data-mask]').inputmask()
+</script>
+
+
 
 @stop

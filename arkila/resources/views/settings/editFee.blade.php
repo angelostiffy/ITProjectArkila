@@ -5,7 +5,6 @@
 @section('method_field', method_field('PATCH'))
 @section('form-title', 'Edit Fee')
 @section('form-body')
-	@include('message.error')
 
 	<div>
         <div style="margin-top:18%">
@@ -34,4 +33,17 @@
 @section('modal-btn')
     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
     <button type="submit" class="btn btn-primary" style="width:33%;">Submit</button>
+@endsection
+
+@section('scripts') 
+@parent
+    <script>
+        $(document).keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+                $('#form-modal').modal('toggle');
+            }
+        });   
+    </script>
+
 @endsection

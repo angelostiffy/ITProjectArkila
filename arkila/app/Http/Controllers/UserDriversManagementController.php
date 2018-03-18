@@ -20,7 +20,7 @@ class UserDriversManagementController extends Controller
 
     public function update(User $driver_user)
     {
-        $defaultpassword = "driver!@bantrans;";
+        $defaultpassword = "driver!@bantrans";
         $driver_user->password = Hash::make($defaultpassword);
         $driver_user->save();
 

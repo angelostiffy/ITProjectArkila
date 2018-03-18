@@ -1,21 +1,28 @@
 @extends('layouts.form')
-@section('title', 'Edit Destination')
+@section('title', 'Edit Ticket')
 @section('back-link', URL::previous())
 @section('form-action', route('destinations.update', [$destination->destination_id]))
 @section('method_field', method_field('PATCH'))
-@section('form-title', 'Edit Destination')
+@section('form-title', 'Edit Ticket')
 @section('form-body')
 	@include('message.error')
 
 	 <div>
 	 	<label for="destination">Description:</label>
-	 	<p>{{$destination->description}}</p>
+	 	<p>*insert description*</p>
 	 </div>
 
-     <div class="form-group">
-        <label>Fare:</label>
-        <input type="number" class="form-control" name="editDestinationFare" step = "0.25" min="50"  max="5000" value="{{$destination->amount}}" required>
-     </div>
+    <div class="form-group">
+        <label>Terminal:</label>
+
+        <select class="form-control" name="ticketTerminal">
+          @foreach($terminals as $terminal)
+            <option value="{{$terminal->terminal_id}}">{{$terminal->description}}</option>
+          @endforeach
+        </select>
+
+    </div>
+
 
 @endsection
 @section('form-btn')

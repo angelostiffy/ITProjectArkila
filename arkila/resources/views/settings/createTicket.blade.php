@@ -1,30 +1,38 @@
 @extends('layouts.form')
-@section('title', 'Create New Fee')
+@section('title', 'Create New Ticket')
 @section('back-link', URL::previous())
-@section('form-action', route('fees.store'))
-@section('form-title', 'Create Fee')
+@section('form-action', route('destinations.store'))
+@section('form-title', 'Create Ticket')
 @section('form-body')
-
+                 
     <div class="form-group">
+
         <div style="margin-top:18%">
             @include('message.error')
         </div>
+
         <label>Description:</label>
-        <input type="text" class="form-control" name="addFeesDesc" maxlength="30" required>
+        <input name="addDescrip" type="text" class="form-control" maxlength="5" required>
     </div>
     <div class="form-group">
-        <label>Amount:</label>
-        <input type="number" class="form-control" name="addFeeAmount" step="0.25" min="1" max="5000" placeholder="Php 0.00" required>
+        <label>Terminal:</label>
+
+        <select class="form-control" name="addTicketTerminal">
+          @foreach($terminals as $terminal)
+            <option value="{{$terminal->terminal_id}}">{{$terminal->description}}</option>
+          @endforeach
+        </select>
+
     </div>
 
 @endsection
 @section('form-btn')
-    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#form-modal" data-keyboard="true">Create</a>
+    <a href="" data-toggle="modal" data-target="#form-modal" class="btn btn-primary" data-keyboard="true">Create</a>
 @endsection
 
 @section('modal-title','Confirm')
 @section('modal-body')
-    <p>Are you sure you want to add this Fee?</p>
+    <p>Are you sure you want to add this Ticket?</p>
 @endsection
 
 @section('modal-btn')
@@ -34,6 +42,7 @@
 
 @section('scripts') 
 @parent
+
     <script>
         $(document).keypress(function(event){
             var keycode = (event.keyCode ? event.keyCode : event.which);
