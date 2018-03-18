@@ -24,7 +24,7 @@ class DestinationController extends Controller
         $this->validate(request(),[
             "addDestination" => "unique:destination,description|regex:/^[\pL\s\-]+$/u|required|max:40",
             "addDestinationTerminal" => ['required', new checkTerminal, 'max:40'],
-            "addDestinationFare" => ['required', new checkCurrency, 'numeric','min:1']
+            "addDestinationFare" => ['required', new checkCurrency, 'numeric','min:1','max:5000']
         ]);
 
 
@@ -46,7 +46,7 @@ class DestinationController extends Controller
     public function update(Destination $destination)
     {
         $this->validate(request(),[
-            "editDestinationFare" => ['required', new checkCurrency, 'numeric','min:1'],
+            "editDestinationFare" => ['required', new checkCurrency, 'numeric','min:1','max:5000'],
         ]);
             
         $destination->update([

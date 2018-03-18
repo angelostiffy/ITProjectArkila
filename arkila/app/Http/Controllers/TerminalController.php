@@ -33,7 +33,7 @@ class TerminalController extends Controller
     {
         $this->validate(request(),[
             "addTerminalName" => "unique:terminal,description|regex:/^[\pL\s\-]+$/u|required|max:40",
-            "bookingFee" => [new checkCurrency, "required"],
+            "bookingFee" => [new checkCurrency, "numeric", "required","min:1","max:5000"],
         ]);
 
         Terminal::create([
@@ -67,8 +67,8 @@ class TerminalController extends Controller
     public function update(Terminal $terminal)
     {
         $this->validate(request(),[
-            "editTerminalName" => 'regex:/^[\pL\s\-]+$/u|required|max:40',
-            "editBookingFee" => [new checkCurrency, "required"],
+            "editTerminalName" => 'regex:/^[\pL\s\-]+$/u|max:40',
+            "editBookingFee" => [new checkCurrency, "numeric", "required","min:1","max:5000"],
             ]);
 
         $terminal->update([
