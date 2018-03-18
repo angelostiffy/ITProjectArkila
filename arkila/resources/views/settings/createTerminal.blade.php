@@ -23,7 +23,7 @@
 
 @endsection
 @section('form-btn')
-    <a  class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Create</a>
+    <a  class="btn btn-primary" data-keyboard="true" data-toggle="modal" data-target="#form-modal">Create</a>
 @endsection
 
 @section('modal-title','Confirm')
@@ -34,4 +34,17 @@
 @section('modal-btn')
     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
     <button type="submit" class="btn btn-primary" style="width:33%;">Submit</button>
+@endsection
+
+@section('scripts') 
+@parent
+
+    <script>
+       $(document).ready(function () {
+            $('#form-modal').on('shown.bs.modal', function() { 
+               generate_modal_body();
+            }) ;
+         });
+    </script>
+
 @endsection

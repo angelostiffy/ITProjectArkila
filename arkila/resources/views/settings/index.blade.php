@@ -36,7 +36,18 @@
                     </li>
                     <li>
                         <a href="#">
-                            Van Rental Feature
+                             Online Van Rental Feature
+                            <span class="label pull-right">         
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                             Walk-in Van Rental Feature
                             <span class="label pull-right">         
                                 <label class="switch">
                                     <input type="checkbox">
