@@ -2,7 +2,7 @@
 <html>
 
 <head>
- @include('layouts.partials.style_links')
+ @include('layouts.partials.stylesheets')
 
 </head>
 
@@ -41,6 +41,7 @@
     </div>
 
     <!-- ./wrapper -->
+     @include('layouts.partials.scripts')
 
 </body>
 

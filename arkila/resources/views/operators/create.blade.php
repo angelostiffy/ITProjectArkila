@@ -109,7 +109,7 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="birthDate" class="form-control" placeholder="mm/dd/yyyy" value="{{old('birthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                  <input type="text" name="birthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('birthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input value="{{old('licenseExpiryDate')}}" name="licenseExpiryDate" type="text" class="form-control" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                    <input value="{{old('licenseExpiryDate')}}" name="licenseExpiryDate" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                 </div>
                             </div>
                         </div>
@@ -200,7 +200,7 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="spouseBirthDate" class="form-control" placeholder="mm/dd/yyyy" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                  <input type="text" name="spouseBirthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                 </div>
                             </div>
                         </div>
@@ -286,7 +286,7 @@
                                                   <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                   </div>
-                                                  <input type="text" name="childrenBDay[]" class="form-control" placeholder="mm/dd/yyyy" value="{{old('childrenBDay.'.$i)}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                                  <input type="text" name="childrenBDay[]" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('childrenBDay.'.$i)}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                                 </div>
                                             </td>
                                             <td>
@@ -307,7 +307,7 @@
                                               <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                               </div>
-                                              <input type="text" name="childrenBDay[]" class="form-control" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                              <input type="text" name="childrenBDay[]" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                             </div>
                                         </td>
                                         <td>
@@ -337,7 +337,7 @@
             <div style="overflow:auto;">
                     <div style="float:right;">
                         <button type="button" id="prevBtn" onclick="nextPrev(-1)" class = "btn btn-default">Previous</button>
-                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class = "btn btn-default">Next</button>
+                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class = "btn btn-primary">Next</button>
                     </div>
                 </div>
         </div>
@@ -348,7 +348,7 @@
  <script>
 
      $(document).ready(function(){
-         cloneDatePicker();
+         cloneDateMask();
          switch($('select[name="civilStatus"]').val()){
              case "Single":
                  $('input[name="nameOfSpouse"]').prop('disabled',true);
@@ -383,12 +383,9 @@
          });
      });
 
-        function cloneDatePicker() {
+        function cloneDateMask() {
 
-            //Date picker
-            $('.datepicker').datepicker({
-                autoclose: true
-            })
+            $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
 
         }
 
@@ -410,7 +407,7 @@
             
             }
             tablebody.appendChild(iClone);
-            cloneDatePicker();
+            cloneDateMask();
         }
         
 
@@ -497,7 +494,8 @@
           radioClass   : 'iradio_flat-blue'
         })
     })
-    $('[data-mask]').inputmask()
+     $('[data-mask]').inputmask()
+     $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
     </script>
 
     
