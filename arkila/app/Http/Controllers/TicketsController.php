@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Terminal;
+use App\Ticket;
 
 class TicketsController extends Controller
 {
@@ -14,7 +15,8 @@ class TicketsController extends Controller
      */
     public function create()
     {
-        return view('settings.createTicket');
+        $terminals = Terminal::all();
+        return view('settings.createTicket',compact('terminals'));
     }
 
     /**
@@ -26,16 +28,18 @@ class TicketsController extends Controller
     public function store()
     {
         //
-    }
+        $this->validate(request(),[
+            "description" => "required|max:5",
+            'terminal' => "required| exists:terminal,terminal_id"
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
+        Ticket::create([
+            'ticket_number' => request('description'),
+            'terminal_id' => request('terminal'),
+            'isAvailable' => 1
+        ]);
+
+        return redirect(route('settings.index'));
         //
     }
 
@@ -45,9 +49,10 @@ class TicketsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Ticket $ticket)
     {
-        //
+        $terminals = Terminal::all();
+        return view('settings.editTicket',compact('ticket','terminals'));
     }
 
     /**
@@ -57,9 +62,21 @@ class TicketsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Ticket $ticket)
     {
-        //
+
+        $this->validate(request(),[
+            "description" => "required|max:5",
+            'terminal' => "required| exists:terminal,terminal_id"
+        ]);
+
+        $ticket->update([
+            'ticket_number' => request('description'),
+            'terminal_id' => request('terminal'),
+            'isAvailable' => 1
+        ]);
+
+        return redirect(route('settings.index'));
     }
 
     /**
@@ -68,8 +85,9 @@ class TicketsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Ticket $ticket)
     {
-        //
+        $ticket->delete();
+        return back();
     }
 }

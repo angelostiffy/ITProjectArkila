@@ -376,7 +376,7 @@
                     <!-- ticket Tab -->
                     <div class="tab-pane" id="ticketTab">
                         <div class="col-md-6 pull-left">
-                            <a href="/home/settings/destinations/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Create Ticket </a>
+                            <a href="{{route('tickets.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Create Ticket </a>
                         </div>
                         <table class="table table-bordered table-striped dataTable">
                             <thead>
@@ -390,12 +390,11 @@
                             <tbody>
                                 @foreach($tickets as $ticket)
                                 <tr>
-                                    <td>{{$ticket->ticket_name}}</td>
-                                    <td>baguio</td>
+                                    <td>{{$ticket->ticket_number}}</td>
+                                    <td>{{$ticket->terminal->description}}</td>
                                     <td>         
                                         <div class="text-center">
-                                            <a href="#" class="btn btn-primary"><i class="fa fa-edit" ></i>Edit</a>
-                                            <input type="hidden" name="_method" value="DELETE">
+                                            <a href="{{route('tickets.edit',[$ticket->ticket_id])}}" class="btn btn-primary"><i class="fa fa-edit" ></i>Edit</a>
                                             <button class="btn btn-outline-danger" data-toggle="modal" data-target="#"><i class="fa fa-trash"></i>Delete</button>
                                         </div>
                                      
@@ -419,9 +418,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <form action="#" method="POST">
-                                        
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                                        <form action="{{route('tickets.destroy',[$ticket->ticket_id])}}" method="POST">
+                                                            {{csrf_field()}}
+                                                            {{method_field('DELETE')}}
                                                             <button type="submit" name="driverArc" value="Arch " class="btn btn-danger" style="width:22%;">Delete</button>
                                                         </form>
                                                     </div>
