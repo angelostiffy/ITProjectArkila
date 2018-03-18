@@ -108,7 +108,11 @@ Route::resource('home/settings/fees', 'FeesController', [
 Route::resource('home/settings/discounts', 'DiscountsController', [
     'except' => ['index']
 ]);
-Route::get('home/settings', 'HomeController@settings');
+
+Route::resource('home/settings/tickets','TicketsController',[
+    'except' => ['index']
+]);
+Route::get('home/settings', 'HomeController@settings')->name('settings.index');
 /****************************************************/
 
 /************ User Management ******************************/
