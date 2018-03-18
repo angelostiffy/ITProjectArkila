@@ -77,7 +77,7 @@
                                 <i class="fa fa-calendar"></i>
                             </div>
                
-                            <input type="text" name="date" class="form-control" placeholder="mm/dd/yyyy" value="{{old('date')}}" data-inputmask=" 'alias': 'mm/dd/yyyy'" data-mask>
+                            <input type="text" name="date" id="date" class="form-control" placeholder="mm/dd/yyyy" value="{{old('date')}}" data-inputmask=" 'alias': 'mm/dd/yyyy'" data-mask>
                             
                         </div>
                     </div>
@@ -239,7 +239,7 @@
         var seat = document.getElementById('seat').value;
         document.getElementById('seatView').textContent = seat;
 
-        var date = document.getElementById('datepicker').value;
+        var date = document.getElementById('date').value;
         document.getElementById('dateView').textContent = date;
 
         var time = document.getElementById('timepicker').value;

@@ -7,6 +7,7 @@ use App\Reservation;
 use App\Rules\checkCurrency;
 use App\Rules\checkTime;
 use App\Rules\checkName;
+use App\Rules\checkContactNum;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -30,6 +31,7 @@ class ReservationRequest extends FormRequest
      */
     public function rules(Request $request)
     {
+
         $dateNow = Carbon::now();
         $thisDate = $dateNow->setTimezone('Asia/Manila');
         
@@ -48,7 +50,7 @@ class ReservationRequest extends FormRequest
                     "dest" => "required",
                     "time" => [new checkTime, 'required'],
                     "seat" => "required|numeric|digits_between:1,2|min:0|max:15",
-                    "contact" => "required|numeric|digits:10",
+                    "contactNumber" => [new checkContactNum],
                     "amount" => [new checkCurrency,'numeric','min:0'],
                 ];
         } else {
@@ -58,7 +60,7 @@ class ReservationRequest extends FormRequest
                 "dest" => "required",
                 "time" => [new checkTime, 'required', 'after:' . $timeFormattedNow],
                 "seat" => "required|numeric|digits_between:1,2|min:1|max:15",
-                "contact" => "required|numeric|digits:10",
+                "contactNumber" => [new checkContactNum],
                 "amount" => [new checkCurrency,'numeric','min:0'],
             ];
         }
