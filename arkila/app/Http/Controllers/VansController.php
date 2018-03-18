@@ -42,8 +42,8 @@ class VansController extends Controller {
     public function createFromOperator(Member $operator)
     {
         $drivers = $operator->drivers()->doesntHave('van')->get();
-
-        return view('vans.create',compact('drivers','operator'));
+        $models = VanModel::all();
+        return view('vans.create',compact('drivers','operator','models'));
     }
 
 
@@ -124,7 +124,7 @@ class VansController extends Controller {
 
         $van = Van::create([
             'plate_number' => request('plateNumber'),
-            'model_id' => $vanModel,
+            'model_id' => $vanModel->model_id,
             'seating_capacity' => request('seatingCapacity')
         ]);
 
@@ -135,18 +135,19 @@ class VansController extends Controller {
             session(['type' => $operator->member_id]);
             return redirect(route('drivers.createFromVan',[$van->plate_number]));
         }else{
-            $newDriver = Member::find(request('driver'));
-            if($newDriver->operator_id == null){
-                $newDriver->update([
-                    'operator_id' => request('operator')
-                ]);
+            if($newDriver = Member::find(request('driver'))) {
+                if ($newDriver->operator_id == null) {
+                    $newDriver->update([
+                        'operator_id' => request('operator')
+                    ]);
+                }
+
+                if ($newDriver->van()->first() != null) {
+                    $newDriver->van()->detach();
+                }
+                $van->members()->attach($newDriver);
             }
 
-            if($newDriver->van()->first() != null){
-                $newDriver->van()->detach();
-            }
-
-            $van->members()->attach($newDriver);
             return redirect(route('operators.showProfile',[$operator->member_id]));
         }
 

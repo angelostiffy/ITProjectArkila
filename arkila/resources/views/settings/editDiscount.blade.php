@@ -22,7 +22,7 @@
 
 @endsection
 @section('form-btn')
-    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Save Changes</a>
+    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#form-modal" data-keyboard="true">Save Changes</a>
 @endsection
 
 @section('modal-title','Confirm')

@@ -36,7 +36,6 @@ class OperatorsController extends Controller
      */
     public function store(OperatorRequest $request)
     {
-
         $createdOperator = Member::create([
             'last_name'=> $request->lastName,
             'first_name' => $request->firstName,

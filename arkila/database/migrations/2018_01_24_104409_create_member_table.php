@@ -17,6 +17,7 @@ class CreateMemberTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('member_id');
             $table->integer('user_id')
+                ->nullable()
             ->unsigned();
 
             $table->integer('operator_id')
