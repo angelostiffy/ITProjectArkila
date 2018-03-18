@@ -35,6 +35,6 @@ class checkContactNum implements Rule
      */
     public function message()
     {
-        return 'The entered input must be  10 digits in the format ###-###-####';
+        return 'The contact number must be 10 digits in the format ###-###-####';
     }
 }
