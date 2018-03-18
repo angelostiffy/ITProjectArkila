@@ -60,7 +60,7 @@
                             <div class="login-logo">
                                 <div class="col-md-1">
                                     <h3 style=":hover{color = green;}">
-                                        <a href=@ yield( 'back-link')>
+                                        <a href="@yield('back-link')">
                                             <i class="fa fa-chevron-left"></i>
                                         </a>
                                     </h3>
