@@ -96,6 +96,9 @@ ol.vertical{
     color: black;
 }
 
+.queuenum a:hover{
+    background: #72afd2;
+}
 .queuenum a:before{
     position: absolute; 
     content: '';
@@ -145,9 +148,13 @@ ol.vertical{
       <div class="row">
         <div class="col-md-3">
             <div class="box box-solid">
-
-              <div class="box-header with-border bg-blue">
+              <div class="box-header with-border">
                   <h3 class="box-title">Add Driver to Queue</h3>
+
+                  <div class="box-tools">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                  </div>
               </div>
               <div class="box-body">
                       <label for="">Van Unit</label>
@@ -193,36 +200,34 @@ ol.vertical{
                           </div>
                       </div>
                 @endif
+              </div>
                 {{-- 
             Special Unit --}}
-            <div class="box-header with-border bg-yellow">
+            <div class="box box-solid">
+            <div class="box-header with-border ">
               <h3 class="box-title">Special Units</h3>
+              <div class="box-tools">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
             </div>
             <div class="box-body">
-
                 <ol class="rectrangle-list">
                   <li class="" data-plate="{{ $trip->van->plate_number ?? null}}" data-remark="{{ $trip->remarks ?? null}}">
-                            <div class="row">
-                              <div class="col-md-6">
-                                
-                                <p>
-                                
-                                {{ $trip->van->plate_number ?? null }}
-                                </p>
-                              </div>
-                              <div class="col-md-6">
-                                <div class="pull-right">
-
-                                  <a href="" id="remark{{ $trip->trip_id ?? null}}" class="remark-editable btn btn-outline-secondary btn-sm editable" data-original-title="" title=""><i class="fa fa-info"></i></a>
-
-                                  
-                                  
-                                  <a href="" class="" data-toggle="modal" data-target="#modal-default"><i class="fa fa-remove text-red"></i></a>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                  
+                      <div class="row">
+                        <div class="col-md-6">
+                          <p>
+                          {{ $trip->van->plate_number ?? null }}
+                          </p>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="pull-right">
+                            <a href="" id="remark{{ $trip->trip_id ?? null}}" class="remark-editable btn btn-outline-secondary btn-sm editable" data-original-title="" title=""><i class="fa fa-info"></i></a>
+                            <a href="" class="" data-toggle="modal" data-target="#modal-default"><i class="fa fa-remove text-red"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
                 </ol>
               </div>
              </div>
@@ -293,12 +298,14 @@ ol.vertical{
                                   <div class="modal-dialog modal-sm">
                                       <div class="modal-content">
                                           <div class="modal-header">
-                                            <h4 class="modal-title text-yellow"><i class="fa fa-warning"></i> Alert</h4>
-                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                  <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">Alert</h4>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                                               
                                           </div>
                                           <div class="modal-body">
+                                            <h1>
+                                              <i class="fa fa-exclamation-triangle pull-left text-yellow" ></i>
+                                            </h1>
                                               <p><strong>{{$trip->van->plate_number}}</strong> will be remove from the list.</p>
                                           </div>
                                           <div class="modal-footer">
@@ -306,7 +313,7 @@ ol.vertical{
                                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                   {{csrf_field()}}
                                                   {{method_field('DELETE')}}
-                                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i>Confirm</button>
+                                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Confirm</button>
                                               </form>
                                           </div>
                                       </div>
@@ -409,7 +416,7 @@ ol.vertical{
       $('#remark{{$trip->trip_id}}').editable({
           name: "remarks",
           type: "select",
-          title: "Update Remark",
+          title: "Update Remark ({{$trip->van->plate_number}})",
         value: "@if(is_null($trip->remarks)){{'NULL'}}@else{{$trip->remarks}}@endif",
           source: [
                 {value: 'NULL', text: 'Give Remarks'},

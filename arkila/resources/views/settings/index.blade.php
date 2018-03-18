@@ -168,7 +168,7 @@
                                 @foreach($destinations as $destination)
                                 <tr>
                                     <td>{{$destination->description}}</td>
-                                    <td>{{$destination->amount}}</td>
+                                    <td class="pull-right">{{$destination->amount}}</td>
                                     <td>{{$destination->terminal}}</td>
                                     <td>
                                           
@@ -239,7 +239,7 @@
                                 @foreach($fees as $fee)
                                 <tr>
                                     <td>{{$fee->description}}</td>
-                                    <td>{{$fee->amount}}</td>
+                                    <td class="pull-right">{{$fee->amount}}</td>
                                     <td>
                                         <div class="text-center">    
                                             <a href="{{ route('fees.edit', [$fee->fad_id]) }}" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
@@ -309,7 +309,7 @@
                                 @foreach($discounts as $discount)
                                 <tr>
                                     <td>{{$discount->description}}</td>
-                                    <td>{{$discount->amount}}</td>
+                                    <td class="pull-right">{{$discount->amount}}</td>
                                     <td>
                                         <div class="text-center">    
                                             <a href="{{ route('discounts.edit', [$discount->fad_id]) }}" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>          

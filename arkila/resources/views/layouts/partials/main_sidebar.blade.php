@@ -59,7 +59,8 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('operators.index')}}"><i class="fa fa-circle-o"></i> Operators</a></li>
-                    <li><a href="{{route('drivers.index')}}"><i class="fa fa-circle-o"></i> Vans and Drivers</a></li>>
+                    <li><a href="{{route('vans.index')}}"><i class="fa fa-circle-o"></i>Vans</a></li>
+                    <li><a href="{{route('drivers.index')}}"><i class="fa fa-circle-o"></i>Drivers</a></li>
                 </ul>
             </li>
             <li>

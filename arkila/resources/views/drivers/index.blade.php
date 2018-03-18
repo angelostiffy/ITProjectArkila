@@ -2,7 +2,8 @@
 <div class="box">
     <div class="box-body">
         <div class="col-md-6">
-            <a href="{{route('drivers.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create New</a>
+            <a href="{{route('drivers.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Register New Driver</a>
+            <a href=""  class="btn btn-default"> <i class="fa fa-print"></i> Print</a>
         </div>
         <table id="driverList" class="table table-bordered table-striped">
             <thead>
@@ -47,19 +48,15 @@
                                         <h4 class="modal-title"> Confirm</h4>
                                     </div>
                                     <div class="modal-body row" style="margin: 0% 1%;">
-                                        <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
-                                            <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
-                                        </div>
-                                        <div class="col-md-10">
-                                            <p style="font-size: 110%;">Are you sure you want to delete "{{ $driver->full_name }}"</p>
-                                        </div>
+                                            <h1><i class="fa fa-exclamation-triangle pull-left text-yellow">  </i></h1>
+                                            <p>Are you sure you want to delete "{{ $driver->full_name }}"?</p>
                                     </div>
                                     <div class="modal-footer">
                                         <form action="{{route('drivers.archiveDelete', $driver->member_id)}}" method="POST">
                                             {{csrf_field()}} {{method_field('PATCH')}}
 
                                             <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                            <button type="submit" name="driverArc" value="Arch " class="btn btn-danger" style="width:22%;">Delete</button>
+                                            <button type="submit" name="driverArc" value="Arch " class="btn btn-danger">Delete</button>
                                         </form>
                                     </div>
                                 </div>
@@ -79,10 +76,6 @@
     <!-- /.box-body -->
 </div>
 <!-- /.box-->
-
-<button type="submit" class="btn btn-default pull-right" style="width:22%;">Print List</button>
-
-
 
 @stop @section('scripts') @parent
 

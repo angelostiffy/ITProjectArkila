@@ -56,15 +56,19 @@
                 <form action="@yield('form-action')" method="POST">
                     {{csrf_field()}} @yield('method_field')
                     <section class="content">
-                        <div class="login-box">
+                        <div class="login-box" style="box-shadow: 0px 5px 10px gray;">
                             <div class="login-logo">
                                 <div class="col-md-1">
-                                    <h1><a href=@ yield( 'back-link')><i class="fa fa-arrow-circle-left"></i></a></h1>
+                                    <h3 style=":hover{color = green;}">
+                                        <a href=@ yield( 'back-link')>
+                                            <i class="fa fa-chevron-left"></i>
+                                        </a>
+                                    </h3>
                                 </div>
                                 <div class="col-md-11">
-                                    <h1>
+                                    <h3>
                                         @yield('form-title')
-                                    </h1>
+                                    </h3>
                                 </div>
                             </div>
                             <div class="login-box-body">
