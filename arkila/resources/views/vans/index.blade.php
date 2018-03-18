@@ -9,15 +9,15 @@
     <div class="box-body">
     	<div class="col-md-6">
     		<a href="{{route('vans.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create Van</a>
+            <a href=""  class="btn btn-default"> <i class="fa fa-print"></i> Print</a>
     	</div>
 
-    	<div class="modal fade" id="modal-default">
-                    <div class="modal-dialog" style="width:400px;">
+    	<div class="modal fade" id="edit-modal">
+                    <div class="modal-dialog modal-sm">
                         <div class="modal-content">
                             <div class="modal-header bg-primary">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                                <h4 id="OpName" class="modal-title"></h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                                <h4 class="modal-title"></h4>
                             </div>
                             <!-- /.modal-header -->
                             <div class="modal-body">
@@ -55,53 +55,63 @@
                 </div>
 
         <div class="modal fade" id="modal-view">
-            <div class="modal-dialog" style="width:400px;">
+            <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span></button>
-                        <h4 id="viewVanOp" class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                        <h4 class="modal-title">Van Details</h4>
                     </div>
                     <!-- /.modal-header -->
                     <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="box box-default">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Van Details</h3>
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-md-5">
+                                    <label for="#plateNumber">Plate Number:</label>    
                                 </div>
-                                <!-- /.box-header -->
-                                <div class="box-body center-block">
-                                    <div class="form-group">
-                                        <label for="operatorLastName">Plate Number:</label>
-                                        <p id="plateNumber" name="driverLastName" class="form-control" placeholder="Plate Number" disabled> </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="contactNumberO">Van Model:</label>
-                                        <p id="vanModel" name="vanModel" class="form-control" placeholder="Van Model" disabled> </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="ageO">Seating Capacity:</label>
-                                        <p id="seatingCapacity" name="seatingCapacity" class="form-control" placeholder="Age" disabled></p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="genderO">Operator:</label>
-                                        <p id="operatorOfVan" name="operator" class="form-control" placeholder="Gender" disabled></p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="sssO">Driver:</label>
-                                        <p id="driverOfVan" name="Driver" type="text" class="form-control" placeholder="SSS No." disabled></p>
-                                    </div>
-                                    <!-- /.form-group -->
+                                <div class="col-md-7">
+                                    <p id="plateNumber" class="form-control" disabled></p>    
                                 </div>
-                                <!-- /.box-body -->
-                                <div class="box-footer">
-                                    <button type="submit" name="search" id="search-btn" class="btn btn-default pull-right" data-dismiss="modal"> Back </button>
-                                </div>
-                                <!-- /.box-footer -->
+                                
+                                
                             </div>
-                            <!-- /.box -->
+                            <div class="form-group">
+                                <div class="col-md-5">
+                                    <label for="#vanModel">Van Model:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <p id="vanModel" class="form-control" disabled> </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <label for="seatingCapacity">Seating Capacity:</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p id="seatingCapacity" class="form-control" disabled></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="vanOperator">Operator:</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p id="vanOperator" class="form-control"disabled></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                 <div class="col-md-3">
+                                     <label for="vanDriver">Driver:</label>
+                                 </div>
+                                 <div class="col-md-9">
+                                     <p id="vanDriver" type="text" class="form-control" disabled></p>
+                                 </div>
+                                
+                                
+                            </div>
                         </div>
-                        <!-- /.container-fluid -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" name="search" id="search-btn" class="btn btn-default pull-right" data-dismiss="modal"> Back </button>
                     </div>
                     <!-- /.modal-body -->
                 </div>
@@ -130,16 +140,16 @@
 							</td>
 							<td>{{ $van->operator()->first()->full_name ??  $van->operator()->first()}}</td>
 							<td>{{$van->model}}</td>
-							<td>{{$van->seating_capacity}}</td>
+							<td class="pull-right">{{$van->seating_capacity}}</td>
 							<td>
 								<div class="text-center">
 									
                                         @if($van->driver()->first())
-		                                        <a name="listDriver" data-driver="{{$van->driver->first()->member_id}}" data-val="{{ $van->operator()->first()->member_id ?? $van->operator()->first()}}" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Change Driver</a>
+		                                        <a name="listDriver" data-driver="{{$van->driver->first()->member_id}}" data-val="{{ $van->operator()->first()->member_id ?? $van->operator()->first()}}" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal">Change Driver</a>
                                         @else
-                                            <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Add Driver</a>
+                                            <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary"><i class="fa fa-user-plus"></i> Add Driver</a>
                                         @endif
-                                        <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-default" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i>View</a>
+                                        <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-default" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i> View</a>
                                        <button class="btn btn-outline-danger" data-toggle="modal" data-target="#{{ 'deleteWarning'. $van->plate_number }}"><i class="fa fa-trash"></i> Delete</button>
 
 		                        </div>
@@ -147,30 +157,32 @@
 							</td>
 						</tr>
                         
-                        <!-- MODAL DELETION -->
+                        
+					@endforeach
+            </tbody>
+        </table>
+        @foreach($vans->where('status', 'Active') as $van)
+        <!-- MODAL DELETION -->
                         <div class="modal fade" id="{{ 'deleteWarning'. $van->plate_number }}">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-sm">
                             <div class="col-md-offset-2 col-md-8">
                                 <div class="modal-content">
                                     <div class="modal-header bg-red">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span></button>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                                         <h4 class="modal-title"> Confirm</h4>
                                     </div>
-                                    <div class="modal-body row" style="margin: 0% 1%;">
-                                       <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
-                                           <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
-                                       </div>
-                                       <div class="col-md-10">
-                                        <p style="font-size: 110%;">Are you sure you want to delete "{{ $van->model }}" with plate number of "{{$van->plate_number}}"</p>
-                                       </div>
+                                    <div class="modal-body">
+                                        <h3>  
+                                           <i class="fa fa-exclamation-triangle pull-left text-yellow"></i>
+                                        </h3>
+                                        <p>Are you sure you want to delete "{{ $van->model }}" with plate number of "{{$van->plate_number}}"</p>
                                     </div>
                                     <div class="modal-footer">
                                         <form method="POST" action="{{route('vans.archiveDelete',[$van->plate_number])}}">
                                             {{csrf_field()}}
                                             {{method_field('PATCH')}}
                                             <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                            <button type="submit" class="btn btn-danger" style="width:22%;">Yes</button>
+                                            <button type="submit" class="btn btn-danger">Yes</button>
                                         </form>    
                                     </div>
                                 </div>
@@ -181,13 +193,9 @@
                         <!-- /.modal-dialog -->
                     </div>
                     <!-- /.modal -->
-					@endforeach
-            </tbody>
-        </table>
+                    @endforeach
     </div>
 </div>
-
-<button type="submit" class="btn btn-default pull-right" style="width:22%;">Print List</button>
 
 @endsection 
 @section('scripts') 

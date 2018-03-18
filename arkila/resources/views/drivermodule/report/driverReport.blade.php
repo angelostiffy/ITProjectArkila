@@ -55,14 +55,14 @@
                                             <input value="" id="" name="dateDeparted" type="text" class="form-control pull-right datepicker">
                                         </div>
                                     </div>
-                                <div class = "bootstrap-timepicker">
-                                    <div class="form-group">
+                                <div class="form-group">
+                                    <div class = "bootstrap-timepicker">
                                         <label for="timeDepart" class="col-sm-4">Time of Departure:</label>
                                         <div class="input-group col-sm-8">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-clock-o"></i>
                                             </div>
-                                            <input value="" id="timepicker" name="timeDeparted" type="text" class = "form-control">
+                                            <input id="timepicker" name="timeDeparted" class = "form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -71,13 +71,13 @@
                                         <div class="col-md-5">
                                             <div class='form-group'>
                                                 <label for=''>Total Passengers: </label>
-                                                <input class='form-control col-xs-3' type='text' name='totalPassengers' id='totalPassengers'>
+                                                <input class='form-control col-xs-3' type='text' onblur='bookingFee()' name='totalPassengers' id='totalPassengers'>
                                             </div>
                                         </div>
                                         <div class="col-md-5">
                                             <div class='form-group clearfix'>
                                                 <label for=''>Total Booking Fee: </label>
-                                                <input class='form-control col-xs-3' type='text' name='totalBookingFee' id='total'>
+                                                <input class='form-control col-xs-3' type='text' data-bookingfee="{{$terminal->booking_fee}}" name='totalBookingFee' id='totalFee'>
                                             </div>
                                         </div>
                                     </div>
@@ -150,17 +150,26 @@
             if (parseInt(arr[i].value))
                 tot += parseInt(arr[i].value);
         }
+
         document.getElementById('totalPassengers').value = tot;
+        var bookingFee = document.getElementById('totalFee');
+        bookingFee.value = document.getElementById('totalPassengers').value * bookingFee.getAttribute('data-bookingfee'); 
     }
 
-    function findTotalBookingFee(){
-
-    }
+    // function findTotalBookingFee(){
+    //     if(document.getElementById('totalPassengers').value != ''){
+    //         var bookingFee = $(this).data('bookingfee');
+    //         var totalPassengers = $('#totalPassengers').val();
+    //         var totalBookingFee = bookingFee * totalPassengers;
+    //         $('#totalFee').val(totalBookingFee);
+    //     }
+    // }
 </script>
 
 <script>
     $('#timepicker').timepicker({
-            showInputs: false
+            showInputs: false,
+            defaultTime: false
         })
 </script>
 <script>
@@ -210,6 +219,10 @@
             tabRow.rows[0].cells[tabRow.rows[0].cells.length - 1].children[0].children[0].style.display = "";
         }
     }
+
+   
 </script>
+
+
 
 @endsection

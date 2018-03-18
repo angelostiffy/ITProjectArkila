@@ -16,7 +16,8 @@ class CreateVanTable extends Migration
         Schema::create('van', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->string('plate_number', 8)
-            ->unique();
+            ->unique()
+            ->nullable();
 
             $table->integer('model_id')
             ->unsigned();       

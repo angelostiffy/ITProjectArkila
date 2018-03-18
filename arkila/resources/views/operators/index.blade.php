@@ -3,6 +3,7 @@
     <div class="box-body">
         <div class="col col-md-6">
             <a href="/home/operators/create" class="btn btn-primary btn-create"><i class="fa fa-plus-circle"></i> Create New</a>
+            <a href=""  class="btn btn-default"> <i class="fa fa-print"></i> Print</a>
         </div>
         <!-- /.col -->
         <table id="operatorList" class="table table-bordered table-striped">
@@ -27,48 +28,42 @@
                     <td>{{ $operator->age }}</td>
                     <td>
                         <div class="text-center">
-                            <a href="{{ route('operators.showProfile', [$operator->member_id]) }}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#{{ 'deleteWarning'.$operator->member_id }}"><i class="fa fa-trash"></i> Delete</button>
+                            <a href="{{ route('operators.showProfile', [$operator->member_id]) }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
+                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#{{ 'deleteWarning'.$operator->member_id }}"><i class="fa fa-trash"></i> Delete</button>
                         </div>
                         <!-- /.text -->
                     </td>
                 </tr>
                 <!-- Modal for Delete-->
                 <div class="modal fade" id="{{ 'deleteWarning'.$operator->member_id }}">
-                    <div class="modal-dialog">
-                        <div class="col-md-offset-2 col-md-8">
+                    <div class="modal-dialog modal-sm">
                             <div class="modal-content">
                                 <div class="modal-header bg-red">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span></button>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                                     <h4 class="modal-title"> Confirm</h4>
                                 </div>
-                                <div class="modal-body row" style="margin: 0% 1%;">
-                                    <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
-                                        <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <p style="font-size: 110%;">Are you sure you want to delete "{{ $operator->full_name }}"</p>
-                                    </div>
+                                <div class="modal-body">
+                                        <h1>
+                                        <i class="fa fa-exclamation-triangle pull-left text-yellow" ></i>
+                                        </h1>
+                                        <p>Are you sure you want to delete "{{ $operator->full_name }}"</p>
                                 </div>
                                 <div class="modal-footer">
                                     @if($operators && $operator)
                                     <form action="{{ route('operators.destroy', [$operator->member_id]) }}" method="POST">
                                         {{ csrf_field() }} {{method_field('DELETE')}}
                                         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                        <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
+                                        <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>
                                     @endif
                                 </div>
                             </div>
                             <!-- /.modal-content -->
-                        </div>
                         <!-- /.col -->
                     </div>
                     <!-- /.modal-dialog -->
                 </div>
                 <!-- /.modal -->
-                
                 @endforeach
             </tbody>
         </table>
@@ -77,11 +72,16 @@
 </div>
 <!-- /.box -->
 
+<<<<<<< HEAD
 <button type="submit" class="btn btn-default pull-right" style="width:22%;">Print List</button>
 
 @stop 
 @section('scripts') 
 @parent
+=======
+@endsection
+@section('scripts') @parent
+>>>>>>> b942dffc0cf72991a7d48cbe939ab25a02bc2b7f
 
 <!-- DataTables -->
 <script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
@@ -100,4 +100,4 @@
     })
 </script>
 
-@stop
+@endsection

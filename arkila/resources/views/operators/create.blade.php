@@ -40,12 +40,14 @@
 @section('form-id','regForm')
 @section('form-action',route('operators.store'))
 @section('form-body')
-<div class="box box-primary">
+<div class="box box-primary" style="box-shadow: 0px 5px 10px gray;">
         <div class="box-header with-border text-center">
-            <a href="{{route('operators.index')}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
-            <h3 class="box-title">
+            <h4>
+            <a href="{{route('operators.index')}}" class="pull-left"><i class="fa  fa-chevron-left"></i></a>    
+            </h4>
+            <h4 class="box-title">
                 Operator Registration
-            </h3>
+            </h4>
         </div>
 
         <div class="box-body">
@@ -316,10 +318,10 @@
 
                                     </tr>
                                 @endif
-
+                        
                                 </tbody>
                             </table>
-
+                    
                         </div>
                     </div>
                 </div>

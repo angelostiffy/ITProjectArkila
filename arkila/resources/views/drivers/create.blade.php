@@ -56,9 +56,11 @@
 
 
 @section('form-body')
-<div class="box box-warning">
+<div class="box box-warning" style="box-shadow: 0px 5px 10px gray;">
         <div class="box-header with-border text-center">
-            <a href="@yield('backRef')" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+            <h4>    
+            <a href="@yield('backRef')" class="pull-left"><i class="fa  fa-chevron-left"></i></a>
+            </h4>
             <h3 class="box-title">
                 Driver Registration
             </h3>
