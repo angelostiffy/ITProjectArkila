@@ -291,7 +291,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Address</label>
-                                <input value="{{old('contactPersonAddress')}}" name="contactPersonAddress" type="text" class="form-control" placeholder="Address" maxlength="50">
+                                <input value="{{old('contactPersonAddress')}}" name="contactPersonAddress" type="text" class="form-control time-mask" placeholder="Address" maxlength="50">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -384,7 +384,7 @@
             <div style="overflow:auto;">
                     <div style="float:right;">
                         <button type="button" id="prevBtn" onclick="nextPrev(-1)" class = "btn btn-default">Previous</button>
-                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class = "btn btn-default">Next</button>
+                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class = "btn btn-primary">Next</button>
                     </div>
                 </div>
         </div>
@@ -395,7 +395,7 @@
  <script>
 
      $(document).ready(function(){
-         cloneDatePicker();
+         cloneDateMask();
          switch($('select[name="civilStatus"]').val()){
              case "Single":
                  $('input[name="nameOfSpouse"]').prop('disabled',true);
@@ -430,12 +430,10 @@
          });
      });
 
-        function cloneDatePicker() {
+        function cloneDateMask() {
 
             //Date picker
-            $('.datepicker').datepicker({
-                autoclose: true
-            })
+            $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
 
         }
 
@@ -456,7 +454,7 @@
             
             }
             tablebody.appendChild(iClone);
-            cloneDatePicker();
+            cloneDateMask();
         }
         
 
@@ -544,8 +542,9 @@
           radioClass   : 'iradio_flat-blue'
         });
     })
+
      $('[data-mask]').inputmask()
      $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
-
+     $('.time-mask').inputmask('hh:mm xm')
     </script>
 @endsection

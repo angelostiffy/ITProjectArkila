@@ -6,12 +6,7 @@
 @section('form-body')
                  
     <div class="form-group">
-
-        <div style="margin-top:18%">
-            @include('message.error')
-        </div>
-
-        <label>Destination:</label>
+        <label>Destination: <span class="text-red">*</span></label>
         <input name="addDestination" type="text" class="form-control" maxlength="30" required>
     </div>
     <div class="form-group">
@@ -25,35 +20,12 @@
 
     </div>
     <div class="form-group">
-        <label>Fare:</label>
+        <label>Fare: <span class="text-red">*</span></label>
         <input type="number" class="form-control" name="addDestinationFare" step="0.25" placeholder="Php 0.00"  min="1" max="5000" required>
     </div>
 
 @endsection
 @section('form-btn')
-    <a href="" data-toggle="modal" data-target="#form-modal" class="btn btn-primary" data-keyboard="true">Create</a>
+    <button type="submit" class="btn btn-primary">Create</button>
 @endsection
 
-@section('modal-title','Confirm')
-@section('modal-body')
-    <p>Are you sure you want to add this destination?</p>
-@endsection
-
-@section('modal-btn')
-    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-    <button type="submit" class="btn btn-primary" style="width:33%;">Submit</button>
-@endsection
-
-@section('scripts') 
-@parent
-
-    <script>
-        $(document).keypress(function(event){
-            var keycode = (event.keyCode ? event.keyCode : event.which);
-            if(keycode == '13'){
-                $('#form-modal').modal('toggle');
-            }
-        });   
-    </script>
-
-@endsection
