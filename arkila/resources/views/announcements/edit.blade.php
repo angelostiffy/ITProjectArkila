@@ -4,7 +4,8 @@
 
 <div class="container" style="padding: 4% 10% 2% 4%">
 
-    
+<form method="post" action="{{ route('announcements.update', $announcement->announcement_id) }}">
+                        {{ csrf_field() }} {{ method_field('PATCH')}}    
 
         <h1 style="margin-bottom:2%">Edit Announcement</h1>
         <div class="form-group">
@@ -23,12 +24,12 @@
 
         <div class="pull-right">
             <a href="/home/announcements/" class="btn btn-md btn-default btn-create">Back</a>
-            <button type="submit" data-toggle="modal" data-target="#saveChanges" class="btn btn-primary">Save Changes</button>
+            <button type="submit" data-toggle="modal" data-target="#{{'saveChanges'. $announcement->announcement_id }}" class="btn btn-primary">Save Changes</button>
         </div>
 
  
     
-    <div class="modal fade" id="saveChanges">
+    <div class="modal fade" id="{{'saveChanges'. $announcement->announcement_id}}">
         <div class="modal-dialog">
             <div class="col-md-offset-2 col-md-8">
                 <div class="modal-content">
@@ -39,17 +40,15 @@
                     </div>
                     <div class="modal-body row" style="margin: 0% 1%;">
                         <div>
-                            <p style="font-size: 110%;">Are you sure you want to overwrite the changes?</p>
+                            <p style="font-size: 110%;">{{$announcement->announcement_id}}Are you sure you want to overwrite the changes?</p>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <form method="post" action="/home/announcements/{{ $announcement->announcement_id }}">
-                        {{ csrf_field() }} {{ method_field('PATCH')}}
+
 
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <button type="submit" name="driverArc" value="Arch" class="btn btn-primary" style="width:22%;">Submit</button>
+                            <button type="submit" class="btn btn-primary" style="width:22%;">Submit</button>
 
-                        </form>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -57,6 +56,7 @@
             <!-- /.col -->
         </div>
         <!-- /.modal-dialog -->
+       </form>
     </div>
 
 </div>

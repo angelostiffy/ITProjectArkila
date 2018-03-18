@@ -156,7 +156,9 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="tab">
+                    @if($driver->children->first())
                     <div class="col-md-12">
                         <Label for="dependentsO">Dependents:</Label>
                         <table class="table table-hover custab">
@@ -166,7 +168,7 @@
 
                             </thead>
                             <tbody id="childrens">
-                                @if($driver->children) @foreach($driver->children as $child)
+                                 @foreach($driver->children as $child)
                                 <tr>
                                     <td>
                                         <p type="text" placeholder="Name of Child" class="form-control" disabled>{{$child->full_name}}</p>
@@ -186,12 +188,14 @@
                                     </td>
 
                                 </tr>
-                                @endforeach @endif
+                                @endforeach
                             </tbody>
                         </table>
 
                     </div>
+                    @endif
                 </div>
+
             </div>
         </div>
 
