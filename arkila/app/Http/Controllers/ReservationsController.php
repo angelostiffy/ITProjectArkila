@@ -56,7 +56,6 @@ class ReservationsController extends Controller
         
         $timeRequest = new Carbon(request('time'));
         $timeFormatted = $timeRequest->format('h:i A');
-        $perContactNumber = '+63'.request('contact');
 
         Reservation::create([
             'name' => $request->name,
@@ -64,7 +63,7 @@ class ReservationsController extends Controller
             'departure_time' => $timeFormatted,
             'destination_id' => $findThis,
             'number_of_seats' => $request->seat,
-            'contact_number' => $perContactNumber,
+            'contact_number' => $request->contactNumber,
             'amount' => $total,
             'type' => 'Walk-in',
             'status' => 'Paid',

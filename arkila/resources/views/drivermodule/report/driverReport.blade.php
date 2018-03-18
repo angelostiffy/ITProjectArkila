@@ -1,6 +1,6 @@
- @extends('layouts.driver') 
- @section('title', 'Driver Report') 
- @section('content-title', 'Driver Report') 
+ @extends('layouts.driver')
+ @section('title', 'Driver Report')
+ @section('content-title', 'Driver Report')
  @section('content')
 <div class="row">
     <div class="col-md-offset-1 col-md-10">
@@ -11,27 +11,28 @@
                 <li @if($terminals->first() == $terminal) class='active' @endif><a class href="#terminal{{$terminal->terminal_id}}" data-toggle="tab">{{$terminal->description}}</a></li>
                 @endforeach
             </ul>
-           
-              
+
+
 
             <div class="tab-content">
-                @foreach($terminals as $terminal) 
+                @foreach($terminals as $terminal)
                 <div id="terminal{{$terminal->terminal_id}}" class="tab-pane @if($terminals->first() == $terminal) {{'active'}} @endif" >
-                    <input type="hidden" name="termId" value="{{$terminal->terminal_id}}">
+
                     <div class="box box-solid">
                         <div class="box-header">
                             <h3 class="box-title">{{$terminal->description}}</h3>
                         </div>
-                        
+
                             <div class="box-body">
                                 <form action="{{route('drivermodule.storeReport')}}" id="terminal{{$terminal->terminal_id}}" method="POST" class="form-horizontal">
                                 <div class="col-md-6">
-                                    
-                                       
-                                        {{csrf_field()}} 
+                                  <input type="hidden" name="termId" value="{{$terminal->terminal_id}}">
+
+                                        {{csrf_field()}}
                                         @foreach($destinations as $destination)
-                                        
+
                                             @if($destination->term_id == $terminal->terminal_id)
+                                            <input type="hidden" name="terminalId" class="dest" >
                                         <div class='form-group'>
                                             <label for="" class="col-sm-4">{{$destination->description}}</label>
                                             <div class="col-sm-6">
@@ -39,9 +40,9 @@
                                             </div>
                                             <input type="hidden" name='destination[]' value='{{$destination->destid}}'>
                                         </div>
-                                            
+
                                             @endif
-                                            
+
                                         @endforeach
 
                                 </div>
@@ -71,7 +72,7 @@
                                         <div class="col-md-5">
                                             <div class='form-group'>
                                                 <label for=''>Total Passengers: </label>
-                                                <input class='form-control col-xs-3' type='text' onblur='bookingFee()' name='totalPassengers' id='totalPassengers'>
+                                                <input class='form-control col-xs-3' type='text' name='totalPassengers' id='totalPassengers'>
                                             </div>
                                         </div>
                                         <div class="col-md-5">
@@ -87,7 +88,8 @@
                                             <div class='form-group'>
                                                 <label for='' class="col-sm-4"> {{$fad->description}} Discounts: </label>
                                                 <div class="col-sm-8">
-                                                <input class='form-control col-sm-9' type='number' name='number{{$fad->description}}' id='{{$fad->fad_id}}'>
+                                                <input type="hidden" name="discountId[]" value="{{$fad->fad_id}}">
+                                                <input class='form-control col-sm-9' type='number' name='numberOfDiscount[]'>
                                                 </div>
                                             </div>
                                             @endforeach
@@ -101,8 +103,8 @@
                                                         </div>
                     </div>
                 </div>
-                
-            
+
+
             <!-- /.tab-content -->
                         <!--               DISCOUNT MODAL-->
             <div class="modal fade" id="discountModal{{$terminal->terminal_id}}">
@@ -119,7 +121,7 @@
                                 <button type="button" class="btn btn-outline-default">Cancel</button>
                                 <button type="submit" class="btn btn-primary">Confirm</button>
                             </div>
-                            
+
                         </div>
                         <!-- /.modal-content -->
                     </div>
@@ -153,17 +155,11 @@
 
         document.getElementById('totalPassengers').value = tot;
         var bookingFee = document.getElementById('totalFee');
-        bookingFee.value = document.getElementById('totalPassengers').value * bookingFee.getAttribute('data-bookingfee'); 
+        bookingFee.value = document.getElementById('totalPassengers').value * bookingFee.getAttribute('data-bookingfee');
     }
 
-    // function findTotalBookingFee(){
-    //     if(document.getElementById('totalPassengers').value != ''){
-    //         var bookingFee = $(this).data('bookingfee');
-    //         var totalPassengers = $('#totalPassengers').val();
-    //         var totalBookingFee = bookingFee * totalPassengers;
-    //         $('#totalFee').val(totalBookingFee);
-    //     }
-    // }
+    //document.getElementById('dest').value = document.getElementById('termId').value;
+
 </script>
 
 <script>
@@ -173,7 +169,7 @@
         })
 </script>
 <script>
-    
+
     function cloneDatePicker() {
 
         //Date picker
@@ -220,7 +216,7 @@
         }
     }
 
-   
+
 </script>
 
 

@@ -18,7 +18,7 @@ class VanModel extends Model
     }
 
     public function rental(){
-    	return $this->belongsTo(Rental::Class, 'rent_id');
+    	return $this->hasOne(Rental::Class, 'rent_id');
     }
 
 }

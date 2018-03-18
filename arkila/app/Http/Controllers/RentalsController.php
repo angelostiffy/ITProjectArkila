@@ -47,9 +47,7 @@ class RentalsController extends Controller
         foreach ($findModel->where('description', $modelReq) as $find) {
             $findModelID = $find->model_id;
         }
-
-        $perContactNumber = '+63'.request('contactNumber');
-
+    
         Rental::create([
             'last_name' => $request->lastName,
             'first_name' => $request->firstName,
@@ -59,7 +57,7 @@ class RentalsController extends Controller
             'departure_time' => $request->time,
             'destination' => $request->destination,
             'number_of_days' => $request->days,
-            'contact_number' => $perContactNumber,
+            'contact_number' => $request->contactNumber,
             'rent_type' => 'Walk-in',
             'status' => 'Paid',
     

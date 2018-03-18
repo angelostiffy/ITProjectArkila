@@ -13,7 +13,7 @@ class Ticket extends Model
     ];
 
     public function terminal(){
-        return $this->belongsTo(Ticket::Class, '	terminal_id');
+        return $this->belongsTo(Terminal::Class,'terminal_id');
     }
 
 }

@@ -1,7 +1,7 @@
 @extends('layouts.form')
 @section('title', 'Edit Announcement')
 @section('back-link', URL::previous())
-@section('form-action', route('announcement.update', [$announcement->announcement_id]))
+@section('form-action', route('announcements.update', [$announcement->announcement_id]))
 @section('method_field', method_field('PATCH'))
 @section('form-title', 'Edit Announcement')
 @section('form-body')
