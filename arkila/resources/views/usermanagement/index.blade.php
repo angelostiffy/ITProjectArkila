@@ -13,7 +13,7 @@
 <section class="content">
     <div class="box">
         
-        <div class="box-body">
+        <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
         <div class="col-xl-6">
         <!-- Custom Tabs -->
         <div class="nav-tabs-custom">
