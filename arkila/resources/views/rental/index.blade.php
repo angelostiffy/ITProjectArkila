@@ -38,7 +38,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($rentals->sortByDesc('status') as $rental) @if ($rental->status == 'Paid' | $rental->status == 'Cancelled' | $rental->status == 'Departed')
+                                    @foreach($rentals as $rental) @if ($rental->status == 'Paid' | $rental->status == 'Cancelled' | $rental->status == 'Departed')
                                     <tr>
                                         <td>{{ $rental->rent_id }}</td>
                                         <td>{{ $rental->full_name }}</td>
@@ -55,7 +55,7 @@
                                                     <button class="btn btn-outline-danger" name="click" id="depart" value="Cancelled" data-toggle="modal" data-target="#{{'cancel'.$rental->rent_id}}"><i class="fa fa-close"></i> Cancel </button>
                                                 
                                                     <!-- Modal for depart-->
-                                                     <div class="modal fade" id="{{'depart'.$reservation->id}}">
+                                                     <div class="modal fade" id="{{'depart'.$rental->rent_id}}">
                                                         <div class="modal-dialog">
                                                             <div class="col-md-offset-2 col-md-8">
                                                                 <div class="modal-content">
@@ -73,8 +73,8 @@
                                                                        <form action="{{ route('rental.update', $rental->rent_id) }}" method="POST" class="form-action">
                                                                             {{ csrf_field() }} {{ method_field('PATCH') }}
                                                                            
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                                            <button type="submit" name="driverArc" value="Arch " class="btn btn-primary" style="width:22%;">Depart</button>
+                                                                            <button type="button" value="Cancelled" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                            <button type="submit" value="Departed " class="btn btn-primary" style="width:22%;">Depart</button>
                                                                         </form>
                                                                     </div>
                                                                 </div>
@@ -195,7 +195,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($rentals->sortByDesc('status')->where('rent_type', 'Online') as $rental) @if ($rental->status == 'Pending' | $rental->status == 'Paid')
+                                    @foreach($rentals->sortByDesc('status')->where('rent_type', 'Online') as $rental) @if ($rental->status == 'Pending' | $rental->status == 'Paid' | $rental->status == 'Cancelled')
                                     <tr>
                                         <td>{{ $rental->rent_id }}</td>
                                         <td>{{ $rental->full_name }}</td>

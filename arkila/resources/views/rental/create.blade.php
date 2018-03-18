@@ -118,7 +118,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" class="form-control" name="date" value="{{ old('date') }}" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                    <input type="text" class="form-control" name="date" id="date" value="{{ old('date') }}" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                 </div>
                             </div>
                         </div>
@@ -281,7 +281,7 @@
             var days = document.getElementById('days').value;
             document.getElementById('daysView').textContent = days;
 
-            var date = document.getElementById('datepicker').value;
+            var date = document.getElementById('date').value;
             document.getElementById('dateView').textContent = date;
 
             var time = document.getElementById('timepicker').value;
