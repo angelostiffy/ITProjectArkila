@@ -15,7 +15,7 @@
     <div class="col-md-3">
 
         <!-- Profile Image -->
-        <div class="box box-primary">
+        <div class="box box-primary" style = "box-shadow: 0px 5px 10px gray;">
             <div class="box-body box-profile">
                 <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset('img/jl.JPG') }}" alt="Operator profile picture">
 
@@ -42,7 +42,7 @@
     </div>
     <!-- /.col -->
     <div class="col-md-9">
-        <div class="nav-tabs-custom">
+        <div class="nav-tabs-custom" style="box-shadow: 0px 5px 10px gray;">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#drivers" data-toggle="tab">Drivers</a></li>
                 <li><a href="#vans" data-toggle="tab">Vans</a></li>
