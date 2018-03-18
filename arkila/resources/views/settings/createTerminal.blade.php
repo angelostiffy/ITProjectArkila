@@ -34,21 +34,11 @@
 @parent
 
     <script>
-        $('#form-modal').modal({
-            keyboard: false,
-            show: false
-        });
-
-        $('[data-toggle^="keyboard"]').on('click.keyboard-toggle', function() {
-            var $this = $(this);
-
-            if ($this.toggleClass('active').hasClass('active')) {
-                $this.text('On');
-                $('#form-modal').data('modal').options.keyboard = true;
-            } 
-
-        });
-    
+       $(document).ready(function () {
+            $('#form-modal').on('shown.bs.modal', function() { 
+               generate_modal_body();
+            }) ;
+         });
     </script>
 
 @endsection

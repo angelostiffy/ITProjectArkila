@@ -20,7 +20,7 @@
 
 @endsection
 @section('form-btn')
-    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Create</a>
+    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#form-modal" data-keyboard="true">Create</a>
 @endsection
 
 @section('modal-title','Confirm')
