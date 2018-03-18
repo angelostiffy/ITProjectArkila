@@ -79,7 +79,9 @@
 
 <button type="submit" class="btn btn-default pull-right" style="width:22%;">Print List</button>
 
-@stop @section('scripts') @parent
+@stop 
+@section('scripts') 
+@parent
 
 <!-- DataTables -->
 <script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>

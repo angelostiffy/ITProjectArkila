@@ -30,16 +30,18 @@
 
 <div class="well">
     <div class="box-body no-padding">
-        <ul class="nav nav-pills nav-stacked">
-            <li><a href="#"><i class="fa fa-inbox"></i> Enable/Disable Account
-        <span class="label pull-right">
-          <label class="switch">
-            <input type="checkbox" class="status" data-id="{{$admin_user->id}}" @if ($admin_user->status == 'enable') checked @endif>
-            <span class="slider round"></span>
-          </label>
-        </span></a>
-            </li>
-        </ul>
+    <ul class="nav nav-pills nav-stacked">
+        <li>
+            <a href="#"><i class="fa fa-inbox"></i> Enable/Disable Account
+                <span class="label pull-right">
+                    <label class="switch">
+                        <input type="checkbox" class="status" data-id="{{$admin_user->id}}" @if ($admin_user->status == 'enable') checked @endif>
+                        <span class="slider round"></span>
+                    </label>
+                </span>
+            </a>
+        </li>
+    </ul>
     </div>
 
     <button type="button" class="btn btn-danger btn-block" style="margin-top:5%" data-toggle="modal" data-target="#form-modal">Reset Password</button>

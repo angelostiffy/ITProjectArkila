@@ -374,18 +374,39 @@
 
                 </div>
             </div>
+        </row>
             <!-- /.col -->
     </div>
 </div>
 
 
-    @endsection @section('scripts') @parent
+    @endsection 
+    @section('scripts') 
+    @parent
 
     <script>
         $(document).ready(function() {
             $('.sidebar-menu').tree()
         })
 
+        
+      $(document).ready(function(){
+        $('.status').on('click', function(event){
+          id = $(this).data('id');
+          $.ajax({
+            type: 'POST',
+            url: "{{ URL::route('changeAdminStatus') }}",
+            data: {
+              '_token': $('input[name=_token]').val(),
+              'id': id
+            },
+            success: function(data){
+              //empty
+            },
+          });
+        });
+      });
+    
     </script>
     <script>
         $(function() {
@@ -424,6 +445,10 @@
         })
 
     </script>
+
+
+    
+    
     <style>
         .switch {
             position: relative;
