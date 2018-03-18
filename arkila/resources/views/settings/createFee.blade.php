@@ -39,6 +39,7 @@
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if(keycode == '13'){
                 $('#form-modal').modal('toggle');
+                event.preventDefault();
             }
         });   
     </script>
