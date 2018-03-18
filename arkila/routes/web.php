@@ -163,6 +163,9 @@ Route::get('/showTrips/{terminal}', 'TripsController@showTrips');
 Route::patch('/updateQueueNumber/{trip}', 'TripsController@updateQueueNumber')->name('trips.updateQueueNumber');
 
 /* Transactions(Ticket) */
+Route::resource('home/settings/tickets','TicketsController',[
+    'except' => ['index']
+]);
 Route::resource('home/transactions', 'TransactionsController');
 Route::get('/listDestinations/{terminal}','TransactionsController@listDestinations')->name('transactions.listDestinations');
 Route::get('/listDiscounts','TransactionsController@listDiscounts')->name('transactions.listDiscounts');

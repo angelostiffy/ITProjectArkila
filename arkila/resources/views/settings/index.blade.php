@@ -388,9 +388,9 @@
                             </thead>
 
                             <tbody>
-                                @foreach($destinations as $destination)
+                                @foreach($tickets as $ticket)
                                 <tr>
-                                    <td>C1</td>
+                                    <td>{{$ticket->ticket_name}}</td>
                                     <td>baguio</td>
                                     <td>         
                                         <div class="text-center">
