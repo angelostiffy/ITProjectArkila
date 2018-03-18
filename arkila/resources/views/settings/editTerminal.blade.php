@@ -11,9 +11,14 @@
         <div style="margin-top:18%">
             @include('message.error')
         </div>
-        
-        <label>Terminal Name:</label>
-        <input type="text" class="form-control" name="editTerminalName" value="{{$terminal->description}}" maxlength="30" required>
+        <div class="form-group">
+            <label>Terminal Name:</label>
+            <input type="text" class="form-control" name="editTerminalName"  maxlength="30" required>
+        </div>
+        <div class="form-group">
+            <label for="">Booking Fee:</label>
+            <input class="form-control" type="number" step="0.25" name="editBookingFee" value="{{$terminal->booking_fee}}" required>
+        </div>
     </div>
 
 @endsection

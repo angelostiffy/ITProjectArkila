@@ -89,6 +89,7 @@
                             <thead>
                                 <tr>
                                     <th>Terminal Name</th>
+                                    <th>Booking Fee</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -96,6 +97,7 @@
                                 @foreach($terminals as $terminal)
                                 <tr>
                                     <td>{{$terminal->description}}</td>
+                                    <td class="pull-right">{{$terminal->booking_fee}}</td>
                                     <td>
                                         
                                         <div class="text-center">                               <a href="{{ route('terminal.edit', [$terminal->terminal_id]) }}" class="btn btn-primary"><i class="fa fa-edit"></i>Edit</a>

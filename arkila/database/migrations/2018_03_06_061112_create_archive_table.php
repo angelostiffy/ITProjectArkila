@@ -14,6 +14,7 @@ class CreateArchiveTable extends Migration
     public function up()
     {
         Schema::create('archive', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('archive_id');
             $table->integer('member_id')
             ->unsigned();

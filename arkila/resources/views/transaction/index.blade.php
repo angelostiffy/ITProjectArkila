@@ -385,10 +385,14 @@
         $('#destination').prop('disabled',false);
         $('#checkDiscount').prop('disabled',false);
         listDestinations();
+        listTickets();
     @else
         $('#checkDiscount').prop('disabled',true);
         $('#destination').prop('disabled',true);
         $('#destination').append('<option>Data Not Available</option>');
+
+        $('#ticket').prop('disabled',true);
+        $('#ticket').append('<option>Data Not Available</option>');
     @endif
 
     checkDiscountBox();
@@ -399,6 +403,7 @@
 
     $('#terminal').on('change',function(){
         listDestinations();
+        listTickets();
     });
 
         function checkDiscountBox(){
@@ -415,7 +420,7 @@
 
             $.ajax({
                 method:'GET',
-                url: '{{route('tickets.listDiscounts')}}',
+                url: '{{route('transactions.listDiscounts')}}',
                 data: {
                     '_token': '{{csrf_token()}}'
                 },
@@ -457,6 +462,32 @@
                     else{
                         destinations.forEach(function(destination){
                             $('#destination').append('<option value='+destination.id+'> '+destination.description+'</option>');
+                        });
+                    }
+
+                }
+            });
+        }
+
+        function listTickets(){
+            $('#ticket').empty();
+
+            $.ajax({
+                method:'GET',
+                url: '/listTickets/'+$('#terminal').val(),
+                data: {
+                    '_token': '{{csrf_token()}}'
+                },
+                success: function(tickets){
+                    console.log(tickets);
+                    if(tickets.length === 0){
+                        $('#ticket').empty();
+                        $('#ticket').prop('disabled',true);
+                        $('#ticket').append('<option>Data Not Available</option>');
+                    }
+                    else{
+                        tickets.forEach(function(ticket){
+                            $('#ticket').append('<option value='+ticket.id+'> '+ticket.ticket_number+'</option>');
                         });
                     }
 

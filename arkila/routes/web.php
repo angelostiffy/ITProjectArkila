@@ -162,10 +162,11 @@ Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVa
 Route::get('/showTrips/{terminal}', 'TripsController@showTrips');
 Route::patch('/updateQueueNumber/{trip}', 'TripsController@updateQueueNumber')->name('trips.updateQueueNumber');
 
-/* Ticket Management */
-Route::resource('home/tickets', 'TicketsController');
-Route::get('/listDestinations/{terminal}','TicketsController@listDestinations')->name('tickets.listDestinations');
-Route::get('/listDiscounts','TicketsController@listDiscounts')->name('tickets.listDiscounts');
+/* Transactions(Ticket) */
+Route::resource('home/transactions', 'TransactionsController');
+Route::get('/listDestinations/{terminal}','TransactionsController@listDestinations')->name('transactions.listDestinations');
+Route::get('/listDiscounts','TransactionsController@listDiscounts')->name('transactions.listDiscounts');
+Route::get('/listTickets/{terminal}','TransactionsController@listTickets')->name('transactions.listTickets');
 /********Archive ********/
 Route::patch('home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
 

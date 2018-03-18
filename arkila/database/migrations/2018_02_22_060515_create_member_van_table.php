@@ -14,6 +14,7 @@ class CreateMemberVanTable extends Migration
     public function up()
     {
         Schema::create('member_van', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->integer('member_id')
             ->unsigned()
             ->nullable();

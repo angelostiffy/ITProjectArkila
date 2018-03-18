@@ -17,6 +17,7 @@ class CreateTerminalTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('terminal_id', 10);
             $table->string('description', 50);
+            $table->double('booking_fee', 3)->unsigned();
             $table->timestamps();
         });
     }
