@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
             <label>Terminal Name:</label>
-            <input type="text" class="form-control" name="editTerminalName"  maxlength="30" required>
+            <input type="text" class="form-control" name="editTerminalName"  maxlength="30" value="{{$terminal->description}}" required>
         </div>
         <div class="form-group">
             <label for="">Booking Fee:</label>

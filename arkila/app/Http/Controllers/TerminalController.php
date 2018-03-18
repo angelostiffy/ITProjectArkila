@@ -67,13 +67,13 @@ class TerminalController extends Controller
     public function update(Terminal $terminal)
     {
         $this->validate(request(),[
-            "editTerminalName" => 'unique:terminal,description,'.$terminal->id.',description|regex:/^[\pL\s\-]+$/u|required|max:40',
-            "editFeeAmount" => [new checkCurrency, "required"],
+            "editTerminalName" => 'regex:/^[\pL\s\-]+$/u|required|max:40',
+            "editBookingFee" => [new checkCurrency, "required"],
             ]);
 
         $terminal->update([
             'description' => request('editTerminalName'),
-            'booking_fee' => request('editFeeAmount'),
+            'booking_fee' => request('editBookingFee'),
         ]);
 
         session()->flash('message', 'Terminal updated successfully');
