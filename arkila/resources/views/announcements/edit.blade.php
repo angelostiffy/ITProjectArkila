@@ -7,10 +7,16 @@
 @section('form-title', 'Edit Announcement')
 @section('form-body')
 
-<div class="box box-warning" style="box-shadow: 0px 5px 10px gray; padding:5%">
-    <h2>Edit Announcement</h2>
-    <div class="form-group">
-        <div style="margin:2% 0%">
+<div class="box box-warning" style="box-shadow: 0px 5px 10px gray;">   
+    <div class="box-header with-border text-center">
+            <a href="{{route('announcements.index')}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+            <h3 class="box-title">
+                Edit Announcement
+            </h3>
+    </div>
+    
+    <div class="form-group" style="padding:3% 5% 5% 5%">
+        <div class="form-group" style="margin:2% 0%">
             <label>Title: </label>
             <input type="text" name="title" value="{{ $announcement->title }}">
             <label>Viewer: {{ $announcement->announcement_id}}</label>
@@ -24,12 +30,13 @@
         </div>
         
         <textarea width="30%" class="form-control" rows="10" name="announce">{{ $announcement->description }}</textarea>
-    </div>
     
-    <div class="box-footer">
-        <div style="overflow:auto;">
-            <div style="float:right;">
-                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#form-modal" data-keyboard="true">Save Changes</button>
+    
+        <div class="box-footer">
+            <div style="overflow:auto;">
+                <div style="float:right;">
+                    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#form-modal" data-keyboard="true">Save Changes</button>
+                </div>
             </div>
         </div>
     </div>
