@@ -127,7 +127,7 @@
                             <div class="form-group">
                                 <label>Departure Time:</label>
                                  <div class="input-group">
-                    <input type="text" class="form-control" id = "timepicker" name="time" value="{{ old('time') }}">
+                    <input type="time" class="form-control" name="time" value="{{ old('time') }}">
 
                     <div class="input-group-addon">
                       <i class="fa fa-clock-o"></i>
@@ -186,14 +186,6 @@
     //Date picker
     $('#datepicker').datepicker({
       autoclose: true
-    })
-
-  })
-    $(function () {
-    
-    //Date picker
-    $('#timepicker').timepicker({
-      showInputs:false
     })
 
   })
