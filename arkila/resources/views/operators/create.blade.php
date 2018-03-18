@@ -44,10 +44,10 @@
         <div class="box-header with-border text-center">
             <h4>
             <a href="{{route('operators.index')}}" class="pull-left"><i class="fa  fa-chevron-left"></i></a>    
-            </h3>
+            </h4>
             <h4 class="box-title">
                 Operator Registration
-            </h3>
+            </h4>
         </div>
 
         <div class="box-body">
@@ -318,10 +318,10 @@
 
                                     </tr>
                                 @endif
-
+                        
                                 </tbody>
                             </table>
-
+                    
                         </div>
                     </div>
                 </div>
@@ -337,7 +337,7 @@
             <div style="overflow:auto;">
                     <div style="float:right;">
                         <button type="button" id="prevBtn" onclick="nextPrev(-1)" class = "btn btn-default">Previous</button>
-                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class = "btn btn-primary">Next</button>
+                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class = "btn btn-default">Next</button>
                     </div>
                 </div>
         </div>

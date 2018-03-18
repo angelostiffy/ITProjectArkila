@@ -31,3 +31,16 @@
     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
     <button type="submit" class="btn btn-primary" style="width:33%;">Submit</button>
 @endsection
+
+@section('scripts') 
+@parent
+    <script>
+        $(document).keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+                $('#form-modal').modal('toggle');
+            }
+        });   
+    </script>
+
+@endsection
