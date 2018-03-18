@@ -7,10 +7,6 @@
 @section('form-body')
 
     <div class="form-group">
-        
-        <div style="margin-top:18%">
-            @include('message.error')
-        </div>
         <div class="form-group">
             <label>Terminal Name:</label>
             <input type="text" class="form-control" name="editTerminalName"  maxlength="30" value="{{$terminal->description}}" required>

@@ -7,10 +7,6 @@
 @section('form-body')
 	
 	<div>
-        <div style="margin-top:18%">
-            @include('message.error')
-        </div>
-        
 	 	<label for="description">Description:</label>
 	 	<p>{{$discount->description}}</p>
 	 </div>
