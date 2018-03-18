@@ -14,35 +14,35 @@
 
 {{csrf_field()}}
 <div class="form-group">
-  <label for="payor">User name:</label>
-  <span name="username">{{$admin_user->username}}</span>
+    <label for="payor">User name:</label>
+    <span name="username">{{$admin_user->username}}</span>
 </div>
 <div class="form-group">
-  <label for="Particulars">Name:</label>
-  <span name="fullname">{{$admin_user->name}}</span>
+    <label for="Particulars">Name:</label>
+    <span name="fullname">{{$admin_user->name}}</span>
 </div>
 <div class="form-group">
-  <label for="Particulars">Email Address:</label>
-  <span name="email">{{$admin_user->email}}</span>
+    <label for="Particulars">Email Address:</label>
+    <span name="email">{{$admin_user->email}}</span>
 </div>
 
 
 
 <div class="well">
-  <div class="box-body no-padding">
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#"><i class="fa fa-inbox"></i> Enable/Disable Account
+    <div class="box-body no-padding">
+        <ul class="nav nav-pills nav-stacked">
+            <li><a href="#"><i class="fa fa-inbox"></i> Enable/Disable Account
         <span class="label pull-right">
           <label class="switch">
             <input type="checkbox" class="status" data-id="{{$admin_user->id}}" @if ($admin_user->status == 'enable') checked @endif>
             <span class="slider round"></span>
           </label>
         </span></a>
-      </li>
-    </ul>
-  </div>
+            </li>
+        </ul>
+    </div>
 
-  <button type="button" class="btn btn-danger btn-block" style="margin-top:5%" data-toggle="modal" data-target="#form-modal">Reset Password</button>
+    <button type="button" class="btn btn-danger btn-block" style="margin-top:5%" data-toggle="modal" data-target="#form-modal">Reset Password</button>
 
   @section('modal-title','Confirm')
   @section('modal-body')

@@ -17,7 +17,7 @@
                 <!-- Custom Tabs -->
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li lass="active"><a href="#tab_1" data-toggle="tab">List of Reservations</a>
+                        <li class="active"><a href="#tab_1" data-toggle="tab">List of Reservations</a>
                         <li><a href="#tab_2" data-toggle="tab">Online Reservation</a></li>
                     </ul>
 
