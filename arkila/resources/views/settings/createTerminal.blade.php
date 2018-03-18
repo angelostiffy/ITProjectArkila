@@ -23,7 +23,7 @@
 
 @endsection
 @section('form-btn')
-    <a  class="btn btn-primary" data-keyboard="true" data-toggle="modal" data-target="#form-modal" id="modalSubmit">Create</a>
+    <a class="btn btn-primary" data-keyboard="true" data-toggle="modal" data-target="#form-modal" id="modalSubmit">Create</a>
 @endsection
 
 @section('modal-title','Confirm')
@@ -41,9 +41,11 @@
 
     <script>
         $(document).keypress(function(event){
+            
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if(keycode == '13'){
                 $('#form-modal').modal('toggle');
+                event.preventDefault();
             }
         });   
     </script>
