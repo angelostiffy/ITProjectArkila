@@ -126,8 +126,8 @@
                                         </span>
                                         <select id="ticket" class="form-control select2" name="" id="">
                                         </select>
-                                        <span class="input-group-btn">
-                                          <button type="button" class="btn btn-info btn-flat">Sell</button>
+                                        <span id="sellButtContainer" class="input-group-btn">
+                                          <button id="sellButt" type="button" class="btn btn-info btn-flat">Sell</button>
                                         </span>
                                     </div>
                                 </div>
@@ -493,6 +493,17 @@
 
                 }
             });
+        }
+
+        function checkSellButton(){
+            var terminal = $('#terminal').val();
+            var destination = $('#destination').val();
+            var ticket = $('#ticket').val();
+
+            if(terminal != null && destination != null && ticket != null){
+
+            }
+
         }
 
     });
