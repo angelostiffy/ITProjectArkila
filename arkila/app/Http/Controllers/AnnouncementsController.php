@@ -96,6 +96,9 @@ class AnnouncementsController extends Controller
     public function update(Announcement $announcement)
     {
         //
+        dd(request("title"));
+
+        dd(request("announce"));
         $current_time = \Carbon\Carbon::now();
         $dateNow = $current_time->setTimezone('Asia/Manila')->format('Y-m-d H:i:s');
 
