@@ -21,8 +21,12 @@
             <div class="box-footer">
                 <button class="btn btn-primary btn-group-justified">Select Terminal</button>
             </div>
+            <!-- /.box-footer -->
         </div>
+        <!-- /.box -->
     </div>
+    <!-- /.col -->
 </div>
+<!-- /.row -->
 
 @endsection
