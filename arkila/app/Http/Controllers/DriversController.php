@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Member;
 use App\Van;
+use App\User;
 use App\Http\Requests\DriverRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 
 class DriversController extends Controller
@@ -82,6 +84,14 @@ class DriversController extends Controller
             ]);
         }
 
+        //Add Account for the driver
+        User::create([
+            'name' => $createdDriver->full_name,
+            'username' => $createdDriver->first_name[0].$createdDriver->last_name,
+            'password' => Hash::make('driver!@bantrans'),
+            'user_type' => 'Driver',
+            'status' => 'enable'
+        ]);
 
 
         return redirect(route('drivers.index'))->with('success', 'Information created successfully');
