@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Ticket;
 use Illuminate\Http\Request;
 use App\Announcement;
 use App\FeesAndDeduction;
@@ -42,10 +43,10 @@ class HomeController extends Controller
         $discounts = FeesAndDeduction::latest()->where('type','Discount')->get();
         $destinations = Destination::join('terminal', 'destination.terminal_id', '=', 'terminal.terminal_id')->select('terminal.description as terminal', 'destination.destination_id','destination.description', 'destination.amount')->get();
         $terminals = Terminal::all();
+        $tickets = Ticket::all();
 
 
-
-        return view('settings.index', compact('fees','destinations', 'terminals', 'discounts'));
+        return view('settings.index', compact('fees','destinations', 'terminals', 'discounts','tickets'));
     }
 
     public function usermanagement()

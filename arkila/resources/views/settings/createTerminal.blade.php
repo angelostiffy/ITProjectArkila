@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
             <label>Booking Fee:</label>
-            <input type="number" class="form-control" step="0.25" name="bookingFee" required>
+            <input type="number" class="form-control" step="0.25" name="bookingFee" min="1" max="5000" required>
         </div>
     </div>
 

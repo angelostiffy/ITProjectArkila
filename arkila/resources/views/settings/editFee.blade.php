@@ -5,7 +5,6 @@
 @section('method_field', method_field('PATCH'))
 @section('form-title', 'Edit Fee')
 @section('form-body')
-	@include('message.error')
 
 	<div>
         <div style="margin-top:18%">

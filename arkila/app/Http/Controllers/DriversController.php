@@ -105,7 +105,7 @@ class DriversController extends Controller
 
     public function storeFromOperator(Member $operator, DriverRequest $request){
 
-        $operator->drivers()->create([
+        $driver = $operator->drivers()->create([
             'last_name'=> $request->lastName,
             'first_name' => $request->firstName,
             'middle_name' => $request->middleName,
@@ -136,11 +136,20 @@ class DriversController extends Controller
         if($this->arrayChecker($request->children) && $this->arrayChecker($request->childrenBDay))
         {
             $children = array_combine($request->children,$request->childrenBDay);
-            $operator->addChildren($children);
-            $operator->update([
+            $driver->addChildren($children);
+            $driver->update([
                 'number_of_children' => sizeof($children)
             ]);
         }
+
+        //Add Account for the driver
+        User::create([
+            'name' => $driver->full_name,
+            'username' => $driver->first_name[0].$driver->last_name,
+            'password' => Hash::make('driver!@bantrans'),
+            'user_type' => 'Driver',
+            'status' => 'enable'
+        ]);
 
         return redirect(route('operators.showProfile',[$operator->member_id]));
     }
@@ -197,6 +206,15 @@ class DriversController extends Controller
         }
 
         $vanNd->members()->attach($driver);
+
+        //Add Account for the driver
+        User::create([
+            'name' => $driver->full_name,
+            'username' => $driver->first_name[0].$driver->last_name,
+            'password' => Hash::make('driver!@bantrans'),
+            'user_type' => 'Driver',
+            'status' => 'enable'
+        ]);
 
         if(session()->get('vanBack') && session()->get('vanBack') == route('operators.showProfile',[$vanNd->operator->first()->member_id])){
             return redirect(route('operators.showProfile',[$vanNd->operator->first()->member_id]));

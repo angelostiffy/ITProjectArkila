@@ -1,24 +1,24 @@
 @extends('layouts.form')
 @section('title', 'Edit Ticket')
 @section('back-link', URL::previous())
-@section('form-action', route('destinations.update', [$destination->destination_id]))
+@section('form-action', route('tickets.update', [$ticket->ticket_id]))
 @section('method_field', method_field('PATCH'))
 @section('form-title', 'Edit Ticket')
 @section('form-body')
 	@include('message.error')
 
 	 <div>
-	 	<label for="destination">Description:</label>
-	 	<p>*insert description*</p>
+	 	<label for="description">Description:</label>
+         <input value='{{old('description') ?? $ticket->ticket_number }}' name="description" type="text" class="form-control" maxlength="5" required>
 	 </div>
 
     <div class="form-group">
         <label>Terminal:</label>
 
-        <select class="form-control" name="ticketTerminal">
-          @foreach($terminals as $terminal)
-            <option value="{{$terminal->terminal_id}}">{{$terminal->description}}</option>
-          @endforeach
+        <select class="form-control" name="terminal">
+            @foreach($terminals as $terminal)
+                <option @if(old('terminal') == $terminal->terminal_id || $ticket->terminal->terminal_id == $terminal->terminal_id) {{'selected'}}@endif value="{{$terminal->terminal_id}}">{{$terminal->description}}</option>
+            @endforeach
         </select>
 
     </div>

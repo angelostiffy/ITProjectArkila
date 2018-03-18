@@ -37,7 +37,7 @@
 
         <div class="box-footer">
             <div class="pull-right">
-                <a href="/home/announcements/{{ $announcement->announcement_id }}/edit/" class="btn btn-primary btn-create"><i class="fa fa-pencil"></i> Edit</a>
+                <a href="{{route('announcements.edit', [$announcement->announcement_id])}}" class="btn btn-primary btn-create"><i class="fa fa-pencil"></i> Edit</a>
                 <button class="btn btn-outline-danger btn-create" data-toggle="modal" data-target="#{{'announcement'.$announcement->announcement_id}}"><i class="fa fa-trash"></i> Delete</button>
 
             </div>

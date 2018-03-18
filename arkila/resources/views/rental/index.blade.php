@@ -38,7 +38,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($rentals->sortByDesc('status') as $rental) @if ($rental->status == 'Paid' | $rental->status == 'Cancelled' | $rental->status == 'Departed')
+                                    @foreach($rentals as $rental) @if ($rental->status == 'Paid' | $rental->status == 'Cancelled' | $rental->status == 'Departed')
                                     <tr>
                                         <td>{{ $rental->rent_id }}</td>
                                         <td>{{ $rental->full_name }}</td>
@@ -55,7 +55,7 @@
                                                     <button class="btn btn-outline-danger" name="click" id="depart" value="Cancelled" data-toggle="modal" data-target="#{{'cancel'.$rental->rent_id}}"><i class="fa fa-close"></i> Cancel </button>
                                                 
                                                     <!-- Modal for depart-->
-                                                     <div class="modal fade" id="{{'depart'.$reservation->id}}">
+                                                     <div class="modal fade" id="{{'depart'.$rental->rent_id}}">
                                                         <div class="modal-dialog">
                                                             <div class="col-md-offset-2 col-md-8">
                                                                 <div class="modal-content">
@@ -66,7 +66,7 @@
                                                                     </div>
                                                                     <div class="modal-body row" style="margin: 0% 1%;">
 
-                                                                        <p style="font-size: 110%;">Are you sure you want to depart this rental?</p>
+                                                                        <p style="font-size: 110%;">Are you sure you want to depart rental #{{$rental->rent_id}}?</p>
 
                                                                     </div>
                                                                     <div class="modal-footer">
@@ -74,7 +74,7 @@
                                                                             {{ csrf_field() }} {{ method_field('PATCH') }}
                                                                            
                                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                                            <button type="submit" name="driverArc" value="Arch " class="btn btn-primary" style="width:22%;">Depart</button>
+                                                                            <button type="submit" name="click" value="Departed" class="btn btn-primary" style="width:22%;">Depart</button>
                                                                         </form>
                                                                     </div>
                                                                 </div>
@@ -101,15 +101,15 @@
                                                                             <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
                                                                         </div>
                                                                         <div class="col-md-10">
-                                                                            <p style="font-size: 110%;">Are you sure you want to cancel this rental?</p>
+                                                                            <p style="font-size: 110%;">Are you sure you want to cancel rental #{{$rental->rent_id}}?</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                        <form action="{{ route('rental.update', $rental->rent_id) }}" method="POST" class="form-action">
                                                                             {{ csrf_field() }} {{ method_field('PATCH') }} 
 
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">discard</button>
-                                                                            <button type="submit" name="driverArc" value="Arch " class="btn btn-danger" style="width:22%;">Cancel</button>
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Discard</button>
+                                                                            <button type="submit" name="click" value="Cancelled" class="btn btn-danger" style="width:22%;">Cancel</button>
                                                                         </form>
                                                                     </div>
                                                                 </div>
@@ -140,15 +140,15 @@
                                                                         <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
                                                                     </div>
                                                                     <div class="col-md-10">
-                                                                        <p style="font-size: 110%;">Are you sure you want to delete this Rental?</p>
+                                                                        <p style="font-size: 110%;">Are you sure you want to delete rental #{{$rental->rent_id}}?</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <form method="POST" action="/home/rental/{{ $rental->rent_id }}">
+                                                                    <form method="POST" action="{{ route('rental.destroy', [$rental->rent_id]) }}">
                                                                         {{csrf_field()}} {{method_field('DELETE')}}
                                                                         
                                                                         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                                                        <button type="submit" name="driverArc" value="Arch" class="btn btn-danger" style="width:22%;">Delete</button>
+                                                                        <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
                                                                         
                                                                     </form>
                                                                 </div>
@@ -195,7 +195,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($rentals->sortByDesc('status')->where('rent_type', 'Online') as $rental) @if ($rental->status == 'Pending' | $rental->status == 'Paid')
+                                    @foreach($rentals->sortByDesc('status')->where('rent_type', 'Online') as $rental) @if ($rental->status == 'Pending' | $rental->status == 'Paid' | $rental->status == 'Cancelled')
                                     <tr>
                                         <td>{{ $rental->rent_id }}</td>
                                         <td>{{ $rental->full_name }}</td>

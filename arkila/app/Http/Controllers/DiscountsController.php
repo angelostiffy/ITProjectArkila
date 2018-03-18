@@ -27,7 +27,7 @@ class DiscountsController extends Controller
     {
         $this->validate(request(),[
             "addDiscountDesc" => "unique:fees_and_deduction,description|regex:/^[\pL\s\-]+$/u|required|max:30",
-            "addDiscountAmount" => ['required',new checkCurrency,'numeric','min:1']
+            "addDiscountAmount" => ['required',new checkCurrency,'numeric','min:1','max:5000']
         ]);
 
         FeesAndDeduction::create([
@@ -61,7 +61,7 @@ class DiscountsController extends Controller
     public function update(FeesAndDeduction $discount)
     {
         $this->validate(request(),[
-            "editDiscountAmount" => ['required',new checkCurrency, 'numeric','min:1'],
+            "editDiscountAmount" => ['required',new checkCurrency, 'numeric','min:1','max:5000'],
         ]);
 
         $discount->update([

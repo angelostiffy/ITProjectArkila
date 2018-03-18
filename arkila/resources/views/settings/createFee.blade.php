@@ -10,7 +10,7 @@
             @include('message.error')
         </div>
         <label>Description:</label>
-        <input type="text" class="form-control" name="addFeesDesc" required>
+        <input type="text" class="form-control" name="addFeesDesc" maxlength="30" required>
     </div>
     <div class="form-group">
         <label>Amount:</label>
