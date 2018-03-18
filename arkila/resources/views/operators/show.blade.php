@@ -13,7 +13,7 @@
     </div>
 
     <form id="regForm" action="/action_page.php">
-        <div class="box-body">
+        <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
 
             <!-- One "tab" for each step in the form: -->
             <div class="tab">
@@ -90,7 +90,7 @@
         </div>
 </div>
 <div class="box box-warning">
-    <div class="box-body">
+    <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
         <div class="tab">
             <h4>Family Information</h4>
             <div class="tab">

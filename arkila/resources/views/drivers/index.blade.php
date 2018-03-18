@@ -1,8 +1,8 @@
 @extends('layouts.master') @section('title', 'List of Drivers') @section('content-header', 'List of Drivers') @section('content') @if(session()->get('opLink')) {{ session()->forget('opLink') }} @endif
 <div class="box">
-    <div class="box-body">
+    <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
         <div class="col-md-6">
-            <a href="{{route('drivers.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Register New Driver</a>
+            <a href="{{route('drivers.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create New</a>
             <a href=""  class="btn btn-default"> <i class="fa fa-print"></i> Print</a>
         </div>
         <table id="driverList" class="table table-bordered table-striped">

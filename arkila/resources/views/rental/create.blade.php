@@ -41,7 +41,7 @@
 @section('form-body')
 
                                {{csrf_field()}}     
-<div class="box box-warning">
+<div class="box box-warning" style = "box-shadow: 0px 5px 10px gray;">
         <div class="box-header with-border text-center">
             <a href="{{ URL::previous() }}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
             <h3 class="box-title">
