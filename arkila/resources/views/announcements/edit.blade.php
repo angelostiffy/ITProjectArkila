@@ -1,32 +1,41 @@
-@extends('layouts.form')
+@extends('layouts.form_lg')
 @section('title', 'Edit Announcement')
 @section('back-link', URL::previous())
 @section('form-action', route('announcements.update', [$announcement->announcement_id]))
 @section('method_field', method_field('PATCH'))
+@section('form-id','regForm')
 @section('form-title', 'Edit Announcement')
 @section('form-body')
 
-<div class="container" style="padding: 4% 10% 2% 4%">
-    <h1 style="margin-bottom:2%">Edit Announcement</h1>
+<div class="box box-warning" style="box-shadow: 0px 5px 10px gray; padding:5%">
+    <h2>Edit Announcement</h2>
     <div class="form-group">
-        <label>Title: </label>
-        <input type="text" name="title" value="{{ $announcement->title }}">
-        <label>Viewer: {{ $announcement->announcement_id}}</label>
-        <select name="viewer">
-        <option value="Public"{{ $announcement->viewer == 'Public' ? 'selected="selected"' : '' }}>Public</option>
-        <option value="Driver Only"{{ $announcement->viewer == 'Driver Only' ? 'selected="selected"' : '' }}>Driver Only</option>
-        <option value="Customer Only"{{ $announcement->viewer == 'Customer Only' ? 'selected="selected"' : '' }}>Customer Only</option>
-        <option value="Only Me"{{ $announcement->viewer == 'Only Me' ? 'selected="selected"' : '' }}>Only Me</option>
+        <div style="margin:2% 0%">
+            <label>Title: </label>
+            <input type="text" name="title" value="{{ $announcement->title }}">
+            <label>Viewer: {{ $announcement->announcement_id}}</label>
 
-    </select>
+            <select name="viewer">
+            <option value="Public"{{ $announcement->viewer == 'Public' ? 'selected="selected"' : '' }}>Public</option>
+            <option value="Driver Only"{{ $announcement->viewer == 'Driver Only' ? 'selected="selected"' : '' }}>Driver Only</option>
+            <option value="Customer Only"{{ $announcement->viewer == 'Customer Only' ? 'selected="selected"' : '' }}>Customer Only</option>
+            <option value="Only Me"{{ $announcement->viewer == 'Only Me' ? 'selected="selected"' : '' }}>Only Me</option>
+            </select>
+        </div>
+        
         <textarea width="30%" class="form-control" rows="10" name="announce">{{ $announcement->description }}</textarea>
+    </div>
+    
+    <div class="box-footer">
+        <div style="overflow:auto;">
+            <div style="float:right;">
+                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#form-modal" data-keyboard="true">Save Changes</button>
+            </div>
+        </div>
     </div>
     
 </div>
 
-@endsection
-@section('form-btn')
-    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#form-modal" data-keyboard="true">Save Changes</a>
 @endsection
 
 @section('modal-title','Confirm')
