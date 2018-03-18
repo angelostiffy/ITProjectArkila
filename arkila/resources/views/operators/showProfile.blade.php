@@ -25,10 +25,10 @@
                         <b>Contact Number</b> <p class="pull-right">{{ $operator->contact_number }}</p>
                     </li>
                     <li class="list-group-item">
-                        <b>Number of Vans</b> <p class="pull-right">{{ $operator->member_id }}</p>
+                        <b>Number of Vans</b> <p class="pull-right">{{ count($operator->van) }}</p>
                     </li>
                     <li class="list-group-item">
-                        <b>Number of Drivers</b> <p class="pull-right">{{ $operator->member_id }}</p>
+                        <b>Number of Drivers</b> <p class="pull-right">{{ count($operator->drivers) }}</p>
                     </li>
                 </ul>
                 <a href="{{route('operators.show',[$operator->member_id])}}" class="btn btn-default btn-block"><b>View All Information</b></a>

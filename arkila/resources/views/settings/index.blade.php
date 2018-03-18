@@ -89,6 +89,7 @@
                     <li><a href="#destinationTab" data-toggle="tab">Destinations</a></li>
                     <li><a href="#feeTab" data-toggle="tab">Fees</a></li>
                     <li><a href="#discountTab" data-toggle="tab">Discounts</a></li>
+                    <li><a href="#ticketTab" data-toggle="tab">Tickets</a></li>
                 </ul>
                 <div class="tab-content">
                     <!-- Terminal Tab -->
@@ -96,7 +97,7 @@
                         <div class="col-md-6 pull-left">
                             <a href="/home/settings/terminal/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Create Terminal </a>
                         </div>
-                        <table id="terminals" class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped dataTable">
                             <thead>
                                 <tr>
                                     <th>Terminal Name</th>
@@ -165,7 +166,7 @@
                         <div class="col-md-6 pull-left">
                             <a href="/home/settings/destinations/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Create Destination </a>
                         </div>
-                        <table id="destinations" class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped dataTable">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -237,7 +238,7 @@
                         <div class="col-md-6 pull-left">
                             <a href="/home/settings/fees/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Create Fee </a>
                         </div>
-                        <table id="fees" class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped dataTable">
                             <thead>
                                 <tr>
                                     <th>Fee</th>
@@ -308,7 +309,7 @@
                         <div class="col-md-6 pull-left">
                             <a href="/home/settings/discounts/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Create Discount </a>
                         </div>
-                        <table id="discounts" class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped dataTable">
                             <thead>
                                 <tr>
                                     <th>Discount</th>
@@ -371,6 +372,74 @@
                             </tbody>
                         </table>
                     </div>
+                    
+                    <!-- ticket Tab -->
+                    <div class="tab-pane" id="ticketTab">
+                        <div class="col-md-6 pull-left">
+                            <a href="/home/settings/destinations/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Create Ticket </a>
+                        </div>
+                        <table class="table table-bordered table-striped dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Terminal</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach($destinations as $destination)
+                                <tr>
+                                    <td>C1</td>
+                                    <td>baguio</td>
+                                    <td>         
+                                        <div class="text-center">
+                                            <a href="#" class="btn btn-primary"><i class="fa fa-edit" ></i>Edit</a>
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="#"><i class="fa fa-trash"></i>Delete</button>
+                                        </div>
+                                     
+                                    </td>
+                                    <!-- Modal for Delete-->
+                                    <div class="modal fade" id="ticket">
+                                        <div class="modal-dialog">
+                                            <div class="col-md-offset-2 col-md-8">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-red">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title"> Confirm</h4>
+                                                    </div>
+                                                    <div class="modal-body row" style="margin: 0% 1%;">
+                                                        <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
+                                                            <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <p style="font-size: 110%;">Are you sure you want to delete "c1"?</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <form action="#" method="POST">
+                                        
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                                            <button type="submit" name="driverArc" value="Arch " class="btn btn-danger" style="width:22%;">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal -->
+                                    
+                                </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
             </div>
@@ -410,7 +479,7 @@
     </script>
     <script>
         $(function() {
-            $('#terminals').DataTable({
+            $('.dataTable').DataTable({
                 'paging': true,
                 'lengthChange': false,
                 'searching': true,
@@ -418,30 +487,7 @@
                 'info': true,
                 'autoWidth': true,
             })
-            $('#destinations').DataTable({
-                'paging': true,
-                'lengthChange': false,
-                'searching': true,
-                'ordering': true,
-                'info': true,
-                'autoWidth': true,
-            })
-            $('#fees').DataTable({
-                'paging': true,
-                'lengthChange': false,
-                'searching': true,
-                'ordering': true,
-                'info': true,
-                'autoWidth': true,
-            })
-            $('#discounts').DataTable({
-                'paging': true,
-                'lengthChange': false,
-                'searching': true,
-                'ordering': true,
-                'info': true,
-                'autoWidth': true
-            })
+            
         })
 
     </script>

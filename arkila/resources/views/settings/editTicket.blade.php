@@ -1,42 +1,37 @@
 @extends('layouts.form')
-@section('title', 'Create New Destination')
+@section('title', 'Edit Ticket')
 @section('back-link', URL::previous())
-@section('form-action', route('destinations.store'))
-@section('form-title', 'Create Destination')
+@section('form-action', route('destinations.update', [$destination->destination_id]))
+@section('method_field', method_field('PATCH'))
+@section('form-title', 'Edit Ticket')
 @section('form-body')
-                 
-    <div class="form-group">
+	@include('message.error')
 
-        <div style="margin-top:18%">
-            @include('message.error')
-        </div>
+	 <div>
+	 	<label for="destination">Description:</label>
+	 	<p>*insert description*</p>
+	 </div>
 
-        <label>Destination:</label>
-        <input name="addDestination" type="text" class="form-control" maxlength="30" required>
-    </div>
     <div class="form-group">
         <label>Terminal:</label>
 
-        <select class="form-control" name="addDestinationTerminal">
+        <select class="form-control" name="ticketTerminal">
           @foreach($terminals as $terminal)
             <option value="{{$terminal->terminal_id}}">{{$terminal->description}}</option>
           @endforeach
         </select>
 
     </div>
-    <div class="form-group">
-        <label>Fare:</label>
-        <input type="number" class="form-control" name="addDestinationFare" step="0.25" placeholder="Php 0.00"  min="1" max="5000" required>
-    </div>
+
 
 @endsection
 @section('form-btn')
-    <a href="" data-toggle="modal" data-target="#form-modal" class="btn btn-primary" data-keyboard="true">Create</a>
+    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#form-modal" data-keyboard="true">Save Changes</a>
 @endsection
 
 @section('modal-title','Confirm')
 @section('modal-body')
-    <p>Are you sure you want to add this destination?</p>
+    <p>Are you sure you want to overwrite the changes?</p>
 @endsection
 
 @section('modal-btn')
@@ -46,7 +41,6 @@
 
 @section('scripts') 
 @parent
-
     <script>
         $(document).keypress(function(event){
             var keycode = (event.keyCode ? event.keyCode : event.which);
