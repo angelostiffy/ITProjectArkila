@@ -157,7 +157,7 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="birthDate" class="form-control" placeholder="mm/dd/yyyy" value="{{old('birthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                  <input type="text" name="birthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('birthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +225,7 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="licenseExpiryDate" class="form-control" placeholder="mm/dd/yyyy" value="{{old('licenseExpiryDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                  <input type="text" name="licenseExpiryDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('licenseExpiryDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                 </div>
                             </div>
                         </div>
@@ -247,7 +247,7 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="spouseBirthDate" class="form-control" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                  <input type="text" name="spouseBirthDate" class="form-control date-mask" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                 </div>
                             </div>
                         </div>
@@ -544,7 +544,8 @@
           radioClass   : 'iradio_flat-blue'
         });
     })
+     $('[data-mask]').inputmask()
+     $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
 
-     $('[data-mask]').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
     </script>
 @endsection
