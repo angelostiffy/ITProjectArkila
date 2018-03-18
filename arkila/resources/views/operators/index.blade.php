@@ -72,16 +72,11 @@
 </div>
 <!-- /.box -->
 
-<<<<<<< HEAD
-<button type="submit" class="btn btn-default pull-right" style="width:22%;">Print List</button>
 
-@stop 
+
+@endsection
 @section('scripts') 
 @parent
-=======
-@endsection
-@section('scripts') @parent
->>>>>>> b942dffc0cf72991a7d48cbe939ab25a02bc2b7f
 
 <!-- DataTables -->
 <script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
