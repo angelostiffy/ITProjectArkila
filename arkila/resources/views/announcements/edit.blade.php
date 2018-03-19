@@ -19,14 +19,16 @@
         <div class="form-group" style="margin:2% 0%">
             <label>Title: </label>
             <input type="text" name="title" value="{{ $announcement->title }}">
-            <label>Viewer: {{ $announcement->announcement_id}}</label>
-
-            <select name="viewer">
-            <option value="Public"{{ $announcement->viewer == 'Public' ? 'selected="selected"' : '' }}>Public</option>
-            <option value="Driver Only"{{ $announcement->viewer == 'Driver Only' ? 'selected="selected"' : '' }}>Driver Only</option>
-            <option value="Customer Only"{{ $announcement->viewer == 'Customer Only' ? 'selected="selected"' : '' }}>Customer Only</option>
-            <option value="Only Me"{{ $announcement->viewer == 'Only Me' ? 'selected="selected"' : '' }}>Only Me</option>
-            </select>
+            
+            <div class="pull-right">
+                <label>Viewer: {{ $announcement->announcement_id}}</label>
+                <select name="viewer">
+                <option value="Public"{{ $announcement->viewer == 'Public' ? 'selected="selected"' : '' }}>Public</option>
+                <option value="Driver Only"{{ $announcement->viewer == 'Driver Only' ? 'selected="selected"' : '' }}>Driver Only</option>
+                <option value="Customer Only"{{ $announcement->viewer == 'Customer Only' ? 'selected="selected"' : '' }}>Customer Only</option>
+                <option value="Only Me"{{ $announcement->viewer == 'Only Me' ? 'selected="selected"' : '' }}>Only Me</option>
+                </select>
+            </div>
         </div>
         
         <textarea width="30%" class="form-control" rows="10" name="announce">{{ $announcement->description }}</textarea>
@@ -55,15 +57,3 @@
     <button type="submit" class="btn btn-primary" style="width:33%;">Submit</button>
 @endsection
 
-@section('scripts') 
-@parent
-    <script>
-        $(document).keypress(function(event){
-            var keycode = (event.keyCode ? event.keyCode : event.which);
-            if(keycode == '13'){
-                $('#form-modal').modal('toggle');
-            }
-        });   
-    </script>
-
-@endsection

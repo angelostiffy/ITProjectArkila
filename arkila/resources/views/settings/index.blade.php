@@ -1,4 +1,6 @@
-@extends('layouts.master') @section('title', 'Settings') @section('content')
+@extends('layouts.master') 
+@section('title', 'Settings') 
+@section('content')
 
 <div class="row">
     <div class="col-md-4">
@@ -15,7 +17,7 @@
                 <ul class="nav nav-pills nav-stacked">
                     <li>
                         <a href="#">
-                            Online Reservation Feature
+                            Online Reservation
                             <span class="label pull-right">         
                                 <label class="switch">
                                     <input type="checkbox">
@@ -25,7 +27,7 @@
                         </a>
                     </li>
                     <li><a href="#">
-                            Walk-in Reservation Feature
+                            Walk-in Reservation
                             <span class="label pull-right">         
                                 <label class="switch">
                                     <input type="checkbox">
@@ -36,7 +38,7 @@
                     </li>
                     <li>
                         <a href="#">
-                             Online Van Rental Feature
+                             Online Van Rental
                             <span class="label pull-right">         
                                 <label class="switch">
                                     <input type="checkbox">
@@ -47,7 +49,7 @@
                     </li>
                     <li>
                         <a href="#">
-                             Walk-in Van Rental Feature
+                             Walk-in Van Rental
                             <span class="label pull-right">         
                                 <label class="switch">
                                     <input type="checkbox">
