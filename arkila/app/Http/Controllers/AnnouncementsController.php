@@ -44,7 +44,7 @@ class AnnouncementsController extends Controller
     {
         //
         $this->validate(request(), [
-            "announce" =>  'required|max:499',
+            "announce" =>  'required|max:1000',
             "title" =>  'required|max:50',
 
         ]);
@@ -93,12 +93,15 @@ class AnnouncementsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Announcement $announcement)
+    public function update(Request $request, Announcement $announcement)
     {
         //
-        dd(request("title"));
+        $this->validate(request(), [
+            "announce" =>  'required|max:1000',
+            "title" =>  'required|max:50',
 
-        dd(request("announce"));
+        ]);
+
         $current_time = \Carbon\Carbon::now();
         $dateNow = $current_time->setTimezone('Asia/Manila')->format('Y-m-d H:i:s');
 

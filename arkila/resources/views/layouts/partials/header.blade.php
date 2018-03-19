@@ -162,7 +162,7 @@
                                 <!-- inner menu: contains the actual data -->
                                 <div class="form-group">
                                     <label for="">Message:</label>
-                                    <textarea name="announce" rows="5" class="form-control" placeholder="" maxlength="500" required></textarea>
+                                    <textarea name="announce" rows="5" class="form-control" placeholder="" maxlength="1000" required></textarea>
                                 </div>
                                 <div class="pull-right">
                                     <button class="btn btn-warning">ANNOUNCE</button>

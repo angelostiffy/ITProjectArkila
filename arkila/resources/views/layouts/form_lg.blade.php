@@ -63,7 +63,7 @@
                 <div class="modal fade" id="form-modal">
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header bg-primary">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title"> @yield('modal-title') </h4>
