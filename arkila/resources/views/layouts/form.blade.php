@@ -2,7 +2,9 @@
 <html>
 
 <head>
-    @include('layouts.partials.stylesheets_form')
+    @section('links')
+        @include('layouts.partials.stylesheets_form')
+    @show
 </head>
 
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
@@ -14,10 +16,7 @@
 
         <!-- Full Width Column -->
         <div class="content-wrapper">
-            <div>
-            @include('message.error')
-        </div>
-            <div class="container">
+                        <div class="container">
                     <section class="content">
                         <div class="login-box" style="box-shadow: 0px 5px 10px gray;">
                             <form action="@yield('form-action')" method="POST" data-parsley-validate="">
@@ -61,8 +60,10 @@
     </div>
     <!-- ./wrapper -->
 
-    
-    @include('layouts.partials.scripts_form')
+    @section('scripts')
+        @include('layouts.partials.scripts_form')
+        @include('message.error')
+    @show
 </body>
-
+ 
 </html>
