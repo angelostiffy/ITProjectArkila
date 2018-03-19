@@ -11,7 +11,7 @@
             @include('message.error')
         </div>
 
-        <label>Description:</label>
+        <label>Description: <span class="text-red">*</span></label>
         <input value='{{old('description')}}' name="description" type="text" class="form-control" maxlength="5" required>
     </div>
     <div class="form-group">
@@ -27,30 +27,6 @@
 
 @endsection
 @section('form-btn')
-    <a href="" data-toggle="modal" data-target="#form-modal" class="btn btn-primary" data-keyboard="true">Create</a>
+    <buttonv type="submit" class="btn btn-primary">Create</button>
 @endsection
 
-@section('modal-title','Confirm')
-@section('modal-body')
-    <p>Are you sure you want to add this Ticket?</p>
-@endsection
-
-@section('modal-btn')
-    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-    <button type="submit" class="btn btn-primary" style="width:33%;">Submit</button>
-@endsection
-
-@section('scripts') 
-@parent
-
-    <script>
-        $(document).keypress(function(event){
-            var keycode = (event.keyCode ? event.keyCode : event.which);
-            if(keycode == '13'){
-                $('#form-modal').modal('toggle');
-                event.preventDefault();
-            }
-        });   
-    </script>
-
-@endsection
