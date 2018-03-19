@@ -16,6 +16,8 @@ class CreateTransactionTable extends Migration
         Schema::create('transaction', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('transaction_id');
+            $table->integer('terminal_id')
+            ->unsigned();
             $table->integer('ticket_id')
             ->unsigned()
             ->nullable();
@@ -29,6 +31,10 @@ class CreateTransactionTable extends Migration
 
             $table->enum('status', ['Pending', 'Cancelled', 'Departed','OnBoard']);
 
+            $table->foreign('terminal_id')
+            ->references('terminal_id')->on('terminal')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
 
             $table->foreign('ticket_id')
             ->references('ticket_id')->on('ticket')

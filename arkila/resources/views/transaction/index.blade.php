@@ -127,7 +127,7 @@
                                         <select id="ticket" class="form-control select2" name="" id="">
                                         </select>
                                         <span id="sellButtContainer" class="input-group-btn">
-                                          <button id="sellButt" type="button" class="btn btn-info btn-flat">Sell</button>
+
                                         </span>
                                     </div>
                                 </div>
@@ -140,11 +140,13 @@
                     <div class="col-md-8">
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
-                              <li class="active"><a href="#terminal1" data-toggle="tab">Terminal 1</a></li>
-                              <li><a href="#terminal2" data-toggle="tab">Terminal 2</a></li>
+                                @foreach($terminals as $terminal)
+                                    <li class="@if($terminals->first() == $terminal){{'active'}}@endif"><a href="#terminal{{$terminal->terminal_id}}" data-toggle="tab">{{$terminal->description}}</a></li>
+                                @endforeach
                             </ul>
                         
                             <div class="tab-content">
+                                @foreach($terminals as $terminal)
                                 <div class="tab-pane active" id="terminal1">
                                     <div class="row">
                                                     <div id="list-left1" class="dual-list list-left col-md-5">
@@ -152,7 +154,7 @@
                                                             <div id="ondeck-header" class="box-header bg-blue">
                                                                 <span class="col-md-6">
                                                                     <h6>On Deck:</h6>
-                                                                     <h4>AAA-123</h4>
+                                                                     <h4>{{$terminal->trips->where('queue_number',1)->first()->plate_number}}</h4>
                                                                 </span>
                                                                  <span class="pull-right btn-group">
                                                                     <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" style="border-radius: 100%">
@@ -204,11 +206,11 @@
                                                     </div>
 
                                                     <div class="list-arrows col-md-2 text-center">
-                                                        <button class="btn btn-outline-primary btn-sm btn-flat move-left1">
+                                                        <button id="board" class="btn btn-outline-primary btn-sm btn-flat move-left1">
                                                             <i class="glyphicon glyphicon-chevron-left"></i>  BOARD
                                                         </button>
                                                         <br>
-                                                        <button class="btn btn-outline-warning btn-sm btn-flat move-right1">
+                                                        <button id="unboard" class="btn btn-outline-warning btn-sm btn-flat move-right1">
                                                              UNBOARD <i class="glyphicon glyphicon-chevron-right"></i>
                                                         </button>
                                                     </div>
@@ -218,7 +220,7 @@
                                                             <div class="box-header bg-yellow bg-gray">
                                                                 <span class="">
                                                                     <h6>Sold Tickets for</h6>
-                                                                     <h4>Cabanatuan Terminal</h4>
+                                                                     <h4>{{$terminal->description}}</h4>
                                                                 </span>
                                                             </div>
                                                             <div class="box-body well">
@@ -238,11 +240,9 @@
                                                                         </div>
                                                                     </div>
                                                                     <ul class="list-group scrollbar scrollbar-info thin ticket-overflow">
-                                                                        <li class="list-group-item">T1 Ticket 6</li>
-                                                                        <li class="list-group-item">T1 Ticket 7</li>
-                                                                        <li class="list-group-item">T1 Ticket 8</li>
-                                                                        <li class="list-group-item">T1 Ticket 9</li>
-                                                                        <li class="list-group-item">T1 Ticket 10</li>
+                                                                        @foreach($terminal->transactions as $transaction)
+                                                                            <li class="list-group-item">{{$transaction->}}</li>
+                                                                        @endforeach
                                                                     </ul>
                                                                     <div class="text-center ">
                                                                     <a href="" class="btn btn-outline-secondary btn-flat">Manage Tickets <i class=""></i></a>
@@ -254,91 +254,7 @@
                                                     </div>
                                                 </div>  
                                 </div>
-                                <div class="tab-pane" id="terminal2">
-                                    <div class="row">
-                                                    <div class="dual-list list-left col-md-5">
-                                                        <div class="box box-solid ">
-                                                            <div class="box-header bg-green text-center">
-                                                                <h3 class="box-title">ON BOARD</h3>
-                                                            </div>
-                                                            <div class="box-body well">
-                                                                <div class="text-right">
-                                                                    <div class="row">
-                                                                        <div class="col-md-2">
-                                                                            <div class="btn-group">
-                                                                                <a class="btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-10">
-                                                                            <div class="input-group">
-                                                                                <span class="input-group-addon">
-                                                                                    <i class=" glyphicon glyphicon-search"></i>
-                                                                                </span>
-                                                                                <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="">
-                                                                    <ul class="list-group scrollbar scrollbar-info thin ticket-overflow">
-                                                                        <li class="list-group-item">T2 Ticket 1</li>
-                                                                        <li class="list-group-item">T2 Ticket 2</li>
-                                                                        <li class="list-group-item">T2 Ticket 3</li>
-                                                                        <li class="list-group-item">T2 Ticket 4</li>
-                                                                        <li class="list-group-item">T2 Ticket 5</li>
-                                                                    </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="text-center ">
-                                                                    <a href="" class="btn btn-success btn-flat">Depart <i class="fa fa-automobile"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="list-arrows col-md-2 text-center">
-                                                        <button class="btn btn-outline-success btn-sm btn-flat ">
-                                                            <i class="glyphicon glyphicon-chevron-left move-left"></i>  BOARD
-                                                        </button>
-                                                        <br>
-                                                        <button class="btn btn-outline-secondary btn-sm btn-flat">
-                                                             UNBOARD <i class="glyphicon glyphicon-chevron-right move-right"></i>
-                                                        </button>
-                                                    </div>
-                                                    
-                                                    <div class="dual-list list-right col-md-5">
-                                                        <div class="box box-solid">
-                                                            <div class="box-header bg-gray text-center">
-                                                                <h3 class="box-title">SOLD TICKETS</h3>
-                                                            </div>
-                                                            <div class="box-body well">
-                                                                    <div class="row">
-                                                                        <div class="col-md-2">
-                                                                            <div class="btn-group">
-                                                                                <a class="btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-10">
-                                                                            <div class="input-group">
-                                                                                <span class="input-group-addon">
-                                                                                    <i class="glyphicon glyphicon-search"></i>
-                                                                                </span>
-                                                                                <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <ul class="list-group list-group scrollbar scrollbar-info thin ticket-overflow">
-                                                                        <li class="list-group-item">T2 Ticket 6</li>
-                                                                        <li class="list-group-item">T2 Ticket 7</li>
-                                                                        <li class="list-group-item">T2 Ticket 8</li>
-                                                                        <li class="list-group-item">T2 Ticket 9</li>
-                                                                        <li class="list-group-item">T2 Ticket 10</li>
-                                                                    </ul>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>    
-                                </div>
+                                    @endforeach
                             </div>
 
                         </div>
@@ -395,6 +311,7 @@
         $('#ticket').append('<option>Data Not Available</option>');
     @endif
 
+
     checkDiscountBox();
 
     $('#checkDiscount').on('click',function(){
@@ -406,7 +323,12 @@
         listTickets();
     });
 
-        function checkDiscountBox(){
+    $(document).ajaxStop(function(){
+        checkSellButton();
+    });
+
+
+    function checkDiscountBox(){
             if($('#checkDiscount').is(':checked')){
                 $('#discount').prop('disabled',false);
                 listDiscounts();
@@ -501,8 +423,11 @@
             var ticket = $('#ticket').val();
 
             if(terminal != null && destination != null && ticket != null){
-
+                if(!$('#sellButt').length){
+                    $('#sellButtContainer').append('<button id="sellButt" type="button" class="btn btn-info btn-flat">Sell</button>');
+                }
             }
+
 
         }
 
