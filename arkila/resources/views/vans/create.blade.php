@@ -74,16 +74,9 @@
 @endsection
 
 @section('form-btn')
-    <a class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Add unit</a>
+    <button type="submit" class="btn btn-primary">Add unit</button>
 @endsection 
-@section('modal-title', 'Confirm') 
-@section('modal-body')
-    <p>Are you sure you want to add this Van?</p>
-@endsection 
-@section('modal-btn')
-    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-    <button type="submit" class="btn btn-primary" style="width:33%;">Submit</button>
-@endsection
+
 @section('scripts')
 	@parent
 	<script>

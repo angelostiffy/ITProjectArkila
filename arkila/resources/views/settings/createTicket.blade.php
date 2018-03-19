@@ -7,9 +7,6 @@
                  
     <div class="form-group">
 
-        <div style="margin-top:18%">
-            @include('message.error')
-        </div>
 
         <label>Description: <span class="text-red">*</span></label>
         <input value='{{old('description')}}' name="description" type="text" class="form-control" maxlength="5" required>

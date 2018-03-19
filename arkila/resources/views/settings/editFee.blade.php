@@ -7,12 +7,12 @@
 @section('form-body')
 
 	<div>
-	 	<label for="description">Description:<span class="text-red">*</span></label>
+	 	<label for="description">Description:</label>
 	 	<p>{{$fee->description}}</p>
 	</div>
 
     <div class="form-group">
-        <label>Amount: <span class="text-red">*</span></label>
+        <label>Amount:</label>
         <input type="number" class="form-control" name="editFeeAmount" step = "0.25" min="1" max="5000" value="{{$fee->amount}}">
     </div>
 
