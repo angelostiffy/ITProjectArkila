@@ -37,7 +37,7 @@
 </div>
 <div class="form-group">
     <label for="">Van Model</label>
-    <input list="models" value="{{old('vanModel')}}" name="vanModel" type="text" class="form-control" maxlength="50" placeholder="Van Model">
+    <input list="models" value="{{old('vanModel')}}" name="vanModel" type="text" class="form-control" maxlength="50" placeholder="Van Model" required>
     <datalist id="models">
         @foreach($models as $model)
         <option value="{{$model->description}}">
@@ -47,7 +47,7 @@
 
 <div class="form-group">
     <label for="">Seating Capacity</label>
-    <input value="{{old('seatingCapacity')}}" name="seatingCapacity" type="number" class="form-control" placeholder="Seating Capacity" max="15" min="1">
+    <input value="{{old('seatingCapacity')}}" name="seatingCapacity" type="number" class="form-control" placeholder="Seating Capacity" max="15" min="1" required>
 </div>
 
 <div class="form-group">
