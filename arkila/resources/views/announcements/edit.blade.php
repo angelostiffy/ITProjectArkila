@@ -8,6 +8,8 @@
 @section('form-body')
 
 <div class="box box-warning" style="box-shadow: 0px 5px 10px gray;">   
+    @include('message.error')
+
     <div class="box-header with-border text-center">
             <a href="{{route('announcements.index')}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
             <h3 class="box-title">
