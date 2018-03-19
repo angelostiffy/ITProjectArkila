@@ -29,7 +29,7 @@ class TicketsController extends Controller
     {
         //
         $this->validate(request(),[
-            "description" => "required|max:5",
+            "description" => "required|max:5|unique:ticket,ticket_number",
             'terminal' => "required| exists:terminal,terminal_id"
         ]);
 
@@ -66,7 +66,7 @@ class TicketsController extends Controller
     {
 
         $this->validate(request(),[
-            "description" => "required|max:5",
+            "description" => "required|max:5|unique:ticket,ticket_number,".$ticket->ticket_id.",ticket_id",
             'terminal' => "required| exists:terminal,terminal_id"
         ]);
 

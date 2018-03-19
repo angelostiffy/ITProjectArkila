@@ -126,8 +126,8 @@
                                         </span>
                                         <select id="ticket" class="form-control select2" name="" id="">
                                         </select>
-                                        <span class="input-group-btn">
-                                          <button type="button" class="btn btn-info btn-flat">Sell</button>
+                                        <span id="sellButtContainer" class="input-group-btn">
+
                                         </span>
                                     </div>
                                 </div>
@@ -254,91 +254,6 @@
                                                     </div>
                                                 </div>  
                                 </div>
-                                <div class="tab-pane" id="terminal2">
-                                    <div class="row">
-                                                    <div class="dual-list list-left col-md-5">
-                                                        <div class="box box-solid ">
-                                                            <div class="box-header bg-green text-center">
-                                                                <h3 class="box-title">ON BOARD</h3>
-                                                            </div>
-                                                            <div class="box-body well">
-                                                                <div class="text-right">
-                                                                    <div class="row">
-                                                                        <div class="col-md-2">
-                                                                            <div class="btn-group">
-                                                                                <a class="btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-10">
-                                                                            <div class="input-group">
-                                                                                <span class="input-group-addon">
-                                                                                    <i class=" glyphicon glyphicon-search"></i>
-                                                                                </span>
-                                                                                <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="">
-                                                                    <ul class="list-group scrollbar scrollbar-info thin ticket-overflow">
-                                                                        <li class="list-group-item">T2 Ticket 1</li>
-                                                                        <li class="list-group-item">T2 Ticket 2</li>
-                                                                        <li class="list-group-item">T2 Ticket 3</li>
-                                                                        <li class="list-group-item">T2 Ticket 4</li>
-                                                                        <li class="list-group-item">T2 Ticket 5</li>
-                                                                    </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="text-center ">
-                                                                    <a href="" class="btn btn-success btn-flat">Depart <i class="fa fa-automobile"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="list-arrows col-md-2 text-center">
-                                                        <button class="btn btn-outline-success btn-sm btn-flat ">
-                                                            <i class="glyphicon glyphicon-chevron-left move-left"></i>  BOARD
-                                                        </button>
-                                                        <br>
-                                                        <button class="btn btn-outline-secondary btn-sm btn-flat">
-                                                             UNBOARD <i class="glyphicon glyphicon-chevron-right move-right"></i>
-                                                        </button>
-                                                    </div>
-                                                    
-                                                    <div class="dual-list list-right col-md-5">
-                                                        <div class="box box-solid">
-                                                            <div class="box-header bg-gray text-center">
-                                                                <h3 class="box-title">SOLD TICKETS</h3>
-                                                            </div>
-                                                            <div class="box-body well">
-                                                                    <div class="row">
-                                                                        <div class="col-md-2">
-                                                                            <div class="btn-group">
-                                                                                <a class="btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-10">
-                                                                            <div class="input-group">
-                                                                                <span class="input-group-addon">
-                                                                                    <i class="glyphicon glyphicon-search"></i>
-                                                                                </span>
-                                                                                <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <ul class="list-group list-group scrollbar scrollbar-info thin ticket-overflow">
-                                                                        <li class="list-group-item">T2 Ticket 6</li>
-                                                                        <li class="list-group-item">T2 Ticket 7</li>
-                                                                        <li class="list-group-item">T2 Ticket 8</li>
-                                                                        <li class="list-group-item">T2 Ticket 9</li>
-                                                                        <li class="list-group-item">T2 Ticket 10</li>
-                                                                    </ul>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>    
-                                </div>
                             </div>
 
                         </div>
@@ -395,6 +310,7 @@
         $('#ticket').append('<option>Data Not Available</option>');
     @endif
 
+
     checkDiscountBox();
 
     $('#checkDiscount').on('click',function(){
@@ -406,7 +322,12 @@
         listTickets();
     });
 
-        function checkDiscountBox(){
+    $(document).ajaxStop(function(){
+        checkSellButton();
+    });
+
+
+    function checkDiscountBox(){
             if($('#checkDiscount').is(':checked')){
                 $('#discount').prop('disabled',false);
                 listDiscounts();
@@ -493,6 +414,20 @@
 
                 }
             });
+        }
+
+        function checkSellButton(){
+            var terminal = $('#terminal').val();
+            var destination = $('#destination').val();
+            var ticket = $('#ticket').val();
+
+            if(terminal != null && destination != null && ticket != null){
+                if(!$('#sellButt').length){
+                    $('#sellButtContainer').append('<button id="sellButt" type="button" class="btn btn-info btn-flat">Sell</button>');
+                }
+            }
+
+
         }
 
     });
