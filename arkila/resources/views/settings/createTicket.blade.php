@@ -27,6 +27,6 @@
 
 @endsection
 @section('form-btn')
-    <buttonv type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="btn btn-primary">Create</button>
 @endsection
 
