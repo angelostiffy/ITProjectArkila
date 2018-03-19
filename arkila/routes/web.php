@@ -67,7 +67,6 @@ Route::get('home/operators/profile/{operator}','OperatorsController@showProfile'
 
 /************ Drivers ******************************/
 Route::resource('home/drivers', 'DriversController');
-Route::patch('home/drivers/{driver}/archive', 'DriversController@archiveDelete')->name('drivers.archiveDelete');
 
 //Adding a driver to a specific operator
 Route::get('home/operators/{operator}/drivers/create', 'DriversController@createFromOperator')->name('drivers.createFromOperator');
@@ -148,6 +147,8 @@ Route::resource('home/testing', 'TestingController');
 Route::resource('home/reservations', 'ReservationsController');
 
 Route::get('home/archive', 'HomeController@archive');
+Route::post('home/operators/{operator}/archiveOperators', 'OperatorsController@archiveOperator')->name('operators.archiveOperator');
+
 
 Route::resource('home/rental', 'RentalsController');
 Route::resource('home/triptest', 'TripsController');
