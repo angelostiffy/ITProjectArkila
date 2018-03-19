@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\FeesAndDeduction;
-use App\Ticket;
+use App\Trip;
 use App\Terminal;
+use App\Transaction;
+use App\Ticket;
 use Illuminate\Http\Request;
 
 class TransactionsController extends Controller
@@ -36,9 +38,33 @@ class TransactionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $this->validate(request(),[
+            'terminal' => 'exists:terminal,terminal_id',
+            'destination' => 'exists:destination,destination_id',
+            'discount' => 'nullable|exists:fees_and_deduction,fad_id',
+            'ticket' => 'exists:ticket,ticket_id'
+        ]);
+
+        Transaction::create([
+            'terminal_id' => request('terminal'),
+            'ticket_id' => request('ticket'),
+            'destination_id' => request('destination'),
+            'fad_id' => request('discount'),
+            'trip_id' => Trip::where([
+                            ['queue_number',1],
+                            ['terminal_id',request('terminal')]
+                        ])->first()->trip_id
+        ]);
+
+        $ticket = Ticket::find(request('ticket'));
+
+        $ticket ->update([
+            'isAvailable' => 0
+        ]);
+
+        return back();
     }
 
     /**
@@ -73,6 +99,47 @@ class TransactionsController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function updatePendingTransactions(){
+        if(request('transactions')){
+            $this->validate(request(),[
+                'transactions.*' => 'required|exists:transaction,transaction_id'
+            ]);
+
+            foreach(request('transactions') as $transactionId){
+                $transaction = Transaction::find($transactionId);
+                    $transaction->update([
+                        'status' => 'OnBoard'
+                    ]);
+            }
+
+            return 'success';
+        }else{
+            return 'error no transaction given';
+        }
+
+    }
+
+
+    public function updateOnBoardTransactions(){
+        if(request('transactions')){
+            $this->validate(request(),[
+                'transactions.*' => 'required|exists:transaction,transaction_id'
+            ]);
+
+            foreach(request('transactions') as $transactionId){
+                $transaction = Transaction::find($transactionId);
+                $transaction->update([
+                    'status' => 'Pending'
+                ]);
+            }
+
+            return 'success';
+        }else{
+            return 'error no transaction given';
+        }
+
     }
 
     /**
