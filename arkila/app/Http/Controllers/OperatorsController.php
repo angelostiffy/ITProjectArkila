@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Member;
+use App\ArchiveMember;
 use App\Http\Requests\OperatorRequest;
 
 class OperatorsController extends Controller
@@ -184,5 +185,13 @@ class OperatorsController extends Controller
         }
 
         return $result;
+    }
+
+    public function archiveOperator(Member $operator) {
+        $operatorId = $operator->member_id;
+        
+        ArchiveMember::create(['member_id' => $operatorId]);
+        return redirect(route('operators.index'));
+
     }
 }

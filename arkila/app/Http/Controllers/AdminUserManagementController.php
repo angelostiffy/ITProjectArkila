@@ -22,13 +22,15 @@ class AdminUserManagementController extends Controller
          $terminals = Terminal::all();
          return view('usermanagement.addAdmin', compact('terminals'));
     }
+    
+    
 
 
     public function store()
     {
         $this->validate(request(), [
 
-            "fullName" => "required|alpha|max:50",
+            "fullName" => "required|regex:/^[\pL\s]+$/u|max:50",
             "userName" => "unique:users,username|required|max:15",
 
             "userEmail" => "email|unique:users,email",

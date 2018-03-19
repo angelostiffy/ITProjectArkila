@@ -8,7 +8,7 @@
 	@include('message.error')
 
 	 <div>
-	 	<label for="destination">Description:<span class="text-red">*</span></label>
+	 	<label for="destination">Description:</label>
 	 	<p>{{$destination->description}}</p>
 	 </div>
 

@@ -7,7 +7,7 @@
 @section('form-body')
 	
 	<div>
-	 	<label for="description">Description: <span class="text-red">*</span></label>
+	 	<label for="description">Description:</label>
 	 	<p>{{$discount->description}}</p>
 	 </div>
 

@@ -1,0 +1,45 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateArchiveMemberTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('archive_member', function (Blueprint $table) {
+            $table->increments('archive_member_id');
+            $table->integer('member_id')
+            ->unsigned();
+            $table->string('plate_number', 8)->nullable();
+            $table->enum('role', ['Driver', 'Operator']);
+            $table->timestamps();
+
+            $table->foreign('plate_number')
+            ->references('plate_number')->on('van')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
+
+            $table->foreign('member_id')
+            ->references('member_id')->on('member')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('archive_member');
+    }
+}

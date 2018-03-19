@@ -77,7 +77,9 @@
 </div>
 <!-- /.box-->
 
-@stop @section('scripts') @parent
+@stop 
+@section('scripts') 
+@parent
 
 <script>
     $(function() {

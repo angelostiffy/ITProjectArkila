@@ -5,7 +5,6 @@
 @section('method_field', method_field('PATCH'))
 @section('form-title', 'Edit Ticket')
 @section('form-body')
-	@include('message.error')
 
 	 <div>
 	 	<label for="description">Description:<span class="text-red">*</span></label>
