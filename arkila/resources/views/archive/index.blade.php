@@ -17,8 +17,8 @@
 
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Age</th>
+                                <th>Operator</th>
+                                <th>Plate No.</th>
                                 <th>Contact Number</th>
                                 <th>Operator</th>
                                 <th>Actions</th>
@@ -26,12 +26,12 @@
                         </thead>
                         <tbody>
 
-                        @foreach ($drivers as $driver)
+                        @foreach ($operators as $operator)
                             <tr>
-                                <td>{{ $driver->full_name }}</td>
-                                <td>{{ $driver->age }}</td>
-                                <td>{{ $driver->contact_number }}</td>
-                                <td>{{ $driver->operator->full_name }}</td>
+                                <td>{{ $operator->operator_id }}</td>
+                                <td>{{ $operator->archiveVan()->first()->plate_number ?? $operator->archiveVan()->first()}}</td>
+                                <td>Hi</td>
+                                <td>Aw</td>
                                 <td>
                                     <div class="text-center">
 
@@ -58,12 +58,12 @@
                                                            <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
                                                        </div>
                                                        <div class="col-md-10">
-                                                        <p style="font-size: 110%;">Are you sure you want to delete "{{ $driver->full_name }}"</p>
+                                                        <p style="font-size: 110%;">Are you sure you want to delete ""</p>
                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         
-                                                            <form method="POST" action="{{route('drivers.destroy',[$driver->member_id])}}">
+                                                            <form method="POST" action="destroy">
                                                                 {{csrf_field()}}
                                                                 {{method_field('DELETE')}}
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
@@ -114,13 +114,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($vans as $van)
+
                                     <tr>
-                                        <td>{{ $van->plate_number }}</td>
-                                        <td>{{ $van->driver()->first()->full_name ?? $van->driver()->first() }}</td>
-                                        <td>{{ $van->operator()->first()->full_name ??  $van->operator()->first() }}</td>
-                                        <td>{{ $van->model }}</td>
-                                        <td>{{ $van->seating_capacity }}</td>
+                                        <td>a</td>
+                                        <td>b</td>
+                                        <td>c</td>
+                                        <td>d</td>
+                                        <td>e</td>
                                         <td>
                                             <div class="text-center">
                                                  
@@ -130,7 +130,6 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    @endforeach
                                     
                                     <!--DELETE MODAL MIGUEL-->
                                     <div class="modal fade" id="deleteVan">

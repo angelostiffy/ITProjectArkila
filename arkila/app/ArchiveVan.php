@@ -8,12 +8,13 @@ class ArchiveVan extends Model
 {
     protected $table = 'archive_van';
     protected $primaryKey = 'archive_van_id';
-    protected $guarded = [
-        'archive_van_id',
+    protected $fillable = [
+        'plate_number',
+        'archived',
     ];
 
-    public function archiveVan(){
-        return $this->belongsToMany(ArchiveMember::class,'archive_member_van','archive_van_id','archive_member_id');
+    public function archiveMember(){
+        return $this->belongsToMany(ArchiveMember::class,'archive_member_van','plate_number','member_id');
     }
 
 }
