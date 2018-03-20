@@ -28,9 +28,12 @@ class Trip extends Model
     public function driver(){
       return $this->belongsTo(Member::class, 'member_id', 'driver_id');
     }
-    public function ticket()
-    {
+    public function ticket(){
         return $this->hasMany(Ticket::class, 'trip_id');
+    }
+
+    public function transactions(){
+        return $this->hasMany(Transaction::class, 'trip_id');
     }
 
 }

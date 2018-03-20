@@ -7,6 +7,7 @@ use App\Trip;
 use App\Terminal;
 use App\Transaction;
 use App\Ticket;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TransactionsController extends Controller
@@ -35,7 +36,6 @@ class TransactionsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store()
@@ -92,13 +92,50 @@ class TransactionsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Trip $trip
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Terminal $terminal)
     {
-        //
+        if( $trip = $terminal->trips->where('queue_number',1)->first() ){
+            $totalPassengers = count($trip->transactions);
+            $totalBooking = (Terminal::find(auth('Super-Admin')->user()->terminal_id)->booking_fee) * $totalPassengers;
+            $totalCommunity = (FeesAndDeduction::where('description', 'Community Fund')->first()->amount) * $totalPassengers;
+
+            $trip->update([
+                'status' => 'Departed',
+                'total_passenger' => $totalPassengers,
+                'total_booking_fee' => $totalBooking,
+                'community_fund' => $totalCommunity,
+                'date_departed' => Carbon::now(),
+                'queue_number' => null,
+            ]);
+
+            if($totalPassengers <= 10){
+                $queueNumber = count(Trip::where('terminal_id',$trip->terminal_id)->whereNotNull('queue_number'));
+
+                Trip::create([
+                    'driver_id' => $trip->driver_id,
+                    'terminal_id' => $trip->terminal_id,
+                    'plate_number' => $trip->plate_number,
+                    'remarks' => 'OB',
+                    'status' => 'On Queue',
+                    'queue_number' => $queueNumber
+                ]);
+            }
+
+            foreach($trip->transactions->where('status','OnBoard') as $transaction){
+                        $transaction->update([
+                            'status' => 'Departed'
+                        ]);
+
+                        $transaction->ticket->update([
+                           'isAvailable' => '1'
+                        ]);
+            }
+            return 'success';
+        }
+        return 'Failed';
     }
 
     public function updatePendingTransactions(){

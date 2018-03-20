@@ -345,6 +345,7 @@
         // then foreach($trips as $trip) {
         // $queueNumber = $trip->queue_number-1;
         // $trip->update(['queue_number' => $queueNumber]);
+        //
        $('#onBoardList'+terminalId+' li').each(function(){
            console.log($(this).data('val'));
        });
