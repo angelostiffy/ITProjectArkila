@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArchiveTable extends Migration
+class CreateArchiveMemberVanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateArchiveTable extends Migration
      */
     public function up()
     {
-        Schema::create('archive', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('archive_id');
+        Schema::create('archive_member_van', function (Blueprint $table) {
             $table->integer('member_id')
             ->unsigned();
-            $table->string('plate_number', 8);
-            $table->timestamps();
+            $table->string('plate_number', 8)->nullable();
+            $table->enum('archived', ['Driver', 'Operator', 'Van']);
 
             $table->foreign('plate_number')
             ->references('plate_number')->on('van')
@@ -30,7 +28,6 @@ class CreateArchiveTable extends Migration
             ->references('member_id')->on('member')
             ->onDelete('restrict')
             ->onUpdate('cascade');
-
         });
     }
 
@@ -41,6 +38,6 @@ class CreateArchiveTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('archive');
+        Schema::dropIfExists('archive_member_van');
     }
 }
