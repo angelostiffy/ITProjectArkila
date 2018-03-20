@@ -172,7 +172,10 @@ Route::get('/', function () {
     Route::patch('/updateQueueNumber/{trip}', 'TripsController@updateQueueNumber')->name('trips.updateQueueNumber');
     
     /* Transactions(Ticket) */
-    Route::resource('home/transactions', 'TransactionsController');
+    Route::resource('home/transactions', 'TransactionsController',[
+        'except' => ['update']
+    ]);
+    Route::patch('/home/transactions/{terminal}', 'TransactionsController@update')->name('transactions.update');
     Route::get('/listDestinations/{terminal}','TransactionsController@listDestinations')->name('transactions.listDestinations');
     Route::get('/listDiscounts','TransactionsController@listDiscounts')->name('transactions.listDiscounts');
     Route::get('/listTickets/{terminal}','TransactionsController@listTickets')->name('transactions.listTickets');

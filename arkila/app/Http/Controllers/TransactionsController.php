@@ -19,7 +19,8 @@ class TransactionsController extends Controller
      */
     public function index()
     {
-        $terminals = Terminal::all();
+        $terminals = Terminal::whereNotIn('terminal_id',[auth()->user()->terminal_id])->get();
+
         return view('transaction.index',compact('terminals'));
     }
 
@@ -47,23 +48,22 @@ class TransactionsController extends Controller
             'ticket' => 'exists:ticket,ticket_id'
         ]);
 
-        Transaction::create([
-            'terminal_id' => request('terminal'),
-            'ticket_id' => request('ticket'),
-            'destination_id' => request('destination'),
-            'fad_id' => request('discount'),
-            'trip_id' => Trip::where([
-                            ['queue_number',1],
-                            ['terminal_id',request('terminal')]
-                        ])->first()->trip_id
-        ]);
+        if( !(Transaction::where([['ticket_id',request('ticket')],['status','Pending']])->first()) ) {
+            Transaction::create([
+                'terminal_id' => request('terminal'),
+                'ticket_id' => request('ticket'),
+                'destination_id' => request('destination'),
+                'fad_id' => request('discount'),
+                'trip_id' => null,
+                'status' => 'Pending'
+            ]);
 
-        $ticket = Ticket::find(request('ticket'));
+            $ticket = Ticket::find(request('ticket'));
 
-        $ticket ->update([
-            'isAvailable' => 0
-        ]);
-
+            $ticket ->update([
+                'isAvailable' => 0
+            ]);
+        }
         return back();
     }
 
@@ -98,13 +98,22 @@ class TransactionsController extends Controller
     public function update(Terminal $terminal)
     {
         if( $trip = $terminal->trips->where('queue_number',1)->first() ){
-            $totalPassengers = count($trip->transactions);
-            $totalBooking = (Terminal::find(auth('Super-Admin')->user()->terminal_id)->booking_fee) * $totalPassengers;
+            $this->validate(request(),[
+                'transactions.*' => 'required|exists:transaction,transaction_id'
+            ]);
+
+            $totalPassengers = count($trip->transactions->where('status','OnBoard'));
+            \Log::info('Total Passengers: '.$totalPassengers);
+
+            $totalBooking = (Terminal::find(auth()->user()->terminal_id)->booking_fee) * $totalPassengers;
+            \Log::info('Total Booking: '.$totalBooking);
+
             $totalCommunity = (FeesAndDeduction::where('description', 'Community Fund')->first()->amount) * $totalPassengers;
+            \Log::info('Total Community: '.$totalCommunity);
 
             $trip->update([
                 'status' => 'Departed',
-                'total_passenger' => $totalPassengers,
+                'total_passengers' => $totalPassengers,
                 'total_booking_fee' => $totalBooking,
                 'community_fund' => $totalCommunity,
                 'date_departed' => Carbon::now(),
@@ -112,7 +121,7 @@ class TransactionsController extends Controller
             ]);
 
             if($totalPassengers <= 10){
-                $queueNumber = count(Trip::where('terminal_id',$trip->terminal_id)->whereNotNull('queue_number'));
+                $queueNumber = Trip::where('terminal_id',$terminal->terminal_id)->orderBy('queue_number','desc')->first()->queue_number+1;
 
                 Trip::create([
                     'driver_id' => $trip->driver_id,
@@ -124,15 +133,27 @@ class TransactionsController extends Controller
                 ]);
             }
 
-            foreach($trip->transactions->where('status','OnBoard') as $transaction){
+
+            foreach(request('transactions') as $transactionId){
+                $transaction = Transaction::find($transactionId);
+
                         $transaction->update([
-                            'status' => 'Departed'
+                            'status' => 'Departed',
+                            'trip_id' => $trip->trip_id
                         ]);
 
                         $transaction->ticket->update([
                            'isAvailable' => '1'
                         ]);
             }
+
+            foreach($terminal->trips()->whereNotNull('queue_number')->get() as $trip){
+                $tripQueueNum = ($trip->queue_number)-1;
+                $trip->update([
+                   'queue_number' => $tripQueueNum
+                ]);
+            }
+
             return 'success';
         }
         return 'Failed';
@@ -147,7 +168,8 @@ class TransactionsController extends Controller
             foreach(request('transactions') as $transactionId){
                 $transaction = Transaction::find($transactionId);
                     $transaction->update([
-                        'status' => 'OnBoard'
+                        'status' => 'OnBoard',
+                        'trip_id' => null
                     ]);
             }
 
@@ -168,7 +190,8 @@ class TransactionsController extends Controller
             foreach(request('transactions') as $transactionId){
                 $transaction = Transaction::find($transactionId);
                 $transaction->update([
-                    'status' => 'Pending'
+                    'status' => 'Pending',
+                    'trip_id' => null
                 ]);
             }
 

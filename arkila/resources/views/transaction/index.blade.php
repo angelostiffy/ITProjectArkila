@@ -140,13 +140,18 @@
                     <div class="col-md-8">
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
+
                                 @foreach($terminals as $terminal)
+                                    @if($terminal->trips->where('queue_number',1)->first()->plate_number ?? null)
                                     <li class="@if($terminals->first() == $terminal){{'active'}}@endif"><a href="#terminal{{$terminal->terminal_id}}" data-toggle="tab">{{$terminal->description}}</a></li>
+                                    @endif
                                 @endforeach
+
                             </ul>
                         
                             <div class="tab-content">
                                 @foreach($terminals as $terminal)
+                                    @if($terminal->trips->where('queue_number',1)->first()->plate_number ?? null)
                                 <div class="tab-pane @if($terminals->first() == $terminal){{'active'}}@endif" id="terminal{{$terminal->terminal_id}}">
                                     <div class="row">
                                                     <div id="list-left1" class="dual-list list-left col-md-5">
@@ -252,7 +257,9 @@
                                                     </div>
                                                 </div>  
                                 </div>
+                                    @endif
                                     @endforeach
+
                             </div>
 
                         </div>
@@ -335,20 +342,28 @@
     });
 
     $('button[name="depart"]').on('click', function(e){
-       var terminalId = $(e.currentTarget).val();
+        var terminalId = $(e.currentTarget).val();
 
-       //Transactions will be departed and ticket will now be available when clicked
-        //Trip will also be updated (remember the trip that is in the ticket sales is queue_number one
-        // First update the first queue_number to null ( where('queue_number',1) )
-        //Also update the total_passenger , total_booking fee date_Departed
-        // To update the queue number of other queue just get them by using $trips = Trip::whereNotNull('queue_number')
-        // then foreach($trips as $trip) {
-        // $queueNumber = $trip->queue_number-1;
-        // $trip->update(['queue_number' => $queueNumber]);
-        //
-       $('#onBoardList'+terminalId+' li').each(function(){
-           console.log($(this).data('val'));
-       });
+        if($('#onBoardList'+terminalId).children().length > 0){
+            var transactions = [];
+               $('#onBoardList'+terminalId+' li').each(function(){
+                    transactions.push($(this).data('val'));
+                    console.log(transactions);
+               });
+
+                $.ajax({
+                    method:'PATCH',
+                    url: '/home/transactions/'+terminalId,
+                    data: {
+                        '_token': '{{csrf_token()}}',
+                        'transactions' : transactions
+                    },
+                    success: function(){
+                        location.reload();
+                    }
+
+                });
+        }
     });
 
     $(document.body).on('click','#sellButt',function(){

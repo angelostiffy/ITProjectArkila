@@ -27,6 +27,7 @@ class CreateTransactionTable extends Migration
             ->nullable()
             ->unsigned();
             $table->integer('trip_id')
+                ->nullable()
             ->unsigned();
 
             $table->enum('status', ['Pending', 'Cancelled', 'Departed','OnBoard']);
