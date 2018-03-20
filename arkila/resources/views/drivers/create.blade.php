@@ -291,7 +291,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Address</label>
-                                <input value="{{old('contactPersonAddress')}}" name="contactPersonAddress" type="text" class="form-control time-mask" placeholder="Address" maxlength="50">
+                                <input value="{{old('contactPersonAddress')}}" name="contactPersonAddress" type="text" class="form-control" placeholder="Address" maxlength="50">
                             </div>
                         </div>
                         <div class="col-md-4">
