@@ -273,15 +273,23 @@
 	
 
     $(function(){
-     var url = window.location.href;
+
      var activeTab = document.location.hash;
-     $(".tab-pane").removeClass("active in"); 
+    if(!activeTab){
+        activeTab = "{{'#terminal'.$terminals->first()->terminal_id}}";
+    }
+
+     $(".tab-pane").removeClass("active in");
      $(".tab-menu").removeClass("active in"); 
      $(activeTab).addClass("active");
      $(activeTab + "-menu").addClass("active");
 
-     $('a[href="#'+ activeTab +'"]').tab('show')
+     $('a[href="#'+ activeTab +'"]').tab('show');
+     window.location.hash = activeTab;
+
     });
+
+
 
     $(function(){
       var hash = window.location.hash;
@@ -337,7 +345,6 @@
         // then foreach($trips as $trip) {
         // $queueNumber = $trip->queue_number-1;
         // $trip->update(['queue_number' => $queueNumber]);
-        //
        $('#onBoardList'+terminalId+' li').each(function(){
            console.log($(this).data('val'));
        });
