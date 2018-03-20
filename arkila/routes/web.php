@@ -113,6 +113,9 @@ Route::get('/', function () {
         'except' => ['index']
     ]);
     Route::get('home/settings', 'HomeController@settings')->name('settings.index');
+     
+     Route::post('home/settings/changeFeature', 'HomeController@changeFeature')->name('settings.changeFeature');
+
     /****************************************************/
     
     /************ User Management ******************************/

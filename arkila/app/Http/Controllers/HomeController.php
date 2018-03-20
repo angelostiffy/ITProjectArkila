@@ -79,6 +79,10 @@ class HomeController extends Controller
 
         return view('archive.index', compact('drivers', 'vans'));
 
-
     }
+    
+    public function changeFeatures() {
+        return view('settings.changeFeature');
+    }
+
 }
