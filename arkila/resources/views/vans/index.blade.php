@@ -164,7 +164,7 @@
         @foreach($vans->where('status', 'Active') as $van)
         <!-- MODAL DELETION -->
                         <div class="modal fade" id="{{ 'deleteWarning'. $van->plate_number }}">
-                        <div class="modal-dialog modal-sm">
+                        <div class="modal-dialog">
                             <div class="col-md-offset-2 col-md-8">
                                 <div class="modal-content">
                                     <div class="modal-header bg-red">

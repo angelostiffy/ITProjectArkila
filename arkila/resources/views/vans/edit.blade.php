@@ -59,15 +59,7 @@
 @endsection
 
 @section('form-btn')
-<a class="btn btn-primary" data-toggle="modal" data-target="#form-modal">Add Van-Driver</a>
-@endsection 
-@section('modal-title', 'Alert') 
-@section('modal-body')
-<h4>Are you sure you want to add?</h4>
-@endsection 
-@section('modal-btn')
-<button type="submit" class="btn btn-primary"> Yes</button>
-<button type="submit" class="btn btn-default"> No</button>
+<button class="btn btn-primary" type="submit">Add Van-Driver</button>
 @endsection
 @section('scripts')
 	@parent
