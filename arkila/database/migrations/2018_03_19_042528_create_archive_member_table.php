@@ -18,7 +18,7 @@ class CreateArchiveMemberTable extends Migration
             $table->integer('member_id')
             ->unsigned();
             $table->string('plate_number', 8)->nullable();
-            $table->enum('role', ['Driver', 'Operator']);
+            $table->enum('archived', ['Driver', 'Operator', 'Van']);
             $table->timestamps();
 
             $table->foreign('plate_number')

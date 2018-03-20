@@ -61,7 +61,7 @@ class LoginController extends Controller
         }
 
         if($user->isSuperAdmin() && $user->isEnable()){
-          return redirect('home/vans');
+          return redirect('/home');
         }
 
         if($user->isAdmin() && $user->isEnable()){
