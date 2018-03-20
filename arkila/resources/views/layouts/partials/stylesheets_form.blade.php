@@ -1,4 +1,3 @@
-@section('links')
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Ban Trans | @yield('title')</title>
@@ -36,5 +35,5 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <!-- style.css -->
-    {{ Html::style('css/style.css') }} 
-    @show
+    {{ Html::style('css/style.css') }}
+    {{ Html::style('css/pnotify.custom.min.css') }}

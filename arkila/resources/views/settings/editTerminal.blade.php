@@ -9,11 +9,11 @@
     <div class="form-group">
         <div class="form-group">
             <label>Terminal Name:</label>
-            <input type="text" class="form-control" name="editTerminalName"  maxlength="30" value="{{$terminal->description}}" required>
+            <input type="text" class="form-control" name="editTerminalName"  maxlength="30" value="{{$terminal->description}}">
         </div>
         <div class="form-group">
             <label for="">Booking Fee:</label>
-            <input class="form-control" type="number" step="0.25" name="editBookingFee" value="{{$terminal->booking_fee}}" min="1" max="5000" required>
+            <input class="form-control" type="number" step="0.25" name="editBookingFee" value="{{$terminal->booking_fee}}" min="1" max="5000">
         </div>
     </div>
 

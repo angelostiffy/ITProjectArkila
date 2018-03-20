@@ -172,6 +172,8 @@ Route::resource('home/transactions', 'TransactionsController');
 Route::get('/listDestinations/{terminal}','TransactionsController@listDestinations')->name('transactions.listDestinations');
 Route::get('/listDiscounts','TransactionsController@listDiscounts')->name('transactions.listDiscounts');
 Route::get('/listTickets/{terminal}','TransactionsController@listTickets')->name('transactions.listTickets');
+Route::patch('/updatePendingTransactions', 'TransactionsController@updatePendingTransactions')->name('transactions.updatePendingTransactions');
+Route::patch('/updateOnBoardTransactions', 'TransactionsController@updateOnBoardTransactions')->name('transactions.updateOnBoardTransactions');
 /********Archive ********/
 Route::patch('home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
 

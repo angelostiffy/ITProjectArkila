@@ -1,4 +1,3 @@
-@section('scripts')
     <!-- jQuery 3 -->
     {{ Html::script('adminlte/bower_components/jquery/dist/jquery.min.js') }}
     <!-- Bootstrap 3.3.7 -->
@@ -32,4 +31,4 @@
     {{ Html::script('adminlte/dist/js/demo.js') }}
     <!-- Parsley -->
     {{ Html::script('js/parsley.min.js') }}
-    @show
+    {{ Html::script('js/pnotify.custom.min.js') }}
