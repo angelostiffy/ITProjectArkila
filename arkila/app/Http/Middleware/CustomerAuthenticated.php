@@ -22,14 +22,14 @@ class CustomerAuthenticated
           }
 
           if(Auth::user()->isSuperAdmin() && Auth::user()->isEnable()){
-            return redirect('home/vans');
+            return redirect('/home');
           }
 
           if(Auth::user()->isAdmin() && Auth::user()->isEnable()){
             return redirect('home/settings');
           }
 
-          if(Auth::user->isCustomer() && Auth::user()->isEnable()){
+          if(Auth::user()->isCustomer() && Auth::user()->isEnable()){
             return $next($request);
           }
         }

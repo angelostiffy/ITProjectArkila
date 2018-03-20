@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('title', 'User Management')
+@section('content-header', 'User Management')
 @section('links')
 @parent
 <!-- DataTables -->
