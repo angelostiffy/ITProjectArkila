@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Member;
-use App\Archive;
+use App\ArchiveMember;
+use App\ArchiveVan;
+
 use App\Http\Requests\OperatorRequest;
 
 class OperatorsController extends Controller
@@ -187,40 +189,59 @@ class OperatorsController extends Controller
         return $result;
     }
 
-    public function archiveOperator(Member $operator)
+    public function archiveOperator(Member $operator, ArchiveVan $vanArchive, ArchiveMember $member)
     {
         $operatorId = $operator->member_id;
 
         if ($operator->drivers->count() == 0 && $operator->van->count() == 0)
         {
-            Archive::create([
+            ArchiveMember::create([
                 'operator_id' => $operatorId,
                 'archived' => 'Operator',
                 ]);
             
-        } else {
-            foreach ($operator->van as $vans) {
-                $vanid = $vans->plate_number;
-            }
-            dd($vanid);
-                    foreach ($operator->drivers as $driver) {
+        }
+        else
+        {
+                foreach ($operator->van as $vans) 
+                {
+                    $vanid = $vans->plate_number;
+                    $van = ArchiveVan::create([
+                        'plate_number' => $vanid,
+                        'archived' => 'Operator',
+                        ]);
+                        $van->archiveMember()->attach($operatorId);
+
+                    foreach ($operator->drivers as $driver)
+                    {
                         $id = $driver->member_id;
-                        Archive::create([
+                        $driverId = ArchiveMember::create([
                             'operator_id' => $operatorId,
                             'driver_id' => $id,
                             'archived' => 'Operator',
                             ]);
-        
-                        $driver->update([
-                            'operator_id' => null,
-                            ]);
-                  }
+            
+                        if ($driver->van()->count() == 1)
+                        {
+                            $driverId->archiveVan()->attach($vanid);
+                        }
+                    }        
+                }
             }
 
-                $operator->update([
-                    'status' => 'Inactive',
-                ]);
-        
+                    if($operator->drivers->count() == 0)
+                    {
+                        ArchiveMember::create([
+                            'operator_id' => $operatorId,
+                            'archived' => 'Operator',
+                            ]);
+                    }
+
+                    $operator->update([
+                        'status' => 'Inactive',
+                        'notification' => 'Disable',
+
+                    ]);
                 return redirect(route('operators.index'));
         }
     }

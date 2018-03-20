@@ -16,8 +16,7 @@ class CreateArchiveMemberVanTable extends Migration
         Schema::create('archive_member_van', function (Blueprint $table) {
             $table->integer('member_id')
             ->unsigned();
-            $table->string('plate_number', 8)->nullable();
-            $table->enum('archived', ['Driver', 'Operator', 'Van']);
+            $table->string('plate_number', 8);
 
             $table->foreign('plate_number')
             ->references('plate_number')->on('van')
