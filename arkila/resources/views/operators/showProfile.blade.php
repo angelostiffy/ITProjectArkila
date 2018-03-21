@@ -157,14 +157,14 @@
                                                 <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Add Driver</a>
                                             @endif
                                             <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-default" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i>View</a>
-                                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteVan"><i class="fa fa-trash"></i> Delete</button>
+                                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="#{{ 'deleteVan'.$van->plate_number }}"><i class="fa fa-trash"></i> Delete</button>
                                         
                                     </div>
                                 </td>
                             </tr>
                             
                             <!--DELETE MODAL MIGUEL-->
-                            <div class="modal fade" id="deleteVan">
+                            <div class="modal fade" id="{{ 'deleteVan'. $van->plate_number }}">
                                 <div class="modal-dialog">
                                     <div class="col-md-offset-2 col-md-8">
                                         <div class="modal-content">
@@ -178,7 +178,7 @@
                                                    <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
                                                </div>
                                                <div class="col-md-10">
-                                                <p style="font-size: 110%;">Are you sure you want to delete "yung user para pogi"</p>
+                                                <p style="font-size: 110%;">Are you sure you want to delete "{{$van->plate_number}}"</p>
                                                </div>
                                             </div>
                                             <div class="modal-footer">
