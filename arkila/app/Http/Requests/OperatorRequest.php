@@ -34,36 +34,36 @@ class OperatorRequest extends FormRequest
             case 'POST':
             {
                 return [
-                    'lastName' => ['required',new checkName,'max:35'],
-                    'firstName' => ['required',new checkName,'max:35'],
-                    'middleName' => ['required',new checkName,'max:35'],
+                    'lastName' => ['required',new checkName,'max:25'],
+                    'firstName' => ['required',new checkName,'max:25'],
+                    'middleName' => ['required',new checkName,'max:25'],
                     'contactNumber' => [new checkContactNum],
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
                     'birthDate' => ['required','date_format:m/d/Y','after:1/1/1918', new checkAge],
-                    'birthPlace' => [new checkName,'required','max:50'],
+                    'birthPlace' => [new checkName,'required','max:30'],
                     'gender' => [
                         'required',
                         Rule::in(['Male', 'Female'])
                     ],
-                    'citizenship' => 'alpha|required|max:35',
+                    'citizenship' => 'alpha|required|max:25',
                     'civilStatus' => [
                         'required',
                         Rule::in(['Single', 'Married', 'Divorced', 'Widowed'])
                     ],
-                    'nameOfSpouse' => ['required_if:civilStatus,Married','required_with:spouseBirthDate','max:120', 'nullable',new checkName],
+                    'nameOfSpouse' => ['required_if:civilStatus,Married','required_with:spouseBirthDate','max:40', 'nullable',new checkName],
                     'spouseBirthDate' => 'required_with:nameOfSpouse|nullable|date|before:today',
-                    'fathersName' => ['required_with:fatherOccupation','max:120', 'nullable',new checkName],
-                    'fatherOccupation' => ['required_with:fathersName','max:50', 'nullable', new checkOccupation],
-                    'mothersName' => ['required_with:motherOccupation','max:120', 'nullable',new checkName],
-                    'motherOccupation' => ['required_with:mothersName','max:50', 'nullable', new checkOccupation],
-                    'contactPerson' => ['required','max:120', 'nullable', new checkName],
-                    'contactPersonAddress' => 'required|max:50',
+                    'fathersName' => ['required_with:fatherOccupation','max:40', 'nullable',new checkName],
+                    'fatherOccupation' => ['required_with:fathersName','max:25', 'nullable', new checkOccupation],
+                    'mothersName' => ['required_with:motherOccupation','max:40', 'nullable',new checkName],
+                    'motherOccupation' => ['required_with:mothersName','max:25', 'nullable', new checkOccupation],
+                    'contactPerson' => ['required','max:40', 'nullable', new checkName],
+                    'contactPersonAddress' => 'required|max:100',
                     'contactPersonContactNumber' => ['required', new checkContactNum],
                     'sss' => 'unique:member,SSS|required|max:10',
                     'licenseNo' => ['required_with:licenseExpiryDate','max:20'],
                     'licenseExpiryDate' => 'required_with:licenseNo|nullable|date|after:today',
-                    'children.*' => ['required_with:childrenBDay.*','distinct', 'nullable', new checkName, 'max:120'],
+                    'children.*' => ['required_with:childrenBDay.*','distinct', 'nullable', new checkName, 'max:40'],
                     'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
                 ];
             }
@@ -71,36 +71,36 @@ class OperatorRequest extends FormRequest
             {
 //                dd($this->all());
                     return [
-                        'lastName' => ['required',new checkName,'max:35'],
-                        'firstName' => ['required',new checkName,'max:35'],
-                        'middleName' => ['required',new checkName,'max:35'],
+                        'lastName' => ['required',new checkName,'max:25'],
+                        'firstName' => ['required',new checkName,'max:25'],
+                        'middleName' => ['required',new checkName,'max:25'],
                         'contactNumber' => [new checkContactNum],
                         'address' => 'required|max:100',
                         'provincialAddress' => 'required|max:100',
                         'birthDate' => ['required','date_format:m/d/Y','after:1/1/1918', new checkAge],
-                        'birthPlace' => [new checkName,'required','max:50'],
+                        'birthPlace' => [new checkName,'required','max:30'],
                         'gender' => [
                             'required',
                             Rule::in(['Male', 'Female'])
                         ],
-                        'citizenship' => 'alpha|required|max:35',
+                        'citizenship' => 'alpha|required|max:25',
                         'civilStatus' => [
                             'required',
                             Rule::in(['Single', 'Married', 'Divorced', 'Widowed'])
                         ],
-                        'nameOfSpouse' => ['required_if:civilStatus,Married','required_with:spouseBirthDate','max:120', 'nullable', new checkName],
+                        'nameOfSpouse' => ['required_if:civilStatus,Married','required_with:spouseBirthDate','max:40', 'nullable', new checkName],
                         'spouseBirthDate' => 'required_with:nameOfSpouse|nullable|date|before:today',
-                        'fathersName' => ['required_with:fatherOccupation','max:120', 'nullable', new checkName],
-                        'fatherOccupation' => ['required_with:fathersName','max:50', 'nullable', new checkOccupation],
-                        'mothersName' => ['required_with:motherOccupation','max:120', 'nullable',new checkName],
-                        'motherOccupation' => ['required_with:mothersName','max:50', 'nullable', new checkOccupation],
-                        'contactPerson' => ['required','max:120', 'nullable', new checkName],
-                        'contactPersonAddress' => 'required|max:50',
+                        'fathersName' => ['required_with:fatherOccupation','max:40', 'nullable', new checkName],
+                        'fatherOccupation' => ['required_with:fathersName','max:25', 'nullable', new checkOccupation],
+                        'mothersName' => ['required_with:motherOccupation','max:40', 'nullable',new checkName],
+                        'motherOccupation' => ['required_with:mothersName','max:25', 'nullable', new checkOccupation],
+                        'contactPerson' => ['required','max:40', 'nullable', new checkName],
+                        'contactPersonAddress' => 'required|max:100',
                         'contactPersonContactNumber' => ['required',new checkContactNum],
                         'sss' => 'unique:member,SSS,'.$this->route('operator')->member_id.',member_id|required|max:10',
                         'licenseNo' => ['required_with:licenseExpiryDate','max:20'],
                         'licenseExpiryDate' => 'required_with:licenseNo|nullable|date|after:today',
-                        'children.*' => ['required_with:childrenBDay.*','distinct', 'nullable', new checkName,'max:120'],
+                        'children.*' => ['required_with:childrenBDay.*','distinct', 'nullable', new checkName,'max:40'],
                         'childrenBDay.*' => 'required_with:children.*|nullable|date|before:tomorrow'
                     ];
 

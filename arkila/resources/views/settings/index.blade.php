@@ -1,4 +1,6 @@
-@extends('layouts.master') @section('title', 'Settings') @section('content')
+@extends('layouts.master') 
+@section('title', 'Settings') 
+@section('content')
 
 <div class="row">
     <div class="col-md-4">
@@ -15,7 +17,7 @@
                 <ul class="nav nav-pills nav-stacked">
                     <li>
                         <a href="#">
-                            Online Reservation Feature
+                            Online Reservation
                             <span class="label pull-right">         
                                 <label class="switch">
                                     <input type="checkbox">
@@ -25,7 +27,7 @@
                         </a>
                     </li>
                     <li><a href="#">
-                            Walk-in Reservation Feature
+                            Walk-in Reservation
                             <span class="label pull-right">         
                                 <label class="switch">
                                     <input type="checkbox">
@@ -36,7 +38,7 @@
                     </li>
                     <li>
                         <a href="#">
-                             Online Van Rental Feature
+                             Online Van Rental
                             <span class="label pull-right">         
                                 <label class="switch">
                                     <input type="checkbox">
@@ -47,7 +49,7 @@
                     </li>
                     <li>
                         <a href="#">
-                             Walk-in Van Rental Feature
+                             Walk-in Van Rental
                             <span class="label pull-right">         
                                 <label class="switch">
                                     <input type="checkbox">
@@ -395,12 +397,12 @@
                                     <td>         
                                         <div class="text-center">
                                             <a href="{{route('tickets.edit',[$ticket->ticket_id])}}" class="btn btn-primary"><i class="fa fa-edit" ></i>Edit</a>
-                                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="#"><i class="fa fa-trash"></i>Delete</button>
+                                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="#{{'deleteTicket'.$ticket->ticket_id}}"><i class="fa fa-trash"></i>Delete</button>
                                         </div>
                                      
                                     </td>
                                     <!-- Modal for Delete-->
-                                    <div class="modal fade" id="ticket">
+                                    <div class="modal fade" id="{{'deleteTicket'.$ticket->ticket_id}}">
                                         <div class="modal-dialog">
                                             <div class="col-md-offset-2 col-md-8">
                                                 <div class="modal-content">
@@ -418,10 +420,11 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+
                                                         <form action="{{route('tickets.destroy',[$ticket->ticket_id])}}" method="POST">
                                                             {{csrf_field()}}
                                                             {{method_field('DELETE')}}
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                                                             <button type="submit" name="driverArc" value="Arch " class="btn btn-danger" style="width:22%;">Delete</button>
                                                         </form>
                                                     </div>
@@ -475,6 +478,23 @@
           });
         });
       });
+        
+        $(document).ready(function(){
+            $('.status').on('click', function(event){
+                id = $(this).data('id');
+                    $.ajax({
+                    type: 'POST',
+                    url: "{{ URL::route('settings.changeFeature') }}",
+                    data: {
+                      '_token': $('input[name=_token]').val(),
+                      'id': id
+                    },
+                    success: function(data){
+                      //empty
+                    },
+                });
+            });
+        });    
     
     </script>
     <script>
@@ -491,8 +511,6 @@
         })
 
     </script>
-
-
     
     
     <style>

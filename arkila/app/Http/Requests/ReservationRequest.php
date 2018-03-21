@@ -40,18 +40,32 @@ class ReservationRequest extends FormRequest
 
 
         $dateToday = $request->date;
+        $mm = substr($dateToday, '0', 2);
+        $dd = substr($dateToday, '3', 2);
+        $yy = substr($dateToday, '6', 4);
+        if ($mm == 'mm' || $dd == 'dd' || $yy == 'yyyy' || $dateToday == null) {
+            return [
+                "name" => [new checkName, 'required', 'max:30'],
+                "date" => "required|date_format:m/d/Y|after_or_equal:today",
+                "dest" => "required",
+                "time" => [new checkTime, 'required'],
+                "seat" => "required|numeric|digits_between:1,2|min:0|max:15",
+                "contactNumber" => [new checkContactNum],
+                "amount" => [new checkCurrency,'numeric','min:0'],
+            ];
+        }
         $dateCarbon = new Carbon(request('date'));
         $dateFormatted = $dateCarbon->format('m/d/Y');
-
+        
         if ($dateFormatted !== $dateFormattedNow) {
-                return [
-                    "name" => [new checkName, 'required', 'max:30'],
-                    "date" => "required|date_format:m/d/Y|after_or_equal:today",
-                    "dest" => "required",
-                    "time" => [new checkTime, 'required'],
-                    "seat" => "required|numeric|digits_between:1,2|min:0|max:15",
-                    "contactNumber" => [new checkContactNum],
-                    "amount" => [new checkCurrency,'numeric','min:0'],
+            return [
+                "name" => [new checkName, 'required', 'max:30'],
+                "date" => "required|date_format:m/d/Y|after_or_equal:today",
+                "dest" => "required",
+                "time" => [new checkTime, 'required'],
+                "seat" => "required|numeric|digits_between:1,2|min:0|max:15",
+                "contactNumber" => [new checkContactNum],
+                "amount" => [new checkCurrency,'numeric','min:0'],
                 ];
         } else {
             return [
@@ -79,12 +93,10 @@ class ReservationRequest extends FormRequest
             "date.date_format" => "Please enter a valid date format (mm/dd/yyyy)",
             "time.required" => "Please enter the preffered departure time",
             "time.after" => "The time must be a time after ". $thisDate ."",
+            "dest.required" => "The destination field is required",
             "seat.required" => "Please enter the number of seat for the reservation",
             "seat.numeric" => "The seat must be a number",
             "seat.digits_between" => "Please enter a number of seat between 1-15",
-            "contact.required" => "Please enter the contact number",
-            "contact.numeric" => "The contact number must be a number",
-            "contact.digits" => "Contact number must be exactly 10 digits (926XXXXXXX)",
 
         ];
     }

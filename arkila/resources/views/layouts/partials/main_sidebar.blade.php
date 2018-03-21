@@ -26,7 +26,7 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li class="active">
-                <a href="#">
+                <a href="/home">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
@@ -45,8 +45,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Rental</a></li>
-                    <li><a href="$"><i class="fa fa-circle-o"></i> Reservation</a></li>
+                    <li><a href="{{route('rental.index')}}"><i class="fa fa-circle-o"></i> Rental</a></li>
+                    <li><a href="{{route('reservations.index')}}"><i class="fa fa-circle-o"></i> Reservation</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -75,14 +75,25 @@
             </li>
             <li class="header">SETTING</li>
             <li>
-                <a href="#">
+                <a href="{{route('settings.index')}}">
                     <i class="fa fa-gear"></i> <span>Settings</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{route('usermanagement.dashboard')}}">
                     <i class="fa fa-male"></i> <span>User Management</span>
                 </a>
+            </li>
+
+            <li>
+                <a href="{{route('logout')}}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+            <i class="fa fa-sign-out"></i>
+            <span>Sign Out</span>
+          </a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            {{csrf_field()}}
+          </form>
             </li>
         </ul>
     </section>

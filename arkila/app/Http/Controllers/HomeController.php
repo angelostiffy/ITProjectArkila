@@ -13,7 +13,8 @@ use App\Van;
 
 use App\Trip;
 
-use App\Member;
+use App\ArchiveMember;
+use App\ArchiveVan;
 
 
 class HomeController extends Controller
@@ -74,11 +75,26 @@ class HomeController extends Controller
     //     return view('drivermodule.index', compact('announcements', 'trips'));
     //   }
     public function archive() {
-        $drivers = Member::latest()->where('status', 'Inactive')->get();
-        $vans = Van::latest()->where('status', 'Inactive')->get();
+        $operators = ArchiveMember::allOperators()->get();
 
-        return view('archive.index', compact('drivers', 'vans'));
-
+        return view('archive.index', compact('operators'));
 
     }
+
+    public function showProfile(ArchiveMember $operator)
+    {
+        return view('archive.operatorArchive',compact('operator'));
+    }
+
+    public function vanDriver() {
+        $drivers = ArchiveMember::all();
+        $vans = ArchiveVan::all();
+
+        return view('archive.vanDriver', compact('drivers', 'vans'));
+
+    }
+    public function changeFeatures() {
+        return view('settings.changeFeature');
+    }
+
 }

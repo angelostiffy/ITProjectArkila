@@ -1,9 +1,16 @@
 @if (session('success'))
-    <div class="alert alert-dismissable alert-success">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <strong>
-            {{ session('success') }}
-        </strong>
+        <script type="text/javascript">
+		$(function(){
+		
+		  new PNotify({
+		    title: 'Error',
+		    text: '{{ session('success') }}',
+		    type: 'success',
+		    hide: 'false',
+		    nonblock: {
+		        nonblock: true
+		    }
+		  });
+		});
+	</script>
 @endif

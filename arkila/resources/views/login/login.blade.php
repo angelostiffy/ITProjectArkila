@@ -1,25 +1,4 @@
-@extends('layouts.partials.style_links')
-<div class="container">
-    <div class="card card-container">
-        <div id="userImg" class="text-center">
-            <img id="imgSize" src="{{ URL::asset('img/user_icon.png') }}">
-        </div>
-        <form method="POST" action="/login">
-          {{csrf_field()}}
-            <input type="text" name="username" class="form-control" style="margin-bottom:3%" placeholder="Username" required autofocus>
-            <input type="password" name="password" class="form-control" placeholder="Password" style="margin-bottom:8%" required>
-            <div class="checkbox">
-                
-            </div>
-            <button class="btn btn btn-primary btn-block" type="submit">Log in</button>
-        </form>
-        <!-- /form -->
-        <a href="#" class="forgot-password pull-right">Forgot Password?</a>
-    </div>
-    <!-- /card-container -->
-</div>
-<!-- /container -->
-@section('scripts') @parent
+@include('layouts.partials.stylesheets')
 <style>
     body,
     html {
@@ -52,4 +31,24 @@
     }
 </style>
 
-@endsection
+<div class="container">
+    <div class="card card-container">
+        <div id="userImg" class="text-center">
+            <img id="imgSize" src="{{ URL::asset('img/user_icon.png') }}">
+        </div>
+        <form method="POST" action="/login">
+          {{csrf_field()}}
+            <input type="text" name="username" class="form-control" style="margin-bottom:3%" placeholder="Username" required autofocus>
+            <input type="password" name="password" class="form-control" placeholder="Password" style="margin-bottom:8%" required>
+            <div class="checkbox">
+                
+            </div>
+            <button class="btn btn btn-primary btn-block" type="submit">Log in</button>
+        </form>
+        <!-- /form -->
+        <a href="#" class="forgot-password pull-right">Forgot Password?</a>
+    </div>
+    <!-- /card-container -->
+</div>
+<!-- /container -->
+@include('layouts.partials.scripts')

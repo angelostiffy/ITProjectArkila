@@ -70,12 +70,12 @@
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">
                     <h4>Personal Information</h4>
-                    @include('message.error')
+                   
                     <div class="row">
                         <div class="col-md-4">
                         <div class=" form-group">
                             @if(isset($operator))
-                                <label for="opName">Operator Name:</label>
+                                <label for="opName">Operator Name: </label>
                                 <span id="opName">{{$operator->full_name}}</span>
                             @elseif(isset($vanNd))
                                 <div class="col-md-4">
@@ -107,19 +107,19 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Last Name:</label>
-                                <input value="{{old('lastName')}}" name="lastName" type="text" class="form-control" placeholder="Last Name" maxlength="35">
+                                <label>Last Name: <span class="text-red">*</span></label>
+                                <input value="{{old('lastName')}}" name="lastName" type="text" class="form-control" placeholder="Last Name" maxlength="35" required="">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>First Name:</label>
+                                <label>First Name: <span class="text-red">*</span></label>
                                 <input value="{{old('firstName')}}" name="firstName" type="text" class="form-control" placeholder="First Name" maxlength="35">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Middle Name:</label>
+                                <label>Middle Name: <span class="text-red">*</span></label>
                                 <input value="{{old('middleName')}}" name="middleName" type="text" class="form-control" placeholder="Middle Name" maxlength="35">
                             </div>
                         </div>
@@ -127,7 +127,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Contact Number</label>
+                                <label>Contact Number <span class="text-red">*</span></label>
                                 <div class="input-group">
                                   <div class="input-group-addon">
                                     <span>+63</span>
@@ -138,13 +138,13 @@
                         </div>
                         <div class="col-md-4">
                              <div class="form-group">
-                                <label>Address:</label>
+                                <label>Address: <span class="text-red">*</span></label>
                                 <input value="{{old('address')}}" name="address" type="text" class="form-control" placeholder="Address" maxlength="100">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Provincial Address:</label>
+                                <label>Provincial Address: <span class="text-red">*</span></label>
                                 <input value="{{old('provincialAddress')}}" name="provincialAddress" type="text" class="form-control" placeholder="Provincial Address" maxlength="100">
                             </div>
                         </div>
@@ -152,7 +152,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Birthdate:</label>
+                                <label>Birthdate: <span class="text-red">*</span></label>
                                 <div class="input-group">
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
@@ -163,14 +163,14 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Birthplace:</label>
+                                <label>Birthplace: <span class="text-red">*</span></label>
                                 <input value="{{old('birthPlace')}}" name="birthPlace" type="text" class="form-control" placeholder="Birthplace" maxlength="50">
                             </div>
                         </div>
                     
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Gender:</label>
+                                <label>Gender: <span class="text-red">*</span></label>
                                 <div class="radio">
                                     <label for=""> Male</label>
                                     <label class="radio-inline">
@@ -188,7 +188,7 @@
                     <div class="row">    
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Citizenship:</label>
+                                <label>Citizenship: <span class="text-red">*</span></label>
                                 <input value="{{old('citizenship')}}" name="citizenship" type="text" class="form-control" placeholder="Citizenship" maxlength="35">
                             </div>
                         </div>
@@ -214,13 +214,13 @@
                     <div class="row">    
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>License No:</label>
+                                <label>License No: <span class="text-red">*</span></label>
                                 <input value="{{old('licenseNo')}}" name="licenseNo" type="text" class="form-control" placeholder="License No." maxlength="20">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>License Expiry Date:</label>
+                                <label>License Expiry Date: <span class="text-red">*</span></label>
                                 <div class="input-group">
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
@@ -284,19 +284,19 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Contact Person</label>
+                                <label>Contact Person: <span class="text-red">*</span></label>
                                 <input value="{{old('contactPerson')}}" name="contactPerson" type="text" class="form-control" placeholder="Contact Person In Case of Emergency" maxlength="120">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Address</label>
+                                <label>Address: <span class="text-red">*</span></label>
                                 <input value="{{old('contactPersonAddress')}}" name="contactPersonAddress" type="text" class="form-control" placeholder="Address" maxlength="50">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Contact Number</label>
+                                <label>Contact Number: <span class="text-red">*</span></label>
                                 <div class="input-group">
                                   <div class="input-group-addon">
                                     <span>+63</span>
@@ -384,7 +384,7 @@
             <div style="overflow:auto;">
                     <div style="float:right;">
                         <button type="button" id="prevBtn" onclick="nextPrev(-1)" class = "btn btn-default">Previous</button>
-                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class = "btn btn-default">Next</button>
+                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class = "btn btn-primary">Next</button>
                     </div>
                 </div>
         </div>
@@ -393,9 +393,8 @@
 @section('scripts')
 @parent
  <script>
-
      $(document).ready(function(){
-         cloneDatePicker();
+         cloneDateMask();
          switch($('select[name="civilStatus"]').val()){
              case "Single":
                  $('input[name="nameOfSpouse"]').prop('disabled',true);
@@ -430,12 +429,10 @@
          });
      });
 
-        function cloneDatePicker() {
+        function cloneDateMask() {
 
             //Date picker
-            $('.datepicker').datepicker({
-                autoclose: true
-            })
+            $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
 
         }
 
@@ -456,7 +453,7 @@
             
             }
             tablebody.appendChild(iClone);
-            cloneDatePicker();
+            cloneDateMask();
         }
         
 
@@ -544,8 +541,9 @@
           radioClass   : 'iradio_flat-blue'
         });
     })
+
      $('[data-mask]').inputmask()
      $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
-
+     $('.time-mask').inputmask('hh:mm xm')
     </script>
 @endsection

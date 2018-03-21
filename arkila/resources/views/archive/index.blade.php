@@ -5,11 +5,82 @@
 
 <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#drivers" data-toggle="tab">Drivers</a></li>
+        <li class="active"><a href="#operator" data-toggle="tab">Operators</a></li>
+        <li><a href="#drivers" data-toggle="tab">Drivers</a></li>
         <li><a href="#vans" data-toggle="tab">Vans</a></li>
     </ul>
     <div class="tab-content">
-        <div class="active tab-pane" id="drivers">
+        
+    <div class="active tab-pane" id="operator">
+        <div class="box">
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table class="table table-bordered table-striped driverVan">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Contact Number</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach ($operators as $operator)
+                        <tr>
+                            <td>{{ $operator->operator->full_name }}</td>
+                            <td>{{ $operator->archiveVan()->first()->plate_number ?? $operator->archiveVan()->first()}}</td>
+                            <td>{{ $operator->operator->contact_number }}</td>
+                            <td>
+                                <div class="text-center">
+                                    <a href="{{ route('archive.showProfile', [$operator->operator_id]) }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#{{'deleteWarning'.$operator->member_id}}"><i class="fa fa-trash"></i> Delete</button>
+                                </div>
+                                <!-- /.text -->
+                            </td>
+                        </tr>
+                        <!-- Modal for Delete-->
+                        <div class="modal fade" id="{{'deleteWarning'.$operator->member_id}}">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-red">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                                        <h4 class="modal-title"> Confirm</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h1>
+                                            <i class="fa fa-exclamation-triangle pull-left text-yellow"></i>
+                                        </h1>
+                                        <p>Are you sure you want to delete "{{ $operator->full_name }}"</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        @if($operators && $operator)
+                                        <form action="{{ route('operators.archiveOperator', [$operator->member_id]) }}" method="POST">
+                                            {{ csrf_field() }}
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                        @endif
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+                        @endforeach
+                    </tbody>
+                </table>
+
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.tab-pane -->
+    </div>
+        
+        <div class="tab-pane" id="drivers">
             <div class="box">
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -17,8 +88,8 @@
 
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Age</th>
+                                <th>Operator</th>
+                                <th>Plate No.</th>
                                 <th>Contact Number</th>
                                 <th>Operator</th>
                                 <th>Actions</th>
@@ -26,12 +97,12 @@
                         </thead>
                         <tbody>
 
-                        @foreach ($drivers as $driver)
+                        @foreach ($operators as $operator)
                             <tr>
-                                <td>{{ $driver->full_name }}</td>
-                                <td>{{ $driver->age }}</td>
-                                <td>{{ $driver->contact_number }}</td>
-                                <td>{{ $driver->operator->full_name }}</td>
+                                <td>{{ $operator->operator->full_name }}</td>
+                                <td>{{ $operator->archiveVan()->first()->plate_number ?? $operator->archiveVan()->first()}}</td>
+                                <td>{{ $operator->operator->contact_number }}</td>
+                                <td>Aw</td>
                                 <td>
                                     <div class="text-center">
 
@@ -58,12 +129,12 @@
                                                            <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
                                                        </div>
                                                        <div class="col-md-10">
-                                                        <p style="font-size: 110%;">Are you sure you want to delete "{{ $driver->full_name }}"</p>
+                                                        <p style="font-size: 110%;">Are you sure you want to delete ""</p>
                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         
-                                                            <form method="POST" action="{{route('drivers.destroy',[$driver->member_id])}}">
+                                                            <form method="POST" action="destroy">
                                                                 {{csrf_field()}}
                                                                 {{method_field('DELETE')}}
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
@@ -114,13 +185,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($vans as $van)
+
                                     <tr>
-                                        <td>{{ $van->plate_number }}</td>
-                                        <td>{{ $van->driver()->first()->full_name ?? $van->driver()->first() }}</td>
-                                        <td>{{ $van->operator()->first()->full_name ??  $van->operator()->first() }}</td>
-                                        <td>{{ $van->model }}</td>
-                                        <td>{{ $van->seating_capacity }}</td>
+                                        <td>a</td>
+                                        <td>b</td>
+                                        <td>c</td>
+                                        <td>d</td>
+                                        <td>e</td>
                                         <td>
                                             <div class="text-center">
                                                  
@@ -130,7 +201,6 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    @endforeach
                                     
                                     <!--DELETE MODAL MIGUEL-->
                                     <div class="modal fade" id="deleteVan">
@@ -153,15 +223,20 @@
                                                     <div class="modal-footer">
                                                         
                                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
-
-
+                                                    
                         </tbody>
                     </table>
                 </div>
                 <!-- /.box-body -->
             </div>
+                            
             <!-- /.box -->
         </div>
         <!-- /.tab-pane -->

@@ -37,10 +37,12 @@
 @section('form-action', route('reservations.store')) 
 @section('form-method', 'POST') 
 @section('form-body') {{csrf_field()}}
+@section('backRef') {{ route('reservations.index') }} @endsection
+
 
 <div class="box box-warning">
     <div class="box-header with-border text-center">
-        <a href="{{ URL::previous() }}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+        <a href="@yield('backRef')" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
         <h3 class="box-title">
             Book a Seat
         </h3>
@@ -244,6 +246,7 @@
 
         var time = document.getElementById('timepicker').value;
         document.getElementById('timeView').textContent = time;
+
     }
     
     $('[data-mask]').inputmask()

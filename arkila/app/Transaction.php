@@ -29,4 +29,8 @@ class Transaction extends Model
     {
         return $this->belongsTo(Ticket::Class, 'ticket_id');
     }
+
+    public function terminal(){
+        return $this->belongsTo(Terminal::Class, 'terminal_id');
+    }
 }
