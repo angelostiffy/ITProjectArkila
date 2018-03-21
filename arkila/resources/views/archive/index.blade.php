@@ -28,12 +28,12 @@
                     <tbody>
                         @foreach ($operators as $operator)
                         <tr>
-                            <td class="hidden-xs" name="opId">{{ $operator->member_id }}</td>
-                            <td><a href="operators/{{ $operator->member_id }}">{{ $operator->first_name }} {{ $operator->middle_name }} {{ $operator->last_name }}</a></td>
-                            <td>{{ $operator->age }}</td>
+                            <td>{{ $operator->operator->full_name }}</td>
+                            <td>{{ $operator->archiveVan()->first()->plate_number ?? $operator->archiveVan()->first()}}</td>
+                            <td>{{ $operator->operator->contact_number }}</td>
                             <td>
                                 <div class="text-center">
-                                    <a href="{{ route('operators.showProfile', [$operator->member_id]) }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
+                                    <a href="{{ route('archive.showProfile', [$operator->operator_id]) }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#{{'deleteWarning'.$operator->member_id}}"><i class="fa fa-trash"></i> Delete</button>
                                 </div>
                                 <!-- /.text -->

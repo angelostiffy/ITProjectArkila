@@ -27,10 +27,10 @@
                         </thead>
                         <tbody>
 
-                        @foreach ($operators as $operator)
+                        @foreach ($drivers as $driver)
                             <tr>
-                                <td>{{ $operator->operator_id }}</td>
-                                <td>{{ $operator->archiveVan()->first()->plate_number ?? $operator->archiveVan()->first()}}</td>
+                                <td>{{ $driver->drivers->full_name }}</td>
+                                <td>{{ $driver->archiveVan()->first()->plate_number ?? $driver->archiveVan()->first()}}</td>
                                 <td>Hi</td>
                                 <td>Aw</td>
                                 <td>

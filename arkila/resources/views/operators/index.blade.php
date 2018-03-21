@@ -28,7 +28,7 @@
                     <td>{{ $operator->age }}</td>
                     <td>
                         <div class="text-center">
-                            <a href="{{ route('operators.showProfile', [$operator->member_id]) }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
+                            <a href="{{ route('operators.showProfile', [$operator->member_id]) }}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#{{'deleteWarning'.$operator->member_id}}"><i class="fa fa-trash"></i> Delete</button>
                         </div>
                         <!-- /.text -->
