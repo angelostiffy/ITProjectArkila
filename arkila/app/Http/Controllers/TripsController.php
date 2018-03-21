@@ -122,10 +122,20 @@ class TripsController extends Controller
         return "Success";
     }
 
-    public function updateDestination(Trip $trip, Terminal $destination){
-        $trip->update([
-            'destination_id' => 'destination'
+    public function updateDestination(Trip $trip){
+        $this->validate(request(),[
+            'destination' => 'required|exists:terminal,terminal_id'
         ]);
+
+        $queueNum = count(Trip::where('terminal_id',$trip->terminal_id)->whereNotNull('queue_number'))+1;
+
+        $trip->update([
+            'terminal_id' => request('destination'),
+            'queue_number' => $queueNum
+        ]);
+
+
+        return back();
     }
 
     public function updateQueueNumber(Trip $trip){

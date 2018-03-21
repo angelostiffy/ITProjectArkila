@@ -36,4 +36,7 @@ class Trip extends Model
         return $this->hasMany(Transaction::class, 'trip_id');
     }
 
+    public function terminal(){
+        return $this->belongsTo(Terminal::class, 'terminal_id');
+    }
 }

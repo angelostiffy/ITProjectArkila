@@ -120,7 +120,7 @@ class TransactionsController extends Controller
             ]);
 
             if($totalPassengers <= 10){
-                $queueNumber = Trip::where('terminal_id',$terminal->terminal_id)->orderBy('queue_number','desc')->first()->queue_number+1;
+                $queueNumber = count(Trip::where('terminal_id',$terminal->terminal_id)->whereNotNull('queue_number')->get())+1;
 
                 Trip::create([
                     'driver_id' => $trip->driver_id,

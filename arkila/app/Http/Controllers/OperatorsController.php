@@ -192,7 +192,6 @@ class OperatorsController extends Controller
     public function archiveOperator(Member $operator, ArchiveVan $vanArchive, ArchiveMember $member)
     {
         $operatorId = $operator->member_id;
-
         if ($operator->drivers->count() == 0 && $operator->van->count() == 0)
         {
             ArchiveMember::create([
@@ -205,6 +204,7 @@ class OperatorsController extends Controller
         {
                 foreach ($operator->van as $vans) 
                 {
+                    $driver = $vans->driver()->first()->member_id ?? $vans->driver()->first();
                     $vanid = $vans->plate_number;
                     $van = ArchiveVan::create([
                         'plate_number' => $vanid,
@@ -212,21 +212,23 @@ class OperatorsController extends Controller
                         ]);
                         $van->archiveMember()->attach($operatorId);
 
-                    foreach ($operator->drivers as $driver)
+                        if ($driver !== null) {
+                            $van->archiveMember()->attach($driver);
+                            
+                        }
+                    }
+                    foreach ($operator->drivers as $count => $driver)
                     {
-                        $id = $driver->member_id;
-                        $driverId = ArchiveMember::create([
-                            'operator_id' => $operatorId,
-                            'driver_id' => $id,
-                            'archived' => 'Operator',
-                            ]);
-            
-                        if ($driver->van()->count() == 1)
-                        {
-                            $driverId->archiveVan()->attach($vanid);
+                        $counter = $count+1;
+                        if ($operator->drivers->count() >= $counter) {
+                            $id = $driver->member_id;
+                            $driverId = ArchiveMember::create([
+                                'operator_id' => $operatorId,
+                                'driver_id' => $id,
+                                'archived' => 'Operator',
+                                ]);
                         }
                     }        
-                }
             }
 
                     if($operator->drivers->count() == 0)

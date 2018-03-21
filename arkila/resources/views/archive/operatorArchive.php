@@ -1,5 +1,5 @@
 @extends('layouts.master') 
-@section('title', 'Show Profile') 
+@section('title', 'Operator Archive') 
 @section('links')
     @parent
     <style>
@@ -19,21 +19,20 @@
             <div class="box-body box-profile">
                 <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset('img/jl.JPG') }}" alt="Operator profile picture">
 
-                <h3 class="profile-username text-center">{{ $operator->full_name }}</h3>
+                <h3 class="profile-username text-center"> fullname</h3>
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
-                        <b>Contact Number</b> <p class="pull-right">{{ $operator->contact_number }}</p>
+                        <b>Contact Number</b> <p class="pull-right">contact</p>
                     </li>
                     <li class="list-group-item">
-                        <b>Number of Vans</b> <p class="pull-right">{{ count($operator->van) }}</p>
+                        <b>Number of Vans</b> <p class="pull-right">69  </p>
                     </li>
                     <li class="list-group-item">
                         <b>Number of Drivers</b> <p class="pull-right">{{ count($operator->drivers) }}</p>
                     </li>
                 </ul>
-                <a href="{{route('operators.show',[$operator->member_id])}}" class="btn btn-info btn-block"><b>View All Information</b></a>
+                <a href="{{route('operators.show',[$operator->member_id])}}" class="btn btn-default btn-block"><b>View All Information</b></a>
                 <a href="{{route('operators.edit',[$operator->member_id])}}" class="btn btn-block btn-primary"><b>Edit Information</b></a>
-                <a href="#" class="btn btn-block btn-default"><b>Archive</b></a>
             </div>
             <!-- /.box-body -->
         </div>

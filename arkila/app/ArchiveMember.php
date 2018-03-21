@@ -22,5 +22,12 @@ class ArchiveMember extends Model
         return $query->where('archived','Operator');
     }
 
+    public function operator(){
+        return $this->belongsTo(Member::class, 'operator_id');
+    }
+
+    public function drivers(){
+        return $this->belongsTo(Member::class, 'operator_id','member_id');
+    }
 
 }
