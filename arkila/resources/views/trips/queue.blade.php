@@ -325,11 +325,14 @@ ol.vertical{
                                           <div class="modal-header">
                                             <h4 class="modal-title text-center">{{$trip->van->plate_number}}</h4>
                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                                          </div> 
+                                          </div>
+                                          <form method="POST" action="{{route('trips.updateDestination',[$trip->trip_id])}}">
+                                              {{csrf_field()}}
+                                              {{method_field('PATCH')}}
                                            <ul class="list-group" style="margin-bottom: 0px">
                                              @foreach($terminals as $terminal)
                                               <li class="list-group-item">
-                                                  <input type="radio" name="gender"  value="Male" class="flat-blue">
+                                                  <input type="radio" name="destination"  value="{{$terminal->terminal_id}}" class="flat-blue">
                                                     {{ $terminal->description }} 
                                               </li>
                                             @endforeach
@@ -337,6 +340,7 @@ ol.vertical{
                                           <div class="modal-footer">
                                             <button type="submit" class="btn btn-primary"><i class="fa fa-map-marker"></i> Change Destination</button>
                                           </div>
+                                          </form>
                                       </div>
                                       <!-- /.modal-content -->
                                   </div>

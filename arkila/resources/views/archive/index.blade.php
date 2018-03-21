@@ -99,9 +99,9 @@
 
                         @foreach ($operators as $operator)
                             <tr>
-                                <td>{{ $operator->operator_id }}</td>
+                                <td>{{ $operator->operator->full_name }}</td>
                                 <td>{{ $operator->archiveVan()->first()->plate_number ?? $operator->archiveVan()->first()}}</td>
-                                <td>Hi</td>
+                                <td>{{ $operator->operator->contact_number }}</td>
                                 <td>Aw</td>
                                 <td>
                                     <div class="text-center">
