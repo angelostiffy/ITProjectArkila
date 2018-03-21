@@ -32,3 +32,4 @@
     <!-- Parsley -->
     {{ Html::script('js/parsley.min.js') }}
     {{ Html::script('js/pnotify.custom.min.js') }}
+    {{ Html::script('js/bootstrap-notify.min.js') }}

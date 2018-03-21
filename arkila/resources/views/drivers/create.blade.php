@@ -70,7 +70,7 @@
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">
                     <h4>Personal Information</h4>
-                    @include('message.error')
+                   
                     <div class="row">
                         <div class="col-md-4">
                         <div class=" form-group">
@@ -393,7 +393,6 @@
 @section('scripts')
 @parent
  <script>
-
      $(document).ready(function(){
          cloneDateMask();
          switch($('select[name="civilStatus"]').val()){

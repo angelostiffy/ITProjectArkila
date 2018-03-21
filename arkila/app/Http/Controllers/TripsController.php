@@ -18,7 +18,7 @@ class TripsController extends Controller
      */
     public function index()
     {
-        $terminals = Terminal::all();
+        $terminals = Terminal::whereNotIn('terminal_id',[auth()->user()->terminal_id])->get();
         $trips = Trip::whereNotNull('queue_number')
             ->orderBy('queue_number')->get();
 

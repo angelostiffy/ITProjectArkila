@@ -31,6 +31,10 @@
     {{ Html::style('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}
     <!-- DataTables -->
     {{ Html::style('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}
+    <!-- iCheck -->
+    {{ Html::style('adminlte/plugins/iCheck/all.css') }}
+    {{ Html::style('adminlte/plugins/iCheck/flat/blue.css') }}
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
