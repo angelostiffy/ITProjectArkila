@@ -33,7 +33,7 @@
                 </ul>
                 <a href="{{route('operators.show',[$operator->member_id])}}" class="btn btn-info btn-block"><b>View All Information</b></a>
                 <a href="{{route('operators.edit',[$operator->member_id])}}" class="btn btn-block btn-primary"><b>Edit Information</b></a>
-                <a href="#" class="btn btn-block btn-default"><b>Archive</b></a>
+                <a href="{{route('archive.vanDriver')}}" class="btn btn-block btn-default"><b>Archive</b></a>
             </div>
             <!-- /.box-body -->
         </div>
