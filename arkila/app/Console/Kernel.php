@@ -26,8 +26,8 @@ class Kernel extends ConsoleKernel
     {
 
 //        $schedule->command(
-//            'db:backup --database=mysql --destination=local --destinationPath=dbBackup --timestamp="m-d-Y" --compression=null'
-//         )->everyMinute();
+//            'db:backup --database=mysql --destination=local --destinationPath=dbBackup --timestamp="Y_m_d_H_i_s" --compression=null'
+//         )->daily();
     }
 
     /**
