@@ -95,7 +95,7 @@
                             <div class="box-body">
                                 
                                     <label for="">Terminal</label>
-                                    <select @if(is_null($terminals->first())){{'disabled'}}@endif name="" id="terminal" class="form-control">
+                                    <select @if(is_null($terminals->first())){{'disabled'}}@endif name="terminal" id="terminal" class="form-control">
                                         @if(is_null($terminals->first()))
                                             <option value="">No Available Data</option>
                                         @else
@@ -105,7 +105,7 @@
                                         @endif
                                      </select>
                                      <label for="">Destination</label>
-                                    <select name="" id="destination" class="form-control">
+                                    <select name="destination" id="destination" class="form-control">
                                     </select>
                                     <label for="">Discount</label>
                                     <div class="input-group">
@@ -140,14 +140,19 @@
                     <div class="col-md-8">
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
+
                                 @foreach($terminals as $terminal)
+                                    @if($terminal->trips->where('queue_number',1)->first()->plate_number ?? null)
                                     <li class="@if($terminals->first() == $terminal){{'active'}}@endif"><a href="#terminal{{$terminal->terminal_id}}" data-toggle="tab">{{$terminal->description}}</a></li>
+                                    @endif
                                 @endforeach
+
                             </ul>
                         
                             <div class="tab-content">
                                 @foreach($terminals as $terminal)
-                                <div class="tab-pane active" id="terminal1">
+                                    @if($terminal->trips->where('queue_number',1)->first()->plate_number ?? null)
+                                <div class="tab-pane @if($terminals->first() == $terminal){{'active'}}@endif" id="terminal{{$terminal->terminal_id}}">
                                     <div class="row">
                                                     <div id="list-left1" class="dual-list list-left col-md-5">
                                                         <div class="box box-solid ticket-box">
@@ -176,7 +181,7 @@
                                                                     <div class="row">
                                                                         <div class="col-md-2">
                                                                             <div class="btn-group">
-                                                                                <a class="btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
+                                                                                <a class="checkBox{{$terminal->terminal_id}} btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-10">
@@ -189,28 +194,26 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="">
-                                                                    <ul class="list-group scrollbar scrollbar-info thin ticket-overflow">
-                                                                        <li class="list-group-item">T1 Ticket 1</li>
-                                                                        <li class="list-group-item">T1 Ticket 2</li>
-                                                                        <li class="list-group-item">T1 Ticket 3</li>
-                                                                        <li class="list-group-item">T1 Ticket 4</li>
-                                                                        <li class="list-group-item">T1 Ticket 5</li>
+                                                                    <ul id="onBoardList{{$terminal->terminal_id}}" class="list-group scrollbar scrollbar-info thin ticket-overflow">
+                                                                        @foreach($terminal->transactions->where('status','OnBoard') as $transaction)
+                                                                            <li data-val="{{$transaction->transaction_id}}" class="list-group-item">{{$transaction->ticket->ticket_number}}</li>
+                                                                        @endforeach
                                                                     </ul>
                                                                     </div>
                                                                 </div>
                                                                 <div class="text-center ">
-                                                                    <a href="" class="btn btn-primary btn-flat">Depart <i class="fa fa-automobile"></i></a>
+                                                                    <button name="depart" value="{{$terminal->terminal_id}}" href="" class="btn btn-primary btn-flat">Depart <i class="fa fa-automobile"></i></button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     <div class="list-arrows col-md-2 text-center">
-                                                        <button id="board" class="btn btn-outline-primary btn-sm btn-flat move-left1">
+                                                        <button id="board{{$terminal->terminal_id}}" class="btn btn-outline-primary btn-sm btn-flat move-left1">
                                                             <i class="glyphicon glyphicon-chevron-left"></i>  BOARD
                                                         </button>
                                                         <br>
-                                                        <button id="unboard" class="btn btn-outline-warning btn-sm btn-flat move-right1">
+                                                        <button id="unboard{{$terminal->terminal_id}}" class="btn btn-outline-warning btn-sm btn-flat move-right1">
                                                              UNBOARD <i class="glyphicon glyphicon-chevron-right"></i>
                                                         </button>
                                                     </div>
@@ -227,7 +230,7 @@
                                                                     <div class="row">
                                                                         <div class="col-md-2">
                                                                             <div class="btn-group">
-                                                                                <a class="btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
+                                                                                <a class="checkBox{{$terminal->terminal_id}} btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-10">
@@ -239,9 +242,9 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <ul class="list-group scrollbar scrollbar-info thin ticket-overflow">
-                                                                        @foreach($terminal->transactions as $transaction)
-                                                                            <li class="list-group-item">{{$transaction->}}</li>
+                                                                    <ul id="pendingList{{$terminal->terminal_id}}" class="list-group scrollbar scrollbar-info thin ticket-overflow">
+                                                                        @foreach($terminal->transactions->where('status','Pending') as $transaction)
+                                                                            <li data-val='{{$transaction->transaction_id}}' class="list-group-item">{{$transaction->ticket->ticket_number}}</li>
                                                                         @endforeach
                                                                     </ul>
                                                                     <div class="text-center ">
@@ -254,7 +257,9 @@
                                                     </div>
                                                 </div>  
                                 </div>
+                                    @endif
                                     @endforeach
+
                             </div>
 
                         </div>
@@ -275,16 +280,23 @@
 	
 
     $(function(){
-     var url = window.location.href;
-     var activeTab = document.location.hash
-     $
-     $(".tab-pane").removeClass("active in"); 
+
+     var activeTab = document.location.hash;
+    if(!activeTab){
+        activeTab = "{{'#terminal'.$terminals->first()->terminal_id}}";
+    }
+
+     $(".tab-pane").removeClass("active in");
      $(".tab-menu").removeClass("active in"); 
      $(activeTab).addClass("active");
      $(activeTab + "-menu").addClass("active");
 
-     $('a[href="#'+ activeTab +'"]').tab('show')
+     $('a[href="#'+ activeTab +'"]').tab('show');
+     window.location.hash = activeTab;
+
     });
+
+
 
     $(function(){
       var hash = window.location.hash;
@@ -323,8 +335,59 @@
         listTickets();
     });
 
+
     $(document).ajaxStop(function(){
         checkSellButton();
+
+    });
+
+    $('button[name="depart"]').on('click', function(e){
+        var terminalId = $(e.currentTarget).val();
+
+        if($('#onBoardList'+terminalId).children().length > 0){
+            var transactions = [];
+               $('#onBoardList'+terminalId+' li').each(function(){
+                    transactions.push($(this).data('val'));
+                    console.log(transactions);
+               });
+
+                $.ajax({
+                    method:'PATCH',
+                    url: '/home/transactions/'+terminalId,
+                    data: {
+                        '_token': '{{csrf_token()}}',
+                        'transactions' : transactions
+                    },
+                    success: function(){
+                        location.reload();
+                    }
+
+                });
+        }
+    });
+
+    $(document.body).on('click','#sellButt',function(){
+        var terminal = $('#terminal').val();
+        var destination = $('#destination').val();
+        var discount = $('#discount').val();
+        var ticket= $('#ticket').val();
+
+        $.ajax({
+            method:'POST',
+            url: '{{route("transactions.store")}}',
+            data: {
+                '_token': '{{csrf_token()}}',
+                'terminal': terminal,
+                'destination': destination,
+                'discount': discount,
+                'ticket': ticket
+            },
+            success: function(){
+                location.reload();
+            }
+
+        });
+
     });
 
 
@@ -436,34 +499,93 @@
 
 <script type="text/javascript">
         $(function () {
-
-
-
             $('body').on('click', '.list-group .list-group-item', function () {
                 $(this).toggleClass('active');
             });
-            $('.list-arrows button').click(function () {
-                var $button = $(this), actives = '';
-                if ($button.hasClass('move-left1')) {
-                    actives = $('#list-right1 .list-group li.active');
-                    actives.clone().appendTo('#list-left1 .list-group')
+
+            @foreach($terminals as $terminal)
+            $('#board{{$terminal->terminal_id}}').on('click', function () {
+
+                var actives = $('#pendingList{{$terminal->terminal_id}}').children('.active');
+                if (actives.length > 0) {
+                    var transactions = [];
+
+                    actives.each(function () {
+                        transactions.push($(this).data('val'));
+                    });
+
+                    $.ajax({
+                        method:'PATCH',
+                        url: '{{route("transactions.updatePendingTransactions")}}',
+                        data: {
+                            '_token': '{{csrf_token()}}',
+                            'transactions':transactions
+                        },
+                        success: function(){
+                        console.log('success');
+                        }
+                    });
+
+                    actives.clone().appendTo('#onBoardList{{$terminal->terminal_id}}').removeClass('active');
                     actives.remove();
-                } else if ($button.hasClass('move-right1')) {
-                    actives = $('#list-left1 .list-group li.active');
-                    actives.clone().appendTo('#list-right1 .list-group').removeClass('active');
-                    actives.remove();
+
+                    var checkBox = $('.checkBox{{$terminal->terminal_id}}');
+
+                    if (checkBox.hasClass('selected') && checkBox.children('i').hasClass('glyphicon-check')) {
+                        checkBox.removeClass('selected');
+                        checkBox.children('i').removeClass('glyphicon-check').addClass('glyphicon-unchecked');
+                    }
+
                 }
             });
-            $('.dual-list .selector').click(function () {
-                var $checkBox = $(this);
-                if (!$checkBox.hasClass('selected')) {
-                    $checkBox.addClass('selected').closest('.well').find('ul li:not(.active)').addClass('active');
-                    $checkBox.children('i').removeClass('glyphicon-unchecked').addClass('glyphicon-check');
+
+            $('#unboard{{$terminal->terminal_id}}').on('click',function() {
+                var actives = $('#onBoardList{{$terminal->terminal_id}}').children('.active');
+
+                if (actives.length > 0) {
+                    var transactions = [];
+                    actives.each(function () {
+                        transactions.push($(this).data('val'));
+                    });
+
+                    $.ajax({
+                        method: 'PATCH',
+                        url: '{{route("transactions.updateOnBoardTransactions")}}',
+                        data: {
+                            '_token': '{{csrf_token()}}',
+                            'transactions': transactions
+                        },
+                        success: function () {
+                            console.log('success');
+                        }
+                    });
+
+
+                    actives.clone().appendTo('#pendingList{{$terminal->terminal_id}}').removeClass('active');
+                    actives.remove();
+
+                    var checkBox = $('.checkBox{{$terminal->terminal_id}}');
+
+                    if (checkBox.hasClass('selected') && checkBox.children('i').hasClass('glyphicon-check')) {
+                        checkBox.removeClass('selected');
+                        checkBox.children('i').removeClass('glyphicon-check').addClass('glyphicon-unchecked');
+                    }
+                }
+            });
+
+
+            $('.checkBox{{$terminal->terminal_id}}').on('click',function(e) {
+                var checkBox = $(e.currentTarget);
+                if (!checkBox.hasClass('selected')) {
+                    checkBox.addClass('selected').closest('.well').find('ul li:not(.active)').addClass('active');
+                    checkBox.children('i').removeClass('glyphicon-unchecked').addClass('glyphicon-check');
                 } else {
-                    $checkBox.removeClass('selected').closest('.well').find('ul li.active').removeClass('active');
-                    $checkBox.children('i').removeClass('glyphicon-check').addClass('glyphicon-unchecked');
+                    checkBox.removeClass('selected').closest('.well').find('ul li.active').removeClass('active');
+                    checkBox.children('i').removeClass('glyphicon-check').addClass('glyphicon-unchecked');
                 }
             });
+            @endforeach
+
             $('[name="SearchDualList"]').keyup(function (e) {
                 var code = e.keyCode || e.which;
                 if (code == '9') return;

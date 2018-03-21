@@ -264,12 +264,10 @@ ol.vertical{
                               <div class="col-md-6">
 
                                 <div class="pull-right">
-                                  <div class="btn-group">
-                                    <a href="" id="remark{{ $trip->trip_id}}" class="remark-editable btn btn-flat btn-primary btn-sm editable" data-original-title="" title="">{{ $trip->remarks }}</a>
-                                    <a href="" data-toggle="modal" data-target="#destination{{$trip->trip_id}}" class="btn btn-smbtn-flat btn-primary"><i class="fa fa-map-marker mapm-zoom"></i></a>
-                                  </div>
+                                    <a href="" id="remark{{ $trip->trip_id}}" class="remark-editable btn btn-flat btn-info btn-sm editable" data-original-title="" title="">{{ $trip->remarks }}</a>
+                                    <a href="" data-toggle="modal" data-target="#destination{{$trip->trip_id}}" class="btn btn-sm btn-flat btn-primary"><i class="fa fa-map-marker mapm-zoom"></i></a>
 
-                                  <a href="" class="" data-toggle="modal" data-target="#delete{{$trip->trip_id}}"><i class="fa fa-remove text-red"></i></a>
+                                  <a href="" class="btn btn-default btn-sm btn-flat" data-toggle="modal" data-target="#delete{{$trip->trip_id}}"><i class="fa fa-remove text-red"></i></a>
                                 </div>
                               </div>
                             </div>

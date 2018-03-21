@@ -15,18 +15,23 @@ class CreateArchiveMemberTable extends Migration
     {
         Schema::create('archive_member', function (Blueprint $table) {
             $table->increments('archive_member_id');
-            $table->integer('member_id')
-            ->unsigned();
-            $table->string('plate_number', 8)->nullable();
-            $table->enum('role', ['Driver', 'Operator']);
+            $table->integer('driver_id')
+            ->unsigned()
+            ->nullable();
+            $table->integer('operator_id')
+            ->unsigned()
+            ->nullable();
+            
+            $table->enum('archived', ['Driver', 'Operator', 'Van']);
             $table->timestamps();
 
-            $table->foreign('plate_number')
-            ->references('plate_number')->on('van')
+
+            $table->foreign('driver_id')
+            ->references('member_id')->on('member')
             ->onDelete('restrict')
             ->onUpdate('cascade');
 
-            $table->foreign('member_id')
+            $table->foreign('operator_id')
             ->references('member_id')->on('member')
             ->onDelete('restrict')
             ->onUpdate('cascade');

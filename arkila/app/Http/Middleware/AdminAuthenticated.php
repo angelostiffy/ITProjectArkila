@@ -26,7 +26,7 @@ class AdminAuthenticated
         }
 
         if(Auth::user()->isSuperAdmin() && Auth::user()->isEnable()){
-          return redirect('home/vans');
+          return redirect('/home');
         }
 
         if(Auth::user()->isAdmin() && Auth::user()->isEnable()){

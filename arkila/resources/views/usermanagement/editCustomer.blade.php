@@ -14,7 +14,7 @@
           
 
 <div class="form-group">
-  <label for="payor">User name:</libel>
+  <label for="payor">User name:</label>
   <span name="username">{{$customer_user->username}}</span>
 </div>
 <div class="form-group">
@@ -41,18 +41,35 @@
     </ul>
   </div>
 
-  <button type="button" class="btn btn-danger btn-block" style="margin-top:5%" data-toggle="modal" data-target="#form-modal">Reset Password</button>  
+  <button type="button" class="btn btn-danger btn-block" style="margin-top:5%" data-toggle="modal" data-target="#resetPass">Reset Password</button>  
 
-  @section('modal-title','Alert')
-  @section('modal-body')
-    <p>Are you sure you want to Reset "NAME"'s password?</p>
-  @endsection
-
-  @section('modal-btn')
-    <button type="submit" class="btn btn-primary">Yes</button>
-    <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-  @endsection 
-
+  <!-- Modal for Reset Password-->
+    <div class="modal fade" id="resetPass">
+        <div class="modal-dialog">
+            <div class="col-md-offset-2 col-md-8">
+                <div class="modal-content">
+                    <div class="modal-header bg-red">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"> Confirm</h4>
+                    </div>
+                    <div class="modal-body row" style="margin: 0% 1%;">
+                            <h1><i class="fa fa-exclamation-triangle pull-left text-yellow"> </i></h1>
+                              <p>Are you sure you want to reset {{ $customer_user->name }}'s password?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger" style="width:40%">Reset Password</button>
+                
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 </div>
                    
 @endsection
