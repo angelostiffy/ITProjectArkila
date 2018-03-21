@@ -283,7 +283,12 @@
 
      var activeTab = document.location.hash;
     if(!activeTab){
-        activeTab = "{{'#terminal'.$terminals->first()->terminal_id}}";
+
+            activeTab = @if($terminals->first()->terminal_id ?? null)
+                "{{'#terminal'.$terminals->first()->terminal_id}}";
+        @else
+                {{''}}
+        @endif
     }
 
      $(".tab-pane").removeClass("active in");
