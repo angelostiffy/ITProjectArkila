@@ -318,8 +318,8 @@ ol.vertical{
           </div>
         </div>
         </div>
-
-        <div class="modal fade" id="destination{{$trip->trip_id}}">
+        @foreach ($trips as $trip)
+        <div class="modal fade" id="destination{{ $trip->trip_id }}">
                                   <div class="modal-dialog modal-sm">
                                       <div class="modal-content">
                                           <div class="modal-header">
@@ -343,6 +343,7 @@ ol.vertical{
                                   <!-- /.modal-dialog -->
                               </div>
                               <!-- /.modal -->
+                              @endforeach
       </div>
 
 
