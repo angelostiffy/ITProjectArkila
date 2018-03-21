@@ -37,3 +37,4 @@
     <!-- style.css -->
     {{ Html::style('css/style.css') }}
     {{ Html::style('css/pnotify.custom.min.css') }}
+    {{ Html::style('css/animate.css') }}

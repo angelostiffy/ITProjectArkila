@@ -2,18 +2,27 @@
 @foreach ($errors->all() as $error)
 
     <script type="text/javascript">
-		$(function(){
-		
-		  new PNotify({
-		    title: 'Error',
-		    text: '{{ $error }}',
-		    type: 'error',
-		    hide: 'false',
-		    nonblock: {
-		        nonblock: true
-		    }
-		  });
+	
+
+		$.notify({
+			// options
+			message: '{{ $error }}' 
+		},{
+			// settings
+			type: 'danger',
+			delay: '999900',
+			placement: {
+				from: "bottom",
+				align: "right"
+			},
+			icon: "fa fa-eye",
+			animate: {
+				enter: 'animated bounceIn',
+				exit: 'animated bounceOut'
+			}
 		});
+
+
 	</script>
 @endforeach
 @endif

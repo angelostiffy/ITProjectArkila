@@ -127,4 +127,8 @@ class TransactionsController extends Controller
         return response()->json($ticketsArr);
     }
 
+    public function manage(){
+        return view('transaction.managetickets');
+    }
+
 }

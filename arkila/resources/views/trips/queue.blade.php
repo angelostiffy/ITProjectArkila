@@ -78,7 +78,6 @@ ol.vertical{
 }
 
 .rectangle-list span:hover{
-    background: #eee;
 }   
 
 .queuenum a{
@@ -87,58 +86,42 @@ ol.vertical{
     left: -2.5em;
     top: 50%;
     margin-top: -1em;
-    background: #fa8072;
     height: 2em;
     width: 2em;
     line-height: 2em;
     text-align: center;
     font-weight: bold;
     color: black;
+    background-color: #fa8072;
 }
 
 .queuenum a:hover{
-    background: #72afd2;
+  background: #fa8072;
+  transition: all .3s ease-out;
 }
-.queuenum a:before{
-    position: absolute; 
+.queuenum a:afters{
+  position: absolute; 
     content: '';
     border: .5em solid transparent;
     left: -1em;
     top: 50%;
     margin-top: -.5em;
-    transition: all .3s ease-out;               
+    transition: all .3s ease-out;
+}
+.queuenum a:hover:after{
+    left: -.5em;
+    border-left-color: #fa8072;              
 }
 
 #queue-list:first-child{
   background: yellow;
 }
 
-.dropped{
-  background: #a3feb6;
-}
-/* SEARCH LIST; */
 
-
-#myUL {
-    /* Remove default list styling */
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-#myUL li a {
-    border: 1px solid #ddd; /* Add a border to all links */
-    margin-top: -1px; /* Prevent double borders */
-    background-color: #f6f6f6; /* Grey background color */
-    padding: 12px; /* Add some padding */
-    text-decoration: none; /* Remove default text underline */
-    font-size: 18px; /* Increase the font-size */
-    color: black; /* Add a black text color */
-    display: block; /* Make it into a block element to fill the whole list */
-}
-
-#myUL li a:hover:not(.header) {
-    background-color: #eee; /* Add a hover effect to all links, except for headers */
+  .mapm-zoom a:hover{
+       transform: scale(1.2);
+    transition: all .3s ease-out;
+  }
   </style>
 @endsection
 
@@ -212,22 +195,21 @@ ol.vertical{
               </div>
             </div>
             <div class="box-body">
-                <ol class="rectrangle-list">
-                  <li class="" data-plate="{{ $trip->van->plate_number ?? null}}" data-remark="{{ $trip->remarks ?? null}}">
+                <ol class="rectrangle-list list-group serialization">
+                  <li class="list-group-item" data-plate="{{ $trip->van->plate_number ?? null}}" data-remark="{{ $trip->remarks ?? null}}">
                       <div class="row">
                         <div class="col-md-6">
-                          <p>
                           {{ $trip->van->plate_number ?? null }}
                           </p>
                         </div>
                         <div class="col-md-6">
                           <div class="pull-right">
-                            <a href="" id="remark{{ $trip->trip_id ?? null}}" class="remark-editable btn btn-outline-secondary btn-sm editable" data-original-title="" title=""><i class="fa fa-info"></i></a>
-                            <a href="" class="" data-toggle="modal" data-target="#modal-default"><i class="fa fa-remove text-red"></i></a>
+                            <a href="" id="remark{{ $trip->trip_id ?? null}}" class="remark-editable btn btn-default btn-flat btn-sm editable" data-original-title="" title=""><i class="fa fa-info"></i></a>
+                            <a href="" class="btn btn-sm btn-outline-error" data-toggle="modal" data-target="#modal-default"><i class="fa fa-remove text-red"></i></a>
                           </div>
                         </div>
                       </div>
-                    </li>
+                    </ui>
                 </ol>
               </div>
              </div>
@@ -236,9 +218,9 @@ ol.vertical{
         <div class="col-md-9">
           <!-- Van Queue Box -->
           <div class="box box-solid">
-            <div class="box-header  bg-blue">
+            {{-- <div class="box-header  bg-blue">
               <h3 class="box-title">Queue</h3>
-            </div>
+            </div> --}}
             <div class="box-body">
               <div class="row">
               <div class="col-md-4">
@@ -270,31 +252,29 @@ ol.vertical{
                     <ol id ="queue-list" class="vertical rectangle-list serialization">
                         @foreach ($trips->where('terminal_id',$terminal->terminal_id) as $trip)
                           <li class="" data-plate="{{ $trip->van->plate_number}}" data-remark="{{ $trip->remarks }}">
-                            <span class="dropped">
+                            <span>
                             <div class="row">
                               <div class="col-md-6">
                                 <div class="queuenum">
                                   <a href="" id="queue{{ $trip->trip_id}}" class="queue-editable">{{ $trip->queue_number }}</a>
                                 </div>
-                                
-                                <p>
-                                  <a href="" ><i class="fa fa-map-marker inline"></i></a>
-                                {{ $trip->van->plate_number }}
-                                </p>
+                                <p> {{ $trip->van->plate_number }}</p>
+
                               </div>
                               <div class="col-md-6">
-                                <div class="pull-right">
-                                  <a href="" id="remark{{ $trip->trip_id}}" class="remark-editable btn btn-outline-secondary btn-sm editable" data-original-title="" title="">{{ $trip->remarks }}</a>
 
-                                  
-                                  
-                                  <a href="" class="" data-toggle="modal" data-target="#modal{{$trip->trip_id}}"><i class="fa fa-remove text-red"></i></a>
+                                <div class="pull-right">
+                                  <div class="btn-group">
+                                    <a href="" id="remark{{ $trip->trip_id}}" class="remark-editable btn btn-flat btn-primary btn-sm editable" data-original-title="" title="">{{ $trip->remarks }}</a>
+                                    <a href="" data-toggle="modal" data-target="#destination{{$trip->trip_id}}" class="btn btn-smbtn-flat btn-primary"><i class="fa fa-map-marker mapm-zoom"></i></a>
+                                  </div>
+
+                                  <a href="" class="" data-toggle="modal" data-target="#delete{{$trip->trip_id}}"><i class="fa fa-remove text-red"></i></a>
                                 </div>
                               </div>
                             </div>
                           </span>
-
-                              <div class="modal fade" id="modal{{$trip->trip_id}}">
+                              <div class="modal fade" id="delete{{$trip->trip_id}}">
                                   <div class="modal-dialog modal-sm">
                                       <div class="modal-content">
                                           <div class="modal-header">
@@ -323,6 +303,8 @@ ol.vertical{
                               </div>
                               <!-- /.modal -->
 
+                              
+
                           </li>
                         @endforeach
                     </ol>
@@ -338,9 +320,32 @@ ol.vertical{
           </div>
         </div>
         </div>
-         
+
+        <div class="modal fade" id="destination{{$trip->trip_id}}">
+                                  <div class="modal-dialog modal-sm">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h4 class="modal-title text-center">{{$trip->van->plate_number}}</h4>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                                          </div> 
+                                           <ul class="list-group" style="margin-bottom: 0px">
+                                             @foreach($terminals as $terminal)
+                                              <li class="list-group-item">
+                                                  <input type="radio" name="gender"  value="Male" class="flat-blue">
+                                                    {{ $terminal->description }} 
+                                              </li>
+                                            @endforeach
+                                          </ul>
+                                          <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary"><i class="fa fa-map-marker"></i> Change Destination</button>
+                                          </div>
+                                      </div>
+                                      <!-- /.modal-content -->
+                                  </div>
+                                  <!-- /.modal-dialog -->
+                              </div>
+                              <!-- /.modal -->
       </div>
-        <pre id="serialize_output2"></pre>
 
 
 @endsection
@@ -509,6 +514,13 @@ ol.vertical{
                     }
                 }
             }
+    </script>
+
+    <script>
+      $('input[type="checkbox"].flat-blue, input[type="radio"].flat-blue').iCheck({
+          checkboxClass: 'icheckbox_flat-blue',
+          radioClass   : 'iradio_flat-blue'
+        });
     </script>
 
 @endsection

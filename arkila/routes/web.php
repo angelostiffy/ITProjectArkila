@@ -44,6 +44,8 @@ Route::resource('/angelo', 'EmailtestController');
 
 Route::get('/dixon', 'TripsController@index');
 
+Route::get('/ticketmanagement','TransactionsController@manage');
+
 Route::get('/demo', function(){
   return new App\Mail\ResetPasswordMail();
 });
@@ -51,8 +53,6 @@ Route::get('/demo', function(){
 
 Route::get('/', function () {
     return view('welcome');
-
-
 });
 Route::get('/home', 'HomeController@index')->name('home');
 
