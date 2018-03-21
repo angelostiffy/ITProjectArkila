@@ -20,7 +20,7 @@ class CreateTripTable extends Migration
             ->unsigned();
             $table->integer('terminal_id')
             ->unsigned();
-            $table->string('plate_number');
+            $table->string('plate_number', 8);
 
             $table->enum('remarks', ['OB', 'CC', 'ER'])->nullable();
             $table->enum('status', ['Departed', 'On Queue'])->default('On Queue');
@@ -28,6 +28,7 @@ class CreateTripTable extends Migration
             $table->integer('total_booking_fee')->nullable();
             $table->decimal('community_fund', 7, 2);
             $table->date('date_departed')->nullable();
+            $table->time('time_departed')->nullable();
             $table->integer('queue_number')->nullable();
 
 

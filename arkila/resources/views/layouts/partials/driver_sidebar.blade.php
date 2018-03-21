@@ -20,13 +20,13 @@
           </a>
             </li>
             <li class="treeview">
-                <a href="#">
+                <a href="{{route('drivermodule.viewTripLog')}}">
             <i class="fa fa-book"></i>
             <span>Trip Log</span>
           </a>
             </li>
             <li class="treeview">
-                <a href="{{route('drivermodule.viewCreateReport')}}">
+                <a href="{{route('drivermodule.chooseTerminal')}}">
             <i class="fa fa-plus"></i>
             <span>Create Report</span>
           </a>

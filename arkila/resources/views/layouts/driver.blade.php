@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="_token" content="{{ csrf_token() }}"/>
-    
+
     <title>Ban Trans | @yield('title')</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -60,6 +60,10 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+          <div>
+            @include('message.error')
+            @include('message.success')
+          </div>
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
@@ -78,14 +82,14 @@
 
         <!-- /.content-wrapper -->
         @include('layouts.partials.footer')
-        
+
     </div>
 
 
     <!-- ./wrapper -->
-    
+
     @section('scripts')
-    
+
     <!-- jQuery 3 -->
     <script src="{{ URL::asset('adminlte/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -124,7 +128,7 @@
     <!-- DataTables -->
     <script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-    
+
     @show
 
 </body>

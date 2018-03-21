@@ -20,7 +20,7 @@ class CreateVanTable extends Migration
             ->nullable();
 
             $table->integer('model_id')
-            ->unsigned();       
+            ->unsigned();
             $table->string('seating_capacity', 2);
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
 
@@ -36,7 +36,7 @@ class CreateVanTable extends Migration
 
 
         });
-        
+
     }
 
     /**

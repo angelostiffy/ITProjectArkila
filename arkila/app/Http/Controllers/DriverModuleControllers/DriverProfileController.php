@@ -36,15 +36,14 @@ class DriverProfileController extends Controller
           $user = Member::findOrFail($id);
           if($user->notification === "Enable"){
               $user->notification = "Disable";
-              session()->flash('message', 'User successfully enabled!');
+              $message = ["success" => "You have successfully disabled your notifications"];
           }elseif($user->notification === "Disable"){
               $user->notification = "Enable";
-
-              session()->flash('message', 'User successfully disabled!');
+              $message = ["success" => "You have successfully enabled your notifications"];
           }
 
           $user->save();
-          return response()->json($user);
+          return response()->json($message);
       }
 
       public function checkCurrentPassword()
@@ -79,7 +78,8 @@ class DriverProfileController extends Controller
 
         Auth::user()->password = Hash::make(request('password'));
         Auth::user()->save();
-        return redirect('/home/profile')->with('success', 'Successfully changed password');
+        Auth::logout();
+        return redirect('/home/login')->with('success', 'Successfully changed password');
 
 
 
