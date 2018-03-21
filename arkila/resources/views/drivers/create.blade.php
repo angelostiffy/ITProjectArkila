@@ -108,7 +108,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Last Name: <span class="text-red">*</span></label>
-                                <input value="{{old('lastName')}}" name="lastName" type="text" class="form-control" placeholder="Last Name" maxlength="35">
+                                <input value="{{old('lastName')}}" name="lastName" type="text" class="form-control" placeholder="Last Name" maxlength="35" required="">
                             </div>
                         </div>
                         <div class="col-md-4">

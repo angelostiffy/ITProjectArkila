@@ -53,7 +53,7 @@
         <div class="box-body">
 
                 <!-- One "tab" for each step in the form: -->
-                <div class="tab">
+                <div class="form-section">
                     <h4>Personal Information</h4>
                     <div class="row">
                         <div class="col-md-4">
@@ -183,7 +183,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab">
+                <div class="form-section">
                     <h4>Family Information</h4>
                     <div class="row">
                         <div class="col-md-6">
@@ -334,9 +334,10 @@
         </div>
         <div class="box-footer">
             <div style="overflow:auto;">
-                    <div style="float:right;">
-                        <button type="button" id="prevBtn" onclick="nextPrev(-1)" class = "btn btn-default">Previous</button>
-                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class = "btn btn-primary">Next</button>
+                    <div class="form-navigation" style="float:right;">
+                        <button type="button" id="prevBtn"  class = "previous btn btn-default">Previous</button>
+                        <button type="button" id="nextBtn"  class = " next btn btn-primary">Next</button>
+                        <input type="submit" class="btn btn-default pull-right">
                     </div>
                 </div>
         </div>
@@ -421,65 +422,6 @@
     </script>
 
     <script>
-     var currentTab = 0; // Current tab is set to be the first tab (0)
-        showTab(currentTab); // Display the crurrent tab
-
-        function showTab(n) {
-            // This function will display the specified tab of the form...
-            var x = document.getElementsByClassName("tab");
-            x[n].style.display = "block";
-            //... and fix the Previous/Next buttons:
-            if (n == 0) {
-                document.getElementById("prevBtn").style.display = "none";
-            } else {
-                document.getElementById("prevBtn").style.display = "inline";
-            }
-            if (n == (x.length - 1)) {
-                document.getElementById("nextBtn").innerHTML = "Submit";
-            } else {
-                document.getElementById("nextBtn").innerHTML = "Next";
-            }
-            //... and run a function that will display the correct step indicator:
-            fixStepIndicator(n)
-        }
-
-        function nextPrev(n) {
-            // This function will figure out which tab to display
-            var x = document.getElementsByClassName("tab");
-            // Exit the function if any field in the current tab is invalid:
-            if (n == 1 && !validateForm()) return false;
-            // Hide the current tab:
-            x[currentTab].style.display = "none";
-            // Increase or decrease the current tab by 1:
-            currentTab = currentTab + n;
-            // if you have reached the end of the form...
-            if (currentTab >= x.length) {
-                // ... the form gets submitted:
-                document.getElementById("regForm").submit();
-                return false;
-            }
-            // Otherwise, display the correct tab:
-            showTab(currentTab);
-        }
-
-        function validateForm() {
-            // This function deals with validation of the form fields
-
-
-            return true; // return the valid status
-        }
-
-        function fixStepIndicator(n) {
-            // This function removes the "active" class of all steps...
-            var i, x = document.getElementsByClassName("step");
-            for (i = 0; i < x.length; i++) {
-                x[i].className = x[i].className.replace("active", "");
-            }
-            //... and adds the "active" class on the current step:
-            x[n].className += " active";
-        }
-    </script>
-    <script>
     $(function () {
 
         $('.select2').select2()
@@ -495,6 +437,50 @@
     })
      $('[data-mask]').inputmask()
      $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+          var $sections = $('.form-section');
+
+          function navigateTo(index) {
+            // Mark the current section with the class 'current'
+            $sections
+              .removeClass('current')
+              .eq(index)
+                .addClass('current');
+            // Show only the navigation buttons that make sense for the current section:
+            $('.form-navigation .previous').toggle(index > 0);
+            var atTheEnd = index >= $sections.length - 1;
+            $('.form-navigation .next').toggle(!atTheEnd);
+            $('.form-navigation [type=submit]').toggle(atTheEnd);
+          }
+
+          function curIndex() {
+            // Return the current index by looking at which section has the class 'current'
+            return $sections.index($sections.filter('.current'));
+          }
+
+          // Previous button is easy, just go back
+          $('.form-navigation .previous').click(function() {
+            navigateTo(curIndex() - 1);
+          });
+
+          // Next button goes forward iff current block validates
+          $('.form-navigation .next').click(function() {
+            $('#regForm').parsley().whenValidate({
+              group: 'block-' + curIndex()
+            }).done(function() {
+              navigateTo(curIndex() + 1);
+            });
+          });
+
+          // Prepare sections by setting the `data-parsley-group` attribute to 'block-0', 'block-1', etc.
+          $sections.each(function(index, section) {
+            $(section).find(':input').attr('data-parsley-group', 'block-' + index);
+          });
+          navigateTo(0); // Start at the beginning
+        });
     </script>
 
     
