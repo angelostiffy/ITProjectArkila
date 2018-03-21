@@ -10,7 +10,7 @@
 
       <p>
         We could not find the page you were looking for.
-        Meanwhile, you may <a href="../../index.html">return to dashboard</a>
+        Meanwhile, you may <a href="/home">return to dashboard</a>
       </p>
 
     </div>

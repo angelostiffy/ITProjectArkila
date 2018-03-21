@@ -149,6 +149,9 @@ Route::get('/', function () {
     Route::resource('/home/reservations', 'ReservationsController');
     
     Route::get('/home/archive', 'HomeController@archive');
+    Route::get('/home/operatorVanDriver', 'HomeController@vanDriver')->name('archive.vanDriver');
+    Route::get('/home/archive/profile/{operator}','HomeController@showProfile')->name('archive.showProfile');
+
     Route::post('/home/operators/{operator}/archiveOperators', 'OperatorsController@archiveOperator')->name('operators.archiveOperator');
     
     
