@@ -37,20 +37,18 @@ Route::get('/driver-profile', function(){
 Route::get('/teo', function(){
     return view('rental.newcreate');
 });
-
-
-
-
-
+    
 Route::get('/dixon', 'TripsController@index');
 
+Route::get('/ticketmanagement','TransactionsController@manage');
 
+Route::get('/demo', function(){
+  return new App\Mail\ResetPasswordMail();
+});
 
 
 Route::get('/', function () {
     return view('welcome');
-
-
 });
 /***********************Super-Admin Module************************************/
 /*****************************************************************************/

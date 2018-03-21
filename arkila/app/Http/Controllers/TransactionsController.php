@@ -101,10 +101,9 @@ class TransactionsController extends Controller
             $this->validate(request(),[
                 'transactions.*' => 'required|exists:transaction,transaction_id'
             ]);
-
-            $totalPassengers = count($trip->transactions->where('status','OnBoard'));
+            $totalPassengers = count(request('transactions'));
             \Log::info('Total Passengers: '.$totalPassengers);
-
+            
             $totalBooking = (Terminal::find(auth()->user()->terminal_id)->booking_fee) * $totalPassengers;
             \Log::info('Total Booking: '.$totalBooking);
 
@@ -252,6 +251,10 @@ class TransactionsController extends Controller
         }
 
         return response()->json($ticketsArr);
+    }
+
+    public function manage(){
+        return view('transaction.managetickets');
     }
 
 }
