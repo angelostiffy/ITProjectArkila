@@ -1,26 +1,35 @@
- @extends('layouts.driver') 
- @section('title', 'Driver Report') 
- @section('content-title', 'Driver Report') 
+ @extends('layouts.driver')
+ @section('title', 'Driver Report')
+ @section('content-title', 'Driver Report')
  @section('content')
- 
+
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
         <div class="box">
+          @include('message.success')
             <div class="box-header">
                 <h3>Choose Terminal</h3>
             </div>
+            <form>
             <div class="box-body">
                 <div class="form-group">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action">Cabanatuan</a>
-                        <a href="#" class="list-group-item list-group-item-action">San Jose</a>
-                    </div>
+                      {{csrf_field()}}
+                      <div class="list-group">
+                        <select id="selectDestination" class="form-control" name="chooseTerminal">
+                          <option>Choose your Terminal</option>
+                          @foreach($terminals as $terminal)
+                            <option value="{{$terminal->terminal_id}}">{{$terminal->description}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+
                 </div>
             </div>
             <div class="box-footer">
-                <button class="btn btn-primary btn-group-justified">Select Terminal</button>
+                <button type="button" id="createReport" class="btn btn-primary btn-group-justified">Select Terminal</button>
             </div>
+            </form>
             <!-- /.box-footer -->
         </div>
         <!-- /.box -->
@@ -29,4 +38,16 @@
 </div>
 <!-- /.row -->
 
+@endsection
+@section('scripts')
+@parent
+<script type="text/javascript">
+  $('#selectDestination').on('change', function(){
+    var terminalId = $(this).val();
+    $('#createReport').click(function(){
+      window.location.href = '/home/create-report/'+terminalId;
+      return false;
+    });
+  });
+</script>
 @endsection

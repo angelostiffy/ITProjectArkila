@@ -103,7 +103,7 @@ class TransactionsController extends Controller
             ]);
             $totalPassengers = count(request('transactions'));
             \Log::info('Total Passengers: '.$totalPassengers);
-            
+
             $totalBooking = (Terminal::find(auth()->user()->terminal_id)->booking_fee) * $totalPassengers;
             \Log::info('Total Booking: '.$totalBooking);
 
@@ -120,8 +120,12 @@ class TransactionsController extends Controller
             ]);
 
             if($totalPassengers <= 10){
-                $queueNumber = count(Trip::where('terminal_id',$terminal->terminal_id)->whereNotNull('queue_number')->get())+1;
-
+                if(Trip::where('terminal_id',$terminal->terminal_id)->orderBy('queue_number','desc')->first() ?? null){
+                    $queueNumber = Trip::where('terminal_id',$terminal->terminal_id)->orderBy('queue_number','desc')->first()->queue_number+1;
+                }else{
+                    $queueNumber = 1;
+                }
+                \Log::info('Queue Number'.$queueNumber);
                 Trip::create([
                     'driver_id' => $trip->driver_id,
                     'terminal_id' => $trip->terminal_id,

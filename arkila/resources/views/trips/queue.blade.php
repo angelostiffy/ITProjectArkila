@@ -195,21 +195,24 @@ ol.vertical{
               </div>
             </div>
             <div class="box-body">
-                <ol class="rectrangle-list list-group serialization">
-                  <li class="list-group-item" data-plate="{{ $trip->van->plate_number ?? null}}" data-remark="{{ $trip->remarks ?? null}}">
-                      <div class="row">
-                        <div class="col-md-6">
-                          {{ $trip->van->plate_number ?? null }}
-                          </p>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="pull-right">
-                            <a href="" id="remark{{ $trip->trip_id ?? null}}" class="remark-editable btn btn-default btn-flat btn-sm editable" data-original-title="" title=""><i class="fa fa-info"></i></a>
-                            <a href="" class="btn btn-sm btn-outline-error" data-toggle="modal" data-target="#modal-default"><i class="fa fa-remove text-red"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </ui>
+                <ol class="list-group serialization">
+                  <li class="list-group-item">
+                    <h4 class="pull-left">
+                      AAA-123
+                    <span class="badge badge-pill badge-default ">CC</span>
+                    </h4>
+                    <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default btn-sm btn-flat dropdown-toggle" data-toggle="dropdown">
+                      <span class="caret"></span>
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">On Deck</a></li>
+                    <li><a href="#">Remove</a></li>
+                  </ul>
+                  </div>
+                    <div class="clearfix"></div>
+                  </li>
                 </ol>
               </div>
              </div>

@@ -4,10 +4,10 @@ namespace App\Http\Controllers\DriverModuleControllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CreateReportRequest;
 use App\Http\Controllers\Controller;
 use App\Rules\checkCurrency;
 use App\Rules\checkTime;
-use Carbon\Carbon;
 use App\FeesAndDeduction;
 use App\Destination;
 use App\Transaction;
@@ -19,120 +19,107 @@ use App\User;
 
 class CreateReportController extends Controller
 {
-  public function createReport()
+  public function chooseTerminal()
   {
     $terminals = Terminal::orderBy('terminal_id')->get();
-    $destinations = Destination::join('terminal', 'destination.terminal_id', '=', 'terminal.terminal_id')->select('terminal.terminal_id as term_id','terminal.description as termdesc', 'destination.destination_id as destid', 'destination.description')->get();
-    $fads = FeesAndDeduction::where('type','=','Discount')->get();
-    return view('drivermodule.report.driverReport',compact('terminals', 'destinations', 'fads'));
+    //$destinations = Destination::join('terminal', 'destination.terminal_id', '=', 'terminal.terminal_id')->select('terminal.terminal_id as term_id','terminal.description as termdesc', 'destination.destination_id as destid', 'destination.description')->get();
+    // $fads = FeesAndDeduction::where('type','=','Discount')->get();
+    return view('drivermodule.report.driverChooseDestination',compact('terminals'));
 
   }
 
-  public function storeReport()
+  public function createReport($id)
   {
-    // $dateDepart = request('dateDeparted');
-    // $timeDepart = request('timeDeparted');
-    // $totalPassengers = request('totalPassengers');
-    // $totalBookingFee = request('totalBookingFee');
+    //dd($id);
+    $terminals = Terminal::where('terminal_id', $id)->first();
+    $destinations = Destination::join('terminal', 'destination.terminal_id', '=', 'terminal.terminal_id')
+                    ->where('terminal.terminal_id', '=', $id)
+                    ->select('terminal.terminal_id as term_id','terminal.description as termdesc', 'destination.destination_id as destid', 'destination.description')->get();
+    $fads = FeesAndDeduction::where('type','=','Discount')->get();
+    return view('drivermodule.report.driverCreateReport', compact('terminals', 'destinations', 'fads'));
+  }
+  public function storeReport($id, CreateReportRequest $request)
+  {
+    dd(request('numberOfDiscount'));
+    $totalPassengers = $request->totalPassengers;
+    $totalBookingFee = $request->totalBookingFee;
+    $totalPassenger = (float)$request->totalPassengers;
+    $communityFund = number_format(5 * $totalPassenger, 2, '.', '');
+    $user = new User;
+    $plateNumber = $user->join('member', 'users.id', '=', 'member.user_id')
+          ->join('member_van', 'member.member_id', '=', 'member_van.member_id')
+          ->join('van', 'member_van.plate_number', '=', 'van.plate_number')
+          ->where('users.id', Auth::id())->select('van.plate_number as plate_number')->first();
+     $driver_id = Member::where('user_id', Auth::id())->select('user_id')->first();
 
-    // dd(compact('dateDepart', 'timeDepart', 'totalPassengers', 'totalBookingFee'));
-    // $this->validate(request(),[
-    //   "dateDeparted" => "required|date_format:m/d/Y",
-    //   "timeDeparted" => [new checkTime, "required"],
-    //   "totalPassengers" => "numeric|required",
-    //   "totalBookingFee" => [new checkCurrency, "required"]
-    // ]);
-    // //
-    // $totalPassengers = (float)request('totalPassengers');
-    // $communityFund = number_format(5 * $totalPassengers, 2, '.', '');
-    // // // $user = new User;
-    // // // $user->join('member', 'users.id', '=', 'member.user_id')
-    // // //       ->join('member_van', 'member.member_id', '=', 'member_van.member_id')
-    // // //       ->join('van', 'member_van.plate_number', '=', 'van.plate_number')
-    // // //       ->where('users.id', Auth::id())->get();
-    // //
-    // $driver_id = Member::where('user_id', Auth::id())->select('user_id')->first();
-    //  $user = User::find(Auth::id());
-    //  $create = Trip::create([
-    //    'driver_id' => $driver_id,
-    //    'terminal_id' => request('termId'),
-    //    'plate_number' => $user->member->van->pluck('plate_number'),
-    //    'status' => 'Departed',
-    //    'total_passengers' => $totalPassengers,
-    //    'total_booking_fee' => request('totalBookingFee'),
-    //    'community_fund' => $communityFund,
-    //    'date_departed' => Carbon::createFromTimestamp(strtotime(request('dateDeparted') . request('timeDeparted'))),
-    //  ]);
-    //
-    // //  return back();
-    // $destinationArr = request('destination');
-    // $numOfPassengers = request('qty');
-    // $discountArr = request('discountId');
-    // $numOfDiscount = request('numberOfDiscount');
-    // $ticketArr = null;
-    // $discountTransactionArr = null;
-    //
-    // for($i = 0; $i < count($numOfPassengers); $i++){
-    //   if(!($numOfPassengers[$i] == null)){
-    //     $ticketArr[$i] = array($destinationArr[$i] => $numOfPassengers[$i]);
-    //   }else{
-    //     continue;
-    //   }
-    // }
-    //
-    // for($j = 0; $j < count($numOfDiscount); $j++){
-    //   if(!($numOfDiscount[$j] == null)){
-    //     $discountTransactionArr[$j] = array($discountArr[$j] => $numOfDiscount[$j]);
-    //   }else{
-    //     continue;
-    //   }
-    // }
-    // $insertTicketArr = array_values($ticketArr);
-    // $insertDiscountArr = array_values($discountTransactionArr);
-    //
-    // //Ticket
-    // foreach($insertTicketArr as $ticketKey => $innerTicketArrays){
-    //   foreach($innerTicketArrays as $innerTicketKeys => $innerTicketValues){
-    //     //Discount
-    //     foreach($insertDiscountArr as $discountKey => $innerDiscountArrays){
-    //         foreach($innerDiscountArrays as $innerDiscountKeys => $innerDiscountValues){
-    //           //echo $key . " " . $innerTicketKeys . " " . $innerTicketValues . "<br/>";
-    //           for($i = 1; $i <= $innerTicketValues || $i <= $innerDiscountValues; $i++){
-    //             //echo $innerKeys . " " . $i . "<br/>";
-    //             if(!($i > $innerDiscountValues)){
-    //               Transaction::create([
-    //                 "destination_id" => $innerTicketKeys,
-    //                 "fad_id" => $innerDiscountKeys,
-    //                 "trip_id" => 1,
-    //                 "status" => 'Departed',
-    //               ]);
-    //             }else{
-    //               Transaction::create([
-    //                 "destination_id" => $innerTicketKeys,
-    //                 "trip_id" => 1,
-    //                 "status" => 'Departed',
-    //               ]);
-    //             }
-    //           }
-    //         }
-    //     }
-    //
-    //   }
-    // }
-    // echo "<br/ >";
-    // foreach($insertDiscountArr as $key => $innerArrays){
-    //   foreach($innerArrays as $keySet => $innerValues){
-    //     echo $key . " " . $keySet . " " . $innerValues . "<br/>";
-    //     for($i = 1; $i <= $innerValues; $i++){
-    //       echo $keySet . " " . $i . "<br/>";
-    //     }
-    //   }
-    // }
-    dd(request('termId'));
-    //return redirect('home/create-report');
+     Trip::create([
+       'driver_id' => $driver_id->user_id,
+       'terminal_id' => $id,
+       'plate_number' => $plateNumber->plate_number,
+       'status' => 'Departed',
+       'total_passengers' => $totalPassengers,
+       'total_booking_fee' => $request->totalBookingFee,
+       'community_fund' => $communityFund,
+       'date_departed' => $request->dateDeparted,
+       'time_departed' => $request->timeDeparted,
+     ]);
 
+    $destinationArr = request('destination');
+    $numOfPassengers = request('qty');
+    $discountArr = request('discountId');
+    $numOfDiscount = request('numberOfDiscount');
+    $ticketArr = null;
+    $discountTransactionArr = null;
 
+    for($i = 0; $i < count($numOfPassengers); $i++){
+      if(!($numOfPassengers[$i] == null)){
+        $ticketArr[$i] = array($destinationArr[$i] => $numOfPassengers[$i]);
+      }else{
+        continue;
+      }
+    }
 
+    $tripId = Trip::latest()->select('trip_id')->first();
+    $insertTicketArr = array_values($ticketArr);
+
+    foreach($insertTicketArr as $ticketKey => $innerTicketArrays){
+      foreach($innerTicketArrays as $innerTicketKeys => $innerTicketValues){
+
+        for($i = 1; $i <= $innerTicketValues; $i++){
+          Transaction::create([
+            "destination_id" => $innerTicketKeys,
+            "trip_id" => $tripId->trip_id,
+            "status" => 'Departed',
+          ]);
+        }
+      }
+    }
+
+    $discountTransactionArr = array_combine($discountArr, $numOfDiscount);
+    $latestTrip = Trip::latest()->first();
+    $transaction = Transaction::orderBy('created_at', 'desc')->get();
+    $updateQueryCount = $totalPassengers;
+
+   $counter = 0;
+   foreach($discountTransactionArr as $key => $value){
+       $numOfDiscount = $value;
+       if($numOfDiscount == null){
+         //echo $numOfDiscount . "hi <br/>";
+         continue;
+       }else{
+
+         while($numOfDiscount != 0){
+           $check = $transaction[$counter]->update([
+             "fad_id" => $key,
+           ]);
+           //echo $counter . " " . $key . " " . $numOfDiscount . " " . $check . "<br/>";
+           $counter++;
+           $numOfDiscount--;
+         }
+       }
+   }
+
+  return redirect('home/choose-terminal');
 
 
   }
