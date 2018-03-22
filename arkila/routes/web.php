@@ -164,7 +164,7 @@ Route::get('/', function () {
     
     /* Trips */
     Route::post('/home/trips/{destination}/{van}/{member}', 'TripsController@store')->name('trips.store');
-    
+    Route::get('/listSpecialUnits/{terminal}','TripsController@listSpecialUnits')->name('trips.listSpecialUnits');
     Route::patch('/home/trips/{trip}', 'TripsController@updateRemarks')->name('trips.updateRemarks');
     Route::patch('/home/trips/changeDestination/{trip}', 'TripsController@updateDestination')->name('trips.updateDestination');
     

@@ -195,24 +195,8 @@ ol.vertical{
               </div>
             </div>
             <div class="box-body">
-                <ol class="list-group serialization">
-                  <li class="list-group-item">
-                    <h4 class="pull-left">
-                      AAA-123
-                    <span class="badge badge-pill badge-default ">CC</span>
-                    </h4>
-                    <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default btn-sm btn-flat dropdown-toggle" data-toggle="dropdown">
-                      <span class="caret"></span>
-                      <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">On Deck</a></li>
-                    <li><a href="#">Remove</a></li>
-                  </ul>
-                  </div>
-                    <div class="clearfix"></div>
-                  </li>
+                <ol id='specialUnitList' class="list-group serialization">
+
                 </ol>
               </div>
              </div>
@@ -242,7 +226,7 @@ ol.vertical{
                 <div class="tab-content">
                 <!-- Cabanatuan Queue Tab -->
                 @foreach($terminals as $terminal)
-                  <div class="tab-pane @if($terminals->first() == $terminal) {{'active'}} @else {{''}} @endif" id="{{$terminal->terminal_id}}">
+                  <div data-val='{{$terminal->terminal_id}}' class="tab-pane @if($terminals->first() == $terminal) {{'active'}} @else {{''}} @endif" id="{{$terminal->terminal_id}}">
                     <div class="box box-solid">
                       <div class="box-header text-center bg-gray">
                         <h3 class="box-title">{{$terminal->description}}</h3>
@@ -255,7 +239,7 @@ ol.vertical{
                     <ol id ="queue-list" class="vertical rectangle-list serialization">
                         @foreach ($trips->where('terminal_id',$terminal->terminal_id) as $trip)
                           <li class="" data-plate="{{ $trip->van->plate_number}}" data-remark="{{ $trip->remarks }}">
-                            <span>
+                            <span id="trip{{$trip->trip_id}}">
                             <div class="row">
                               <div class="col-md-6">
                                 <div class="queuenum">
@@ -322,7 +306,7 @@ ol.vertical{
         </div>
         </div>
         @foreach ($trips as $trip)
-        <div class="modal fade" id="destination{{ $trip->trip_id }}">
+        <div class="modal fade" id="destination{{$trip->trip_id}}">
                                   <div class="modal-dialog modal-sm">
                                       <div class="modal-content">
                                           <div class="modal-header">
@@ -335,7 +319,7 @@ ol.vertical{
                                            <ul class="list-group" style="margin-bottom: 0px">
                                              @foreach($terminals as $terminal)
                                               <li class="list-group-item">
-                                                  <input type="radio" name="destination"  value="{{$terminal->terminal_id}}" class="flat-blue">
+                                                  <input type="radio" name="destination"  value="{{$terminal->terminal_id}}" class="flat-blue" @if($trip->terminal_id == $terminal->terminal_id){{'checked'}}@endif>
                                                     {{ $terminal->description }} 
                                               </li>
                                             @endforeach
@@ -367,7 +351,9 @@ ol.vertical{
   </script>
     <!-- List sortable -->
     <script>
-        $(document).ready(function() {
+        $(function() {
+            $('#specialUnitList').load('/listSpecialUnits/'+$('#destinationTerminals li.active').data('val'));
+
             $('#addQueueButt').on('click', function() {
                 var destination = $('#destination').val();
                 var van = $('#van').val();
@@ -388,9 +374,6 @@ ol.vertical{
 
                 }
             });
-
-
-
 
         var group = $("ol.serialization").sortable({
         group: 'serialization',
@@ -421,6 +404,11 @@ ol.vertical{
 
         }
       });
+
+        $('#destinationTerminals li').on('click',function(e){
+            var terminal = $(e.currentTarget).data('val');
+            $('#specialUnitList').load('/listSpecialUnits/'+terminal);
+        });
 
     @foreach($trips as $trip)
 
@@ -453,14 +441,30 @@ ol.vertical{
                 console.log(response);
                 return response.responseJSON.message;
             }
+        },
+        success: function(response){
+            console.log(response);
+            if(response.length > 0){
+                checkSpecialUnit({{$trip->trip_id}},reponse[0],response[1],response[2]);
+            }
         }
       });
 
-
     @endforeach
 
-    @foreach($trips as $trip)
+    function checkSpecialUnit(tripId,hasPrivilege,trips,terminal){
+            if(hasPrivilege == 1){
+                $('#trip'+tripId).remove();
 
+                for(i = 0; i < trips.length; i++){
+                    $('#queue'+trips[i].trip_id).editable('setValue',trips[i].queue_number);
+                }
+
+                $('#specialUnitList').load('/listSpecialUnits/'+terminal);
+            }
+    }
+
+    @foreach($trips as $trip)
               $('#queue{{$trip->trip_id}}').editable({
                   name: 'queue',
                   value: '{{ $trip->queue_number }}',
