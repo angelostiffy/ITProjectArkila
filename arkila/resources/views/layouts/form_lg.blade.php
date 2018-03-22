@@ -52,7 +52,6 @@ display:inherit;
   }
   </style>
     @show
-}
 </head>
 
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
