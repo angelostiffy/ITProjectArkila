@@ -3,6 +3,7 @@
 @section('content-header', 'Ticket Sale') 
 @section('links') 
     @parent 
+    {{ Html::style('/jquery/bootstrap3-editable/css/bootstrap-editable.css') }}
 <style>
         .list-arrows button{
             min-width: 95px;
@@ -80,6 +81,14 @@
   border-top-left-radius: 0px ;
   border-top-right-radius: 0px ;
 }
+.select2-container--open 
+.select2-dropdown--below{
+    z-index:1100;
+}
+
+#driverdeck{
+    color: white;
+}
     </style>
     @stop 
 @section('content')
@@ -146,22 +155,33 @@
                                     <div id="sellTickets{{$terminal->terminal_id}}" class="row">
                                         <div id="list-left1" class="dual-list list-left col-md-5">
                                             <div class="box box-solid ticket-box">
-                                                <div id="ondeck-header" class="box-header bg-blue">
+                                                <div id="ondeck-header{{$terminal->terminal_id}}" class="box-header bg-blue">
                                                     <span class="col-md-6">
                                                         <h6>On Deck:</h6>
                                                          <h4>{{$terminal->trips->where('queue_number',1)->first()->plate_number}}</h4>
                                                     </span>
                                                      <span class="pull-right btn-group">
-                                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" style="border-radius: 100%">
-                                                            <i class="fa fa-gear"></i>
-                                                              <span class="sr-only">Toggle Dropdown</span>
+                                                        <button type="button" id="changeDriverBtn" class="btn btn-sm btn-primary" style="border-radius: 100%">
+                                                            <i class="fa fa-user"></i>
                                                         </button>
-                                                        <ul class="dropdown-menu" role="menu" style="border-color: #999999;">
-                                                            <li><a href="#"><i class="fa fa-trash"></i> Remove</a></li>
-                                                            <li><a href="#"><i class="fa fa-edit"></i> Change Driver</a></li>
-                                                        </ul>
+                                                        <button type="button" class="btn btn-sm btn-primary" style="border-radius: 100%">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                                <div id="changedriver-header{{$terminal->terminal_id}}" class="box-header bg-blue">
+                                                    <span class="col-md-6">
+                                                        <h6>Driver:</h6>
+                                                         <h4>
+                                                            <a href="" id="driverdeck" class=" editable" data-original-title title>John Doe</a>
+                                                        </h4>
+                                                    </span>
+                                                     <span class="pull-right btn-group">
+                                                        <button type="button" id="onDeckBtn" class="btn btn-sm btn-primary" data-toggle="dropdown" style="border-radius: 100%">
+                                                            <i class="fa fa-chevron-left"></i>
+                                                        </button>
                                                         <button class="btn btn-sm btn-primary" style="border-radius: 100%">
-                                                            <i class="fa fa-exchange"></i>
+                                                            <i class="fa fa-trash"></i>
                                                         </button>
                                                     </span>
                                                 </div>
@@ -265,7 +285,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($transactions as $transaction)
+                                           {{--  @foreach($transactions as $transaction)
                                             <tr>
                                               <td><input type="checkbox"> {{ $transaction->ticket_id }}</td>
                                               <td>{{ $transaction->destination->description}}</td>
@@ -276,7 +296,7 @@
                                                 <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</button>
                                               </td>
                                             </tr>
-                                            @endforeach
+                                            @endforeach --}}
                                         </tbody>
                                     </table>
                                   
@@ -294,6 +314,7 @@
 @endsection
 @section('scripts')
 @parent
+{{ Html::script('/jquery/bootstrap3-editable/js/bootstrap-editable.min.js') }}
 
 <script>
 	$(function () {
@@ -643,6 +664,18 @@
             $("#sellTickets{{$terminal->terminal_id}}").show();
         })
       });
+
+     $(document).ready(function(){
+        $("#changedriver-header{{$terminal->terminal_id}}").hide();
+        $("#changeDriverBtn").click(function(){
+            $("#ondeck-header{{$terminal->terminal_id}}").hide();
+            $("#changedriver-header{{$terminal->terminal_id}}").show();
+        })
+        $("#onDeckBtn").click(function(){
+            $("#changedriver-header{{$terminal->terminal_id}}").hide();
+            $("#ondeck-header{{$terminal->terminal_id}}").show();
+        })
+      });
     @endforeach
 </script>
 
@@ -682,5 +715,20 @@
             "order": [[ 1, "desc" ]]
         })
     })
+</script>
+<script>
+    $(document).ready(function() {
+        $('#driverdeck').editable({
+            type: 'select2',
+            title: 'Change Driver',
+            value: '1',
+            source: [
+                {value: '1', text: 'John Doe'},
+                {value: '2', text: 'Jhun Du'},
+                {value: '3', text: 'Jon Do'},
+                {value: '4', text: 'Jan Doo'}
+             ]
+        });
+    });
 </script>
 @stop
