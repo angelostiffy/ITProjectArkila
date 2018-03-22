@@ -99,29 +99,33 @@ class CreateReportController extends Controller
       }
     }
 
-    $discountTransactionArr = array_combine($discountArr, $numOfDiscount);
-    $latestTrip = Trip::latest()->first();
-    $transaction = Transaction::orderBy('created_at', 'desc')->get();
-    $updateQueryCount = $totalPassengers;
+    if($numOfDiscount != null){
+      $discountTransactionArr = array_combine($discountArr, $numOfDiscount);
+      $latestTrip = Trip::latest()->first();
+      $transaction = Transaction::orderBy('created_at', 'desc')->get();
+      $updateQueryCount = $totalPassengers;
 
-   $counter = 0;
-   foreach($discountTransactionArr as $key => $value){
-       $numOfDiscount = $value;
-       if($numOfDiscount == null){
-         //echo $numOfDiscount . "hi <br/>";
-         continue;
-       }else{
+     $counter = 0;
+     foreach($discountTransactionArr as $key => $value){
+         $numOfDiscount = $value;
+         if($numOfDiscount == null){
+           //echo $numOfDiscount . "hi <br/>";
+           continue;
+         }else{
 
-         while($numOfDiscount != 0){
-           $check = $transaction[$counter]->update([
-             "fad_id" => $key,
-           ]);
-           //echo $counter . " " . $key . " " . $numOfDiscount . " " . $check . "<br/>";
-           $counter++;
-           $numOfDiscount--;
+           while($numOfDiscount != 0){
+             $check = $transaction[$counter]->update([
+               "fad_id" => $key,
+             ]);
+             //echo $counter . " " . $key . " " . $numOfDiscount . " " . $check . "<br/>";
+             $counter++;
+             $numOfDiscount--;
+           }
          }
-       }
-   }
+     }
+    }
+
+
 
   return redirect('home/choose-terminal');
 

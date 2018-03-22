@@ -38,10 +38,12 @@ class CreateReportRequest extends FormRequest
           "numberOfDiscount" => "array",
           "numberOfDiscount.*" => "numeric|min:1"
         ];
-        
-        foreach($this->request->get('numberOfDiscount') as $key => $value){
-          $rules['numberOfDiscount.'.$key] = 'numeric|min:1';
-        }
+         if($this->request->get('numberOfDiscount') != null){
+           foreach($this->request->get('numberOfDiscount') as $key => $value){
+             $rules['numberOfDiscount.'.$key] = 'numeric|min:1';
+           }
+         }
+
 
         return $rules;
     }
@@ -59,18 +61,19 @@ class CreateReportRequest extends FormRequest
         // "numberOfDiscount.*.numeric" => "The number of discount must be numeric",
         // "numberOfDiscount.*.min" => "The number of discounts must greater than 0",
       ];
-
-      foreach($this->request->get('numberOfDiscount') as $key => $value){
-        // if($messages['numberOfDiscount.'.$key.'.numeric']){
-        //
-        // }
-        //
-        // if($messages['numberOfDiscount.'.$key.'.min']){
-        //
-        // }
-        $messages['numberOfDiscount.'.$key.'.min'] = "The number of discount must greater than 0";
-        $messages['numberOfDiscount.'.$key.'.numeric'] = "The number of discount must be numeric";
-        break;
+      if($this->request->get('numberOfDiscount') != null){
+        foreach($this->request->get('numberOfDiscount') as $key => $value){
+          // if($messages['numberOfDiscount.'.$key.'.numeric']){
+          //
+          // }
+          //
+          // if($messages['numberOfDiscount.'.$key.'.min']){
+          //
+          // }
+          $messages['numberOfDiscount.'.$key.'.min'] = "The number of discount must greater than 0";
+          $messages['numberOfDiscount.'.$key.'.numeric'] = "The number of discount must be numeric";
+          break;
+        }
       }
 
       return $messages;
