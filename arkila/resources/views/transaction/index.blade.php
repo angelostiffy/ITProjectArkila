@@ -115,23 +115,13 @@
                                         <select name="discount" id="discount" class="form-control">
                                      </select>
                                     </div>
-                                
+                                    <label for="">Ticket</label>
+                                        <select id="ticket" class="form-control select2" multiple="multiple" data-placeholder="Select Ticket">
+                                        </select>
                             </div>
 
-                            <div class="box-footer ">
-                                <div class="pull-right">
-                                    <div class="input-group ">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-ticket"></i>
-                                        </span>
-                                        <select id="ticket" class="form-control select2" name="" id="">
-                                        </select>
-                                        <span id="sellButtContainer" class="input-group-btn">
-
-                                        </span>
-                                    </div>
-                                </div>
-                                
+                            <div class="box-footer">
+                                <div id="sellButtContainer" class="pull-right"></div>
                             </div>
                             </form>
                         </div>
@@ -153,113 +143,147 @@
                                 @foreach($terminals as $terminal)
                                     @if($terminal->trips->where('queue_number',1)->first()->plate_number ?? null)
                                 <div class="tab-pane @if($terminals->first() == $terminal){{'active'}}@endif" id="terminal{{$terminal->terminal_id}}">
-                                    <div class="row">
-                                                    <div id="list-left1" class="dual-list list-left col-md-5">
-                                                        <div class="box box-solid ticket-box">
-                                                            <div id="ondeck-header" class="box-header bg-blue">
-                                                                <span class="col-md-6">
-                                                                    <h6>On Deck:</h6>
-                                                                     <h4>{{$terminal->trips->where('queue_number',1)->first()->plate_number}}</h4>
-                                                                </span>
-                                                                 <span class="pull-right btn-group">
-                                                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" style="border-radius: 100%">
-                                                                        <i class="fa fa-gear"></i>
-                                                                          <span class="sr-only">Toggle Dropdown</span>
-                                                                    </button>
-                                                                    <ul class="dropdown-menu" role="menu" style="border-color: #999999;">
-                                                                        <li><a href="#"><i class="fa fa-trash"></i> Remove</a></li>
-                                                                        <li><a href="#"><i class="fa fa-edit"></i> Change Driver</a></li>
-                                                                    </ul>
-                                                                    <button class="btn btn-sm btn-primary" style="border-radius: 100%">
-                                                                        <i class="fa fa-exchange"></i>
-                                                                    </button>
-                                                                </span>
-                                                            </div>
+                                    <div id="sellTickets{{$terminal->terminal_id}}" class="row">
+                                        <div id="list-left1" class="dual-list list-left col-md-5">
+                                            <div class="box box-solid ticket-box">
+                                                <div id="ondeck-header" class="box-header bg-blue">
+                                                    <span class="col-md-6">
+                                                        <h6>On Deck:</h6>
+                                                         <h4>{{$terminal->trips->where('queue_number',1)->first()->plate_number}}</h4>
+                                                    </span>
+                                                     <span class="pull-right btn-group">
+                                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" style="border-radius: 100%">
+                                                            <i class="fa fa-gear"></i>
+                                                              <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu" style="border-color: #999999;">
+                                                            <li><a href="#"><i class="fa fa-trash"></i> Remove</a></li>
+                                                            <li><a href="#"><i class="fa fa-edit"></i> Change Driver</a></li>
+                                                        </ul>
+                                                        <button class="btn btn-sm btn-primary" style="border-radius: 100%">
+                                                            <i class="fa fa-exchange"></i>
+                                                        </button>
+                                                    </span>
+                                                </div>
 
-                                                            <div class="box-body well">
-                                                                <div class="text-right">
-                                                                    <div class="row">
-                                                                        <div class="col-md-2">
-                                                                            <div class="btn-group">
-                                                                                <a class="checkBox{{$terminal->terminal_id}} btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-10">
-                                                                            <div class="input-group">
-                                                                                <span class="input-group-addon">
-                                                                                    <i class=" glyphicon glyphicon-search"></i>
-                                                                                </span>
-                                                                                <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="">
-                                                                    <ul id="onBoardList{{$terminal->terminal_id}}" class="list-group scrollbar scrollbar-info thin ticket-overflow">
-                                                                        @foreach($terminal->transactions->where('status','OnBoard') as $transaction)
-                                                                            <li data-val="{{$transaction->transaction_id}}" class="list-group-item">{{$transaction->ticket->ticket_number}}</li>
-                                                                        @endforeach
-                                                                    </ul>
-                                                                    </div>
+                                                <div class="box-body well">
+                                                    <div class="text-right">
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <div class="btn-group">
+                                                                    <a class="checkBox{{$terminal->terminal_id}} btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
                                                                 </div>
-                                                                <div class="text-center ">
-                                                                    <button name="depart" value="{{$terminal->terminal_id}}" href="" class="btn btn-primary btn-flat">Depart <i class="fa fa-automobile"></i></button>
+                                                            </div>
+                                                            <div class="col-md-10">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <i class=" glyphicon glyphicon-search"></i>
+                                                                    </span>
+                                                                    <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-
-                                                    <div class="list-arrows col-md-2 text-center">
-                                                        <button id="board{{$terminal->terminal_id}}" class="btn btn-outline-primary btn-sm btn-flat move-left1">
-                                                            <i class="glyphicon glyphicon-chevron-left"></i>  BOARD
-                                                        </button>
-                                                        <br>
-                                                        <button id="unboard{{$terminal->terminal_id}}" class="btn btn-outline-warning btn-sm btn-flat move-right1">
-                                                             UNBOARD <i class="glyphicon glyphicon-chevron-right"></i>
-                                                        </button>
-                                                    </div>
-                                                    
-                                                    <div id="list-right1" class="dual-list list-right col-md-5">
-                                                        <div class="box box-solid ticket-box">
-                                                            <div class="box-header bg-yellow bg-gray">
-                                                                <span class="">
-                                                                    <h6>Sold Tickets for</h6>
-                                                                     <h4>{{$terminal->description}}</h4>
-                                                                </span>
-                                                            </div>
-                                                            <div class="box-body well">
-                                                                    <div class="row">
-                                                                        <div class="col-md-2">
-                                                                            <div class="btn-group">
-                                                                                <a class="checkBox{{$terminal->terminal_id}} btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-10">
-                                                                            <div class="input-group">
-                                                                                <span class="input-group-addon">
-                                                                                    <i class="glyphicon glyphicon-search"></i>
-                                                                                </span>
-                                                                                <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <ul id="pendingList{{$terminal->terminal_id}}" class="list-group scrollbar scrollbar-info thin ticket-overflow">
-                                                                        @foreach($terminal->transactions->where('status','Pending') as $transaction)
-                                                                            <li data-val='{{$transaction->transaction_id}}' class="list-group-item">{{$transaction->ticket->ticket_number}}</li>
-                                                                        @endforeach
-                                                                    </ul>
-                                                                    <div class="text-center ">
-                                                                    <a href="" class="btn btn-outline-secondary btn-flat">Manage Tickets <i class=""></i></a>
-                                                                </div>
-                                                                    
-                                                            </div>
-
+                                                        <div class="">
+                                                        <ul id="onBoardList{{$terminal->terminal_id}}" class="list-group scrollbar scrollbar-info thin ticket-overflow">
+                                                            @foreach($terminal->transactions->where('status','OnBoard') as $transaction)
+                                                                <li data-val="{{$transaction->transaction_id}}" class="list-group-item">{{$transaction->ticket->ticket_number}}</li>
+                                                            @endforeach
+                                                        </ul>
                                                         </div>
                                                     </div>
-                                                </div>  
+                                                    <div class="text-center ">
+                                                        <button name="depart" value="{{$terminal->terminal_id}}" href="" class="btn btn-primary btn-flat">Depart <i class="fa fa-automobile"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="list-arrows col-md-2 text-center">
+                                            <button id="board{{$terminal->terminal_id}}" class="btn btn-outline-primary btn-sm btn-flat move-left1">
+                                                <i class="glyphicon glyphicon-chevron-left"></i>  BOARD
+                                            </button>
+                                            <br>
+                                            <button id="unboard{{$terminal->terminal_id}}" class="btn btn-outline-warning btn-sm btn-flat move-right1">
+                                                 UNBOARD <i class="glyphicon glyphicon-chevron-right"></i>
+                                            </button>
+                                        </div>
+                                        
+                                        <div id="list-right1" class="dual-list list-right col-md-5">
+                                            <div class="box box-solid ticket-box">
+                                                <div class="box-header bg-yellow bg-gray">
+                                                    <span class="">
+                                                        <h6>Sold Tickets for</h6>
+                                                         <h4>{{$terminal->description}}</h4>
+                                                    </span>
+                                                </div>
+                                                <div class="box-body well">
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <div class="btn-group">
+                                                                    <a class="checkBox{{$terminal->terminal_id}} btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-10">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="glyphicon glyphicon-search"></i>
+                                                                    </span>
+                                                                    <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <ul id="pendingList{{$terminal->terminal_id}}" class="list-group scrollbar scrollbar-info thin ticket-overflow">
+                                                            @foreach($terminal->transactions->where('status','Pending') as $transaction)
+                                                                <li data-val='{{$transaction->transaction_id}}' class="list-group-item">{{$transaction->ticket->ticket_number}}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                        <div class="text-center ">
+                                                        <button type="button" id="managePageBtn" class="btn btn-outline-secondary btn-flat">Manage Tickets <i class=""></i></button>
+                                                    </div>
+                                                        
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="manageTickets{{$terminal->terminal_id}}">
+                                       <div class="pull-left col-md-6">
+                                            <button id="boardPageBtn" class="btn btn-outline-secondary btn-sm btn-flat"><i class="fa fa-chevron-left"></i> Board Tickets</button>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default btn-sm  btn-flat checkbox-toggle"><i class="fa fa-square-o"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-sm btn-flat"><i class="fa fa-trash"></i></button>
+                                            </div>
+                                        </div>
+                                    <table id="sold-tickets" class="table table-bordered sold-tickets">
+                                        <thead>
+                                            <tr>
+                                              <th>Ticket No.</th>
+                                              <th>Destination</th>
+                                              <th>Date Purchased</th>
+                                              <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($transactions as $transaction)
+                                            <tr>
+                                              <td><input type="checkbox"> {{ $transaction->ticket_id }}</td>
+                                              <td>{{ $transaction->destination->description}}</td>
+                                              <td>{{ $transaction->created_at }}</td>
+                                              <td>
+                                                <button class="btn btn-primary"><i class="fa fa-money"></i> Refund</button>
+                                                <button class="btn btn-info"><i class="fa fa-edit"></i> Change Destination</button>
+                                                <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</button>
+                                              </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                  
+                                    </div>  
                                 </div>
                                     @endif
                                     @endforeach
-
                             </div>
 
                         </div>
@@ -604,5 +628,59 @@
             });
 
         });
+</script>
+
+<script>
+    @foreach($terminals as $terminal)
+     $(document).ready(function(){
+        $("#manageTickets{{$terminal->terminal_id}}").hide();
+        $("#managePageBtn").click(function(){
+            $("#sellTickets{{$terminal->terminal_id}}").hide();
+            $("#manageTickets{{$terminal->terminal_id}}").show();
+        })
+        $("#boardPageBtn").click(function(){
+            $("#manageTickets{{$terminal->terminal_id}}").hide();
+            $("#sellTickets{{$terminal->terminal_id}}").show();
+        })
+      });
+    @endforeach
+</script>
+
+<script>
+            $(function () {
+                //Enable iCheck plugin for checkboxes
+                //iCheck for checkbox and radio inputs
+                $('.sold-tickets input[type="checkbox"]').iCheck({
+                  checkboxClass: 'icheckbox_flat-blue'
+                });
+
+                //Enable check and uncheck all functionality
+                $(".checkbox-toggle").click(function () {
+                  var clicks = $(this).data('clicks');
+                  if (clicks) {
+                    //Uncheck all checkboxes
+                    $(".sold-tickets input[type='checkbox']").iCheck("uncheck");
+                    $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+                  } else {
+                    //Check all checkboxes
+                    $(".sold-tickets input[type='checkbox']").iCheck("check");
+                    $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+                  }
+                  $(this).data("clicks", !clicks);
+                });
+            });
+</script>
+<script>
+    $(function() {
+        $('#sold-tickets').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': true,
+            "order": [[ 1, "desc" ]]
+        })
+    })
 </script>
 @stop
