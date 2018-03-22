@@ -1,17 +1,15 @@
-@extends('layouts.master') 
+@extends('layouts.error') 
 @section('title', 'Error 404') 
 @section('content') 
 
 <div class="error-page">
-    <h2 class="headline text-yellow"> 404</h2>
 
-    <div class="error-content">
-      <h3><i class="fa fa-warning text-yellow"></i> Oops! Page not found.</h3>
-
-      <p>
-        We could not find the page you were looking for.
-        Meanwhile, you may <a href="/home">return to dashboard</a>
-      </p>
+    <div class="section text-center" style="margin-top:14%">       
+        <h1 class="text-yellow" style="font-size:200pt"> 404</h1>       
+        <h3><i class="fa fa-warning text-yellow"></i> Oops! Page not found.</h3>
+        <p>
+            We could not find the page you were looking for.
+        </p>
 
     </div>
     <!-- /.error-content -->
