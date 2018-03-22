@@ -3,6 +3,7 @@
 
 
     {{Session::get('error')}}
+    @include('message.success')
     <!-- Profile Image -->
     <div class="box box-primary">
         <div class="box-body box-profile">

@@ -205,11 +205,16 @@ Route::group(['middleware' => ['auth', 'driver']], function(){
   Route::get('/home/profile', 'DriverModuleControllers\DriverProfileController@showDriverProfile')->name('drivermodule.showProfile');
   Route::post('/home/profile', 'DriverModuleControllers\DriverProfileController@changeNotificationStatus')->name('drivermodule.notification');
   /*Change Password*/
+
   Route::patch('/home/profile/change-password/{driverid}', 'DriverModuleControllers\DriverProfileController@updatePassword')->name('drivermodule.changePassword');
-  Route::post('/home/profile/change-password', 'DriverModuleControllers\DriverProfileController@checkCurrentPassword')->name('drivermodule.checkCurrentPassword');
-  /*Trip Log/Create Report*/
-  Route::get('/home/create-report', 'DriverModuleControllers\CreateReportController@createReport')->name('drivermodule.viewCreateReport');
-  Route::post('/home/create-report', 'DriverModuleControllers\CreateReportController@storeReport')->name('drivermodule.storeReport');
+  Route::post('home/profile/change-password', 'DriverModuleControllers\DriverProfileController@checkCurrentPassword')->name('drivermodule.checkCurrentPassword');
+  /*Create Report*/
+  Route::get('/home/choose-terminal', 'DriverModuleControllers\CreateReportController@chooseTerminal')->name('drivermodule.chooseTerminal');
+  Route::get('/home/create-report/{id}', 'DriverModuleControllers\CreateReportController@createReport')->name('drivermodule.createReport');
+  Route::post('/home/create-report/{id}/store', 'DriverModuleControllers\CreateReportController@storeReport')->name('drivermodule.storeReport');
+  /*Trip Log*/
+  Route::get('/home/view-trips', 'DriverModuleControllers\TripLogController@viewTripLog')->name('drivermodule.viewTripLog');
+
 });
 
 

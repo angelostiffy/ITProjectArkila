@@ -1,23 +1,31 @@
- @extends('layouts.driver') 
- @section('title', 'Driver Report') 
- @section('content-title', 'Driver Report') 
+ @extends('layouts.driver')
+ @section('title', 'Driver Report')
+ @section('content-title', 'Driver Report')
  @section('content')
 <div class="row">
     <div class="col-md-offset-1 col-md-10">
         <div id="terminal" class="tab-pane">
             <div class="box box-solid">
                 <div class="box-header">
-                    <h3 class="box-title">Cabanatuan</h3>
+                    <h3 class="box-title">{{$terminals->description}}</h3>
                 </div>
+
                 <div class="box-body">
-                    <form action="" method="POST" class="form-horizontal">
+                    <form action="{{route('drivermodule.storeReport', [request('id')])}}" method="POST" class="form-horizontal">
+                      {{csrf_field()}}
+                      <input type="hidden" name="termId" value="{{$terminals->terminal_id}}">
                         <div class="col-md-6">
+                          @php $counter = 0; @endphp
+                          @foreach($destinations as $destination)
                             <div class='form-group'>
-                                <label for="" class="col-sm-4">asdasd</label>
+                                <label for="" class="col-sm-4">{{$destination->description}}</label>
                                 <div class="col-sm-6">
-                                    <input class='form-control pull-right' onblur='findTotal()' type='number' name='qty[]' id=''>
+                                    <input type="hidden" name="destination[]" value="{{$destination->destid}}">
+                                    <input value="{{old('qty.'.$counter)}}" class='form-control pull-right' onblur='findTotal()' type='number' name='qty[]' id=''>
                                 </div>
                             </div>
+                            @php $counter++; @endphp
+                          @endforeach
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -26,7 +34,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input value="" id="" name="dateDeparted" type="text" class="form-control datepicker">
+                                    <input value="{{old('dateDeparted')}}" id="" name="dateDeparted" type="text" class="form-control datepicker">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -36,7 +44,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-clock-o"></i>
                                         </div>
-                                        <input id="timepicker" name="timeDeparted" class="form-control">
+                                        <input value="{{old('timeDeparted')}}" id="timepicker" name="timeDeparted" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -45,24 +53,30 @@
                                 <div class="col-md-5">
                                     <div class='form-group'>
                                         <label for=''>Total Passengers: </label>
-                                        <input class='form-control col-xs-3' type='text' name='totalPassengers' id='totalPassengers'>
+                                        <input value="{{old('totalPassengers')}}" class='form-control col-xs-3' type='number' name='totalPassengers' id='totalPassengers'>
                                     </div>
                                 </div>
                                 <div class="col-md-1"></div>
                                 <div class="col-md-5">
                                     <div class='form-group clearfix'>
                                         <label for=''>Total Booking Fee: </label>
-                                        <input class='form-control col-xs-3' type='text' name='totalBookingFee' id='totalFee'>
+                                        <input value="{{old('totalBookingFee')}}" class='form-control col-xs-3' type='number' data-bookingfee="{{$terminals->booking_fee}}" name='totalBookingFee' id='totalFee'>
                                     </div>
                                 </div>
                             </div>
+                            <label for='Discounts'> Number of Customers with Discounts: </label>
                             <div class="form-horizontal">
-                                <div class='form-group'>
-                                    <label for='Discounts' class="col-sm-6"> Number of Customers with Discounts: </label>
-                                    <div class="col-sm-6">
-                                        <input class='form-control col-sm-9' type='number' name='numberOfDiscount'>
-                                    </div>
-                                </div>
+                              @php $c = 0; @endphp
+                                @foreach($fads as $fad)
+                                  <div class='form-group'>
+                                      <label for='Discounts' class="col-sm-4"> {{$fad->description}} Discount: </label>
+                                      <div class="col-sm-6">
+                                        <input type="hidden" name="discountId[]" value="{{$fad->fad_id}}">
+                                          <input value="{{old('numberOfDiscount.'.$c)}}" class='form-control col-sm-9' type='number' name='numberOfDiscount[]'>
+                                      </div>
+                                  </div>
+                                    @php $c++; @endphp
+                                @endforeach
                             </div>
                             <div class="box-footer text-center">
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#discountModal">Submit</button>
@@ -108,8 +122,8 @@
 <!-- /.row -->
 </div>
 
-@endsection 
-@section('scripts') 
+@endsection
+@section('scripts')
 @parent
 
 

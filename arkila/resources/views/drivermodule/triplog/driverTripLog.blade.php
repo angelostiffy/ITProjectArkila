@@ -16,11 +16,15 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>puggggg</td>
-                        <td>Chabal loves shaina</td>
-                        <td>15</td>
-                        <td>chabal</td>
+                      @php $tripNo = 1; @endphp
+                      @foreach($tripsMade as $tripMade)
+                        <td>{{$tripNo}}</td>
+                        <td>{{$tripMade->date_departed}}</td>
+                        <td>{{$tripMade->time_departed}}</td>
+                        <td>{{$tripMade->terminal->description}}</td>
+                        <td></td>
+                      @php $tripNo++; @endphp
+                      @endforeach
                     </tr>
                 </tbody>
             </table>
@@ -41,15 +45,12 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <div class="list-group">
-                    <li class="list-group-item">Trip 1 (February 9, 2018 || 5:00 pm)
-                        <button type="button" class="btn btn-xs btn-primary pull-right" data-toggle="modal" data-target="#seeLogDetails"><i class="fa fa-eye"></i> View</button>
+                  @php $tripCount = 1; @endphp
+                  @foreach($tripsMade as $tripMade)
+                    <li class="list-group-item">Trip {{$tripCount}} (February 9, 2018 || 5:00 pm)
+                        <button type="button" class="btn btn-xs btn-primary pull-right" data-date="" data-time="" data-origin="" data-destination="" data-income="" data-toggle="modal" data-target="#seeLogDetails"><i class="fa fa-eye"></i> View</button>
                     </li>
-                    <li class="list-group-item">Trip 2 (February 9, 2018 || 5:00 pm)
-                        <button type="button" class="btn btn-xs btn-primary pull-right" data-toggle="modal" data-target="#seeLogDetails"><i class="fa fa-eye"></i> View</button>
-                    </li>
-                    <li class="list-group-item">Trip 3 (February 9, 2018 || 5:00 pm)
-                        <button type="button" class="btn btn-xs btn-primary pull-right" data-toggle="modal" data-target="#seeLogDetails"><i class="fa fa-eye"></i> View</button>
-                    </li>
+                  @endforeach
                 </div>
                 <!-- /.list -->
 
