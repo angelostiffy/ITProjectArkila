@@ -51,7 +51,7 @@
                     <td>{{$userAdmin->description}}</td>
                     <td class="center-block">
                         <div class="text-center">
-                             <a href="/home/user-management/admin/{{$userAdmin->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
+                             <a href="/home/user-management/admin/{{$user_admin->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
                         </div>
                     </td>
                 </tr>
