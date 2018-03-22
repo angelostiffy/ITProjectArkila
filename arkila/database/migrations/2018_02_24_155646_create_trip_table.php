@@ -30,6 +30,7 @@ class CreateTripTable extends Migration
             $table->date('date_departed')->nullable();
             $table->time('time_departed')->nullable();
             $table->integer('queue_number')->nullable();
+            $table->boolean('has_privilege');
 
 
             $table->foreign('terminal_id')

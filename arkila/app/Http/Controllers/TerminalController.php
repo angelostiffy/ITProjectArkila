@@ -7,12 +7,7 @@ use App\Terminal;
 use App\Rules\checkCurrency;
 class TerminalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    
+
     /**
      * Show the form for creating a new resource.
      *
