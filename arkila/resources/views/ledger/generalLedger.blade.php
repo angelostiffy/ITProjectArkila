@@ -3,154 +3,153 @@
 @section('links')
 @parent
   <link rel="stylesheet" href="public\css\myOwnStyle.css">
-  @stop
+@stop
 @section('content')
-
-      <section class="content">
-        <div class="box">  
-           <div class="box-body">
-              <div class="col-xl-6">
+<section class="content">
+    <div class="box">
+        <div class="box-body">
+            <div class="col-xl-6">
                 <div class="col-md-3 pull-right">
-                   <div class="input-group">
-                      <span class="input-group-addon">
+                    <div class="input-group">
+                        <span class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </span>
-                      <input type="text" class="form-control pull-right" id="reservation">
-                      <span class="input-group-btn">
+                        <input type="text" class="form-control pull-right" id="reservation">
+                        <span class="input-group-btn">
                         <button type="submit" class="btn btn-info alignTable">Filter</button>
                       </span>
                     </div>
-                </div>    
-          <!-- Custom Tabs -->
-                <div class="nav-tabs-custom">
-                  <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab_1" data-toggle="tab">Revenues</a></li>
-                    <li><a href="#tab_2" data-toggle="tab">Expenses</a></li>
-                  </ul>
-             
-                 <div class="tab-content">
-                  <div class="tab-pane active" id="tab_1">
-                  <table class="table table-bordered table-striped example1">
-                    <thead>
-                       <tr>
-                        <th>Revenue Name</th>
-                        <th>Amount</th>
-                        <th>Date Stamp</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                   <tbody>
-                    <tr>
-                      <td>Rentals</td>
-                      <td>520.00</td>
-                      <td>January 23,2018 8:00 am</td>
-                      <td><a href="#" class="btn btn-primary"><i class="fa fa-eye">View</i></a></td>
-                    </tr>
-                     <tr>
-                      <td>Booking fee</td>
-                      <td>500.00</td>
-                      <td>January 24,2018 9:00 am</td>
-                      <td><a href="#" class="btn btn-primary"><i class="fa fa-eye">View</i></a></td>
-                    </tbody>
-                  </table>
-
-                <div class="form-group">
-                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Generate Report</button>
                 </div>
-                  
-                <!-- Modal -->
-                <div id="myModal" class="modal fade" role="dialog">
-                  <div class="modal-dialog">
+                <!-- Custom Tabs -->
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab_1" data-toggle="tab">Revenues</a></li>
+                        <li><a href="#tab_2" data-toggle="tab">Expenses</a></li>
+                    </ul>
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Generate Report Confirmation</h4>
-                      </div>
-                        <div class="modal-body">
-                           <p>Are you sure to generate this report from MM/DD/YYYY to MM/DD/YYYY<p>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_1">
+                            <table class="table table-bordered table-striped example1">
+                                <thead>
+                                    <tr>
+                                        <th>Revenue Name</th>
+                                        <th>Amount</th>
+                                        <th>Date Stamp</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Rentals</td>
+                                        <td>520.00</td>
+                                        <td>January 23,2018 8:00 am</td>
+                                        <td><a href="#" class="btn btn-primary"><i class="fa fa-eye">View</i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Booking fee</td>
+                                        <td>500.00</td>
+                                        <td>January 24,2018 9:00 am</td>
+                                        <td><a href="#" class="btn btn-primary"><i class="fa fa-eye">View</i></a></td>
+                                </tbody>
+                            </table>
+
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Generate Report</button>
+                            </div>
+
+                            <!-- Modal -->
+                            <div id="myModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Generate Report Confirmation</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure to generate this report from MM/DD/YYYY to MM/DD/YYYY
+                                                <p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
-            
-            <!-- /.box-body -->
+
+                        <!-- /.box-body -->
 
 
-          
- 
-              <!-- /.tab-pane -->
-            <div class="tab-pane" id="tab_2">
 
-              <table class="table table-bordered table-striped example1">
-                <thead>
-                <tr>
-                  <th>Revenue Name</th>
-                  <th>Amount</th>
-                  <th>Date Stamp</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>Rentals</td>
-                  <td>520.00</td>
-                  <td>January 23,2018 8:00 am</td>
-                  <td><a href="#" class="btn btn-primary"><i class="fa fa-eye">View</i></a></td>
-                </tr>
-                 <tr>
-                  <td>Booking fee</td>
-                  <td>500.00</td>
-                  <td>January 24,2018 9:00 am</td>
-                  <td><a href="#" class="btn btn-primary"><i class="fa fa-eye">View</i></a></td>
 
-                </tbody>
-              </table>
-                   <div class="form-group">
-                         <!-- Trigger the modal with a button -->
-                <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal2">Generate Report</button>
-              </div>
-                        <!-- Modal -->
-                <div id="myModal2" class="modal fade" role="dialog">
-                  <div class="modal-dialog">
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="tab_2">
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Generate Confirmation</h4>
-                      </div>
-                      <div class="modal-body">
-                        <p>Are you sure to generate this report from MM/DD/YYYY to MM/DD/YYYY<p>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
-                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                      </div>
+                            <table class="table table-bordered table-striped example1">
+                                <thead>
+                                    <tr>
+                                        <th>Revenue Name</th>
+                                        <th>Amount</th>
+                                        <th>Date Stamp</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Rentals</td>
+                                        <td>520.00</td>
+                                        <td>January 23,2018 8:00 am</td>
+                                        <td><a href="#" class="btn btn-primary"><i class="fa fa-eye">View</i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Booking fee</td>
+                                        <td>500.00</td>
+                                        <td>January 24,2018 9:00 am</td>
+                                        <td><a href="#" class="btn btn-primary"><i class="fa fa-eye">View</i></a></td>
+
+                                </tbody>
+                            </table>
+                            <div class="form-group">
+                                <!-- Trigger the modal with a button -->
+                                <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal2">Generate Report</button>
+                            </div>
+                            <!-- Modal -->
+                            <div id="myModal2" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Generate Confirmation</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure to generate this report from MM/DD/YYYY to MM/DD/YYYY
+                                                <p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
-                  </div>
+
                 </div>
             </div>
-
-              </div>
-
-
-              </div>
-              </div>
-            </div>
-         <!-- /.tab-pane -->
-            </div>
-            <!-- /.tab-content -->
-      </section>
-
-
+        </div>
+        <!-- /.tab-pane -->
+    </div>
+    <!-- /.tab-content -->
+</section>
 
 @stop
 
