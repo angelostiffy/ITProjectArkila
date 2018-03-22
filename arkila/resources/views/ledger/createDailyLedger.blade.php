@@ -1,10 +1,6 @@
 @extends('layouts.master')
-@section('title', 'index')
+@section('title', 'Create Daily Ledger')
 @section('content')
-<!-- bootstrap datepicker -->
-<link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"> <!-- Date Picker -->
-<link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">   
-
  <div style="text-align: center" style class="row">
         <!-- Left col -->
     
