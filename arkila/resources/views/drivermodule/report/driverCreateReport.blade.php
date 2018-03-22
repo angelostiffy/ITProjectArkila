@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="box-body">
-                    <form action="{{route('drivermodule.storeReport', [request('id')])}}" method="POST" class="form-horizontal">
+                    <form action="{{route('drivermodule.storeReport', [request('id')])}}" method="POST" class="form-horizontal" data-parsley-validate="">
                       {{csrf_field()}}
                       <input type="hidden" name="termId" value="{{$terminals->terminal_id}}">
                         <div class="col-md-6">
@@ -30,37 +30,45 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="departureDate" class="col-sm-4">Date of Departure:</label>
-                                <div class="input-group date col-sm-8">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
+                                <div class="col-sm-8">
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input value="{{old('dateDeparted')}}" id="" name="dateDeparted" type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask required data-parsley-errors-container="#errDateDeparted">
+                                        
                                     </div>
-                                    <input value="{{old('dateDeparted')}}" id="" name="dateDeparted" type="text" class="form-control datepicker">
+                                    <p id="errDateDeparted"></p>
                                 </div>
+                                
                             </div>
                             <div class="form-group">
                                 <div class="bootstrap-timepicker">
                                     <label for="timeDepart" class="col-sm-4">Time of Departure:</label>
-                                    <div class="input-group col-sm-8">
+                                    <div class=" col-sm-8">
+                                    <div class="input-group">
                                         <div class="input-group-addon">
                                             <i class="fa fa-clock-o"></i>
                                         </div>
-                                        <input value="{{old('timeDeparted')}}" id="timepicker" name="timeDeparted" class="form-control">
+                                        <input value="{{old('timeDeparted')}}" id="timepicker" name="timeDeparted" class="form-control" required data-parsley-errors-container="#errTimeDeparted">
+                                    </div>
+                                    <p id="errTimeDeparted"></p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab">
+                            <div class="row">
                                 <div class="col-md-1"></div>
                                 <div class="col-md-5">
                                     <div class='form-group'>
                                         <label for=''>Total Passengers: </label>
-                                        <input value="{{old('totalPassengers')}}" class='form-control col-xs-3' type='number' name='totalPassengers' id='totalPassengers'>
+                                        <input value="{{old('totalPassengers')}}" class='form-control col-xs-3' type='number' name='totalPassengers' id='totalPassengers' required>
                                     </div>
                                 </div>
                                 <div class="col-md-1"></div>
                                 <div class="col-md-5">
                                     <div class='form-group clearfix'>
                                         <label for=''>Total Booking Fee: </label>
-                                        <input value="{{old('totalBookingFee')}}" class='form-control col-xs-3' type='number' data-bookingfee="{{$terminals->booking_fee}}" name='totalBookingFee' id='totalFee'>
+                                        <input value="{{old('totalBookingFee')}}" class='form-control col-xs-3' type='number' data-bookingfee="{{$terminals->booking_fee}}" name='totalBookingFee' id='totalFee' required>
                                     </div>
                                 </div>
                             </div>
@@ -197,6 +205,10 @@
             tabRow.rows[0].cells[tabRow.rows[0].cells.length - 1].children[0].children[0].style.display = "";
         }
     }
+</script>
+
+<script>
+     $('[data-mask]').inputmask()
 </script>
 
 
