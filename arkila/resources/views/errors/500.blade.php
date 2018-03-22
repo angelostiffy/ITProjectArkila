@@ -16,4 +16,4 @@
 </div>
 <!-- /.error-page -->
 
-@endforeach
+@endsection
