@@ -17,4 +17,4 @@
     <!-- /.error-content -->
 </div>
 
-@endforeach
+@endsection
