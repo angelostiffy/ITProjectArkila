@@ -67,27 +67,7 @@ class RentalsController extends Controller
         return redirect('/home/rental/create');
 
     }    
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */ 
-    public function show(Request $request)
-    {
 
-    }    
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */ 
-    public function edit($id)
-    {
-        //
-    }    
 
     /**
      * Update the specified resource in storage.

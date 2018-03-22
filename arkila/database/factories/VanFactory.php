@@ -1,7 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
-
+use \App\VanModel;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -14,9 +14,15 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\Van::class, function (Faker $faker) {
+
+    $vanModel = VanModel::create([
+        'description' => 'Innova'
+    ]);
+
     return [
         'plate_number' => $faker->unique()->bothify('??? - ###'),
-        'model' => $faker->word,
+        'model_id' => $vanModel->model_id,
         'seating_capacity'=> $faker->numberBetween($min = 13, $max = 15),
+        'status' => 'Active'
     ];
 });
