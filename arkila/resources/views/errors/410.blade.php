@@ -5,8 +5,8 @@
 <div class="error-page">
 
     <div class="section text-center" style="margin-top:14%">       
-        <h1 class="text-yellow" style="font-size:200pt"> 404</h1>       
-        <h3><i class="fa fa-warning text-yellow"></i> Oops! Page not found.</h3>
+        <h1 class="text-yellow" style="font-size:200pt"> 410</h1>       
+        <h3><i class="fa fa-warning text-yellow"></i> Oops! Gone.</h3>
         <p>
             We could not find the page you were looking for.
         </p>
