@@ -11,7 +11,7 @@
                 <!-- Custom Tabs -->
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab_1" data-toggle="tab">Walk-in Rental</a></li>
+                        <li class="active"><a href="#tab_1" data-toggle="tab">List of Rentals</a></li>
                         <li><a href="#tab_2" data-toggle="tab">Online Rental</a></li>
 
                     </ul>
