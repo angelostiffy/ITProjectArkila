@@ -12,6 +12,7 @@ class TripLogController extends Controller
 {
     public function viewTripLog()
     {
+      $trips = Trip::where('driver_id', Auth::id())->get();
       $member = Member::where('user_id', Auth::id())->first();
       $tripsMade = $member->trips;
       return view('drivermodule.triplog.driverTripLog', compact('tripsMade'));

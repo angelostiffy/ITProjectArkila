@@ -15,17 +15,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                  @php $tripNo = 1; @endphp
+                  @foreach($tripsMade as $tripMade)
                     <tr>
-                      @php $tripNo = 1; @endphp
-                      @foreach($tripsMade as $tripMade)
                         <td>{{$tripNo}}</td>
                         <td>{{$tripMade->date_departed}}</td>
                         <td>{{$tripMade->time_departed}}</td>
                         <td>{{$tripMade->terminal->description}}</td>
                         <td></td>
-                      @php $tripNo++; @endphp
-                      @endforeach
                     </tr>
+                    @php $tripNo++; @endphp
+                    @endforeach
                 </tbody>
             </table>
 

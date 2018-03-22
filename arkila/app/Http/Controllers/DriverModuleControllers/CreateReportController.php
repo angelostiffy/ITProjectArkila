@@ -8,6 +8,7 @@ use App\Http\Requests\CreateReportRequest;
 use App\Http\Controllers\Controller;
 use App\Rules\checkCurrency;
 use App\Rules\checkTime;
+use Carbon\Carbon;
 use App\FeesAndDeduction;
 use App\Destination;
 use App\Transaction;
@@ -40,7 +41,7 @@ class CreateReportController extends Controller
   }
   public function storeReport($id, CreateReportRequest $request)
   {
-    dd(request('numberOfDiscount'));
+    //dd(request('numberOfDiscount'));
     $totalPassengers = $request->totalPassengers;
     $totalBookingFee = $request->totalBookingFee;
     $totalPassenger = (float)$request->totalPassengers;
@@ -52,6 +53,9 @@ class CreateReportController extends Controller
           ->where('users.id', Auth::id())->select('van.plate_number as plate_number')->first();
      $driver_id = Member::where('user_id', Auth::id())->select('user_id')->first();
 
+     $timeDeparted = Carbon::createFromFormat('h:i A', $request->timeDeparted);
+     $timeDepartedFormat = $timeDeparted->format('H:i:s');
+     $dateDeparted = $request->dateDeparted;
      Trip::create([
        'driver_id' => $driver_id->user_id,
        'terminal_id' => $id,
@@ -61,7 +65,7 @@ class CreateReportController extends Controller
        'total_booking_fee' => $request->totalBookingFee,
        'community_fund' => $communityFund,
        'date_departed' => $request->dateDeparted,
-       'time_departed' => $request->timeDeparted,
+       'time_departed' => $timeDepartedFormat,
      ]);
 
     $destinationArr = request('destination');

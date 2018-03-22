@@ -38,6 +38,7 @@ class CreateReportRequest extends FormRequest
           "numberOfDiscount" => "array",
           "numberOfDiscount.*" => "numeric|min:1"
         ];
+        
         foreach($this->request->get('numberOfDiscount') as $key => $value){
           $rules['numberOfDiscount.'.$key] = 'numeric|min:1';
         }
