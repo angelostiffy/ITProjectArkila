@@ -51,7 +51,7 @@
                     <td>{{$userAdmin->description}}</td>
                     <td class="center-block">
                         <div class="text-center">
-                             <a href="/home/user-management/admin/{{$user_admin->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
+                             <a href="/home/user-management/admin/{{$userAdmin->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
                         </div>
                     </td>
                 </tr>
@@ -84,7 +84,7 @@
                     
                     <td class="center-block">
                         <div class="text-center">
-                             <a href="/home/user-management/admin/{{$userAdmin->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
+                             <a href="/home/user-management/admin/{{$userDriver->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
                         </div>
                     </td>
                     </tr>
@@ -114,7 +114,7 @@
                 <td>{{$userCustomer->email}}</td>
                 <td class="center-block">
                     <div class="text-center">
-                         <a href="/home/user-management/admin/{{$userAdmin->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
+                         <a href="/home/user-management/admin/{{$userCustomer->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
                     </div>
                 </td>
                 @endforeach
