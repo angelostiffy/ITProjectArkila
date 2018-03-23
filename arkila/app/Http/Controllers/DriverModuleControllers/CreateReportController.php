@@ -29,19 +29,27 @@ class CreateReportController extends Controller
 
   }
 
-  public function createReport($id)
+  public function createReport(Terminal $terminals)
   {
-    //dd($id);
-    $terminals = Terminal::where('terminal_id', $id)->first();
     $destinations = Destination::join('terminal', 'destination.terminal_id', '=', 'terminal.terminal_id')
-                    ->where('terminal.terminal_id', '=', $id)
+                    ->where('terminal.terminal_id', '=', $terminals->terminal_id)
                     ->select('terminal.terminal_id as term_id','terminal.description as termdesc', 'destination.destination_id as destid', 'destination.description')->get();
     $fads = FeesAndDeduction::where('type','=','Discount')->get();
     return view('drivermodule.report.driverCreateReport', compact('terminals', 'destinations', 'fads'));
   }
-  public function storeReport($id, CreateReportRequest $request)
+  public function storeReport(Terminal $terminal, CreateReportRequest $request)
   {
-    //dd(request('numberOfDiscount'));
+    //dd(request('qty'));  
+    // $qtyCounter = 0;
+    // $qty = request('qty');
+    // foreach($qty as $key => $value){
+    //   if($value == null){
+    //     $qtyCounter++;
+    //   }
+    // }
+    // dd($qty);
+    // dd((empty(request('qty')) ? true:false));
+     //dd(request('numberOfDiscount'));
     $totalPassengers = $request->totalPassengers;
     $totalBookingFee = $request->totalBookingFee;
     $totalPassenger = (float)$request->totalPassengers;
@@ -58,7 +66,7 @@ class CreateReportController extends Controller
      $dateDeparted = $request->dateDeparted;
      Trip::create([
        'driver_id' => $driver_id->user_id,
-       'terminal_id' => $id,
+       'terminal_id' => $terminal->terminal_id,
        'plate_number' => $plateNumber->plate_number,
        'status' => 'Departed',
        'total_passengers' => $totalPassengers,
@@ -127,7 +135,7 @@ class CreateReportController extends Controller
 
 
 
-  return redirect('home/choose-terminal');
+  return redirect('home/choose-terminal')->with('success', 'Report created successfully!');
 
 
   }

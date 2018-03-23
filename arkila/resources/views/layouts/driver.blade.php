@@ -12,7 +12,7 @@
     <!-- Bootstrap 3.3.7 -->
   @section('links')
     @include('layouts.partials.stylesheets_form')
-    
+
   @show
 </head>
 
@@ -25,10 +25,7 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-          <div>
-            @include('message.error')
-            @include('message.success')
-          </div>
+
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
@@ -57,7 +54,7 @@
         @parent
         @include('layouts.partials.scripts_form')
         @include('message.error')
-
+        @include('message.success')
     @show
 
 </body>

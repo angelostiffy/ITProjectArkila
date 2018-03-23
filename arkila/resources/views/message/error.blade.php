@@ -1,12 +1,13 @@
 @if (count($errors))
 @foreach ($errors->all() as $error)
 
-    <script type="text/javascript">
-	
 
+
+
+    <script type="text/javascript">
 		$.notify({
 			// options
-			message: '{{ $error }}' 
+			message: '{{ $error }}'
 		},{
 			// settings
 			type: 'danger',
@@ -24,5 +25,6 @@
 
 
 	</script>
+
 @endforeach
 @endif
