@@ -19,20 +19,20 @@
             <div class="box-body box-profile">
                 <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset('img/jl.JPG') }}" alt="Operator profile picture">
 
-                <h3 class="profile-username text-center"> fullname</h3>
+                <h3 class="profile-username text-center">{{ $archive->operator->full_name }}</h3>
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
-                        <b>Contact Number</b> <p class="pull-right">contact</p>
+                        <b>Contact Number</b> <p class="pull-right">{{ $archive->operator->contact_number }}</p>
                     </li>
                     <li class="list-group-item">
-                        <b>Number of Vans</b> <p class="pull-right">69  </p>
+                        <b>Number of Vans</b> <p class="pull-right">{{ count($archive->archiveVan) }}  </p>
                     </li>
                     <li class="list-group-item">
-                        <b>Number of Drivers</b> <p class="pull-right"></p>
+                        <b>Number of Drivers</b> <p class="pull-right">{{ count($archive->driver_id) }}</p>
                     </li>
                 </ul>
-                <a href="" class="btn btn-default btn-block"><b>View All Information</b></a>
-                <a href="" class="btn btn-block btn-primary"><b>Edit Information</b></a>
+                <a href="{{route('operators.show',[$archive->operator->member_id])}}" class="btn btn-default btn-block"><b>View All Information</b></a>
+                <a href="{{route('operators.destroy', [$archive->operator->member_id])}}" class="btn btn-block btn-danger"><b>Permanently Delete Operator</b></a>
             </div>
             <!-- /.box-body -->
         </div>
@@ -56,18 +56,19 @@
                                 <th>Name</th>
                                 <th>Age</th>
                                 <th>Contact Number</th>
+                                <th>Van</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                            
+                        @foreach ($drivers as $driver)
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{ $driver->drivers->full_name ?? $driver->drivers()->first() }}</td>
+                                <td>{{ $driver->drivers()->first()->age ?? $driver->drivers()->first() }}</td>
+                                <td>{{ $driver->drivers()->first()->contact_number ?? $driver->drivers()->first() }}</td>
+                                <td>{{ $driver->archiveVan()->first()->plate_number ?? $driver->archiveVan()->first() }}</td>
                                 <td>
-
+                        
                                     
                                         <div class="text-center">
                                 
@@ -77,7 +78,7 @@
                                         </div>                                                
                                 </td>
                             </tr>
-                            
+                            @endforeach
                             <!--DELETE MODAL MIGUEL-->
                             <div class="modal fade" id="">
                                 <div class="modal-dialog">
@@ -124,19 +125,12 @@
                         <thead>
                             <tr>
                                 <th>Plate Number</th>
-                                <th>Driver</th>
-                                <th>Model</th>
-                                <th>Seating Capacity</th>
-                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                           
+                        @foreach ($archive->archiveVan as $vans)
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{ $vans->plate_number }}</td>
                                 <td>
                                     <div class="text-center">
                                             
@@ -146,7 +140,7 @@
                                     </div>
                                 </td>
                             </tr>
-                                
+                            @endforeach
                             <!--DELETE MODAL MIGUEL-->
                             <div class="modal fade" id="deleteVan">
                                 <div class="modal-dialog">

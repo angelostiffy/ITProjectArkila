@@ -18,9 +18,9 @@
                 <table class="table table-bordered table-striped driverVan">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Name</th>
                             <th>Contact Number</th>
+                            <th>Address</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -29,18 +29,18 @@
                         @foreach ($operators as $operator)
                         <tr>
                             <td>{{ $operator->operator->full_name }}</td>
-                            <td>{{ $operator->archiveVan()->first()->plate_number ?? $operator->archiveVan()->first()}}</td>
                             <td>{{ $operator->operator->contact_number }}</td>
+                            <td>{{ $operator->operator->address }}</td>                             
                             <td>
                                 <div class="text-center">
-                                    <a href="{{ route('archive.showProfile', [$operator->operator_id]) }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#{{'deleteWarning'.$operator->member_id}}"><i class="fa fa-trash"></i> Delete</button>
+                                    <a href="{{ route('archive.showProfile', [$operator->archive_member_id]) }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#{{'deleteWarning'.$operator->operator_id}}"><i class="fa fa-trash"></i> Delete</button>
                                 </div>
                                 <!-- /.text -->
                             </td>
                         </tr>
                         <!-- Modal for Delete-->
-                        <div class="modal fade" id="{{'deleteWarning'.$operator->member_id}}">
+                        <div class="modal fade" id="{{'deleteWarning'.$operator->operator_id}}">
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
                                     <div class="modal-header bg-red">
@@ -51,7 +51,7 @@
                                         <h1>
                                             <i class="fa fa-exclamation-triangle pull-left text-yellow"></i>
                                         </h1>
-                                        <p>Are you sure you want to delete "{{ $operator->full_name }}"</p>
+                                        <p>Are you sure you want to delete "{{ $operator->operator->full_name }}"</p>
                                     </div>
                                     <div class="modal-footer">
                                         @if($operators && $operator)
@@ -105,17 +105,17 @@
                                 <td>Aw</td>
                                 <td>
                                     <div class="text-center">
-
+                            
                                         <a href="#" class="btn btn-default"><i class="fa fa-eye"></i>View</a>
 
-                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteDriver"><i class="fa fa-trash"></i> Delete</button>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#('deleteDriver'. $operator->operator_id)"><i class="fa fa-trash"></i> Delete</button>
                                     </div>
 
                                 </td>
                             </tr>
 
                             <!--DELETE MODAL MIGUEL-->
-                            <div class="modal fade" id="deleteDriver">
+                            <div class="modal fade" id="('deleteDriver'. $operator->operator_id)">
                                 <div class="modal-dialog">
                                     <div class="col-md-offset-2 col-md-8">
                                         <div class="modal-content">
@@ -129,7 +129,7 @@
                                                            <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
                                                        </div>
                                                        <div class="col-md-10">
-                                                        <p style="font-size: 110%;">Are you sure you want to delete ""</p>
+                                                        <p style="font-size: 110%;">Are you sure you want to delete "{{$operator->operator->full_name}}"</p>
                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">

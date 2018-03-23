@@ -117,4 +117,13 @@ class Member extends Model
         $this->attributes['emergency_contactno'] = '+63'.$contactArr[0].$contactArr[1].$contactArr[2];
     }
 
+    public function archivedOperator() {
+        return $this->hasMany(ArchiveMember::class, 'operator_id');
+
+    }
+
+    public function archivedDriver() {
+        return $this->hasMany(ArchiveMember::class, 'driver_id');
+
+    }
 }
