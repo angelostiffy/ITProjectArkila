@@ -52,7 +52,7 @@
                                             <p>Are you sure you want to delete "{{ $driver->full_name }}"?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="{{route('drivers.archiveDelete', $driver->member_id)}}" method="POST">
+                                        <form action="" method="POST">
                                             {{csrf_field()}} {{method_field('PATCH')}}
 
                                             <button type="button" class="btn btn-default" data-dismiss="modal">No</button>

@@ -38,8 +38,8 @@
         </div>
         <form method="POST" action="/login">
           {{csrf_field()}}
-            <input type="text" name="username" class="form-control" style="margin-bottom:3%" placeholder="Username" required autofocus>
-            <input type="password" name="password" class="form-control" placeholder="Password" style="margin-bottom:8%" required>
+            <input type="text" name="username" class="form-control" style="margin-bottom:3%" placeholder="Username" maxlength="20" required autofocus>
+            <input type="password" name="password" class="form-control" placeholder="Password" style="margin-bottom:8%" maxlength="20" required>
             <div class="checkbox">
                 
             </div>

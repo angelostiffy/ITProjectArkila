@@ -45,13 +45,13 @@ class ReservationRequest extends FormRequest
         $yy = substr($dateToday, '6', 4);
         if ($mm == 'mm' || $dd == 'dd' || $yy == 'yyyy' || $dateToday == null) {
             return [
-                "name" => [new checkName, 'required', 'max:30'],
-                "date" => "required|date_format:m/d/Y|after_or_equal:today",
-                "dest" => "required",
-                "time" => [new checkTime, 'required'],
-                "seat" => "required|numeric|digits_between:1,2|min:0|max:15",
-                "contactNumber" => [new checkContactNum],
-                "amount" => [new checkCurrency,'numeric','min:0'],
+                "name" => ['bail',new checkName, 'required', 'max:30'],
+                "date" => "bail|required|date_format:m/d/Y|after_or_equal:today",
+                "dest" => "bail|required",
+                "time" => ['bail',new checkTime, 'required'],
+                "seat" => "bail|required|numeric|digits_between:1,2|min:0|max:15",
+                "contactNumber" => ['bail',new checkContactNum],
+                "amount" => ['bail',new checkCurrency,'numeric','min:0'],
             ];
         }
         $dateCarbon = new Carbon(request('date'));
@@ -59,23 +59,23 @@ class ReservationRequest extends FormRequest
         
         if ($dateFormatted !== $dateFormattedNow) {
             return [
-                "name" => [new checkName, 'required', 'max:30'],
-                "date" => "required|date_format:m/d/Y|after_or_equal:today",
-                "dest" => "required",
-                "time" => [new checkTime, 'required'],
-                "seat" => "required|numeric|digits_between:1,2|min:0|max:15",
-                "contactNumber" => [new checkContactNum],
-                "amount" => [new checkCurrency,'numeric','min:0'],
+                "name" => ['bail',new checkName, 'required', 'max:30'],
+                "date" => "bail|required|date_format:m/d/Y|after_or_equal:today",
+                "dest" => "bail|required",
+                "time" => ['bail',new checkTime, 'required'],
+                "seat" => "bail|required|numeric|digits_between:1,2|min:0|max:15",
+                "contactNumber" => ['bail',new checkContactNum],
+                "amount" => ['bail',new checkCurrency,'numeric','min:0'],
                 ];
         } else {
             return [
-                "name" => [new checkName, 'required', 'max:50'],
-                "date" => "required|date_format:m/d/Y|after_or_equal:today",
-                "dest" => "required",
-                "time" => [new checkTime, 'required', 'after:' . $timeFormattedNow],
-                "seat" => "required|numeric|digits_between:1,2|min:1|max:15",
-                "contactNumber" => [new checkContactNum],
-                "amount" => [new checkCurrency,'numeric','min:0'],
+                "name" => ['bail',new checkName, 'required', 'max:50'],
+                "date" => "bail|required|date_format:m/d/Y|after_or_equal:today",
+                "dest" => "bail|required",
+                "time" => ['bail',new checkTime, 'required', 'after:' . $timeFormattedNow],
+                "seat" => "bail|required|numeric|digits_between:1,2|min:1|max:15",
+                "contactNumber" => ['bail',new checkContactNum],
+                "amount" => ['bail',new checkCurrency,'numeric','min:0'],
             ];
         }
     }

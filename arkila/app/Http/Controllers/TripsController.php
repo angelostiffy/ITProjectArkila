@@ -31,22 +31,14 @@ class TripsController extends Controller
         $vans = Van::whereNotIn('plate_number', function($query){
             $query->select('plate_number')
                 ->from('trip')
-                ->whereNotNull('queue_number');
+                ->where('has_privilege',1)
+                ->orWhereNotNull('queue_number');
         })->get();
 
 
         return view('trips.queue', compact('terminals','trips','vans','destinations','drivers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -80,27 +72,7 @@ class TripsController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -111,6 +83,9 @@ class TripsController extends Controller
      */
     public function updateRemarks(Trip $trip)
     {
+        $queueArr = [];
+        $tripArr = [];
+
         $this->validate(request(),[
             'value' => [Rule::in('OB','CC','ER', "NULL")]
         ]);
@@ -119,32 +94,59 @@ class TripsController extends Controller
             'remarks' => request('value')
         ]);
 
-        return "Success";
+        if($trip->queue_number == 1){
+            if(request('value') == 'CC' || request('value') == 'ER' ){
+                $trip->update([
+                    'has_privilege' => 1,
+                    'queue_number' =>null
+                ]);
+
+                foreach(Trip::where('terminal_id',$trip->terminal_id)->whereNotNull('queue_number')->get() as $trip){
+                    $trip->update([
+                       'queue_number' => $trip->queue_number-1
+                    ]);
+                }
+
+                foreach(Trip::where('terminal_id',$trip->terminal_id)->whereNotNull('queue_number') as $trip){
+                    array_push($tripArr,[
+                        'trip_id' => $trip->trip_id,
+                        'queue_number' => $trip->queue_number
+                    ]);
+                }
+
+                array_push($queueArr, $trip->has_privilege);
+                array_push($queueArr, $tripArr);
+                array_push($queueArr, $trip->terminal_id);
+
+
+            }
+        }
+        return response()->json($queueArr);
     }
 
     public function updateDestination(Trip $trip){
         $this->validate(request(),[
             'destination' => 'required|exists:terminal,terminal_id'
         ]);
+        if(request('destination') != $trip->terminal_id){
+                $queueNum = count(Trip::where('terminal_id',request('destination'))->whereNotNull('queue_number')->get())+1;
+                $trips =Trip::where('terminal_id',$trip->terminal_id)->whereNotNull('queue_number')->get();
 
-        $queueNum = count(Trip::where('terminal_id',request('destination'))->whereNotNull('queue_number')->get())+1;
-        $trips =Trip::where('terminal_id',$trip->terminal_id)->whereNotNull('queue_number')->get();
+                foreach( $trips as $tripObj){
+                    if($trip->trip_id == $tripObj->trip_id || $tripObj->queue_number < $trip->queue_number ){
+                        continue;
+                    }else{
+                        $tripObj->update([
+                            'queue_number' => ($tripObj->queue_number)-1
+                        ]);
+                    }
+                }
 
-        foreach( $trips as $tripObj){
-            if($trip->trip_id == $tripObj->trip_id || $tripObj->queue_number < $trip->queue_number ){
-                continue;
-            }else{
-                $tripObj->update([
-                    'queue_number' => ($tripObj->queue_number)-1
+                $trip->update([
+                    'terminal_id' => request('destination'),
+                    'queue_number' => $queueNum
                 ]);
-            }
         }
-
-        $trip->update([
-            'terminal_id' => request('destination'),
-            'queue_number' => $queueNum
-        ]);
-
         return back();
     }
 
@@ -229,6 +231,11 @@ class TripsController extends Controller
 
         session()->flash('success', 'Trip Successfully Deleted');
         return back();
+    }
+
+    public function listSpecialUnits(Terminal $terminal){
+        $trips = $terminal->trips()->where('has_privilege',1)->get();
+        return view('trips.partials.listSpecialUnits',compact('trips'));
     }
 
     public function updateVanQueue(){
