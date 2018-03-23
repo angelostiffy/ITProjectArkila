@@ -3,8 +3,6 @@
 @section('content-header', 'User Management')
 @section('links')
 @parent
-<!-- DataTables -->
-<link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 <!-- additional CSS -->
 <link rel="stylesheet" href="tripModal.css"> 
 
@@ -137,13 +135,9 @@
 
 @section('scripts')
 @parent
-    <!-- DataTables -->
-    <script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}")></script>
-    <script src="{{ URL::asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-            
+
     <script>
         $(function() {
-            $('.example1').DataTable()
             $('#adminTable').DataTable({
                 'paging': true,
                 'lengthChange': false,

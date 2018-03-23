@@ -155,20 +155,10 @@
 
 @section('scripts')
 @parent
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
-<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
-<!-- InputMask -->
-<script src="plugins/input-mask/jquery.inputmask.js"></script>
-<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
-<!-- iCheck 1.0.1 -->
-<script src="plugins/iCheck/icheck.min.js"></script>
+
  <script>
   $(function () {
-    $('.example1').DataTable()
-    $('#example2').DataTable({
+    $('.example1').DataTable({
       'paging'      : true,
       'lengthChange': true,
       'searching'   : true,
