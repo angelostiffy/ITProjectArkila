@@ -74,7 +74,7 @@
                                 
                                             <a href="#" class="btn btn-default"><i class="fa fa-eye"></i>View</a>
                                            
-                                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="#"><i class="fa fa-trash"></i> Delete</button>
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#"><i class="fa fa-trash"></i> Delete</button>
                                         </div>                                                
                                 </td>
                             </tr>
@@ -135,7 +135,7 @@
                                     <div class="text-center">
                                             
                                             <a data-val='' name="vanInfo" class="btn btn-default" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i>View</a>
-                                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteVan"><i class="fa fa-trash"></i> Delete</button>
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteVan"><i class="fa fa-trash"></i> Delete</button>
                                         
                                     </div>
                                 </td>

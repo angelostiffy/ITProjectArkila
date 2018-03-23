@@ -16,5 +16,6 @@ use Faker\Generator as Faker;
 $factory->define(App\Terminal::class, function (Faker $faker) {
     return [
         'description' => $faker->city,
+        'booking_fee' => '330.00'
     ];
 });

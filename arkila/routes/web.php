@@ -93,22 +93,22 @@ Route::get('/', function () {
     
     /************ Settings ******************************/
     Route::resource('/home/settings/destinations', 'DestinationController', [
-        'except' => ['index']
+        'except' => ['index','show']
     ]);
     
     Route::resource('/home/settings/terminal', 'TerminalController', [
-        'except' => ['index']
+        'except' => ['index','show']
     ]);
     
     Route::resource('/home/settings/fees', 'FeesController', [
-        'except' => ['index',]
+        'except' => ['index','show']
     ]);
     Route::resource('/home/settings/discounts', 'DiscountsController', [
-        'except' => ['index']
+        'except' => ['index', 'show']
     ]);
     
     Route::resource('/home/settings/tickets','TicketsController',[
-        'except' => ['index']
+        'except' => ['index','show']
     ]);
     Route::get('/home/settings', 'HomeController@settings')->name('settings.index');
      
@@ -146,7 +146,9 @@ Route::get('/', function () {
     
     Route::resource('/home/test', 'TestController');
     Route::resource('/home/testing', 'TestingController');
-    Route::resource('/home/reservations', 'ReservationsController');
+    Route::resource('/home/reservations', 'ReservationsController', [
+        'except' => ['show', 'edit']
+    ]);
     
     Route::get('/home/archive', 'HomeController@archive');
     Route::get('/home/operatorVanDriver', 'HomeController@vanDriver')->name('archive.vanDriver');
@@ -155,18 +157,19 @@ Route::get('/', function () {
     Route::post('/home/operators/{operator}/archiveOperators', 'OperatorsController@archiveOperator')->name('operators.archiveOperator');
     
     
-    Route::resource('/home/rental', 'RentalsController');
-    Route::resource('/home/triptest', 'TripsController');
-    
+    Route::resource('/home/rental', 'RentalsController',[
+        'except' => ['show','edit']
+    ]);
+
     
     /* Trips */
     Route::post('/home/trips/{destination}/{van}/{member}', 'TripsController@store')->name('trips.store');
-    
+    Route::get('/listSpecialUnits/{terminal}','TripsController@listSpecialUnits')->name('trips.listSpecialUnits');
     Route::patch('/home/trips/{trip}', 'TripsController@updateRemarks')->name('trips.updateRemarks');
     Route::patch('/home/trips/changeDestination/{trip}', 'TripsController@updateDestination')->name('trips.updateDestination');
     
     Route::resource('/home/trips', 'TripsController',[
-        'except' =>['store','update']
+        'except' => ['create','show','edit','update']
     ]);
     Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
     Route::get('/showTrips/{terminal}', 'TripsController@showTrips');
@@ -174,7 +177,7 @@ Route::get('/', function () {
     
     /* Transactions(Ticket) */
     Route::resource('/home/transactions', 'TransactionsController',[
-        'except' => ['update']
+        'except' => ['create','show','edit']
     ]);
     Route::patch('/home/transactions/{terminal}', 'TransactionsController@update')->name('transactions.update');
     Route::get('/listDestinations/{terminal}','TransactionsController@listDestinations')->name('transactions.listDestinations');

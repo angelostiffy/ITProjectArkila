@@ -43,7 +43,7 @@ class RentalRequest extends FormRequest
         $yy = substr($dateToday, '6', 4);
         if ($mm == 'mm' || $dd == 'dd' || $yy == 'yyyy' || $dateToday == null) {
             return [
-                "date" => 'required|date_format:m/d/Y|after_or_equal:today',
+                "date" => 'bail|required|date_format:m/d/Y|after_or_equal:today',
             ];
         }
         $dateCarbon = new Carbon(request('date'));
@@ -51,28 +51,28 @@ class RentalRequest extends FormRequest
 
         if ($dateFormatted !== $dateFormattedNow) {
             return [
-                "lastName" => [new checkName, 'required', 'max:35'],
-                "firstName" => [new checkName, 'required', 'max:35'],
-                "middleName" => [new checkName, 'required', 'max:35'],
-                "date" => 'required|date_format:m/d/Y|after_or_equal:today',
-                "destination" => "required|max:50",
-                "model" => "required|max:50",
-                "time" => [new checkTime, 'required'],
-                "days" => "required|numeric|digits_between:1,2|min:1",
-                "contactNumber" => [new checkContactNum],
+                "lastName" => ['bail',new checkName, 'required', 'max:35'],
+                "firstName" => ['bail',new checkName, 'required', 'max:35'],
+                "middleName" => ['bail',new checkName, 'required', 'max:35'],
+                "date" => 'bail|required|date_format:m/d/Y|after_or_equal:today',
+                "destination" => "bail|required|max:50",
+                "model" => "bail|required|max:50",
+                "time" => ['bail',new checkTime, 'required'],
+                "days" => "bail|required|numeric|digits_between:1,2|min:1",
+                "contactNumber" => ['bail',new checkContactNum],
         
             ];
         } else {
             return [
-                "lastName" => [new checkName, 'required', 'max:35'],
-                "firstName" => [new checkName, 'required', 'max:35'],
-                "middleName" => [new checkName, 'required', 'max:35'],
-                "date" =>  'required|date_format:m/d/Y|after_or_equal:today',
-                "destination" => "required|max:50",
-                "model" => "required|max:50",
-                "time" => [new checkTime, 'required', 'after:' . $timeFormattedNow],
-                "days" => "required|numeric|digits_between:1,2|min:1",
-                "contactNumber" => [new checkContactNum],
+                "lastName" => ['bail',new checkName, 'required', 'max:35'],
+                "firstName" => ['bail',new checkName, 'required', 'max:35'],
+                "middleName" => ['bail',new checkName, 'required', 'max:35'],
+                "date" =>  'bail|required|date_format:m/d/Y|after_or_equal:today',
+                "destination" => "bail|required|max:50",
+                "model" => "bail|required|max:50",
+                "time" => ['bail',new checkTime, 'required', 'after:' . $timeFormattedNow],
+                "days" => "bail|required|numeric|digits_between:1,2|min:1",
+                "contactNumber" => ['bail',new checkContactNum],
          
                 ];
         }
