@@ -1,9 +1,8 @@
 @extends('layouts.driver') @section('title', 'Driver Profile') @section('content-title', 'Driver Home') @section('content')
-    <div class="desktop">
-
-        <div class="box">
-            <table class="table table-bordered table-striped driver">
-
+<div class="desktop">
+    <div class="box">
+        <div class="box-body">
+            <table id="driverLog" class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Trip No.</th>
@@ -11,56 +10,72 @@
                         <th>Time</th>
                         <th>Origin</th>
                         <th>Destination</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                  @php $tripNo = 1; @endphp
-                  @foreach($tripsMade as $tripMade)
+                    @php $tripNo = 1; @endphp @foreach($tripsMade as $tripMade)
                     <tr>
                         <td>{{$tripNo}}</td>
                         <td>{{$tripMade->date_departed}}</td>
                         <td>{{$tripMade->time_departed}}</td>
                         <td>{{$tripMade->terminal->description}}</td>
                         <td>{{$superAdmin->description}}</td>
+                        <td>
+                            <div class="text-center">
+                                <a href="" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> VIEW</a>
+                            </div>
+                        </td>
                     </tr>
-                    @php $tripNo++; @endphp
-                    @endforeach
+                    @php $tripNo++; @endphp @endforeach
+                    <tr>
+                        <td>asdas</td>
+                        <td>asdasd</td>
+                        <td>asdasd</td>
+                        <td>asdasd</td>
+                        <td>asdasdasd</td>
+                        <td>
+                            <div class="text-center">
+                                <a href="" type="button" data-toggle="modal" data-target="#seeLogDetails" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> VIEW</a>
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+</div>
+<!-- /.desktop -->
+
+<div class="mobile_device_480px">
+
+    <div class="box box-solid">
+        <div class="box-header with-border">
+            <i class="fa fa-car"></i>
+
+            <h3 class="box-title">Trip Log</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="list-group">
+                @php $tripCount = 1; @endphp @foreach($tripsMade as $tripMade)
+                <li class="list-group-item">Trip {{$tripCount}} ({{$tripMade->date_departed}} || {{$tripMade->time_departed}})
+                    <button type="button" class="btn btn-xs btn-primary pull-right" data-date="{{$tripMade->date_departed}}" data-time="{{$tripMade->time_departed}}" data-origin="{{$tripMade->terminal->description}}" data-destination="" data-income="" data-toggle="modal" data-target="#seeLogDetails"><i class="fa fa-eye"></i> View</button>
+                </li>
+                @endforeach
+            </div>
+            <!-- /.list -->
+
 
         </div>
-        <!-- /.box -->
+        <!-- /.box-body -->
     </div>
-    <!-- /.desktop -->
+    <!-- /.box -->
 
-    <div class="mobile_device_480px">
-
-        <div class="box box-solid">
-            <div class="box-header with-border">
-                <i class="fa fa-car"></i>
-
-                <h3 class="box-title">Trip Log</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="list-group">
-                  @php $tripCount = 1; @endphp
-                  @foreach($tripsMade as $tripMade)
-                    <li class="list-group-item">Trip {{$tripCount}} ({{$tripMade->date_departed}} || {{$tripMade->time_departed}})
-                        <button type="button" class="btn btn-xs btn-primary pull-right" data-date="{{$tripMade->date_departed}}" data-time="{{$tripMade->time_departed}}" data-origin="{{$tripMade->terminal->description}}" data-destination="" data-income="" data-toggle="modal" data-target="#seeLogDetails"><i class="fa fa-eye"></i> View</button>
-                    </li>
-                  @endforeach
-                </div>
-                <!-- /.list -->
-
-
-            </div>
-            <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-
-    </div>
-    <!-- /.mobile -->
+</div>
+<!-- /.mobile -->
 
 
 <!--        SEE DETAILS MODAL-->
@@ -148,7 +163,7 @@
 
 <script>
 $(function() {
-    $('.driver').DataTable({
+    $('#driverLog').DataTable({
         'paging': true,
         'lengthChange': false,
         'searching': true,
