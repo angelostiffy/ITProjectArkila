@@ -59,20 +59,20 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Last Name: <span class="text-red">*</span></label>
-                                <input value="{{old('lastName')}}" name="lastName" type="text" class="form-control" placeholder="Last Name" maxlength="25" required data-parsley-errors-container="#errLastName" data-parsley-trigger="keyup" data-parsley-pattern="^[a-zA-Z]">
+                                <input value="{{old('lastName')}}" name="lastName" type="text" class="form-control" placeholder="Last Name" data-parsley-errors-container="#errLastName" data-parsley-trigger="keyup" val-name required> 
                                 <p id="errLastName"></p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>First Name: <span class="text-red">*</span></label>
-                                <input value="{{old('firstName')}}" name="firstName" type="text" class="form-control" placeholder="First Name" maxlength="25" required data-parsley-trigger="keyup" data-parsley-pattern="^[a-zA-Z]">
+                                <input value="{{old('firstName')}}" name="firstName" type="text" class="form-control" placeholder="First Name" data-parsley-trigger="keyup" val-name required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Middle Name: <span class="text-red">*</span></label>
-                                <input value="{{old('middleName')}}" name="middleName" type="text" class="form-control" placeholder="Middle Name" maxlength="25" required data-parsley-trigger="keyup" data-parsley-pattern="^[a-zA-Z]">
+                                <input value="{{old('middleName')}}" name="middleName" type="text" class="form-control" placeholder="Middle Name" data-parsley-trigger="keyup" val-name required>
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                                   <div class="input-group-addon">
                                     <span>+63</span>
                                   </div>
-                                  <input type="text" name="contactNumber"  class="form-control" value="{{old('contactNumber')}}" placeholder="Contact Number" data-parsley-minlength="10" data-inputmask='"mask": "999-999-9999"' data-mask required data-parsley-errors-container="#errContactNumber" data-parsley-trigger="keyup" >
+                                  <input type="text" name="contactNumber"  class="form-control" value="{{old('contactNumber')}}" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask required data-parsley-errors-container="#errContactNumber" data-parsley-trigger="keyup" val-phone required>
                                 </div>
                                 <p id="errContactNumber"></p>
                             </div>
@@ -92,13 +92,13 @@
                         <div class="col-md-4">
                              <div class="form-group">
                                 <label>Address: <span class="text-red">*</span></label>
-                                <input value="{{old('address')}}" name="address" type="text" class="form-control" placeholder="Address" maxlength="100" required data-parsley-trigger="keyup" >
+                                <input value="{{old('address')}}" name="address" type="text" class="form-control" placeholder="Address" data-parsley-trigger="keyup" val-address  required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Provincial Address: <span class="text-red">*</span></label>
-                                <input value="{{old('provincialAddress')}}" name="provincialAddress" type="text" class="form-control" placeholder="Provincial Address" maxlength="100" required data-parsley-trigger="keyup" >
+                                <input value="{{old('provincialAddress')}}" name="provincialAddress" type="text" class="form-control" placeholder="Provincial Address" data-parsley-trigger="keyup" val-address required>
                             </div>
                         </div>
                     </div>
@@ -110,14 +110,14 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="birthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('birthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask required data-parsley-trigger="keyup" >
+                                  <input type="text" name="birthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('birthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" required>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Birthplace: <span class="text-red">*</span></label>
-                                <input value="{{old('birthPlace')}}" name="birthPlace" type="text" class="form-control" placeholder="Birthplace" maxlength="30" required data-parsley-trigger="keyup" >
+                                <input value="{{old('birthPlace')}}" name="birthPlace" type="text" class="form-control" placeholder="Birthplace" data-parsley-trigger="keyup" val-birthplace required>
                             </div>
                         </div>
                     
@@ -142,7 +142,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Citizenship: <span class="text-red">*</span></label>
-                                <input value="{{old('citizenship')}}" name="citizenship" type="text" class="form-control" placeholder="Citizenship" maxlength="25" required data-parsley-trigger="keyup">
+                                <input value="{{old('citizenship')}}" name="citizenship" type="text" class="form-control" placeholder="Citizenship" maxlength="25" required data-parsley-trigger="keyup" val-citizenship>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -161,7 +161,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>SSS No: <span class="text-red">*</span></label>
-                                <input value="{{old('sss')}}" name="sss" type="text" class="form-control" placeholder="SSS No." maxlength="10" required data-parsley-trigger="keyup" >
+                                <input value="{{old('sss')}}" name="sss" type="text" class="form-control" placeholder="SSS No." data-parsley-trigger="keyup" val-sss required>
                             </div>
                         </div>
                     </div> 
@@ -169,7 +169,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>License No: <span class="text-red">*</span></label>
-                                <input value="{{old('licenseNo')}}" name="licenseNo" type="text" class="form-control" placeholder="License No." maxlength="20" required data-parsley-trigger="keyup" >
+                                <input value="{{old('licenseNo')}}" name="licenseNo" type="text" class="form-control" placeholder="License No." data-parsley-trigger="keyup" val-license required>
                             </div>
                         </div>
                         <div class="col-md-4">

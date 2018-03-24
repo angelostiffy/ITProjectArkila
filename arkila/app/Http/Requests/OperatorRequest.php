@@ -34,13 +34,13 @@ class OperatorRequest extends FormRequest
             case 'POST':
             {
                 return [
-                    'lastName' => ['required',new checkName,'max:25'],
-                    'firstName' => ['required',new checkName,'max:25'],
-                    'middleName' => ['required',new checkName,'max:25'],
+                    'lastName' => ['required',new checkName,'max:25','min:2'],
+                    'firstName' => ['required',new checkName,'max:25','min:2'],
+                    'middleName' => ['required',new checkName,'max:25','min:2'],
                     'contactNumber' => [new checkContactNum],
                     'address' => 'required|max:100',
                     'provincialAddress' => 'required|max:100',
-                    'birthDate' => ['required','date_format:m/d/Y','after:1/1/1918', new checkAge],
+                    'birthDate' => ['required','date_format:m/d/Y','after:1/1/1900', new checkAge],
                     'birthPlace' => [new checkName,'required','max:30'],
                     'gender' => [
                         'required',
