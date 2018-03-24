@@ -8,51 +8,9 @@
     <!-- /.box-header -->
     <div class="box-body">
     	<div class="col-md-6">
-    		<a href="{{route('vans.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create Van</a>
-            <a href=""  class="btn btn-default"> <i class="fa fa-print"></i> Print</a>
+    		<a href="{{route('vans.create')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> REGISTER VAN</a>
+            <a href=""  class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i> PRINT</a>
     	</div>
-
-    	<div class="modal fade" id="edit-modal">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header bg-primary">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                                <h4 class="modal-title"></h4>
-                            </div>
-                            <!-- /.modal-header -->
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <div class="box box-default">
-                                        <div class="box-header with-border">
-                                            <h3 class="box-title">Choose Driver</h3>
-                                        </div>
-                                        <!-- /.box-header -->
-                                        <form id="formChangeDriver" method="POST" action="">
-                                            {{ csrf_field() }}
-                                            {{ method_field("PATCH") }}
-                                            <div class="box-body center-block">
-                                                <div class="form-group ">
-                                                    <select name="driver" class="form-control"></select>
-                                                </div>
-                                                <!-- /.form-group -->
-                                            </div>
-                                            <!-- /.box-body -->
-                                            <div class="box-footer">
-                                                <button type="submit" name="search" id="search-btn" class="btn btn-primary pull-right"> Submit </button>
-                                            </div>
-                                        </form>
-                                        <!-- /.box-footer -->
-                                    </div>
-                                    <!-- /.box -->
-                                </div>
-                                <!-- /.container-fluid -->
-                            </div>
-                            <!-- /.modal-body -->
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
 
         <div class="modal fade" id="modal-view">
             <div class="modal-dialog modal-sm">
@@ -143,14 +101,16 @@
 							<td class="pull-right">{{$van->seating_capacity}}</td>
 							<td>
 								<div class="text-center">
+
+                                    <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i> VIEW</a>
 									
-                                        @if($van->driver()->first())
-		                                        <a name="listDriver" data-driver="{{$van->driver->first()->member_id}}" data-val="{{ $van->operator()->first()->member_id ?? $van->operator()->first()}}" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal">Change Driver</a>
-                                        @else
-                                            <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary"><i class="fa fa-user-plus"></i> Add Driver</a>
-                                        @endif
-                                        <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-default" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i> View</a>
-                                       <button class="btn btn-outline-danger" data-toggle="modal" data-target="#{{ 'deleteWarning'. $van->plate_number }}"><i class="fa fa-trash"></i> Delete</button>
+                                    @if($van->driver()->first())
+                                            <a name="listDriver" data-driver="{{$van->driver->first()->member_id}}" data-val="{{ $van->operator()->first()->member_id ?? $van->operator()->first()}}" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit-modal"> CHANGE DRIVER</a>
+                                    @else
+                                        <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary btn-sm"><i class="fa fa-user-plus"></i> ADD DRIVER</a>
+                                    @endif
+                                    
+                                   <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{ 'deleteWarning'. $van->plate_number }}"><i class="fa fa-trash"></i> DELETE</button>
 
 		                        </div>
 

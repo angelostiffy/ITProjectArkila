@@ -239,7 +239,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Contact Person: <span class="text-red">*</span></label>
-                                <input value="{{old('contactPerson')}}" name="contactPerson" type="text" class="form-control" placeholder="Contact Person In Case of Emergency" maxlength="40" data-parsley-trigger="keyup" >
+                                <input value="{{old('contactPerson')}}" name="contactPerson" type="text" class="form-control" placeholder="Contact Person In Case of Emergency" data-parsley-trigger="keyup" val-name>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -255,7 +255,7 @@
                                   <div class="input-group-addon">
                                     <span>+63</span>
                                   </div>
-                                  <input type="text" name="contactPersonContactNumber"  class="form-control" value="{{old('contactPersonContactNumber')}}" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask data-parsley-trigger="keyup" >
+                                  <input type="text" name="contactPersonContactNumber"  class="form-control" value="{{old('contactPersonContactNumber')}}" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask data-parsley-trigger="keyup" val-phone>
                                 </div>
                             </div>
                         </div>
