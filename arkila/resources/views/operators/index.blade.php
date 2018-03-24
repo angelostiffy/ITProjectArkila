@@ -19,7 +19,7 @@
             </thead>
 
             <tbody>
-                @foreach ($operators as $operator)
+                @foreach ($operators->where('status', 'Active') as $operator)
                 <tr>
                     <td class="hidden-xs" name="opId">{{ $operator->member_id }}</td>
                     <td><a href="operators/{{ $operator->member_id }}">{{ $operator->first_name }} {{ $operator->middle_name }} {{ $operator->last_name }}</a></td>

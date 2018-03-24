@@ -3,8 +3,6 @@
 @section('content-header', 'User Management')
 @section('links')
 @parent
-<!-- DataTables -->
-<link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 <!-- additional CSS -->
 <link rel="stylesheet" href="tripModal.css"> 
 
@@ -84,7 +82,7 @@
                     
                     <td class="center-block">
                         <div class="text-center">
-                             <a href="/home/user-management/admin/{{$userAdmin->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
+                             <a href="/home/user-management/admin/{{$userDriver->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
                         </div>
                     </td>
                     </tr>
@@ -114,7 +112,7 @@
                 <td>{{$userCustomer->email}}</td>
                 <td class="center-block">
                     <div class="text-center">
-                         <a href="/home/user-management/admin/{{$userAdmin->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
+                         <a href="/home/user-management/admin/{{$userCustomer->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
                     </div>
                 </td>
                 @endforeach
@@ -137,13 +135,9 @@
 
 @section('scripts')
 @parent
-    <!-- DataTables -->
-    <script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}")></script>
-    <script src="{{ URL::asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-            
+
     <script>
         $(function() {
-            $('.example1').DataTable()
             $('#adminTable').DataTable({
                 'paging': true,
                 'lengthChange': false,

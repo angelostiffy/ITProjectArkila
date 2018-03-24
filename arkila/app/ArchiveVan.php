@@ -17,4 +17,9 @@ class ArchiveVan extends Model
         return $this->belongsToMany(ArchiveMember::class,'archive_member_van','plate_number','member_id');
     }
 
+    public function van() {
+        return $this->belongsTo(Van::Class, 'plate_number');                    
+    }
+    
+
 }

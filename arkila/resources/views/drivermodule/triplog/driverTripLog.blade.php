@@ -1,9 +1,8 @@
 @extends('layouts.driver') @section('title', 'Driver Profile') @section('content-title', 'Driver Home') @section('content')
-<div id="content">
     <div class="desktop">
 
         <div class="box">
-            <table id="driver" class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped driver">
 
                 <thead>
                     <tr>
@@ -15,17 +14,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                  @php $tripNo = 1; @endphp
+                  @foreach($tripsMade as $tripMade)
                     <tr>
-                      @php $tripNo = 1; @endphp
-                      @foreach($tripsMade as $tripMade)
                         <td>{{$tripNo}}</td>
                         <td>{{$tripMade->date_departed}}</td>
                         <td>{{$tripMade->time_departed}}</td>
                         <td>{{$tripMade->terminal->description}}</td>
-                        <td></td>
-                      @php $tripNo++; @endphp
-                      @endforeach
+                        <td>{{$superAdmin->description}}</td>
                     </tr>
+                    @php $tripNo++; @endphp
+                    @endforeach
                 </tbody>
             </table>
 
@@ -47,8 +46,8 @@
                 <div class="list-group">
                   @php $tripCount = 1; @endphp
                   @foreach($tripsMade as $tripMade)
-                    <li class="list-group-item">Trip {{$tripCount}} (February 9, 2018 || 5:00 pm)
-                        <button type="button" class="btn btn-xs btn-primary pull-right" data-date="" data-time="" data-origin="" data-destination="" data-income="" data-toggle="modal" data-target="#seeLogDetails"><i class="fa fa-eye"></i> View</button>
+                    <li class="list-group-item">Trip {{$tripCount}} ({{$tripMade->date_departed}} || {{$tripMade->time_departed}})
+                        <button type="button" class="btn btn-xs btn-primary pull-right" data-date="{{$tripMade->date_departed}}" data-time="{{$tripMade->time_departed}}" data-origin="{{$tripMade->terminal->description}}" data-destination="" data-income="" data-toggle="modal" data-target="#seeLogDetails"><i class="fa fa-eye"></i> View</button>
                     </li>
                   @endforeach
                 </div>
@@ -62,8 +61,7 @@
 
     </div>
     <!-- /.mobile -->
-</div>
-<!-- /.content -->
+
 
 <!--        SEE DETAILS MODAL-->
 <div class="modal fade" id="seeLogDetails">
@@ -81,25 +79,25 @@
                             <div class="form-group" class="control-label">
                                 <label for="">Date:</label>
 
-                                <input value="" id="" name="" type="text" class="form-control" disabled>
+                                <input value="" id="dateDeparted" name="" type="text" class="form-control" disabled>
 
                             </div>
                             <div class="form-group" class="control-label">
                                 <label for="">Time:</label>
 
-                                <input value="" id="" name="" type="text" class="form-control" disabled>
+                                <input value="" id="timeDeparted" name="" type="text" class="form-control" disabled>
 
                             </div>
                             <div class="form-group" class="control-label">
                                 <label for="">Origin:</label>
 
-                                <input value="" id="" name="" type="text" class="form-control" disabled>
+                                <input value="" id="origin" name="" type="text" class="form-control" disabled>
 
                             </div>
                             <div class="form-group" class="control-label">
                                 <label for="">Destination:</label>
 
-                                <input value="" id="" name="" type="text" class="form-control" disabled>
+                                <input value="" id="destination" name="" type="text" class="form-control" disabled>
 
                             </div>
                             <div class="box">
@@ -147,6 +145,20 @@
 </div>
 <!-- /.modal -->
 @endsection @section('scripts') @parent
+
+<script>
+$(function() {
+    $('.driver').DataTable({
+        'paging': true,
+        'lengthChange': false,
+        'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': true
+    })
+});
+</script>
+
 <style>
     /* if desktop */
 
@@ -181,4 +193,5 @@
         }
     }
 </style>
+
 @endsection

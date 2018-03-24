@@ -21,14 +21,13 @@ class ArchiveMember extends Model
     public static function scopeAllOperators($query){
         return $query->where('archived','Operator');
     }
-    
 
     public function operator(){
-        return $this->belongsTo(Member::class, 'operator_id');
+        return $this->belongsTo(Member::class, 'operator_id', 'member_id');
     }
 
     public function drivers(){
-        return $this->belongsTo(Member::class, 'operator_id','member_id');
+        return $this->belongsTo(Member::class, 'driver_id', 'member_id');
     }
 
 }
