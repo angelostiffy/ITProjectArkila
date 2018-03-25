@@ -1,6 +1,6 @@
 @extends('layouts.form')
 @section('title', 'Create New Terminal')
-@section('back-link', URL::previous())
+@section('back-link', route('settings.index'))
 @section('form-action', route('terminal.store'))
 @section('form-title', 'Create Terminal')
 @section('form-body')

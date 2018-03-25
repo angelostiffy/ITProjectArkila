@@ -1,19 +1,26 @@
 @foreach($trips as $trip)
-    <li class="list-group-item">
+    <li class="">
+        <span class="list-border">
+            <div class="row">
+        <div class="col-xs-6">
         <h4 class="pull-left">
             {{$trip->plate_number}}
-            <span class="badge badge-pill badge-default ">{{$trip->remarks}}</span>
+            
         </h4>
-        <div class="btn-group pull-right">
-            <button type="button" class="btn btn-default btn-sm btn-flat dropdown-toggle" data-toggle="dropdown">
-                <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a name='onDeck' data-val="{{$trip->trip_id}}" href="#">On Deck</a></li>
-                <li><a href="#">Remove</a></li>
-            </ul>
+
+        <div class="col-xs-6">
+            <div class="pull-right">
+                <i class="badge badge-pill badge-default ">{{$trip->remarks}}</i>
+                <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" style="border-radius: 100%;">
+                    <i class="fa fa-gear"></i>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">On Deck</a></li>
+                    <li><a href="#">Remove</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="clearfix"></div>
+        </div>
+        </span>
     </li>
     @endforeach
