@@ -10,7 +10,7 @@
                 <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="#">On Deck</a></li>
+                <li><a name='onDeck' data-val="{{$trip->trip_id}}" href="#">On Deck</a></li>
                 <li><a href="#">Remove</a></li>
             </ul>
         </div>

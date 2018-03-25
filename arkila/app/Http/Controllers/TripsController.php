@@ -9,15 +9,13 @@ use App\Member;
 use App\Terminal;
 use Illuminate\Validation\Rule;
 
-class TripsController extends Controller
-{
+class TripsController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $terminals = Terminal::whereNotIn('terminal_id',[auth()->user()->terminal_id])->get();
         $trips = Trip::whereNotNull('queue_number')
             ->orderBy('queue_number')->get();
@@ -46,8 +44,7 @@ class TripsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Terminal $destination, Van $van, Member $member )
-    {
+    public function store(Terminal $destination, Van $van, Member $member ) {
         if( is_null(Trip::where('terminal_id',$destination->terminal_id)
             ->where('plate_number',$van->plate_number)
             ->whereNotNull('queue_number')->first()) ){
@@ -81,10 +78,7 @@ class TripsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateRemarks(Trip $trip)
-    {
-        $queueArr = [];
-        $tripArr = [];
+    public function updateRemarks(Trip $trip) {
 
         $this->validate(request(),[
             'value' => [Rule::in('OB','CC','ER', "NULL")]
@@ -94,34 +88,7 @@ class TripsController extends Controller
             'remarks' => request('value')
         ]);
 
-        if($trip->queue_number == 1){
-            if(request('value') == 'CC' || request('value') == 'ER' ){
-                $trip->update([
-                    'has_privilege' => 1,
-                    'queue_number' =>null
-                ]);
-
-                foreach(Trip::where('terminal_id',$trip->terminal_id)->whereNotNull('queue_number')->get() as $trip){
-                    $trip->update([
-                       'queue_number' => $trip->queue_number-1
-                    ]);
-                }
-
-                foreach(Trip::where('terminal_id',$trip->terminal_id)->whereNotNull('queue_number') as $trip){
-                    array_push($tripArr,[
-                        'trip_id' => $trip->trip_id,
-                        'queue_number' => $trip->queue_number
-                    ]);
-                }
-
-                array_push($queueArr, $trip->has_privilege);
-                array_push($queueArr, $tripArr);
-                array_push($queueArr, $trip->terminal_id);
-
-
-            }
-        }
-        return response()->json($queueArr);
+        return 'success';
     }
 
     public function updateDestination(Trip $trip){
@@ -168,7 +135,7 @@ class TripsController extends Controller
             'value' => 'required|digits_between:1,'.$tripsCount,
         ]);
 
-        for($i = 0,$n = 1; $i < count($trips) ; $i++,$n++){
+        for($i = 0,$n = 1; $i < count($trips) ; $i++,$n++) {
             $tripsArr[$n] =  $trips[$i]->trip_id;
         }
 
@@ -180,8 +147,7 @@ class TripsController extends Controller
 
             $beingReplacedKey += 1;
 
-            for($i = $beingReplacedKey; $i<= $beingTransferredKey; $i++)
-            {
+            for($i = $beingReplacedKey; $i<= $beingTransferredKey; $i++) {
                     $beingTransferredVal =  $tripsArr[$i];
                     $tripsArr[$i] = $beingReplacedVal;
                     $beingReplacedVal = $beingTransferredVal;
@@ -225,8 +191,7 @@ class TripsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Trip $trip)
-    {
+    public function destroy(Trip $trip) {
         $trip->delete();
 
         session()->flash('success', 'Trip Successfully Deleted');
@@ -240,11 +205,13 @@ class TripsController extends Controller
 
     public function updateVanQueue(){
         $vans = request('vanQueue');
+
         $tripArr = [];
         if(is_array($vans)) {
-            foreach($vans[0] as $key => $vanInfo){
+            foreach($vans[1] as $key => $vanInfo){
+
                 if($van = Van::find($vanInfo['plate'])){
-                   $van->updateQueue($key);
+                    $van->updateQueue($key);
                 }
             }
 
@@ -267,4 +234,55 @@ class TripsController extends Controller
 
     }
 
+    public function specialUnitChecker() {
+        $firstOnQueue = Trip::where('queue_number',1)->get();
+        $successMessage = [];
+
+            foreach($firstOnQueue as $first) {
+                if($first->remarks == "ER" || $first->remarks == 'CC'){
+
+                    $first->update([
+                        'queue_number' => null,
+                        'has_privilege' => 1
+                    ]);
+
+
+                    $trips = Trip::whereNotNull('queue_number')->where('terminal_id', $first->terminal_id)->get();
+
+                    foreach($trips as $trip) {
+                        $queueNumber = ($trip->queue_number)-1;
+                        $trip->update([
+                            'queue_number'=> $queueNumber
+                            ]);
+
+                    }
+
+
+
+                    array_push($successMessage, "Van ".$first->plate_number." with a remark of ".$first->remarks."has been moved the the Special Units list.");
+                }
+
+            }
+
+            return response()->json($successMessage);
+    }
+
+    public function updatedQueueNumber(){
+        $updatedQueueList = Trip::where('has_privilege',0)->get();
+        $updatedQueueListArr = [];
+
+        foreach($updatedQueueList as $trip){
+            array_push($updatedQueueListArr, [
+               'id' => $trip->trip_id,
+               'queueNumber' => $trip->queue_number
+            ]);
+        }
+
+        return response()->json($updatedQueueListArr);
+
+    }
+
+    public function putOnDeck(Trip $trip){
+        dd($trip);
+    }
 }
