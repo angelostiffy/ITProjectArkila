@@ -13,7 +13,7 @@ class RandallController extends Controller
      */
     public function index()
     {
-        return view('drivermodule.report.driverChooseDestination');
+        return view('drivermodule.triplog.driverTripLog');
     }
 
     /**
