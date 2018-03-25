@@ -4,7 +4,9 @@ namespace App\Http\Controllers\DriverModuleControllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Destination;
 use App\Announcement;
+use App\Terminal;
 use App\Trip;
 
 class DriverHomeController extends Controller
@@ -18,6 +20,8 @@ class DriverHomeController extends Controller
     {
       $announcements = Announcement::latest()->where('viewer', '=', 'Public')
                                     ->orWhere('viewer', '=', 'Driver Only')->get();
+      $destinations = Destination::all();
+      $terminals = Terminal::all();
       $trips = Trip::join('member', 'trip.driver_id', '=', 'member.member_id')
                     ->join('terminal', 'trip.terminal_id', '=', 'terminal.terminal_id')
                     ->join('destination', 'terminal.terminal_id', '=', 'destination.terminal_id')
@@ -27,6 +31,6 @@ class DriverHomeController extends Controller
                     ->where('trip.status', '<>', 'Departed')
                     ->orderBy('trip.created_at','asc')
                     ->select('trip.trip_id as trip_id', 'trip.queue_number as queueId', 'trip.plate_number as plate_number', 'trip.remarks as remarks', 'terminal.description as terminaldesc')->get();
-      return view('drivermodule.index', compact('announcements', 'trips'));
+      return view('drivermodule.index', compact('destinations','announcements', 'trips','terminals'));
     }
 }

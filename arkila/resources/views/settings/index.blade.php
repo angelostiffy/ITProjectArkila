@@ -1,5 +1,5 @@
-@extends('layouts.master') 
-@section('title', 'Settings') 
+@extends('layouts.master')
+@section('title', 'Settings')
 @section('content')
 
 <div class="row">
@@ -15,69 +15,19 @@
             </div>
             <div class="box-body no-padding">
                 <ul class="nav nav-pills nav-stacked">
+                  @foreach($features as $feature)
                     <li>
                         <a href="#">
-                            Online Reservation
-                            <span class="label pull-right">         
+                            {{$feature->description}}
+                            <span class="label pull-right">
                                 <label class="switch">
-                                    <input type="checkbox">
+                                    <input type="checkbox" class="features" data-featureid="{{$feature->id}}" @if($feature->Status == 'enable') {{'checked'}} @endif>
                                     <span class="slider round"></span>
                                 </label>
                             </span>
                         </a>
                     </li>
-                    <li><a href="#">
-                            Walk-in Reservation
-                            <span class="label pull-right">         
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                             Online Van Rental
-                            <span class="label pull-right">         
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                             Walk-in Van Rental
-                            <span class="label pull-right">         
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </span>
-                        </a>
-                    </li>
-                    <li><a href="#">
-                            Driver Module
-                            <span class="label pull-right">         
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </span>
-                        </a>
-                    </li>
-                    <li><a href="#">
-                            Customer Module
-                            <span class="label pull-right">         
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </span>
-                        </a>
-                    </li>
+                  @endforeach
                 </ul>
             </div>
         </div>
@@ -113,15 +63,14 @@
                                     <td>{{$terminal->description}}</td>
                                     <td class="pull-right">{{$terminal->booking_fee}}</td>
                                     <td>
-                                        
                                         <div class="text-center">                               <a href="{{ route('terminal.edit', [$terminal->terminal_id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> EDIT</a>
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteTerminal'.$terminal->terminal_id}}"><i class="fa fa-trash"></i> DELETE
                                             </button>
                                         </div>
-                                                                                    
+
                                     </td>
-                                    
+
                                     <!-- Modal for Delete-->
                                     <div class="modal fade" id="{{'deleteTerminal'.$terminal->terminal_id}}">
                                         <div class="modal-dialog">
@@ -157,7 +106,7 @@
                                         <!-- /.modal-dialog -->
                                     </div>
                                     <!-- /.modal -->
-                                    
+
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -185,13 +134,13 @@
                                     <td class="pull-right">{{$destination->amount}}</td>
                                     <td>{{$destination->terminal}}</td>
                                     <td>
-                                          
+
                                             <div class="text-center">
                                                 <a href="{{ route('destinations.edit', [$destination->destination_id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" ></i> EDIT</a>
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button class="btn btn-outline-danger" data-toggle="modal" data-target="#{{'deleteDestination'.$destination->destination_id}}"><i class="fa fa-trash"></i> DELETE</button>
                                             </div>
-                                     
+
                                     </td>
                                     <!-- Modal for Delete-->
                                     <div class="modal fade" id="{{'deleteDestination'.$destination->destination_id}}">
@@ -213,7 +162,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <form action="{{ route('destinations.destroy', [$destination->destination_id]) }}" method="POST">
-                                                            {{csrf_field()}}  
+                                                            {{csrf_field()}}
                                                             {{method_field('DELETE')}}
 
                                                             <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
@@ -228,7 +177,7 @@
                                         <!-- /.modal-dialog -->
                                     </div>
                                     <!-- /.modal -->
-                                    
+
                                 </tr>
                                 @endforeach
 
@@ -260,10 +209,10 @@
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteFee'.$fee->fad_id}}"><i class="fa fa-trash"></i> DELETE</button>
 
-                                        </div> 
-                                        
+                                        </div>
+
                                     </td>
-                                    
+
                                     <!-- Modal for Delete-->
                                     <div class="modal fade" id="{{'deleteFee'.$fee->fad_id}}">
                                         <div class="modal-dialog">
@@ -299,13 +248,13 @@
                                         <!-- /.modal-dialog -->
                                     </div>
                                     <!-- /.modal -->
-                                    
+
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-        
+
                     <!-- Discount Tab -->
                     <div class="tab-pane" id="discountTab">
                         <div class="col-md-6 pull-left">
@@ -330,10 +279,9 @@
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteDiscount'.$discount->fad_id}}"><i class="fa fa-trash"></i> DELETE</button>
                                         </div>    
-                                        
                                     </td>
                                 </tr>
-                                
+
                                 <!-- Modal for Delete-->
                                 <div class="modal fade" id="{{'deleteDiscount'.$discount->fad_id}}">
                                     <div class="modal-dialog">
@@ -374,7 +322,7 @@
                             </tbody>
                         </table>
                     </div>
-                    
+
                     <!-- ticket Tab -->
                     <div class="tab-pane" id="ticketTab">
                         <div class="col-md-6 pull-left">
@@ -394,12 +342,12 @@
                                 <tr>
                                     <td>{{$ticket->ticket_number}}</td>
                                     <td>{{$ticket->terminal->description}}</td>
-                                    <td>         
+                                    <td>
                                         <div class="text-center">
                                             <a href="{{route('tickets.edit',[$ticket->ticket_id])}}" class="btn btn-primary btn-sm"><i class="fa fa-edit" ></i> EDIT</a>
                                             <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteTicket'.$ticket->ticket_id}}"><i class="fa fa-trash"></i> DELETE</button>
                                         </div>
-                                     
+
                                     </td>
                                     <!-- Modal for Delete-->
                                     <div class="modal fade" id="{{'deleteTicket'.$ticket->ticket_id}}">
@@ -436,7 +384,7 @@
                                         <!-- /.modal-dialog -->
                                     </div>
                                     <!-- /.modal -->
-                                    
+
                                 </tr>
                                 @endforeach
 
@@ -452,16 +400,17 @@
 </div>
 
 
-    @endsection 
-    @section('scripts') 
+    @endsection
+    @section('scripts')
     @parent
-
+    @include('message.success')
+    @include('message.error')
     <script>
         $(document).ready(function() {
             $('.sidebar-menu').tree()
         })
 
-        
+
       $(document).ready(function(){
         $('.status').on('click', function(event){
           id = $(this).data('id');
@@ -478,13 +427,13 @@
           });
         });
       });
-        
+
         $(document).ready(function(){
-            $('.status').on('click', function(event){
-                id = $(this).data('id');
+            $('.features').on('click', function(event){
+                id = $(this).data('featureid');
                     $.ajax({
                     type: 'POST',
-                    url: "{{ URL::route('settings.changeFeature') }}",
+                    url: '/home/settings/changeFeature/'+id,
                     data: {
                       '_token': $('input[name=_token]').val(),
                       'id': id
@@ -494,8 +443,8 @@
                     },
                 });
             });
-        });    
-    
+        });
+
     </script>
     <script>
         $(function() {
@@ -507,12 +456,12 @@
                 'info': true,
                 'autoWidth': true,
             })
-            
+
         })
 
     </script>
-    
-    
+
+
     <style>
         .switch {
             position: relative;

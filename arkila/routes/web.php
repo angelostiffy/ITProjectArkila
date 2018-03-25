@@ -112,7 +112,7 @@ Route::get('/', function () {
     ]);
     Route::get('/home/settings', 'HomeController@settings')->name('settings.index');
 
-     Route::post('/home/settings/changeFeature', 'HomeController@changeFeature')->name('settings.changeFeature');
+     Route::post('/home/settings/changeFeature/{feature}', 'HomeController@changeFeatures')->name('settings.changeFeature');
 
     /****************************************************/
 
