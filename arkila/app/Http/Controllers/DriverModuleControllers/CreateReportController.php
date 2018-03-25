@@ -39,7 +39,7 @@ class CreateReportController extends Controller
   }
   public function storeReport(Terminal $terminal, CreateReportRequest $request)
   {
-    //dd(request('qty'));  
+    //dd(request('qty'));
     // $qtyCounter = 0;
     // $qty = request('qty');
     // foreach($qty as $key => $value){
@@ -100,6 +100,7 @@ class CreateReportController extends Controller
         for($i = 1; $i <= $innerTicketValues; $i++){
           Transaction::create([
             "destination_id" => $innerTicketKeys,
+            'terminal_id' => $terminal->terminal_id,
             "trip_id" => $tripId->trip_id,
             "status" => 'Departed',
           ]);
