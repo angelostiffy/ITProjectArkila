@@ -567,6 +567,7 @@ ol.vertical{
                         success: function(response){
                                 if(response.length >  0){
 
+                                    location.reload();
                                 }
                         }
 
