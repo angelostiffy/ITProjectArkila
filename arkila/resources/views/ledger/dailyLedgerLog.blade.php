@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'index')
+@section('title', 'Daily Ledger Log')
 @section('links')
 @parent
   <link rel="stylesheet" href="tripModal.css"> 
@@ -9,7 +9,7 @@
     <!-- /.box-header -->
 
     <div class="box-body">
-        <table id="dailyLedgerTable" class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped dailyLedgerTable">
             <thead>
                 <tr>
                     <th>Date</th>
@@ -41,13 +41,10 @@
 
 @section('scripts')
 @parent
-<!-- DataTables -->
-    <script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}" )></script>
-    <script src="{{ URL::asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+
     <script>  
         $(function() {
-            $('.example1').DataTable()
-            $('#adminTable').DataTable({
+            $('.dailyLedgerTable').DataTable({
                 'paging': true,
                 'lengthChange': false,
                 'searching': true,
@@ -55,24 +52,7 @@
                 'info': true,
                 'autoWidth': true
             })
-
-            $('#driverTable').DataTable({
-                'paging': true,
-                'lengthChange': true,
-                'searching': true,
-                'ordering': true,
-                'info': true,
-                'autoWidth': true
-            })
-
-            $('#customerTable').DataTable({
-                'paging': true,
-                'lengthChange': true,
-                'searching': true,
-                'ordering': true,
-                'info': true,
-                'autoWidth': true
-            })
+    
         })
     </script>
 

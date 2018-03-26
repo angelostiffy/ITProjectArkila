@@ -1,6 +1,6 @@
 @extends('layouts.form')
 @section('title', 'Edit Fee')
-@section('back-link', URL::previous())
+@section('back-link', route('settings.index'))
 @section('form-action', route('fees.update', [$fee->fad_id]))
 @section('method_field', method_field('PATCH'))
 @section('form-title', 'Edit Fee')

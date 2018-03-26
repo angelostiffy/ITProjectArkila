@@ -11,8 +11,8 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
   @section('links')
-    @include('layouts.partials.stylesheets_form')
-    
+    @include('layouts.partials.stylesheets')
+
   @show
 </head>
 
@@ -25,10 +25,7 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-          <div>
-            @include('message.error')
-            @include('message.success')
-          </div>
+
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
@@ -55,9 +52,9 @@
 
     @section('scripts')
         @parent
-        @include('layouts.partials.scripts_form')
+        @include('layouts.partials.scripts')
         @include('message.error')
-
+        @include('message.success')
     @show
 
 </body>

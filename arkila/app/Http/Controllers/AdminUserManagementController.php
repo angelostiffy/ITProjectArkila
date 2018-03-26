@@ -22,8 +22,8 @@ class AdminUserManagementController extends Controller
          $terminals = Terminal::all();
          return view('usermanagement.addAdmin', compact('terminals'));
     }
-    
-    
+
+
 
 
     public function store()
@@ -46,7 +46,7 @@ class AdminUserManagementController extends Controller
             'user_type' => 'Admin',
         ]);
 
-        session()->flash('message', 'Successfully added new Admin');
+        session()->flash('success', 'Successfully added new Admin');
 
         return redirect('/home/user-management');
     }
@@ -68,7 +68,7 @@ class AdminUserManagementController extends Controller
 
         //Mail::to('932a782243-eb8d48@inbox.mailtrap.io')->send(new ResetPasswordMail(request('_token'), $admin_user->email));
 
-        session()->flash('message', 'Reset Password Successful! A Reset Password Link Has Been Sent to the User.');
+        session()->flash('success', 'Reset Password Successful! A Reset Password Link Has Been Sent to the User.');
         return redirect('/home/user-management');
     }
 
@@ -88,6 +88,7 @@ class AdminUserManagementController extends Controller
         }
 
         $user->save();
+        
         return response()->json($user);
     }
 }

@@ -1,0 +1,17 @@
+<div class="modal fade" id="dialogBox">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Van {{}} of Terminal {{}} with a remark of will be moved to the special units list</p>
+                <button type="button" class="btn btn-primary pull-right">OK</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<script>
+    $('#dialogBox').modal({backdrop: 'static', keyboard: false})
+</script>

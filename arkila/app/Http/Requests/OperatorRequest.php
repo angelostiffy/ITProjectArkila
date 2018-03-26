@@ -34,6 +34,7 @@ class OperatorRequest extends FormRequest
             case 'POST':
             {
                 return [
+
                     'lastName' => ['bail','required',new checkName,'max:25'],
                     'firstName' => ['bail','required',new checkName,'max:25'],
                     'middleName' => ['bail','required',new checkName,'max:25'],

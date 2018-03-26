@@ -171,8 +171,8 @@
         <div class="box-footer">
             <div style="overflow:auto;">
                     <div style="float:right;">
-                        <button type="button" id="prevBtn" onclick="nextPrev(-1)" class = "btn btn-default">Previous</button>
-                        <button type="button" id="nextBtn" onclick="nextPrev(1); getData();" class = "btn btn-primary">Next</button>
+                        <button type="button" id="prevBtn" onclick="nextPrev(-1)" class = "btn btn-default btn-sm">Previous</button>
+                        <button type="button" id="nextBtn" onclick="nextPrev(1); getData();" class = "btn btn-primary btn-sm">Next</button>
                     </div>
                 </div>
         </div>

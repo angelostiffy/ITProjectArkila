@@ -23,8 +23,8 @@
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
-                            <div style="margin-bottom:1%">
-                                <a href="/home/reservations/create" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create New</a>
+                            <div class="col-md-6">
+                                <a href="/home/reservations/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> CREATE</a>
                             </div>
 
 
@@ -61,9 +61,9 @@
                                                     
                                                 @if ($reservation->status == 'Paid')
                                                 
-                                                    <button class="btn btn-primary" type="submit" name="butt" data-toggle="modal" data-target="#{{'depart'.$reservation->id}}" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
+                                                    <button class="btn btn-primary btn-sm" type="submit" name="butt" data-toggle="modal" data-target="#{{'depart'.$reservation->id}}" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
                                                 
-                                                    <button class="btn btn-outline-danger" type="submit" name="butt" data-toggle="modal" data-target="#{{'cancel'.$reservation->id}}" value="Cancelled"><i class="fa fa-close"></i> Cancel</button>
+                                                    <button class="btn btn-outline-danger btn-sm" type="submit" name="butt" data-toggle="modal" data-target="#{{'cancel'.$reservation->id}}" value="Cancelled"><i class="fa fa-close"></i> Cancel</button>
                                                 
                                                 
                                                      <!-- Modal for Cancelation-->
@@ -88,7 +88,7 @@
                                                                        <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
                                                                             {{ csrf_field() }} {{ method_field('PATCH') }} 
 
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Discard</button>
+                                                                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Discard</button>
                                                                             <button type="submit" name="butt" value="Cancelled" class="btn btn-danger" style="width:22%;">Cancel</button>
                                                                         </form>
                                                                     </div>
@@ -120,7 +120,7 @@
                                                                        <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
                                                                             {{ csrf_field() }} {{ method_field('PATCH') }} 
 
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
                                                                             <button type="submit" name="butt" value="Departed " class="btn btn-primary" style="width:22%;">Depart</button>
                                                                         </form>
                                                                     </div>
@@ -135,7 +135,7 @@
 
                                                 @else
                                                
-                                                <button class="btn btn-danger" data-toggle="modal" data-target="#{{'deletion'.$reservation->id}}"><i class="fa fa-close"></i> Delete</button>
+                                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{'deletion'.$reservation->id}}"><i class="fa fa-close"></i> Delete</button>
                                                 
                                                 
                                                 <!-- Modal for Deletion-->
@@ -160,8 +160,8 @@
                                                                     <form method="POST" action="{{ route('reservations.destroy', [$reservation->id]) }}" class="delete">
                                                                         {{csrf_field()}} {{method_field('DELETE')}}
 
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                                        <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
+                                                                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+                                                                        <button type="submit" class="btn btn-danger btn-sm" style="width:22%;">Delete</button>
                                                                     </form>
                                                                 </div>
                                                             </div>
@@ -217,15 +217,15 @@
                                             <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
                                                 {{ csrf_field() }} {{ method_field('PATCH') }} 
                                                 @if ($reservation->status == 'Pending')
-                                                    <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
-                                                    <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Declined"><i class="fa fa-close"></i> Decline</button> 
+                                                    <button class="btn btn-success btn-sm" type="submit" name="butt" onclick="return ConfirmStatus()" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
+                                                    <button class="btn btn-danger btn-sm" type="submit" name="butt" onclick="return ConfirmStatus()" value="Declined"><i class="fa fa-close"></i> Decline</button> 
                                                 @elseif ($reservation->status == 'Paid')
 
-                                                    <button class="btn btn-success" type="submit" name="butt" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
-                                                    <button class="btn btn-danger" type="submit" name="butt" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button> @else
+                                                    <button class="btn btn-success btn-sm" type="submit" name="butt" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
+                                                    <button class="btn btn-danger btn-sm" type="submit" name="butt" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button> @else
                                                     <form method="POST" action="/home/reservations/{{$reservation->reservation_id}}" class="delete">
                                                         {{csrf_field()}} {{method_field('DELETE')}}
-                                                        <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</button>
+                                                        <button class="btn btn-danger btn-sm" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</button>
                                                     </form>
                                                 @endif
                                             </form>
@@ -262,7 +262,7 @@
     $(function() {
         $('.listReservation').DataTable({
             'paging': true,
-            'lengthChange': true,
+            'lengthChange': false,
             'searching': true,
             'ordering': true,
             'info': true,

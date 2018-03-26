@@ -19,8 +19,8 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
 
-                            <div style="margin-bottom:1%">
-                                <a href="/home/rental/create" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create New</a>
+                            <div class="col-md-6">
+                                <a href="/home/rental/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> CREATE</a>
                             </div>
                             
                             <table id="listRent" class="table table-bordered table-striped rentalTable">
@@ -51,8 +51,8 @@
                                         <td class="center-block">
                                             <div class="center-block">
                                                 @if ($rental->status == 'Paid')
-                                                    <button class="btn btn-primary" name="click" id="depart" value="Departed"  data-toggle="modal" data-target="#{{'depart'.$rental->rent_id}}"><i class="fa fa-automobile"></i> Depart </button>
-                                                    <button class="btn btn-outline-danger" name="click" id="depart" value="Cancelled" data-toggle="modal" data-target="#{{'cancel'.$rental->rent_id}}"><i class="fa fa-close"></i> Cancel </button>
+                                                    <button class="btn btn-primary btn-sm" name="click" id="depart" value="Departed"  data-toggle="modal" data-target="#{{'depart'.$rental->rent_id}}"><i class="fa fa-automobile"></i> Depart </button>
+                                                    <button class="btn btn-outline-danger btn-sm" name="click" id="depart" value="Cancelled" data-toggle="modal" data-target="#{{'cancel'.$rental->rent_id}}"><i class="fa fa-close"></i> Cancel </button>
                                                 
                                                     <!-- Modal for depart-->
                                                      <div class="modal fade" id="{{'depart'.$rental->rent_id}}">
@@ -73,8 +73,8 @@
                                                                        <form action="{{ route('rental.update', $rental->rent_id) }}" method="POST" class="form-action">
                                                                             {{ csrf_field() }} {{ method_field('PATCH') }}
                                                                            
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                                            <button type="submit" name="click" value="Departed" class="btn btn-primary" style="width:22%;">Depart</button>
+                                                                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+                                                                            <button type="submit" name="click" value="Departed" class="btn btn-primary btn-sm" style="width:22%;">Depart</button>
                                                                         </form>
                                                                     </div>
                                                                 </div>
@@ -108,8 +108,8 @@
                                                                        <form action="{{ route('rental.update', $rental->rent_id) }}" method="POST" class="form-action">
                                                                             {{ csrf_field() }} {{ method_field('PATCH') }} 
 
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Discard</button>
-                                                                            <button type="submit" name="click" value="Cancelled" class="btn btn-danger" style="width:22%;">Cancel</button>
+                                                                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Discard</button>
+                                                                            <button type="submit" name="click" value="Cancelled" class="btn btn-danger btn-sm" style="width:22%;">Cancel</button>
                                                                         </form>
                                                                     </div>
                                                                 </div>
@@ -122,7 +122,7 @@
                                                     <!-- /.modal -->
                                                
                                                 @else
-                                                <button class="btn btn-danger" data-toggle="modal" data-target="#{{'deleteRental'.$rental->rent_id}}"><i class="fa fa-trash"></i>Delete
+                                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{'deleteRental'.$rental->rent_id}}"><i class="fa fa-trash"></i>Delete
                                                 </button>
 
                                                 <!-- Modal for Delete-->
@@ -147,8 +147,8 @@
                                                                     <form method="POST" action="{{ route('rental.destroy', [$rental->rent_id]) }}">
                                                                         {{csrf_field()}} {{method_field('DELETE')}}
                                                                         
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                                                        <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
+                                                                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">No</button>
+                                                                        <button type="submit" class="btn btn-danger btn-sm" style="width:22%;">Delete</button>
                                                                         
                                                                     </form>
                                                                 </div>
@@ -209,16 +209,16 @@
                                             <div class="text-center">
                                                 <form action="{{ route('rental.update', $rental->rent_id) }}" method="POST">
                                                     {{ csrf_field() }} {{ method_field('PATCH') }} @if ($rental->status == 'Pending')
-                                                    <button class="btn btn-success" name="click" onclick="return ConfirmStatus()" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
-                                                    <button class="btn btn-outline-danger" name="click" onclick="return ConfirmStatus()" value="Declined"><i class="fa fa-close"></i> Decline</button>
+                                                    <button class="btn btn-success btn-sm" name="click" onclick="return ConfirmStatus()" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
+                                                    <button class="btn btn-outline-danger btn-sm" name="click" onclick="return ConfirmStatus()" value="Declined"><i class="fa fa-close"></i> Decline</button>
                                                 </form>
 
                                                 @elseif ($rental->status == 'Paid')
-                                                <button class="btn btn-primary" name="click" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
-                                                <button class="btn btn-outline-danger" name="click" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button> @else
+                                                <button class="btn btn-primary btn-sm" name="click" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
+                                                <button class="btn btn-outline-danger btn-sm" name="click" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button> @else
                                                 <form method="POST" action="/home/rental/{{ $rental->rent_id }}" class="delete">
                                                     {{csrf_field()}} {{method_field('DELETE')}}
-                                                    <button class="btn btn-danger" onclick="return ConfirmDelete()"><i class="fa fa-trash"></i> Delete</i></button>
+                                                    <button class="btn btn-danger btn-sm" onclick="return ConfirmDelete()"><i class="fa fa-trash"></i> Delete</i></button>
                                                 </form>
                                                 @endif @endif
 
@@ -241,7 +241,7 @@
 
         $('.rentalTable').DataTable({
             'paging': true,
-            'lengthChange': true,
+            'lengthChange': false,
             'searching': true,
             'ordering': true,
             'info': true,

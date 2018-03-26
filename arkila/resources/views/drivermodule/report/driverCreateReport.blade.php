@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="box-body">
-                    <form action="{{route('drivermodule.storeReport', [request('id')])}}" method="POST" class="form-horizontal" data-parsley-validate="">
+                    <form action="{{route('drivermodule.storeReport', [$terminals->terminal_id])}}" method="POST" class="form-horizontal" data-parsley-validate="">
                       {{csrf_field()}}
                       <input type="hidden" name="termId" value="{{$terminals->terminal_id}}">
                         <div class="col-md-6">
@@ -21,7 +21,7 @@
                                 <label for="" class="col-sm-4">{{$destination->description}}</label>
                                 <div class="col-sm-6">
                                     <input type="hidden" name="destination[]" value="{{$destination->destid}}">
-                                    <input value="{{old('qty.'.$counter)}}" class='form-control pull-right' onblur='findTotal()' type='number' name='qty[]' id=''>
+                                    <input value="{{old('qty.'.$counter)}}" class='form-control pull-right' onblur='findTotal()' type='number' name='qty[]' id='' min="0">
                                 </div>
                             </div>
                             @php $counter++; @endphp
@@ -36,11 +36,12 @@
                                             <i class="fa fa-calendar"></i>
                                         </div>
                                         <input value="{{old('dateDeparted')}}" id="" name="dateDeparted" type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask required data-parsley-errors-container="#errDateDeparted">
-                                        
+
                                     </div>
+
                                     <p id="errDateDeparted"></p>
                                 </div>
-                                
+
                             </div>
                             <div class="form-group">
                                 <div class="bootstrap-timepicker">
@@ -61,17 +62,20 @@
                                 <div class="col-md-5">
                                     <div class='form-group'>
                                         <label for=''>Total Passengers: </label>
-                                        <input value="{{old('totalPassengers')}}" class='form-control col-xs-3' type='number' name='totalPassengers' id='totalPassengers' required>
+                                        <p id="totalPassenger">{{old('totalPassengers')}}</p>
+                                        <input id="totalPassengers" type="hidden" name="totalPassengers" value="">
                                     </div>
                                 </div>
                                 <div class="col-md-1"></div>
                                 <div class="col-md-5">
                                     <div class='form-group clearfix'>
                                         <label for=''>Total Booking Fee: </label>
-                                        <input value="{{old('totalBookingFee')}}" class='form-control col-xs-3' type='number' data-bookingfee="{{$terminals->booking_fee}}" name='totalBookingFee' id='totalFee' required>
+                                        <p data-bookingfee="{{$terminals->booking_fee}}" id="totalFee">{{old('totalBookingFee')}}</p>
+                                        <input id="totalFees"  type="hidden" name='totalBookingFee' value="">
                                     </div>
                                 </div>
                             </div>
+                            @if($fads->count() > 0)
                             <label for='Discounts'> Number of Customers with Discounts: </label>
                             <div class="form-horizontal">
                               @php $c = 0; @endphp
@@ -86,6 +90,7 @@
                                     @php $c++; @endphp
                                 @endforeach
                             </div>
+                            @endif
                             <div class="box-footer text-center">
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#discountModal">Submit</button>
                             </div>
@@ -145,9 +150,11 @@
                 tot += parseInt(arr[i].value);
         }
 
+        document.getElementById('totalPassenger').textContent = tot;
         document.getElementById('totalPassengers').value = tot;
         var bookingFee = document.getElementById('totalFee');
-        bookingFee.value = document.getElementById('totalPassengers').value * bookingFee.getAttribute('data-bookingfee');
+        bookingFee.textContent = document.getElementById('totalPassengers').value * bookingFee.getAttribute('data-bookingfee');
+        document.getElementById('totalFees').value = document.getElementById('totalPassengers').value * bookingFee.getAttribute('data-bookingfee');
     }
 
     //document.getElementById('dest').value = document.getElementById('termId').value;

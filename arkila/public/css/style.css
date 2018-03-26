@@ -99,13 +99,13 @@ right: 20px;
 .thin::-webkit-scrollbar {
   width: 6px; }
 
-.list-group-style {
-  margin-bottom: 0px;
-}
-
-.list-group-item:first-child {
-  border-top-left-radius: 0px ;
-  border-top-right-radius: 0px ;
+.special-list span {
+    position: relative;
+    display: block;
+    padding: .4em .4em .4em .8em;
+    margin: .5em 0 0 0;
+    text-decoration: none;
+    transition: all .3s ease-out;
 }
 
 /*btn-outline*/

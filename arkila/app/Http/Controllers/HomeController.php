@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Announcement;
 use App\FeesAndDeduction;
 use App\Destination;
+use App\Feature;
 use App\Terminal;
 use App\User;
 use App\Van;
@@ -46,9 +47,9 @@ class HomeController extends Controller
         $destinations = Destination::join('terminal', 'destination.terminal_id', '=', 'terminal.terminal_id')->select('terminal.description as terminal', 'destination.destination_id','destination.description', 'destination.amount')->get();
         $terminals = Terminal::all();
         $tickets = Ticket::all();
+        $features = Feature::all();
 
-
-        return view('settings.index', compact('fees','destinations', 'terminals', 'discounts','tickets'));
+        return view('settings.index', compact('fees','destinations', 'terminals', 'discounts','tickets','features'));
     }
 
     public function usermanagement()
@@ -59,22 +60,6 @@ class HomeController extends Controller
         return view('usermanagement.index', compact('userAdmins', 'userDrivers', 'userCustomers'));
     }
 
-
-    // public function driverDashboard()
-    // {
-    //     $announcements = Announcement::latest()->where('viewer', '=', 'Public')->orWhere('viewer', '=', 'Driver Only')->get();
-    //     // $ondeckTrip = Trip::
-    //     $trips = Trip::join('member', 'trip.driver_id', '=', 'member.member_id')
-    //                   ->join('destination', 'trip.destination_id', '=', 'destination.destination_id')
-    //                   ->join('terminal', 'destination.terminal_id', '=', 'terminal.terminal_id')
-    //                   ->join('van', 'trip.plate_number', '=', 'van.plate_number')
-    //                   ->where('member.operator_id', '=', null)
-    //                   ->where('member.role', '=', 'Driver')
-    //                   ->where('trip.status', '<>', 'Departed')
-    //                   ->orderBy('trip.created_at','asc')
-    //                   ->select('trip.trip_id as trip_id', 'trip.queue_number as queueId', 'trip.plate_number as plate_number', 'trip.remarks as remarks', 'terminal.description as terminaldesc')->get();
-    //     return view('drivermodule.index', compact('announcements', 'trips'));
-    //   }
     public function archive() {
         $operators = ArchiveMember::allOperators()->groupBy('operator_id')->get();
 
@@ -97,8 +82,20 @@ class HomeController extends Controller
         return view('archive.vanDriver', compact('drivers', 'vans'));
 
     }
-    public function changeFeatures() {
-        return view('settings.changeFeature');
+    public function changeFeatures(Feature $feature) {
+        if($feature->Status === 'enable'){
+          $feature->Status = 'disable';
+          session()->flash('success', $feature->description . 'has been successfully disabled');
+          //$message = ['success' => $feature->description . 'has been successfully disabled'];
+        }elseif($feature->Status === 'disable'){
+          $feature->Status = 'enable';
+          //$message = ['success' => $feature->description . 'has been successfully enabled'];
+          session()->flash('success', $feature->description . 'has been successfully enabled');
+        }
+
+        $feature->save();
+        return response()->json(true);
+
     }
 
 }

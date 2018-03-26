@@ -8,6 +8,7 @@ use App\Http\Requests\CreateReportRequest;
 use App\Http\Controllers\Controller;
 use App\Rules\checkCurrency;
 use App\Rules\checkTime;
+use Carbon\Carbon;
 use App\FeesAndDeduction;
 use App\Destination;
 use App\Transaction;
@@ -28,19 +29,27 @@ class CreateReportController extends Controller
 
   }
 
-  public function createReport($id)
+  public function createReport(Terminal $terminals)
   {
-    //dd($id);
-    $terminals = Terminal::where('terminal_id', $id)->first();
     $destinations = Destination::join('terminal', 'destination.terminal_id', '=', 'terminal.terminal_id')
-                    ->where('terminal.terminal_id', '=', $id)
+                    ->where('terminal.terminal_id', '=', $terminals->terminal_id)
                     ->select('terminal.terminal_id as term_id','terminal.description as termdesc', 'destination.destination_id as destid', 'destination.description')->get();
     $fads = FeesAndDeduction::where('type','=','Discount')->get();
     return view('drivermodule.report.driverCreateReport', compact('terminals', 'destinations', 'fads'));
   }
-  public function storeReport($id, CreateReportRequest $request)
+  public function storeReport(Terminal $terminal, CreateReportRequest $request)
   {
-    dd(request('numberOfDiscount'));
+    //dd(request('qty'));
+    // $qtyCounter = 0;
+    // $qty = request('qty');
+    // foreach($qty as $key => $value){
+    //   if($value == null){
+    //     $qtyCounter++;
+    //   }
+    // }
+    // dd($qty);
+    // dd((empty(request('qty')) ? true:false));
+     //dd(request('numberOfDiscount'));
     $totalPassengers = $request->totalPassengers;
     $totalBookingFee = $request->totalBookingFee;
     $totalPassenger = (float)$request->totalPassengers;
@@ -52,16 +61,19 @@ class CreateReportController extends Controller
           ->where('users.id', Auth::id())->select('van.plate_number as plate_number')->first();
      $driver_id = Member::where('user_id', Auth::id())->select('user_id')->first();
 
+     $timeDeparted = Carbon::createFromFormat('h:i A', $request->timeDeparted);
+     $timeDepartedFormat = $timeDeparted->format('H:i:s');
+     $dateDeparted = $request->dateDeparted;
      Trip::create([
        'driver_id' => $driver_id->user_id,
-       'terminal_id' => $id,
+       'terminal_id' => $terminal->terminal_id,
        'plate_number' => $plateNumber->plate_number,
        'status' => 'Departed',
        'total_passengers' => $totalPassengers,
        'total_booking_fee' => $request->totalBookingFee,
        'community_fund' => $communityFund,
        'date_departed' => $request->dateDeparted,
-       'time_departed' => $request->timeDeparted,
+       'time_departed' => $timeDepartedFormat,
      ]);
 
     $destinationArr = request('destination');
@@ -88,6 +100,7 @@ class CreateReportController extends Controller
         for($i = 1; $i <= $innerTicketValues; $i++){
           Transaction::create([
             "destination_id" => $innerTicketKeys,
+            'terminal_id' => $terminal->terminal_id,
             "trip_id" => $tripId->trip_id,
             "status" => 'Departed',
           ]);
@@ -95,31 +108,35 @@ class CreateReportController extends Controller
       }
     }
 
-    $discountTransactionArr = array_combine($discountArr, $numOfDiscount);
-    $latestTrip = Trip::latest()->first();
-    $transaction = Transaction::orderBy('created_at', 'desc')->get();
-    $updateQueryCount = $totalPassengers;
+    if($numOfDiscount != null){
+      $discountTransactionArr = array_combine($discountArr, $numOfDiscount);
+      $latestTrip = Trip::latest()->first();
+      $transaction = Transaction::orderBy('created_at', 'desc')->get();
+      $updateQueryCount = $totalPassengers;
 
-   $counter = 0;
-   foreach($discountTransactionArr as $key => $value){
-       $numOfDiscount = $value;
-       if($numOfDiscount == null){
-         //echo $numOfDiscount . "hi <br/>";
-         continue;
-       }else{
+     $counter = 0;
+     foreach($discountTransactionArr as $key => $value){
+         $numOfDiscount = $value;
+         if($numOfDiscount == null){
+           //echo $numOfDiscount . "hi <br/>";
+           continue;
+         }else{
 
-         while($numOfDiscount != 0){
-           $check = $transaction[$counter]->update([
-             "fad_id" => $key,
-           ]);
-           //echo $counter . " " . $key . " " . $numOfDiscount . " " . $check . "<br/>";
-           $counter++;
-           $numOfDiscount--;
+           while($numOfDiscount != 0){
+             $check = $transaction[$counter]->update([
+               "fad_id" => $key,
+             ]);
+             //echo $counter . " " . $key . " " . $numOfDiscount . " " . $check . "<br/>";
+             $counter++;
+             $numOfDiscount--;
+           }
          }
-       }
-   }
+     }
+    }
 
-  return redirect('home/choose-terminal');
+
+
+  return redirect('home/choose-terminal')->with('success', 'Report created successfully!');
 
 
   }

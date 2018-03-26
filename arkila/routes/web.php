@@ -37,7 +37,7 @@ Route::get('/driver-profile', function(){
 Route::get('/teo', function(){
     return view('rental.newcreate');
 });
-    
+
 Route::get('/dixon', 'TripsController@index');
 
 Route::get('/ticketmanagement','TransactionsController@manage');
@@ -56,29 +56,29 @@ Route::get('/', function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::resource('/home/ledger', 'DailyLedgerController');
-    
+
     Route::resource('/home/announcements', 'AnnouncementsController');
-    
-    
+
+
     //Operators
     Route::resource('/home/operators', 'OperatorsController');
     Route::get('/home/operators/profile/{operator}','OperatorsController@showProfile')->name('operators.showProfile');
-    
+
     /************ Drivers ******************************/
     Route::resource('/home/drivers', 'DriversController');
-    
+
     //Adding a driver to a specific operator
     Route::get('/home/operators/{operator}/drivers/create', 'DriversController@createFromOperator')->name('drivers.createFromOperator');
     Route::post('/home/operators/{operator}/drivers/', 'DriversController@storeFromOperator')->name('drivers.storeFromOperator');
-    
+
     //Adding a driver to a specific van
     Route::get('/home/vans/{vanNd}/drivers/create', 'DriversController@createFromVan')->name('drivers.createFromVan');
     Route::post('/home/vans/{vanNd}/drivers/', 'DriversController@storeFromVan')->name('drivers.storeFromVan');
-    
+
     //Give the list of certain drivers
     Route::post('/listDrivers','VansController@listDrivers')->name('vans.listDrivers');
     /****************************************************/
-    
+
     /************ Vans ******************************/
     Route::resource('/home/vans', 'VansController', [
         'except' => ['show']
@@ -86,95 +86,100 @@ Route::get('/', function () {
     //Creating Vans
     Route::get('/home/operators/{operator}/vans/create', 'VansController@createFromOperator')->name('vans.createFromOperator');
     Route::post('/home/operators/{operator}/vans', 'VansController@storeFromOperator')->name('vans.storeFromOperator');
-    
+
     //Give the info of a van
     Route::post('/vanInfo','VansController@vanInfo')->name('vans.vanInfo');
     /****************************************************/
-    
+
     /************ Settings ******************************/
     Route::resource('/home/settings/destinations', 'DestinationController', [
         'except' => ['index','show']
     ]);
-    
+
     Route::resource('/home/settings/terminal', 'TerminalController', [
         'except' => ['index','show']
     ]);
-    
+
     Route::resource('/home/settings/fees', 'FeesController', [
         'except' => ['index','show']
     ]);
     Route::resource('/home/settings/discounts', 'DiscountsController', [
         'except' => ['index', 'show']
     ]);
-    
+
     Route::resource('/home/settings/tickets','TicketsController',[
         'except' => ['index','show']
     ]);
     Route::get('/home/settings', 'HomeController@settings')->name('settings.index');
-     
-     Route::post('/home/settings/changeFeature', 'HomeController@changeFeature')->name('settings.changeFeature');
+
+     Route::post('/home/settings/changeFeature/{feature}', 'HomeController@changeFeatures')->name('settings.changeFeature');
 
     /****************************************************/
-    
+
     /************ User Management ******************************/
     Route::get('/home/user-management', 'HomeController@usermanagement')->name('usermanagement.dashboard');
-    
+
     Route::resource('/home/user-management/admin', 'AdminUserManagementController', [
         'except' => ['index','destroy'],
         'parameters' => ['admin' => 'admin_user']
     ]);
     Route::post('/home/user-management/admin/change-status', array('as' => 'changeAdminStatus','uses' => 'AdminUserManagementController@changeAdminStatus'));
-    
+
     //Route::get('password/reset/{token}/{email}', array('as' => 'getResetPass', 'uses' => 'Auth\ResetPasswordController@showResetForm'));
     //Route::post('password/reset', array('as' => 'resetPass', 'uses' => 'Auth\ResetPasswordController@reset'));
-    
+
     //Route::patch('home/user-management/admin/{admin_user}/{token}', 'AdminUserManagementController@update');
-    
+
     Route::resource('/home/user-management/driver', 'UserDriversManagementController', [
         'except' => ['index','store', 'create','edit','destroy'],
         'parameters' => ['driver' => 'driver_user']
-    
+
     ]);
     Route::post('/home/user-management/drivers/change-status', array('as' => 'changeDriverStatus','uses' => 'UserDriversManagementController@changeDriverStatus'));
-    
+
     Route::resource('/home/user-management/customer', 'CustomerUserManagementController', [
         'except' => ['index','store', 'create','edit','destroy'],
         'parameters' => ['customer' => 'customer_user']
     ]);
     Route::post('/home/user-management/customer/change-status', array('as' => 'changeCustomerStatus','uses' => 'CustomerUserManagementController@changeCustomerStatus'));
     /****************************************************/
-    
+
     Route::resource('/home/test', 'TestController');
     Route::resource('/home/testing', 'TestingController');
+
     Route::resource('/home/reservations', 'ReservationsController', [
         'except' => ['show', 'edit']
     ]);
-    
+
     Route::get('/home/archive', 'HomeController@archive');
     Route::get('/home/operatorVanDriver', 'HomeController@vanDriver')->name('archive.vanDriver');
     Route::get('/home/archive/profile/{operator}','HomeController@showProfile')->name('archive.showProfile');
 
     Route::post('/home/operators/{operator}/archiveOperators', 'OperatorsController@archiveOperator')->name('operators.archiveOperator');
-    
-    
+
+
+
     Route::resource('/home/rental', 'RentalsController',[
         'except' => ['show','edit']
     ]);
 
-    
+
     /* Trips */
     Route::post('/home/trips/{destination}/{van}/{member}', 'TripsController@store')->name('trips.store');
     Route::get('/listSpecialUnits/{terminal}','TripsController@listSpecialUnits')->name('trips.listSpecialUnits');
+
     Route::patch('/home/trips/{trip}', 'TripsController@updateRemarks')->name('trips.updateRemarks');
     Route::patch('/home/trips/changeDestination/{trip}', 'TripsController@updateDestination')->name('trips.updateDestination');
-    
+
     Route::resource('/home/trips', 'TripsController',[
         'except' => ['create','show','edit','update']
     ]);
     Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
     Route::get('/showTrips/{terminal}', 'TripsController@showTrips');
     Route::patch('/updateQueueNumber/{trip}', 'TripsController@updateQueueNumber')->name('trips.updateQueueNumber');
-    
+    Route::post('/specialUnitChecker','TripsController@specialUnitChecker')->name('trips.specialUnitChecker');
+    Route::get('/updatedQueueNumber','TripsController@updatedQueueNumber')->name('trips.updatedQueueNumber');
+    Route::post('/putOnDeck/{trip}','TripsController@putOnDeck')->name('trips.putOnDeck');
     /* Transactions(Ticket) */
     Route::resource('/home/transactions', 'TransactionsController',[
         'except' => ['create','show','edit']
@@ -187,8 +192,8 @@ Route::get('/', function () {
     Route::patch('/updateOnBoardTransactions', 'TransactionsController@updateOnBoardTransactions')->name('transactions.updateOnBoardTransactions');
     /********Archive ********/
     Route::patch('/home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
-    
-    
+
+
  });
 /*****************************************************************************/
 /*****************************************************************************/
@@ -213,8 +218,8 @@ Route::group(['middleware' => ['auth', 'driver']], function(){
   Route::post('home/profile/change-password', 'DriverModuleControllers\DriverProfileController@checkCurrentPassword')->name('drivermodule.checkCurrentPassword');
   /*Create Report*/
   Route::get('/home/choose-terminal', 'DriverModuleControllers\CreateReportController@chooseTerminal')->name('drivermodule.chooseTerminal');
-  Route::get('/home/create-report/{id}', 'DriverModuleControllers\CreateReportController@createReport')->name('drivermodule.createReport');
-  Route::post('/home/create-report/{id}/store', 'DriverModuleControllers\CreateReportController@storeReport')->name('drivermodule.storeReport');
+  Route::get('/home/create-report/{terminals}', 'DriverModuleControllers\CreateReportController@createReport')->name('drivermodule.createReport');
+  Route::post('/home/create-report/{terminal}/store', 'DriverModuleControllers\CreateReportController@storeReport')->name('drivermodule.storeReport');
   /*Trip Log*/
   Route::get('/home/view-trips', 'DriverModuleControllers\TripLogController@viewTripLog')->name('drivermodule.viewTripLog');
 
