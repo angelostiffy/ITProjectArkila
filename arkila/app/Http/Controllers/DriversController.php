@@ -363,13 +363,10 @@ class DriversController extends Controller
 
     public function archiveDelete(Request $request, Member $driver)
     {
-        if ($request->driverArc == 'Arch') {
             $driver->update([
                 'status' => 'Inactive',
             ]);
-            return redirect(route('drivers.index'));
-
-        }
+            return back();
     }
 
 }

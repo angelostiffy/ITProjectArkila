@@ -69,17 +69,15 @@ class HomeController extends Controller
 
     public function showProfile(ArchiveMember $archive)
     {           
-        $drivers = ArchiveMember::where('operator_id',$archive->operator_id)->get();
+        $drivers = Member::where('operator_id',$archive->operator_id)->get();
         // dd($driver);
 
         return view('archive.operatorArchive',compact('archive', 'drivers'));
     }
 
-    public function vanDriver() {
-        $drivers = ArchiveMember::all();
-        $vans = ArchiveVan::all();
+    public function vanDriver(Member $operator) {
 
-        return view('archive.vanDriver', compact('drivers', 'vans'));
+        return view('archive.vanDriver', compact('operator'));
 
     }
     public function changeFeatures(Feature $feature) {

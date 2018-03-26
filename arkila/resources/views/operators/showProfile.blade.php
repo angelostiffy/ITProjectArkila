@@ -33,7 +33,7 @@
                 </ul>
                 <a href="{{route('operators.show',[$operator->member_id])}}" class="btn btn-info btn-block"><b>View All Information</b></a>
                 <a href="{{route('operators.edit',[$operator->member_id])}}" class="btn btn-block btn-primary"><b>Edit Information</b></a>
-                <a href="{{route('archive.vanDriver')}}" class="btn btn-block btn-default"><b>Archive</b></a>
+                <a href="{{route('archive.vanDriver',[$operator->member_id])}}" class="btn btn-block btn-default"><b>Archive</b></a>
             </div>
             <!-- /.box-body -->
         </div>
@@ -69,7 +69,7 @@
                         </thead>
                         <tbody>
 
-                            @foreach($operator->drivers as $driver)
+                            @foreach($operator->drivers->where('status', 'Active') as $driver)
                             <tr>
                                 <td>{{$driver->full_name}}</td>
                                 <td>{{$driver->age}}</td>
@@ -106,8 +106,8 @@
                                                </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <form action="{{route('drivers.destroy',[$driver->member_id])}}" method="POST">
-                                                     {{ csrf_field() }} {{method_field('DELETE')}}
+                                                <form action="{{route('drivers.archiveDelete',[$driver->member_id])}}" method="POST">
+                                                     {{ csrf_field() }} {{method_field('PATCH')}}
                                                     
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                                                     <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
@@ -143,11 +143,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($operator->van as $van)
+                            @foreach($operator->van->where('status', 'Active') as $van)
                             <tr>
                                 <td>{{$van->plate_number}}</td>
                                 <td>{{$van->driver()->first()->full_name ?? $van->driver()->first()}}</td>
-                                <td>{{$van->model}}</td>
+                                <td>{{$van->vanmodel->description}}</td>
                                 <td>{{$van->seating_capacity}}</td>
                                 <td>
                                     <div class="text-center">
@@ -183,9 +183,9 @@
                                             </div>
                                             <div class="modal-footer">
                                                 
-                                               <form method="POST" action="{{route('vans.destroy',[$van->plate_number])}}">
+                                               <form method="POST" action="{{route('vans.archiveDelete',[$van->plate_number])}}">
                                                     {{csrf_field()}}
-                                                    {{method_field('DELETE')}}
+                                                    {{method_field('PATCH')}}
 
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                                                     <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>

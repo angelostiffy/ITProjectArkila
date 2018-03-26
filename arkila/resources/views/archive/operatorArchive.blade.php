@@ -63,7 +63,7 @@
                         <tbody>
                         @foreach ($drivers as $driver)
                             <tr>
-                                <td>{{ $driver->drivers->first_name }}</td>
+                                <td>{{ $driver->first_name }}</td>
                                 <td>{{ $driver->age }}</td>
                                 <td>{{ $driver->contact_number }}</td>
                                 <td>{{ $archive->archiveVan()->first()->plate_number ?? $archive->archiveVan()->first() }}</td>
