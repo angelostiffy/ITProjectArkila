@@ -144,7 +144,11 @@
                 'searching': true,
                 'ordering': true,
                 'info': true,
-                'autoWidth': true
+                'autoWidth': true,
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1] /* 1st one, start by the right */
+                }]
             })
 
             $('#driverTable').DataTable({
@@ -153,7 +157,11 @@
                 'searching': true,
                 'ordering': true,
                 'info': true,
-                'autoWidth': true
+                'autoWidth': true,
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1] /* 1st one, start by the right */
+                }]
             })
 
             $('#customerTable').DataTable({
@@ -162,7 +170,11 @@
                 'searching': true,
                 'ordering': true,
                 'info': true,
-                'autoWidth': true
+                'autoWidth': true,
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1] /* 1st one, start by the right */
+                }]
             })
         });
     </script>

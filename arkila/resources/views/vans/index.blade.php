@@ -169,7 +169,12 @@
             'searching': true,
             'ordering': true,
             'info': true,
-            'autoWidth': true
+            'autoWidth': true,
+            'order': [[ 3, "desc" ]],
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': [-1] /* 1st one, start by the right */
+            }]
         })
 
 
