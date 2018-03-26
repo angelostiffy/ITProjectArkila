@@ -6,7 +6,7 @@
             <a href=""  class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i> PRINT</a>
         </div>
         <!-- /.col -->
-        <table id="operatorList" class="table table-bordered table-striped">
+        <table id="operatorList" class="table table-bordered table-striped table-responsive">
             <thead>
                 <tr>
                     <th>ID</th>

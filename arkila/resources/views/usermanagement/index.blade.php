@@ -29,7 +29,7 @@
                 <div class="box-body">
                     
                 <div class="col col-md-6">
-                    <a href="/home/user-management/admin/create" class="btn btn-primary btn-create"><i class="fa fa-plus-circle"></i> Create New</a>
+                    <a href="/home/user-management/admin/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus-circle"></i> Create New</a>
                 </div>
 
                 <table id="adminTable" class="table table-bordered table-striped">
@@ -49,7 +49,7 @@
                     <td>{{$userAdmin->description}}</td>
                     <td class="center-block">
                         <div class="text-center">
-                             <a href="/home/user-management/admin/{{$userAdmin->userid}}/edit" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
+                             <a href="/home/user-management/admin/{{$userAdmin->userid}}/edit" class="btn btn-default btn-sm btn-flat"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
                         </div>
                     </td>
                 </tr>
