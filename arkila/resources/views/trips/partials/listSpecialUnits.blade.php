@@ -8,7 +8,6 @@
             
         </h4>
 
-        </div>
         <div class="col-xs-6">
             <div class="pull-right">
                 <i class="badge badge-pill badge-default ">{{$trip->remarks}}</i>

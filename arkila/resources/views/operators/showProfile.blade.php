@@ -31,9 +31,9 @@
                         <b>Number of Drivers</b> <p class="pull-right">{{ count($operator->drivers) }}</p>
                     </li>
                 </ul>
-                <a href="{{route('operators.show',[$operator->member_id])}}" class="btn btn-info btn-block"><b>View All Information</b></a>
-                <a href="{{route('operators.edit',[$operator->member_id])}}" class="btn btn-block btn-primary"><b>Edit Information</b></a>
-                <a href="{{route('archive.vanDriver')}}" class="btn btn-block btn-default"><b>Archive</b></a>
+                <a href="{{route('operators.show',[$operator->member_id])}}" class="btn btn-info btn-block btn-sm btn-flat"><b>View All Information</b></a>
+                <a href="{{route('operators.edit',[$operator->member_id])}}" class="btn btn-block btn-primary btn-sm btn-flat"><b>Edit Information</b></a>
+                <a href="{{route('archive.vanDriver',[$operator->member_id])}}" class="btn btn-block btn-default btn-sm btn-flat"><b>Archive</b></a>
             </div>
             <!-- /.box-body -->
         </div>
@@ -52,15 +52,16 @@
                 <div class="active tab-pane" id="drivers">
                     <div class="col-md-6">
                        @if ($operator->drivers->count() < $operator->van->count())
-                            <a href="{{route('drivers.createFromOperator',[$operator->member_id])}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add Driver</a>
+                            <a href="{{route('drivers.createFromOperator',[$operator->member_id])}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus-circle"></i> Add Driver</a>
                         @else
-                            <a href="" class="btn btn-primary disabled"><i class="fa fa-plus-circle"></i> Add Driver </a>
+                            <a href="" class="btn btn-primary btn-sm btn-flat disabled"><i class="fa fa-plus-circle"></i> Add Driver </a>
                         @endif    
                     </div>
                     <table id="driver" class="table table-bordered table-striped">
 
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Name</th>
                                 <th>Age</th>
                                 <th>Contact Number</th>
@@ -69,8 +70,9 @@
                         </thead>
                         <tbody>
 
-                            @foreach($operator->drivers as $driver)
+                            @foreach($operator->drivers->where('status', 'Active') as $driver)
                             <tr>
+                                <td>{{$driver->member_id}}</td>
                                 <td>{{$driver->full_name}}</td>
                                 <td>{{$driver->age}}</td>
                                 <td>{{$driver->contact_number}}</td>
@@ -78,10 +80,10 @@
 
                                     
                                         <div class="text-center">
-                                            <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Edit</a>
-                                            <a href="{{route('drivers.show',[$driver->member_id])}}" class="btn btn-default"><i class="fa fa-eye"></i>View</a>
+                                            <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-pencil-square-o"></i>Edit</a>
+                                            <a href="{{route('drivers.show',[$driver->member_id])}}" class="btn btn-default btn-sm btn-flat"><i class="fa fa-eye"></i>View</a>
                                            
-                                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="#{{ 'deleteDriver'.$operator->member_id }}"><i class="fa fa-trash"></i> Delete</button>
+                                            <button class="btn btn-outline-danger btn-sm btn-flat" data-toggle="modal" data-target="#{{ 'deleteDriver'.$operator->member_id }}"><i class="fa fa-trash"></i> Delete</button>
                                         </div>                                                
                                 </td>
                             </tr>
@@ -106,11 +108,11 @@
                                                </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <form action="{{route('drivers.destroy',[$driver->member_id])}}" method="POST">
-                                                     {{ csrf_field() }} {{method_field('DELETE')}}
+                                                <form action="{{route('drivers.archiveDelete',[$driver->member_id])}}" method="POST">
+                                                     {{ csrf_field() }} {{method_field('PATCH')}}
                                                     
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                                    <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
+                                                    <button type="button" class="btn btn-default btn-sm btn-flat" data-dismiss="modal">No</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm btn-flat" style="width:22%;">Delete</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -130,7 +132,7 @@
                 
                 <div class="tab-pane" id="vans">
                     <div class="col-md-6">
-                        <a href="{{route('vans.createFromOperator',$operator->member_id)}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add Van</a>
+                        <a href="{{route('vans.createFromOperator',$operator->member_id)}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus-circle"></i> Add Van</a>
                     </div>
                     <table id="van" class="table table-bordered table-striped">
                         <thead>
@@ -143,21 +145,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($operator->van as $van)
+                            @foreach($operator->van->where('status', 'Active') as $van)
                             <tr>
                                 <td>{{$van->plate_number}}</td>
                                 <td>{{$van->driver()->first()->full_name ?? $van->driver()->first()}}</td>
-                                <td>{{$van->model}}</td>
+                                <td>{{$van->vanmodel->description}}</td>
                                 <td>{{$van->seating_capacity}}</td>
                                 <td>
                                     <div class="text-center">
                                             @if($van->driver()->first())
-                                                <a name="listDriver" data-val="{{ $van->operator()->first()->member_id }}" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Change Driver</a>
+                                                <a name="listDriver" data-val="{{ $van->operator()->first()->member_id }}" class="btn btn-primary btn-sm btn-flat" data-toggle="modal" data-target="#modal-default">Change Driver</a>
                                             @else
-                                                <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Add Driver</a>
+                                                <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-pencil-square-o"></i>Add Driver</a>
                                             @endif
-                                            <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-default" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i>View</a>
-                                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="#{{ 'deleteVan'.$van->plate_number }}"><i class="fa fa-trash"></i> Delete</button>
+                                            <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-default btn-sm btn-flat" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i>View</a>
+                                            <button class="btn btn-outline-danger btn-sm btn-flat" data-toggle="modal" data-target="#{{ 'deleteVan'.$van->plate_number }}"><i class="fa fa-trash"></i> Delete</button>
                                         
                                     </div>
                                 </td>
@@ -183,9 +185,9 @@
                                             </div>
                                             <div class="modal-footer">
                                                 
-                                               <form method="POST" action="{{route('vans.destroy',[$van->plate_number])}}">
+                                               <form method="POST" action="{{route('vans.archiveDelete',[$van->plate_number])}}">
                                                     {{csrf_field()}}
-                                                    {{method_field('DELETE')}}
+                                                    {{method_field('PATCH')}}
 
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                                                     <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
@@ -230,7 +232,12 @@
                 'searching': true,
                 'ordering': true,
                 'info': true,
-                'autoWidth': true
+                'autoWidth': true,
+                'order': [[ 0, "desc" ]],
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1] /* 1st one, start by the right */
+                }]
             })
             $('#van').DataTable({
                 'paging': true,
@@ -238,7 +245,12 @@
                 'searching': true,
                 'ordering': true,
                 'info': true,
-                'autoWidth': true
+                'autoWidth': true,
+                'order': [[ 0, "desc" ]],
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1] /* 1st one, start by the right */
+                }]
             })
         });
 

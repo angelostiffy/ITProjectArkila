@@ -152,10 +152,10 @@ Route::get('/', function () {
     ]);
 
     Route::get('/home/archive', 'HomeController@archive');
-    Route::get('/home/operatorVanDriver', 'HomeController@vanDriver')->name('archive.vanDriver');
-    Route::get('/home/archive/profile/{operator}','HomeController@showProfile')->name('archive.showProfile');
-
-    Route::post('/home/operators/{operator}/archiveOperators', 'OperatorsController@archiveOperator')->name('operators.archiveOperator');
+    Route::get('/home/operatorVanDriver/{operator}', 'HomeController@vanDriver')->name('archive.vanDriver');
+    Route::get('/home/archive/profile/{archive}','HomeController@showProfile')->name('archive.showProfile');
+    Route::patch('/home/operators/{driver}/archiveDelete', 'DriversController@archiveDelete')->name('drivers.archiveDelete');
+    Route::post('/home/operators/{archive}/archiveOperators', 'OperatorsController@archiveOperator')->name('operators.archiveOperator');
 
 
 
@@ -177,7 +177,9 @@ Route::get('/', function () {
     Route::post('/vanqueue', 'TripsController@updateVanQueue')->name('trips.updateVanQueue');
     Route::get('/showTrips/{terminal}', 'TripsController@showTrips');
     Route::patch('/updateQueueNumber/{trip}', 'TripsController@updateQueueNumber')->name('trips.updateQueueNumber');
-
+    Route::post('/specialUnitChecker','TripsController@specialUnitChecker')->name('trips.specialUnitChecker');
+    Route::get('/updatedQueueNumber','TripsController@updatedQueueNumber')->name('trips.updatedQueueNumber');
+    Route::post('/putOnDeck/{trip}','TripsController@putOnDeck')->name('trips.putOnDeck');
     /* Transactions(Ticket) */
     Route::resource('/home/transactions', 'TransactionsController',[
         'except' => ['create','show','edit']
@@ -190,7 +192,7 @@ Route::get('/', function () {
     Route::patch('/updateOnBoardTransactions', 'TransactionsController@updateOnBoardTransactions')->name('transactions.updateOnBoardTransactions');
     /********Archive ********/
     Route::patch('/home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
-
+    Route::get('/showConfirmationBox/{encodedTrips}','TripsController@showConfirmationBox');
 
  });
 /*****************************************************************************/

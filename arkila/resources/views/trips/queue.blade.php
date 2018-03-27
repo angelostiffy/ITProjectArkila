@@ -210,12 +210,11 @@ ol.vertical{
             </div>
             <div class="box-body">
                 <ol id='specialUnitList' class="special-list serialization">
-                    <li class="sp-item"><span class="list-border">SSS</span></li>
                 </ol>
               </div>
              </div>
         </div>
-
+          <div id="confirmBoxModal"></div>
         <div class="col-md-9">
           <!-- Van Queue Box -->
           <div class="box box-solid">
@@ -403,8 +402,8 @@ ol.vertical{
     <!-- List sortable -->
     <script>
         $(function() {
+            specialUnitChecker();
             $('#specialUnitList').load('/listSpecialUnits/'+$('#destinationTerminals li.active').data('val'));
-
             $('#addQueueButt').on('click', function() {
                 var destination = $('#destination').val();
                 var van = $('#van').val();
@@ -431,7 +430,7 @@ ol.vertical{
         delay: 500,
         onDrop: function ($item, container, _super) {
           var queue = group.sortable("serialize").get();
-
+            console.log(queue);
           var jsonString = JSON.stringify(queue, null, ' ');
 
           $('#serialize_output2').text(jsonString);
@@ -449,6 +448,7 @@ ol.vertical{
                for(i = 0; i < trips.length; i++){
                     $('#queue'+trips[i].trip_id).editable('setValue',trips[i].queue_number);
                }
+               specialUnitChecker();
             }
 
         });
@@ -494,27 +494,15 @@ ol.vertical{
             }
         },
         success: function(response){
+            specialUnitChecker();
             console.log(response);
             if(response.length > 0){
-                checkSpecialUnit({{$trip->trip_id}},reponse[0],response[1],response[2]);
+
             }
         }
       });
 
     @endforeach
-
-    function checkSpecialUnit(tripId,hasPrivilege,trips,terminal){
-            if(hasPrivilege == 1){
-                $('#trip'+tripId).remove();
-
-                for(i = 0; i < trips.length; i++){
-                    $('#queue'+trips[i].trip_id).editable('setValue',trips[i].queue_number);
-                }
-
-                $('#specialUnitList').load('/listSpecialUnits/'+terminal);
-            }
-    }
-
     @foreach($trips as $trip)
               $('#queue{{$trip->trip_id}}').editable({
                   name: 'queue',
@@ -550,6 +538,61 @@ ol.vertical{
                   }
               });
             @endforeach
+
+            function updateQueueList(){
+                $.ajax({
+                    method:'GET',
+                    url: '{{route("trips.updatedQueueNumber")}}',
+                    data: {
+                        '_token': '{{csrf_token()}}'
+                    },
+                    success: function(response){
+                        response.forEach(function(trip){
+                            $('#queue'+trip.id).editable('setValue',trip.queueNumber);
+                        });
+
+                    }
+
+                });
+            }
+
+            function specialUnitChecker(){
+                    $.ajax({
+                        method:'POST',
+                        url: '{{route("trips.specialUnitChecker")}}',
+                        data: {
+                            '_token': '{{csrf_token()}}'
+                        },
+                        success: function(response){
+                            if(response === 1 || response === 0){
+                                if(response === 0){
+
+                                }
+                            }else{
+                                $('#confirmBoxModal').load('/showConfirmationBox/'+response);
+                            }
+
+                        }
+
+                    });
+            }
+
+            $('a[name="onDeck"]').on('click',function(e){
+
+                $.ajax({
+                    method:'POST',
+                    url: '/putOnDeck/'+$(e.currentTarget).data('val'),
+                    data: {
+                        '_token': '{{csrf_token()}}'
+                    },
+                    success: function(response){
+
+                    }
+
+                });
+
+            });
+
         });
 </script>
 
