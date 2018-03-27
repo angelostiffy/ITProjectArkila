@@ -61,9 +61,9 @@
                                                     
                                                 @if ($reservation->status == 'Paid')
                                                 
-                                                    <button class="btn btn-primary btn-sm" type="submit" name="butt" data-toggle="modal" data-target="#{{'depart'.$reservation->id}}" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
+                                                    <button class="btn btn-primary btn-sm btn-flat" type="submit" name="butt" data-toggle="modal" data-target="#{{'depart'.$reservation->id}}" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
                                                 
-                                                    <button class="btn btn-outline-danger btn-sm" type="submit" name="butt" data-toggle="modal" data-target="#{{'cancel'.$reservation->id}}" value="Cancelled"><i class="fa fa-close"></i> Cancel</button>
+                                                    <button class="btn btn-outline-danger btn-sm btn-flat" type="submit" name="butt" data-toggle="modal" data-target="#{{'cancel'.$reservation->id}}" value="Cancelled"><i class="fa fa-close"></i> Cancel</button>
                                                 
                                                 
                                                      <!-- Modal for Cancelation-->
@@ -135,7 +135,7 @@
 
                                                 @else
                                                
-                                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{'deletion'.$reservation->id}}"><i class="fa fa-close"></i> Delete</button>
+                                                <button class="btn btn-danger btn-sm btn-flat" data-toggle="modal" data-target="#{{'deletion'.$reservation->id}}"><i class="fa fa-close"></i> Delete</button>
                                                 
                                                 
                                                 <!-- Modal for Deletion-->
@@ -217,12 +217,15 @@
                                             <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
                                                 {{ csrf_field() }} {{ method_field('PATCH') }} 
                                                 @if ($reservation->status == 'Pending')
-                                                    <button class="btn btn-success btn-sm" type="submit" name="butt" onclick="return ConfirmStatus()" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
-                                                    <button class="btn btn-danger btn-sm" type="submit" name="butt" onclick="return ConfirmStatus()" value="Declined"><i class="fa fa-close"></i> Decline</button> 
+                                                    <button class="btn btn-success btn-sm btn-flat" type="submit" name="butt" onclick="return ConfirmStatus()" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
+                                                
+                                                    <button class="btn btn-danger btn-sm btn-flat" type="submit" name="butt" onclick="return ConfirmStatus()" value="Declined"><i class="fa fa-close"></i> Decline</button> 
                                                 @elseif ($reservation->status == 'Paid')
 
                                                     <button class="btn btn-success btn-sm" type="submit" name="butt" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
-                                                    <button class="btn btn-danger btn-sm" type="submit" name="butt" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button> @else
+                                                
+                                                    <button class="btn btn-danger btn-sm btn-flat" type="submit" name="butt" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button> 
+                                                @else
                                                     <form method="POST" action="/home/reservations/{{$reservation->reservation_id}}" class="delete">
                                                         {{csrf_field()}} {{method_field('DELETE')}}
                                                         <button class="btn btn-danger btn-sm" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</button>
