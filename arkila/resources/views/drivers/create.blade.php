@@ -544,6 +544,5 @@
 
      $('[data-mask]').inputmask()
      $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
-     $('.time-mask').inputmask('hh:mm xm')
     </script>
 @endsection
