@@ -210,12 +210,11 @@ ol.vertical{
             </div>
             <div class="box-body">
                 <ol id='specialUnitList' class="special-list serialization">
-                    <li class="sp-item"><span class="list-border">SSS</span></li>
                 </ol>
               </div>
              </div>
         </div>
-
+          <div id="confirmBoxModal"></div>
         <div class="col-md-9">
           <!-- Van Queue Box -->
           <div class="box box-solid">
@@ -565,10 +564,14 @@ ol.vertical{
                             '_token': '{{csrf_token()}}'
                         },
                         success: function(response){
-                                if(response.length >  0){
+                            if(response === 1 || response === 0){
+                                if(response === 0){
 
-                                    location.reload();
                                 }
+                            }else{
+                                $('#confirmBoxModal').load('/showConfirmationBox/'+response);
+                            }
+
                         }
 
                     });

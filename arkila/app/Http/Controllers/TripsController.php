@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Trip;
 use App\Van;
-use App\Destination;
 use App\Member;
 use App\Terminal;
 use Illuminate\Validation\Rule;
+
 
 class TripsController extends Controller {
     /**
@@ -81,12 +81,19 @@ class TripsController extends Controller {
     public function updateRemarks(Trip $trip) {
 
         $this->validate(request(),[
-            'value' => [Rule::in('OB','CC','ER', "NULL")]
+            'value' => [Rule::in('OB','CC','ER', 'NULL')]
         ]);
 
-        $trip->update([
-            'remarks' => request('value')
-        ]);
+
+        if(request('value') === 'NULL'){
+            $trip->update([
+                'remarks' => NULL
+            ]);
+        }else{
+            $trip->update([
+                'remarks' => request('value')
+            ]);
+        }
 
         return 'success';
     }
@@ -236,7 +243,8 @@ class TripsController extends Controller {
 
     public function specialUnitChecker() {
         $firstOnQueue = Trip::where('queue_number',1)->get();
-        $successMessage = [];
+        $successfullyUpdated = [];
+        $obRemarkSession = [];
 
             foreach($firstOnQueue as $first) {
                 if($first->remarks == "ER" || $first->remarks == 'CC'){
@@ -245,7 +253,7 @@ class TripsController extends Controller {
                         'queue_number' => null,
                         'has_privilege' => 1
                     ]);
-
+                    array_push($successfullyUpdated,$first->trip_id);
 
                     $trips = Trip::whereNotNull('queue_number')->where('terminal_id', $first->terminal_id)->get();
 
@@ -257,14 +265,27 @@ class TripsController extends Controller {
 
                     }
 
+                    session()->flash('successMessage', "Van ".$first->plate_number." with a remark of ".$first->remarks." has been moved to the Special Units list.");
 
-
-                    array_push($successMessage, "Van ".$first->plate_number." with a remark of ".$first->remarks."has been moved the the Special Units list.");
+                }elseif($first->remarks =='OB') {
+                    array_push($obRemarkSession, "Van ".$first->plate_number." with a remark of ".$first->remarks." can now be moved to the Special Units list.");
                 }
 
             }
 
-            return response()->json($successMessage);
+
+            if(count($obRemarkSession) > 0){
+                if(session('obNotification')){
+                    return 1;
+                }else{
+                    session()->flash('obNotification',$obRemarkSession);
+                    return 0;
+                }
+            }else{
+                return http_build_query($successfullyUpdated);
+            }
+
+
     }
 
     public function updatedQueueNumber(){
@@ -284,5 +305,23 @@ class TripsController extends Controller {
 
     public function putOnDeck(Trip $trip){
         dd($trip);
+    }
+
+    public function showConfirmationBox($encodedTrips){
+        $trips = [];
+        parse_str($encodedTrips,$trips);
+        if(!is_array($trips)){
+            abort(404);
+        }else{
+            $tripsObjArr = [];
+            foreach($trips as $trip){
+                if($tripObj = Trip::find($trip)){
+                    array_push($tripsObjArr,$tripObj);
+                }else{
+                    abort(404);
+                }
+            }
+        }
+        return view('trips.partials.confirmDialogBox',compact('tripsObjArr'));
     }
 }
