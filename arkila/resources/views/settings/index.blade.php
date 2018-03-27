@@ -455,6 +455,10 @@
                 'ordering': true,
                 'info': true,
                 'autoWidth': true,
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1] /* 1st one, start by the right */
+                }]
             })
 
         })
