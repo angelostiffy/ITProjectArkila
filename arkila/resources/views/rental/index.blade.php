@@ -219,7 +219,7 @@
                                                 
                                                 <button class="btn btn-primary btn-sm btn-flat" name="click" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
                                                 
-                                                <button class="btn btn-outline-danger btn-sm btn-flat" name="click" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button> 
+                                                <button class="btn btn-outline-danger btn-sm btn-flat" name="click" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i>  Cancel</button> 
                                                 @else
                                                 
                                                 <form method="POST" action="/home/rental/{{ $rental->rent_id }}" class="delete">
