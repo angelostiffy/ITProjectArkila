@@ -25,7 +25,7 @@
                         <b>Contact Number</b> <p class="pull-right">{{ $operator->contact_number }}</p>
                     </li>
                     <li class="list-group-item">
-                        <b>Number of Vans</b> <p class="pull-right">{{ count($operator->van) }}</p>
+                        <b>Number of Vans</b> <p class="pull-right"> </p>
                     </li>
                     <li class="list-group-item">
                         <b>Number of Drivers</b> <p class="pull-right">{{ count($operator->drivers) }}</p>
@@ -45,11 +45,90 @@
     <div class="col-md-9">
         <div class="nav-tabs-custom" style="box-shadow: 0px 5px 10px gray;">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#drivers" data-toggle="tab">Drivers</a></li>
-                <li><a href="#vans" data-toggle="tab">Vans</a></li>
+                <li class="active"><a href="#vans" data-toggle="tab">Vans</a></li>
+                <li><a href="#drivers" data-toggle="tab">Drivers</a></li>
             </ul>
             <div class="tab-content">
-                <div class="active tab-pane" id="drivers">
+                
+                 <div class="active tab-pane" id="vans">
+                    <div class="col-md-6">
+                        <a href="{{route('vans.createFromOperator',$operator->member_id)}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus-circle"></i> Add Van</a>
+                    </div>
+                    <table id="van" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Plate Number</th>
+                                <th>Driver</th>
+                                <th>Model</th>
+                                <th>Seating Capacity</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($operator->van->where('status', 'Active') as $van)
+                            <tr>
+                                <td>{{$van->plate_number}}</td>
+                                <td>{{$van->driver()->first()->full_name ?? $van->driver()->first()}}</td>
+                                <td>{{$van->vanmodel->description}}</td>
+                                <td>{{$van->seating_capacity}}</td>
+                                <td>
+                                    <div class="text-center">
+                                            @if($van->driver()->first())
+                                                <a name="listDriver" data-val="{{ $van->operator()->first()->member_id }}" class="btn btn-primary btn-sm btn-flat" data-toggle="modal" data-target="#modal-default"><i class="fa fa-exchange"></i>Change Driver</a>
+                                            @else
+                                                <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-user-plus"></i>Add Driver</a>
+                                            @endif
+                                            <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-default btn-sm btn-flat" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i>View</a>
+                                            <button class="btn btn-outline-danger btn-sm btn-flat" data-toggle="modal" data-target="#{{ 'deleteVan'.$van->plate_number }}"><i class="fa fa-trash"></i> Delete</button>
+                                        
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <!--DELETE MODAL MIGUEL-->
+                            <div class="modal fade" id="{{ 'deleteVan'. $van->plate_number }}">
+                                <div class="modal-dialog">
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-red">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title"> Confirm</h4>
+                                            </div>
+                                            <div class="modal-body row" style="margin: 0% 1%;">
+                                               <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
+                                                   <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
+                                               </div>
+                                               <div class="col-md-10">
+                                                <p style="font-size: 110%;">Are you sure you want to delete "{{$van->plate_number}}"</p>
+                                               </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                
+                                               <form method="POST" action="{{route('vans.archiveDelete',[$van->plate_number])}}">
+                                                    {{csrf_field()}}
+                                                    {{method_field('PATCH')}}
+
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                                    <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+                            
+                            @endforeach
+                            
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="tab-pane" id="drivers">
                     <div class="col-md-6">
                        @if ($operator->drivers->count() < $operator->van->count())
                             <a href="{{route('drivers.createFromOperator',[$operator->member_id])}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus-circle"></i> Add Driver</a>
@@ -129,84 +208,6 @@
                     </table>                  
                         <!-- /.tab-pane -->
                 </div>
-                
-                <div class="tab-pane" id="vans">
-                    <div class="col-md-6">
-                        <a href="{{route('vans.createFromOperator',$operator->member_id)}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus-circle"></i> Add Van</a>
-                    </div>
-                    <table id="van" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Plate Number</th>
-                                <th>Driver</th>
-                                <th>Model</th>
-                                <th>Seating Capacity</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($operator->van->where('status', 'Active') as $van)
-                            <tr>
-                                <td>{{$van->plate_number}}</td>
-                                <td>{{$van->driver()->first()->full_name ?? $van->driver()->first()}}</td>
-                                <td>{{$van->vanmodel->description}}</td>
-                                <td>{{$van->seating_capacity}}</td>
-                                <td>
-                                    <div class="text-center">
-                                            @if($van->driver()->first())
-                                                <a name="listDriver" data-val="{{ $van->operator()->first()->member_id }}" class="btn btn-primary btn-sm btn-flat" data-toggle="modal" data-target="#modal-default">Change Driver</a>
-                                            @else
-                                                <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-pencil-square-o"></i>Add Driver</a>
-                                            @endif
-                                            <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-default btn-sm btn-flat" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i>View</a>
-                                            <button class="btn btn-outline-danger btn-sm btn-flat" data-toggle="modal" data-target="#{{ 'deleteVan'.$van->plate_number }}"><i class="fa fa-trash"></i> Delete</button>
-                                        
-                                    </div>
-                                </td>
-                            </tr>
-                            
-                            <!--DELETE MODAL MIGUEL-->
-                            <div class="modal fade" id="{{ 'deleteVan'. $van->plate_number }}">
-                                <div class="modal-dialog">
-                                    <div class="col-md-offset-2 col-md-8">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-red">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title"> Confirm</h4>
-                                            </div>
-                                            <div class="modal-body row" style="margin: 0% 1%;">
-                                               <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
-                                                   <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
-                                               </div>
-                                               <div class="col-md-10">
-                                                <p style="font-size: 110%;">Are you sure you want to delete "{{$van->plate_number}}"</p>
-                                               </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                
-                                               <form method="POST" action="{{route('vans.archiveDelete',[$van->plate_number])}}">
-                                                    {{csrf_field()}}
-                                                    {{method_field('PATCH')}}
-
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                                    <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
-                            <!-- /.modal -->
-                            
-                            @endforeach
-                            
-                        </tbody>
-                    </table>
-                </div>
                 <!-- /.tab-pane -->
             </div>
                 <!-- /.tab-content -->          
@@ -246,7 +247,7 @@
                 'ordering': true,
                 'info': true,
                 'autoWidth': true,
-                'order': [[ 0, "desc" ]],
+                'order': [[ 1, "desc" ]],
                 'aoColumnDefs': [{
                     'bSortable': false,
                     'aTargets': [-1] /* 1st one, start by the right */

@@ -8,12 +8,10 @@
         <table id="driverList" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Driver ID</th>
+                    <th>ID</th>
                     <th>Operator</th>
                     <th>Name</th>
                     <th>Contact Number</th>
-                    <th>Address</th>
-                    <th>Age</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -25,8 +23,6 @@
                     <td>{{$driver->operator->full_name ?? null}}</td>
                     <td>{{$driver->full_name}}</td>
                     <td>{{$driver->contact_number}}</td>
-                    <td>{{$driver->address}}</td>
-                    <td>{{$driver->age}}</td>
                     <td>
                         <div class="text-center">
                             <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>Edit</a>
