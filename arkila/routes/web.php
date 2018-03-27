@@ -192,7 +192,7 @@ Route::get('/', function () {
     Route::patch('/updateOnBoardTransactions', 'TransactionsController@updateOnBoardTransactions')->name('transactions.updateOnBoardTransactions');
     /********Archive ********/
     Route::patch('/home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
-
+    Route::get('/showConfirmationBox/{encodedTrips}','TripsController@showConfirmationBox');
 
  });
 /*****************************************************************************/
