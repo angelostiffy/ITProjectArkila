@@ -152,10 +152,10 @@ Route::get('/', function () {
     ]);
 
     Route::get('/home/archive', 'HomeController@archive');
-    Route::get('/home/operatorVanDriver', 'HomeController@vanDriver')->name('archive.vanDriver');
-    Route::get('/home/archive/profile/{operator}','HomeController@showProfile')->name('archive.showProfile');
-
-    Route::post('/home/operators/{operator}/archiveOperators', 'OperatorsController@archiveOperator')->name('operators.archiveOperator');
+    Route::get('/home/operatorVanDriver/{operator}', 'HomeController@vanDriver')->name('archive.vanDriver');
+    Route::get('/home/archive/profile/{archive}','HomeController@showProfile')->name('archive.showProfile');
+    Route::patch('/home/operators/{driver}/archiveDelete', 'DriversController@archiveDelete')->name('drivers.archiveDelete');
+    Route::post('/home/operators/{archive}/archiveOperators', 'OperatorsController@archiveOperator')->name('operators.archiveOperator');
 
 
 

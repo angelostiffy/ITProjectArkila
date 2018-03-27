@@ -5,6 +5,7 @@
             <a href="/home/operators/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> REGISTER OPERATOR</a>
             <a href=""  class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i> PRINT</a>
         </div>
+        
         <!-- /.col -->
         <table id="operatorList" class="table table-bordered table-striped">
             <thead>
@@ -90,7 +91,11 @@
             'ordering': true,
             'info': true,
             'autoWidth': true,
-            "order": [[ 1, "desc" ]]
+            'order': [[ 0, "desc" ]],
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': [-1] /* 1st one, start by the right */
+            }]
         })
     })
 </script>

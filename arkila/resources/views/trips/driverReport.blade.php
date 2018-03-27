@@ -21,6 +21,7 @@
                     <th>Driver</th>
                     <th>Departed at</th>
                     <th>Destination</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -31,6 +32,7 @@
                     <td>JL</td>
                     <td>Cabanatuan</td>
                     <td>Baguio City</td>
+                    <th>Pending</th>
                     <td class="center-block">
                         <div class="center-block">
                             <button class="btn btn-success"><i class="fa fa-check"></i> Accept</button>

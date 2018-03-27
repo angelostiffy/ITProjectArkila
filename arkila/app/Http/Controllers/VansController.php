@@ -314,7 +314,7 @@ class VansController extends Controller {
         $van->update([
            'status' => 'Inactive',
         ]);
-        return redirect(route('vans.index'));
+        return back();
 
         }
     }

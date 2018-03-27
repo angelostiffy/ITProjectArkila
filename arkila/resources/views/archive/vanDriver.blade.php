@@ -18,25 +18,25 @@
 
                         <thead>
                             <tr>
-                                <th>Operator</th>
-                                <th>Plate No.</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Age</th>
                                 <th>Contact Number</th>
-                                <th>Operator</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                        @foreach ($drivers as $driver)
+                        @foreach ($operator->drivers->where('status', 'Inactive') as $driver)
                             <tr>
-                                <td>{{ $driver->drivers->full_name }}</td>
-                                <td>{{ $driver->archiveVan()->first()->plate_number ?? $driver->archiveVan()->first()}}</td>
-                                <td>Hi</td>
-                                <td>Aw</td>
+                                <td>{{$driver->full_name}}</td>
+                                <td>{{$driver->address}}</td>
+                                <td>{{$driver->age}}</td>
+                                <td>{{ $driver->contact_number }}</td>
                                 <td>
                                     <div class="text-center">
 
-                                        <a href="#" class="btn btn-default"><i class="fa fa-eye"></i>View</a>
+                                        <a href="" class="btn btn-default"><i class="fa fa-eye"></i>View</a>
 
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteDriver"><i class="fa fa-trash"></i> Delete</button>
                                     </div>
@@ -64,7 +64,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         
-                                                            <form method="POST" action="destroy">
+                                                            <form method="POST" action="{{route('drivers.destroy',[$driver->member_id])}}">
                                                                 {{csrf_field()}}
                                                                 {{method_field('DELETE')}}
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
@@ -105,24 +105,20 @@
                         <div class="box-body">
                             <table  class="table table-bordered table-striped driverVan">
                                 <thead>
-                                    <tr>
-                                        <th>Plate Number</th>
-                                        <th>Driver</th>
-                                        <th>Operator</th>
-                                        <th>Model</th>
-                                        <th>Seating Capacity</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td>a</td>
-                                        <td>b</td>
-                                        <td>c</td>
-                                        <td>d</td>
-                                        <td>e</td>
-                                        <td>
+                                <tr>
+                                <th>Plate Number</th>
+                                <th>Model</th>
+                                <th>Seating Capacity</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($operator->van->where('status', 'Inactive') as $van)
+                            <tr>
+                                <td>{{$van->plate_number}}</td>
+                                <td>{{$van->vanmodel->description}}</td>
+                                <td>{{$van->seating_capacity}}</td>
+                                <td>
                                             <div class="text-center">
                                                  
                                                     <a data-val='#' name="vanInfo" class="btn btn-default" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i>View</a>
@@ -157,6 +153,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
                         </tbody>
                     </table>
                 </div>

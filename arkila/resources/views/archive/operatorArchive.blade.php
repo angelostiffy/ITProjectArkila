@@ -63,10 +63,10 @@
                         <tbody>
                         @foreach ($drivers as $driver)
                             <tr>
-                                <td>{{ $driver->drivers->full_name ?? $driver->drivers()->first() }}</td>
-                                <td>{{ $driver->drivers()->first()->age ?? $driver->drivers()->first() }}</td>
-                                <td>{{ $driver->drivers()->first()->contact_number ?? $driver->drivers()->first() }}</td>
-                                <td>{{ $driver->archiveVan()->first()->plate_number ?? $driver->archiveVan()->first() }}</td>
+                                <td>{{ $driver->first_name }}</td>
+                                <td>{{ $driver->age }}</td>
+                                <td>{{ $driver->contact_number }}</td>
+                                <td>{{ $archive->archiveVan()->first()->plate_number ?? $archive->archiveVan()->first() }}</td>
                                 <td>
                         
                                     
