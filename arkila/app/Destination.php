@@ -12,6 +12,10 @@ class Destination extends Model
 	protected $primaryKey = 'destination_id';
     protected $guarded = ['destination_id',];
 
+    public function transaction(){
+      return $this->hasMany(Transaction::class, 'transaction_id');
+    }
+
     public function reservation(){
     	return $this->hasOne(Reservation::class, 'id');
     }

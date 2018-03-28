@@ -15,24 +15,24 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="active treeview">
-                <a href="{{ route('drivermodule.dashboard') }}">
+                <a href="{{ route('drivermodule.index') }}">
             <i class="fa fa-home"></i> <span>Home</span>
           </a>
             </li>
             <li class="treeview">
-                <a href="{{ route('drivermodule.viewTripLog') }}">
+                <a href="{{ route('drivermodule.triplog.driverTripLog') }}">
                     <i class="fa fa-book"></i>
                     <span>Trip Log</span>
                   </a>
             </li>
             <li class="treeview">
-                <a href="{{route('drivermodule.chooseTerminal')}}">
+                <a href="{{route('drivermodule.report.driverChooseDestination')}}">
             <i class="fa fa-plus"></i>
             <span>Create Report</span>
           </a>
             </li>
             <li class="treeview">
-                <a href="{{route('drivermodule.showProfile')}}">
+                <a href="{{route('drivermodule.profile.driverProfile')}}">
             <i class="	fa fa-user"></i>
             <span>Profile</span>
           </a>

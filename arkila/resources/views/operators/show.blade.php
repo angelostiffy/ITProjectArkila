@@ -22,6 +22,8 @@
         </h3>
     </div>
     <div class="box-body">
+    <a href="{{route('pdf.perOperator', [$operator->member_id])}}"  class="btn btn-default btn-sm btn-fla"> <i class="fa fa-print"></i> PRINT</a>
+
             <h4>Personal Information</h4>
             <div class="row">
                 <div class="col-md-4">
@@ -53,7 +55,7 @@
                     </div>
                     <div class="form-group">
                         <label for="addressO">Address:</label>
-                        <p id="addressO" name="addressO" class="info-container"}</p>
+                        <p id="addressO" name="addressO" class="info-container">{{$operator->address}}</p>
                     </div>
                     <div class="form-group">
                         <label for="birthdateO">Birthdate:</label>

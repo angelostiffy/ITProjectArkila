@@ -174,7 +174,7 @@
                                 <div class="radio">
                                     <label for=""> Male</label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="gender"  value="Male" class="flat-blue" @if(old('gender') == 'Male') {{'checked'}}@endif>
+                                        <input type="radio" name="gender" checked="checked"  value="Male" class="flat-blue" @if(old('gender') == 'Male') {{'checked'}}@endif>
                                     </label>
                                     <label for="">Female</label>
                                     <label class="radio-inline">
@@ -247,7 +247,7 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="spouseBirthDate" class="form-control date-mask" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                  <input type="text" name="spouseBirthDate" placeholder="mm/dd/yyyy" class="form-control date-mask" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                 </div>
                             </div>
                         </div>

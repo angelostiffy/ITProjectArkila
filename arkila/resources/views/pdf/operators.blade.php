@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Drivers</title>
+    <title>Operators</title>
 </head>
 <body>
 
@@ -37,16 +37,17 @@
         </thead>
 
         <tbody>
-        @foreach ($operators->where('status', 'Active')->sortBy('last_name') as $driver)
+        @foreach ($operators->where('status', 'Active')->sortBy('last_name') as $operator)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $operators->last_name }}, {{ $operators->first_name }}</td>
-                <td>{{ $operators->contact_number }}</td>
-                <td>{{ $operators->age }}</td>
+                <td>{{ $operator->last_name }}, {{ $operator->first_name }}</td>
+                <td>{{ $operator->contact_number }}</td>
+                <td>{{ $operator->age }}</td>
 
             </tr>
         @endforeach
         </tbody>
     </table>
+    
 </body>
 </html>

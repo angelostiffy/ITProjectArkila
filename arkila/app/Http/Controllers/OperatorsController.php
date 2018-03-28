@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Member;
 use App\ArchiveMember;
 use App\ArchiveVan;
+use PDF;
+use Carbon\Carbon;
 
 use App\Http\Requests\OperatorRequest;
 
@@ -193,14 +195,15 @@ class OperatorsController extends Controller
     public function generatePDF()
     {
         $operators = Member::allOperators()->get();
-        $pdf = PDF::loadView('pdf.operator', ['operators' => $operators]);
-        return $pdf->stream('operators.pdf');
+        $pdf = PDF::loadView('pdf.operators', ['operators' => $operators]);
+        return $pdf->download('operators.pdf');
     }
 
-    public function generatePerDriver(Member $operator)
+    public function generatePerOperator(Member $operator)
     {
-        $pdf = PDF::loadView('pdf.perDriver', ['driver' => $driver]);
-        return $pdf->download("$driver->last_name"."$driver->first_name-Bio-Data.pdf");
+        $date = Carbon::now();
+        $pdf = PDF::loadView('pdf.perOperator', ['operator' => $operator]);
+        return $pdf->download("$operator->last_name"."$operator->first_name-Bio-Data.pdf");
         
     }
 
