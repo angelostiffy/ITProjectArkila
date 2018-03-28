@@ -72,8 +72,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Trip Log</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Driver Report</a></li>
+                    <li><a href="{{route('trips.tripLog')}}"><i class="fa fa-circle-o"></i>Trip Log</a></li>
+                    <li><a href="{{route('trips.driverReport')}}"><i class="fa fa-circle-o"></i> Driver Report</a></li>
                 </ul>
             </li>
             <li class="treeview">
