@@ -1,8 +1,8 @@
-@extends('layouts.master') 
-@section('title', 'Ticket Sale') 
-@section('content-header', 'Ticket Sale') 
-@section('links') 
-    @parent 
+@extends('layouts.master')
+@section('title', 'Ticket Sale')
+@section('content-header', 'Ticket Sale')
+@section('links')
+    @parent
     {{ Html::style('/jquery/bootstrap3-editable/css/bootstrap-editable.css') }}
 <style>
         .list-arrows button{
@@ -81,7 +81,7 @@
   border-top-left-radius: 0px ;
   border-top-right-radius: 0px ;
 }
-.select2-container--open 
+.select2-container--open
 .select2-dropdown--below{
     z-index:1100;
 }
@@ -90,7 +90,7 @@
     color: white;
 }
     </style>
-    @stop 
+    @stop
 @section('content')
 <div class="row">
 
@@ -102,7 +102,7 @@
                             </div>
                             <form action="">
                             <div class="box-body">
-                                
+
                                     <label for="">Terminal</label>
                                     <select @if(is_null($terminals->first())){{'disabled'}}@endif name="terminal" id="terminal" class="form-control">
                                         @if(is_null($terminals->first()))
@@ -147,7 +147,7 @@
                                 @endforeach
 
                             </ul>
-                        
+
                             <div class="tab-content">
                                 @foreach($terminals as $terminal)
                                     @if($terminal->trips->where('queue_number',1)->first()->plate_number ?? null)
@@ -227,7 +227,7 @@
                                                  UNBOARD <i class="glyphicon glyphicon-chevron-right"></i>
                                             </button>
                                         </div>
-                                        
+
                                         <div id="list-right1" class="dual-list list-right col-md-5">
                                             <div class="box box-solid ticket-box">
                                                 <div class="box-header bg-yellow bg-gray">
@@ -260,7 +260,7 @@
                                                         <div class="text-center ">
                                                         <button type="button" id="managePageBtn" class="btn btn-outline-secondary btn-flat">Manage Tickets <i class=""></i></button>
                                                     </div>
-                                                        
+
                                                 </div>
 
                                             </div>
@@ -285,7 +285,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           {{--  @foreach($transactions as $transaction)
+                                            @foreach($terminal->transactions->where('status','Pending') as $transaction)
                                             <tr>
                                               <td><input type="checkbox"> {{ $transaction->ticket_id }}</td>
                                               <td>{{ $transaction->destination->description}}</td>
@@ -296,11 +296,11 @@
                                                 <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</button>
                                               </td>
                                             </tr>
-                                            @endforeach --}}
+                                            @endforeach
                                         </tbody>
                                     </table>
-                                  
-                                    </div>  
+
+                                    </div>
                                 </div>
                                     @endif
                                     @endforeach
@@ -322,7 +322,7 @@
 	})
 </script>
 <script>
-	
+
 
     $(function(){
 
@@ -337,7 +337,7 @@
     }
 
      $(".tab-pane").removeClass("active in");
-     $(".tab-menu").removeClass("active in"); 
+     $(".tab-menu").removeClass("active in");
      $(activeTab).addClass("active");
      $(activeTab + "-menu").addClass("active");
 

@@ -202,6 +202,8 @@ Route::get('/', function () {
     Route::get('/home/trip-log', 'TripsController@tripLog')->name('trips.tripLog');
     Route::get('/home/driver-report', 'TripsController@driverReport')->name('trips.driverReport');
 
+    Route::resource('/home/ledger', 'LedgersController');
+
 
  });
 /*****************************************************************************/
@@ -210,8 +212,7 @@ Route::get('/', function () {
 
 
 /*************************************Driver Module****************************/
-
-/********************Dashboard************************/
+/******************************************************************************/
 Route::group(['middleware' => ['auth', 'driver']], function(){
   /*Driver Dashboard*/
   Route::get('/home/driver-dashboard', 'DriverModuleControllers\DriverHomeController@index')->name('drivermodule.index');
@@ -233,10 +234,17 @@ Route::group(['middleware' => ['auth', 'driver']], function(){
   Route::get('/home/view-trips', 'DriverModuleControllers\TripLogController@viewTripLog')->name('drivermodule.triplog.driverTripLog');
 
 });
+/******************************************************************************/
+/******************************************************************************/
+Route::get('/home/try', 'PassController@index');
 
+/*********************************Customer Module******************************/
+/******************************************************************************/
+Route::get('/home', 'CustomerModuleControllers\CustomerHomeController@indexNonUser')->name('customermodule.non-user.index');
+Route::get('/about', 'CustomerModuleControllers\CustomerHomeController@aboutNonUser')->name('customermodule.non-user.about.customerAbout');
 
-    Route::get('/home/try', 'PassController@index');
-//Route::get('home/profile', 'DriverModuleControllers\DriverProfileController@index');
-/******************************************************/
+Route::group(['middleware' => ['auth', 'customer']], function(){
 
+});
+/******************************************************************************/
 /******************************************************************************/

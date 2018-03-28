@@ -14,7 +14,7 @@
     </a>
 
     <div class="box-body">
-        <table lass="table table-bordered table-striped dailyLedgerTable">
+        <table class="table table-bordered table-striped dailyLedgerTable">
             <thead>
                 <tr>
                     <th>Payee/Payor</th>
@@ -46,9 +46,6 @@
 
             </tbody>
         </table>
-
-        <button type="button" class="btn btn-primary">Update Report</button>
-        <button type="button" class="btn btn-outline-danger">Delete Report</button>
 
     </div>
     <!-- /.box-body -->
