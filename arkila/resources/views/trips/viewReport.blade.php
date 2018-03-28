@@ -1,5 +1,5 @@
 @extends('layouts.master') 
-@section('title', 'Trip Details')
+@section('title', 'Report Details')
 @section('links')
 @section('content')
 
@@ -7,7 +7,7 @@
     <div class="box-header with-border text-center">
         <a href="{{route('trips.tripLog')}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
         <h3 class="box-title">
-            Trip Details
+            Driver Report Details
         </h3>
     </div>
     <div class="box-body">
@@ -103,7 +103,10 @@
                                 <input id="" class="form-control pull-right" type="text" id="total" style="width:30%;" value="" disabled>
                             </div>
                         </div>
-
+                        <div class="text-center" style="margin: 5%;">
+                            <button class="btn btn-success btn-sm" data-dismiss="modal"><i class="fa fa-check"></i>Accept</button>
+                            <button class="btn btn-danger btn-sm"><i class="fa fa-close"></i>Decline</button>
+                        </div>
                     </div>
                     </div>
                 </div>

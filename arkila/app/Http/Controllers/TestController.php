@@ -13,7 +13,7 @@ class TestController extends Controller
      */
     public function index()
     {
-        return view('operators.archiveDriverVan');
+        return view('trips.viewReport');
     }
 
     /**
