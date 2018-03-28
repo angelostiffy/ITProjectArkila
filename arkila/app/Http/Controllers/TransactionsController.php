@@ -42,14 +42,14 @@ class TransactionsController extends Controller
             if( !(Transaction::where([['ticket_id',$ticketId],['status','Pending']])->first()) ) {
                 Transaction::create([
                     'terminal_id' => request('terminal'),
-                    'ticket_id' => request('ticket'),
+                    'ticket_id' => $ticketId,
                     'destination_id' => request('destination'),
                     'fad_id' => request('discount'),
                     'trip_id' => null,
                     'status' => 'Pending'
                 ]);
 
-                $ticket = Ticket::find(request('ticket'));
+                $ticket = Ticket::find($ticketId);
 
                 $ticket ->update([
                     'isAvailable' => 0
