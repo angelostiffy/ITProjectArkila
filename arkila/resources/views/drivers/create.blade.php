@@ -174,7 +174,7 @@
                                 <div class="radio">
                                     <label for=""> Male</label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="gender"  value="Male" class="flat-blue" @if(old('gender') == 'Male') {{'checked'}}@endif>
+                                        <input type="radio" name="gender" checked="checked"  value="Male" class="flat-blue" @if(old('gender') == 'Male') {{'checked'}}@endif>
                                     </label>
                                     <label for="">Female</label>
                                     <label class="radio-inline">
