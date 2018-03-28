@@ -39,17 +39,6 @@ class CreateReportController extends Controller
   }
   public function storeReport(Terminal $terminal, CreateReportRequest $request)
   {
-    //dd(request('qty'));
-    // $qtyCounter = 0;
-    // $qty = request('qty');
-    // foreach($qty as $key => $value){
-    //   if($value == null){
-    //     $qtyCounter++;
-    //   }
-    // }
-    // dd($qty);
-    // dd((empty(request('qty')) ? true:false));
-     //dd(request('numberOfDiscount'));
     $totalPassengers = $request->totalPassengers;
     $totalBookingFee = $request->totalBookingFee;
     $totalPassenger = (float)$request->totalPassengers;
@@ -59,13 +48,13 @@ class CreateReportController extends Controller
           ->join('member_van', 'member.member_id', '=', 'member_van.member_id')
           ->join('van', 'member_van.plate_number', '=', 'van.plate_number')
           ->where('users.id', Auth::id())->select('van.plate_number as plate_number')->first();
-     $driver_id = Member::where('user_id', Auth::id())->select('user_id')->first();
+     $driver_id = Member::where('user_id', Auth::id())->select('member_id')->first();
 
      $timeDeparted = Carbon::createFromFormat('h:i A', $request->timeDeparted);
      $timeDepartedFormat = $timeDeparted->format('H:i:s');
      $dateDeparted = $request->dateDeparted;
      Trip::create([
-       'driver_id' => $driver_id->user_id,
+       'driver_id' => $driver_id->member_id,
        'terminal_id' => $terminal->terminal_id,
        'plate_number' => $plateNumber->plate_number,
        'status' => 'Departed',
@@ -74,6 +63,7 @@ class CreateReportController extends Controller
        'community_fund' => $communityFund,
        'date_departed' => $request->dateDeparted,
        'time_departed' => $timeDepartedFormat,
+       'report_status' => 'Pending',
      ]);
 
     $destinationArr = request('destination');

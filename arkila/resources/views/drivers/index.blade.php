@@ -3,7 +3,7 @@
     <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
         <div class="col-md-6">
             <a href="{{route('drivers.create')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus-circle"></i> REGISTER DRIVER</a>
-            <a href=""  class="btn btn-default btn-sm btn-fla"> <i class="fa fa-print"></i> PRINT</a>
+            <a href="{{route('pdf.drivers')}}"  class="btn btn-default btn-sm btn-fla"> <i class="fa fa-print"></i> PRINT</a>
         </div>
         <table id="driverList" class="table table-bordered table-striped">
             <thead>
@@ -12,12 +12,12 @@
                     <th>Operator</th>
                     <th>Name</th>
                     <th>Contact Number</th>
-                    <th>Actions</th>
+                    <th class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
 
-                @foreach($drivers->where('status','Active') as $driver)
+                @foreach($drivers->where('status','Active')->sortByDesc('member_id') as $driver)
                 <tr>
                     <th>{{$driver->member_id}}</th>
                     <td>{{$driver->operator->full_name ?? null}}</td>
@@ -85,12 +85,11 @@
             'searching': true,
             'ordering': true,
             'info': true,
-            'autoWidth': true,
+            'autoWidth': false,
             'order': [[ 0, "desc" ]],
-            'aoColumnDefs': [{
-                'bSortable': false,
-                'aTargets': [-1] /* 1st one, start by the right */
-            }]
+            'aoColumnDefs': [
+                { 'bSortable': false, 'aTargets': [-1]}             
+            ]
         });
 
     })

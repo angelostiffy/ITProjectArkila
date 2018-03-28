@@ -6,6 +6,7 @@ use App\Member;
 use App\Van;
 use App\User;
 use App\Http\Requests\DriverRequest;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -367,6 +368,20 @@ class DriversController extends Controller
                 'status' => 'Inactive',
             ]);
             return back();
+    }
+
+    public function generatePDF()
+    {
+        $drivers = Member::allDrivers()->get();
+        $pdf = PDF::loadView('pdf.drivers', ['drivers' => $drivers]);
+        return $pdf->download('drivers.pdf');
+    }
+
+    public function generatePerDriver(Member $driver)
+    {
+        $pdf = PDF::loadView('pdf.perDriver', ['driver' => $driver]);
+        return $pdf->download("$driver->last_name"."$driver->first_name-Bio-Data.pdf");
+        
     }
 
 }

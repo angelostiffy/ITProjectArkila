@@ -27,7 +27,7 @@ Route::get('/randall', 'RandallController@index');
 Route::get('/driver-profile', function(){
     return view('drivermodule.report.driverReport');
 });
-Route::get('/login', 'Auth\LoginController@showLoginForm');
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 
 
 Route::get('/driver-profile', function(){
@@ -194,6 +194,12 @@ Route::get('/', function () {
     Route::patch('/home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
     Route::get('/showConfirmationBox/{encodedTrips}','TripsController@showConfirmationBox');
 
+    Route::get('/drivers/generatePDF', 'DriversController@generatePDF')->name('pdf.drivers');
+    Route::get('/operators/generatePDF', 'OperatorsController@generatePDF')->name('pdf.operators');
+    Route::get('/drivers/generatePerDriver/{driver}', 'DriversController@generatePerDriver')->name('pdf.perDriver');
+    Route::get('/drivers/generatePerOperator/{operator}', 'OperatorsController@generatePerOperator')->name('pdf.perOperator');
+
+
  });
 /*****************************************************************************/
 /*****************************************************************************/
@@ -205,23 +211,23 @@ Route::get('/', function () {
 /********************Dashboard************************/
 Route::group(['middleware' => ['auth', 'driver']], function(){
   /*Driver Dashboard*/
-  Route::get('/home/driver-dashboard', 'DriverModuleControllers\DriverHomeController@index')->name('drivermodule.dashboard');
+  Route::get('/home/driver-dashboard', 'DriverModuleControllers\DriverHomeController@index')->name('drivermodule.index');
   /*AJAX GET for queue and announcements*/
   Route::get('/home/view-queue', 'DriverModuleControllers\ViewVanQueueController@showVanQueue')->name('drivermodule.viewQueue');
   Route::get('/home/view-announcement', 'DriverModuleControllers\ViewAnnouncementsController@showAnnouncement')->name('drivermodule.viewAnnouncement');
   /*Driver Profile*/
-  Route::get('/home/profile', 'DriverModuleControllers\DriverProfileController@showDriverProfile')->name('drivermodule.showProfile');
+  Route::get('/home/profile', 'DriverModuleControllers\DriverProfileController@showDriverProfile')->name('drivermodule.profile.driverProfile');
   Route::post('/home/profile', 'DriverModuleControllers\DriverProfileController@changeNotificationStatus')->name('drivermodule.notification');
   /*Change Password*/
 
   Route::patch('/home/profile/change-password/{driverid}', 'DriverModuleControllers\DriverProfileController@updatePassword')->name('drivermodule.changePassword');
   Route::post('home/profile/change-password', 'DriverModuleControllers\DriverProfileController@checkCurrentPassword')->name('drivermodule.checkCurrentPassword');
   /*Create Report*/
-  Route::get('/home/choose-terminal', 'DriverModuleControllers\CreateReportController@chooseTerminal')->name('drivermodule.chooseTerminal');
+  Route::get('/home/choose-terminal', 'DriverModuleControllers\CreateReportController@chooseTerminal')->name('drivermodule.report.driverChooseDestination');
   Route::get('/home/create-report/{terminals}', 'DriverModuleControllers\CreateReportController@createReport')->name('drivermodule.createReport');
   Route::post('/home/create-report/{terminal}/store', 'DriverModuleControllers\CreateReportController@storeReport')->name('drivermodule.storeReport');
   /*Trip Log*/
-  Route::get('/home/view-trips', 'DriverModuleControllers\TripLogController@viewTripLog')->name('drivermodule.viewTripLog');
+  Route::get('/home/view-trips', 'DriverModuleControllers\TripLogController@viewTripLog')->name('drivermodule.triplog.driverTripLog');
 
 });
 

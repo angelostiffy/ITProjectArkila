@@ -23,6 +23,8 @@
         </h3>
     </div>
     <div class="box-body">
+    <a href="{{route('pdf.perDriver', [$driver->member_id])}}"  class="btn btn-default btn-sm btn-fla"> <i class="fa fa-print"></i> PRINT</a>
+
         <h4>Personal Information</h4>
         <div class="row">
             <div class="col-md-4">
@@ -115,7 +117,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="spouseBirthDateD">Birthdate of Spouse:</label>
-                        <p id="spouseBirthDateD" name="spouseBirthDateD" type="text" class="info-container">{{$driver->spouse_birth_date}}</p>
+                        <p id="spouseBirthDateD" name="spouseBirthDateD" type="text" class="info-container">{{$driver->spouse_birthdate}}</p>
                 </div>
                 <div class="form-group">
                     <label for="occupationFatherD">Occupation:</label>
@@ -160,7 +162,7 @@
                          @foreach($driver->children as $child)
                         <tr>
                             <td>
-                                <p type="text" class="info-container">{{$child->full_name}}</p>
+                                <p type="text" class="info-container">{{$child->children_name}}</p>
                             </td>
                             <td>
                                 <p type="text" class="info-container">{{$child->birthdate}}</p>

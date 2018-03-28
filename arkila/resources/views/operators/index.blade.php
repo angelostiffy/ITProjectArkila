@@ -6,7 +6,7 @@
     <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
         <div class="col col-md-6">
             <a href="/home/operators/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> REGISTER OPERATOR</a>
-            <a href=""  class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i> PRINT</a>
+            <a href="{{route('pdf.operators')}}"  class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i> PRINT</a>
         </div>
         
         <!-- /.col -->
@@ -16,12 +16,12 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Contact Number</th>
-                    <th>Actions</th>
+                    <th class="text-center">Actions</th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach ($operators->where('status', 'Active') as $operator)
+                @foreach ($operators->where('status', 'Active')->sortByDesc('member_id') as $operator)
                 <tr>
                     <td class="hidden-xs" name="opId">{{ $operator->member_id }}</td>
                     <td><a href="operators/{{ $operator->member_id }}">{{ $operator->first_name }} {{ $operator->middle_name }} {{ $operator->last_name }}</a></td>
@@ -89,12 +89,11 @@
             'searching': true,
             'ordering': true,
             'info': true,
-            'autoWidth': true,
+            'autoWidth': false,
             'order': [[ 0, "desc" ]],
-            'aoColumnDefs': [{
-                'bSortable': false,
-                'aTargets': [-1] /* 1st one, start by the right */
-            }]
+            'aoColumnDefs': [
+                { 'bSortable': false, 'aTargets': [-1]}
+            ]
         })
     })
 </script>
