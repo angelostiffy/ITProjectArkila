@@ -9,6 +9,8 @@
     <!-- /.box-header -->
 
     <div class="box-body">
+    <a button class="btn btn-info" href="{{route('ledger.create')}}"><i class="glyphicon glyphicon-eye-open"> Add </i></a>
+
         <table class="table table-bordered table-striped dailyLedgerTable">
             <thead>
                 <tr>
@@ -23,7 +25,7 @@
                     <td>5200</td>
                     <td class="center-block">
                         <div class="center-block">
-                            <a button class="btn btn-info" href="dailyLedger.html"><i class="glyphicon glyphicon-eye-open"> View </i></a>
+                            <a button class="btn btn-info" href="show"><i class="glyphicon glyphicon-eye-open"> View </i></a>
                         </div>
                     </td>
 

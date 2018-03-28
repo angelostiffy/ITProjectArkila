@@ -199,6 +199,8 @@ Route::get('/', function () {
     Route::get('/drivers/generatePerDriver/{driver}', 'DriversController@generatePerDriver')->name('pdf.perDriver');
     Route::get('/drivers/generatePerOperator/{operator}', 'OperatorsController@generatePerOperator')->name('pdf.perOperator');
 
+    Route::resource('/home/ledger', 'LedgersController');
+
 
  });
 /*****************************************************************************/
