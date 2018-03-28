@@ -10,6 +10,7 @@
                         <th>Time</th>
                         <th>Origin</th>
                         <th>Destination</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -26,6 +27,7 @@
                         <td>{{$tripMade->time_departed}}</td>
                         <td>{{$tripMade->terminal->description}}</td>
                         <td>{{$superAdmin->description}}</td>
+                        <td>{{$tripMade->report_status}}</td>
                         <td>
                             <div class="text-center">
                                 <a href="" type="button" data-toggle="modal"
@@ -36,6 +38,7 @@
                                 data-destination="{{$superAdmin->description}}"
                                 data-innerroutes="@foreach($destinations as $key => $values) @if($tripMade->trip_id == $values->tripid) @php $innerRoutesArr[$key] = $values; @endphp {{$values}} @endif @endforeach"
                                 data-income="{{$tripMade->total_booking_fee}}"
+                                data-status="{{$tripMade->report_status}}"
                                 class="btn btn-primary btn-sm"
                                 id="view-trip{{$tripMade->trip_id}}">
                                 <i class="fa fa-eye"></i>
@@ -76,6 +79,7 @@
                     data-origin="{{$tripMade->terminal->description}}"
                     data-destination="{{$superAdmin->description}}"
                     data-income="{{$tripMade->total_booking_fee}}"
+                    data-status="{{$tripMade->report_status}}"
                     data-toggle="modal" data-target="#seeLogDetails{{$tripMade->trip_id}}">
                     <i class="fa fa-eye"></i>
                       View
@@ -123,6 +127,10 @@
                             <div class="form-group" class="control-label">
                                 <label for="">Destination:</label>
                                 <input value="" id="destination{{$tripMade->trip_id}}" name="" type="text" class="form-control" disabled>
+                            </div>
+                            <div class="form-group" class="control-label">
+                                <label for="">Status:</label>
+                                <input value="" id="status{{$tripMade->trip_id}}" name="" type="text" class="form-control" disabled>
                             </div>
                             <div class="box">
                                 <div class="box-header">
@@ -193,6 +201,8 @@ $(document).ready(function(){
     $('#destination{{$trip->trip_id}}').val($(this).data('destination'));
     var income = $(this).data('income');
     $('#totalIncome{{$trip->trip_id}}').html(income.toString());
+    var status = $(this).data('status');
+    $('#status{{$trip->trip_id}}').val($(this).data('status'));
     console.log(income.toString());
   });
 });

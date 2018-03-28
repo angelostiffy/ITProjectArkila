@@ -22,22 +22,6 @@ class TripLogController extends Controller
       $destinations = Transaction::join('destination', 'destination.destination_id', '=', 'transaction.destination_id')
                           ->selectRaw('trip_id as tripid, destination.description as destdesc, COUNT(destination.description) as counts')
                           ->groupBy(['trip_id','destination.description'])->get();
-
-      // $tempArr = null;
-      // $counter = 0;
-      // foreach($tripsMade as $tripKey => $tripMade){
-      //
-      //   foreach($destinations as $key => $values){
-      //     // if($values->tripid != $tripMade->trip_id){
-      //     //       continue;
-      //     // }
-      //     echo $values->tripid . " " . $values->destdesc . " " . $values->counts . "<br/>";
-      //
-      //   }
-      //
-      //   //print_r($tempArr);
-      // }
-      // dd($tripsMade);
       return view('drivermodule.triplog.driverTripLog', compact('tripsMade', 'superAdmin', 'destinations'));
     }
 }

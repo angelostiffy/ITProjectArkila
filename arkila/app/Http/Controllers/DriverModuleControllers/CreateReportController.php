@@ -39,17 +39,6 @@ class CreateReportController extends Controller
   }
   public function storeReport(Terminal $terminal, CreateReportRequest $request)
   {
-    //dd(request('qty'));
-    // $qtyCounter = 0;
-    // $qty = request('qty');
-    // foreach($qty as $key => $value){
-    //   if($value == null){
-    //     $qtyCounter++;
-    //   }
-    // }
-    // dd($qty);
-    // dd((empty(request('qty')) ? true:false));
-     //dd(request('numberOfDiscount'));
     $totalPassengers = $request->totalPassengers;
     $totalBookingFee = $request->totalBookingFee;
     $totalPassenger = (float)$request->totalPassengers;
@@ -74,6 +63,7 @@ class CreateReportController extends Controller
        'community_fund' => $communityFund,
        'date_departed' => $request->dateDeparted,
        'time_departed' => $timeDepartedFormat,
+       'report_status' => 'Pending',
      ]);
 
     $destinationArr = request('destination');
