@@ -101,14 +101,14 @@
 							<td class="pull-right">{{$van->seating_capacity}}</td>
 							<td>
 								<div class="text-center">
-	
-                                    @if($van->driver()->first())
-                                            <a name="listDriver" data-driver="{{$van->driver->first()->member_id}}" data-val="{{ $van->operator()->first()->member_id ?? $van->operator()->first()}}" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit-modal"><i class="fa fa-exchange"></i> CHANGE DRIVER</a>
-                                    @else
-                                        <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary btn-sm"><i class="fa fa-user-plus"></i> ADD DRIVER</a>
-                                    @endif
+	                               
+                                    <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i> VIEW</a>
                                     
-                                    <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i> VIEW</a>
+                                    @if($van->driver()->first())
+                                            <a name="listDriver" data-driver="{{$van->driver->first()->member_id}}" data-val="{{ $van->operator()->first()->member_id ?? $van->operator()->first()}}" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#edit-modal"><i class="fa fa-exchange"></i> CHANGE DRIVER</a>
+                                    @else
+                                        <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-outline-secondary btn-sm"><i class="fa fa-user-plus"></i> ADD DRIVER</a>
+                                    @endif
                                     
                                     <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{ 'deleteWarning'. $van->plate_number }}"><i class="fa fa-trash"></i> DELETE</button>
 
