@@ -127,7 +127,7 @@
                             <div class="form-group">
                                 <label>Departure Time:</label>
                                  <div class="input-group">
-                    <input type="time" class="form-control" name="time" value="{{ old('time') }}">
+                    <input type="text" class="form-control" name="time" value="{{ old('time') }}" id = "timepicker">
 
                     <div class="input-group-addon">
                       <i class="fa fa-clock-o"></i>
@@ -190,6 +190,11 @@
     })
 
   })
+    </script>
+    <script>
+    	$('#timepicker').timepicker({
+    		template: false
+  });
     </script>
     
     
