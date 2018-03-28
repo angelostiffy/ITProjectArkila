@@ -14,8 +14,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php $tripNo = 1; @endphp @foreach($tripsMade as $tripMade)
+                  @php
+                    $tripNo = 1;
+                    $innerRoutesArr = null;
+                  @endphp
+                  @foreach($tripsMade as $tripKey => $tripMade)
                     <tr>
+
                         <td>{{$tripNo}}</td>
                         <td>{{$tripMade->date_departed}}</td>
                         <td>{{$tripMade->time_departed}}</td>
@@ -23,23 +28,25 @@
                         <td>{{$superAdmin->description}}</td>
                         <td>
                             <div class="text-center">
-                                <a href="" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> VIEW</a>
+                                <a href="" type="button" data-toggle="modal"
+                                data-target="#seeLogDetails{{$tripMade->trip_id}}"
+                                data-date="{{$tripMade->date_departed}}"
+                                data-time="{{$tripMade->time_departed}}"
+                                data-origin="{{$tripMade->terminal->description}}"
+                                data-destination="{{$superAdmin->description}}"
+                                data-innerroutes="@foreach($destinations as $key => $values) @if($tripMade->trip_id == $values->tripid) @php $innerRoutesArr[$key] = $values; @endphp {{$values}} @endif @endforeach"
+                                data-income="{{$tripMade->total_booking_fee}}"
+                                class="btn btn-primary btn-sm"
+                                id="view-trip{{$tripMade->trip_id}}">
+                                <i class="fa fa-eye"></i>
+                                  VIEW
+                                </a>
                             </div>
                         </td>
+
                     </tr>
-                    @php $tripNo++; @endphp @endforeach
-                    <tr>
-                        <td>asdas</td>
-                        <td>asdasd</td>
-                        <td>asdasd</td>
-                        <td>asdasd</td>
-                        <td>asdasdasd</td>
-                        <td>
-                            <div class="text-center">
-                                <a href="" type="button" data-toggle="modal" data-target="#seeLogDetails" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> VIEW</a>
-                            </div>
-                        </td>
-                    </tr>
+                    @php $tripNo++; @endphp
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -60,9 +67,19 @@
         <!-- /.box-header -->
         <div class="box-body">
             <div class="list-group">
-                @php $tripCount = 1; @endphp @foreach($tripsMade as $tripMade)
+                @php $tripCount = 1; @endphp
+                @foreach($tripsMade as $tripMade)
                 <li class="list-group-item">Trip {{$tripCount}} ({{$tripMade->date_departed}} || {{$tripMade->time_departed}})
-                    <button type="button" class="btn btn-xs btn-primary pull-right" data-date="{{$tripMade->date_departed}}" data-time="{{$tripMade->time_departed}}" data-origin="{{$tripMade->terminal->description}}" data-destination="" data-income="" data-toggle="modal" data-target="#seeLogDetails"><i class="fa fa-eye"></i> View</button>
+                    <button type="button" class="view-trip btn btn-xs btn-primary pull-right"
+                    data-date="{{$tripMade->date_departed}}"
+                    data-time="{{$tripMade->time_departed}}"
+                    data-origin="{{$tripMade->terminal->description}}"
+                    data-destination="{{$superAdmin->description}}"
+                    data-income="{{$tripMade->total_booking_fee}}"
+                    data-toggle="modal" data-target="#seeLogDetails{{$tripMade->trip_id}}">
+                    <i class="fa fa-eye"></i>
+                      View
+                    </button>
                 </li>
                 @endforeach
             </div>
@@ -77,9 +94,9 @@
 </div>
 <!-- /.mobile -->
 
-
+@foreach($tripsMade as $tripKey => $tripMade)
 <!--        SEE DETAILS MODAL-->
-<div class="modal fade" id="seeLogDetails">
+<div class="modal fade" id="seeLogDetails{{$tripMade->trip_id}}">
     <div class="modal-dialog" style="margin-top:70px;">
         <div class="col-md-offset-2 col-md-8">
             <div class="modal-content">
@@ -93,56 +110,47 @@
                         <div class="box-body">
                             <div class="form-group" class="control-label">
                                 <label for="">Date:</label>
-
-                                <input value="" id="dateDeparted" name="" type="text" class="form-control" disabled>
-
+                                <input id="dateDeparted{{$tripMade->trip_id}}" name="" type="text" class="form-control" disabled>
                             </div>
                             <div class="form-group" class="control-label">
                                 <label for="">Time:</label>
-
-                                <input value="" id="timeDeparted" name="" type="text" class="form-control" disabled>
-
+                                <input id="timeDeparted{{$tripMade->trip_id}}" name="" type="text" class="form-control" disabled>
                             </div>
                             <div class="form-group" class="control-label">
                                 <label for="">Origin:</label>
-
-                                <input value="" id="origin" name="" type="text" class="form-control" disabled>
-
+                                <input id="origin{{$tripMade->trip_id}}" name="" type="text" class="form-control" disabled>
                             </div>
                             <div class="form-group" class="control-label">
                                 <label for="">Destination:</label>
-
-                                <input value="" id="destination" name="" type="text" class="form-control" disabled>
-
+                                <input value="" id="destination{{$tripMade->trip_id}}" name="" type="text" class="form-control" disabled>
                             </div>
                             <div class="box">
                                 <div class="box-header">
                                     <h4>Destination</h4>
                                 </div>
-                                <div class="box-body">
+                                <div class="box-body" id="inner-dest">
+                                      @php $totalPassengers = 0; @endphp
+                                      @foreach($destinations as $key => $values)
+                                      @if($tripMade->trip_id == $values->tripid)
+                                        @php $innerRoutesArr[$key] = $values; @endphp
 
-                                    <div class="form-group">
-
-                                        <label for="">Baguio : </label>
-                                        <input class="form-control pull-right" onblur="findTotal()" type="text" name="qty" id="qty4" style="width:30%;" disabled>
-                                    </div>
-                                    <div class="form-group">
-
-                                        <label for="">Nueva Ecija : </label>
-                                        <input class="form-control pull-right" onblur="findTotal()" type="text" name="qty" id="qty4" style="width:30%;" disabled>
-                                    </div>
-                                    <div class="form-group">
+                                        <div class="form-group inner-routes">
+                                            <label for="">{{$values->destdesc}}</label>
+                                            <input class="form-control pull-right" type="number" id="qty{{$tripMade->trip_id}}" style="width:30%;" value="{{$values->counts}}" disabled>
+                                        </div>
+                                        @php $totalPassengers = $totalPassengers + $values->counts; @endphp
+                                      @endif
+                                    @endforeach
 
                                         <label for="">Total</label>
-                                        <input class="form-control pull-right" type="text" name="total" id="total" style="width:30%;" disabled>
+                                        <input id="totalPassenger{{$tripMade->trip_id}}" class="form-control pull-right" type="text" id="total" style="width:30%;" value="{{$totalPassengers}}" disabled>
                                     </div>
                                 </div>
 
 
                             </div>
                             <div class="box-footer text-center">
-
-                                <p><strong>Your Income: Php 3500.00</strong></p>
+                                <p>Total Income<strong id="totalIncome{{$tripMade->trip_id}}"></strong></p>
                                 <button class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -156,6 +164,7 @@
         </div>
         <!-- /.col -->
     </div>
+    @endforeach
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
@@ -174,6 +183,21 @@ $(function() {
 });
 </script>
 
+@foreach($tripsMade as $trip)
+<script>
+$(document).ready(function(){
+  $('#view-trip{{$trip->trip_id}}').click(function(){
+    $('#dateDeparted{{$trip->trip_id}}').val($(this).data('date'));
+    $('#timeDeparted{{$trip->trip_id}}').val($(this).data('time'));
+    $('#origin{{$trip->trip_id}}').val($(this).data('origin'));
+    $('#destination{{$trip->trip_id}}').val($(this).data('destination'));
+    var income = $(this).data('income');
+    $('#totalIncome{{$trip->trip_id}}').html(income.toString());
+    console.log(income.toString());
+  });
+});
+</script>
+@endforeach
 <style>
     /* if desktop */
 

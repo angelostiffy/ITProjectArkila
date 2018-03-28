@@ -27,7 +27,7 @@ Route::get('/randall', 'RandallController@index');
 Route::get('/driver-profile', function(){
     return view('drivermodule.report.driverReport');
 });
-Route::get('/login', 'Auth\LoginController@showLoginForm');
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 
 
 Route::get('/driver-profile', function(){

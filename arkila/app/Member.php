@@ -26,7 +26,7 @@ class Member extends Model
     public function drivers(){
         return $this->hasMany(Member::class, 'operator_id','member_id');
     }
-
+    
     public function trips(){
       return $this->hasMany(Trip::class, 'driver_id', 'member_id');
     }

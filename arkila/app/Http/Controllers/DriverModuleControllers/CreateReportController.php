@@ -59,13 +59,13 @@ class CreateReportController extends Controller
           ->join('member_van', 'member.member_id', '=', 'member_van.member_id')
           ->join('van', 'member_van.plate_number', '=', 'van.plate_number')
           ->where('users.id', Auth::id())->select('van.plate_number as plate_number')->first();
-     $driver_id = Member::where('user_id', Auth::id())->select('user_id')->first();
+     $driver_id = Member::where('user_id', Auth::id())->select('member_id')->first();
 
      $timeDeparted = Carbon::createFromFormat('h:i A', $request->timeDeparted);
      $timeDepartedFormat = $timeDeparted->format('H:i:s');
      $dateDeparted = $request->dateDeparted;
      Trip::create([
-       'driver_id' => $driver_id->user_id,
+       'driver_id' => $driver_id->member_id,
        'terminal_id' => $terminal->terminal_id,
        'plate_number' => $plateNumber->plate_number,
        'status' => 'Departed',
