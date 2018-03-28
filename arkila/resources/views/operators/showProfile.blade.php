@@ -31,9 +31,9 @@
                         <b>Number of Drivers</b> <p class="pull-right">{{ count($operator->drivers) }}</p>
                     </li>
                 </ul>
-                <a href="{{route('operators.show',[$operator->member_id])}}" class="btn btn-info btn-block btn-sm btn-flat"><b>View All Information</b></a>
-                <a href="{{route('operators.edit',[$operator->member_id])}}" class="btn btn-block btn-primary btn-sm btn-flat"><b>Edit Information</b></a>
-                <a href="{{route('archive.vanDriver',[$operator->member_id])}}" class="btn btn-block btn-default btn-sm btn-flat"><b>Archive</b></a>
+                <a href="{{route('operators.show',[$operator->member_id])}}" class="btn btn-info btn-block btn-sm"><b>View All Information</b></a>
+                <a href="{{route('operators.edit',[$operator->member_id])}}" class="btn btn-block btn-primary btn-sm"><b>Edit Information</b></a>
+                <a href="{{route('archive.vanDriver',[$operator->member_id])}}" class="btn btn-block btn-default btn-sm"><b>Archive</b></a>
             </div>
             <!-- /.box-body -->
         </div>
@@ -73,14 +73,16 @@
                                 <td>{{$van->seating_capacity}}</td>
                                 <td>
                                     <div class="text-center">
-                                            @if($van->driver()->first())
-                                                <a name="listDriver" data-val="{{ $van->operator()->first()->member_id }}" class="btn btn-primary btn-sm btn-flat" data-toggle="modal" data-target="#modal-default"><i class="fa fa-exchange"></i>Change Driver</a>
-                                            @else
-                                                <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-user-plus"></i>Add Driver</a>
-                                            @endif
-                                            <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-default btn-sm btn-flat" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i>View</a>
-                                            <button class="btn btn-outline-danger btn-sm btn-flat" data-toggle="modal" data-target="#{{ 'deleteVan'.$van->plate_number }}"><i class="fa fa-trash"></i> Delete</button>
-                                        
+                                        <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i>View</a>    
+
+                                        @if($van->driver()->first())
+                                            <a name="listDriver" data-val="{{ $van->operator()->first()->member_id }}" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modal-default"><i class="fa fa-exchange"></i>Change Driver</a>
+                                        @else
+                                            <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-outline-secondary btn-sm"><i class="fa fa-user-plus"></i>Add Driver</a>
+                                        @endif
+
+                                        <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{ 'deleteVan'.$van->plate_number }}"><i class="fa fa-trash"></i> Delete</button>
+
                                     </div>
                                 </td>
                             </tr>
@@ -159,10 +161,11 @@
 
                                     
                                         <div class="text-center">
-                                            <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-pencil-square-o"></i>Edit</a>
-                                            <a href="{{route('drivers.show',[$driver->member_id])}}" class="btn btn-default btn-sm btn-flat"><i class="fa fa-eye"></i>View</a>
+                                            <a href="{{route('drivers.show',[$driver->member_id])}}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i>View</a>
+                                            
+                                            <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-outline-secondary btn-sm"><i class="fa fa-pencil-square-o"></i>Edit</a>
                                            
-                                            <button class="btn btn-outline-danger btn-sm btn-flat" data-toggle="modal" data-target="#{{ 'deleteDriver'.$operator->member_id }}"><i class="fa fa-trash"></i> Delete</button>
+                                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{ 'deleteDriver'.$operator->member_id }}"><i class="fa fa-trash"></i> Delete</button>
                                         </div>                                                
                                 </td>
                             </tr>

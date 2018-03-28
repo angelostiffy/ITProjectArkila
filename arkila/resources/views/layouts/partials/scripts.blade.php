@@ -39,7 +39,7 @@
     {{ Html::script('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}
     {{ Html::script('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}
     <!-- Parsley -->
-    {{ Html::script('js/parsley.min.js') }}
+    {{ Html::script('js/client-side_validation/parsley.min.js') }}
     <!-- iCheck -->
     {{ Html::script('adminlte/plugins/iCheck/icheck.min.js') }}
     

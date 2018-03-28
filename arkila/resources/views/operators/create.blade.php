@@ -71,7 +71,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Middle Name: <span class="text-red">*</span></label>
+                                <label>Middle Name:</label>
                                 <input value="{{old('middleName')}}" name="middleName" type="text" class="form-control" placeholder="Middle Name" data-parsley-trigger="keyup" val-name required>
                             </div>
                         </div>
