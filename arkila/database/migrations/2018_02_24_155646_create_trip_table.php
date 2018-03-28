@@ -31,7 +31,7 @@ class CreateTripTable extends Migration
             $table->time('time_departed')->nullable();
             $table->integer('queue_number')->nullable();
             $table->boolean('has_privilege');
-
+            $table->enum('report_status', ['Pending', 'Accepted', 'Declined'])->default('Pending');
 
             $table->foreign('terminal_id')
             ->references('terminal_id')->on('terminal')

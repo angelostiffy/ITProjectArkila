@@ -39,13 +39,13 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="operatorLastName">Last Name:</label>
+                        <label for="operatorLastName">Last Name: <span class="text-red">*</span></label>
                         <input value="{{old('lastName') ?? $driver->last_name }}" id="driverLastName" name="lastName" type="text" class="form-control" placeholder="Last Name">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="operatorFirstName">First Name:</label>
+                        <label for="operatorFirstName">First Name: <span class="text-red">*</span></label>
                         <input id="operatorFirstName" value="{{old('firstName')  ?? $driver->first_name}}" name="firstName" type="text" class="form-control" placeholder="First Name" maxlength="35">
                     </div>
                 </div>
@@ -59,19 +59,19 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="contactNumberO">Contact Number:</label>
+                        <label for="contactNumberO">Contact Number: <span class="text-red">*</span></label>
                         <input value="{{old('contactNumber') ?? $driver->edit_contact_number }}" id="contactNumberO" name="contactNumber" type="text" class="form-control" placeholder="Contact Number">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="addressO">Address:</label>
+                        <label for="addressO">Address: <span class="text-red">*</span></label>
                         <input id="addressO" value="{{old('address') ?? $driver->address }}" name="address" type="text" class="form-control" placeholder="Address" maxlength="100">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="provincialAddressO">Provincial Address:</label>
+                        <label for="provincialAddressO">Provincial Address: <span class="text-red">*</span></label>
                         <input value="{{old('provincialAddress') ?? $driver->provincial_address }}" id="provincialAddress" name="provincialAddress" type="text" class="form-control" placeholder="Provincial Address">
                     </div>
                 </div>
@@ -79,7 +79,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="birthdateO">Birthdate:</label>
+                        <label for="birthdateO">Birthdate: <span class="text-red">*</span></label>
                         <div class="input-group date">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
@@ -90,13 +90,13 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="birthplaceO">Birthplace:</label>
+                        <label for="birthplaceO">Birthplace: <span class="text-red">*</span></label>
                         <input value="{{old('birthPlace') ?? $driver->birth_place }}" id="birthplaceO" name="birthPlace" type="text" class="form-control" placeholder="Birthplace" maxlength="50">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="genderO">Gender:</label>
+                        <label for="genderO">Gender: <span class="text-red">*</span></label>
                         <div class="radio">
                             <label for="genderMaleO"> Male</label>
                             <label class="radio-inline">
@@ -113,7 +113,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="citizenshipO">Citizenship:</label>
+                        <label for="citizenshipO">Citizenship: <span class="text-red">*</span></label>
                         <input value="{{ old('citizenship') ?? $driver->citizenship }}" id="citizenshipO" name="citizenship" type="text" class="form-control" placeholder="Citizenship" maxlength="35">
                     </div>
                 </div>
@@ -138,13 +138,13 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="licenseNoO">License No:</label>
+                        <label for="licenseNoO">License No: <span class="text-red">*</span></label>
                         <input id="licenseNoO" value="{{  old('licenseNo') ?? $driver->license_number }}" name="licenseNo" type="text" class="form-control" placeholder="License No.">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="licenseExpiryDateO">License Expiry Date:</label>
+                        <label for="licenseExpiryDateO">License Expiry Date: <span class="text-red">*</span></label>
                         <div class="input-group date">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
@@ -198,13 +198,13 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="contactPersonO">Contact Person:</label>
+                        <label for="contactPersonO">Contact Person: <span class="text-red">*</span></label>
                         <input value="{{ old('contactPerson') ?? $driver->person_in_case_of_emergency }}" id="contactPersonO" name="contactPerson" type="text" class="form-control" placeholder="Contact Person In Case of Emergency" maxlength="120">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="addressO">Address:</label>
+                        <label for="addressO">Address: <span class="text-red">*</span></label>
 
                         <input value="{{ old('contactPersonAddress') ?? $driver->emergency_address }}" id="addressO" name="contactPersonAddress" type="text" class="form-control" placeholder="Address">
 
@@ -212,7 +212,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="contactNumberO">Contact Number:</label>
+                        <label for="contactNumberO">Contact Number: <span class="text-red">*</span></label>
                         <input value="{{ old('contactPersonContactNumber') ?? $driver->edit_emergency_contactno }}" id="contactNumberO" name="contactPersonContactNumber" type="text" class="form-control" placeholder="Contact Number" maxlength="10">
                     </div>
                 </div>

@@ -25,7 +25,7 @@ class CreateMemberTable extends Migration
             ->unsigned();
             $table->string('last_name', 35);
             $table->string('first_name', 35);
-            $table->string('middle_name', 35);
+            $table->string('middle_name', 35)->nullable();
             $table->string('contact_number', 13);
             $table->enum('role', ['Operator', 'Driver']);
             $table->string('address',100);
