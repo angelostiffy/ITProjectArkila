@@ -198,6 +198,11 @@ Route::get('/', function () {
     Route::get('/operators/generatePDF', 'OperatorsController@generatePDF')->name('pdf.operators');
     Route::get('/drivers/generatePerDriver/{driver}', 'DriversController@generatePerDriver')->name('pdf.perDriver');
     Route::get('/drivers/generatePerOperator/{operator}', 'OperatorsController@generatePerOperator')->name('pdf.perOperator');
+     
+    Route::get('/home/trip-log', 'TripsController@tripLog')->name('trips.tripLog');
+    Route::get('/home/driver-report', 'TripsController@driverReport')->name('trips.driverReport');
+
+    Route::resource('/home/ledger', 'LedgersController');
 
 
  });

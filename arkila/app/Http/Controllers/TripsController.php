@@ -324,4 +324,14 @@ class TripsController extends Controller {
         }
         return view('trips.partials.confirmDialogBox',compact('tripsObjArr'));
     }
+    
+    public function tripLog()
+    {
+        return view('trips.tripLog');
+    }
+    
+    public function driverReport()
+    {
+        return view('trips.driverReport');
+    }
 }

@@ -15,7 +15,7 @@
         @include('layouts.partials.header_2')
 
         <!-- Full Width Column -->
-        <div class="content-wrapper">
+        <div class="content-wrapper bgform-image">
                         <div class="container">
                     <section class="content">
                         <div class="login-box" style="box-shadow: 0px 5px 10px gray;">

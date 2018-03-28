@@ -1,6 +1,6 @@
 @extends('layouts.master')
-@section('title', 'Driver's Report')
-@section('content-header', 'Driver's Report')
+@section('title', 'Driver Report')
+@section('content-header', 'Driver Report')
 @section('links')
 @parent
 <!-- additional CSS -->

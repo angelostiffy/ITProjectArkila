@@ -16,12 +16,12 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Contact Number</th>
-                    <th>Actions</th>
+                    <th class="text-center">Actions</th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach ($operators->where('status', 'Active') as $operator)
+                @foreach ($operators->where('status', 'Active')->sortByDesc('member_id') as $operator)
                 <tr>
                     <td class="hidden-xs" name="opId">{{ $operator->member_id }}</td>
                     <td><a href="operators/{{ $operator->member_id }}">{{ $operator->first_name }} {{ $operator->middle_name }} {{ $operator->last_name }}</a></td>
@@ -89,12 +89,11 @@
             'searching': true,
             'ordering': true,
             'info': true,
-            'autoWidth': true,
+            'autoWidth': false,
             'order': [[ 0, "desc" ]],
-            'aoColumnDefs': [{
-                'bSortable': false,
-                'aTargets': [-1] /* 1st one, start by the right */
-            }]
+            'aoColumnDefs': [
+                { 'bSortable': false, 'aTargets': [-1]}
+            ]
         })
     })
 </script>

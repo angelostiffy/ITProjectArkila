@@ -12,12 +12,12 @@
                     <th>Operator</th>
                     <th>Name</th>
                     <th>Contact Number</th>
-                    <th>Actions</th>
+                    <th class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
 
-                @foreach($drivers->where('status','Active') as $driver)
+                @foreach($drivers->where('status','Active')->sortByDesc('member_id') as $driver)
                 <tr>
                     <th>{{$driver->member_id}}</th>
                     <td>{{$driver->operator->full_name ?? null}}</td>
@@ -85,12 +85,11 @@
             'searching': true,
             'ordering': true,
             'info': true,
-            'autoWidth': true,
+            'autoWidth': false,
             'order': [[ 0, "desc" ]],
-            'aoColumnDefs': [{
-                'bSortable': false,
-                'aTargets': [-1] /* 1st one, start by the right */
-            }]
+            'aoColumnDefs': [
+                { 'bSortable': false, 'aTargets': [-1]}             
+            ]
         });
 
     })
