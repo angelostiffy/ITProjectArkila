@@ -36,7 +36,7 @@
                                         <th>Name</th>
                                         <th>Username</th>
                                         <th>Terminal</th>
-                                        <th>Action</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -69,7 +69,7 @@
 
                                         <th>Name</th>
                                         <th>Username</th>
-                                        <th>Action</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>

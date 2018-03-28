@@ -12,7 +12,7 @@
                     <th>Operator</th>
                     <th>Name</th>
                     <th>Contact Number</th>
-                    <th>Actions</th>
+                    <th class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>

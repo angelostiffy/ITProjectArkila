@@ -59,14 +59,22 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('operators.index')}}"><i class="fa fa-circle-o"></i> Operators</a></li>
-                    <li><a href="{{route('vans.index')}}"><i class="fa fa-circle-o"></i>Vans</a></li>
                     <li><a href="{{route('drivers.index')}}"><i class="fa fa-circle-o"></i>Drivers</a></li>
+                    <li><a href="{{route('vans.index')}}"><i class="fa fa-circle-o"></i>Vans</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-bus"></i> <span>Trips</span>
+                    <i class="fa fa-bus"></i>
+                    <span>Trips</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('trips.tripLog')}}"><i class="fa fa-circle-o"></i>Trip Log</a></li>
+                    <li><a href="{{route('trips.driverReport')}}"><i class="fa fa-circle-o"></i> Driver Report</a></li>
+                </ul>
             </li>
             <li class="treeview">
                 <a href="#">

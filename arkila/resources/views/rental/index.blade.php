@@ -34,7 +34,7 @@
                                         <th>Contact Number</th>
                                         <th>Van Model</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -192,7 +192,7 @@
                                         <th>Contact Number </th>
                                         <th>Van Model </th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
