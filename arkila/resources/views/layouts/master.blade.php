@@ -14,7 +14,7 @@
         @include('layouts.partials.main_sidebar')
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper bg-image">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>

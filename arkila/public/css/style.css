@@ -421,3 +421,21 @@ textarea.parsley-error {
   width: 100%;
   height: 5px;
 }
+
+.select2 {
+  width:100%!important;
+}
+
+.bgform-image {
+  background-image: url("../img/form-background.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size:cover;
+}
+
+.bg-image {
+  background-image: url("../img/bg1-image.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size:cover;
+}

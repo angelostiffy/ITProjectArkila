@@ -59,7 +59,7 @@ display:inherit;
     <div class="wrapper">
         @include('layouts.partials.header_2')
         <!-- Full Width Column -->
-        <div class="content-wrapper">
+        <div class="content- bgform-image">
             <div class="container">
 
                 <form id="@yield('form-id')" class="parsley-form" action="@yield('form-action')" method="POST" data-parsley-validate="">
