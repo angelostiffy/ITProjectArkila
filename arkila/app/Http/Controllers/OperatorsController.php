@@ -190,6 +190,20 @@ class OperatorsController extends Controller
         return $result;
     }
 
+    public function generatePDF()
+    {
+        $operators = Member::allOperators()->get();
+        $pdf = PDF::loadView('pdf.operator', ['operators' => $operators]);
+        return $pdf->stream('operators.pdf');
+    }
+
+    public function generatePerDriver(Member $operator)
+    {
+        $pdf = PDF::loadView('pdf.perDriver', ['driver' => $driver]);
+        return $pdf->download("$driver->last_name"."$driver->first_name-Bio-Data.pdf");
+        
+    }
+
     public function archiveOperator(Member $archive)
     {
         $operatorId = $archive->member_id;
@@ -248,4 +262,5 @@ class OperatorsController extends Controller
                     ]);
                 return redirect(route('operators.index'));
         }
+        
     }

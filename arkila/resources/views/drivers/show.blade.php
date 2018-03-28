@@ -14,7 +14,8 @@
 
     <form id="regForm" action="/action_page.php">
         <div class="box-body">
-
+        <a href="{{route('pdf.perDriver', [$driver->member_id])}}"  class="btn btn-default"> <i class="fa fa-print"></i> Print</a>
+    
             <!-- One "tab" for each step in the form: -->
             <div class="tab">
                 <h4>Personal Information</h4>
@@ -171,7 +172,7 @@
                                  @foreach($driver->children as $child)
                                 <tr>
                                     <td>
-                                        <p type="text" placeholder="Name of Child" class="form-control" disabled>{{$child->full_name}}</p>
+                                        <p type="text" placeholder="Name of Child" class="form-control" disabled>{{$child->children_name}}</p>
                                     </td>
                                     <td>
                                         <div class="input-group date">
