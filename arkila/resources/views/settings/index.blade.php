@@ -54,7 +54,7 @@
                                 <tr>
                                     <th>Terminal Name</th>
                                     <th>Booking Fee</th>
-                                    <th>Actions</th>
+                                    <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -123,7 +123,7 @@
                                     <th>Name</th>
                                     <th>Fare</th>
                                     <th>Terminal</th>
-                                    <th>Actions</th>
+                                    <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
 
@@ -194,7 +194,7 @@
                                 <tr>
                                     <th>Fee</th>
                                     <th>Amount</th>
-                                    <th>Actions</th>
+                                    <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
 
@@ -265,7 +265,7 @@
                                 <tr>
                                     <th>Discount</th>
                                     <th>Amount</th>
-                                    <th>Actions</th>
+                                    <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -333,7 +333,7 @@
                                 <tr>
                                     <th>Description</th>
                                     <th>Terminal</th>
-                                    <th>Actions</th>
+                                    <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
 

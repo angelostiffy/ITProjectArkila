@@ -39,14 +39,16 @@
         <form method="POST" action="/login">
           {{csrf_field()}}
             <input type="text" name="username" class="form-control" style="margin-bottom:3%" placeholder="Username" maxlength="20" required autofocus>
-            <input type="password" name="password" class="form-control" placeholder="Password" style="margin-bottom:8%" maxlength="20" required>
-            <div class="checkbox">
-                
-            </div>
+            <input type="password" name="password" class="form-control" placeholder="Password" style="margin-bottom:2%" maxlength="20" required>
+            <div id="remember" class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
             <button class="btn btn btn-primary btn-block" type="submit">Log in</button>
         </form>
         <!-- /form -->
-        <a href="#" class="forgot-password pull-right">Forgot Password?</a>
+        <a href="#" class="forgot-password">Forgot Password?</a>
     </div>
     <!-- /card-container -->
 </div>
