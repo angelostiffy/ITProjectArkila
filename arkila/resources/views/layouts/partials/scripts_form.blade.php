@@ -31,7 +31,8 @@
     {{ Html::script('adminlte/dist/js/demo.js') }}
     <!-- Parsley -->
     {{ Html::script('js/client-side_validation/parsley.min.js') }}
-    {{ Html::script('js/client-side_validation/parsley-validation.js') }}
+    {{ Html::script('js/client-side_validation/member-validation.js') }}
+    {{ Html::script('js/client-side_validation/van-validation.js') }}
     {{ Html::script('js/notifications/pnotify.custom.min.js') }}
     {{ Html::script('js/notifications/bootstrap-notify.min.js') }}
     
