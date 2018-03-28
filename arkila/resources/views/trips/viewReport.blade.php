@@ -5,7 +5,7 @@
 
 <div class="box" style="box-shadow: 0px 5px 10px gray;">
     <div class="box-header with-border text-center">
-        <a href="{{route('trips.tripLog')}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+        <a href="{{route('trips.driverReport')}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
         <h3 class="box-title">
             Driver Report Details
         </h3>
