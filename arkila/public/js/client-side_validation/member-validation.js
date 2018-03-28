@@ -80,9 +80,10 @@
 
   // Validate license.
     $('[val-license]').parsley({
-    	maxlength: 10
+    	maxlength: 11
     });
 
+    $('[val-license]').attr('data-parsley-license-unique');
     $('[val-license]').attr('data-parsley-required-message','Please enter a license number.');
 
   // Validate expire date.

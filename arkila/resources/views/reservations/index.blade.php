@@ -39,7 +39,7 @@
                                         <th>Time</th>
                                         <th>Amount</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -197,7 +197,7 @@
                                         <th>Time</th>
                                         <th>Amount</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
