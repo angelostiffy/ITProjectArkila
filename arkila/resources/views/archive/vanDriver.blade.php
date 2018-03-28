@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('title', 'Archive')
+@section('content-header', 'Archive')
 @section('content')
     {{session(['opLink'=> Request::url()])}} 
 
@@ -10,7 +11,7 @@
     </ul>
     <div class="tab-content">
         
-        <div class="tab-pane" id="drivers">
+        <div class="active tab-pane" id="drivers">
             <div class="box">
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -36,9 +37,9 @@
                                 <td>
                                     <div class="text-center">
 
-                                        <a href="" class="btn btn-default"><i class="fa fa-eye"></i>View</a>
+                                        <a href="" class="btn btn-default btn-sm"><i class="fa fa-eye"></i>View</a>
 
-                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteDriver"><i class="fa fa-trash"></i> Delete</button>
+                                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteDriver"><i class="fa fa-trash"></i> Delete</button>
                                     </div>
 
                                 </td>
@@ -76,8 +77,8 @@
                                             </div>
                                             <div class="modal-footer">
 
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                                <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
+                                                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">No</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" style="width:22%;">Delete</button>
 
                                             </div>
                                         </div>
@@ -99,9 +100,6 @@
                 
                 <div class="tab-pane" id="vans">
                     <div class="box">
-                        <div class="box-header">
-                            
-                        </div>
                         <div class="box-body">
                             <table  class="table table-bordered table-striped driverVan">
                                 <thead>
@@ -121,8 +119,9 @@
                                 <td>
                                             <div class="text-center">
                                                  
-                                                    <a data-val='#' name="vanInfo" class="btn btn-default" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i>View</a>
-                                                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteVan"><i class="fa fa-trash"></i> Delete</button>
+                                                    <a data-val='#' name="vanInfo" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i>View</a>
+                                                
+                                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteVan"><i class="fa fa-trash"></i> Delete</button>
                                                 
                                             </div>
                                         </td>

@@ -2,13 +2,13 @@
 <div class="box">
     <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
         <div class="col-md-6">
-            <a href="{{route('drivers.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Create New</a>
-            <a href=""  class="btn btn-default"> <i class="fa fa-print"></i> Print</a>
+            <a href="{{route('drivers.create')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus-circle"></i> REGISTER DRIVER</a>
+            <a href=""  class="btn btn-default btn-sm btn-fla"> <i class="fa fa-print"></i> PRINT</a>
         </div>
         <table id="driverList" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Driver ID</th>
+                    <th>ID</th>
                     <th>Operator</th>
                     <th>Name</th>
                     <th>Contact Number</th>
@@ -26,7 +26,9 @@
                     <td>
                         <div class="text-center">
                             <a href="{{route('drivers.show',[$driver->member_id])}}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> VIEW</a>
-                            <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-outline-secondary btn-sm"><i class="fa fa-pencil-square-o"></i> EDIT</a> 
+                            
+                            <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-outline-secondary btn-sm"><i class="fa fa-pencil-square-o"></i> EDIT</a>
+                            
                             <button type="button" data-toggle="modal" data-target="#{{'deleteWarning'.$driver->member_id}}" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i> DELETE</button>
                         </div>
                         <!-- /.text-->
