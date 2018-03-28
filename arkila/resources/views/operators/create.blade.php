@@ -59,7 +59,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Last Name: <span class="text-red">*</span></label>
-                                <input value="{{old('lastName')}}" name="lastName" type="text" class="form-control" placeholder="Last Name" data-parsley-errors-container="#errLastName" data-parsley-trigger="keyup" val-name required> 
+                                <input value="{{old('lastName')}}" name="lastName" type="text" class="form-control val-name" placeholder="Last Name" data-parsley-errors-container="#errLastName" data-parsley-trigger="keyup" val-name required> 
                                 <p id="errLastName"></p>
                             </div>
                         </div>
@@ -110,8 +110,9 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="birthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('birthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" required>
+                                  <input type="text" name="birthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('birthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" required data-parsley-legal-age val-birthdate data-parsley-errors-container="#errLegal">
                                 </div>
+                                <p id="errLegal"></p>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -179,8 +180,9 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input value="{{old('licenseExpiryDate')}}" name="licenseExpiryDate" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask required data-parsley-trigger="keyup" >
+                                    <input value="{{old('licenseExpiryDate')}}" name="licenseExpiryDate" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask required data-parsley-trigger="keyup" val-license-exp data-parsley-expire-date data-parsley-errors-container="#errExpireDate">
                                 </div>
+                                <p id= "errExpireDate"></p>
                             </div>
                         </div>
                     </div>
@@ -201,8 +203,9 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="spouseBirthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" >
+                                  <input type="text" name="spouseBirthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" data-parsley-errors-container="#errSpouseBirthdate">
                                 </div>
+                                <p id="errSpouseBirthdate"></p>
                             </div>
                         </div>
                     </div>
@@ -210,7 +213,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Fathers Name:</label>
-                                <input value="{{old('fathersName')}}" name="fathersName" type="text" class="form-control" placeholder="Fathers Name" maxlength="40" data-parsley-trigger="keyup" >
+                                <input value="{{old('fathersName')}}" name="fathersName" type="text" class="form-control" placeholder="Fathers Name" maxlength="40" data-parsley-trigger="keyup" val-name>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -224,7 +227,7 @@
                         <div class="col-md-6">
                              <div class="form-group">
                                 <label>Mothers Maiden Name:</label>
-                                <input value="{{old('mothersName')}}" name="mothersName" type="text" class="form-control" placeholder="Mothers Name" maxlength="40" data-parsley-trigger="keyup" >
+                                <input value="{{old('mothersName')}}" name="mothersName" type="text" class="form-control" placeholder="Mothers Name" maxlength="40" data-parsley-trigger="keyup" val-name>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -239,13 +242,13 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Contact Person: <span class="text-red">*</span></label>
-                                <input value="{{old('contactPerson')}}" name="contactPerson" type="text" class="form-control" placeholder="Contact Person In Case of Emergency" data-parsley-trigger="keyup" val-name>
+                                <input value="{{old('contactPerson')}}" name="contactPerson" type="text" class="form-control" placeholder="Contact Person In Case of Emergency" data-parsley-trigger="keyup" val-name required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Address: <span class="text-red">*</span></label>
-                                <input value="{{old('contactPersonAddress')}}" name="contactPersonAddress" type="text" class="form-control" placeholder="Address" maxlength="100" data-parsley-trigger="keyup" >
+                                <input value="{{old('contactPersonAddress')}}" name="contactPersonAddress" type="text" class="form-control" placeholder="Address" data-parsley-trigger="keyup" val-address required>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -255,8 +258,9 @@
                                   <div class="input-group-addon">
                                     <span>+63</span>
                                   </div>
-                                  <input type="text" name="contactPersonContactNumber"  class="form-control" value="{{old('contactPersonContactNumber')}}" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask data-parsley-trigger="keyup" val-phone>
+                                  <input type="text" name="contactPersonContactNumber"  class="form-control" value="{{old('contactPersonContactNumber')}}" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask data-parsley-trigger="keyup" val-phone required data-parsley-errors-container="#errContactPersonPhone">
                                 </div>
+                                <p id="errContactPersonPhone"></p>
                             </div>
                         </div>
                     </div>
@@ -287,8 +291,10 @@
                                                   <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                   </div>
-                                                  <input type="text" name="childrenBDay[]" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('childrenBDay.'.$i)}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                                  <input type="text" name="childrenBDay[]" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('childrenBDay.'.$i)}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-errors-container="#"
+                                                 >
                                                 </div>
+                                                <p id=""></p>
                                             </td>
                                             <td>
                                                 <div class="pull-right">
@@ -308,8 +314,10 @@
                                               <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                               </div>
-                                              <input type="text" name="childrenBDay[]" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                              <input type="text" name="childrenBDay[]" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask
+                                              data-parsley-errors-container="#">
                                             </div>
+                                            <p id=""></p>
                                         </td>
                                         <td>
                                         <div class="pull-right">
@@ -391,9 +399,6 @@
 
         }
 
-
-
-
         function addItem() {
             var tablebody = document.getElementById('childrens');
             if (tablebody.rows.length == 1) {
@@ -473,7 +478,7 @@
           $('.form-navigation .next').click(function() {
             $('.parsley-form').parsley().whenValidate({
               group: 'block-' + curIndex()
-            }).done(function() {
+            })  .done(function() {
               navigateTo(curIndex() + 1);
             });
           });

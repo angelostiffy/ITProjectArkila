@@ -2,38 +2,34 @@
 <div class="box">
     <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
         <div class="col-md-6">
-            <a href="{{route('drivers.create')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> REGISTER DRIVER</a>
-            <a href=""  class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i> PRINT</a>
+            <a href="{{route('drivers.create')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus-circle"></i> REGISTER DRIVER</a>
+            <a href=""  class="btn btn-default btn-sm btn-fla"> <i class="fa fa-print"></i> PRINT</a>
         </div>
         <table id="driverList" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Driver ID</th>
+                    <th>ID</th>
                     <th>Operator</th>
                     <th>Name</th>
                     <th>Contact Number</th>
-                    <th>Address</th>
-                    <th>Age</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @php $counter = 1; @endphp
+
                 @foreach($drivers->where('status','Active') as $driver)
                 <tr>
-                    <th>{{$counter}}</th>
+                    <th>{{$driver->member_id}}</th>
                     <td>{{$driver->operator->full_name ?? null}}</td>
                     <td>{{$driver->full_name}}</td>
                     <td>{{$driver->contact_number}}</td>
-                    <td>{{$driver->address}}</td>
-                    <td>{{$driver->age}}</td>
                     <td>
                         <div class="text-center">
                             <a href="{{route('drivers.show',[$driver->member_id])}}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> VIEW</a>
+                            
                             <a href="{{route('drivers.edit',[$driver->member_id])}}" class="btn btn-outline-secondary btn-sm"><i class="fa fa-pencil-square-o"></i> EDIT</a>
-
+                            
                             <button type="button" data-toggle="modal" data-target="#{{'deleteWarning'.$driver->member_id}}" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i> DELETE</button>
-
                         </div>
                         <!-- /.text-->
                     </td>
@@ -52,7 +48,7 @@
                                             <p>Are you sure you want to delete "{{ $driver->full_name }}"?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="" method="POST">
+                                        <form action="{{route('drivers.archiveDelete', $driver->member_id)}}" method="POST">
                                             {{csrf_field()}} {{method_field('PATCH')}}
 
                                             <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
@@ -69,7 +65,6 @@
                     <!-- /.modal -->
 
                 </tr>
-                @php $counter++; @endphp
                 @endforeach
             </tbody>
         </table>
@@ -90,7 +85,12 @@
             'searching': true,
             'ordering': true,
             'info': true,
-            'autoWidth': true
+            'autoWidth': true,
+            'order': [[ 0, "desc" ]],
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': [-1] /* 1st one, start by the right */
+            }]
         });
 
     })

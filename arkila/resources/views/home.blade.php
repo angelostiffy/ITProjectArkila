@@ -9,7 +9,7 @@
             <div class="info-box-content">
               <span class="info-box-text text-center" style="margin: 5px;">Operators</span>
               <span >
-                <button class="btn btn-info center-block"><i class="fa fa-eye"></i> View operators</button>
+                <a type="button" href="{{route('operators.index')}}" class="btn btn-info center-block"><i class="fa fa-eye"></i> View operators</a>
                 </span>
             </div>
             <!-- /.info-box-content -->
@@ -23,7 +23,7 @@
             <div class="info-box-content">
               <span class="info-box-text text-center" style="margin: 5px;">Van units</span>
               <span>
-                <button class="btn btn-danger center-block"><i class="fa fa-eye"></i> View units</button>
+                <a href="{{route('vans.index')}}" type="button" class="btn btn-danger center-block"><i class="fa fa-eye"></i> View units</a>
               </span>
             </div>
             <!-- /.info-box-content -->
@@ -40,7 +40,7 @@
             <div class="info-box-content">
               <span class="info-box-text text-center" style="margin: 5px;">Reservations</span>
               <span>
-                <button class="btn btn-success center-block"><i class="fa fa-eye"></i> View requests</button>
+                <a href="{{route('rental.index')}}" type="button" class="btn btn-success center-block"><i class="fa fa-eye"></i> View requests</a>
               </span>
             </div>
             <!-- /.info-box-content -->
@@ -54,7 +54,7 @@
             <div class="info-box-content">
               <span class="info-box-text text-center" style="margin: 5px;">Rentals</span>
               <span>
-                <button class="btn btn-warning center-block"><i class="fa fa-eye"></i> View requests</button>
+                  <a href="{{route('rental.index')}}" type="button" class="btn btn-warning center-block"><i class="fa fa-eye"></i> View requests</a>
               </span>
             </div>
             <!-- /.info-box-content -->

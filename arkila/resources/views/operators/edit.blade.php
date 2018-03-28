@@ -1,23 +1,18 @@
-@extends('layouts.master')
-@section('title', 'Edit Operator Information') 
-@section('links') 
-@parent
-<link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"> 
-@stop 
-@section('content')
+@extends('layouts.form_lg')
+@section('title', 'Edit Operator Information')
+@section('form-id','regForm')
+@section('form-action', route('operators.update',[$operator->member_id]))
+@section('form-body')
 
 <div class="box box-primary" style="box-shadow: 0px 5px 10px gray;">
     <div class="box-header with-border text-center">
-        <a href="{{route('operators.showProfile',[$operator->member_id])}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+        <a href="{{route('operators.showProfile',[$operator->member_id])}}" class="pull-left btn"><i class="fa  fa-chevron-left"></i></a>
         <h3 class="box-title">
-            Edit Operator Information
+            EDIT OPERATOR INFORMATION
         </h3>
     </div>
-
-    <form method="POST" id="regForm" action="{{route('operators.update',[$operator->member_id])}}">
         {{csrf_field()}}
         {{method_field("PATCH")}}
-
         <div class="box-body">
             <h4>Personal Information</h4>
             <div class="row">
@@ -220,7 +215,7 @@
                             <th>Birthdate</th>
                             <th>
                                 <div class="pull-right">
-                                    <button type="button" class="btn btn-info" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Children</button>
+                                    <button type="button" class="btn btn-primary btn-sm btn-flat" onclick="addItem()"><i class="fa fa-plus"></i> ADD DEPENDENT</button>
                                 </div>
                             </th>
                         </thead>
@@ -299,10 +294,9 @@
         <div class="box-footer">
             <div class="pull-right">
                 <a href="" class="btn btn-default">Cancel</a>
-                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save Changes</button>
             </div>
         </div>    
-    </form>
 </div>
 
 

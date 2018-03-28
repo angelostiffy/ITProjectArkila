@@ -44,83 +44,12 @@
     <div class="col-md-9">
         <div class="nav-tabs-custom" style="box-shadow: 0px 5px 10px gray;">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#drivers" data-toggle="tab">Drivers</a></li>
-                <li><a href="#vans" data-toggle="tab">Vans</a></li>
+                <li class="active"><a href="#vans" data-toggle="tab">Vans</a></li>
+                <li><a href="#drivers" data-toggle="tab">Drivers</a></li>
             </ul>
             <div class="tab-content">
-                <div class="active tab-pane" id="drivers">
-                    <table id="driver" class="table table-bordered table-striped">
-
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Age</th>
-                                <th>Contact Number</th>
-                                <th>Van</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($drivers as $driver)
-                            <tr>
-                                <td>{{ $driver->drivers->full_name ?? $driver->drivers()->first() }}</td>
-                                <td>{{ $driver->drivers()->first()->age ?? $driver->drivers()->first() }}</td>
-                                <td>{{ $driver->drivers()->first()->contact_number ?? $driver->drivers()->first() }}</td>
-                                <td>{{ $driver->archiveVan()->first()->plate_number ?? $driver->archiveVan()->first() }}</td>
-                                <td>
-                        
-                                    
-                                        <div class="text-center">
-                                
-                                            <a href="#" class="btn btn-default"><i class="fa fa-eye"></i>View</a>
-                                           
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#"><i class="fa fa-trash"></i> Delete</button>
-                                        </div>                                                
-                                </td>
-                            </tr>
-                            @endforeach
-                            <!--DELETE MODAL MIGUEL-->
-                            <div class="modal fade" id="">
-                                <div class="modal-dialog">
-                                    <div class="col-md-offset-2 col-md-8">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-red">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                <h4 class="modal-title"> Confirm</h4>
-                                            </div>
-                                            <div class="modal-body row" style="margin: 0% 1%;">
-                                               <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
-                                                   <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
-                                               </div>
-                                               <div class="col-md-10">
-                                                <p style="font-size: 110%;">Are you sure you want to delete ""</p>
-                                               </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <form action="" method="POST">
-                                                  
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                                    <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
-                            <!-- /.modal -->
-                          
-
-                        </tbody>
-                    </table>                  
-                        <!-- /.tab-pane -->
-                </div>
                 
-                <div class="tab-pane" id="vans">
+                <div class="active tab-pane" id="vans">
                     <table id="van" class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -181,6 +110,79 @@
                         </tbody>
                     </table>
                 </div>
+                
+                <div class="tab-pane" id="drivers">
+                    <table id="driver" class="table table-bordered table-striped">
+
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Contact Number</th>
+                                <th>Van</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($drivers as $driver)
+                            <tr>
+                                <td>{{ $driver->first_name }}</td>
+                                <td>{{ $driver->age }}</td>
+                                <td>{{ $driver->contact_number }}</td>
+                                <td>{{ $archive->archiveVan()->first()->plate_number ?? $archive->archiveVan()->first() }}</td>
+                                <td>
+                        
+                                    
+                                        <div class="text-center">
+                                
+                                            <a href="#" class="btn btn-default"><i class="fa fa-eye"></i>View</a>
+                                           
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#"><i class="fa fa-trash"></i> Delete</button>
+                                        </div>                                                
+                                </td>
+                            </tr>
+                            @endforeach
+                            <!--DELETE MODAL MIGUEL-->
+                            <div class="modal fade" id="">
+                                <div class="modal-dialog">
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-red">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <h4 class="modal-title"> Confirm</h4>
+                                            </div>
+                                            <div class="modal-body row" style="margin: 0% 1%;">
+                                               <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
+                                                   <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
+                                               </div>
+                                               <div class="col-md-10">
+                                                <p style="font-size: 110%;">Are you sure you want to delete ""</p>
+                                               </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form action="" method="POST">
+                                                  
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                                    <button type="submit" class="btn btn-danger" style="width:22%;">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+                          
+
+                        </tbody>
+                    </table>                  
+                        <!-- /.tab-pane -->
+                </div>
+                
                 <!-- /.tab-pane -->
             </div>
                 <!-- /.tab-content -->          

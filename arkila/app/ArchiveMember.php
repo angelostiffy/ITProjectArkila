@@ -18,7 +18,7 @@ class ArchiveMember extends Model
         return $this->belongsToMany(ArchiveVan::class,'archive_member_van','member_id','plate_number');
     }
 
-    public static function scopeAllOperators($query){
+    public function scopeAllOperators($query){
         return $query->where('archived','Operator');
     }
 

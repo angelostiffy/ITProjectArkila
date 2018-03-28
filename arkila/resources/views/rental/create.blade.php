@@ -35,7 +35,7 @@
     </style>
 @endsection
 @section('title', 'Rent Van')
-@section('form-id', 'regForm')
+@section('form-id', 'parsley-form')
 @section('form-action', route('rental.store'))
 @section('form-method', 'POST')
 @section('form-body')
@@ -43,34 +43,34 @@
                                {{csrf_field()}}     
 <div class="box box-warning" style = "box-shadow: 0px 5px 10px gray;">
         <div class="box-header with-border text-center">
-            <a href="{{ URL::previous() }}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+            <a href="{{ route('rental.index')}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
             <h3 class="box-title">
-                Rent a Van
+                Rental Form
             </h3>
         </div>
         <div class="box-body">
-        @include('message.error')
+      
 
                 <!-- One "tab" for each step in the form: -->
-                <div class="tab">
+                <div class="form-section">
                     <h4>Trip Information</h4>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Last Name:</label>
-                                <input type="text" class="form-control" placeholder="Last Name" name="lastName" id="lastName" value="{{ old('lastName') }}" maxlength="35">
+                                <input type="text" class="form-control" placeholder="Last Name" name="lastName" id="lastName" value="{{ old('lastName') }}" val-name required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>First Name:</label>
-                                <input type="text" class="form-control" placeholder="First Name" name="firstName" id="firstName" value="{{ old('firstName') }}" maxlength="35">
+                                <input type="text" class="form-control" placeholder="First Name" name="firstName" id="firstName" value="{{ old('firstName') }}" val-name>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Middle Name:</label>
-                                <input type="text" class="form-control" placeholder="Middle Name" name="middleName" id="middleName" value="{{ old('middleName') }}" maxlength="35">
+                                <input type="text" class="form-control" placeholder="Middle Name" name="middleName" id="middleName" value="{{ old('middleName') }}" val-name>
                             </div>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                             <div class="form-group">
                                 <label>Departure Time:</label>
                                  <div class="input-group">
-                    <input type="time" class="form-control" name="time" value="{{ old('time') }}">
+                    <input type="text" class="form-control" name="time" value="{{ old('time') }}" id = "timepicker">
 
                     <div class="input-group-addon">
                       <i class="fa fa-clock-o"></i>
@@ -138,7 +138,7 @@
                         </div>
                     </div> 
                 </div>
-                <div class="tab" style="margin-left:37%; font-size: 14pt">
+                <div class="form-section" style="margin-left:37%; font-size: 14pt">
                     <h4 style="margin-left:17%; margin-bottom:3%; font-size: 14pt">Summary</h4>
                     <div class = "row">
                            <dl class = "dl-horizontal">
@@ -170,9 +170,10 @@
         </div>
         <div class="box-footer">
             <div style="overflow:auto;">
-                    <div style="float:right;">
-                        <button type="button" id="prevBtn" onclick="nextPrev(-1)" class = "btn btn-default">Previous</button>
-                        <button type="button" id="nextBtn" onclick="nextPrev(1); getData();" class = "btn btn-primary">Next</button>
+                    <div class="form-navigation" style="float:right;">
+                        <button type="button" id="prevBtn"  class="previous btn btn-default">Previous</button>
+                        <button type="button" id="nextBtn"  class="next btn btn-primary">Next</button>
+                        <input type="submit" class="btn btn-primary">
                     </div>
                 </div>
         </div>
@@ -190,10 +191,15 @@
 
   })
     </script>
-    
-    
-    
     <script>
+    	$('#timepicker').timepicker({
+    		template: false
+  });
+    </script>
+    
+    
+    
+  {{--   <script>
      var currentTab = 0; // Current tab is set to be the first tab (0)
         showTab(currentTab); // Display the crurrent tab
 
@@ -279,9 +285,52 @@
             var time = document.getElementById('timepicker').value;
             document.getElementById('timeView').textContent = time;
         }
-        
-    </script>
+    </script> --}}
     <script>
     $('[data-mask]').inputmask()
     </script>
+        <script type="text/javascript">
+        $(function () {
+          var $sections = $('.form-section');
+
+          function navigateTo(index) {
+            // Mark the current section with the class 'current'
+            $sections
+              .removeClass('current')
+              .eq(index)
+                .addClass('current');
+            // Show only the navigation buttons that make sense for the current section:
+            $('.form-navigation .previous').toggle(index > 0);
+            var atTheEnd = index >= $sections.length - 1;
+            $('.form-navigation .next').toggle(!atTheEnd);
+            $('.form-navigation [type=submit]').toggle(atTheEnd);
+          }
+
+          function curIndex() {
+            // Return the current index by looking at which section has the class 'current'
+            return $sections.index($sections.filter('.current'));
+          }
+
+          // Previous button is easy, just go back
+          $('.form-navigation .previous').click(function() {
+            navigateTo(curIndex() - 1);
+          });
+
+          // Next button goes forward iff current block validates
+          $('.form-navigation .next').click(function() {
+            $('.parsley-form').parsley().whenValidate({
+              group: 'block-' + curIndex()
+            }).done(function() {
+              navigateTo(curIndex() + 1);
+            });
+          });
+
+          // Prepare sections by setting the `data-parsley-group` attribute to 'block-0', 'block-1', etc.
+          $sections.each(function(index, section) {
+            $(section).find(':input').attr('data-parsley-group', 'block-' + index);
+          });
+          navigateTo(0); // Start at the beginning
+        });
+    </script>
+      @include('message.error')
 @endsection

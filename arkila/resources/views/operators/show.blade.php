@@ -2,124 +2,128 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 <!-- additional CSS -->
-<link rel="stylesheet" href="operatorStyle.css"> @stop @section('content')
+<link rel="stylesheet" href="operatorStyle.css"> 
+<style> 
+.info-container{
+    border: 1px solid; 
+    padding: 5px;
+    overflow-x: auto;
+    height:33px;
+    background:#e9ecfd;
+}
+</style>
+@stop @section('content')
 
-<div class="box box-warning">
-    <div class="box-header with-border text-center">
+<div class="box box-default"  style="box-shadow: 0px 5px 10px gray;">
+    <div class="box-header with-border text-center" >
         <a href="{{route('operators.showProfile',[$operator->member_id])}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
         <h3 class="box-title">
             View Operator Information
         </h3>
     </div>
-
-    <form id="regForm" action="/action_page.php">
-        <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
-
-            <!-- One "tab" for each step in the form: -->
-            <div class="tab">
-                <h4>Personal Information</h4>
-                <div class="tab">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="operatorLastName">Last Name:</label>
-                            <p id="driverLastName" name="driverLastName" class="form-control" placeholder="Last Name" disabled>{{$operator->last_name}} </p>
-                        </div>
-                        <div class="form-group">
-                            <label for="contactNumberO">Contact Number:</label>
-                            <p id="contactNumberO" name="contactNumberO" class="form-control" placeholder="Contact Number" disabled>{{$operator->edit_contact_number}}</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="ageO">Age:</label>
-                            <p id="ageO" name="ageO" class="form-control" placeholder="Age" disabled>{{$operator->age}}</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="genderO">Gender:</label>
-                            <p id="genderO" name="genderO" class="form-control" placeholder="Gender" disabled>{{$operator->gender}}</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="sssO">SSS No:</label>
-                            <p id="sssO" name="sssO" type="text" class="form-control" placeholder="SSS No." disabled>{{$operator->SSS}}</p>
-                        </div>
+    <div class="box-body">
+            <h4>Personal Information</h4>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="operatorLastName">Last Name:</label>
+                        <p id="driverLastName" name="driverLastName"  class="info-container">{{$operator->last_name}} </p>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactNumberO">Contact Number:</label>
+                        <p id="contactNumberO" name="contactNumberO" class="info-container">{{$operator->edit_contact_number}}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="ageO">Age:</label>
+                        <p id="ageO" name="ageO" class="info-container">{{$operator->age}}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="genderO">Gender:</label>
+                        <p id="genderO" name="genderO" class="info-container">{{$operator->gender}}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="sssO">SSS No:</label>
+                        <p id="sssO" name="sssO" type="text" class="info-container">{{$operator->SSS}}</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="operatorFirstName">First Name:</label>
-                        <p id="operatorFirstName" name="operatorFirstName" class="form-control" placeholder="First Name" disabled>{{$operator->first_name}}</p>
+                        <p id="operatorFirstName" name="operatorFirstName" class="info-container">{{$operator->first_name}}</p>
                     </div>
                     <div class="form-group">
                         <label for="addressO">Address:</label>
-                        <p id="addressO" name="addressO" class="form-control" placeholder="Address" disabled>{{$operator->address}}</p>
+                        <p id="addressO" name="addressO" class="info-container"}</p>
                     </div>
                     <div class="form-group">
                         <label for="birthdateO">Birthdate:</label>
-                        <p id="birthdateO" name="birthdateO" class="form-control" placeholder="Birthdate" disabled>{{$operator->birth_date}}</p>
+                        <p id="birthdateO" name="birthdateO" class="info-container">{{$operator->birth_date}}</p>
                     </div>
                     <div class="form-group">
                         <label for="citizenshipO">Citizenship:</label>
-                        <p id="citizenshipO" name="citizenshipO" class="form-control" placeholder="Citizenship" disabled>{{$operator->citizenship}}</p>
+                        <p id="citizenshipO" name="citizenshipO" class="info-container">{{$operator->citizenship}}</p>
                     </div>
                     <div class="form-group">
                         <label for="licenseNoO">License No:</label>
-                        <p id="licenseNoO" name="licenseNoO" class="form-control" placeholder="License No." disabled>{{$operator->license_number}}</p>
+                        <p id="licenseNoO" name="licenseNoO" class="info-container">{{$operator->license_number}}</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="operatorMiddleName">Middle Name:</label>
-                        <p id="operatorMiddleName" name="operatorMiddleName" class="form-control" placeholder="Middle Name" disabled>{{$operator->middle_name}}</p>
+                        <p id="operatorMiddleName" name="operatorMiddleName" class="info-container">{{$operator->middle_name}}</p>
                     </div>
                     <div class="form-group">
                         <label for="provincialAddressO">Provincial Address:</label>
-                        <p id="provincialAddressO" name="provincialAddressO" class="form-control" placeholder="Provincial Address" disabled>{{$operator->provincial_address}}</p>
+                        <p id="provincialAddressO" name="provincialAddressO" class="info-container">{{$operator->provincial_address}}</p>
                     </div>
                     <div class="form-group">
                         <label for="birthplaceO">Birthplace:</label>
-                        <p id="birthplaceO" name="birthplaceO" class="form-control" placeholder="Birthplace" disabled>{{$operator->birth_place}}</p>
+                        <p id="birthplaceO" name="birthplaceO" class="info-container">{{$operator->birth_place}}</p>
                     </div>
                     <div class="form-group">
                         <label for="civilStatusO">Civil Status:</label>
-                        <p id="civilStatusO" name="civilStatusO" class="form-control" placeholder="Civil Status" disabled>{{$operator->civil_status}}</p>
+                        <p id="civilStatusO" name="civilStatusO" class="info-container">{{$operator->civil_status}}</p>
                     </div>
                     <div class="form-group">
                         <label for="licenseExpiryDateO">License Expiry Date:</label>
-                        <p id="licenseExpiryDateO" name="licenseExpiryDateO" class="form-control" placeholder="License Expiry" disabled>{{$operator->expiry_date}}</p>
+                        <p id="licenseExpiryDateO" name="licenseExpiryDateO" class="info-container">{{$operator->expiry_date}}</p>
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
 </div>
-<div class="box box-warning">
-    <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
-        <div class="tab">
+<div class="box box-default"  style="box-shadow: 0px 5px 10px gray;">
+    <div class="box-body">
+        
             <h4>Family Information</h4>
-            <div class="tab">
+            <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="spouseNameO">Name of Spouse:</label>
-                        <p id="spouseNameO" name="spouseNameO" class="form-control" placeholder="Name of Spouse" disabled>{{$operator->spouse}}</p>
+                        <p id="spouseNameO" name="spouseNameO" class="info-container" placeholder="Name of Spouse">{{$operator->spouse}}</p>
                     </div>
                     <div class="form-group">
                         <label for="fathersNameO">Fathers Name:</label>
-                        <p id="fathersNameO" name="fathersNameO" class="form-control" placeholder="Fathers Name" disabled>{{$operator->father_name}}</p>
+                        <p id="fathersNameO" name="fathersNameO" class="info-container" placeholder="Fathers Name">{{$operator->father_name}}</p>
                     </div>
                     <div class="form-group">
                         <label for="mothersNameO">Mothers Name:</label>
-                        <p id="mothersNameO" name="mothersNameO" class="form-control" placeholder="Mothers Name" disabled>{{$operator->mother_name}}</p>
+                        <p id="mothersNameO" name="mothersNameO" class="info-container" placeholder="Mothers Name">{{$operator->mother_name}}</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="spouseBirthDateO">Birthdate of Spouse:</label>
-                        <p id="spouseBirthDateO" name="spouseBirthDateO" class="form-control" placeholder="Spouse Birthday" disabled>{{$operator->spouse_birthdate}}</p>
+                        <p id="spouseBirthDateO" name="spouseBirthDateO" class="info-container" placeholder="Spouse Birthday">{{$operator->spouse_birthdate}}</p>
                     </div>
                     <div class="form-group">
                         <label for="occupationFatherO">Occupation:</label>
-                        <p id="occupationFatherO" name="occupationFatherO" class="form-control" placeholder="Occupation Father" disabled>{{$operator->father_occupation}}</p>
+                        <p id="occupationFatherO" name="occupationFatherO" class="info-container" placeholder="Occupation Father">{{$operator->father_occupation}}</p>
                     </div>
                     <div class="form-group">
                         <label for="occupationMotherO">Occupation:</label>
-                        <p id="occupationMotherO" name="occupationMotherO" class="form-control" placeholder="Occupation Mother" disabled>{{$operator->mother_occupation}}</p>
+                        <p id="occupationMotherO" name="occupationMotherO" class="info-container" placeholder="Occupation Mother">{{$operator->mother_occupation}}</p>
                     </div>
 
                 </div>
@@ -127,19 +131,19 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="contactPersonO">Contact Person</label>
-                            <p id="contactPersonO" name="contactPersonO" class="form-control" placeholder="Contact Person In Case of Emergency" disabled>{{$operator->person_in_case_of_emergency}}</p>
+                            <p id="contactPersonO" name="contactPersonO" class="info-container" placeholder="Contact Person In Case of Emergency">{{$operator->person_in_case_of_emergency}}</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="addressO">Address</label>
-                            <p id="addressO" name="addressO" class="form-control" placeholder="Address" disabled>{{$operator->emergency_address}}</p>
+                            <p id="addressO" name="addressO" class="info-container" placeholder="Address">{{$operator->emergency_address}}</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="contactNumberO">Contact Number</label>
-                            <p id="contactNumberO" name="contactNumberO" class="form-control" placeholder="Contact Number" disabled>{{$operator->emergency_contactno}}</p>
+                            <p id="contactNumberO" name="contactNumberO" class="info-container" placeholder="Contact Number">{{$operator->emergency_contactno}}</p>
                         </div>
                     </div>
                 </div>
@@ -162,11 +166,11 @@
 
                                 <tr>
                                     <td>
-                                        <p placeholder="Name of Child" class="form-control" disabled>{{$child->children_name}}</p>
+                                        <p placeholder="Name of Child" class="info-container">{{$child->children_name}}</p>
                                     </td>
                                     <td>
                                         <div class="col-md-7">
-                                            <p id="childBirthDateO" name="childBirthDateO" class="form-control" placeholder="Operator Child Birthday" disabled>{{$child->birthdate}}</p>
+                                            <p id="childBirthDateO" name="childBirthDateO" class="info-container" placeholder="Operator Child Birthday">{{$child->birthdate}}</p>
                                         </div>
                                     </td>
 
@@ -178,28 +182,7 @@
                     </div>
                             @endif
                 </div>
-
             </div>
-        </div>
     </div>
-
-    @stop @section('scripts') @parent
-
-    <!-- DataTables -->
-    <script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-    <script>
-        $(function() {
-            $('#driver').DataTable()
-            $('#van').DataTable({
-                'paging': true,
-                'lengthChange': true,
-                'searching': true,
-                'ordering': true,
-                'info': true,
-                'autoWidth': true
-            })
-        })
-    </script>
-
-    @stop
+</div>
+@endsection

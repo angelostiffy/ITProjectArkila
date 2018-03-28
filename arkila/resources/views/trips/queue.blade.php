@@ -71,8 +71,6 @@ ol.vertical{
     padding: .4em .4em .4em .8em;
     *padding: .4em;
     margin: .5em 0 .5em 2.5em;
-    background: #ddd;
-    color: #444;
     text-decoration: none;
     transition: all .3s ease-out;   
 }
@@ -96,7 +94,7 @@ ol.vertical{
 }
 
 .queuenum a:hover{
-  background: #fa8072;
+  background: #eb6b5c;
   transition: all .3s ease-out;
 }
 .queuenum a:afters{
@@ -110,11 +108,27 @@ ol.vertical{
 }
 .queuenum a:hover:after{
     left: -.5em;
-    border-left-color: #fa8072;              
+    border-left-color: #fa8072;    
+
 }
 
 #queue-list:first-child{
   background: yellow;
+}
+
+.special-list span {
+    position: relative;
+    display: block;
+    padding: .4em .4em .4em .8em;
+    margin: .5em 0 0 0;
+    text-decoration: none;
+    transition: all .3s ease-out;
+}
+
+.list-border{
+    border: 1px solid #8f8685;
+    border-left-width: 4px;
+    background: #feb0a721;
 }
 
 
@@ -195,13 +209,12 @@ ol.vertical{
               </div>
             </div>
             <div class="box-body">
-                <ol id='specialUnitList' class="list-group serialization">
-
+                <ol id='specialUnitList' class="special-list serialization">
                 </ol>
               </div>
              </div>
         </div>
-
+          <div id="confirmBoxModal"></div>
         <div class="col-md-9">
           <!-- Van Queue Box -->
           <div class="box box-solid">
@@ -212,12 +225,12 @@ ol.vertical{
               <div class="row">
               <div class="col-md-4">
                   <div class="box box-solid">
-                    <div class="box-header text-center bg-gray">
-                      <h3 class="box-title">Terminals</h3>
+                    <div class="box-header text-center with-border">
+                      <h3 class="box-title"><i class="fa fa-location-arrow"></i> Terminals</h3>
                     </div>
                   <ul id="destinationTerminals" class="nav nav-stacked">
                     @foreach ($terminals as $terminal)
-                    <li class="@if($terminals->first() == $terminal){{'active'}} @else {{''}}@endif" data-val="{{$terminal->terminal_id}}"><a href="#{{$terminal->terminal_id}}" data-toggle="tab">{{$terminal->description}}</a></li>
+                    <li class=" @if($terminals->first() == $terminal){{'active'}} @else {{''}}@endif" data-val="{{$terminal->terminal_id}}"><a href="#{{$terminal->terminal_id}}" data-toggle="tab">{{$terminal->description}}</a></li>
                     @endforeach
                   </ul>
                   </div>
@@ -227,39 +240,76 @@ ol.vertical{
                 <!-- Cabanatuan Queue Tab -->
                 @foreach($terminals as $terminal)
                   <div data-val='{{$terminal->terminal_id}}' class="tab-pane @if($terminals->first() == $terminal) {{'active'}} @else {{''}} @endif" id="{{$terminal->terminal_id}}">
-                    <div class="box box-solid">
-                      <div class="box-header text-center bg-gray">
+                    <div class="box box-primary">
+                      <div class="box-header text-center ">
                         <h3 class="box-title">{{$terminal->description}}</h3>
                       </div>
                       <div class="box-body">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                      <input type="email" id="queueSearch" class="form-control" placeholder="Search in queue" onkeyup="myFunction()">
+                      <input type="text" id="queueSearch" class="form-control" placeholder="Search in queue" onkeyup="myFunction()">
                     </div>
                     <ol id ="queue-list" class="vertical rectangle-list serialization">
                         @foreach ($trips->where('terminal_id',$terminal->terminal_id) as $trip)
                           <li class="" data-plate="{{ $trip->van->plate_number}}" data-remark="{{ $trip->remarks }}">
-                            <span id="trip{{$trip->trip_id}}">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <div class="queuenum">
-                                  <a href="" id="queue{{ $trip->trip_id}}" class="queue-editable">{{ $trip->queue_number }}</a>
+                            <span id="trip{{$trip->trip_id}}" class="list-border">
+                              <div class="queuenum">
+                                    <a href="" id="queue{{ $trip->trip_id}}" class="queue-editable">{{ $trip->queue_number }}</a>
+                                  </div>
+                              <div id="item{{$trip->trip_id}}" class="row">
+
+                                <div class="col-md-6">
+                                  
+                                  <p> {{ $trip->van->plate_number }} </p>
+
+
                                 </div>
-                                <p> {{ $trip->van->plate_number }}</p>
+                                <div class="col-md-6">
 
-                              </div>
-                              <div class="col-md-6">
+                                  <div class="pull-right">
+                                     <a href="" id="remark{{ $trip->trip_id}}" class="remark-editable editable btn btn-outline-info btn-xs" style="border-radius: 100%;" data-original-title="" title="">{{ $trip->remarks }}</a>
 
-                                <div class="pull-right">
-                                    <a href="" id="remark{{ $trip->trip_id}}" class="remark-editable btn btn-flat btn-info btn-sm editable" data-original-title="" title="">{{ $trip->remarks }}</a>
-                                    <a href="" data-toggle="modal" data-target="#destination{{$trip->trip_id}}" class="btn btn-sm btn-flat btn-primary"><i class="fa fa-map-marker mapm-zoom"></i></a>
-
-                                  <a href="" class="btn btn-default btn-sm btn-flat" data-toggle="modal" data-target="#delete{{$trip->trip_id}}"><i class="fa fa-remove text-red"></i></a>
+                                      {{-- <div class="btn-group">
+                                        <button type="button"  class="btn btn-sm btn-primary"><i class="fa fa-map-marker mapm-zoom"></i></button>
+                                      </div> --}}
+                                      <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" style="border-radius: 100%">
+                                        <i class="fa fa-gear"></i>
+                                      </button>
+                                      <ul class="dropdown-menu" role="menu">
+                                        <li><a href="" id="destBtn{{$trip->trip_id}}" data-toggle="modal" data-target="#destination{{$trip->trip_id}}"><i class="fa fa-map-marker"></i>Change Destination</a></li>
+                                        <li><a href="#" id="deleteBtn{{$trip->trip_id}}" data-toggle="modal" data-target="#delete{{$trip->trip_id}}"><i class="fa fa-trash"></i>Remove</a></li>
+                                      </ul>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </span>
-                              <div class="modal fade" id="delete{{$trip->trip_id}}">
+                              <div class="" id="destitem{{$trip->trip_id}}">
+                                <div class="row">
+                                  <div class="col-xs-6">  
+                                    <select name="" id="" class="form-control">
+                                      @foreach($terminals as $terminal)
+                                      <option value="">{{$terminal->description}}</option>
+                                      @endforeach
+                                    </select>
+                                  </div>
+                                  <div class="col-xs-5 pull-right">  
+                                  <button class="btn btn-default btn-sm itemBtn{{$trip->trip_id}}">CANCEL</button>
+                                  <button class="btn btn-primary btn-sm">CHANGE</button>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="" id="deleteitem{{$trip->trip_id}}"> 
+                                <div class="row"> 
+                                  <div class="col-xs-7">  
+                                      <p><strong>{{ $trip->van->plate_number }}</strong> will be deleted. Do you want to continue?</p>
+                                  </div>
+                                  <div class="col-xs-5 pull-right">  
+                                    <button class="btn btn-default btn-sm itemBtn{{$trip->trip_id}}"> CANCEL</button>
+                                    <button class="btn btn-primary btn-sm"> YES</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </span>
+                              {{-- <div class="modal fade" id="delete{{$trip->trip_id}}">
                                   <div class="modal-dialog modal-sm">
                                       <div class="modal-content">
                                           <div class="modal-header">
@@ -285,7 +335,7 @@ ol.vertical{
                                       <!-- /.modal-content -->
                                   </div>
                                   <!-- /.modal-dialog -->
-                              </div>
+                              </div> --}}
                               <!-- /.modal -->
 
                               
@@ -306,7 +356,7 @@ ol.vertical{
         </div>
         </div>
         @foreach ($trips as $trip)
-        <div class="modal fade" id="destination{{$trip->trip_id}}">
+        {{-- <div class="modal fade" id="destination{{$trip->trip_id}}">
                                   <div class="modal-dialog modal-sm">
                                       <div class="modal-content">
                                           <div class="modal-header">
@@ -333,7 +383,7 @@ ol.vertical{
                                   </div>
                                   <!-- /.modal-dialog -->
                               </div>
-                              <!-- /.modal -->
+                              <!-- /.modal --> --}}
                               @endforeach
       </div>
 
@@ -352,8 +402,8 @@ ol.vertical{
     <!-- List sortable -->
     <script>
         $(function() {
+            specialUnitChecker();
             $('#specialUnitList').load('/listSpecialUnits/'+$('#destinationTerminals li.active').data('val'));
-
             $('#addQueueButt').on('click', function() {
                 var destination = $('#destination').val();
                 var van = $('#van').val();
@@ -380,7 +430,7 @@ ol.vertical{
         delay: 500,
         onDrop: function ($item, container, _super) {
           var queue = group.sortable("serialize").get();
-
+            console.log(queue);
           var jsonString = JSON.stringify(queue, null, ' ');
 
           $('#serialize_output2').text(jsonString);
@@ -398,6 +448,7 @@ ol.vertical{
                for(i = 0; i < trips.length; i++){
                     $('#queue'+trips[i].trip_id).editable('setValue',trips[i].queue_number);
                }
+               specialUnitChecker();
             }
 
         });
@@ -415,10 +466,10 @@ ol.vertical{
       $('#remark{{$trip->trip_id}}').editable({
           name: "remarks",
           type: "select",
-          title: "Update Remark ({{$trip->van->plate_number}})",
+          title: "Update Remark",
         value: "@if(is_null($trip->remarks)){{'NULL'}}@else{{$trip->remarks}}@endif",
           source: [
-                {value: 'NULL', text: 'Give Remarks'},
+                {value: 'NULL', text: '...'},
                 {value: 'CC', text: 'CC'},
                 {value: 'ER', text: 'ER'},
                 {value: 'OB', text: 'OB'}
@@ -443,27 +494,15 @@ ol.vertical{
             }
         },
         success: function(response){
+            specialUnitChecker();
             console.log(response);
             if(response.length > 0){
-                checkSpecialUnit({{$trip->trip_id}},reponse[0],response[1],response[2]);
+
             }
         }
       });
 
     @endforeach
-
-    function checkSpecialUnit(tripId,hasPrivilege,trips,terminal){
-            if(hasPrivilege == 1){
-                $('#trip'+tripId).remove();
-
-                for(i = 0; i < trips.length; i++){
-                    $('#queue'+trips[i].trip_id).editable('setValue',trips[i].queue_number);
-                }
-
-                $('#specialUnitList').load('/listSpecialUnits/'+terminal);
-            }
-    }
-
     @foreach($trips as $trip)
               $('#queue{{$trip->trip_id}}').editable({
                   name: 'queue',
@@ -498,8 +537,61 @@ ol.vertical{
                       location.reload();
                   }
               });
-
             @endforeach
+
+            function updateQueueList(){
+                $.ajax({
+                    method:'GET',
+                    url: '{{route("trips.updatedQueueNumber")}}',
+                    data: {
+                        '_token': '{{csrf_token()}}'
+                    },
+                    success: function(response){
+                        response.forEach(function(trip){
+                            $('#queue'+trip.id).editable('setValue',trip.queueNumber);
+                        });
+
+                    }
+
+                });
+            }
+
+            function specialUnitChecker(){
+                    $.ajax({
+                        method:'POST',
+                        url: '{{route("trips.specialUnitChecker")}}',
+                        data: {
+                            '_token': '{{csrf_token()}}'
+                        },
+                        success: function(response){
+                            if(response === 1 || response === 0){
+                                if(response === 0){
+
+                                }
+                            }else{
+                                $('#confirmBoxModal').load('/showConfirmationBox/'+response);
+                            }
+
+                        }
+
+                    });
+            }
+
+            $('a[name="onDeck"]').on('click',function(e){
+
+                $.ajax({
+                    method:'POST',
+                    url: '/putOnDeck/'+$(e.currentTarget).data('val'),
+                    data: {
+                        '_token': '{{csrf_token()}}'
+                    },
+                    success: function(response){
+
+                    }
+
+                });
+
+            });
 
         });
 </script>
@@ -532,5 +624,28 @@ ol.vertical{
           radioClass   : 'iradio_flat-blue'
         });
     </script>
+  
+  @foreach($trips as $trip)
+    <script>
+      $(document).ready(function(){
+        $("#destitem{{$trip->trip_id}}").hide();
+        $("#deleteitem{{$trip->trip_id}}").hide();
+        $("#destBtn{{$trip->trip_id}}").click(function(){
+            $("#item{{$trip->trip_id}}").hide();
+            $("#destitem{{$trip->trip_id}}").show();
+        })
+        $(".itemBtn{{$trip->trip_id}}").click(function(){
+            $("#destitem{{$trip->trip_id}}").hide();
+            $("#deleteitem{{$trip->trip_id}}").hide();
+            $("#item{{$trip->trip_id}}").show();
+        })
+        $("#deleteBtn{{$trip->trip_id}}").click(function(){
+            $("#item{{$trip->trip_id}}").hide();
+            $("#deleteitem{{$trip->trip_id}}").show();
+            
+        })
+      });
+    </script>
+    @endforeach
 
 @endsection

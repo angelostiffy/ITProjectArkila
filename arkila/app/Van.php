@@ -44,7 +44,9 @@ class Van extends Model
 
     public function updateQueue($queue_number){
         $queue_number+=1;
-         $this->trips()->where('queue_number','!=',null)->first()->update(compact('queue_number'));
+        if(!is_null($this->trips()->where('queue_number','!=',null)->first())){
+            $this->trips()->where('queue_number','!=',null)->first()->update(compact('queue_number'));
+        }
     }
 
 }

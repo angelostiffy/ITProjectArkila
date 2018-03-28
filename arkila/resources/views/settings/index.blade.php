@@ -47,7 +47,7 @@
                     <!-- Terminal Tab -->
                     <div class="tab-pane active" id="terminalTab">
                         <div class="col-md-6 pull-left">
-                            <a href="/home/settings/terminal/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Create Terminal </a>
+                            <a href="/home/settings/terminal/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"> </i> CREATE TERMINAL</a>
                         </div>
                         <table class="table table-bordered table-striped dataTable">
                             <thead>
@@ -63,10 +63,9 @@
                                     <td>{{$terminal->description}}</td>
                                     <td class="pull-right">{{$terminal->booking_fee}}</td>
                                     <td>
-
-                                        <div class="text-center">                               <a href="{{ route('terminal.edit', [$terminal->terminal_id]) }}" class="btn btn-primary"><i class="fa fa-edit"></i>Edit</a>
+                                        <div class="text-center">                               <a href="{{ route('terminal.edit', [$terminal->terminal_id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> EDIT</a>
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="#{{'deleteTerminal'.$terminal->terminal_id}}"><i class="fa fa-trash"></i>Delete
+                                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteTerminal'.$terminal->terminal_id}}"><i class="fa fa-trash"></i> DELETE
                                             </button>
                                         </div>
 
@@ -116,7 +115,7 @@
                     <!-- Destinations Tab -->
                     <div class="tab-pane" id="destinationTab">
                         <div class="col-md-6 pull-left">
-                            <a href="/home/settings/destinations/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Create Destination </a>
+                            <a href="/home/settings/destinations/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"> </i> CREATE DESTINATION </a>
                         </div>
                         <table class="table table-bordered table-striped dataTable">
                             <thead>
@@ -137,9 +136,9 @@
                                     <td>
 
                                             <div class="text-center">
-                                                <a href="{{ route('destinations.edit', [$destination->destination_id]) }}" class="btn btn-primary"><i class="fa fa-edit" ></i>Edit</a>
+                                                <a href="{{ route('destinations.edit', [$destination->destination_id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" ></i> EDIT</a>
                                                 <input type="hidden" name="_method" value="DELETE">
-                                                <button class="btn btn-outline-danger" data-toggle="modal" data-target="#{{'deleteDestination'.$destination->destination_id}}"><i class="fa fa-trash"></i>Delete</button>
+                                                <button class="btn btn-outline-danger" data-toggle="modal" data-target="#{{'deleteDestination'.$destination->destination_id}}"><i class="fa fa-trash"></i> DELETE</button>
                                             </div>
 
                                     </td>
@@ -188,7 +187,7 @@
                     <!-- Fee Tab -->
                     <div class="tab-pane" id="feeTab">
                         <div class="col-md-6 pull-left">
-                            <a href="/home/settings/fees/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Create Fee </a>
+                            <a href="/home/settings/fees/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"> </i> CREATE FEE </a>
                         </div>
                         <table class="table table-bordered table-striped dataTable">
                             <thead>
@@ -205,10 +204,10 @@
                                     <td>{{$fee->description}}</td>
                                     <td class="pull-right">{{$fee->amount}}</td>
                                     <td>
-                                        <div class="text-center">
-                                            <a href="{{ route('fees.edit', [$fee->fad_id]) }}" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
+                                        <div class="text-center">    
+                                            <a href="{{ route('fees.edit', [$fee->fad_id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> EDIT</a>
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="#{{'deleteFee'.$fee->fad_id}}"><i class="fa fa-trash"></i> Delete</button>
+                                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteFee'.$fee->fad_id}}"><i class="fa fa-trash"></i> DELETE</button>
 
                                         </div>
 
@@ -259,7 +258,7 @@
                     <!-- Discount Tab -->
                     <div class="tab-pane" id="discountTab">
                         <div class="col-md-6 pull-left">
-                            <a href="/home/settings/discounts/create" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Create Discount </a>
+                            <a href="/home/settings/discounts/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> CREATE DISCOUNT </a>
                         </div>
                         <table class="table table-bordered table-striped dataTable">
                             <thead>
@@ -275,12 +274,11 @@
                                     <td>{{$discount->description}}</td>
                                     <td class="pull-right">{{$discount->amount}}</td>
                                     <td>
-                                        <div class="text-center">
-                                            <a href="{{ route('discounts.edit', [$discount->fad_id]) }}" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
+                                        <div class="text-center">    
+                                            <a href="{{ route('discounts.edit', [$discount->fad_id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> EDIT</a>          
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="#{{'deleteDiscount'.$discount->fad_id}}"><i class="fa fa-trash"></i> Delete</button>
-                                        </div>
-
+                                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteDiscount'.$discount->fad_id}}"><i class="fa fa-trash"></i> DELETE</button>
+                                        </div>    
                                     </td>
                                 </tr>
 
@@ -328,7 +326,7 @@
                     <!-- ticket Tab -->
                     <div class="tab-pane" id="ticketTab">
                         <div class="col-md-6 pull-left">
-                            <a href="{{route('tickets.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"> </i> Create Ticket </a>
+                            <a href="{{route('tickets.create')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"> </i> CREATE TICKET </a>
                         </div>
                         <table class="table table-bordered table-striped dataTable">
                             <thead>
@@ -346,8 +344,8 @@
                                     <td>{{$ticket->terminal->description}}</td>
                                     <td>
                                         <div class="text-center">
-                                            <a href="{{route('tickets.edit',[$ticket->ticket_id])}}" class="btn btn-primary"><i class="fa fa-edit" ></i>Edit</a>
-                                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="#{{'deleteTicket'.$ticket->ticket_id}}"><i class="fa fa-trash"></i>Delete</button>
+                                            <a href="{{route('tickets.edit',[$ticket->ticket_id])}}" class="btn btn-primary btn-sm"><i class="fa fa-edit" ></i> EDIT</a>
+                                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteTicket'.$ticket->ticket_id}}"><i class="fa fa-trash"></i> DELETE</button>
                                         </div>
 
                                     </td>
@@ -457,6 +455,10 @@
                 'ordering': true,
                 'info': true,
                 'autoWidth': true,
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1] /* 1st one, start by the right */
+                }]
             })
 
         })

@@ -125,7 +125,7 @@
                                      </select>
                                     </div>
                                     <label for="">Ticket</label>
-                                        <select id="ticket" class="form-control select2" multiple="multiple" data-placeholder="Select Ticket">
+                                        <select name="tickets" id="ticket" class="form-control select2" multiple="multiple" data-placeholder="Select Ticket">
                                         </select>
                             </div>
 
