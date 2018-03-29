@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Ledger;
 
-class TestController extends Controller
+class LedgersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class TestController extends Controller
      */
     public function index()
     {
-        return view('trips.viewReport');
+        return view('ledger.index');
     }
 
     /**
@@ -23,7 +24,7 @@ class TestController extends Controller
      */
     public function create()
     {
-        //
+        return view('ledger.create');
     }
 
     /**
@@ -34,9 +35,15 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        $anak = $request->children;
-        $bday = $request->date;
-        dd(compact('anak', 'bday'));
+        Ledger::create([
+            'payee' => $request->payor,
+            'description' => $request->particulars,
+            'or_number' => $request->or,
+            'amount' => $request->amount,
+            'type' => $request->r1,    
+        ]);
+
+        return back();
     }
 
     /**

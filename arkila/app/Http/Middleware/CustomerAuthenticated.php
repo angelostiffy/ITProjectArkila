@@ -18,7 +18,7 @@ class CustomerAuthenticated
     {
         if(Auth::check()){
           if(Auth::user()->isDriver() && Auth::user()->isEnable()){
-            return redirect(route('drivermodule.dashboard'));
+            return redirect(route('drivermodule.index'));
           }
 
           if(Auth::user()->isSuperAdmin() && Auth::user()->isEnable()){

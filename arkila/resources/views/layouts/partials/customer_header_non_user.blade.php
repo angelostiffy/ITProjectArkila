@@ -14,17 +14,15 @@
                 <div id="navigation" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item dropdown">
-                            <a href="customerHomeNoLogin.html">Home</a>
+                            <a href="{{route('customermodule.non-user.index')}}">Home</a>
                         </li>
                         <li class="nav-item dropdown menu-large">
-                            <a href="customerAbout.html">About</a>
+                            <a href="{{route('customermodule.non-user.about.customerAbout')}}">About</a>
                         </li>
                         <li class="nav-item dropdown menu-large">
-                            <a href="customerHelp.html">Sign In</a>
+                            <a href="{{route('login')}}">Sign In</a>
                         </li>
-                        <li class="nav-item dropdown menu-large">
-                            <a href="#">Sign Out</a>
-                        </li>
+                        
                     </ul>
                 </div>
                 <div id="search" class="collapse clearfix">

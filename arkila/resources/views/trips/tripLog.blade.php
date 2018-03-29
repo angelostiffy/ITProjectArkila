@@ -11,8 +11,9 @@
 
 <div class="box">
     <!-- /.box-header -->
-    <div class="box-body">
-        <table id="triplog" class="table table-bordered table-striped">
+    <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
+        
+        <table class="table table-bordered table-striped tripLog">
             <thead>
                 <tr>
                     <th>Trip ID</th>
@@ -20,7 +21,7 @@
                     <th>Driver</th>
                     <th>Departed at</th>
                     <th>Destination</th>
-                    <th>Action</th>
+                    <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,9 +31,9 @@
                     <td>Miguel</td>
                     <td>Baguio City</td>
                     <td>San Jose City</td>
-                    <td class="center-block">
-                        <div class="center-block">
-                            <button class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"> View </i></button>
+                    <td>
+                        <div class="text-center">
+                            <button data-toggle="modal" data-target="#wala" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> VIEW</button>
                         </div>
                     </td>
                 </tr>
@@ -44,20 +45,27 @@
 
 @endsection
 
-@section('scripts')
+@section('scripts') 
 @parent
 
-    <script>
-        $(function() {
-            $('#tripLog').DataTable({
-                'paging': true,
-                'lengthChange': false,
-                'searching': true,
-                'ordering': true,
-                'info': true,
-                'autoWidth': true
-            })
-        });
-    </script>
+<!-- DataTables -->
+<script src="{{ URL::asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+<script>
+    $(function() {
+        $('.tripLog').DataTable({
+            'paging': true,
+            'lengthChange': true,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false,
+            'order': [[ 0, "desc" ]],
+            'aoColumnDefs': [
+                { 'bSortable': false, 'aTargets': [-1]}
+            ]
+        })
+    })
+</script>
 
 @endsection

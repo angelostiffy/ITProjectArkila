@@ -1,50 +1,40 @@
-@extends('layouts.form')
-@section('title', 'Add Daily Revenue/Expense')
-@section('form-title', 'Add Daily Revenue/Expense')
-@section('links')
-@parent
-  <link rel="stylesheet" href="public\css\myOwnStyle.css">
-@stop
+@extends('layouts.master')
+@section('title', 'Create Daily Ledger')
 @section('content')
-@section('form-body')
-          
-<div class="form-group">
-    <label for="payor">Payee/Payor:</label>
-    <input type="text" class="form-control" id="payor">
-</div>
-<div class="form-group">
-    <label for="Particulars">Particulars:</label>
-    <input type="text" class="form-control" id="particulars">
-</div>
-<div class="form-group">
-    <label for="or">OR#:</label>
-    <input type="text" class="form-control" id="or">
-</div>
-<div class="form-group">
-    <label for="amount">Amount:</label>
-    <input type="text" class="form-control" id="amount">
-</div>
-<div class="form-group" id="revenueExpense">
-
-<div class="form-group">
-    <label>
-        <input type="radio" name="r1" class="minimal">
-            Revenue
-    </label>
-    <label>
-        <input type="radio" name="r1" class="minimal">
-            Expense
-    </label>
-</div>
+ <div style="text-align: center" style class="row">
+        <!-- Left col -->
     
-@endsection
-@section('form-btn')     
-   <button type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
-   <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
+        <p> <a href="{{route('ledger.create')}}" class="btn btn-primary btn-md" style="margin-left: 1.5%" > Create Today's Ledger </span> </a></p>
+        
+        <p>OR</p>
+        <p>In case you didn't able to record ledger in the past days, please enter the date:</p>
+        
+         <!-- Date -->
+          <div class="form-group">
+            <label>Date:</label>
 
-@endsection
+            <div class="input-group date" style="width: 18%; margin-left: 41%">
+              <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <input type="text" class="form-control pull-right" id="datepicker">
+            </div>
+           </div>  
+         
+         <p> <a href="#" class="btn btn-primary btn-md" style="margin-left: 1.5%"> Create </span> </a></p>
+          
+    <!-- /.content -->
+  </div>
 
-@section('scripts')
-@parent
+<script>
+  $(function () {
+    
+    //Date picker
+    $('#datepicker').datepicker({
+      autoclose: true
+    })
+
+  })
+</script>
 
 @endsection

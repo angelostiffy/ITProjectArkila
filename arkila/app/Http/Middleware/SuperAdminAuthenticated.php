@@ -22,7 +22,7 @@ class SuperAdminAuthenticated
           }
 
           if(Auth::user()->isDriver() && Auth::user()->isEnable()){
-            return redirect(route('drivermodule.dashboard'));
+            return redirect(route('drivermodule.index'));
           }
           if(Auth::user()->isAdmin() && Auth::user()->isEnable()){
             return redirect('home/settings');
