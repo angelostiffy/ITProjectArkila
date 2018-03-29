@@ -67,7 +67,7 @@ class CreateReportRequest extends FormRequest
 
          if($this->request->get('numberOfDiscount') !== null){
            foreach($this->request->get('numberOfDiscount') as $key => $value){
-             $rules['numberOfDiscount.'.$key] = 'nullable|numeric|min:1';
+             $rules['numberOfDiscount.'.$key] = 'nullable|numeric|min:1|max:'.$member_van->seating_capacity;
            }
          }
 
@@ -77,6 +77,8 @@ class CreateReportRequest extends FormRequest
 
     public function messages()
     {
+      $member = Member::where('user_id', Auth::id())->first();
+      $member_van = $member->van->first();
       $messages = [
         "dateDeparted.required" => "Please enter the date of departure",
         "dateDeparted.date_format" => "Please enter the correct format for the date of departure: mm/dd/yyyy",
@@ -113,6 +115,8 @@ class CreateReportRequest extends FormRequest
           }else if(!(is_numeric($value))){
               $messages['numberOfDiscount.'.$key.'.numeric'] = "The number of discount must be numeric";
               break;
+          }else if($value > $member_van->seating_capacity){
+              $messages['numberOfDiscount.'.$key.'.max'] = "The number of discount cannot be greater than".$member_van->seating_capacity.", the seating capacity of the van";
           }
         }
       }
