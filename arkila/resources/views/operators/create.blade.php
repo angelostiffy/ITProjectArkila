@@ -59,8 +59,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Last Name: <span class="text-red">*</span></label>
-                                <input value="{{old('lastName')}}" name="lastName" type="text" class="form-control val-name" placeholder="Last Name" data-parsley-errors-container="#errLastName" data-parsley-trigger="keyup" val-name required> 
-                                <p id="errLastName"></p>
+                                <input value="{{old('lastName')}}" name="lastName" type="text" class="form-control val-name" placeholder="Last Name" data-parsley-trigger="keyup" val-name required> 
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -72,7 +71,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Middle Name:</label>
-                                <input value="{{old('middleName')}}" name="middleName" type="text" class="form-control" placeholder="Middle Name" data-parsley-trigger="keyup" val-name required>
+                                <input value="{{old('middleName')}}" name="middleName" type="text" class="form-control" placeholder="Middle Name" data-parsley-trigger="keyup" val-name>
                             </div>
                         </div>
                     </div>
@@ -143,7 +142,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Citizenship: <span class="text-red">*</span></label>
-                                <input value="{{old('citizenship')}}" name="citizenship" type="text" class="form-control" placeholder="Citizenship" maxlength="25" required data-parsley-trigger="keyup" val-citizenship>
+                                <input value="{{old('citizenship')}}" name="citizenship" type="text" class="form-control" placeholder="Citizenship" data-parsley-trigger="keyup" val-citizenship required>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -169,18 +168,18 @@
                     <div class="row">   
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>License No: <span class="text-red">*</span></label>
-                                <input value="{{old('licenseNo')}}" name="licenseNo" type="text" class="form-control" placeholder="License No." data-parsley-trigger="keyup" val-license required>
+                                <label>License No:</label>
+                                <input value="{{old('licenseNo')}}" name="licenseNo" type="text" class="form-control" placeholder="License No." data-parsley-trigger="keyup" val-license>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>License Expiry Date: <span class="text-red">*</span></label>
+                                <label>License Expiry Date:</label>
                                 <div class="input-group date">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input value="{{old('licenseExpiryDate')}}" name="licenseExpiryDate" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask required data-parsley-trigger="keyup" val-license-exp data-parsley-expire-date data-parsley-errors-container="#errExpireDate">
+                                    <input value="{{old('licenseExpiryDate')}}" name="licenseExpiryDate" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" val-license-exp data-parsley-expire-date data-parsley-errors-container="#errExpireDate">
                                 </div>
                                 <p id= "errExpireDate"></p>
                             </div>
@@ -193,7 +192,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Name of Spouse:</label>
-                                <input value="{{old('nameOfSpouse')}}" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse" maxlength="40" data-parsley-trigger="keyup">
+                                <input value="{{old('nameOfSpouse')}}" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse"data-parsley-trigger="keyup">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -213,7 +212,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Fathers Name:</label>
-                                <input value="{{old('fathersName')}}" name="fathersName" type="text" class="form-control" placeholder="Fathers Name" maxlength="40" data-parsley-trigger="keyup" val-name>
+                                <input value="{{old('fathersName')}}" name="fathersName" type="text" class="form-control" placeholder="Fathers Name" data-parsley-trigger="keyup" val-name>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -227,7 +226,7 @@
                         <div class="col-md-6">
                              <div class="form-group">
                                 <label>Mothers Maiden Name:</label>
-                                <input value="{{old('mothersName')}}" name="mothersName" type="text" class="form-control" placeholder="Mothers Name" maxlength="40" data-parsley-trigger="keyup" val-name>
+                                <input value="{{old('mothersName')}}" name="mothersName" type="text" class="form-control" placeholder="Mothers Name" data-parsley-trigger="keyup" val-name>
                             </div>
                         </div>
                         <div class="col-md-6">

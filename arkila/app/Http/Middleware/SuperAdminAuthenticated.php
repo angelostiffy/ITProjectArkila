@@ -18,7 +18,7 @@ class SuperAdminAuthenticated
     {
         if(Auth::check()){
           if(Auth::user()->isCustomer() && Auth::user()->isEnable()){
-            return redirect('home/user-management');
+            return redirect(route('customermodule.user.index'));
           }
 
           if(Auth::user()->isDriver() && Auth::user()->isEnable()){

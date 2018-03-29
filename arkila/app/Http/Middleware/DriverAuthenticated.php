@@ -26,7 +26,7 @@ class DriverAuthenticated
         }
 
         if(Auth::user()->isCustomer() && Auth::user()->isEnable()){
-          return redirect('user-management');
+          return redirect(route('customermodule.user.index'));
         }
 
         if(Auth::user()->isDriver() && Auth::user()->isEnable()){

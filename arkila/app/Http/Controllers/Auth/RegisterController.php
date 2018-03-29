@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\VerifyUser;
+use App\Mail\VerifyMail;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -27,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -37,6 +41,11 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function showRegistrationForm()
+    {
+        return view('auth.register');
     }
 
     /**
@@ -49,6 +58,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
+            'username' => 'required|string|max:15|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -62,10 +72,50 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        
+        $user = User::create([
             'name' => $data['name'],
+            'username' => $data['username'],
             'email' => $data['email'],
+            'user_type' => 'Customer',
+            'status' => 'disable',
             'password' => bcrypt($data['password']),
         ]);
+
+        $verifyUser = VerifyUser::create([
+            'user_id' => $user->id,
+            'token' => str_random(40)
+        ]);
+
+        Mail::to($user->email)->send(new VerifyMail($user));
+
+        session()->flash('success', 'Registration Successful. An email verification has been sent to your email');
+        return $user;
     }
+
+    public function verifyUser($token)
+    {
+        $verifyUser = VerifyUser::where('token', $token)->first();
+        if(isset($verifyUser)){
+            $user = $verifyUser->user;
+            if($user->status === 'disable'){
+                $verifyUser->user->status = 'enable';
+                $verifyUser->user->save();
+                $status = "Your e-mail is verified. You can now login.";
+            }else{
+                $status = "Your e-mail is already verified. You can now login.";
+            }
+        }else{
+            return redirect('/login')->with('error', "Sorry your email cannot be identified.");
+        }
+
+        return redirect('/login')->with('success', $status);
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        $this->guard()->logout();
+        return redirect('/login')->with('status', 'We sent you an activation code. Check your email and click on the link to verify.');
+    }
+
 }

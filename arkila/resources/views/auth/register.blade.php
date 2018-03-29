@@ -1,77 +1,63 @@
-@extends('layouts.app')
-
+@extends('layouts.customer_non_user')
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<section id="mainSection" style="background-image: url('{{ URL::asset('img/background.jpg') }}');">
+        <div class="container">
+            <div class="heading text-center">
+                <h2>Sign Up</h2>
             </div>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4" id="boxContainer">
+                    <form class="contact100-form" action="{{route('register')}}" method="POST">
+                        {{csrf_field()}}
+                        <div class="wrap-input100{{ $errors->has('name') ? ' has-error' : '' }}" >
+                            <input id="customerName" class="input100" type="text" name="name" value="{{ old('name') }}" placeholder="Full Name" required>
+                            @if ($errors->has('name'))
+                                <span class="focus-input100">
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
+                            @endif    
+                        </div><!-- wrap-input100-->
+                        <div class="wrap-input100{{ $errors->has('username') ? ' has-error' : '' }}">
+                            <input id="customerUsername" class="input100" type="text" name="username" value="{{ old('username') }}" placeholder="Username" required>
+                            @if ($errors->has('username'))    
+                                <span class="focus-input100">
+                                    <strong>{{ $errors->first('username') }}</strong>
+                                </span>
+                            @endif
+                        </div><!-- wrap-input100-->
+                        <div class="wrap-input100">
+                            <input id="customerEmail" class="input100" type="text" name="email" value="{{ old('email') }}" placeholder="Email Address">
+                            @if ($errors->has('email'))
+                                <span class="focus-input100">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif    
+                        </div><!-- wrap-input100-->
+                        <div class="wrap-input100{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <input id="customerPassword" class="input100" type="password" name="password" placeholder="Password" required>
+                            @if ($errors->has('password'))
+                                <span class="focus-input100">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                            @endif    
+                        </div><!-- wrap-input100-->
+                        <div class="wrap-input100">
+                            <input id="customerRepeatPassword" class="input100" type="password" name="password_confirmation" placeholder="Repeat Password" required>
+                            <span class="focus-input100"></span>
+                        </div><!-- wrap-input100-->
+                        <div class="container-contact100-form-btn">
+                            <button type="submit" class="contact100-form-btn"><strong>Sign Up</strong></button>
+                        </div><!-- container-contact100-form-btn-->
+                    </form>
+                    <!-- contact100-form-->
+                </div>
+                <!-- boxContainer-->
+            </div>
+            <!-- row-->
         </div>
-    </div>
-</div>
-@endsection
+        <!-- container-->
+    </section>
+    <!--    main section-->
+
+@stop

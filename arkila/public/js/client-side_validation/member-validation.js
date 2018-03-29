@@ -66,7 +66,7 @@
 
   // Validate citizenship.
     $('[val-citizenship]').parsley({
-    	maxlength: 30,
+    	maxlength: 25,
     	pattern: /^[a-zA-Z]+$/
     });
     $('[val-citizenship]').attr('data-parsley-required-message','Please enter a citizenship.');

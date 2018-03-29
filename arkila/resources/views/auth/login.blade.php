@@ -1,69 +1,60 @@
-@extends('layouts.app')
-
+@extends('layouts.customer_non_user')
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<section id="mainSection" style="background-image: url('{{ URL::asset('img/background.jpg') }}');">
+        <div class="container">
+            <div class="heading text-center">
+                <h2>Sign In</h2>
             </div>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4" id="boxContainer">
+                    <form class="contact100-form" method="POST" action="{{ route('login') }}">
+                      {{csrf_field()}}
+                        <div class="wrap-input100{{ $errors->has('username') ? ' has-error' : '' }}">
+                            <input id="username" type="text" name="username" class="input100" type="text" name="Customer Username" placeholder="Username">
+                            @if ($errors->has('username'))
+                              <span class="focus-input100">
+                                <strong>{{ $errors->first('email') }}</strong>
+                              </span>
+                            @endif
+                        </div><!-- wrap-input100-->
+                        <div class="wrap-input100{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <input id="password" type="password" name="password" class="input100" type="password" name="Customer Password" placeholder="Password">
+                            @if ($errors->has('password'))
+                              <span class="focus-input100">
+                                <strong>{{ $errors->first('password') }}</strong>
+                              </span>
+                            @endif
+                        </div><!-- wrap-input100-->
+                        <div class="checkbox">
+                          <label>
+                              <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                          </label>
+                        </div>
+                        <div class="container-contact100-form-btn">
+                          <div class="row">
+                            <div class="col-md-2">
+                                <button type="submit" class="contact100-form-btn"><strong>Log In</strong></button>
+                            </div>
+                            <div class="col-md-2">
+                                <a href="{{route('register')}}" type="button" class="contact100-form-btn"><strong>Sign-up</strong></a>
+                            </div>
+                          </div>
+
+
+                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                Forgot Your Password?
+                            </a>
+                        </div><!-- container-contact100-form-btn-->
+                    </form>
+                    <!-- contact100-form-->
+                </div>
+                <!-- boxContainer-->
+            </div>
+            <!-- row-->
         </div>
-    </div>
-</div>
-@endsection
+        <!-- container-->
+    </section>
+    <!--    main section-->
+
+@stop

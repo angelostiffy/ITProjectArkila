@@ -22,7 +22,9 @@
                         <li class="nav-item dropdown menu-large">
                             <a href="{{route('login')}}">Sign In</a>
                         </li>
-                        
+                        <li class="nav-item dropdown menu-large">
+                            <a href="{{route('register')}}">Sign Up</a>
+                        </li>
                     </ul>
                 </div>
                 <div id="search" class="collapse clearfix">

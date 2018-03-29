@@ -132,10 +132,6 @@ ol.vertical{
 }
 
 
-  .mapm-zoom a:hover{
-       transform: scale(1.2);
-    transition: all .3s ease-out;
-  }
   </style>
 @endsection
 
@@ -209,12 +205,11 @@ ol.vertical{
               </div>
             </div>
             <div class="box-body">
-                <ol id='specialUnitList' class="special-list serialization">
+                <ol id='specialUnitList' class="special-list">
                 </ol>
               </div>
              </div>
         </div>
-          <div id="confirmBoxModal"></div>
         <div class="col-md-9">
           <!-- Van Queue Box -->
           <div class="box box-solid">
@@ -254,35 +249,30 @@ ol.vertical{
                           <li class="" data-plate="{{ $trip->van->plate_number}}" data-remark="{{ $trip->remarks }}">
                             <span id="trip{{$trip->trip_id}}" class="list-border">
                               <div class="queuenum">
-                                    <a href="" id="queue{{ $trip->trip_id}}" class="queue-editable">{{ $trip->queue_number }}</a>
-                                  </div>
-                              <div id="item{{$trip->trip_id}}" class="row">
+                                  <a href="" id="queue{{ $trip->trip_id}}" class="queue-editable">{{ $trip->queue_number }}</a>
+                              </div>
+                              <div id="item{{$trip->trip_id}}">
+                                <div  class="row">
+                                  <div class="col-md-12">
+                                    {{ $trip->van->plate_number }} 
+                                    <div class="pull-right">
+                                       <a href="" id="remark{{ $trip->trip_id}}" class="remark-editable editable btn btn-outline-info btn-xs" style="border-radius: 100%;" data-original-title="" title="">{{ $trip->remarks }}</a>
 
-                                <div class="col-md-6">
-                                  
-                                  <p> {{ $trip->van->plate_number }} </p>
-
-
-                                </div>
-                                <div class="col-md-6">
-
-                                  <div class="pull-right">
-                                     <a href="" id="remark{{ $trip->trip_id}}" class="remark-editable editable btn btn-outline-info btn-xs" style="border-radius: 100%;" data-original-title="" title="">{{ $trip->remarks }}</a>
-
-                                      {{-- <div class="btn-group">
-                                        <button type="button"  class="btn btn-sm btn-primary"><i class="fa fa-map-marker mapm-zoom"></i></button>
-                                      </div> --}}
-                                      <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" style="border-radius: 100%">
-                                        <i class="fa fa-gear"></i>
-                                      </button>
-                                      <ul class="dropdown-menu" role="menu">
-                                        <li><a href="" id="destBtn{{$trip->trip_id}}" data-toggle="modal" data-target="#destination{{$trip->trip_id}}"><i class="fa fa-map-marker"></i>Change Destination</a></li>
-                                        <li><a href="#" id="deleteBtn{{$trip->trip_id}}" data-toggle="modal" data-target="#delete{{$trip->trip_id}}"><i class="fa fa-trash"></i>Remove</a></li>
-                                      </ul>
+                                        {{-- <div class="btn-group">
+                                          <button type="button"  class="btn btn-sm btn-primary"><i class="fa fa-map-marker mapm-zoom"></i></button>
+                                        </div> --}}
+                                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" style="border-radius: 100%">
+                                          <i class="fa fa-gear"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                          <li><button id="destBtn{{$trip->trip_id}}" class="btn btn-menu btn-sm btn-flat btn-block"><i class="fa fa-map-marker"></i> Change Destination</button></li>
+                                          <li><button id="deleteBtn{{$trip->trip_id}}" class="btn btn-menu btn-sm btn-flat btn-block"><i class="fa fa-trash"></i> Remove</button></li>
+                                        </ul>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                              <div class="" id="destitem{{$trip->trip_id}}">
+                              <div id="destitem{{$trip->trip_id}}" class="hidden">
                                 <div class="row">
                                   <div class="col-xs-6">  
                                     <select name="" id="" class="form-control">
@@ -297,7 +287,7 @@ ol.vertical{
                                   </div>
                                 </div>
                               </div>
-                              <div class="" id="deleteitem{{$trip->trip_id}}"> 
+                              <div id="deleteitem{{$trip->trip_id}}" class="hidden"> 
                                 <div class="row"> 
                                   <div class="col-xs-7">  
                                       <p><strong>{{ $trip->van->plate_number }}</strong> will be deleted. Do you want to continue?</p>
@@ -630,9 +620,11 @@ ol.vertical{
       $(document).ready(function(){
         $("#destitem{{$trip->trip_id}}").hide();
         $("#deleteitem{{$trip->trip_id}}").hide();
+        $("#ondeck-sp{{ $trip->trip_id}}").hide();
         $("#destBtn{{$trip->trip_id}}").click(function(){
             $("#item{{$trip->trip_id}}").hide();
             $("#destitem{{$trip->trip_id}}").show();
+            $("#destitem{{$trip->trip_id}}").removeClass("hidden");
         })
         $(".itemBtn{{$trip->trip_id}}").click(function(){
             $("#destitem{{$trip->trip_id}}").hide();
@@ -642,7 +634,7 @@ ol.vertical{
         $("#deleteBtn{{$trip->trip_id}}").click(function(){
             $("#item{{$trip->trip_id}}").hide();
             $("#deleteitem{{$trip->trip_id}}").show();
-            
+            $("#deleteitem{{$trip->trip_id}}").removeClass("hidden");
         })
       });
     </script>
