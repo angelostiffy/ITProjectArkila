@@ -49,7 +49,7 @@ class LedgersController extends Controller
             'type' => [
                 'bail',
                 'required',
-                Rule::in(['Revenue', 'Expenses'])
+                Rule::in(['Revenue', 'Expense'])
             ],
         ]);
 
@@ -103,7 +103,7 @@ class LedgersController extends Controller
             'type' => [
                 'bail',
                 'required',
-                Rule::in(['Revenue', 'Expenses'])
+                Rule::in(['Revenue', 'Expense'])
             ],
         ]);
         

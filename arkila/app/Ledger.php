@@ -12,4 +12,16 @@ class Ledger extends Model
         'ledger_id',
     ];
 
+    public function getTotalRevenueAttribute(){
+        return $this->where('type', 'Revenue')->sum('amount');
+    }
+
+    public function getTotalExpenseAttribute(){
+        return $this->where('type', 'Expense')->sum('amount');
+    }
+
+    public function getBalanceAttribute(){
+        return $this->total_revenue - $this->total_expense;
+    }
+
 }

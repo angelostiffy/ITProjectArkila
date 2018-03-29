@@ -33,13 +33,15 @@
                     <td>{{$ledger->description}}</td>
                     <td>{{$ledger->or_number}}</td>
                     @if ($ledger->type == 'Revenue')
-                    <td>{{$ledger->amount}}</td>
+                    <td>&#8369;{{$ledger->amount}}</td>
                     <td></td>
+                    <td>&#8369;{{$ledger->amount}}</td>
+
                     @else
                     <td></td>                    
-                    <td>{{$ledger->amount}}</td>
+                    <td>&#8369;{{$ledger->amount}}</td>
+                    <td>-&#8369;{{$ledger->amount}}</td>
                     @endif
-                    <td>500</td>
                     <td class="center-block">
                         <div class="center-block">
                             <a href="{{route('ledger.edit', $ledger->ledger_id)}}" class="btn btn-primary">   <i class="glyphicon glyphicon-pencil">Edit</i></a>
@@ -52,6 +54,7 @@
                 @endforeach
             </tbody>
         </table>
+                <p>Total Balance: {{ $ledger->balance }}</p>
 
     </div>
     <!-- /.box-body -->
