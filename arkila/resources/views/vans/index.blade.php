@@ -175,7 +175,7 @@
                 'bSortable': false,
                 'aTargets': [-1] /* 1st one, start by the right */
             }]
-        })
+        });
 
 
     $('a[name="listDriver"]').on('click',function(e){
@@ -215,8 +215,8 @@
                 $('#plateNumber').text(vanInfo.plateNumber);
                 $('#vanModel').text(vanInfo.vanModel);
                 $('#seatingCapacity').text(vanInfo.seatingCapacity);
-                $('#operatorOfVan').text(vanInfo.operatorOfVan);
-                $('#driverOfVan').text(vanInfo.driverOfVan);
+                $('#vanOperator').text(vanInfo.operatorOfVan);
+                $('#vanDriver').text(vanInfo.driverOfVan);
             }
 
         });

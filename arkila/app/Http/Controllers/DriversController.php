@@ -374,13 +374,13 @@ class DriversController extends Controller
     {
         $drivers = Member::allDrivers()->get();
         $pdf = PDF::loadView('pdf.drivers', ['drivers' => $drivers]);
-        return $pdf->download('drivers.pdf');
+        return $pdf->stream('drivers.pdf');
     }
 
     public function generatePerDriver(Member $driver)
     {
         $pdf = PDF::loadView('pdf.perDriver', ['driver' => $driver]);
-        return $pdf->download("$driver->last_name"."$driver->first_name-Bio-Data.pdf");
+        return $pdf->stream("$driver->last_name"."$driver->first_name-Bio-Data.pdf");
         
     }
 

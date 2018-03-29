@@ -22,7 +22,7 @@
                     <th>Departed at</th>
                     <th>Destination</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,10 +33,9 @@
                     <td>Cabanatuan</td>
                     <td>Baguio City</td>
                     <th>Pending</th>
-                    <td class="center-block">
-                        <div class="center-block">
-                            <button class="btn btn-success"><i class="fa fa-check"></i> Accept</button>
-                            <button class="btn btn-danger"><i class="fa fa-close"></i> Decline</button>
+                    <td>
+                        <div class="text-center">
+                           <button data-toggle="modal" data-target="#wala" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> VIEW</button>
                         </div>
                     </td>
                 </tr>
@@ -52,17 +51,24 @@
 @section('scripts')
 @parent
 
-    <script>
-        $(function() {
-            $('#driverTrips').DataTable({
-                'paging': true,
-                'lengthChange': false,
-                'searching': true,
-                'ordering': true,
-                'info': true,
-                'autoWidth': true
-            })
-        });
-    </script>
+<script>
+    $(function() {
+        $('#driversTrips').DataTable({
+            'paging': true,
+            'lengthChange': true,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false,
+            'order': [
+                [0, "desc"]
+            ],
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': [-1]
+            }]
+        })
+    });
+</script>
 
 @endsection
