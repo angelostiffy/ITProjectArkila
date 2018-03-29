@@ -3,7 +3,7 @@
     <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
         <div class="col-md-6">
             <a href="{{route('drivers.create')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus-circle"></i> REGISTER DRIVER</a>
-            <a href="{{route('pdf.drivers')}}"  class="btn btn-default btn-sm btn-fla"> <i class="fa fa-print"></i> PRINT</a>
+            <a href="{{route('pdf.drivers')}}"  class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i> PRINT</a>
         </div>
         <table id="driverList" class="table table-bordered table-striped">
             <thead>

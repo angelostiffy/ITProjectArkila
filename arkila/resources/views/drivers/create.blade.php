@@ -68,7 +68,7 @@
         <div class="box-body">
 
                 <!-- One "tab" for each step in the form: -->
-                <div class="tab">
+                <div class="form-section">
                     <h4>Personal Information</h4>
                    
                     <div class="row">
@@ -108,19 +108,19 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Last Name: <span class="text-red">*</span></label>
-                                <input value="{{old('lastName')}}" name="lastName" type="text" class="form-control" placeholder="Last Name" maxlength="35" required="">
+                                <input value="{{old('lastName')}}" name="lastName" type="text" class="form-control" placeholder="Last Name" val-name required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>First Name: <span class="text-red">*</span></label>
-                                <input value="{{old('firstName')}}" name="firstName" type="text" class="form-control" placeholder="First Name" maxlength="35">
+                                <input value="{{old('firstName')}}" name="firstName" type="text" class="form-control" placeholder="First Name" val-name required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Middle Name:</label>
-                                <input value="{{old('middleName')}}" name="middleName" type="text" class="form-control" placeholder="Middle Name" maxlength="35">
+                                <input value="{{old('middleName')}}" name="middleName" type="text" class="form-control" placeholder="Middle Name" val-name>
                             </div>
                         </div>
                     </div>
@@ -132,20 +132,21 @@
                                   <div class="input-group-addon">
                                     <span>+63</span>
                                   </div>
-                                  <input type="text" name="contactNumber"  class="form-control" value="{{old('contactNumber')}}" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask>
+                                  <input type="text" name="contactNumber"  class="form-control" value="{{old('contactNumber')}}" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask required data-parsley-errors-container="#errContactNumber" data-parsley-trigger="keyup" val-phone required>
                                 </div>
+                                <p id="errContactNumber"></p>
                             </div>
                         </div>
                         <div class="col-md-4">
                              <div class="form-group">
                                 <label>Address: <span class="text-red">*</span></label>
-                                <input value="{{old('address')}}" name="address" type="text" class="form-control" placeholder="Address" maxlength="100">
+                                <input value="{{old('address')}}" name="address" type="text" class="form-control" placeholder="Address" val-address required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Provincial Address: <span class="text-red">*</span></label>
-                                <input value="{{old('provincialAddress')}}" name="provincialAddress" type="text" class="form-control" placeholder="Provincial Address" maxlength="100">
+                                <input value="{{old('provincialAddress')}}" name="provincialAddress" type="text" class="form-control" placeholder="Provincial Address" val-address required>
                             </div>
                         </div>
                     </div>
@@ -157,14 +158,15 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="birthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('birthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                  <input type="text" name="birthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('birthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" required data-parsley-legal-age val-birthdate data-parsley-errors-container="#errLegal">
                                 </div>
+                                <p id="errLegal"></p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Birthplace: <span class="text-red">*</span></label>
-                                <input value="{{old('birthPlace')}}" name="birthPlace" type="text" class="form-control" placeholder="Birthplace" maxlength="50">
+                                <input value="{{old('birthPlace')}}" name="birthPlace" type="text" class="form-control" placeholder="Birthplace" val-birthplace required>
                             </div>
                         </div>
                     
@@ -189,7 +191,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Citizenship: <span class="text-red">*</span></label>
-                                <input value="{{old('citizenship')}}" name="citizenship" type="text" class="form-control" placeholder="Citizenship" maxlength="35">
+                                <input value="{{old('citizenship')}}" name="citizenship" type="text" class="form-control" placeholder="Citizenship" val-citizenship required>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -206,8 +208,8 @@
                    
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>SSS No:</label>
-                                <input value="{{old('sss')}}" name="sss" type="text" class="form-control" placeholder="SSS No." maxlength="10">
+                                <label>SSS No: <span class="text-red">*</span></label>
+                                <input value="{{old('sss')}}" name="sss" type="text" class="form-control" placeholder="SSS No." val-sss required>
                             </div>
                         </div>
                     </div>
@@ -215,7 +217,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>License No: <span class="text-red">*</span></label>
-                                <input value="{{old('licenseNo')}}" name="licenseNo" type="text" class="form-control" placeholder="License No." maxlength="20">
+                                <input value="{{old('licenseNo')}}" name="licenseNo" type="text" class="form-control" placeholder="License No." val-license required>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -225,19 +227,20 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="licenseExpiryDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('licenseExpiryDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                  <input type="text" name="licenseExpiryDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('licenseExpiryDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask val-license-exp data-parsley-expire-date data-parsley-errors-container="#errExpireDate" required>
                                 </div>
+                                <p id= "errExpireDate"></p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="tab">
+                <div class="form-section">
                     <h4>Family Information</h4>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Name of Spouse:</label>
-                                <input value="{{old('nameOfSpouse')}}" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse" maxlength="120">
+                                <input value="{{old('nameOfSpouse')}}" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -247,16 +250,17 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="spouseBirthDate" placeholder="mm/dd/yyyy" class="form-control date-mask" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                  <input type="text" name="spouseBirthDate" placeholder="mm/dd/yyyy" class="form-control date-mask" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask val-spouse-bdate data-parsley-errors-container="#errSpouseBirthdate">
                                 </div>
                             </div>
+                            <p id="errSpouseBirthdate">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Fathers Name:</label>
-                                <input value="{{old('fathersName')}}" name="fathersName" type="text" class="form-control" placeholder="Fathers Name" maxlength="120">
+                                <input value="{{old('fathersName')}}" name="fathersName" type="text" class="form-control" placeholder="Fathers Name" val-name>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -270,13 +274,13 @@
                         <div class="col-md-6">
                              <div class="form-group">
                                 <label>Mothers Name:</label>
-                                <input value="{{old('mothersName')}}" name="mothersName" type="text" class="form-control" placeholder="Mothers Name" maxlength="120">
+                                <input value="{{old('mothersName')}}" name="mothersName" type="text" class="form-control" placeholder="Mothers Name" val-name>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Occupation:</label>
-                                <input value="{{old('motherOccupation')}}" name="motherOccupation" type="text" class="form-control" placeholder="Occupation" maxlength="50">
+                                <input value="{{old('motherOccupation')}}" name="motherOccupation" type="text" class="form-control" placeholder="Occupation" maxlength="25">
                             </div>
                         </div>
                     </div>
@@ -285,13 +289,13 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Contact Person: <span class="text-red">*</span></label>
-                                <input value="{{old('contactPerson')}}" name="contactPerson" type="text" class="form-control" placeholder="Contact Person In Case of Emergency" maxlength="120">
+                                <input value="{{old('contactPerson')}}" name="contactPerson" type="text" class="form-control" placeholder="Contact Person In Case of Emergency" val-name required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Address: <span class="text-red">*</span></label>
-                                <input value="{{old('contactPersonAddress')}}" name="contactPersonAddress" type="text" class="form-control" placeholder="Address" maxlength="50">
+                                <input value="{{old('contactPersonAddress')}}" name="contactPersonAddress" type="text" class="form-control" placeholder="Address" val-address required>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -301,8 +305,9 @@
                                   <div class="input-group-addon">
                                     <span>+63</span>
                                   </div>
-                                  <input type="text" name="contactPersonContactNumber"  class="form-control" value="{{old('contactPersonContactNumber')}}" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask>
+                                  <input type="text" name="contactPersonContactNumber"  class="form-control" value="{{old('contactPersonContactNumber')}}" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask val-phone required data-parsley-errors-container="#errContactPersonPhone">
                                 </div>
+                                <p id="errContactPersonPhone"></p>
                             </div>
                         </div>
                     </div>
@@ -382,13 +387,14 @@
         </div>
         <div class="box-footer">
             <div style="overflow:auto;">
-                    <div style="float:right;">
-                        <button type="button" id="prevBtn" onclick="nextPrev(-1)" class = "btn btn-default">Previous</button>
-                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class = "btn btn-primary">Next</button>
+                    <div class="form-navigation" style="float:right;">
+                        <button type="button" id="prevBtn"  class="previous btn btn-default">Previous</button>
+                        <button type="button" id="nextBtn"  class="next btn btn-primary">Next</button>
+                        <input type="submit" class="btn btn-primary">
                     </div>
                 </div>
         </div>
-    </div> 
+</div> 
 @endsection
 @section('scripts')
 @parent
@@ -468,66 +474,6 @@
     </script>
 
     <script>
-     var currentTab = 0; // Current tab is set to be the first tab (0)
-        showTab(currentTab); // Display the crurrent tab
-
-        function showTab(n) {
-            // This function will display the specified tab of the form...
-            var x = document.getElementsByClassName("tab");
-            x[n].style.display = "block";
-            //... and fix the Previous/Next buttons:
-            if (n == 0) {
-                document.getElementById("prevBtn").style.display = "none";
-            } else {
-                document.getElementById("prevBtn").style.display = "inline";
-            }
-            if (n == (x.length - 1)) {
-                document.getElementById("nextBtn").innerHTML = "Submit";
-            } else {
-                document.getElementById("nextBtn").innerHTML = "Next";
-            }
-            //... and run a function that will display the correct step indicator:
-            fixStepIndicator(n)
-        }
-
-        function nextPrev(n) {
-            // This function will figure out which tab to display
-            var x = document.getElementsByClassName("tab");
-            // Exit the function if any field in the current tab is invalid:
-            if (n == 1 && !validateForm()) return false;
-            // Hide the current tab:
-            x[currentTab].style.display = "none";
-            // Increase or decrease the current tab by 1:
-            currentTab = currentTab + n;
-            // if you have reached the end of the form...
-            if (currentTab >= x.length) {
-                // ... the form gets submitted:
-                document.getElementById("regForm").submit();
-                return false;
-            }
-            // Otherwise, display the correct tab:
-            showTab(currentTab);
-        }
-
-        function validateForm() {
-            // This function deals with validation of the form fields
-
-
-            return true; // return the valid status
-        }
-
-        function fixStepIndicator(n) {
-            // This function removes the "active" class of all steps...
-            var i, x = document.getElementsByClassName("step");
-            for (i = 0; i < x.length; i++) {
-                x[i].className = x[i].className.replace("active", "");
-            }
-            //... and adds the "active" class on the current step:
-            x[n].className += " active";
-        }
-    </script>
-
-    <script>
     $(function () {
 
         $('.select2').select2();
@@ -544,5 +490,49 @@
 
      $('[data-mask]').inputmask()
      $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+          var $sections = $('.form-section');
+
+          function navigateTo(index) {
+            // Mark the current section with the class 'current'
+            $sections
+              .removeClass('current')
+              .eq(index)
+                .addClass('current');
+            // Show only the navigation buttons that make sense for the current section:
+            $('.form-navigation .previous').toggle(index > 0);
+            var atTheEnd = index >= $sections.length - 1;
+            $('.form-navigation .next').toggle(!atTheEnd);
+            $('.form-navigation [type=submit]').toggle(atTheEnd);
+          }
+
+          function curIndex() {
+            // Return the current index by looking at which section has the class 'current'
+            return $sections.index($sections.filter('.current'));
+          }
+
+          // Previous button is easy, just go back
+          $('.form-navigation .previous').click(function() {
+            navigateTo(curIndex() - 1);
+          });
+
+          // Next button goes forward iff current block validates
+          $('.form-navigation .next').click(function() {
+            $('.parsley-form').parsley().whenValidate({
+              group: 'block-' + curIndex()
+            })  .done(function() {
+              navigateTo(curIndex() + 1);
+            });
+          });
+
+          // Prepare sections by setting the `data-parsley-group` attribute to 'block-0', 'block-1', etc.
+          $sections.each(function(index, section) {
+            $(section).find(':input').attr('data-parsley-group', 'block-' + index);
+          });
+          navigateTo(0); // Start at the beginning
+        });
     </script>
 @endsection
