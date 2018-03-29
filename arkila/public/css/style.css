@@ -452,6 +452,17 @@ textarea.parsley-error {
   background-image: none; 
 }
 
+.btn-driver{
+  min-width: 120px;
+}
 .hidden{
   display:none;
+}
+
+.info-container{
+    border: 1px solid; 
+    padding: 5px;
+    overflow-x: auto;
+    height:33px;
+    background:#e9ecfd;
 }
