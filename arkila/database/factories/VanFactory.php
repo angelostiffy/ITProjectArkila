@@ -21,7 +21,7 @@ $factory->define(App\Van::class, function (Faker $faker) {
 
     return [
         'plate_number' => $faker->unique()->bothify('??? - ###'),
-        'model_id' => $vanModel->model_id,
+        'model_id' =>  $vanModel,
         'seating_capacity'=> $faker->numberBetween($min = 13, $max = 15),
         'status' => 'Active'
     ];

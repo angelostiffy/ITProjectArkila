@@ -119,6 +119,22 @@
   // Validate spouse
     $('[name="nameOfSpouse"]').attr('data-parsley-required-message','Please enter name of spouse.');
     $('[name="spouseBirthDate"]').attr('data-parsley-required-message','Please enter birth date of spouse.');
+    $('[val-spouse-bdate]').parsley({
+      pattern: /^(0?[1-9]|1[0-2])\/(0?[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/
+    });
+
+    $('[val-spouse-date]').attr('data-parsley-pattern-message','Please enter a valid date format (mm/dd/yyyy).');
+    $(document).ready(function() {
+        $('#regForm').parsley();
+        $('select[name="civilStatus"]').on('change', function() {
+            
+            if ($(this).val() === 'married') {
+                $('[name="nameOfSpouse"').attr('data-parsley-required', 'true').parsley();
+                $('[name="spouseBirthDate"]').attr('data-parsley-required', 'true').parsley();
+            } 
+        });
+    });
+
 
   // Validate contact person.
     $('[name="contactPerson"]').attr('data-parsley-required-message','Please enter name of the contact person.');
