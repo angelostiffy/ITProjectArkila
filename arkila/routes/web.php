@@ -15,24 +15,15 @@ Auth::routes();
 
 //Made by Randall
 
-//Route::get('/randall', 'VansController@index')
-//Route::resource('/driver-test', 'DriverViewTestController');
 Route::get('/randall', 'RandallController@index');
 
-// Route::get('/driver-profile', function(){
-//     return view('drivermodule.report.driverReport');
-// });
-
-
-Route::get('/driver-profile', function(){
-    return view('drivermodule.report.driverReport');
-});
+/*Log in*/
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
-
-
-Route::get('/driver-profile', function(){
-    return view('drivermodule.report.driverReport');
-});
+/*Email Verification*/
+Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
+/*Reset Password*/
+// Route::get('password/reset/{token?}', 'Auth\ResetPasswordController@showResetForm');
+// Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 
 Route::get('/teo', function(){
     return view('rental.newcreate');
@@ -42,14 +33,9 @@ Route::get('/dixon', 'TripsController@index');
 
 Route::get('/ticketmanagement','TransactionsController@manage');
 
-Route::get('/demo', function(){
-  return new App\Mail\ResetPasswordMail();
-});
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNonUser')->name('customermodule.non-user.index');
 /***********************Super-Admin Module************************************/
 /*****************************************************************************/
  Route::group(['middleware' => ['auth', 'super-admin']], function(){
@@ -124,11 +110,6 @@ Route::get('/', function () {
         'parameters' => ['admin' => 'admin_user']
     ]);
     Route::post('/home/user-management/admin/change-status', array('as' => 'changeAdminStatus','uses' => 'AdminUserManagementController@changeAdminStatus'));
-
-    //Route::get('password/reset/{token}/{email}', array('as' => 'getResetPass', 'uses' => 'Auth\ResetPasswordController@showResetForm'));
-    //Route::post('password/reset', array('as' => 'resetPass', 'uses' => 'Auth\ResetPasswordController@reset'));
-
-    //Route::patch('home/user-management/admin/{admin_user}/{token}', 'AdminUserManagementController@update');
 
     Route::resource('/home/user-management/driver', 'UserDriversManagementController', [
         'except' => ['index','store', 'create','edit','destroy'],
@@ -240,11 +221,11 @@ Route::get('/home/try', 'PassController@index');
 
 /*********************************Customer Module******************************/
 /******************************************************************************/
-Route::get('/home', 'CustomerModuleControllers\CustomerHomeController@indexNonUser')->name('customermodule.non-user.index');
-Route::get('/about', 'CustomerModuleControllers\CustomerHomeController@aboutNonUser')->name('customermodule.non-user.about.customerAbout');
+
+Route::get('/about', 'CustomerModuleControllers\CustomerNonUserHomeController@aboutNonUser')->name('customermodule.non-user.about.customerAbout');
 
 Route::group(['middleware' => ['auth', 'customer']], function(){
-
+    Route::get('/home', 'CustomerModuleControllers\CustomerUserHomeController@index')->name('customermodule.user.index');
 });
 /******************************************************************************/
 /******************************************************************************/

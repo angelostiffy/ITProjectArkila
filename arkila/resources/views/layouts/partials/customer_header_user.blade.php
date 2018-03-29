@@ -47,7 +47,12 @@
                             <a href="customerHelp.html">Help</a>
                         </li>
                         <li class="nav-item dropdown menu-large">
-                            <a href="#">Sign Out</a>
+                            <a href="{{route('logout')}}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">Sign-out
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{csrf_field()}}
+                            </form>
                         </li>
                     </ul>
                 </div>

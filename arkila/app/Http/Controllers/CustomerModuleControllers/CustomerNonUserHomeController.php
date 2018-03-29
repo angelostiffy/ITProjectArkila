@@ -5,7 +5,7 @@ namespace App\Http\Controllers\CustomerModuleControllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CustomerHomeController extends Controller
+class CustomerNonUserHomeController extends Controller
 {
     public function indexNonUser()
     {
@@ -17,5 +17,8 @@ class CustomerHomeController extends Controller
       return view('customermodule.non-user.about.customerAbout');
     }
 
-    
+    public function register()
+    {
+    	return view('customermodule.non-user.sign-up.signUp');
+    }
 }

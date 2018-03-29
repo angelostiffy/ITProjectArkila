@@ -1,7 +1,7 @@
 @extends('layouts.form_lg') @section('title', 'asdasd') @section('form-title', 'Hello!') @section('form-body')
 
-@section('form-action', route('resetPass'))
-
+@section('form-action', '/password/reset')
+  
 <!--Start confirm password box-->
 <input type="hidden" name="token" value="{{$token}}">
 <div style="margin-left:20%; margin-right:20%;">

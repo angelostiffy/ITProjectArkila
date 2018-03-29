@@ -38,6 +38,11 @@ class User extends Authenticatable
         return $this->hasOne(Member::class, 'user_id', 'id');
     }
 
+    public function verifyUser()
+    {
+        return $this->hasOne('App\VerifyUser');
+    }
+    
     public function scopeStatusEnable($query)
     {
       return $query->where('status', '=', 'enable');
@@ -88,8 +93,8 @@ class User extends Authenticatable
       return $this->user_type === 'Customer';
     }
 
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new ResetPasswordNotification($token));
-    }
+    // public function sendPasswordResetNotification($token)
+    // {
+    //     $this->notify(new ResetPasswordNotification($token));
+    // }
 }
