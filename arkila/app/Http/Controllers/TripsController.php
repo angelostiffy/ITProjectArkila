@@ -121,7 +121,7 @@ class TripsController extends Controller {
                     'queue_number' => $queueNum
                 ]);
         }
-        return back();
+        return 'success';
     }
 
     public function updateQueueNumber(Trip $trip){
@@ -275,17 +275,9 @@ class TripsController extends Controller {
 
 
             if(count($obRemarkSession) > 0){
-                if(session('obNotification')){
-                    return 1;
-                }else{
-                    session()->flash('obNotification',$obRemarkSession);
-                    return 0;
-                }
-            }else{
-                return http_build_query($successfullyUpdated);
+                session()->flash('obNotification',$obRemarkSession);
             }
-
-
+            return http_build_query($successfullyUpdated);
     }
 
     public function updatedQueueNumber(){
