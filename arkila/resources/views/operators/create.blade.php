@@ -150,10 +150,10 @@
                             <div class="form-group">
                                 <label>Civil Status:</label>
                                 <select name="civilStatus" class="form-control">
-                                   <option @if(old('civilStatus') == 'Single') {{'selected'}} @endif>Single</option>
-                                   <option @if(old('civilStatus') == 'Married') {{'selected'}} @endif>Married</option>
-                                   <option @if(old('civilStatus') == 'Divorced') {{'selected'}} @endif>Divorced</option>
-                                   <option @if(old('civilStatus') == 'Widowed') {{'selected'}} @endif>Widowed</option>
+                                   <option value="single" @if(old('civilStatus') == 'Single') {{'selected'}} @endif>Single</option>
+                                   <option value="married" @if(old('civilStatus') == 'Married') {{'selected'}} @endif>Married</option>
+                                   <option value="divorced" @if(old('civilStatus') == 'Divorced') {{'selected'}} @endif>Divorced</option>
+                                   <option value="widowed" @if(old('civilStatus') == 'Widowed') {{'selected'}} @endif>Widowed</option>
                                </select>
                             </div>
                         </div>
@@ -203,7 +203,7 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="spouseBirthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" data-parsley-errors-container="#errSpouseBirthdate">
+                                  <input type="text" name="spouseBirthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" val-spouse-bdate data-parsley-errors-container="#errSpouseBirthdate">
                                 </div>
                                 <p id="errSpouseBirthdate"></p>
                             </div>
