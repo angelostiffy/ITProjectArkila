@@ -293,13 +293,15 @@ class VansController extends Controller {
     public function vanInfo(){
         $van = Van::find(request('van'));
 
+        $vanModel = $van->vanModel->description;
+
         if($van != null){
             $vanInfo = [
                 'plateNumber' => $van->plate_number,
-                'vanModel' => $van->model,
+                'vanModel' => $vanModel,
                 'seatingCapacity' => $van->seating_capacity,
                 'operatorOfVan' => $van->operator()->first()->full_name,
-                'driverOfVan' => $van->driver()->first()->full_name ?? $van->driver()->first()
+                'driverOfVan' => $van->driver()->first()->full_name ?? null
             ];
 
             return response()->json($vanInfo);
