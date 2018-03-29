@@ -439,3 +439,19 @@ textarea.parsley-error {
   background-attachment: fixed;
   background-size:cover;
 }
+
+.btn-menu{
+    text-align: left;
+    color: #6e6969;
+    background-color: transparent;
+    background-image: none; 
+}
+
+.btn-menu:hover{
+  background-color: #dfdddd;
+  background-image: none; 
+}
+
+.hidden{
+  display:none;
+}
