@@ -9,7 +9,7 @@
 @endif
 @section('form-action',route('vans.update',[$van->plate_number]))
 
-@section('form-title', 'Add Van-Driver')
+@section('form-title', 'Edit Van')
 @section('method_field',method_field("PATCH"))
 @section('form-body')
     @include('message.error')
@@ -59,7 +59,7 @@
 @endsection
 
 @section('form-btn')
-<button class="btn btn-primary" type="submit">Add Van-Driver</button>
+<button class="btn btn-primary" type="submit">Add Driver</button>
 @endsection
 @section('scripts')
 	@parent

@@ -22,7 +22,7 @@ class CustomerAuthenticated
           }
 
           if(Auth::user()->isSuperAdmin() && Auth::user()->isEnable()){
-            return redirect('/home');
+            return redirect(route('home'));
           }
 
           if(Auth::user()->isAdmin() && Auth::user()->isEnable()){

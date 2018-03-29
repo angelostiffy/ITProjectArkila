@@ -39,7 +39,7 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
 /***********************Super-Admin Module************************************/
 /*****************************************************************************/
  Route::group(['middleware' => ['auth', 'super-admin']], function(){
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home/superadmin-dashboard', 'HomeController@index')->name('home');
 
     Route::resource('/home/ledger', 'DailyLedgerController');
 
