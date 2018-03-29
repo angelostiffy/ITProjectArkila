@@ -47,7 +47,6 @@ class RentalsController extends Controller
         foreach ($findModel->where('description', $modelReq) as $find) {
             $findModelID = $find->model_id;
         }
-    
         Rental::create([
             'last_name' => $request->lastName,
             'first_name' => $request->firstName,
@@ -64,7 +63,7 @@ class RentalsController extends Controller
         ]);
         session()->flash('message', 'Rental was created successfully');
     
-        return redirect('/home/rental/create');
+        return redirect('/home/rental/');
 
     }    
 

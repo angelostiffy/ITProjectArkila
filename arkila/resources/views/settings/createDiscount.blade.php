@@ -1,6 +1,6 @@
 @extends('layouts.form')
 @section('title', 'Create New Discount')
-@section('back-link', route('settings.index') )
+@section('back-link', route('settings.index'))
 @section('form-action', route('discounts.store'))
 @section('form-title', 'Create Discount')
 @section('form-body')
