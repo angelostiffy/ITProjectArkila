@@ -39,7 +39,7 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
 /***********************Super-Admin Module************************************/
 /*****************************************************************************/
  Route::group(['middleware' => ['auth', 'super-admin']], function(){
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home/superadmin-dashboard', 'HomeController@index')->name('home');
 
     Route::resource('/home/ledger', 'DailyLedgerController');
 
@@ -132,7 +132,7 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
         'except' => ['show', 'edit']
     ]);
 
-    Route::get('/home/archive', 'HomeController@archive');
+    Route::get('/home/archive', 'HomeController@archive')->name('archive.index');
     Route::get('/home/operatorVanDriver/{operator}', 'HomeController@vanDriver')->name('archive.vanDriver');
     Route::get('/home/archive/profile/{archive}','HomeController@showProfile')->name('archive.showProfile');
     Route::patch('/home/operators/{driver}/archiveDelete', 'DriversController@archiveDelete')->name('drivers.archiveDelete');
