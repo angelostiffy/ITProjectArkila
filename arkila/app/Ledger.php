@@ -11,4 +11,5 @@ class Ledger extends Model
     protected $guarded = [
         'ledger_id',
     ];
+
 }

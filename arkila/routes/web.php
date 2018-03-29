@@ -132,7 +132,7 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
         'except' => ['show', 'edit']
     ]);
 
-    Route::get('/home/archive', 'HomeController@archive');
+    Route::get('/home/archive', 'HomeController@archive')->name('archive.index');
     Route::get('/home/operatorVanDriver/{operator}', 'HomeController@vanDriver')->name('archive.vanDriver');
     Route::get('/home/archive/profile/{archive}','HomeController@showProfile')->name('archive.showProfile');
     Route::patch('/home/operators/{driver}/archiveDelete', 'DriversController@archiveDelete')->name('drivers.archiveDelete');
