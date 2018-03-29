@@ -7,6 +7,7 @@ use App\Trip;
 use App\Terminal;
 use App\Transaction;
 use App\Ticket;
+use App\Destination;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -176,15 +177,28 @@ class TransactionsController extends Controller
 
     }
 
+    public function changeDestination(Transaction $transaction,Destination $destination){
+
+        $transaction->update([
+            'destination_id'=> $destination->destination_id
+        ]);
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        //
+        $this->validate(request(),[
+            'delete.*' => 'exists|ticket,ticket_id'
+        ]);
+        foreach(request('delete') as $transaction){
+            $transaction->delete();
+        }
+
+        return back();
     }
 
     public function listDestinations(Terminal $terminal){
