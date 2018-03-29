@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Password;
@@ -28,7 +29,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -44,6 +45,14 @@ class ResetPasswordController extends Controller
     // {
     //   return Password::broker('admins');
     // }
+
+    protected function resetPassword($user, $password)
+{
+    $user->forceFill([
+        'password' => bcrypt($password),
+        'remember_token' => Str::random(60),
+    ])->save();
+}
 
 
 }

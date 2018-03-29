@@ -42,7 +42,7 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('login.login');
+        return view('auth.login');
     }
 
     public function username()
@@ -52,25 +52,27 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
-        if($user->isCustomer() && $user->isEnable()){
-          return redirect('home/user-management');
-        }
+        if($user->status === 'disable'){
+          Auth::logout();
+          return back()->with('error', 'You need to confirm your account. We have sent you an activation code, please check your email.');
+        }else if($user->status === 'enable'){
+          if($user->isCustomer() && $user->isEnable()){
+            return redirect(route('customermodule.user.index'));
+          }
 
-        if($user->isDriver() && $user->isEnable()){
-          return redirect(route('drivermodule.dashboard'));
-        }
+          if($user->isDriver() && $user->isEnable()){
+            return redirect(route('drivermodule.index'));
+          }
 
-        if($user->isSuperAdmin() && $user->isEnable()){
-          return redirect('/home');
-        }
+          if($user->isSuperAdmin() && $user->isEnable()){
+            return redirect('/home');
+          }
 
-        if($user->isAdmin() && $user->isEnable()){
-          return redirect('home/settings');
+          if($user->isAdmin() && $user->isEnable()){
+            return redirect('home/settings');
+          }
         }
-        // else{
-        //   abort(404);
-        // }
-        //return $user;
+      
         abort(404);
     }
 }
