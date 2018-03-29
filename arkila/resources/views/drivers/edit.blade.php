@@ -201,7 +201,7 @@
                    <div class = "col-md-6">
                     <div class="form-group">
                         <label for="mothersNameO">Mothers Maiden Name:</label>
-                        <input value=" {{ old('mothersName') ?? $driver->mother_name }}" id="mothersNameO" name="mothersName" type="text" class="form-control" placeholder="Mothers Maiden Name" maxlength="120">
+                        <input value="{{ old('mothersName') ?? $driver->mother_name }}" id="mothersNameO" name="mothersName" type="text" class="form-control" placeholder="Mothers Maiden Name" maxlength="120">
                     </div>
                     </div>
                     <div class = "col-md-6">
@@ -377,8 +377,6 @@
             $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
 
     }
-
-
 
     function addItem() {
         var tablebody = document.getElementById('childrens');

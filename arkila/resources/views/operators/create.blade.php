@@ -226,7 +226,7 @@
                         <div class="col-md-6">
                              <div class="form-group">
                                 <label>Mothers Maiden Name:</label>
-                                <input value="{{old('mothersName')}}" name="mothersName" type="text" class="form-control" placeholder="Mothers Name" data-parsley-trigger="keyup" val-name>
+                                <input value="{{old('mothersName')}}" name="mothersName" type="text" class="form-control" placeholder="Mothers Maiden Name" data-parsley-trigger="keyup" val-name>
                             </div>
                         </div>
                         <div class="col-md-6">

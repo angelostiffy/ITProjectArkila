@@ -273,7 +273,7 @@
                     <div class="row">
                         <div class="col-md-6">
                              <div class="form-group">
-                                <label>Mothers Name:</label>
+                                <label>Mothers Maiden Name:</label>
                                 <input value="{{old('mothersName')}}" name="mothersName" type="text" class="form-control" placeholder="Mothers Name" val-name>
                             </div>
                         </div>
