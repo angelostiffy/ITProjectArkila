@@ -100,6 +100,11 @@
                     <i class="fa fa-male"></i> <span>User Management</span>
                 </a>
             </li>
+            <li>
+                <a href="{{route('archive.index')}}">
+                    <i class="fa fa-archive"></i> <span>Operator Archive</span>
+                </a>
+            </li>
 
             <li>
                 <a href="{{route('logout')}}" onclick="event.preventDefault();

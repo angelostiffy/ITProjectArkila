@@ -24,45 +24,48 @@
 
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab_1">
-                        <div class="box-body">
+                        
+                            <div class="box-body">
+                                <div class="table-responsive-sm">
+                                <div class="col col-md-6">
+                                    <a href="/home/user-management/admin/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus-circle"></i> Create New</a>
+                                </div>
 
-                            <div class="col col-md-6">
-                                <a href="/home/user-management/admin/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus-circle"></i> Create New</a>
+
+                                <table id="adminTable" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Username</th>
+                                            <th>Terminal</th>
+                                            <th class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($userAdmins as $userAdmin)
+                                        <tr>
+                                            <td>{{$userAdmin->name}}</td>
+                                            <td>{{$userAdmin->username}}</td>
+                                            <td>{{$userAdmin->description}}</td>
+                                            <td class="center-block">
+                                                <div class="text-center">
+                                                    <a href="/home/user-management/admin/{{$userAdmin->userid}}/edit" class="btn btn-default btn-sm btn-flat"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
-
-                            <table id="adminTable" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Username</th>
-                                        <th>Terminal</th>
-                                        <th class="text-center">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($userAdmins as $userAdmin)
-                                    <tr>
-                                        <td>{{$userAdmin->name}}</td>
-                                        <td>{{$userAdmin->username}}</td>
-                                        <td>{{$userAdmin->description}}</td>
-                                        <td class="center-block">
-                                            <div class="text-center">
-                                                <a href="/home/user-management/admin/{{$userAdmin->userid}}/edit" class="btn btn-default btn-sm btn-flat"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                            </table>
                         </div>
-
-
                     </div>
 
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_2">
-
+                        
+                        
                         <div class="box-body">
-
+                            <div class="table-responsive-sm">
                             <table id="driverTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -85,13 +88,16 @@
                                         </td>
                                     </tr>
                                     @endforeach
+                                </tbody>
                             </table>
+                            </div>
                         </div>
                     </div>
 
 
                     <div class="tab-pane" id="tab_3">
                         <div class="box-body">
+                            <div class="table-responsive-sm">
                             <table id="customerTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -115,7 +121,9 @@
                                         </td>
                                         @endforeach
                                     </tr>
+                                </tbody>
                             </table>
+                            </div>
                         </div>
                     </div>
 

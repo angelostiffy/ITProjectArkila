@@ -10,6 +10,7 @@
         </div>
         
         <!-- /.col -->
+        <div class="table-responsive-sm">
         <table id="operatorList" class="table table-bordered table-striped">
             <thead>
                 <tr>

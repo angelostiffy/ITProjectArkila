@@ -31,8 +31,8 @@
                         <b>Number of Drivers</b> <p class="pull-right">{{ count($archive->driver_id) }}</p>
                     </li>
                 </ul>
-                <a href="{{route('operators.show',[$archive->operator->member_id])}}" class="btn btn-default btn-block"><b>View All Information</b></a>
-                <a href="{{route('operators.destroy', [$archive->operator->member_id])}}" class="btn btn-block btn-danger"><b>Permanently Delete Operator</b></a>
+                <a href="{{route('operators.show',[$archive->operator->member_id])}}" class="btn btn-primary btn-block btn-sm"><b>View All Information</b></a>
+                <a href="{{route('operators.destroy', [$archive->operator->member_id])}}" class="btn btn-block btn-outline-danger btn-sm"><b>Permanently Delete</b></a>
             </div>
             <!-- /.box-body -->
         </div>
@@ -203,7 +203,7 @@
         $(function() {
             $('#driver').DataTable({
                 'paging': true,
-                'lengthChange': false,
+                'lengthChange': true,
                 'searching': true,
                 'ordering': true,
                 'info': true,
@@ -211,7 +211,7 @@
             })
             $('#van').DataTable({
                 'paging': true,
-                'lengthChange': false,
+                'lengthChange': true,
                 'searching': true,
                 'ordering': true,
                 'info': true,
