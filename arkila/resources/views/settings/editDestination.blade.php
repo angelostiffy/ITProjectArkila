@@ -3,13 +3,12 @@
 @section('back-link', route('settings.index'))
 @section('form-action', route('destinations.update', [$destination->destination_id]))
 @section('method_field', method_field('PATCH'))
-@section('form-title', 'Edit Destination')
+@section('form-title', 'EDIT DESTINATION')
 @section('form-body')
-	@include('message.error')
 
 	 <div>
 	 	<label for="destination">Description:</label>
-	 	<p>{{$destination->description}}</p>
+	 	<p class="info-container">{{$destination->description}}</p>
 	 </div>
 
      <div class="form-group">

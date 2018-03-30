@@ -4,6 +4,40 @@
 <head>
     @section('links')
         @include('layouts.partials.stylesheets_form')
+        <style>
+            .form-box{
+                width: 360px;
+                margin: 7% auto;
+                box-shadow: 0px 5px 10px gray;
+            }
+
+            .form-box-header{
+                font-size: 25px;
+                margin-bottom: auto;
+                font-weight: 300;
+                background: white;
+                padding: 15px;
+                border-top-right-radius: 3px;
+                border-top-left-radius: 3px;
+            }
+
+            .form-box-body {
+                background: #fff;
+                padding: 15px;
+                border-top: 0;
+                color: #666;
+            }
+
+            .form-box-footer {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 3px;
+                border-bottom-left-radius: 3px;
+                border-top: 1px solid #f4f4f4;
+                padding: 15px;
+                background-color: #fff;
+            }
+        </style>
     @show
 </head>
 
@@ -18,32 +52,29 @@
         <div class="content-wrapper bgform-image">
                         <div class="container">
                     <section class="content">
-                        <div class="login-box" style="box-shadow: 0px 5px 10px gray;">
+                        <div class="form-box">
                             <form action="@yield('form-action')" method="POST" data-parsley-validate="">
                             {{csrf_field()}} @yield('method_field')
-                            <div class="login-logo">
-                                <div class="col-md-1">
-                                    <h3 style=":hover{color = green;}">
+                            <div class="form-box-header">
+                                    <p>
                                         <a href="@yield('back-link')">
                                             <i class="fa fa-chevron-left"></i>
                                         </a>
-                                    </h3>
-                                </div>
-                                <div class="col-md-11">
-                                    <h3>
+                                    <span class="text-center">
                                         @yield('form-title')
-                                    </h3>
-                                </div>
+                                    </span>
+                                    </p>
                             </div>
-                            <div class="login-box-body">
+                            <div class="form-box-body">
                                 @yield('form-body')
                             </div>
                             <!-- /.login-box-body -->
-                            <div class="box-footer">
+                            <div class="form-box-footer">
                                 @yield('others')
                                 <div class="form-group pull-right">
                                     @yield('form-btn')
                                 </div>
+                                <div class="clearfix"></div>
                             </div>
                             </form>
                         </div>

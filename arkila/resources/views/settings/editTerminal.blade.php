@@ -3,13 +3,13 @@
 @section('back-link', route('settings.index'))
 @section('form-action', route('terminal.update', [$terminal->terminal_id]))
 @section('method_field', method_field('PATCH'))
-@section('form-title', 'Edit Terminal')
+@section('form-title', 'EDIT TERMINAL')
 @section('form-body')
 
     <div class="form-group">
         <div class="form-group">
             <label>Terminal Name:</label>
-            <input type="text" class="form-control" name="editTerminalName"  maxlength="30" value="{{$terminal->description}}">
+            <p class="info-container">{{$terminal->description}}</p>
         </div>
         <div class="form-group">
             <label for="">Booking Fee:</label>

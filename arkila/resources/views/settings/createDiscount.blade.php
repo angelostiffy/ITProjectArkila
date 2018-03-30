@@ -2,13 +2,10 @@
 @section('title', 'Create New Discount')
 @section('back-link', route('settings.index'))
 @section('form-action', route('discounts.store'))
-@section('form-title', 'Create Discount')
+@section('form-title', 'CREATE DISCOUNT')
 @section('form-body')
 				  
 <div class="form-group">
-    <div style="margin-top:18%">
-        @include('message.error')
-    </div>
 
     <label>Description: <span class="text-red">*</span></label>
     <input type="text" class="form-control" name="addDiscountDesc" required>

@@ -2,7 +2,7 @@
 @section('title', 'Create New Fee')
 @section('back-link', route('settings.index'))
 @section('form-action', route('fees.store'))
-@section('form-title', 'Create Fee')
+@section('form-title', 'CREATE FEE')
 @section('form-body')
 
     <div class="form-group">

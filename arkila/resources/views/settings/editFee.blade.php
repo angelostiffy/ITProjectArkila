@@ -3,12 +3,12 @@
 @section('back-link', route('settings.index'))
 @section('form-action', route('fees.update', [$fee->fad_id]))
 @section('method_field', method_field('PATCH'))
-@section('form-title', 'Edit Fee')
+@section('form-title', 'EDIT FEE')
 @section('form-body')
 
 	<div>
 	 	<label for="description">Description:</label>
-	 	<p>{{$fee->description}}</p>
+	 	<p class="info-container">{{$fee->description}}</p>
 	</div>
 
     <div class="form-group">

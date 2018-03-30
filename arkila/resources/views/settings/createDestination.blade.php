@@ -2,7 +2,7 @@
 @section('title', 'Create New Destination')
 @section('back-link', route('settings.index'))
 @section('form-action', route('destinations.store'))
-@section('form-title', 'Create Destination')
+@section('form-title', 'CREATE DESTINATION')
 @section('form-body')
                  
     <div class="form-group">
@@ -26,6 +26,6 @@
 
 @endsection
 @section('form-btn')
-    <button type="submit" class="btn btn-primary btn-sm btn-flat">Create</button>
+    <button type="submit" class="btn btn-primary">Create</button>
 @endsection
 
