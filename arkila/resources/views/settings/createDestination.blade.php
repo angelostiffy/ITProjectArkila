@@ -7,7 +7,7 @@
                  
     <div class="form-group">
         <label>Destination: <span class="text-red">*</span></label>
-        <input name="addDestination" type="text" class="form-control" maxlength="30" required>
+        <input name="addDestination" type="text" class="form-control" val-settings-desc required>
     </div>
     <div class="form-group">
         <label>Terminal:</label>
@@ -21,7 +21,7 @@
     </div>
     <div class="form-group">
         <label>Fare: <span class="text-red">*</span></label>
-        <input type="number" class="form-control" name="addDestinationFare" step="0.25" placeholder="Php 0.00"  min="1" max="5000" required>
+        <input type="number" class="form-control" name="addDestinationFare" step="0.25" placeholder="Php 0.00"  val-settings-amount required>
     </div>
 
 @endsection

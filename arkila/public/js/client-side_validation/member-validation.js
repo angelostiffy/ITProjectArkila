@@ -1,7 +1,7 @@
 /** OPERATOR & DRIVER REGISTRATION VALIDATION **/
   // Validate name.
     $('[val-name]').parsley({
-      maxlength: 25,
+      maxlength: 30,
       pattern: /^[a-zA-Z]$|^[a-zA-Z][a-zA-Z\s-]*[a-zA-Z]$/,
       minlength: 2
     });	

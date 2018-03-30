@@ -26,7 +26,7 @@ class DiscountsController extends Controller
     public function store()
     {
         $this->validate(request(),[
-            "addDiscountDesc" => "unique:fees_and_deduction,description|regex:/^[\pL\s\-]+$/u|required|max:30",
+            "addDiscountDesc" => "unique:fees_and_deduction,description|regex:/^[\pL\s\-]+$/u|required|max:40",
             "addDiscountAmount" => ['required',new checkCurrency,'numeric','min:1','max:5000']
         ]);
 
