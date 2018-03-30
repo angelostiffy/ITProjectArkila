@@ -53,13 +53,13 @@
                     <td class="center-block">
                         <div class="text-center">
                             <a href="{{route('ledger.edit', $ledger->ledger_id)}}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i>EDIT</a>
-                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteLedger', $ledger->ledger_id}}"><i class="fa fa-trash"></i> DELETE</button>
+                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteLedger'. $ledger->ledger_id}}"><i class="fa fa-trash"></i> DELETE</button>
                         </div>
                     </td>
                 </tr>
                 @endif
                     <!-- Modal for Delete-->
-                    <div class="modal fade" id="{{'deleteLedger', $ledger->ledger_id}}">
+                    <div class="modal fade" id="{{'deleteLedger'. $ledger->ledger_id}}">
                         <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
                                     <div class="modal-header bg-red">
@@ -96,7 +96,7 @@
                     <th>TOTAL:</th>
                     <th class="text-right">&#8369;{{$ledger->total_revenue}}</th>
                     <th class="text-right">&#8369;{{$ledger->total_expense}}</th>
-                    <th class="text-right">&#8369;{{ $ledger->balance }}</th>
+                    <th class="text-right">&#8369;{{ number_format($ledger->balance, 2) }}</th>
                     <th></th>
                 </tr>
             </tfoot>

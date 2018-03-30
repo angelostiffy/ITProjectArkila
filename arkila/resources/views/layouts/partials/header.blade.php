@@ -191,23 +191,17 @@
                                 <h3 class="profile-username text-center">Miguel lookssaka - owner ng pangit </h3>
                             </div>
                             <!-- /.box-body -->
-                        </div>
-                        <!-- /.box -->
-
-                        <!-- About Me Box -->
-                        <div class="box box-primary">
-                            <div class="pull-left">
-
-                            </div>
-
-                            <div class="pull-right">
-                                <div class="box-header with-border">
-                                    <a href="#" class="btn btn-default btn-block">Sign out</a>
-
+                            <div class="box-footer">
+                                <div class="btn-group btn-group-justified">
+                                  <div class="btn-group">
+                                      <a href="#" class="btn btn-primary">Account Settings</a>
+                                  </div>
+                                  <div class="btn-group">
+                                      <a href="#" class="btn btn-default">Sign out</a>
+                                  </div>
                                 </div>
-                                <!-- /.box-header -->
                             </div>
-                            <!-- /.pull-right -->
+                            <!-- /.box-footer -->
                         </div>
                         <!-- /.box -->
                     </ul>

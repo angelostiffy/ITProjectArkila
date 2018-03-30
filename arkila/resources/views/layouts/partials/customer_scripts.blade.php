@@ -19,5 +19,10 @@
     {{ Html::script('js/client-side_validation/settings-validation.js') }}
     {{ Html::script('js/notifications/pnotify.custom.min.js') }}
     {{ Html::script('js/notifications/bootstrap-notify.min.js') }}
+
+    <!-- InputMask -->
+    {{ Html::script('adminlte/plugins/input-mask/jquery.inputmask.js') }}
+    {{ Html::script('adminlte/plugins/input-mask/jquery.inputmask.date.extensions.js') }}
+    {{ Html::script('adminlte/plugins/input-mask/jquery.inputmask.extensions.js') }}
    
 @show

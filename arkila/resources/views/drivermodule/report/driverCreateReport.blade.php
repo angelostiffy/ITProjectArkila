@@ -35,10 +35,8 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input value="{{old('dateDeparted')}}" id="" name="dateDeparted" type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask required data-parsley-errors-container="#errDateDeparted">
-
+                                        <input value="{{old('dateDeparted')}}" id="" name="dateDeparted" type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask required data-parsley-errors-container="#errDateDeparted" val-date-depart required>
                                     </div>
-
                                     <p id="errDateDeparted"></p>
                                 </div>
 
@@ -51,7 +49,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-clock-o"></i>
                                         </div>
-                                        <input value="{{old('timeDeparted')}}" id="timepicker" name="timeDeparted" class="form-control" required data-parsley-errors-container="#errTimeDeparted">
+                                        <input value="{{old('timeDeparted')}}" id="timepicker" name="timeDeparted" class="form-control" required data-parsley-errors-container="#errTimeDeparted" val-time-depart required>
                                     </div>
                                     <p id="errTimeDeparted"></p>
                                     </div>
@@ -84,7 +82,7 @@
                                       <label for='Discounts' class="col-sm-4"> {{$fad->description}} Discount: </label>
                                       <div class="col-sm-6">
                                         <input type="hidden" name="discountId[]" value="{{$fad->fad_id}}">
-                                          <input value="{{old('numberOfDiscount.'.$c)}}" class='form-control col-sm-9' type='number' name='numberOfDiscount[]'>
+                                          <input value="{{old('numberOfDiscount.'.$c)}}" class='form-control col-sm-9' type='number' name='numberOfDiscount[]' val-report-discount>
                                       </div>
                                   </div>
                                     @php $c++; @endphp

@@ -13,7 +13,7 @@ class RandallController extends Controller
      */
     public function index()
     {
-        return view('customermodule.user.reservation.customerReservation');
+        return view('profile.index');
     }
 
     /**

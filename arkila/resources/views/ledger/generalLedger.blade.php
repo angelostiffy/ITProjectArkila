@@ -7,7 +7,7 @@
 @section('content')
 <div class="box">
     <!-- /.box-header -->
-    <h2 class="text-center">{{ $thisDate->formatLocalized('%A %d %B %Y') }}</h2>
+    <h2 class="text-center">General Ledger</h2>
     
     <div class="col col-md-6">
         <a href="{{route('ledger.create')}}" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-plus"></i>
@@ -31,7 +31,6 @@
             </thead>
             <tbody>
             @foreach ($ledgers->sortByDesc('ledger_id') as $ledger)
-                @if ($ledger->created_at->format('m-d-Y') == $thisDate->format('m-d-Y'))
                 <tr>
                     <td>{{$ledger->payee}}</td>
                     <td>{{$ledger->description}}</td>
@@ -46,19 +45,18 @@
                     <td></td>                    
                     <td class="text-right">&#8369;{{$ledger->amount}}</td>
                     <td class="text-right">-&#8369;{{$ledger->amount}}</td>
-
                     @endif
-                                        
+
                     <td class="center-block">
                         <div class="text-center">
                             <a href="{{route('ledger.edit', $ledger->ledger_id)}}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i>EDIT</a>
-                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteLedger', $ledger->ledger_id}}"><i class="fa fa-trash"></i> DELETE</button>
+                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteLedger'. $ledger->ledger_id}}"><i class="fa fa-trash"></i> DELETE</button>
                         </div>
                     </td>
                 </tr>
-                @endif
+             
                     <!-- Modal for Delete-->
-                    <div class="modal fade" id="{{'deleteLedger', $ledger->ledger_id}}">
+                    <div class="modal fade" id="{{'deleteLedger'. $ledger->ledger_id}}">
                         <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
                                     <div class="modal-header bg-red">
@@ -93,9 +91,9 @@
                     <th></th>
                     <th></th>
                     <th>TOTAL:</th>
-                    <th class="text-right">&#8369;{{$ledger->total_revenue}}</th>
-                    <th class="text-right">&#8369;{{$ledger->total_expense}}</th>
-                    <th class="text-right">&#8369;{{ $ledger->balance }}</th>
+                    <th class="text-right">&#8369;{{$ledger->gledger_total_revenue}}</th>
+                    <th class="text-right">&#8369;{{$ledger->gledger_total_expense}}</th>
+                    <th class="text-right">&#8369;{{number_format($ledger->gledger_total_balance, 2)}}</th>
                     <th></th>
                 </tr>
             </tfoot>

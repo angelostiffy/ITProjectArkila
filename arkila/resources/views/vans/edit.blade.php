@@ -9,29 +9,36 @@
 @endif
 @section('form-action',route('vans.update',[$van->plate_number]))
 
-@section('form-title', 'Edit Van')
+@section('form-title', 'EDIT VAN')
 @section('method_field',method_field("PATCH"))
 @section('form-body')
     @include('message.error')
 
     <div class="form-group">
         <label for="">Operator:</label> <span></span>
-        <p class="info-container">{{ $van->operator()->first()->full_name }}</p>
+        <select name="operator" id="" class="form-control select2">
+        @foreach($operators as $operator)
+            <option value="{{$operator->member_id}}">{{$operator->full_name}}</option>
+        @endforeach
+    </select>
     </div>
     
 	<div class="form-group">
         <label for="">Plate Number:</label>
         <p class="info-container">{{$van->plate_number}}</p>
+        <input type="hidden" value="{{$van->plate_number}}">
     </div>
+
     <div class="form-group">
         <label for="">Van Model</label>
         <p class="info-container">{{$van->model}}</p>
+        <input type="hidden" value="{{$van->model}}">
     </div>
 
     <div class="form-group">
         <label for="">Seating Capacity</label>
         <p class="info-container">{{$van->seating_capacity}}</p>
-      
+        <input type="hidden" value="{{$van->seating_capacity}}">
     </div>
     
     <div class="form-group">

@@ -13,7 +13,7 @@
 	</div>
 
     <div class="form-group">
-        <label>Amount:</label>
+        <label>Amount: <span class="text-red">*</span></label>
         <input type="number" class="form-control" name="editFeeAmount" step = "0.25" value="{{$fee->amount}}" val-settings-amount>
     </div>
 
