@@ -20,9 +20,10 @@ class LedgersController extends Controller
      */
     public function index()
     {
-        $date = Carbon::now()->formatLocalized('%A %d %B %Y');
+        $date = Carbon::now();
+        $thisDate = $date->setTimezone('Asia/Manila');
         $ledgers = Ledger::all();
-        return view('ledger.index', compact('ledgers', 'date'));
+        return view('ledger.index', compact('ledgers', 'thisDate'));
     }
 
     /**
@@ -56,12 +57,16 @@ class LedgersController extends Controller
             ],
         ]);
 
+        $date = Carbon::now();
+        $thisDate = $date->setTimezone('Asia/Manila');
+        
         Ledger::create([
             'payee' => $request->payor,
             'description' => $request->particulars,
             'or_number' => $request->or,
             'amount' => $request->amount,
-            'type' => $request->type,    
+            'type' => $request->type,
+            'created_at' => $thisDate,
         ]);
 
         return redirect('/home/ledger');

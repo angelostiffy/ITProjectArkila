@@ -8,7 +8,7 @@
 
 <div class="box">
     <!-- /.box-header -->
-    <h2 class="text-center">{{ $date }}</h2>
+    <h2 class="text-center">{{ $thisDate->formatLocalized('%A %d %B %Y') }}</h2>
     
     <div class="col col-md-6">
         <a href="{{route('ledger.create')}}" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-plus"></i>
@@ -32,6 +32,7 @@
             </thead>
             <tbody>
             @foreach ($ledgers->sortByDesc('ledger_id') as $ledger)
+                @if ($ledger->created_at->format('m-d-Y') == $thisDate->format('m-d-Y'))
                 <tr>
                     <td>{{$ledger->payee}}</td>
                     <td>{{$ledger->description}}</td>
@@ -56,7 +57,7 @@
                         </div>
                     </td>
                 </tr>
-                
+                @endif
                     <!-- Modal for Delete-->
                     <div class="modal fade" id="{{'deleteLedger', $ledger->ledger_id}}">
                         <div class="modal-dialog modal-sm">
