@@ -1,41 +1,4 @@
 @extends('layouts.form_lg') 
-@section('links')
-@parent
-<style>
-        /* Mark input boxes that gets an error on validation: */
-
-        /* Hide all steps by default: */
-
-        .tab {
-            display: none;
-        }
-
-
-
-        /* Make circles that indicate the steps of the form: */
-
-        .step {
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: #bbbbbb;
-            border: none;
-            border-radius: 50%;
-            display: inline-block;
-            opacity: 0.5;
-        }
-
-        .step.active {
-            opacity: 1;
-        }
-
-        /* Mark the steps that are finished and valid: */
-
-        .step.finish {
-            background-color: #4CAF50;
-        }
-    </style>
-@endsection
 @section('title', 'Driver Registration')
 @section('form-id', 'regForm')
 
@@ -158,7 +121,7 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="birthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('birthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" required data-parsley-legal-age val-birthdate data-parsley-errors-container="#errLegal">
+                                  <input type="text" name="birthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('birthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" data-parsley-errors-container="#errLegal"  data-parsley-legal-age val-birthdate required>
                                 </div>
                                 <p id="errLegal"></p>
                             </div>
@@ -227,7 +190,7 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="licenseExpiryDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('licenseExpiryDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask val-license-exp data-parsley-expire-date data-parsley-errors-container="#errExpireDate" required>
+                                  <input type="text" name="licenseExpiryDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('licenseExpiryDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-errors-container="#errExpireDate" val-license-exp data-parsley-expire-date  required>
                                 </div>
                                 <p id= "errExpireDate"></p>
                             </div>
@@ -240,7 +203,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Name of Spouse:</label>
-                                <input value="{{old('nameOfSpouse')}}" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse">
+                                <input value="{{old('nameOfSpouse')}}" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse" val-fullname>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -250,7 +213,7 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="spouseBirthDate" placeholder="mm/dd/yyyy" class="form-control date-mask" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask val-spouse-bdate data-parsley-errors-container="#errSpouseBirthdate">
+                                  <input type="text" name="spouseBirthDate" placeholder="mm/dd/yyyy" class="form-control date-mask" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-errors-container="#errSpouseBirthdate" data-parsley-legal-age val-spouse-bdate >
                                 </div>
                             </div>
                             <p id="errSpouseBirthdate">
@@ -305,7 +268,7 @@
                                   <div class="input-group-addon">
                                     <span>+63</span>
                                   </div>
-                                  <input type="text" name="contactPersonContactNumber"  class="form-control" value="{{old('contactPersonContactNumber')}}" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask val-phone required data-parsley-errors-container="#errContactPersonPhone">
+                                  <input type="text" name="contactPersonContactNumber"  class="form-control" value="{{old('contactPersonContactNumber')}}" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask data-parsley-errors-container="#errContactPersonPhone" val-phone required>
                                 </div>
                                 <p id="errContactPersonPhone"></p>
                             </div>

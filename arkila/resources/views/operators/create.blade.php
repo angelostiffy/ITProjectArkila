@@ -72,7 +72,7 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="birthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('birthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" required data-parsley-legal-age val-birthdate data-parsley-errors-container="#errLegal">
+                                  <input type="text" name="birthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('birthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" data-parsley-errors-container="#errLegal" val-birthdate data-parsley-legal-age required>
                                 </div>
                                 <p id="errLegal"></p>
                             </div>
@@ -142,7 +142,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input value="{{old('licenseExpiryDate')}}" name="licenseExpiryDate" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" val-license-exp data-parsley-expire-date data-parsley-errors-container="#errExpireDate">
+                                    <input value="{{old('licenseExpiryDate')}}" name="licenseExpiryDate" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" data-parsley-errors-container="#errExpireDate" val-license-exp data-parsley-expire-date>
                                 </div>
                                 <p id= "errExpireDate"></p>
                             </div>
@@ -165,7 +165,7 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" name="spouseBirthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" val-spouse-bdate data-parsley-errors-container="#errSpouseBirthdate">
+                                  <input type="text" name="spouseBirthDate" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('spouseBirthDate')}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-trigger="keyup" data-parsley-errors-container="#errSpouseBirthdate" val-spouse-bdate>
                                 </div>
                                 <p id="errSpouseBirthdate"></p>
                             </div>
@@ -220,7 +220,7 @@
                                   <div class="input-group-addon">
                                     <span>+63</span>
                                   </div>
-                                  <input type="text" name="contactPersonContactNumber"  class="form-control" value="{{old('contactPersonContactNumber')}}" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask data-parsley-trigger="keyup" val-phone required data-parsley-errors-container="#errContactPersonPhone">
+                                  <input type="text" name="contactPersonContactNumber"  class="form-control" value="{{old('contactPersonContactNumber')}}" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask data-parsley-trigger="keyup" data-parsley-errors-container="#errContactPersonPhone" val-phone required>
                                 </div>
                                 <p id="errContactPersonPhone"></p>
                             </div>

@@ -40,19 +40,19 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="operatorLastName">Last Name: <span class="text-red">*</span></label>
-                        <input value="{{old('lastName') ?? $driver->last_name }}" id="driverLastName" name="lastName" type="text" class="form-control" placeholder="Last Name">
+                        <input value="{{old('lastName') ?? $driver->last_name }}" id="driverLastName" name="lastName" type="text" class="form-control" placeholder="Last Name" val-name required>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="operatorFirstName">First Name: <span class="text-red">*</span></label>
-                        <input id="operatorFirstName" value="{{old('firstName')  ?? $driver->first_name}}" name="firstName" type="text" class="form-control" placeholder="First Name" maxlength="35">
+                        <input id="operatorFirstName" value="{{old('firstName')  ?? $driver->first_name}}" name="firstName" type="text" class="form-control" placeholder="First Name" val-name required>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="operatorMiddleName">Middle Name:</label>
-                        <input id="operatorMiddleName" value="{{  old('middleName')  ?? $driver->middle_name }}" name="middleName" type="text" class="form-control" placeholder="Middle Name">
+                        <input id="operatorMiddleName" value="{{  old('middleName')  ?? $driver->middle_name }}" name="middleName" type="text" class="form-control" placeholder="Middle Name" val-name>
                     </div>
                 </div>
             </div>
@@ -64,20 +64,21 @@
                             <div class = "input-group-addon">
                                 <span>+63</span>
                             </div>
-                        <input value="{{old('contactNumber') ?? $driver->edit_contact_number }}" id="contactNumberO" name="contactNumber" type="text" class="form-control" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask>
+                        <input value="{{old('contactNumber') ?? $driver->edit_contact_number }}" id="contactNumberO" name="contactNumber" type="text" class="form-control" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask data-parsley-errors-container="#errContactNumber" val-phone required>
                         </div>
+                        <p id="errContactNumber"></p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="addressO">Address: <span class="text-red">*</span></label>
-                        <input id="addressO" value="{{old('address') ?? $driver->address }}" name="address" type="text" class="form-control" placeholder="Address" maxlength="100">
+                        <input id="addressO" value="{{old('address') ?? $driver->address }}" name="address" type="text" class="form-control" placeholder="Address" val-address required>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="provincialAddressO">Provincial Address: <span class="text-red">*</span></label>
-                        <input value="{{old('provincialAddress') ?? $driver->provincial_address }}" id="provincialAddress" name="provincialAddress" type="text" class="form-control" placeholder="Provincial Address">
+                        <input value="{{old('provincialAddress') ?? $driver->provincial_address }}" id="provincialAddress" name="provincialAddress" type="text" class="form-control" placeholder="Provincial Address" val-address required>
                     </div>
                 </div>
             </div>
@@ -89,14 +90,15 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input value="{{ old('birthDate') ?? $driver->birth_date }}" id="birthdateO" name="birthDate" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                            <input value="{{ old('birthDate') ?? $driver->birth_date }}" id="birthdateO" name="birthDate" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-errors-container="#errLegal"  data-parsley-legal-age val-birthdate required>
                         </div>
+                        <p id="errLegal"></p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="birthplaceO">Birthplace: <span class="text-red">*</span></label>
-                        <input value="{{old('birthPlace') ?? $driver->birth_place }}" id="birthplaceO" name="birthPlace" type="text" class="form-control" placeholder="Birthplace" maxlength="50">
+                        <input value="{{old('birthPlace') ?? $driver->birth_place }}" id="birthplaceO" name="birthPlace" type="text" class="form-control" placeholder="Birthplace" val-birthplace required>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -119,7 +121,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="citizenshipO">Citizenship: <span class="text-red">*</span></label>
-                        <input value="{{ old('citizenship') ?? $driver->citizenship }}" id="citizenshipO" name="citizenship" type="text" class="form-control" placeholder="Citizenship" maxlength="35">
+                        <input value="{{ old('citizenship') ?? $driver->citizenship }}" id="citizenshipO" name="citizenship" type="text" class="form-control" placeholder="Citizenship" cal-citizenship required>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -136,7 +138,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="sssO">SSS No:</label>
-                        <input id="sssO" name="sss" value="{{  old('sss') ?? $driver->SSS }}" type="text" class="form-control" placeholder="SSS No." maxlength="10">
+                        <input id="sssO" name="sss" value="{{  old('sss') ?? $driver->SSS }}" type="text" class="form-control" placeholder="SSS No." val-sss required>
                     </div>
                 </div>
             </div>
@@ -144,7 +146,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="licenseNoO">License No: <span class="text-red">*</span></label>
-                        <input id="licenseNoO" value="{{  old('licenseNo') ?? $driver->license_number }}" name="licenseNo" type="text" class="form-control" placeholder="License No.">
+                        <input id="licenseNoO" value="{{  old('licenseNo') ?? $driver->license_number }}" name="licenseNo" type="text" class="form-control" placeholder="License No." val-license required>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -154,8 +156,9 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input value="{{  old('licenseExpiryDate')  ?? $driver->expiry_date }}" id="licenseExpiryDateO" name="licenseExpiryDate" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                            <input value="{{  old('licenseExpiryDate')  ?? $driver->expiry_date }}" id="licenseExpiryDateO" name="licenseExpiryDate" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-errors-container="#errExpireDate" val-license-exp data-parsley-expire-date  required>
                         </div>
+                        <p id= "errExpireDate"></p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -167,7 +170,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="spouseNameO">Name of Spouse:</label>
-                        <input value="{{ old('nameOfSpouse') ?? $driver->spouse }}" id="spouseNameO" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse">
+                        <input value="{{ old('nameOfSpouse') ?? $driver->spouse }}" id="spouseNameO" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse" val-fullname>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -177,37 +180,38 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input value="{{  old('spouseBirthDate') ?? $driver->spouse_birthdate }}" id="spouseBirthDateO" name="spouseBirthDate" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                            <input value="{{  old('spouseBirthDate') ?? $driver->spouse_birthdate }}" id="spouseBirthDateO" name="spouseBirthDate" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-errors-container="#errSpouseBirthdate" data-parsley-legal-age val-spouse-bdate>
                         </div>
+                        <p id="errSpouseBirthdate">
                     </div>
                 </div>
             </div>
             <div class = "row">
                   <div class = "col-md-6">
                     <div class="form-group">
-                        <label for="fathersNameO">Fathers Name:</label>
-                        <input value="{{ old('fathersName') ?? $driver->father_name }}" id="fathersNameO" name="fathersName" type="text" class="form-control" placeholder="Fathers Name">
+                        <label for="fathersNameO">Father's Name:</label>
+                        <input value="{{ old('fathersName') ?? $driver->father_name }}" id="fathersNameO" name="fathersName" type="text" class="form-control" placeholder="Father's Name" val-fullname>
                     </div>
                    </div>
                    
                     <div class = "col-md-6">
                     <div class="form-group">
                         <label for="occupationFatherO">Occupation:</label>
-                        <input value="{{  old('fatherOccupation') ?? $driver->father_occupation }}" id="occupationFatherO" name="fatherOccupation" type="text" class="form-control" placeholder="Occupation" maxlength="50">
+                        <input value="{{  old('fatherOccupation') ?? $driver->father_occupation }}" id="occupationFatherO" name="fatherOccupation" type="text" class="form-control" placeholder="Occupation" val-occupation>
                     </div>
                     </div>
             </div>
                    <div class = "row">
                    <div class = "col-md-6">
                     <div class="form-group">
-                        <label for="mothersNameO">Mothers Maiden Name:</label>
-                        <input value="{{ old('mothersName') ?? $driver->mother_name }}" id="mothersNameO" name="mothersName" type="text" class="form-control" placeholder="Mothers Maiden Name" maxlength="120">
+                        <label for="mothersNameO">Mother's Maiden Name:</label>
+                        <input value="{{ old('mothersName') ?? $driver->mother_name }}" id="mothersNameO" name="mothersName" type="text" class="form-control" placeholder="Mother's Maiden Name" val-fullname>
                     </div>
                     </div>
                     <div class = "col-md-6">
                     <div class="form-group">
                         <label for="occupationMotherO">Occupation:</label>
-                        <input value="{{ old('motherOccupation') ?? $driver->mother_occupation }}" id="occupationMotherO" name="motherOccupation" type="text" class="form-control" placeholder="Occupation" maxlength="50">
+                        <input value="{{ old('motherOccupation') ?? $driver->mother_occupation }}" id="occupationMotherO" name="motherOccupation" type="text" class="form-control" placeholder="Occupation" val-occupation>
                     </div>
             </div>
                 </div>
@@ -216,14 +220,14 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="contactPersonO">Contact Person: <span class="text-red">*</span></label>
-                        <input value="{{ old('contactPerson') ?? $driver->person_in_case_of_emergency }}" id="contactPersonO" name="contactPerson" type="text" class="form-control" placeholder="Contact Person In Case of Emergency" maxlength="120">
+                        <input value="{{ old('contactPerson') ?? $driver->person_in_case_of_emergency }}" id="contactPersonO" name="contactPerson" type="text" class="form-control" placeholder="Contact Person In Case of Emergency" val-fullname required>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="addressO">Address: <span class="text-red">*</span></label>
 
-                        <input value="{{ old('contactPersonAddress') ?? $driver->emergency_address }}" id="addressO" name="contactPersonAddress" type="text" class="form-control" placeholder="Address">
+                        <input value="{{ old('contactPersonAddress') ?? $driver->emergency_address }}" id="addressO" name="contactPersonAddress" type="text" class="form-control" val-address required>
 
                     </div>
                 </div>
@@ -234,8 +238,9 @@
                             <div class = "input-group-addon">
                                 <span>+63</span>
                             </div>
-                        <input value="{{ old('contactPersonContactNumber') ?? $driver->edit_emergency_contactno }}" id="contactNumberO" name="contactPersonContactNumber" type="text" class="form-control" placeholder="Contact Number" maxlength="10" data-inputmask='"mask": "999-999-9999"' data-mask>
+                        <input value="{{ old('contactPersonContactNumber') ?? $driver->edit_emergency_contactno }}" id="contactNumberO" name="contactPersonContactNumber" type="text" class="form-control" placeholder="Contact Number" maxlength="10" data-inputmask='"mask": "999-999-9999"' data-mask data-parsley-errors-container="#errContactPersonPhone" val-phone required>
                         </div>
+                        <p id="errContactPersonPhone"></p>
                     </div>
                 </div>
             </div>
