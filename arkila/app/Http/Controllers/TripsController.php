@@ -215,7 +215,7 @@ class TripsController extends Controller {
 
         $tripArr = [];
         if(is_array($vans)) {
-            foreach($vans[1] as $key => $vanInfo){
+            foreach($vans[0] as $key => $vanInfo){
 
                 if($van = Van::find($vanInfo['plate'])){
                     $van->updateQueue($key);
@@ -244,7 +244,8 @@ class TripsController extends Controller {
     public function specialUnitChecker() {
         $firstOnQueue = Trip::where('queue_number',1)->get();
         $successfullyUpdated = [];
-        $obRemarkSession = [];
+        $pendingUpdate = [];
+        $responseArr = [];
 
             foreach($firstOnQueue as $first) {
                 if($first->remarks == "ER" || $first->remarks == 'CC'){
@@ -265,19 +266,14 @@ class TripsController extends Controller {
 
                     }
 
-                    session()->flash('successMessage', "Van ".$first->plate_number." with a remark of ".$first->remarks." has been moved to the Special Units list.");
-
                 }elseif($first->remarks =='OB') {
-                    array_push($obRemarkSession, "Van ".$first->plate_number." with a remark of ".$first->remarks." can now be moved to the Special Units list.");
+                    array_push($pendingUpdate,$first->trip_id);
                 }
-
             }
+            $responseArr[0] = http_build_query($successfullyUpdated);
+            $responseArr[1] = http_build_query($pendingUpdate);
 
-
-            if(count($obRemarkSession) > 0){
-                session()->flash('obNotification',$obRemarkSession);
-            }
-            return http_build_query($successfullyUpdated);
+            return response()->json($responseArr);
     }
 
     public function updatedQueueNumber(){
@@ -296,11 +292,12 @@ class TripsController extends Controller {
     }
 
     public function putOnDeck(Trip $trip){
-        $trips = Trips::where('terminal_id',$trip->terminal_id)->whereNotNull('queue_number')->get();
+        $trips = Trip::where('terminal_id',$trip->terminal_id)->whereNotNull('queue_number')->get();
 
         foreach($trips as $tripObj){
+            $newQueueNumber = ($tripObj->queue_number)+1;
             $tripObj->update([
-                'queue_number' => ($tripObj->queue_number)-1
+                'queue_number' => $newQueueNumber
             ]);
         }
 
@@ -309,6 +306,8 @@ class TripsController extends Controller {
             'remarks' => null,
             'has_privilege' => 0
         ]);
+
+        return back();
     }
 
     public function showConfirmationBox($encodedTrips){
@@ -329,14 +328,47 @@ class TripsController extends Controller {
         return view('trips.partials.confirmDialogBox',compact('tripsObjArr'));
     }
 
+    public function showConfirmationBoxOb($encodedTrips) {
+        $trips = [];
+        parse_str($encodedTrips,$trips);
+        if(!is_array($trips)){
+            abort(404);
+        }else{
+            $tripsObjArr = [];
+            foreach($trips as $trip){
+                if($tripObj = Trip::find($trip)){
+                    array_push($tripsObjArr,$tripObj);
+                }else{
+                    abort(404);
+                }
+            }
+        }
+        return view('message.confirm',compact('tripsObjArr'));
+    }
+
+    public function changeRemarksOB(Trip $trip){
+        $this->validate(request(),[
+            'answer' => [Rule::in(['Yes', 'No'])]
+        ]);
+
+        if(request('answer') === 'Yes'){
+            $trip->update([
+                'queue_number' => NULL,
+                'has_privilege' => 1
+            ]);
+        }else{
+            $trip->update([
+                'remarks' => NULL,
+            ]);
+        }
+    }
+
     
-    public function tripLog()
-    {
+    public function tripLog() {
         return view('trips.tripLog');
     }
     
-    public function driverReport()
-    {
+    public function driverReport() {
         return view('trips.driverReport');
     }
 }
