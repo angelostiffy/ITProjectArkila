@@ -136,10 +136,12 @@
     });
     //Validate name
     $('[val-fullname]').parsley({
-      maxlength: 50
+      minlength: 5,
+      maxlength: 50,
+      pattern: /^[a-zA-Z]$|^[a-zA-Z][a-zA-Z\s-]*[a-zA-Z]$/
     });
 
-
+    $('[val-fullname]').attr('data-parsley-pattern-message','Please use letters (a-z) only.');
     // Validate occupation
     $('[val-occupation]').parsley({
       maxlength: 30
