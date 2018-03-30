@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use DB;
 
 class Ledger extends Model
 {
@@ -40,5 +41,31 @@ class Ledger extends Model
 
     public function getGledgerTotalBalanceAttribute(){
         return $this->gledger_total_revenue - $this->gledger_total_expense;
+    }
+    
+    public function getBookingFeeAttribute() {
+        $now = Carbon::now()->format('Y-m-d');
+        return $this->where('description', 'Booking Fee')
+        ->where('created_at', 'like', $now . '%')
+        ->groupBy('description')
+        ->sum('amount');
+    }
+    
+    public function getSopAttribute() {
+        $now = Carbon::now()->format('Y-m-d');
+        return $this->where('description', 'SOP')
+        ->where('created_at', 'like', $now . '%')
+        ->groupBy('description')
+        ->sum('amount');
+    }
+    
+    public function scopeAllBooking($query) {
+        return $query->where('description', 'Booking Fee')->orWhere('description', 'SOP')->groupBy(DB::raw('day(created_at)'), DB::raw('month(created_at)'), DB::raw('year(created_at)'));
+    }
+    
+    public function getBookAttribute() {
+        return $this->where('description', 'Booking Fee')
+        ->groupBy(DB::raw('day(created_at)'), DB::raw('month(created_at)'), DB::raw('year(created_at)'))
+        ->sum('amount');
     }
 }

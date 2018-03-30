@@ -26,11 +26,26 @@
                     <th>IN</th>
                     <th>OUT</th>
                     <th>Balance</th>
+                    <th>Date</th>
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach ($bookings as $booking)
+                <tr>
+                    <td></td>
+                    <td>{{$booking->description}}</td>
+                    <td></td>
+                    <td class="text-right">&#8369;{{ $booking->total_amount }}</td>
+                    <td></td>
+                    <td></td>
+                    <td>{{$booking->created_at}}</td>
+                    <td></td>
+                </tr>
+                @endforeach
             @foreach ($ledgers->sortByDesc('ledger_id') as $ledger)
+                @if ($ledger->description !== 'Booking Fee' && $ledger->description !== 'SOP')
+
                 <tr>
                     <td>{{$ledger->payee}}</td>
                     <td>{{$ledger->description}}</td>
@@ -46,6 +61,8 @@
                     <td class="text-right">&#8369;{{$ledger->amount}}</td>
                     <td class="text-right">-&#8369;{{$ledger->amount}}</td>
                     @endif
+                    
+                    <td>{{$ledger->created_at}}</td>
 
                     <td class="center-block">
                         <div class="text-center">
@@ -82,7 +99,7 @@
                         </div>
                         <!-- /.modal-dialog -->
                     </div>
-                
+                @endif
                 @endforeach
             </tbody>
             @if ($ledgers->count() > 0)

@@ -34,6 +34,7 @@
             @foreach ($ledgers->sortByDesc('ledger_id') as $ledger)
                 @if ($ledger->created_at->format('m-d-Y') == $thisDate->format('m-d-Y'))
                 <tr>
+                    @if ($ledger->description !== 'Booking Fee' && $ledger->description !== 'SOP')
                     <td>{{$ledger->payee}}</td>
                     <td>{{$ledger->description}}</td>
                     <td>{{$ledger->or_number}}</td>
@@ -57,6 +58,7 @@
                         </div>
                     </td>
                 </tr>
+                @endif
                 @endif
                     <!-- Modal for Delete-->
                     <div class="modal fade" id="{{'deleteLedger'. $ledger->ledger_id}}">
@@ -87,6 +89,23 @@
                     </div>
                 
                 @endforeach
+                    <tr>
+                        <td></td>
+                        <td>Booking Fee</td>
+                        <td></td>
+                        <td class="text-right">{{$ledger->booking_fee}}</td>
+                        <td></td>
+                        <td class="text-right">{{$ledger->booking_fee}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>SOP</td>
+                        <td></td>
+                        <td class="text-right">{{$ledger->sop}}</td>
+                        <td></td>
+                        <td class="text-right">{{$ledger->sop}}</td>
+                    </tr>
+
             </tbody>
             @if ($ledgers->count() > 0)
             <tfoot>
