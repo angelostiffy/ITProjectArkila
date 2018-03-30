@@ -1,5 +1,5 @@
 @extends('layouts.form')
-@section('title', 'Edit Daily Revenue/Expense')
+@section('title', 'Edit Revenue/Expense')
 @section('form-title', 'Edit Daily Ledger')
 @section('links')
 @parent
@@ -26,7 +26,7 @@
 </div>
 <div class="form-group">
     <label for="amount">Amount:</label>
-    <input type="text" class="form-control" name="amount" value="{{ $ledger->amount }}">
+    <input type="number" class="form-control" name="amount" value="{{ $ledger->amount }}">
 </div>
 <div class="form-group" name="revenueExpense">
 
@@ -45,8 +45,8 @@
 @endsection
 @section('form-btn')
     
-    <button type="submit" class="btn btn-success" data-dismiss="modal">Submit</button>
-    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
+    <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
+
     
 @endsection
 
