@@ -7,7 +7,7 @@
     @section('form-action',route('vans.storeFromOperator',[$operator->member_id]))
     @section('back-link', route('operators.showProfile',[$operator->member_id]))
 @endif
-@section('form-title', 'Add Van')
+@section('form-title', 'ADD VAN')
 @section('form-body')
 
 @if(isset($operators))

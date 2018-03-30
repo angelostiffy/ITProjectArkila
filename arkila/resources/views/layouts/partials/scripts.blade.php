@@ -42,5 +42,11 @@
     {{ Html::script('js/client-side_validation/parsley.min.js') }}
     <!-- iCheck -->
     {{ Html::script('adminlte/plugins/iCheck/icheck.min.js') }}
+    {{ Html::script('js/client-side_validation/parsley.min.js') }}
+    {{ Html::script('js/client-side_validation/member-validation.js') }}
+    {{ Html::script('js/client-side_validation/van-validation.js') }}
+    {{ Html::script('js/client-side_validation/settings-validation.js') }}
+    {{ Html::script('js/notifications/pnotify.custom.min.js') }}
+    {{ Html::script('js/notifications/bootstrap-notify.min.js') }}
     
 @show

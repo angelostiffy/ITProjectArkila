@@ -53,7 +53,7 @@ class VansController extends Controller {
             "operator" => ['numeric','exists:member,member_id',new checkOperator],
             "driver" => ['nullable','numeric','exists:member,member_id',new checkDriver],
             "plateNumber" => [new checkPlateNumber,'unique:van,plate_number','required','between:6,9'],
-            "vanModel" =>  'required|max:50',
+            "vanModel" =>  'required|max:30',
             "seatingCapacity" => 'required|between:10,15|numeric'
         ]);
 
