@@ -31,6 +31,22 @@
                 </ul>
             </div>
         </div>
+        
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">Database</h3>
+                <div class="box-tools">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <p class="text-center">Click "Restore" to retreive all saved data.</p>
+                <a class="btn btn-primary btn-sm btn-flat btn-block pull-right">RESTORE</a>
+            </div>
+        </div>
+        
     </div>
     <div class="col-md-8">
         <row>
