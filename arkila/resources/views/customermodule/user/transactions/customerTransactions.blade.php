@@ -30,7 +30,7 @@
                                             <tr>
                                                 <td>{{$rental->destination}}</td>
                                                 <td>{{$rental->departure_date}}</td>
-                                                <td>{{$rental->deprture_time}}</td>
+                                                <td>{{$rental->departure_time}}</td>
                                                 <td>
                                                     <div class="text-center">
                                                         <button type="button" class="btn btn-primary" 
@@ -73,7 +73,7 @@
                                                         <button type="button" class="btn btn-primary" 
                                                         data-toggle="modal" 
                                                         data-target="#viewReservation{{$reservation->id}}"
-                                                        data-destination="{{$reservation->destination->descirption}}"
+                                                        data-destination="{{$reservation->destination->description}}"
                                                         data-contact="{{$reservation->contact_number}}"
                                                         data-seats="{{$reservation->number_of_seats}}"
                                                         data-reservedate="{{$reservation->departure_date}}"
@@ -129,7 +129,7 @@
                             </tr>
                             <tr>
                                 <th>Number of Days</th>
-                                <td id="rentNumOfDays{{$rental->rent_id}}"></td>
+                                <td id="rentalNumOfDays{{$rental->rent_id}}"></td>
                             </tr>
                             <tr>
                                 <th>Date</th>
@@ -224,8 +224,12 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                            <button type="button" class="btn btn-danger" style="width:30%;">Yes</button>
+                            <form action="{{route('customermodule.deleteRental', [$rental->rent_id])}}" method="POST">
+                                {{csrf_field()}}
+                                {{method_field('DELETE')}} 
+                                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                <button type="submit" class="btn btn-danger" style="width:30%;">Yes</button>
+                            </form>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -258,8 +262,12 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                            <button type="button" class="btn btn-danger" style="width:30%;">Yes</button>
+                            <form action="{{route('customermodule.deleteReservation', [$reservation->id])}}" method="POST">
+                            {{csrf_field()}}
+                            {{method_field('DELETE')}} 
+                                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                <button type="submit" class="btn btn-danger" style="width:30%;">Yes</button>
+                            </form>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -278,13 +286,13 @@
         <script>
             $(document).ready(function(){
                 $('#viewRental{{$rental->rent_id}}').click(function(){
-                    $('#vehicleType{{$rental->rent_id}}').text($(this).data('vehicle'));
-                    $('#rentalDestination{{$rental->rent_id}}').text($(this).data('destination'));
-                    $('#rentalContactNumber{{$rental->rent_id}}').text($(this).data('contact'));
-                    $('#rentNumOfDays{{$rental->rent_id}}').text($(this).data('days'));
-                    $('#rentalDate{{$rental->rent_id}}').text($(this).data('rentdate'));
-                    $('#rentalTime{{$rental->rent_id}}').text($(this).data('renttime'));
-                    $('#rentalComment{{$rental->rent_id}}').text($(this).data('rentcomment'));
+                    $('#vehicleType{{$rental->rent_id}}').html($(this).data('vehicle}'));
+                    $('#rentalDestination{{$rental->rent_id}}').html($(this).data('destination'));
+                    $('#rentalContactNumber{{$rental->rent_id}}').html($(this).data('contact'));
+                    $('#rentalNumOfDays{{$rental->rent_id}}').html($(this).data('days'));
+                    $('#rentalDate{{$rental->rent_id}}').html($(this).data('rentdate'));
+                    $('#rentalTime{{$rental->rent_id}}').html($(this).data('renttime'));
+                    $('#rentalComment{{$rental->rent_id}}').html($(this).data('rentcomment'));
                 });
             });
         </script>
@@ -293,12 +301,12 @@
         <script>
             $(document).ready(function(){
                 $('#viewReservation{{$reservation->id}}').click(function(){
-                    $('#reservationDest{{$reservation->id}}').text($(this).data('destination'));
-                    $('#reservationContactNumber{{$reservation->id}}').text($(this).data('contact'));
-                    $('#reservationSeats{{$reservation->id}}').text($(this).data('seats'));
-                    $('#reservationDate{{$reservation->id}}').text($(this).data('reservedate'));
-                    $('#reservationTime{{$reservation->id}}').text($(this).data('reservetime'));
-                    $('#reservationComment{{$reservation->id}}').text($(this).data('reservecomment'));
+                    $('#reservationDest{{$reservation->id}}').html($(this).data('destination'));
+                    $('#reservationContactNumber{{$reservation->id}}').html($(this).data('contact'));
+                    $('#reservationSeats{{$reservation->id}}').html($(this).data('seats'));
+                    $('#reservationDate{{$reservation->id}}').html($(this).data('reservedate'));
+                    $('#reservationTime{{$reservation->id}}').html($(this).data('reservetime'));
+                    $('#reservationComment{{$reservation->id}}').html($(this).data('reservecomment'));
                 });
             });
         </script>

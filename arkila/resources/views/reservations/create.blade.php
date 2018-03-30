@@ -16,13 +16,13 @@
     <div class="box-body">
     @include('message.error')
 
-        <div class="tab">
+        <div class="form-section">
             <h4>Trip Information</h4>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Name: <span class="text-red">*</span></label>
-                        <input type="text" class="form-control" placeholder="Name" name="name" id="name" value="{{ old('name') }}" maxlength='30' required>
+                        <input type="text" class="form-control" placeholder="Name" name="name" id="name" value="{{ old('name') }}" val-fullname required>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -32,8 +32,9 @@
                             <div class = "input-group-addon">
                                 <span>+63</span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Contact Number" name="contactNumber" id="contactNumber" value="{{ old('contactNumber') }}" data-inputmask='"mask": "999-999-9999"' data-mask>
+                            <input type="text" class="form-control" placeholder="Contact Number" name="contactNumber" id="contactNumber" value="{{ old('contactNumber') }}" data-inputmask='"mask": "999-999-9999"' data-mask data-parsley-errors-container="#errContactNumber" data-mask val-phone required>
                         </div>
+                        <p id="errContactNumber"></p>
                     </div>
                 </div>
                 
@@ -44,10 +45,9 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-               
-                            <input type="text" name="date" id="date" class="form-control" placeholder="mm/dd/yyyy" value="{{old('date')}}" data-inputmask=" 'alias': 'mm/dd/yyyy'" data-mask>
-                            
+                            <input type="text" name="date" id="date" class="form-control" placeholder="mm/dd/yyyy" value="{{old('date')}}" data-inputmask=" 'alias': 'mm/dd/yyyy'" data-mask data-parsley-errors-container="#errDepartureDate" data-mask val-book-date data-parsley-valid-departure required>
                         </div>
+                        <p id="errDepartureDate"></p>    
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Number of Seats: <span class="text-red">*</span></label>
-                        <input type="number" class="form-control" placeholder="Number of Seats" name="seat" id="seat" value="{{ old('seat') }}" min="1" max="15" required>
+                        <input type="number" class="form-control" placeholder="Number of Seats" name="seat" id="seat" value="{{ old('seat') }}" val-num-seats required>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -74,18 +74,19 @@
                         <div class="form-group">
                             <label>Departure Time: <span class="text-red">*</span></label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="timepicker" name="time" value="{{ old('time') }}" required>
                                 <div class="input-group-addon">
                                     <i class="fa fa-clock-o"></i>
                                 </div>
+                                <input type="text" class="form-control" id="timepicker" name="time" value="{{ old('time') }}" data-parsley-errors-container="#errDepartureTime" val-book-time required>
                             </div>
+                            <p id="errDepartureTime"></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="tab" style="margin-left:37%; font-size: 14pt">
+    <div class="form-section" style="margin-left:37%; font-size: 14pt">
         <h4 style="margin-left:17%; margin-bottom:3%; font-size: 14pt">Summary</h4>
         <div class="row">
             <dl class="dl-horizontal">
@@ -109,14 +110,14 @@
         <span class="step"></span>
     </div>
 
-<div class="box box-footer">
-    <div style="overflow:auto;">
-        <div style="float:right;">
-            <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-default btn-sm">Previous</button>
-            <button type="button" id="nextBtn" onclick="nextPrev(1); getData();" class="btn btn-primary btn-sm">Next</button>
+    <div class="box box-footer">
+        <div class="form-navigation" style="overflow:auto;">
+            <div style="float:right;">
+                <button type="button" id="prevBtn" class="previous btn btn-default">Previous</button>
+                <button type="button" id="nextBtn" onclick="getData();" class="next btn btn-primary">Next</button>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 @endsection @section('scripts') @parent
@@ -135,86 +136,52 @@
 
 
 
-<script>
-    var currentTab = 0; // Current tab is set to be the first tab (0)
-    showTab(currentTab); // Display the crurrent tab
+<script type="text/javascript">
+        $(function () {
+          var $sections = $('.form-section');
 
-    function showTab(n) {
-        // This function will display the specified tab of the form...
-        var x = document.getElementsByClassName("tab");
-        x[n].style.display = "block";
-        //... and fix the Previous/Next buttons:
-        if (n == 0) {
-            document.getElementById("prevBtn").style.display = "none";
-        } else {
-            document.getElementById("prevBtn").style.display = "inline";
-        }
-        if (n == (x.length - 1)) {
-            document.getElementById("nextBtn").innerHTML = "Submit";
-        } else {
-            document.getElementById("nextBtn").innerHTML = "Next";
-        }
-        //... and run a function that will display the correct step indicator:
-        fixStepIndicator(n)
-    }
+          function navigateTo(index) {
+            // Mark the current section with the class 'current'
+            $sections
+              .removeClass('current')
+              .eq(index)
+                .addClass('current');
+            // Show only the navigation buttons that make sense for the current section:
+            $('.form-navigation .previous').toggle(index > 0);
+            var atTheEnd = index >= $sections.length - 1;
+            $('.form-navigation .next').toggle(!atTheEnd);
+            $('.form-navigation [type=submit]').toggle(atTheEnd);
+          }
 
-    function nextPrev(n) {
-        // This function will figure out which tab to display
-        var x = document.getElementsByClassName("tab");
-        // Exit the function if any field in the current tab is invalid:
-        if (n == 1 && !validateForm()) return false;
-        // Hide the current tab:
-        x[currentTab].style.display = "none";
-        // Increase or decrease the current tab by 1:
-        currentTab = currentTab + n;
-        // if you have reached the end of the form...
-        if (currentTab >= x.length) {
-            // ... the form gets submitted:
-            document.getElementById("regForm").submit();
-            return false;
-        }
-        // Otherwise, display the correct tab:
-        showTab(currentTab);
-    }
+          function curIndex() {
+            // Return the current index by looking at which section has the class 'current'
+            return $sections.index($sections.filter('.current'));
+          }
 
-    function validateForm() {
-        // This function deals with validation of the form fields
+          // Previous button is easy, just go back
+          $('.form-navigation .previous').click(function() {
+            navigateTo(curIndex() - 1);
+          });
 
+          // Next button goes forward iff current block validates
+          $('.form-navigation .next').click(function() {
+            $('.parsley-form').parsley().whenValidate({
+              group: 'block-' + curIndex()
+            })  .done(function() {
+              navigateTo(curIndex() + 1);
+            });
+          });
 
-        return true; // return the valid status
-    }
+          // Prepare sections by setting the `data-parsley-group` attribute to 'block-0', 'block-1', etc.
+          $sections.each(function(index, section) {
+            $(section).find(':input').attr('data-parsley-group', 'block-' + index);
+          });
+          navigateTo(0); // Start at the beginning
+        });
+    </script>
 
-    function fixStepIndicator(n) {
-        // This function removes the "active" class of all steps...
-        var i, x = document.getElementsByClassName("step");
-        for (i = 0; i < x.length; i++) {
-            x[i].className = x[i].className.replace("active", "");
-        }
-        //... and adds the "active" class on the current step:
-        x[n].className += " active";
-    }
-
-    function getData() {
-        var name = document.getElementById('name').value;
-        document.getElementById('nameView').textContent = name;
-
-        var contactNumber = document.getElementById('contactNumber').value;
-        document.getElementById('contactView').textContent = contactNumber;
-
-        var destination = document.getElementById('dest').value;
-        document.getElementById('destView').textContent = destination;
-
-        var seat = document.getElementById('seat').value;
-        document.getElementById('seatView').textContent = seat;
-
-        var date = document.getElementById('date').value;
-        document.getElementById('dateView').textContent = date;
-
-        var time = document.getElementById('timepicker').value;
-        document.getElementById('timeView').textContent = time;
-
-    }
-    
-    $('[data-mask]').inputmask()
-</script>
+    <script>
+        $('[data-mask]').inputmask()
+    $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
+    </script>
 @endsection

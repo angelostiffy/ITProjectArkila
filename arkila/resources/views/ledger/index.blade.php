@@ -34,6 +34,7 @@
             @foreach ($ledgers->sortByDesc('ledger_id') as $ledger)
                 @if ($ledger->created_at->format('m-d-Y') == $thisDate->format('m-d-Y'))
                 <tr>
+                    @if ($ledger->description !== 'Booking Fee' && $ledger->description !== 'SOP')
                     <td>{{$ledger->payee}}</td>
                     <td>{{$ledger->description}}</td>
                     <td>{{$ledger->or_number}}</td>
@@ -53,13 +54,14 @@
                     <td class="center-block">
                         <div class="text-center">
                             <a href="{{route('ledger.edit', $ledger->ledger_id)}}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i>EDIT</a>
-                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteLedger', $ledger->ledger_id}}"><i class="fa fa-trash"></i> DELETE</button>
+                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteLedger'. $ledger->ledger_id}}"><i class="fa fa-trash"></i> DELETE</button>
                         </div>
                     </td>
                 </tr>
                 @endif
+                @endif
                     <!-- Modal for Delete-->
-                    <div class="modal fade" id="{{'deleteLedger', $ledger->ledger_id}}">
+                    <div class="modal fade" id="{{'deleteLedger'. $ledger->ledger_id}}">
                         <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
                                     <div class="modal-header bg-red">
@@ -87,6 +89,23 @@
                     </div>
                 
                 @endforeach
+                    <tr>
+                        <td></td>
+                        <td>Booking Fee</td>
+                        <td></td>
+                        <td class="text-right">{{$ledger->booking_fee}}</td>
+                        <td></td>
+                        <td class="text-right">{{$ledger->booking_fee}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>SOP</td>
+                        <td></td>
+                        <td class="text-right">{{$ledger->sop}}</td>
+                        <td></td>
+                        <td class="text-right">{{$ledger->sop}}</td>
+                    </tr>
+
             </tbody>
             @if ($ledgers->count() > 0)
             <tfoot>
@@ -96,7 +115,7 @@
                     <th>TOTAL:</th>
                     <th class="text-right">&#8369;{{$ledger->total_revenue}}</th>
                     <th class="text-right">&#8369;{{$ledger->total_expense}}</th>
-                    <th class="text-right">&#8369;{{ $ledger->balance }}</th>
+                    <th class="text-right">&#8369;{{ number_format($ledger->balance, 2) }}</th>
                     <th></th>
                 </tr>
             </tfoot>

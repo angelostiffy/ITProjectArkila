@@ -1,0 +1,50 @@
+
+$('[val-rent-dest]').parsley({
+	pattern: /^[,\pL\s\-]+$/,
+	maxlength: 50
+});
+
+$('[name="name"]').attr('data-parsley-required-message',"Please enter a name.");
+
+$('[val-rent-dest]').attr('data-parsley-required-message','Please enter a destination.');
+
+$('[val-num-days]').parsley({
+	range: [1,2]
+});
+
+$('[val-num-seats]').parsley({
+	range: [1,2]
+});
+
+$('[val-num-days]').attr('data-parsley-required-message','Please enter a number of days.');
+
+ $('[val-book-date]').parsley({
+    	pattern: /^(0?[1-9]|1[0-2])\/(0?[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/
+    })
+
+    $('[val-book-date]').attr('data-parsley-pattern-message','Please enter a valid date format (mm/dd/yyyy).');
+    $('[val-book-date]').attr('data-parsley-required-message','Please enter a departure date.');
+
+
+    window.Parsley.addValidator('validDeparture', {
+      validateString: function(value) {
+      	var bdate_array = value.split('/')
+      	var now = new Date()
+      	var nowMonth = (now.getMonth() + 1);
+      	var valueMonth = parseInt(bdate_array[0]);
+    	var nowDay = now.getDate();
+    	var valueDay = parseInt(bdate_array[1]);
+    	var nowYear = now.getFullYear(); 
+    	var valueYear = parseInt(bdate_array[2]);
+        if(valueYear > nowYear || (valueYear === nowYear && ((valueMonth > nowMonth) || (valueMonth === nowMonth && valueDay >= nowDay)) ) ){
+        	return true;
+        } else {
+        	return false;
+        }
+      },
+      messages: {
+        en: 'Unable to depart on this date.',
+      }
+    });
+
+    $('[val-book-time]').attr('data-parsley-required-message','Please enter a departure time.');

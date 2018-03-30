@@ -9,6 +9,7 @@ use App\Rules\checkCurrency;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Carbon\Carbon;
+use DB;
 
 
 class LedgersController extends Controller
@@ -57,16 +58,12 @@ class LedgersController extends Controller
             ],
         ]);
 
-        $date = Carbon::now();
-        $thisDate = $date->setTimezone('Asia/Manila');
-        
         Ledger::create([
             'payee' => $request->payor,
             'description' => $request->particulars,
             'or_number' => $request->or,
             'amount' => $request->amount,
             'type' => $request->type,
-            'created_at' => $thisDate,
         ]);
 
         return redirect('/home/ledger');
@@ -140,7 +137,11 @@ class LedgersController extends Controller
     }
 
     public function generalLedger() {
+        $date = Carbon::now();
+        $thisDate = $date->setTimezone('Asia/Manila');
         $ledgers = Ledger::all();
-        return view('ledger.generalLedger', compact('ledgers'));
+        $bookings = Ledger::select('created_at','description', DB::raw("SUM(amount) as total_amount"))->where('description', 'Booking Fee')
+        ->groupBy(DB::raw('day(created_at)'), DB::raw('month(created_at)'), DB::raw('year(created_at)'))->get();
+        return view('ledger.generalLedger', compact('ledgers', 'thisDate', 'bookings'));
     }
 }
