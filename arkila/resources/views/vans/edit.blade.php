@@ -17,21 +17,24 @@
     <div class="form-group">
         <label for="">Operator:</label> <span></span>
         <p class="info-container">{{ $van->operator()->first()->full_name }}</p>
+        <input type="hidden" value="{{ $van->operator()->first()->full_name }}">
     </div>
     
 	<div class="form-group">
         <label for="">Plate Number:</label>
         <p class="info-container">{{$van->plate_number}}</p>
+        <input type="hidden" value={{$van->plate_number}}">
     </div>
     <div class="form-group">
         <label for="">Van Model</label>
         <p class="info-container">{{$van->model}}</p>
+        <input type="hidden" value="{{$van->model}}">
     </div>
 
     <div class="form-group">
         <label for="">Seating Capacity</label>
         <p class="info-container">{{$van->seating_capacity}}</p>
-      
+        <input type="hidden" value="{{$van->seating_capacity}}">
     </div>
     
     <div class="form-group">
