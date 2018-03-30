@@ -135,7 +135,7 @@ ol.vertical{
   </style>
 @endsection
 
-@section('content-header','WOW')
+@section('content-header','Van Queue')
 
 @section('content')
       <div class="row">
@@ -453,10 +453,6 @@ ol.vertical{
         },
         success: function(response){
             specialUnitChecker();
-            console.log(response);
-            if(response.length > 0){
-
-            }
         }
       });
 

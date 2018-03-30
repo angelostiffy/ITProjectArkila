@@ -160,6 +160,8 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
     Route::get('/updatedQueueNumber','TripsController@updatedQueueNumber')->name('trips.updatedQueueNumber');
     Route::patch('/putOnDeck/{trip}','TripsController@putOnDeck')->name('trips.putOnDeck');
     Route::post('/changeRemarksOB/{trip}','TripsController@changeRemarksOB')->name('trips.changeRemarksOB');
+    Route::get('/showConfirmationBox/{encodedTrips}','TripsController@showConfirmationBox');
+    Route::get('/showConfirmationBoxOB/{encodedTrips}','TripsController@showConfirmationBoxOb');
     /* Transactions(Ticket) */
     Route::resource('/home/transactions', 'TransactionsController',[
         'except' => ['create','show','edit']
@@ -171,15 +173,13 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
     Route::patch('/updatePendingTransactions', 'TransactionsController@updatePendingTransactions')->name('transactions.updatePendingTransactions');
     Route::patch('/updateOnBoardTransactions', 'TransactionsController@updateOnBoardTransactions')->name('transactions.updateOnBoardTransactions');
     Route::get('/listSourceDrivers','TransactionsController@listSourceDrivers')->name('transactions.listSourceDrivers');
+    Route::patch('/changeDriver/{trip}', 'TransactionsController@changeDriver')->name('transactions.changeDriver');
     /********Archive ********/
     Route::patch('/home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
-    Route::get('/showConfirmationBox/{encodedTrips}','TripsController@showConfirmationBox');
-    Route::get('/showConfirmationBoxOB/{encodedTrips}','TripsController@showConfirmationBoxOb');
     Route::get('/drivers/generatePDF', 'DriversController@generatePDF')->name('pdf.drivers');
     Route::get('/operators/generatePDF', 'OperatorsController@generatePDF')->name('pdf.operators');
     Route::get('/drivers/generatePerDriver/{driver}', 'DriversController@generatePerDriver')->name('pdf.perDriver');
     Route::get('/drivers/generatePerOperator/{operator}', 'OperatorsController@generatePerOperator')->name('pdf.perOperator');
-     
     Route::get('/home/trip-log', 'TripsController@tripLog')->name('trips.tripLog');
     Route::get('/home/driver-report', 'TripsController@driverReport')->name('trips.driverReport');
 

@@ -255,4 +255,16 @@ class TransactionsController extends Controller {
         return response()->json($drivers);
 
     }
+
+    public function changeDriver(Trip $trip){
+        $this->validate(request(),[
+           'value' => 'exists:member,member_id'
+        ]);
+
+        $trip->update([
+           'driver_id' => request('value')
+        ]);
+
+        return 'success';
+    }
 }
