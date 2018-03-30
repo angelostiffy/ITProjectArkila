@@ -28,7 +28,7 @@
                             <div class="box-body">
                                 <div class="table-responsive-sm">
                                 <div class="col col-md-6">
-                                    <a href="/home/user-management/admin/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus-circle"></i> Create New</a>
+                                    <a href="/home/user-management/admin/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i>  Create New</a>
                                 </div>
 
 

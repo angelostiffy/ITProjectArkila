@@ -6,12 +6,15 @@
 @stop
 @section('content')
 
-<div id="ledgerInfo" class="box">
+<div class="box">
     <!-- /.box-header -->
-    <name id="ledgerDate" style="font-size: 13pt">March 23, 2018</name>
-    <a href="{{route('ledger.create')}}" class="btn btn-primary btn-md" data-target="#addExpRev">
-        Add <span class="glyphicon glyphicon-plus-sign"></span> 
-    </a>
+    <h2 class="text-center">March 23, 2018</h2>
+    
+    <div class="col col-md-6">
+        <a href="{{route('ledger.create')}}" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-plus"></i>
+            Add Revenue/Expense 
+        </a>
+    </div>
 
     <div class="box-body">
         <table class="table table-bordered table-striped dailyLedgerTable">
@@ -23,7 +26,7 @@
                     <th>IN</th>
                     <th>OUT</th>
                     <th>Balance</th>
-                    <th>Action</th>
+                    <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,29 +36,69 @@
                     <td>{{$ledger->description}}</td>
                     <td>{{$ledger->or_number}}</td>
                     @if ($ledger->type == 'Revenue')
-                    <td>&#8369;{{$ledger->amount}}</td>
+
+                    <td class="text-right">&#8369;{{$ledger->amount}}</td>
                     <td></td>
-                    <td>&#8369;{{$ledger->amount}}</td>
 
                     @else
                     <td></td>                    
-                    <td>&#8369;{{$ledger->amount}}</td>
-                    <td>-&#8369;{{$ledger->amount}}</td>
+                    <td class="text-right">&#8369;{{$ledger->amount}}</td>
+                    
                     @endif
+                    
+                    <td class="text-right">-&#8369;{{$ledger->amount}}</td>
+                    
                     <td class="center-block">
-                        <div class="center-block">
-                            <a href="{{route('ledger.edit', $ledger->ledger_id)}}" class="btn btn-primary">   <i class="glyphicon glyphicon-pencil">Edit</i></a>
-                            <button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</button>
+                        <div class="text-center">
+                            <a href="{{route('ledger.edit', $ledger->ledger_id)}}" class="btn btn-primary btn-sm"><i class="fa-pencil-square-o"></i>EDIT</a>
+                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="yuki"><i class="fa fa-trash"></i> DELETE</button>
                         </div>
                     </td>
-
-
                 </tr>
+                
+                <!-- Modal for Delete-->
+                <div class="modal fade" id="yuki">
+                    <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header bg-red">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                                    <h4 class="modal-title"> Confirm</h4>
+                                </div>
+                                <div class="modal-body">
+                                        <h1>
+                                        <i class="fa fa-exclamation-triangle pull-left text-yellow" ></i>
+                                        </h1>
+                                        <p>Are you sure you want to delete "{{$ledger->description}}"?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="#" method="POST">
+                                       
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Discard</button>
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                            
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>TOTAL:</th>
+                    <th class="text-right">&#8369;121</th>
+                    <th class="text-right">&#8369;232</th>
+                    <th class="text-right">&#8369;{{ $ledger->balance }}</th>
+                    <th></th>
+                </tr>
+            </tfoot>
         </table>
-                <p>Total Balance: {{ $ledger->balance }}</p>
-
     </div>
     <!-- /.box-body -->
 </div>
@@ -68,12 +111,16 @@
     <script>
         $(function() {
             $('.dailyLedgerTable').DataTable({
-                'paging': true,
+                'paging': false,
                 'lengthChange': true,
-                'searching': false,
+                'searching': true,
                 'ordering': true,
                 'info': false,
-                'autoWidth': true
+                'autoWidth': true,
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1] /* 1st one, start by the right */
+                }]
             })
         })
     </script>
