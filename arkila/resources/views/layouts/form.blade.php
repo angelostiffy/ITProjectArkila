@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ban Trans | @yield('title')</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
     @section('links')
         @include('layouts.partials.stylesheets_form')
     @show
@@ -18,32 +23,29 @@
         <div class="content-wrapper bgform-image">
                         <div class="container">
                     <section class="content">
-                        <div class="login-box" style="box-shadow: 0px 5px 10px gray;">
+                        <div class="form-box">
                             <form action="@yield('form-action')" method="POST" data-parsley-validate="">
                             {{csrf_field()}} @yield('method_field')
-                            <div class="login-logo">
-                                <div class="col-md-1">
-                                    <h3 style=":hover{color = green;}">
+                            <div class="form-box-header">
+                                    <p>
                                         <a href="@yield('back-link')">
                                             <i class="fa fa-chevron-left"></i>
                                         </a>
-                                    </h3>
-                                </div>
-                                <div class="col-md-11">
-                                    <h3>
+                                    <span class="text-center">
                                         @yield('form-title')
-                                    </h3>
-                                </div>
+                                    </span>
+                                    </p>
                             </div>
-                            <div class="login-box-body">
+                            <div class="form-box-body">
                                 @yield('form-body')
                             </div>
                             <!-- /.login-box-body -->
-                            <div class="box-footer">
+                            <div class="form-box-footer">
                                 @yield('others')
                                 <div class="form-group pull-right">
                                     @yield('form-btn')
                                 </div>
+                                <div class="clearfix"></div>
                             </div>
                             </form>
                         </div>

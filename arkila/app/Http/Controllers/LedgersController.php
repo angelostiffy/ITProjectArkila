@@ -138,4 +138,9 @@ class LedgersController extends Controller
         $ledger->delete();
         return back();
     }
+
+    public function generalLedger() {
+        $ledgers = Ledger::all();
+        return view('ledger.generalLedger', compact('ledgers'));
+    }
 }

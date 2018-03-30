@@ -31,6 +31,22 @@
                 </ul>
             </div>
         </div>
+        
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">Database</h3>
+                <div class="box-tools">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <p class="text-center">Click "Restore" to retreive all saved data.</p>
+                <a class="btn btn-primary btn-sm btn-flat btn-block pull-right">RESTORE</a>
+            </div>
+        </div>
+        
     </div>
     <div class="col-md-8">
         <row>
@@ -474,71 +490,4 @@
         })
 
     </script>
-
-
-    <style>
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 40px;
-            height: 20px;
-        }
-
-        /* Hide default HTML checkbox */
-
-        .switch input {
-            display: none;
-        }
-
-        /* The slider */
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: gray;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 15px;
-            width: 18px;
-            left: 5px;
-            bottom: 3px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-        input:checked+.slider {
-            background-color: #0275d8;
-        }
-
-        input:focus+.slider {
-            box-shadow: 0 0 1px #2196F3;
-        }
-
-        input:checked+.slider:before {
-            -webkit-transform: translateX(13px);
-            -ms-transform: translateX(13px);
-            transform: translateX(13px);
-        }
-
-        /* Rounded sliders */
-
-        .slider.round {
-            border-radius: 100px;
-        }
-
-        .slider.round:before {
-            border-radius: 80%;
-        }
-
-    </style>
     @endsection

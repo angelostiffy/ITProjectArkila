@@ -1,48 +1,14 @@
-@extends('layouts.form_lg') @section('links') @parent
-
-<style>
-    /* Mark input boxes that gets an error on validation: */
-
-    /* Hide all steps by default: */
-
-    .tab {
-        display: none;
-    }
-
-    /* Make circles that indicate the steps of the form: */
-
-    .step {
-        height: 15px;
-        width: 15px;
-        margin: 0 2px;
-        background-color: #bbbbbb;
-        border: none;
-        border-radius: 50%;
-        display: inline-block;
-        opacity: 0.5;
-    }
-
-    .step.active {
-        opacity: 1;
-    }
-
-    /* Mark the steps that are finished and valid: */
-
-    .step.finish {
-        background-color: #4CAF50;
-    }
-</style>
-@endsection @section('title', 'Book a Seat') 
+@extends('layouts.form_lg') 
+@section('title', 'Book a Seat') 
 @section('form-id', 'regForm') 
 @section('form-action', route('reservations.store')) 
 @section('form-method', 'POST') 
 @section('form-body') {{csrf_field()}}
 @section('backRef') {{ route('reservations.index') }} @endsection
 
-
-<div class="box box-warning">
+<div class="box box-success">
     <div class="box-header with-border text-center">
-        <a href="@yield('backRef')" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+        <a href="@yield('backRef')"><i class="fa  fa-chevron-left"></i></a>
         <h3 class="box-title">
             Book a Seat
         </h3>
@@ -55,13 +21,13 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>Name:</label>
+                        <label>Name: <span class="text-red">*</span></label>
                         <input type="text" class="form-control" placeholder="Name" name="name" id="name" value="{{ old('name') }}" maxlength='30' required>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>Contact Number:</label>
+                        <label>Contact Number: <span class="text-red">*</span></label>
                         <div class = "input-group">  
                             <div class = "input-group-addon">
                                 <span>+63</span>
@@ -73,7 +39,7 @@
                 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>Departure Date:</label>
+                        <label>Departure Date: <span class="text-red">*</span></label>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
@@ -88,8 +54,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>Destination:</label>
-                        <select class="form-control" name="dest" id="dest" required>
+                        <label>Destination: <span class="text-red">*</span></label>
+                        <select class="form-control select2" name="dest" id="dest" required>
                                     <option value="" disabled selected>Select Destination</option>
                                 @foreach ($destinations as $destination)
                                    <option value="{{ $destination->description }}" @if($destination->description == old('dest') ) {{'selected'}} @endif>{{ $destination->description }}</option>
@@ -99,14 +65,14 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>Number of Seats:</label>
+                        <label>Number of Seats: <span class="text-red">*</span></label>
                         <input type="number" class="form-control" placeholder="Number of Seats" name="seat" id="seat" value="{{ old('seat') }}" min="1" max="15" required>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="bootstrap-timepicker">
                         <div class="form-group">
-                            <label>Departure Time:</label>
+                            <label>Departure Time: <span class="text-red">*</span></label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="timepicker" name="time" value="{{ old('time') }}" required>
                                 <div class="input-group-addon">
