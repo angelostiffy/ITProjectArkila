@@ -4,12 +4,14 @@
 @section('content')
 <div class="box">
     <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
+       <div class="table-responsive">
         <div class="col col-md-6">
             <a href="/home/operators/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> REGISTER OPERATOR</a>
             <a href="{{route('pdf.operators')}}"  class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i> PRINT</a>
         </div>
         
         <!-- /.col -->
+        
         <table id="operatorList" class="table table-bordered table-striped">
             <thead>
                 <tr>

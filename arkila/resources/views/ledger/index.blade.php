@@ -1,61 +1,130 @@
 @extends('layouts.master')
-@section('title', 'Daily Ledger Log')
+@section('title', 'Daily Ledger')
 @section('links')
 @parent
-  <link rel="stylesheet" href="tripModal.css"> 
+  <link rel="stylesheet" href="public\css\myOwnStyle.css">
 @stop
 @section('content')
-<div id="ledgerInfo" class="box">
+
+<div class="box">
     <!-- /.box-header -->
+    <h2 class="text-center">{{ $thisDate->formatLocalized('%A %d %B %Y') }}</h2>
+    
+    <div class="col col-md-6">
+        <a href="{{route('ledger.create')}}" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-plus"></i>
+            Add Revenue/Expense 
+        </a>
+        <a href="#"  class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i>PRINT</a>
+    </div>
 
     <div class="box-body">
-    <a button class="btn btn-info" href="{{route('ledger.create')}}"><i class="glyphicon glyphicon-eye-open"> Add </i></a>
-
         <table class="table table-bordered table-striped dailyLedgerTable">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Profit/Loss</th>
-                    <th>Action</th>
+                    <th>Payee/Payor</th>
+                    <th>Particulars</th>
+                    <th>OR#</th>
+                    <th>IN</th>
+                    <th>OUT</th>
+                    <th>Balance</th>
+                    <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
+            @foreach ($ledgers->sortByDesc('ledger_id') as $ledger)
+                @if ($ledger->created_at->format('m-d-Y') == $thisDate->format('m-d-Y'))
                 <tr>
-                    <td>May 23, 2018</td>
-                    <td>5200</td>
+                    <td>{{$ledger->payee}}</td>
+                    <td>{{$ledger->description}}</td>
+                    <td>{{$ledger->or_number}}</td>
+                    @if ($ledger->type == 'Revenue')
+
+                    <td class="text-right">&#8369;{{$ledger->amount}}</td>
+                    <td></td>
+                    <td class="text-right">&#8369;{{$ledger->amount}}</td>
+
+                    @else
+                    <td></td>                    
+                    <td class="text-right">&#8369;{{$ledger->amount}}</td>
+                    <td class="text-right">-&#8369;{{$ledger->amount}}</td>
+
+                    @endif
+                                        
                     <td class="center-block">
-                        <div class="center-block">
-                            <a button class="btn btn-info" href="show"><i class="glyphicon glyphicon-eye-open"> View </i></a>
+                        <div class="text-center">
+                            <a href="{{route('ledger.edit', $ledger->ledger_id)}}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i>EDIT</a>
+                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteLedger', $ledger->ledger_id}}"><i class="fa fa-trash"></i> DELETE</button>
                         </div>
                     </td>
-
                 </tr>
-
+                @endif
+                    <!-- Modal for Delete-->
+                    <div class="modal fade" id="{{'deleteLedger', $ledger->ledger_id}}">
+                        <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-red">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                                        <h4 class="modal-title"> Confirm</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                            <h1>
+                                            <i class="fa fa-exclamation-triangle pull-left text-yellow" ></i>
+                                            </h1>
+                                            <p>Are you sure you want to delete "{{$ledger->description}}"?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                         <form action="{{route('ledger.destroy', $ledger->ledger_id)}}" method="POST">
+                                            {{csrf_field()}} {{method_field('DELETE')}}
+                                             
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button> <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                
+                @endforeach
             </tbody>
+            @if ($ledgers->count() > 0)
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>TOTAL:</th>
+                    <th class="text-right">&#8369;{{$ledger->total_revenue}}</th>
+                    <th class="text-right">&#8369;{{$ledger->total_expense}}</th>
+                    <th class="text-right">&#8369;{{ $ledger->balance }}</th>
+                    <th></th>
+                </tr>
+            </tfoot>
+            @endif
         </table>
-
-
     </div>
     <!-- /.box-body -->
 </div>
+         
 
-@endsection
+@stop
 
 @section('scripts')
 @parent
-
-    <script>  
+    <script>
         $(function() {
             $('.dailyLedgerTable').DataTable({
-                'paging': true,
-                'lengthChange': false,
+                'paging': false,
+                'lengthChange': true,
                 'searching': true,
                 'ordering': true,
-                'info': true,
-                'autoWidth': true
+                'info': false,
+                'autoWidth': true,
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1] /* 1st one, start by the right */
+                }]
             })
-    
         })
     </script>
-
-@endsection
+@stop

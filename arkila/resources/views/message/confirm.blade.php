@@ -49,7 +49,7 @@
 			    buttons: {
 			        closer: false,
 			        sticker: false
-			    },
+			    }, a
 			    history: {
 			        history: false
 			    }

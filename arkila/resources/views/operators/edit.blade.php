@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="operatorMiddleName">Middle Name: <span class="text-red">*</span></label>
+                        <label for="operatorMiddleName">Middle Name: </label>
                         <input id="operatorMiddleName" value="{{  old('middleName')  ?? $operator->middle_name }}"  name="middleName" type="text" class="form-control" placeholder="Middle Name" maxlength="35">
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input value="{{ old('birthDate') ?? $operator->birth_date }}" id="birthdateO" name="birthDate" type="text" class="form-control" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                            <input value="{{ old('birthDate') ?? $operator->birth_date }}" id="birthdateO" name="birthDate" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                         </div>
                     </div>
                 </div>
@@ -129,11 +129,11 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="licenseExpiryDateO">License Expiry Date: <span class="text-red">*</span></label>
-                        <div class="input-group date">
+                        <div class="input-group">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input value="{{  old('licenseExpiryDate')  ?? $operator->expiry_date }}" id="licenseExpiryDateO" name="licenseExpiryDate" type="text" class="form-control pull-right datepicker">
+                            <input value="{{  old('licenseExpiryDate')  ?? $operator->expiry_date }}" id="licenseExpiryDateO" name="licenseExpiryDate" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                         </div>
                     </div>
                 </div>
@@ -149,11 +149,11 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="spouseBirthDateO">Birthdate of Spouse:</label>
-                        <div class="input-group date">
+                        <div class="input-group">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input value="{{  old('spouseBirthDate') ?? $operator->spouse_birthdate }}" id="spouseBirthDateO" name="spouseBirthDate" type="text" class="form-control pull-right datepicker">
+                            <input value="{{  old('spouseBirthDate') ?? $operator->spouse_birthdate }}" id="spouseBirthDateO" name="spouseBirthDate" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                         </div>
                     </div>
                 </div>
@@ -175,8 +175,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="mothersNameO">Mothers Name:</label>
-                        <input value=" {{ old('mothersName') ?? $operator->mother_name }}" id="mothersNameO" name="mothersName" type="text" class="form-control" placeholder="Mothers Name" maxlength="120">
+                        <label for="mothersNameO">Mothers Maiden Name:</label>
+                        <input value="{{ old('mothersName') ?? $operator->mother_name }}" id="mothersNameO" name="mothersName" type="text" class="form-control" placeholder="Mothers Maiden Name" maxlength="120">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -202,7 +202,12 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="contactNumberO">Contact Number: <span class="text-red">*</span></label>
-                        <input value="{{ old('contactPersonContactNumber') ?? $operator->edit_emergency_contactno }}" id="contactNumberO" name="contactPersonContactNumber" type="text" class="form-control" placeholder="Contact Number" maxlength="10">
+                        <div class = "input-group">
+                            <div class = "input-group-addon">
+                                <span>+63</span>
+                            </div>
+                        <input value="{{ old('contactPersonContactNumber') ?? $operator->edit_emergency_contactno }}" id="contactNumberO" name="contactPersonContactNumber" type="text" class="form-control" placeholder="Contact Number" maxlength="10" data-inputmask='"mask": "999-999-9999"' data-mask>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -228,11 +233,11 @@
                                         <input value="{{old('children.'.$i)}}" name="children[]" type="text" placeholder="Name of Child" class="form-control" maxlength="120">
                                     </td>
                                     <td>
-                                        <div class="input-group date">
+                                        <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input value="{{old('childrenBDay.'.$i)}}" name="childrenBDay[]" type="text" class="form-control pull-right datepicker">
+                                            <input value="{{old('childrenBDay.'.$i)}}" name="childrenBDay[]" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                         </div>
                                     </td>
                                     <td>
@@ -250,11 +255,11 @@
                                         <input value="{{$child->children_name}}" name="children[]" type="text" placeholder="Name of Child" class="form-control" maxlength="120">
                                     </td>
                                     <td>
-                                        <div class="input-group date">
+                                        <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input value="{{$child->birthdate}}" name="childrenBDay[]" type="text" class="form-control pull-right datepicker">
+                                            <input value="{{$child->birthdate}}" name="childrenBDay[]" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                         </div>
                                     </td>
                                     <td>
@@ -271,11 +276,11 @@
                                     <input name="children[]" type="text" placeholder="Name of Child" class="form-control" maxlength="120">
                                 </td>
                                 <td>
-                                    <div class="input-group date">
+                                    <div class="input-group">
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input name="childrenBDay[]" type="text" class="form-control pull-right datepicker">
+                                        <input name="childrenBDay[]" type="text" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                     </div>
                                 </td>
                                 <td>
@@ -304,7 +309,7 @@
 
 <script>
     $(document).ready(function(){
-        cloneDatePicker();
+        cloneDateMask();
         switch($('select[name="civilStatus"]').val()){
             case "Single":
                 $('input[name="nameOfSpouse"]').prop('disabled',true);
@@ -339,15 +344,11 @@
         });
     });
 
-    function cloneDatePicker() {
+    function cloneDateMask() {
 
-        //Date picker
-        $('.datepicker').datepicker({
-            autoclose: true
-        })
+            $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
 
-    }
-
+        }
 
 
     function addItem() {
@@ -365,7 +366,7 @@
 
         }
         tablebody.appendChild(iClone);
-        cloneDatePicker();
+        cloneDateMask();
     }
 
 
@@ -379,9 +380,21 @@
     }
 </script>
 <script>
+    $(function () {
+
+        $('.select2').select2()
+
+        $('#datepicker').datepicker({
+          autoclose: true
+        })
+
+        $('input[type="checkbox"].flat-blue, input[type="radio"].flat-blue').iCheck({
+          checkboxClass: 'icheckbox_flat-blue',
+          radioClass   : 'iradio_flat-blue'
+        })
+    })
+
     $('[data-mask]').inputmask()
-</script>
-
-
-
+    $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
+    </script>
 @stop

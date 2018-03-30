@@ -85,8 +85,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Daily Ledger</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> General Ledger</a></li>
+                    <li><a href="{{route('ledger.index')}}"><i class="fa fa-circle-o"></i> Daily Ledger</a></li>
+                    <li><a href="generalLedger"><i class="fa fa-circle-o"></i> General Ledger</a></li>
                 </ul>
             </li>
             <li class="header">SETTING</li>
@@ -98,6 +98,11 @@
             <li>
                 <a href="{{route('usermanagement.dashboard')}}">
                     <i class="fa fa-male"></i> <span>User Management</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('archive.index')}}">
+                    <i class="fa fa-archive"></i> <span>Operator Archive</span>
                 </a>
             </li>
 

@@ -4,13 +4,7 @@
 <!-- additional CSS -->
 <link rel="stylesheet" href="operatorStyle.css"> 
 <style> 
-.info-container{
-    border: 1px solid; 
-    padding: 5px;
-    overflow-x: auto;
-    height:33px;
-    background:#e9ecfd;
-}
+
 </style>
 @stop @section('content')
 

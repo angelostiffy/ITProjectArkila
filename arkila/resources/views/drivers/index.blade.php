@@ -1,9 +1,10 @@
 @extends('layouts.master') @section('title', 'List of Drivers') @section('content-header', 'List of Drivers') @section('content') @if(session()->get('opLink')) {{ session()->forget('opLink') }} @endif
 <div class="box">
     <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
+       <div class="table-responsive">
         <div class="col-md-6">
             <a href="{{route('drivers.create')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus-circle"></i> REGISTER DRIVER</a>
-            <a href="{{route('pdf.drivers')}}"  class="btn btn-default btn-sm btn-fla"> <i class="fa fa-print"></i> PRINT</a>
+            <a href="{{route('pdf.drivers')}}"  class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i> PRINT</a>
         </div>
         <table id="driverList" class="table table-bordered table-striped">
             <thead>
@@ -72,6 +73,7 @@
     <!-- /.box-body -->
 </div>
 <!-- /.box-->
+</div>
 
 @stop 
 @section('scripts') 

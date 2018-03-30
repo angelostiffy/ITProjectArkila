@@ -26,7 +26,7 @@ class CreateLedgerTable extends Migration
             ->nullable();
             $table->decimal('amount', 7, 2);
 
-            $table->enum('type', ['Revenue', 'Expenses']);
+            $table->enum('type', ['Revenue', 'Expense']);
 
             $table->timestamps();
 

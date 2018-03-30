@@ -8,7 +8,7 @@
             padding: 5px;
             overflow-x: auto;
             height:33px;
-            background:#ffffd7;
+            background:#fff6e2;
         }
     </style>
 @stop 
