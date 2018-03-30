@@ -16,6 +16,10 @@ class CreateReservationTable extends Migration
         Schema::create('reservation', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->integer('user_id')
+            ->unsigned()
+            ->nullable();
+
             $table->integer('destination_id')
             ->unsigned();
             $table->string('name', 70);
@@ -26,8 +30,15 @@ class CreateReservationTable extends Migration
             $table->decimal('amount', 7, 2);
             $table->enum('status', ['Pending', 'Departed', 'Declined', 'Paid', 'Cancelled']);
             $table->enum('type', ['Walk-in', 'Online']);
+            $table->string('comments', 300)
+            ->nullable();
 
             $table->timestamps();
+
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
 
             $table->foreign('destination_id')
             ->references('destination_id')->on('destination')

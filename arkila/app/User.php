@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username','email', 'password', 'terminal_id', 'user_type', 'status'
+        'first_name', 'middle_name', 'last_name', 'username','email', 'password', 'terminal_id', 'user_type', 'status'
     ];
 
     /**
@@ -42,7 +42,17 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\VerifyUser');
     }
+
+    public function reservation()
+    {
+      return $this->hasMany(Reservation::class, 'user_id', 'id');
+    }
     
+    public function rental()
+    {
+      return $this->hasMany(Rental::class, 'user_id', 'id');
+    }
+
     public function scopeStatusEnable($query)
     {
       return $query->where('status', '=', 'enable');

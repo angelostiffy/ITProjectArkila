@@ -8,13 +8,15 @@
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6" id="boxContainer">
-                    <form class="contact100-form">
+                    <form class="contact100-form" action="{{route('customermodule.storeRental')}}" method="POST">
+                        {{csrf_field()}}
                         <div class="wrap-input100">
-                            <select id="vanType" name="Type of Van" class="input100">
-                                       <option disabled hidden selected>Type of Vehicle</option>
-                                       <option>innova</option>
-                                       <option>hi ace</option>
-                                    </select>
+                            <select id="vanType" name="van_model" class="input100">
+                                
+                                @foreach($vanmodels as $vanmodel)
+                                    <option value="{{$vanmodel->model_id}}">{{$vanmodel->description}}</option>
+                                @endforeach
+                            </select>
                             <span class="focus-input100"></span>
                         </div><!-- wrap-input100-->
                         <div class="wrap-input100">
@@ -24,13 +26,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="wrap-input100">
-                                    <input id="contactNumber" class="input100" type="text" placeholder="Contact Number" name="contactNumber" value="" data-inputmask='"mask": "999-999-9999"' data-mask>
+                                    <input id="contactNumber" class="input100" type="text" placeholder="Contact Number" name="contactNumber" data-inputmask='"mask": "999-999-9999"' data-mask>
                                     <span class="focus-input100"></span>
                                 </div><!-- wrap-input100-->
                             </div><!-- col-->
                             <div class="col-md-6">
                                 <div class="wrap-input100">
-                                    <input id="numberOfDays" class="input100" type="number" placeholder="Number of Days" name="numberOfDays" value="">
+                                    <input id="numberOfDays" class="input100" type="number" placeholder="Number of Days" name="numberOfDays">
                                     <span class="focus-input100"></span>
                                 </div><!-- wrap-input100-->
                             </div><!-- col-->
@@ -38,14 +40,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="wrap-input100">
-                                    <input id="date" class="input100 datepicker" type="text" name="" placeholder="Date">
+                                    <input id="date" class="input100 datepicker" type="text" name="date" placeholder="Date">
                                     <span class="focus-input100"></span>
                                 </div><!-- wrap-input100-->
                             </div><!-- col-->
                             <div class="col-md-6">
                                 <div class="wrap-input100">
                                     <div class="bootstrap-timepicker">
-                                        <input type="text" id="timepicker" class="input100 timepicker" placeholder="Time">
+                                        <input type="text" id="timepicker" class="input100 timepicker" name="time" placeholder="Time">
                                         <span class="focus-input100"></span>
                                     </div><!-- bootstrap-timepicker-->
                                 </div><!-- wrap-input100-->
@@ -56,9 +58,9 @@
                             <span class="focus-input100"></span>
                         </div><!-- wrap-input100-->
                         <div class="container-contact100-form-btn">
-                            <button type="button" class="contact100-form-btn" data-toggle="modal" data-target="#addSuccess"><strong>Book</strong></button>
+                            <button type="button" class="contact100-form-btn" onclick="showSummary()" data-toggle="modal" data-target="#summary"><strong>Book</strong></button>
                         </div><!-- container-contact100-form-btn-->
-                    </form>
+                    
                     <!-- contact100-form-->
                 </div>
                 <!-- boxContainer-->
@@ -70,7 +72,7 @@
     <!--    main section-->
     
     <!-- Success Modal-->
-    <div id="addSuccess" aria-hidden="true" class="modal fade">
+    <div id="summary" aria-hidden="true" class="modal fade summary-modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" style="background:#5cb85c; color:white; font-family: Montserrat-Regular;">
@@ -78,43 +80,76 @@
 
                 </div>
                 <div class="modal-body">
-                    <p class="text-center" style="margin-bottom:10px;"><strong>You have Successfully created a request!</strong></p>
+                    <p class="text-center" style="margin-bottom:10px;"><strong>Summary</strong></p>
                     <table class="table">
                         <tbody>
                             <tr>
                                 <th>Type of Vehicle</th>
-                                <td>sadas</td>
+                                <td id="vehicleType"></td>
                             </tr>
                             <tr>
                                 <th>Destination</th>
-                                <td>qwdas</td>
+                                <td id="dest"></td>
                             </tr>
                             <tr>
                                 <th>Contact Number</th>
-                                <td>asdasd</td>
+                                <td id="contactNo"></td>
                             </tr>
                             <tr>
                                 <th>Number of Days</th>
-                                <td>qwe</td>
+                                <td id="numDays"></td>
                             </tr>
                             <tr>
                                 <th>Date</th>
-                                <td></td>
+                                <td id="dateDepart"></td>
                             </tr>
                             <tr>
                                 <th>Time</th>
-                                <td></td>
+                                <td id="timeDepart"></td>
                             </tr>
                             <tr>
                                 <th>Comments</th>
-                                <td></td>
+                                <td id="comment"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="modal-footer">
+                    <button type="submit" class="contact100-form-btn"><strong>Submit</strong></button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
 @stop
+@section('scripts')
+@parent
+<script>
+    // $('.summary-modal').click(function(){
+    //         $('#vehicleType').text($('#vanType option:selected').text());
+    //         $('#dest').text($('#rentalDestination').val());
+    //         $('#contactNo').text($('#contactNumber').val());
+    //         $('#numDays').text($('#numberOfDays').val());
+    //         $('#dateDepart').text($('#date').val());
+    //         $('#timeDepart').text($('#timepicker').val());
+    //         $('#comment').text($('#message').val());
+    //     });
+    function getVehicle(elementId){
+        var sel = document.getElementById(elementId);
+        if (sel.selectedIndex == -1){
+            return null;
+        }
+        
+        return sel.options[sel.selectedIndex].text;
+    }
+    function showSummary(){
+        document.getElementById('vehicleType').textContent = getVehicle('vanType');
+        document.getElementById('dest').textContent = document.getElementById('rentalDestination').value;
+        document.getElementById('contactNo').textContent = document.getElementById('contactNumber').value;
+        document.getElementById('numDays').textContent = document.getElementById('numberOfDays').value;
+        document.getElementById('dateDepart').textContent = document.getElementById('date').value;
+        document.getElementById('timeDepart').textContent = document.getElementById('timepicker').value;
+        document.getElementById('comment').textContent = document.getElementById('message').value;
+    }
+</script>
+@endsection

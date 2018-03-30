@@ -8,7 +8,8 @@
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6" id="boxContainer">
-                    <form class="contact100-form">
+                    <form class="contact100-form" action="" method="POST">
+                        {{csrf_field()}}
                         <div class="wrap-input100">
                             <select id="destination" name="destination" class="input100">
                                <option disabled hidden selected>Destination</option>
@@ -34,14 +35,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="wrap-input100">
-                                    <input id="date" class="input100 datepicker" type="text" name="" placeholder="Date">
+                                    <input id="date" class="input100 datepicker" type="text" name="date" placeholder="Date">
                                     <span class="focus-input100"></span>
                                 </div><!-- wrap-input100-->
                             </div><!-- col-->
                             <div class="col-md-6">
                                 <div class="wrap-input100">
                                     <div class="bootstrap-timepicker">
-                                        <input type="text" id="timepicker" class="input100 timepicker" placeholder="Time">
+                                        <input type="text" id="timepicker" class="input100 timepicker" name="time" placeholder="Time">
                                         <span class="focus-input100"></span>
                                     </div><!-- bootstrap-timepicker-->
                                 </div><!-- wrap-input100-->
@@ -54,7 +55,7 @@
                         <div class="container-contact100-form-btn">
                             <button type="button" class="contact100-form-btn" data-toggle="modal" data-target="#addSuccess"><strong>Book</strong></button>
                         </div><!-- container-contact100-form-btn-->
-                    </form>
+                    
                     <!-- contact100-form-->
                 </div>
                 <!-- col-->
@@ -103,8 +104,12 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="modal-footer">
+                    <button type="submit" class="contact100-form-btn"><strong>Submit</strong></button>
+                </div>
                 <!-- modal-body-->
             </div>
+            </form>
             <!-- modal-content-->
         </div>
         <!-- modal-dialog-->
