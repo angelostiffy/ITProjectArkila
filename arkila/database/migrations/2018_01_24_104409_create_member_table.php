@@ -49,8 +49,9 @@ class CreateMemberTable extends Migration
             $table->string('SSS', 20);
             $table->string('license_number', 20)->nullable();
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
-            $table->enum('notification', ['Enable', 'Disable'])->default('Enable');
+             ->enum('notification', ['Enable', 'Disable'])->default('Enable');
             $table->date('expiry_date')->nullable();
+            $table->decimal('monthly_dues', 7, 2);
             $table->timestamps();
 
             $table->foreign('user_id')
