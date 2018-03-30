@@ -1,17 +1,17 @@
 @extends('layouts.form_lg')
-@section('title', 'Rent Van')
+@section('title', 'book Van')
 @section('form-id', 'parsley-form')
-@section('form-action', route('rental.store'))
+@section('form-action', route('bookal.store'))
 @section('form-method', 'POST')
 @section('form-body')
                           {{csrf_field()}}     
 <div class="box box-danger with-shadow" style = " margin: 7% auto;">
         <div class="box-header with-border text-center">
             <h3>
-            <a href="{{ route('rental.index')}}" class="pull-left"><i class="fa fa-chevron-left"></i></a>
+            <a href="{{ route('bookal.index')}}" class="pull-left"><i class="fa fa-chevron-left"></i></a>
             </h3>
             <h3 class="box-title">
-                Rental Form
+                bookal Form
             </h3>
         </div>
         <div class="box-body">
@@ -54,7 +54,7 @@
                         <div class="col-md-4">
                              <div class="form-group">
                                 <label>Destination: <span class="text-red">*</span></label>
-                                <input type="text" class="form-control" placeholder="Destination" name="destination" id="destination" value="{{ old('destination') }}" maxlength="35">
+                                <input type="text" class="form-control" placeholder="Destination" name="destination" id="destination" value="{{ old('destination') }}" val-book-dest required>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -73,7 +73,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Number of Days: <span class="text-red">*</span></label>
-                                <input type="number" class="form-control" placeholder="Number of Days" name="days" id="days" value="{{ old('days') }}" min="1" max="15">
+                                <input type="number" class="form-control" placeholder="Number of Days" name="days" id="days" value="{{ old('days') }}" val-num-days required>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -83,22 +83,23 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" class="form-control" name="date" id="date" value="{{ old('date') }}" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                    <input type="text" class="form-control" name="date" id="date" value="{{ old('date') }}" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-parsley-errors-container="#errDepartureDate" data-mask val-book-date data-parsley-valid-departure required>
                                 </div>
+                                <p id="errDepartureDate"></p>
                             </div>
                         </div>
                         <div class="col-md-4">
-                        <div class = "bootstrap-timepicker">
-                            <div class="form-group">
-                                <label>Departure Time: <span class="text-red">*</span></label>
-                                 <div class="input-group">
-                    <input type="text" class="form-control" name="time" value="{{ old('time') }}" id = "timepicker">
-
-                    <div class="input-group-addon">
-                      <i class="fa fa-clock-o"></i>
-                    </div>
-                    </div>
-                  </div>
+                            <div class = "bootstrap-timepicker">
+                                <div class="form-group">
+                                    <label>Departure Time: <span class="text-red">*</span></label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                          <i class="fa fa-clock-o"></i>
+                                        </div>
+                                        <input type="text" class="form-control" name="time" value="{{ old('time') }}" id = "timepicker" data-parsley-errors-container="#errDepartureTime" val-book-time required>
+                                    </div>
+                                    <p id="errDepartureTime"></p>
+                                </div>
                             </div>
                         </div>
                     </div> 
@@ -142,7 +143,7 @@
 </div> 
 @endsection
 @section('scripts')
-@parent
+@pabook
     <script>
     	$('#timepicker').timepicker({
     		template: false
@@ -158,12 +159,12 @@
           var $sections = $('.form-section');
 
           function navigateTo(index) {
-            // Mark the current section with the class 'current'
+            // Mark the curbook section with the class 'curbook'
             $sections
-              .removeClass('current')
+              .removeClass('curbook')
               .eq(index)
-                .addClass('current');
-            // Show only the navigation buttons that make sense for the current section:
+                .addClass('curbook');
+            // Show only the navigation buttons that make sense for the curbook section:
             $('.form-navigation .previous').toggle(index > 0);
             var atTheEnd = index >= $sections.length - 1;
             $('.form-navigation .next').toggle(!atTheEnd);
@@ -171,8 +172,8 @@
           }
 
           function curIndex() {
-            // Return the current index by looking at which section has the class 'current'
-            return $sections.index($sections.filter('.current'));
+            // Return the curbook index by looking at which section has the class 'curbook'
+            return $sections.index($sections.filter('.curbook'));
           }
 
           // Previous button is easy, just go back
@@ -180,7 +181,7 @@
             navigateTo(curIndex() - 1);
           });
 
-          // Next button goes forward iff current block validates
+          // Next button goes forward iff curbook block validates
           $('.form-navigation .next').click(function() {
             $('.parsley-form').parsley().whenValidate({
               group: 'block-' + curIndex()
@@ -195,6 +196,11 @@
           });
           navigateTo(0); // Start at the beginning
         });
+    </script>
+
+    <script>
+        $('[data-mask]').inputmask()
+    $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
     </script>
     
   
