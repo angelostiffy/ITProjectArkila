@@ -192,7 +192,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Name of Spouse:</label>
-                                <input value="{{old('nameOfSpouse')}}" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse"data-parsley-trigger="keyup">
+                                <input value="{{old('nameOfSpouse')}}" name="nameOfSpouse" type="text" class="form-control" placeholder="Name of Spouse" data-parsley-trigger="keyup" val-fullname>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -211,28 +211,28 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Fathers Name:</label>
-                                <input value="{{old('fathersName')}}" name="fathersName" type="text" class="form-control" placeholder="Fathers Name" data-parsley-trigger="keyup" val-name>
+                                <label>Father's Name:</label>
+                                <input value="{{old('fathersName')}}" name="fathersName" type="text" class="form-control" placeholder="Father's Name" data-parsley-trigger="keyup" val-fullname>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Occupation:</label>
-                                <input value="{{old('fatherOccupation')}}" name="fatherOccupation" type="text" class="form-control" placeholder="Occupation" maxlength="25" data-parsley-trigger="keyup" >
+                                <input value="{{old('fatherOccupation')}}" name="fatherOccupation" type="text" class="form-control" placeholder="Occupation" data-parsley-trigger="keyup" val-occupation>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                              <div class="form-group">
-                                <label>Mothers Maiden Name:</label>
-                                <input value="{{old('mothersName')}}" name="mothersName" type="text" class="form-control" placeholder="Mothers Maiden Name" data-parsley-trigger="keyup" val-name>
+                                <label>Mother's Maiden Name:</label>
+                                <input value="{{old('mothersName')}}" name="mothersName" type="text" class="form-control" placeholder="Mother's Maiden Name" data-parsley-trigger="keyup" val-fullname>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Occupation:</label>
-                                <input value="{{old('motherOccupation')}}" name="motherOccupation" type="text" class="form-control" placeholder="Occupation" maxlength="25" data-parsley-trigger="keyup" >
+                                <input value="{{old('motherOccupation')}}" name="motherOccupation" type="text" class="form-control" placeholder="Occupation" data-parsley-trigger="keyup" val-occupation>
                             </div>
                         </div>
                     </div>
@@ -272,7 +272,7 @@
                                     <th>Birthdate</th>
                                     <th>
                                         <div class="pull-right">
-                                            <button type="button" class="btn btn-primary" onclick="addItem()"><i class="fa fa-plus-circle"></i> Add Children</button>
+                                            <button type="button" class="btn btn-primary btn-sm btn-flat" onclick="addItem()"><i class="fa fa-plus"></i> ADD DEPENDENT</button>
                                         </div>
                                     </th>
                                 </thead>
@@ -283,7 +283,7 @@
                                     @for($i = 0; $i < count(old('children')); $i++)
                                         <tr>
                                             <td>
-                                                <input value="{{old('children.'.$i)}}" name="children[]" type="text" placeholder="Name of Child" class="form-control">
+                                                <input value="{{old('children.'.$i)}}" name="children[]" type="text" placeholder="Name of Child" class="form-control" val-fullname>
                                             </td>
                                             <td>
                                                 <div class="input-group">
@@ -306,7 +306,7 @@
                                 @else
                                     <tr>
                                         <td>
-                                            <input name="children[]" type="text" placeholder="Name of Child" class="form-control" maxlength="40">
+                                            <input name="children[]" type="text" placeholder="Name of Child" class="form-control" val-fullname>
                                         </td>
                                         <td>
                                             <div class="input-group">

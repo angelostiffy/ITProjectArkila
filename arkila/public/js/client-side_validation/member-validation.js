@@ -58,7 +58,7 @@
   // Validate birth place.
     $('[val-birthplace]').parsley({
     	pattern: /^[a-zA-Z]$|^[a-zA-Z][a-zA-Z\s-]*[a-zA-Z]$/,
-    	maxlength: 30
+    	maxlength: 35
     });
     $('[val-birthplace]').attr('data-parsley-pattern-message','Please use only letters (a-z) and numbers.');
     $('[val-birthplace]').attr('data-parsley-required-message','Please enter a birthplace.');
@@ -134,9 +134,21 @@
             } 
         });
     });
+    //Validate name
+    $('[val-fullname]').parsley({
+      maxlength: 50
+    });
+
+
+    // Validate occupation
+    $('[val-occupation]').parsley({
+      maxlength: 30
+    });
 
 
   // Validate contact person.
     $('[name="contactPerson"]').attr('data-parsley-required-message','Please enter name of the contact person.');
     $('[name="contactPersonAddress"]').attr('data-parsley-required-message','Please enter address of the contact person.');
     $('[name="contactPersonContactNumber"]').attr('data-parsley-required-message','Please enter phone number of the contact person.');
+
+    
