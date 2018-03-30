@@ -107,7 +107,7 @@
                                     <label for="">Terminal</label>
                                     <select @if(is_null($terminals->first())){{'disabled'}}@endif name="terminal" id="terminal" class="form-control">
                                         @if(is_null($terminals->first()))
-                                            <option value="">No Available Data</option>
+                                            <option value="">No Available Terminal</option>
                                         @else
                                             @foreach($terminals as $terminal)
                                                 <option value="{{$terminal->terminal_id}}">{{$terminal->description}}</option>

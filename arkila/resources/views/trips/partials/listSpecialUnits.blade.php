@@ -24,9 +24,13 @@
                       <p>Are you sure you want to delete <strong>{{$trip->van->plate_number}}</strong>?</p>
                     </div>
                     <div class="col-xs-12">
-                        <div class="pull-right">  
-                            <button class="btn btn-default btn-xs itemSpBtn{{$trip->trip_id}}"> <i class="fa fa-times"></i></button>
-                            <button class="btn btn-primary btn-xs"><i class="fa fa-check"></i></button>
+                        <div class="pull-right">
+                             <form method="POST" action="{{route('trips.destroy',[$trip->trip_id])}}">
+                                 {{method_field('DELETE')}}
+                                 {{csrf_field()}}
+                                <a class="btn btn-default btn-xs itemSpBtn{{$trip->trip_id}}"> <i class="fa fa-times"></i></a>
+                                <button type="submit" class="btn btn-primary btn-xs"><i class="fa fa-check"></i></button>
+                             </form>
                         </div>
                     </div>
                 </div>
