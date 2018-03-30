@@ -142,6 +142,9 @@ class LedgersController extends Controller
         $ledgers = Ledger::all();
         $bookings = Ledger::select('created_at','description', DB::raw("SUM(amount) as total_amount"))->where('description', 'Booking Fee')
         ->groupBy(DB::raw('day(created_at)'), DB::raw('month(created_at)'), DB::raw('year(created_at)'))->get();
-        return view('ledger.generalLedger', compact('ledgers', 'thisDate', 'bookings'));
+        $sops = Ledger::select('created_at','description', DB::raw("SUM(amount) as total_amount"))->where('description', 'SOP')
+        ->groupBy(DB::raw('day(created_at)'), DB::raw('month(created_at)'), DB::raw('year(created_at)'))->get();
+
+        return view('ledger.generalLedger', compact('ledgers', 'thisDate', 'bookings', 'sops'));
     }
 }
