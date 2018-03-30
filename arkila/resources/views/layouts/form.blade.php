@@ -1,43 +1,14 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ban Trans | @yield('title')</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
     @section('links')
         @include('layouts.partials.stylesheets_form')
-        <style>
-            .form-box{
-                width: 360px;
-                margin: 7% auto;
-                box-shadow: 0px 5px 10px gray;
-            }
-
-            .form-box-header{
-                font-size: 25px;
-                margin-bottom: auto;
-                font-weight: 300;
-                background: white;
-                padding: 15px;
-                border-top-right-radius: 3px;
-                border-top-left-radius: 3px;
-            }
-
-            .form-box-body {
-                background: #fff;
-                padding: 15px;
-                border-top: 0;
-                color: #666;
-            }
-
-            .form-box-footer {
-                border-top-left-radius: 0;
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 3px;
-                border-bottom-left-radius: 3px;
-                border-top: 1px solid #f4f4f4;
-                padding: 15px;
-                background-color: #fff;
-            }
-        </style>
     @show
 </head>
 
