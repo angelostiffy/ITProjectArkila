@@ -3,7 +3,7 @@
 @section('form-id','regForm')
 @section('form-action',route('operators.store'))
 @section('form-body')
-<div class="box box-primary" style="box-shadow: 0px 5px 10px gray;">
+<div class="box box-primary with-shadow">
         <div class="box-header with-border text-center">
             <h4>
             <a href="{{route('operators.index')}}" class="pull-left"><i class="fa  fa-chevron-left"></i></a>    

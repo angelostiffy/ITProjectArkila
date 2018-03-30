@@ -2,8 +2,9 @@
 <html>
 
 <head>
- @include('layouts.partials.customer_stylesheets')
-
+	@section('links')
+ 		@include('layouts.partials.customer_stylesheets')	
+	@show
 </head>
 
 <body>
@@ -18,9 +19,13 @@
 
 
     <!-- ./wrapper -->
-    @include('layouts.partials.customer_scripts')
-	@include('message.error')
-	@include('message.success')
+    @section('scripts')
+	    @include('layouts.partials.customer_scripts')
+		@include('message.error')
+		@include('message.success')
+
+		
+	@show
 </body>
 
 </html>

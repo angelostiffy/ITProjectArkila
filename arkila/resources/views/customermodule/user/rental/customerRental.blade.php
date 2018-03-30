@@ -125,6 +125,9 @@
 @section('scripts')
 @parent
 <script>
+        $('[data-mask]').inputmask()
+            $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
+        
     // $('.summary-modal').click(function(){
     //         $('#vehicleType').text($('#vanType option:selected').text());
     //         $('#dest').text($('#rentalDestination').val());
