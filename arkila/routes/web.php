@@ -238,6 +238,8 @@ Route::group(['middleware' => ['auth', 'customer']], function(){
     Route::post('/home/create-reservation', 'CustomerModuleControllers\MakeReservationController@storeReservation')->name('customermodule.storeReservation');
     /*Transactions*/
     Route::get('/home/view-transactions', 'CustomerModuleControllers\ViewTransactionsController@viewTransactions')->name('customermodule.user.transactions.customerTransactions');
+    Route::delete('/home/view-transactions/delete-rental/{rental}', 'CustomerModuleControllers\ViewTransactionsController@destroyRental')->name('customermodule.deleteRental');
+    Route::delete('/home/view-transactions/delete-reservation/{reservation}', 'CustomerModuleControllers\ViewTransactionsController@destroyReservation')->name('customermodule.deleteReservation');
     /*About*/
     Route::get('/home/about', 'CustomerModuleControllers\ViewAboutController@viewAbout')->name('customermodule.user.about.customerAbout');
     /*Help*/

@@ -51,6 +51,6 @@ class MakeRentalController extends Controller
 	    		"comments" => $request->message
     		]);
     	}	
-    	return redirect('customermodule.user.transactions.customerTransactions')->with('success', 'Successfully made a rental');
+    	return redirect(route('customermodule.user.transactions.customerTransactions'))->with('success', 'Successfully made a rental');
     }
 }

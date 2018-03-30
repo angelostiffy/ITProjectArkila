@@ -11,8 +11,8 @@
                     <form class="contact100-form" action="{{route('customermodule.storeReservation')}}" method="POST">
                         {{csrf_field()}}
                         <div class="wrap-input100">
-                            <select id="destination" name="destination" class="input100">
-                                <option disabled hidden selected>Destination</option>
+                            <select id="destination" name="destination" class="input100" placeholder="Destinations">
+                                
                                 @foreach($destinations as $destination)
                                     <option value="{{$destination->destination_id}}">{{$destination->description}}</option>
                                 @endforeach
