@@ -8,13 +8,14 @@
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6" id="boxContainer">
-                    <form class="contact100-form" action="" method="POST">
+                    <form class="contact100-form" action="{{route('customermodule.storeReservation')}}" method="POST">
                         {{csrf_field()}}
                         <div class="wrap-input100">
                             <select id="destination" name="destination" class="input100">
-                               <option disabled hidden selected>Destination</option>
-                               <option>Cabanatuan</option>
-                               <option>San Jose</option>
+                                <option disabled hidden selected>Destination</option>
+                                @foreach($destinations as $destination)
+                                    <option value="{{$destination->destination_id}}">{{$destination->description}}</option>
+                                @endforeach
                            </select>
                             <span class="focus-input100"></span>
                         </div><!-- wrap-input100-->
@@ -74,20 +75,20 @@
                 </div>
                 <div class="modal-body">
 
-                    <p class="text-center" style="margin-bottom:10px;"><strong>You have Successfully created a request!</strong></p>
+                    <p class="text-center" style="margin-bottom:10px;"><strong>Reservation Summary</strong></p>
                     <table class="table">
                         <tbody>
                             <tr>
                                 <th>Destination</th>
-                                <td>qwdas</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th>Contact Number</th>
-                                <td>asdasd</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th>Number of Seats</th>
-                                <td>qwe</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th>Date</th>
