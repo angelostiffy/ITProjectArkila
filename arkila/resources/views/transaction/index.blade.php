@@ -179,7 +179,7 @@
                                                             <span class="col-md-6">
                                                                 <h6>Driver:</h6>
                                                                  <h4>
-                                                                    <a href="" id="driverChange{{$terminal->terminal_id}}" class=" editable" data-original-title title>John Doe</a>
+                                                                    <a href="#" id="driverChange{{$terminal->terminal_id}}">John Doe</a>
                                                                 </h4>
                                                             </span>
                                                              <span class="pull-right btn-group">
@@ -771,13 +771,18 @@
 <script>
     $(document).ready(function() {
         @foreach($terminals as $terminal)
+        @if($terminal->trips->where('queue_number',1)->first())
             $('#driverChange{{$terminal->terminal_id}}').editable({
-                type: 'select2',
+                name: 'driver_id',
+                type: 'select',
                 title: 'Change Driver',
-                value: '',
-                source: '{{route('transactions.listSourceDrivers')}}',
-                sourceCache: true
+                value: "{{$terminal->trips->where('queue_number',1)->first()->driver->full_name}}",
+                source: "{{route('transactions.listSourceDrivers')}}",
+                sourceCache: true,
+                pk: '{{$terminal->trips->where('queue_number',1)->first()->trip_id}}',
+                url: ''
             });
+        @endif
         @endforeach
     });
 </script>

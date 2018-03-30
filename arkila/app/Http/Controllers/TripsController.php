@@ -296,7 +296,19 @@ class TripsController extends Controller {
     }
 
     public function putOnDeck(Trip $trip){
-        dd($trip);
+        $trips = Trips::where('terminal_id',$trip->terminal_id)->whereNotNull('queue_number')->get();
+
+        foreach($trips as $tripObj){
+            $tripObj->update([
+                'queue_number' => ($tripObj->queue_number)-1
+            ]);
+        }
+
+        $trip->update([
+            'queue_number' => 1,
+            'remarks' => null,
+            'has_privilege' => 0
+        ]);
     }
 
     public function showConfirmationBox($encodedTrips){
@@ -316,6 +328,7 @@ class TripsController extends Controller {
         }
         return view('trips.partials.confirmDialogBox',compact('tripsObjArr'));
     }
+
     
     public function tripLog()
     {
