@@ -7,6 +7,7 @@
 <div class="box">
     <!-- /.box-header -->
     <div class="box-body">
+    <div class="table-responsive">
     	<div class="col-md-6">
     		<a href="{{route('vans.create')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> REGISTER VAN</a>
             <a href=""  class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i> PRINT</a>
@@ -55,7 +56,7 @@
 					@endforeach
             </tbody>
         </table>
-
+</div>
         @foreach($vans->where('status', 'Active') as $van)
         <!-- MODAL DELETION -->
             <div class="modal fade" id="{{ 'deleteWarning'. $van->plate_number }}">
