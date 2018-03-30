@@ -18,4 +18,15 @@ class ViewTransactionsController extends Controller
     	return view('customermodule.user.transactions.customerTransactions', compact('rentals', 'reservations'));	
     }
 
+    public function destroyRental(Rental $rental)
+    {
+    	$rental->delete();
+    	return back()->with('success','Rental has been deleted successfully');
+    }
+
+    public function destroyReservation(Reservation $reservation)
+    {
+    	$reservation->delete();
+    	return back()->with('success', 'Reservation has been deleted successfully');
+    }
 }

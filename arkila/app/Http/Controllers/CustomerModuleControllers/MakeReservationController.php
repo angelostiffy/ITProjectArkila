@@ -66,6 +66,6 @@ class MakeReservationController extends Controller
     		]);
     	}
     	
-    	return redirect('customermodule.user.transactions.customerTransactions')->with('success', 'Successfully made a Reservation');
+    	return redirect(route('customermodule.user.transactions.customerTransactions'))->with('success', 'Successfully made a Reservation');
     }
 }
