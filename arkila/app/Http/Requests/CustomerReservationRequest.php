@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\checkCurrency;
 use App\Rules\checkTime;
 use App\Rules\checkName;
 use App\Rules\checkContactNum;
@@ -47,6 +46,7 @@ class CustomerReservationRequest extends FormRequest
                 "time" => ['bail',new checkTime, 'required'],
                 "numberOfSeats" => "bail|required|numeric|digits_between:1,2|min:0|max:15",
                 "contactNumber" => ['bail',new checkContactNum],
+                "message" => "string|max:300|nullable",
             ];
         }
         $dateCarbon = new Carbon(request('date'));
@@ -59,6 +59,7 @@ class CustomerReservationRequest extends FormRequest
                 "time" => ['bail',new checkTime, 'required'],
                 "numberOfSeats" => "bail|required|numeric|digits_between:1,2|min:0|max:15",
                 "contactNumber" => ['bail',new checkContactNum],
+                "message" => "string|max:300|nullable",
                 ];
         } else {
             return [
@@ -67,6 +68,7 @@ class CustomerReservationRequest extends FormRequest
                 "time" => ['bail',new checkTime, 'required', 'after:' . $timeFormattedNow],
                 "numberOfSeats" => "bail|required|numeric|digits_between:1,2|min:1|max:15",
                 "contactNumber" => ['bail',new checkContactNum],
+                "message" => "string|max:300|nullable",
             ];
         }
     }
@@ -75,7 +77,6 @@ class CustomerReservationRequest extends FormRequest
     {
         $dateNow = Carbon::now();
         $thisDate = $dateNow->setTimezone('Asia/Manila')->format('h:i A');
-
 
         return [
             "date.required" => "Please enter the preffered departure date",
@@ -86,7 +87,7 @@ class CustomerReservationRequest extends FormRequest
             "numberOfSeats.required" => "Please enter the number of seat for the reservation",
             "numberOfSeats.numeric" => "The seat must be a number",
             "numberOfSeats.digits_between" => "Please enter a number of seat between 1-15",
-
+            "message.max" => "The maximum characters is on 300",
         ];
     }
 }

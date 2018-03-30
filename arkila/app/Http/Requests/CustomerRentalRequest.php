@@ -76,6 +76,7 @@ class CustomerRentalRequest extends FormRequest
             "numberOfDays.numeric" => "Please enter a number in number of days",
             "numberOfDays.digits_between" => "The days must be between 1-15",
             "numberOfDays.min" => "The number of days must be atleast 1",
+            "message.max" => "The maximum characters is on 300",            
         ];
     }
 }
