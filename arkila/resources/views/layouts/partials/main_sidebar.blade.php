@@ -86,7 +86,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('ledger.index')}}"><i class="fa fa-circle-o"></i> Daily Ledger</a></li>
-                    <li><a href="generalLedger"><i class="fa fa-circle-o"></i> General Ledger</a></li>
+                    <li><a href="{{route('ledger.generalLedger')}}"><i class="fa fa-circle-o"></i> General Ledger</a></li>
                 </ul>
             </li>
             <li class="header">SETTING</li>
