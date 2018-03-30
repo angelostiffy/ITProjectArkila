@@ -8,12 +8,13 @@
 
 <div class="box">
     <!-- /.box-header -->
-    <h2 class="text-center">March 23, 2018</h2>
+    <h2 class="text-center">{{ $thisDate->formatLocalized('%A %d %B %Y') }}</h2>
     
     <div class="col col-md-6">
         <a href="{{route('ledger.create')}}" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-plus"></i>
             Add Revenue/Expense 
         </a>
+        <a href="#"  class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i>PRINT</a>
     </div>
 
     <div class="box-body">
@@ -31,6 +32,7 @@
             </thead>
             <tbody>
             @foreach ($ledgers->sortByDesc('ledger_id') as $ledger)
+                @if ($ledger->created_at->format('m-d-Y') == $thisDate->format('m-d-Y'))
                 <tr>
                     <td>{{$ledger->payee}}</td>
                     <td>{{$ledger->description}}</td>
@@ -39,65 +41,66 @@
 
                     <td class="text-right">&#8369;{{$ledger->amount}}</td>
                     <td></td>
+                    <td class="text-right">&#8369;{{$ledger->amount}}</td>
 
                     @else
                     <td></td>                    
                     <td class="text-right">&#8369;{{$ledger->amount}}</td>
-                    
-                    @endif
-                    
                     <td class="text-right">-&#8369;{{$ledger->amount}}</td>
-                    
+
+                    @endif
+                                        
                     <td class="center-block">
                         <div class="text-center">
-                            <a href="{{route('ledger.edit', $ledger->ledger_id)}}" class="btn btn-primary btn-sm"><i class="fa-pencil-square-o"></i>EDIT</a>
-                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="yuki"><i class="fa fa-trash"></i> DELETE</button>
+                            <a href="{{route('ledger.edit', $ledger->ledger_id)}}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i>EDIT</a>
+                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteLedger', $ledger->ledger_id}}"><i class="fa fa-trash"></i> DELETE</button>
                         </div>
                     </td>
                 </tr>
-                
-                <!-- Modal for Delete-->
-                <div class="modal fade" id="yuki">
-                    <div class="modal-dialog modal-sm">
-                            <div class="modal-content">
-                                <div class="modal-header bg-red">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                                    <h4 class="modal-title"> Confirm</h4>
+                @endif
+                    <!-- Modal for Delete-->
+                    <div class="modal fade" id="{{'deleteLedger', $ledger->ledger_id}}">
+                        <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-red">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                                        <h4 class="modal-title"> Confirm</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                            <h1>
+                                            <i class="fa fa-exclamation-triangle pull-left text-yellow" ></i>
+                                            </h1>
+                                            <p>Are you sure you want to delete "{{$ledger->description}}"?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                         <form action="{{route('ledger.destroy', $ledger->ledger_id)}}" method="POST">
+                                            {{csrf_field()}} {{method_field('DELETE')}}
+                                             
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button> <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                        <h1>
-                                        <i class="fa fa-exclamation-triangle pull-left text-yellow" ></i>
-                                        </h1>
-                                        <p>Are you sure you want to delete "{{$ledger->description}}"?</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <form action="#" method="POST">
-                                       
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Discard</button>
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
-                            
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        <!-- /.col -->
+                                <!-- /.modal-content -->
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.modal-dialog -->
                     </div>
-                    <!-- /.modal-dialog -->
-                </div>
                 
                 @endforeach
             </tbody>
+            @if ($ledgers->count() > 0)
             <tfoot>
                 <tr>
                     <th></th>
                     <th></th>
                     <th>TOTAL:</th>
-                    <th class="text-right">&#8369;121</th>
-                    <th class="text-right">&#8369;232</th>
+                    <th class="text-right">&#8369;{{$ledger->total_revenue}}</th>
+                    <th class="text-right">&#8369;{{$ledger->total_expense}}</th>
                     <th class="text-right">&#8369;{{ $ledger->balance }}</th>
                     <th></th>
                 </tr>
             </tfoot>
+            @endif
         </table>
     </div>
     <!-- /.box-body -->
