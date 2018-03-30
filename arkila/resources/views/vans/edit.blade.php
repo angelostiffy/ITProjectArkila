@@ -15,22 +15,22 @@
     @include('message.error')
 
     <div class="form-group">
-        <label for="">Operator:</label> <span>{{ $van->operator()->first()->full_name }}</span>
-    
+        <label for="">Operator:</label> <span></span>
+        <p class="info-container">{{ $van->operator()->first()->full_name }}</p>
     </div>
     
 	<div class="form-group">
         <label for="">Plate Number:</label>
-        <input value="{{$van->plate_number}}" name="plateNumber" type="text" class="form-control" placeholder="Plate Number" disabled>
+        <p class="info-container">{{$van->plate_number}}</p>
     </div>
     <div class="form-group">
         <label for="">Van Model</label>
-        <input value="{{$van->model}}" name="vanModel" type="text" class="form-control" placeholder="Van Model" disabled>
+        <p class="info-container">{{$van->model}}</p>
     </div>
 
     <div class="form-group">
         <label for="">Seating Capacity</label>
-        <input value="{{$van->seating_capacity}}" name="seatingCapacity" type="number" class="form-control" placeholder="Seating Capacity" max="16" min="1" disabled>
+        <p class="info-container">{{$van->seating_capacity}}</p>
       
     </div>
     

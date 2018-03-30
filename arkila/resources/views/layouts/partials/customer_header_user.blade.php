@@ -14,7 +14,7 @@
                 <div id="navigation" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item dropdown">
-                            <a href="customerHomeNoLogin.html">Home</a>
+                            <a href="{{route('customermodule.user.index')}}">Home</a>
                         </li>
                         <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Services</a>
                             <ul class="dropdown-menu megamenu">
@@ -26,10 +26,10 @@
                                         <div class="col-md-4">
                                             <ul class="list-unstyled">
                                                 <li class="nav-item">
-                                                    <a href="customerRental.html" class="nav-link">Rentals</a>
+                                                    <a href="{{route('customermodule.user.rental.customerRental')}}" class="nav-link">Rentals</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="customerReservation.html" class="nav-link">Reservation</a>
+                                                    <a href="{{route('customermodule.user.reservation.customerReservation')}}" class="nav-link">Reservation</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -38,13 +38,13 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown menu-large">
-                            <a href="customerTransactions.html">My Transactions</a>
+                            <a href="{{route('customermodule.user.transactions.customerTransactions')}}">My Transactions</a>
                         </li>
                         <li class="nav-item dropdown menu-large">
-                            <a href="customerAbout.html">About</a>
+                            <a href="{{route('customermodule.user.about.customerAbout')}}">About</a>
                         </li>
                         <li class="nav-item dropdown menu-large">
-                            <a href="customerHelp.html">Help</a>
+                            <a href="{{route('customermodule.user.help.customerHelp')}}">Help</a>
                         </li>
                         <li class="nav-item dropdown menu-large">
                             <a href="{{route('logout')}}" onclick="event.preventDefault();

@@ -142,7 +142,7 @@ ol.vertical{
         <div class="col-md-3">
             <div class="box box-solid">
               <div class="box-header with-border">
-                  <h3 class="box-title">Add Driver to Queue</h3>
+                  <h3 class="box-title">Add Unit to Queue</h3>
 
                   <div class="box-tools">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -175,7 +175,7 @@ ol.vertical{
 
 
                        <label for="">Driver</label>
-                      <select @if($vans->first() == null | $terminals->first() ==null | $drivers ->first() ==null) {{'disabled'}} @endif name="driver" id="driver" class="form-control">
+                      <select @if($vans->first() == null | $terminals->first() ==null | $drivers ->first() ==null) {{'disabled'}} @endif name="driver" id="driver" class="form-control select2">
                           @if($drivers->first() != null)
                               @foreach ($drivers as $driver)
                                   <option value="{{$driver->member_id}}">{{ $driver->full_name }}</option>
@@ -189,13 +189,13 @@ ol.vertical{
 
                       <div class="box-footer">
                           <div class="pull-right">
-                              <button id="addQueueButt" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add to Queue</button>
+                              <button id="addQueueButt" class="btn btn-primary"><i class="fa fa-plus"></i> Add</button>
                           </div>
                       </div>
                     @else
                     <div class="box-footer">
                         <div class="pull-right">
-                            <button  data-toggle="tooltip" class="btn btn-primary" title="Please add vans, destinations, or drivers before adding a van to the queue" disabled><i class="fa fa-plus-circle"></i> Add to Queue</button>
+                            <button  data-toggle="tooltip" class="btn btn-primary" title="Please add vans, destinations, or drivers before adding a van to the queue" disabled><i class="fa fa-plus"></i> Add </button>
                         </div>
                     </div>
                 @endif
@@ -248,19 +248,20 @@ ol.vertical{
                       <div class="box-body">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                      <input type="text" id="queueSearch" class="form-control" placeholder="Search in queue" onkeyup="myFunction()">
+                      <input type="text" id="queueSearch{{$terminal->terminal_id}}" class="form-control" placeholder="Search in queue" onkeyup="search{{$terminal->terminal_id}}()">
                     </div>
-                    <ol id ="queue-list" class="vertical rectangle-list serialization">
+                    <ol id ="queue-list{{$terminal->terminal_id}}" class="vertical rectangle-list serialization">
                         @foreach ($trips->where('terminal_id',$terminal->terminal_id) as $trip)
-                          <li class="" data-plate="{{ $trip->van->plate_number}}" data-remark="{{ $trip->remarks }}">
+                          <li class="queue-item" data-plate="{{ $trip->van->plate_number}}" data-remark="{{ $trip->remarks }}">
                             <span id="trip{{$trip->trip_id}}" class="list-border">
                               <div class="queuenum">
                                   <a href="" id="queue{{ $trip->trip_id}}" class="queue-editable">{{ $trip->queue_number }}</a>
                               </div>
-                              <div id="item{{$trip->trip_id}}">
+                              <div class=item id="item{{$trip->trip_id}}">
                                 <div  class="row">
                                   <div class="col-md-12">
-                                    {{ $trip->van->plate_number }} 
+                                    <p class="hidden">{{ $trip->van->plate_number }}</p>
+                                    {{ $trip->van->plate_number }}
                                     <div class="pull-right">
                                        <a href="" id="remark{{ $trip->trip_id}}" class="remark-editable editable btn btn-outline-info btn-xs" style="border-radius: 100%;" data-original-title="" title="">{{ $trip->remarks }}</a>
 
@@ -309,37 +310,6 @@ ol.vertical{
                                 </div>
                               </div>
                             </span>
-                              {{-- <div class="modal fade" id="delete{{$trip->trip_id}}">
-                                  <div class="modal-dialog modal-sm">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h4 class="modal-title">Alert</h4>
-                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                                              
-                                          </div>
-                                          <div class="modal-body">
-                                            <h1>
-                                              <i class="fa fa-exclamation-triangle pull-left text-yellow" ></i>
-                                            </h1>
-                                              <p><strong>{{$trip->van->plate_number}}</strong> will be remove from the list.</p>
-                                          </div>
-                                          <div class="modal-footer">
-                                              <form method="POST" action="{{route('trips.destroy',[$trip->trip_id])}}">
-                                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                  {{csrf_field()}}
-                                                  {{method_field('DELETE')}}
-                                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Confirm</button>
-                                              </form>
-                                          </div>
-                                      </div>
-                                      <!-- /.modal-content -->
-                                  </div>
-                                  <!-- /.modal-dialog -->
-                              </div> --}}
-                              <!-- /.modal -->
-
-                              
-
                           </li>
                         @endforeach
                     </ol>
@@ -356,34 +326,6 @@ ol.vertical{
         </div>
         </div>
         @foreach ($trips as $trip)
-        {{-- <div class="modal fade" id="destination{{$trip->trip_id}}">
-                                  <div class="modal-dialog modal-sm">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h4 class="modal-title text-center">{{$trip->van->plate_number}}</h4>
-                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                                          </div>
-                                          <form method="POST" action="{{route('trips.updateDestination',[$trip->trip_id])}}">
-                                              {{csrf_field()}}
-                                              {{method_field('PATCH')}}
-                                           <ul class="list-group" style="margin-bottom: 0px">
-                                             @foreach($terminals as $terminal)
-                                              <li class="list-group-item">
-                                                  <input type="radio" name="destination"  value="{{$terminal->terminal_id}}" class="flat-blue" @if($trip->terminal_id == $terminal->terminal_id){{'checked'}}@endif>
-                                                    {{ $terminal->description }} 
-                                              </li>
-                                            @endforeach
-                                          </ul>
-                                          <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary"><i class="fa fa-map-marker"></i> Change Destination</button>
-                                          </div>
-                                          </form>
-                                      </div>
-                                      <!-- /.modal-content -->
-                                  </div>
-                                  <!-- /.modal-dialog -->
-                              </div>
-                              <!-- /.modal --> --}}
                               @endforeach
           <div id="confirmBoxModal"></div>
       </div>
@@ -607,20 +549,20 @@ ol.vertical{
         });
 </script>
 
-<script>
-
-          function myFunction() {
+    @foreach($terminals as $terminal)
+    <script>
+          function search{{$terminal->terminal_id}}() {
                 // Declare variables
-                var input, filter, ol, li, span, i;
-                input = document.getElementById('queueSearch');
+                var input, filter, ol, li, p, i;
+                input = document.getElementById('queueSearch{{$terminal->terminal_id}}');
                 filter = input.value.toUpperCase();
-                ol = document.getElementById('queue-list');
-                li = ol.getElementsByTagName('li');
+                ol = document.getElementById('queue-list{{$terminal->terminal_id}}');
+                li = ol.getElementsByClassName('queue-item');
 
                 // Loop through all list items, and hide those who don't match the search query
                 for (i = 0; i < li.length; i++) {
-                    span = li[i].getElementsByTagName("span")[0];
-                    if (span.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    p = li[i].getElementsByTagName('p')[0];
+                    if (p.innerHTML.toUpperCase().indexOf(filter) > -1) {
                         li[i].style.display = "";
                     } else {
                         li[i].style.display = "none";
@@ -628,6 +570,7 @@ ol.vertical{
                 }
             }
     </script>
+    @endforeach
 
     <script>
       $('input[type="checkbox"].flat-blue, input[type="radio"].flat-blue').iCheck({

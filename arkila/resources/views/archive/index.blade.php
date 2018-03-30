@@ -7,6 +7,7 @@
 <div class="box">
     <!-- /.box-header -->
     <div class="box-body">
+       <div class="table-responsive">
         <table class="table table-bordered table-striped archiveOpe">
             <thead>
                 <tr>
@@ -64,7 +65,7 @@
                 @endforeach
             </tbody>
         </table>
-
+        </div>
         <!-- /.box-body -->
     </div>
     <!-- /.box -->

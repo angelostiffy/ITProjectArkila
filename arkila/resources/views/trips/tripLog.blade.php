@@ -12,7 +12,7 @@
 <div class="box">
     <!-- /.box-header -->
     <div class="box-body" style="box-shadow: 0px 5px 10px gray;">
-        
+        <div class="table-responsive">
         <table class="table table-bordered table-striped tripLog">
             <thead>
                 <tr>
@@ -39,6 +39,7 @@
                 </tr>
             </tbody>
         </table>
+        </div>
     </div>
     <!-- /.box-body -->
 </div>

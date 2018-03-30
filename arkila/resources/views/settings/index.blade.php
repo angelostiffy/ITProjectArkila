@@ -36,7 +36,7 @@
         <row>
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs nav-justified">
                     <li class="active"><a href="#terminalTab" data-toggle="tab">Terminals</a></li>
                     <li><a href="#destinationTab" data-toggle="tab">Destinations</a></li>
                     <li><a href="#feeTab" data-toggle="tab">Fees</a></li>
@@ -46,6 +46,7 @@
                 <div class="tab-content">
                     <!-- Terminal Tab -->
                     <div class="tab-pane active" id="terminalTab">
+                       <div class="table-responsive">
                         <div class="col-md-6 pull-left">
                             <a href="/home/settings/terminal/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"> </i> CREATE TERMINAL</a>
                         </div>
@@ -111,9 +112,11 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        </div>
                     </div>
                     <!-- Destinations Tab -->
                     <div class="tab-pane" id="destinationTab">
+                       <div class="table-responsive">
                         <div class="col-md-6 pull-left">
                             <a href="/home/settings/destinations/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"> </i> CREATE DESTINATION </a>
                         </div>
@@ -183,9 +186,11 @@
 
                             </tbody>
                         </table>
+                        </div>
                     </div>
                     <!-- Fee Tab -->
                     <div class="tab-pane" id="feeTab">
+                       <div class="table-responsive">
                         <div class="col-md-6 pull-left">
                             <a href="/home/settings/fees/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"> </i> CREATE FEE </a>
                         </div>
@@ -253,10 +258,12 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        </div>
                     </div>
 
                     <!-- Discount Tab -->
                     <div class="tab-pane" id="discountTab">
+                       <div class="table-responsive">
                         <div class="col-md-6 pull-left">
                             <a href="/home/settings/discounts/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> CREATE DISCOUNT </a>
                         </div>
@@ -321,10 +328,12 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        </div>
                     </div>
 
                     <!-- ticket Tab -->
                     <div class="tab-pane" id="ticketTab">
+                       <div class="table-responsive">
                         <div class="col-md-6 pull-left">
                             <a href="{{route('tickets.create')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"> </i> CREATE TICKET </a>
                         </div>
@@ -390,6 +399,7 @@
 
                             </tbody>
                         </table>
+                        </div>
                     </div>
 
                 </div>
@@ -464,71 +474,4 @@
         })
 
     </script>
-
-
-    <style>
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 40px;
-            height: 20px;
-        }
-
-        /* Hide default HTML checkbox */
-
-        .switch input {
-            display: none;
-        }
-
-        /* The slider */
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: gray;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 15px;
-            width: 18px;
-            left: 5px;
-            bottom: 3px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-        input:checked+.slider {
-            background-color: #0275d8;
-        }
-
-        input:focus+.slider {
-            box-shadow: 0 0 1px #2196F3;
-        }
-
-        input:checked+.slider:before {
-            -webkit-transform: translateX(13px);
-            -ms-transform: translateX(13px);
-            transform: translateX(13px);
-        }
-
-        /* Rounded sliders */
-
-        .slider.round {
-            border-radius: 100px;
-        }
-
-        .slider.round:before {
-            border-radius: 80%;
-        }
-
-    </style>
     @endsection

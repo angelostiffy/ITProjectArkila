@@ -12,10 +12,6 @@
 
 @if(isset($operators))
 <div class="form-group">
-    <div style="margin-top:18%">
-        @include('message.error')
-    </div>
-
     <label for="">Operator:</label>
     <select name="operator" id="" class="form-control select2">
         @foreach($operators as $operator)

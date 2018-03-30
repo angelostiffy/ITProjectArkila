@@ -18,7 +18,7 @@
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
-
+<div class="table-responsive">
                             <div class="col-md-6">
                                 <a href="/home/rental/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> ADD RENTAL</a>
                             </div>
@@ -176,11 +176,12 @@
                             </table>
 
                             <!-- /.box-body -->
-
+</div>
                         </div>
 
                         <!-- /.tab-pane -->
                         <div class="tab-pane" id="tab_2">
+                           <div class="table-responsive">
                             <table class="table table-bordered table-striped rentalTable">
                                 <thead>
                                     <tr>
@@ -233,6 +234,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            </div>
                             </div>
                         </div>
                         <!-- /.tab-pane -->
