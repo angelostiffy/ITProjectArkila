@@ -6,13 +6,13 @@
 @stop
 @section('content')
 
-<div id="ledgerInfo" class="box">
+<div class="box">
     <!-- /.box-header -->
     <h2 class="text-center">March 23, 2018</h2>
     
     <div class="col col-md-6">
-        <a href="{{route('ledger.create')}}" class="btn btn-primary btn-flat btn-sm" data-target="#addExpRev">
-            Add <span class="glyphicon glyphicon-plus-sign"></span> 
+        <a href="{{route('ledger.create')}}" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-plus"></i>
+            Add Revenue/Expense 
         </a>
     </div>
 
@@ -50,9 +50,8 @@
                     
                     <td class="center-block">
                         <div class="text-center">
-
-                            <a href="{{route('ledger.edit', $ledger->ledger_id)}}" class="btn btn-primary">   <i class="glyphicon glyphicon-pencil">Edit</i></a>
-                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="yuki"><i class="fa fa-trash"></i> Delete</button>
+                            <a href="{{route('ledger.edit', $ledger->ledger_id)}}" class="btn btn-primary btn-sm"><i class="fa-pencil-square-o"></i>EDIT</a>
+                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="yuki"><i class="fa fa-trash"></i> DELETE</button>
                         </div>
                     </td>
                 </tr>
@@ -69,12 +68,12 @@
                                         <h1>
                                         <i class="fa fa-exclamation-triangle pull-left text-yellow" ></i>
                                         </h1>
-                                        <p>Are you sure you want to delete ""</p>
+                                        <p>Are you sure you want to delete "{{$ledger->description}}"?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <form action="#" method="POST">
                                        
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Discard</button>
                                         <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>
                             
