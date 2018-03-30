@@ -36,7 +36,7 @@
             Revenue
     </label>
     <label>
-        <input type="radio" name="type" class="minimal" value="Expenses" @if(old('type') == 'Expenses') {{'checked'}}@endif>
+        <input type="radio" name="type" class="minimal" value="Expense" @if(old('type') == 'Expense') {{'checked'}}@endif>
             Expense
     </label>
 </div>

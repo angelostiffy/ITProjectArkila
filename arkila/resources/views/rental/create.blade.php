@@ -172,7 +172,7 @@
             <div style="overflow:auto;">
                     <div class="form-navigation" style="float:right;">
                         <button type="button" id="prevBtn"  class="previous btn btn-default">Previous</button>
-                        <button type="button" id="nextBtn"  class="next btn btn-primary">Next</button>
+                        <button type="button" id="nextBtn" onclick="getData();"  class="next btn btn-primary">Next</button>
                         <input type="submit" class="btn btn-primary">
                     </div>
                 </div>
@@ -285,7 +285,7 @@
             var time = document.getElementById('timepicker').value;
             document.getElementById('timeView').textContent = time;
         }
-    </script> --}}
+    </script>
     <script>
     $('[data-mask]').inputmask()
     </script>

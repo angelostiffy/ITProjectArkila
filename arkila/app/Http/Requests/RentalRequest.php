@@ -29,7 +29,6 @@ class RentalRequest extends FormRequest
      */
     public function rules(Request $request)
     {
-
         $dateNow = Carbon::now();
         $thisDate = $dateNow->setTimezone('Asia/Manila');
         

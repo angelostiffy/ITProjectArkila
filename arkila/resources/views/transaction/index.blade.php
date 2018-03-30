@@ -179,7 +179,7 @@
                                                             <span class="col-md-6">
                                                                 <h6>Driver:</h6>
                                                                  <h4>
-                                                                    <a href="" id="driverChange" class=" editable" data-original-title title>John Doe</a>
+                                                                    <a href="" id="driverChange{{$terminal->terminal_id}}" class=" editable" data-original-title title>John Doe</a>
                                                                 </h4>
                                                             </span>
                                                              <span class="pull-right btn-group">
@@ -770,14 +770,15 @@
 </script>
 <script>
     $(document).ready(function() {
-        $('#driverChange').editable({
-            type: 'select2',
-            title: 'Change Driver',
-            value: '1',
-            source: [
-
-                    ]
-        });
+        @foreach($terminals as $terminal)
+            $('#driverChange{{$terminal->terminal_id}}').editable({
+                type: 'select2',
+                title: 'Change Driver',
+                value: '',
+                source: '{{route('transactions.listSourceDrivers')}}',
+                sourceCache: true
+            });
+        @endforeach
     });
 </script>
 @stop

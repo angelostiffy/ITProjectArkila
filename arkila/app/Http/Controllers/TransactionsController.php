@@ -11,15 +11,13 @@ use App\Destination;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class TransactionsController extends Controller
-{
+class TransactionsController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $terminals = Terminal::whereNotIn('terminal_id',[auth()->user()->terminal_id])->get();
 
         return view('transaction.index',compact('terminals'));
@@ -30,8 +28,7 @@ class TransactionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
-    {
+    public function store() {
         $this->validate(request(),[
             'terminal' => 'exists:terminal,terminal_id',
             'destination' => 'exists:destination,destination_id',
@@ -67,8 +64,7 @@ class TransactionsController extends Controller
      * @param  Trip $trip
      * @return \Illuminate\Http\Response
      */
-    public function update(Terminal $terminal)
-    {
+    public function update(Terminal $terminal) {
         if( $trip = $terminal->trips->where('queue_number',1)->first() ){
             $this->validate(request(),[
                 'transactions.*' => 'required|exists:transaction,transaction_id'
@@ -134,7 +130,7 @@ class TransactionsController extends Controller
         return 'Failed';
     }
 
-    public function updatePendingTransactions(){
+    public function updatePendingTransactions() {
         if(request('transactions')){
             $this->validate(request(),[
                 'transactions.*' => 'required|exists:transaction,transaction_id'
@@ -156,7 +152,7 @@ class TransactionsController extends Controller
     }
 
 
-    public function updateOnBoardTransactions(){
+    public function updateOnBoardTransactions() {
         if(request('transactions')){
             $this->validate(request(),[
                 'transactions.*' => 'required|exists:transaction,transaction_id'
@@ -177,7 +173,7 @@ class TransactionsController extends Controller
 
     }
 
-    public function changeDestination(Transaction $transaction,Destination $destination){
+    public function changeDestination(Transaction $transaction,Destination $destination) {
 
         $transaction->update([
             'destination_id'=> $destination->destination_id
@@ -201,7 +197,7 @@ class TransactionsController extends Controller
         return back();
     }
 
-    public function listDestinations(Terminal $terminal){
+    public function listDestinations(Terminal $terminal) {
         $destinationArr = [];
 
         foreach($terminal->destinations as $destination){
@@ -214,7 +210,7 @@ class TransactionsController extends Controller
         return response()->json($destinationArr);
     }
 
-    public function listDiscounts(){
+    public function listDiscounts() {
         $discountArr = [];
         $discounts = FeesAndDeduction::discounts()->get();
 
@@ -228,7 +224,7 @@ class TransactionsController extends Controller
         return response()->json($discountArr);
     }
 
-    public function listTickets(Terminal $terminal){
+    public function listTickets(Terminal $terminal) {
         $ticketsArr = [];
         $tickets = $terminal->tickets->where('isAvailable', 1);
 
@@ -242,8 +238,21 @@ class TransactionsController extends Controller
         return response()->json($ticketsArr);
     }
 
-    public function manage(){
+    public function manage() {
         return view('transaction.managetickets');
     }
+    public function listSourceDrivers(){
+        $drivers = [];
 
+        foreach(Members::where('status','Active')->get() as $member){
+            array_push($drivers,[
+                'value' => $member->member_id,
+                    'text' => $member->full_name
+                ]
+            );
+        }
+
+        return $drivers;
+
+    }
 }

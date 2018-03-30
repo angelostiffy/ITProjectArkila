@@ -151,37 +151,37 @@ ol.vertical{
               </div>
               <div class="box-body">
                       <label for="">Van Unit</label>
-                      <select @if($vans->first() == null) {{'disabled'}} @endif name="van" id="van" class="form-control select2">
+                      <select @if($vans->first() == null | $terminals->first() ==null | $drivers ->first() ==null) {{'disabled'}} @endif name="van" id="van" class="form-control select2">
                           @if($vans->first() != null)
                               @foreach ($vans as $van)
                                 <option value="{{$van->plate_number}}">{{ $van->plate_number }}</option>
                               @endforeach
                           @else
-                              <option> No Available Data</option>
+                              <option> No Available Van Units</option>
                           @endif
                        </select>
 
                        <label for="">Destination</label>
-                      <select @if($terminals->first() == null) {{'disabled'}} @endif name="destination" id="destination" class="form-control">
+                      <select @if($vans->first() == null | $terminals->first() ==null | $drivers ->first() ==null) {{'disabled'}} @endif name="destination" id="destination" class="form-control">
                           @if($terminals->first() != null)
                             @foreach ($terminals as $terminal)
                                 <option value="{{$terminal->terminal_id}}">{{ $terminal->description }}</option>
                             @endforeach
                           @else
-                              <option> No Available Data</option>
+                              <option> No Available Destination</option>
                           @endif
 
                       </select>
 
 
                        <label for="">Driver</label>
-                      <select @if($drivers->first() == null) {{'disabled'}} @endif name="driver" id="driver" class="form-control">
+                      <select @if($vans->first() == null | $terminals->first() ==null | $drivers ->first() ==null) {{'disabled'}} @endif name="driver" id="driver" class="form-control">
                           @if($drivers->first() != null)
                               @foreach ($drivers as $driver)
                                   <option value="{{$driver->member_id}}">{{ $driver->full_name }}</option>
                               @endforeach
                           @else
-                              <option> No Available Data</option>
+                              <option> No Available Driver</option>
                           @endif
                       </select>
               </div>
@@ -192,6 +192,12 @@ ol.vertical{
                               <button id="addQueueButt" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add to Queue</button>
                           </div>
                       </div>
+                    @else
+                    <div class="box-footer">
+                        <div class="pull-right">
+                            <button  data-toggle="tooltip" class="btn btn-primary" title="Please add vans, destinations, or drivers before adding a van to the queue" disabled><i class="fa fa-plus-circle"></i> Add to Queue</button>
+                        </div>
+                    </div>
                 @endif
               </div>
                 {{-- 
@@ -275,15 +281,15 @@ ol.vertical{
                               <div id="destitem{{$trip->trip_id}}" class="hidden">
                                 <div class="row">
                                   <div class="col-xs-6">  
-                                    <select name="" id="" class="form-control">
+                                    <select id="destOption{{$trip->trip_id}}" class="form-control">
                                       @foreach($terminals as $terminal)
-                                      <option value="">{{$terminal->description}}</option>
+                                      <option @if($terminal->terminal_id == $trip->terminal_id) {{'selected'}} @endif value="{{$terminal->terminal_id}}">{{$terminal->description}}</option>
                                       @endforeach
                                     </select>
                                   </div>
-                                  <div class="col-xs-5 pull-right">  
+                                  <div class="col-xs-5 pull-right">
                                   <button class="btn btn-default btn-sm itemBtn{{$trip->trip_id}}">CANCEL</button>
-                                  <button class="btn btn-primary btn-sm">CHANGE</button>
+                                  <button name="destBtn" data-val="{{$trip->trip_id}}" class="btn btn-primary btn-sm">CHANGE</button>
                                   </div>
                                 </div>
                               </div>
@@ -294,7 +300,7 @@ ol.vertical{
                                   </div>
                                   <div class="col-xs-5 pull-right">  
                                     <button class="btn btn-default btn-sm itemBtn{{$trip->trip_id}}"> CANCEL</button>
-                                    <button class="btn btn-primary btn-sm"> YES</button>
+                                    <button name="deleteBtn" data-val="{{$trip->trip_id}}" class="btn btn-primary btn-sm"> YES</button>
                                   </div>
                                 </div>
                               </div>
@@ -375,6 +381,7 @@ ol.vertical{
                               </div>
                               <!-- /.modal --> --}}
                               @endforeach
+          <div id="confirmBoxModal"></div>
       </div>
 
 
@@ -393,6 +400,21 @@ ol.vertical{
     <script>
         $(function() {
             specialUnitChecker();
+            $('button[name="destBtn"]').on('click',function(){
+                $.ajax({
+                    method:'PATCH',
+                    url:'/home/trips/changeDestination/'+$(this).data('val'),
+                    data: {
+                        '_token': '{{csrf_token()}}',
+                        'destination': $('#destOption'+$(this).data('val')).val()
+                    },
+                    success: function(){
+                        location.reload();
+                    }
+
+                });
+            });
+
             $('#specialUnitList').load('/listSpecialUnits/'+$('#destinationTerminals li.active').data('val'));
             $('#addQueueButt').on('click', function() {
                 var destination = $('#destination').val();
@@ -554,14 +576,9 @@ ol.vertical{
                             '_token': '{{csrf_token()}}'
                         },
                         success: function(response){
-                            if(response === 1 || response === 0){
-                                if(response === 0){
-
-                                }
-                            }else{
-                                $('#confirmBoxModal').load('/showConfirmationBox/'+response);
+                            if(response) {
+                                $('#confirmBoxModal').load('/showConfirmationBox/' + response);
                             }
-
                         }
 
                     });

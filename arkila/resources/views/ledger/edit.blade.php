@@ -36,7 +36,7 @@
         Revenue
     </label>
     <label>
-      <input type="radio" value="Expenses" name="type" class="minimal" @if(old('type') || $ledger->type == 'Expenses') {{ 'checked' }} @endif>
+      <input type="radio" value="Expense" name="type" class="minimal" @if(old('type') || $ledger->type == 'Expense') {{ 'checked' }} @endif>
         Expense
     </label>
 
