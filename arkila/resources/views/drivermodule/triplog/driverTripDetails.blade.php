@@ -1,4 +1,6 @@
-@extends('layouts.driver') @section('title', 'Driver Profile') @section('content-title', 'Driver Home') @section('content')
+@extends('layouts.driver') @section('title', 'Driver Profile') 
+@section('content-title', 'Driver Home') 
+@section('content')
 <div class="content-wrapper">
             <section class="content">
                 <div id="content">

@@ -15,6 +15,10 @@
     {{ Html::script('adminlte/bower_components/morris.js/morris.min.js') }}
     <!-- Select2 -->
     {{ Html::script('adminlte/bower_components/select2/dist/js/select2.full.min.js') }}
+    <!-- InputMask -->
+    {{ Html::script('adminlte/plugins/input-mask/jquery.inputmask.js') }}
+    {{ Html::script('adminlte/plugins/input-mask/jquery.inputmask.date.extensions.js') }}
+    {{ Html::script('adminlte/plugins/input-mask/jquery.inputmask.extensions.js') }}
     <!-- Sparkline -->
     {{ Html::script('adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}
     <!-- jvectormap -->
@@ -46,6 +50,9 @@
     {{ Html::script('js/client-side_validation/member-validation.js') }}
     {{ Html::script('js/client-side_validation/van-validation.js') }}
     {{ Html::script('js/client-side_validation/settings-validation.js') }}
+    {{ Html::script('js/client-side_validation/rental-form-validation.js') }}
+    {{ Html::script('js/client-side_validation/reservation-form-validation.js') }}
+    {{ Html::script('js/client-side_validation/driver-report-validation.js') }}
     {{ Html::script('js/notifications/pnotify.custom.min.js') }}
     {{ Html::script('js/notifications/bootstrap-notify.min.js') }}
     

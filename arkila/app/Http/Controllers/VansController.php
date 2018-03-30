@@ -164,8 +164,8 @@ class VansController extends Controller {
      */
     public function edit(Van $van)
     {
-
-        return view('vans.edit', compact('van'));
+        $operators = Member::allOperators()->get();
+        return view('vans.edit', compact('van','operators'));
     }
 
     /**

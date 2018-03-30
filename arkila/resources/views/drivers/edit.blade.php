@@ -238,7 +238,7 @@
                             <div class = "input-group-addon">
                                 <span>+63</span>
                             </div>
-                        <input value="{{ old('contactPersonContactNumber') ?? $driver->edit_emergency_contactno }}" id="contactNumberO" name="contactPersonContactNumber" type="text" class="form-control" placeholder="Contact Number" maxlength="10" data-inputmask='"mask": "999-999-9999"' data-mask data-parsley-errors-container="#errContactPersonPhone" val-phone required>
+                        <input value="{{ old('contactPersonContactNumber') ?? $driver->edit_emergency_contactno }}" id="contactNumberO" name="contactPersonContactNumber" type="text" class="form-control" placeholder="Contact Number" data-inputmask='"mask": "999-999-9999"' data-mask data-parsley-errors-container="#errContactPersonPhone" val-phone required>
                         </div>
                         <p id="errContactPersonPhone"></p>
                     </div>
