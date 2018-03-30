@@ -2,7 +2,7 @@
 @section('title', 'Error 505') 
 @section('content') 
 
-<div class="error-page" style="padding:20%">
+<div class="error-page">
 
     <div class="section text-center" style="margin-top:14%">       
         <h1 class="text-red" style="font-size:200pt"> 505</h1>       
