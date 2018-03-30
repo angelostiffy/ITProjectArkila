@@ -17,6 +17,9 @@ class CreateRentalTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('rent_id');
             $table->string('plate_number', 8)->nullable();
+            $table->integer('user_id')
+            ->unsigned()
+            ->nullable();
             $table->string('first_name', 50);
             $table->string('last_name', 50);
             $table->string('middle_name', 50);
@@ -30,6 +33,8 @@ class CreateRentalTable extends Migration
             $table->enum('status', ['Departed', 'Pending', 'Declined', 'Cancelled', 'Paid'])
             ->default('Pending');
             $table->enum('rent_type', ['Online', 'Walk-in']);
+            $table->string('comments', 300)
+            ->nullable();
             $table->timestamps();
 
             $table->foreign('plate_number')
@@ -37,6 +42,11 @@ class CreateRentalTable extends Migration
             ->onDelete('restrict')
             ->onUpdate('cascade');
 
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
+            
             $table->foreign('model_id')
             ->references('model_id')->on('van_model')
             ->onDelete('restrict')

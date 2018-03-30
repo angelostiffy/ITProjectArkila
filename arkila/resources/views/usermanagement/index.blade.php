@@ -24,11 +24,10 @@
 
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab_1">
-                        
                             <div class="box-body">
-                                <div class="table-responsive-sm">
+                                <div class="table-responsive">
                                 <div class="col col-md-6">
-                                    <a href="/home/user-management/admin/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus-circle"></i> Create New</a>
+                                    <a href="/home/user-management/admin/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i>  Create New</a>
                                 </div>
 
 
@@ -58,14 +57,14 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
+                </div>
 
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_2">
                         
                         
                         <div class="box-body">
-                            <div class="table-responsive-sm">
+                            <div class="table-responsive">
                             <table id="driverTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -97,7 +96,7 @@
 
                     <div class="tab-pane" id="tab_3">
                         <div class="box-body">
-                            <div class="table-responsive-sm">
+                            <div class="table-responsive">
                             <table id="customerTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>

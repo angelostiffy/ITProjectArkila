@@ -25,6 +25,10 @@ class Rental extends Model
     	return $this->belongsTo(VanModel::Class, 'model_id');
     }
 
+    public function user(){
+        return $this->belongsTo(User::Class, 'user_id', 'id');
+    }
+
     public function setContactNumberAttribute($value){
         $contactArr = explode('-',$value);
         $this->attributes['contact_number'] = '+63'.$contactArr[0].$contactArr[1].$contactArr[2];

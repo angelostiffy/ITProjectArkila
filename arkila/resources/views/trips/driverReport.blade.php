@@ -13,6 +13,7 @@
 <div class="box">
     <!-- /.box-header -->
     <div class="box-body">
+        <div class="table-responsive">
         <table id="driversTrips" class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -44,6 +45,7 @@
         </table>
     </div>
     <!-- /.box-body -->
+    </div>
 </div>
 
 @endsection

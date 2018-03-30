@@ -298,9 +298,13 @@ ol.vertical{
                                   <div class="col-xs-7">  
                                       <p><strong>{{ $trip->van->plate_number }}</strong> will be deleted. Do you want to continue?</p>
                                   </div>
-                                  <div class="col-xs-5 pull-right">  
-                                    <button class="btn btn-default btn-sm itemBtn{{$trip->trip_id}}"> CANCEL</button>
-                                    <button name="deleteBtn" data-val="{{$trip->trip_id}}" class="btn btn-primary btn-sm"> YES</button>
+                                  <div class="col-xs-5 pull-right">
+                                      <form method="POST" action="{{route('trips.destroy',[$trip->trip_id])}}">
+                                          {{method_field('DELETE')}}
+                                          {{csrf_field()}}
+                                        <a class="btn btn-default btn-sm itemBtn{{$trip->trip_id}}"> CANCEL</a>
+                                        <button type="submit" name="deleteBtn" data-val="{{$trip->trip_id}}" class="btn btn-primary btn-sm"> YES</button>
+                                      </form>
                                   </div>
                                 </div>
                               </div>
