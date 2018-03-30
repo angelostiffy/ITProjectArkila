@@ -18,6 +18,6 @@
     {{ Html::script('js/client-side_validation/van-validation.js') }}
     {{ Html::script('js/client-side_validation/settings-validation.js') }}
     {{ Html::script('js/notifications/pnotify.custom.min.js') }}
-    {{ Html::script('js/notifications/bootstrap-notify.min.js') }
+    {{ Html::script('js/notifications/bootstrap-notify.min.js') }}
    
 @show
