@@ -30,6 +30,11 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 
+    {{ Html::style('css/style.css') }}
+    {{ Html::style('css/client-side_validation/parsley.css') }}
+    {{ Html::style('css/notifications/pnotify.custom.min.css') }}
+    {{ Html::style('css/notifications/animate.css') }}
+
 @show
         
     

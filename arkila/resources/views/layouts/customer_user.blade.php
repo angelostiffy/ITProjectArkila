@@ -18,8 +18,9 @@
 
 
     <!-- ./wrapper -->
-     @include('layouts.partials.customer_scripts')
-
+    @include('layouts.partials.customer_scripts')
+	@include('message.error')
+	@include('message.success')
 </body>
 
 </html>

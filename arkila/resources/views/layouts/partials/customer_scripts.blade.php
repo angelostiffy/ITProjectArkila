@@ -12,5 +12,12 @@
    {{ Html::script('customer/vendor/bootstrap-select/js/bootstrap-select.min.js') }}  
    {{ Html::script('customer/vendor/jquery.scrollto/jquery.scrollTo.min.js') }} 
    {{ Html::script('customer/js/front.js') }} 
+
+   {{ Html::script('js/client-side_validation/parsley.min.js') }}
+    {{ Html::script('js/client-side_validation/member-validation.js') }}
+    {{ Html::script('js/client-side_validation/van-validation.js') }}
+    {{ Html::script('js/client-side_validation/settings-validation.js') }}
+    {{ Html::script('js/notifications/pnotify.custom.min.js') }}
+    {{ Html::script('js/notifications/bootstrap-notify.min.js') }
    
 @show
