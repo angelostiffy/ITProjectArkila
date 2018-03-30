@@ -185,6 +185,7 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
     Route::get('/home/driver-report', 'TripsController@driverReport')->name('trips.driverReport');
 
     Route::resource('/home/ledger', 'LedgersController');
+    Route::get('/home/general-ledger', 'LedgersController@generalLedger')->name('ledger.generalLedger');
 
 
  });
