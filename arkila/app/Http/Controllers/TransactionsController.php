@@ -9,7 +9,7 @@ use App\Transaction;
 use App\Ticket;
 use App\Destination;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Member;
 
 class TransactionsController extends Controller {
     /**
@@ -244,7 +244,7 @@ class TransactionsController extends Controller {
     public function listSourceDrivers(){
         $drivers = [];
 
-        foreach(Members::where('status','Active')->get() as $member){
+        foreach(Member::where('status','Active')->whereNotNull('license_number')->get() as $member){
             array_push($drivers,[
                 'value' => $member->member_id,
                     'text' => $member->full_name
@@ -252,7 +252,7 @@ class TransactionsController extends Controller {
             );
         }
 
-        return $drivers;
+        return response()->json($drivers);
 
     }
 }
