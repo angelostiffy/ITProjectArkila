@@ -31,7 +31,13 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{route('trips.index')}}">
+                    <i class="fa fa-angle-double-right"></i>
+                    <span>Van Queue</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('transactions.index')}}">
                     <i class="fa fa-ticket"></i>
                     <span>Ticket Management</span>
                 </a>
