@@ -6,17 +6,10 @@
     {{ Html::script('adminlte/bower_components/jquery-ui/jquery-ui.min.js') }}
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $.widget.bridge('uibutton', $.ui.button);8
+        $.widget.bridge('uibutton', $.ui.button);
 
-        $(function(){
-            var current = location.pathname;
-            $('#sidemenu-bar li a').each(function(){
-                var $this = $(this);
-                // if the current path is like this link, make it active
-                if($this.attr('href').indexOf(current) !== -1){
-                    $this.addClass('active');
-                }
-            })
+        $(function() {
+            $('.sidebar-menu li a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
         });
         
     </script>
