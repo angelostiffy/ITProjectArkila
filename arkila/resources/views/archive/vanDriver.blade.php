@@ -23,7 +23,7 @@
                                 <th>Address</th>
                                 <th>Age</th>
                                 <th>Contact Number</th>
-                                <th>Actions</th>
+                                <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -107,7 +107,7 @@
                                 <th>Plate Number</th>
                                 <th>Model</th>
                                 <th>Seating Capacity</th>
-                                <th>Actions</th>
+                                <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -178,7 +178,11 @@
             'searching': true,
             'ordering': true,
             'info': true,
-            'autoWidth': true
+            'autoWidth': true,
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': [-1] /* 1st one, start by the right */
+            }]
         })
     });
 </script>    

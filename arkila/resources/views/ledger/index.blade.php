@@ -91,11 +91,12 @@
                 @endforeach
                     <tr>
                         <td></td>
-                        <td>Booking Fee</td>
+                        <td>Booking Fee(Baguio)</td>
                         <td></td>
                         <td class="text-right">{{$ledger->booking_fee}}</td>
                         <td></td>
                         <td class="text-right">{{$ledger->booking_fee}}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -104,6 +105,7 @@
                         <td class="text-right">{{$ledger->sop}}</td>
                         <td></td>
                         <td class="text-right">{{$ledger->sop}}</td>
+                        <td></td>
                     </tr>
 
             </tbody>

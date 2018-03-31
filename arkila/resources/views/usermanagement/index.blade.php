@@ -43,7 +43,13 @@
                                     <tbody>
                                         @foreach($userAdmins as $userAdmin)
                                         <tr>
-                                            <td>{{$userAdmin->name}}</td>
+                                            @php $fullName = null; @endphp
+                                            @if($userAdmin->middle_name == null)
+                                                $fullName = $userAdmin->first_name . " " . $userAdmin->last_name;
+                                            @else
+                                                $fullName = $userAdmin->first_name . " " . $userAdmin->middle_name . " " . $userAdmin->last_name;
+                                            @endif
+                                            <td>{{$fullName}}</td>
                                             <td>{{$userAdmin->username}}</td>
                                             <td>{{$userAdmin->description}}</td>
                                             <td class="center-block">
