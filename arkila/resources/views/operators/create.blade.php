@@ -112,10 +112,10 @@
                             <div class="form-group">
                                 <label>Civil Status:</label>
                                 <select name="civilStatus" class="form-control">
-                                   <option value="single" @if(old('civilStatus') == 'Single') {{'selected'}} @endif>Single</option>
-                                   <option value="married" @if(old('civilStatus') == 'Married') {{'selected'}} @endif>Married</option>
-                                   <option value="divorced" @if(old('civilStatus') == 'Divorced') {{'selected'}} @endif>Divorced</option>
-                                   <option value="widowed" @if(old('civilStatus') == 'Widowed') {{'selected'}} @endif>Widowed</option>
+                                   <option value="Single" @if(old('civilStatus') == 'Single') {{'selected'}} @endif>Single</option>
+                                   <option value="Married" @if(old('civilStatus') == 'Married') {{'selected'}} @endif>Married</option>
+                                   <option value="Divorced" @if(old('civilStatus') == 'Divorced') {{'selected'}} @endif>Divorced</option>
+                                   <option value="Widowed" @if(old('civilStatus') == 'Widowed') {{'selected'}} @endif>Widowed</option>
                                </select>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>SSS No: <span class="text-red">*</span></label>
-                                <input value="{{old('sss')}}" name="sss" type="text" class="form-control" placeholder="SSS No." data-parsley-trigger="keyup" val-sss required>
+                                <input value="{{old('sss')}}" name="sss" type="text" class="form-control" placeholder="SSS No." data-parsley-trigger="keyup" val-sss required data-inputmask='"mask": "99-9999999-9"' data-mask>
                             </div>
                         </div>
                     </div> 
@@ -132,7 +132,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>License No:</label>
-                                <input value="{{old('licenseNo')}}" name="licenseNo" type="text" class="form-control" placeholder="License No." data-parsley-trigger="keyup" val-license>
+                                <input value="{{old('licenseNo')}}" name="licenseNo" type="text" class="form-control" placeholder="License No." data-parsley-trigger="keyup" val-license data-inputmask='"mask": "A99-99-999999"' data-mask>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -253,7 +253,7 @@
                                                   <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                   </div>
-                                                  <input type="text" name="childrenBDay[]" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('childrenBDay.'.$i)}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask data-parsley-errors-container="#"
+                                                  <input type="text" name="childrenBDay[]" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('childrenBDay.'.$i)}}" data-inputmask="'alias': 'mm/dd/yyyy'" 
                                                  >
                                                 </div>
                                                 <p id=""></p>
@@ -276,8 +276,7 @@
                                               <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                               </div>
-                                              <input type="text" name="childrenBDay[]" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask
-                                              data-parsley-errors-container="#">
+                                              <input type="text" name="childrenBDay[]" class="form-control date-mask" placeholder="mm/dd/yyyy" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                             </div>
                                             <p id=""></p>
                                         </td>

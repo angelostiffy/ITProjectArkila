@@ -5,9 +5,12 @@
   <link rel="stylesheet" href="public\css\myOwnStyle.css">
 @stop
 @section('content')
+
+ 
 <div class="box">
-    <!-- /.box-header -->
-    <h2 class="box-header text-center">General Ledger</h2>
+    <!-- /.box-header -->    
+    <h2 class="text-center">General Ledger</h2>
+<div class="table-responsive">   
     <div class="col col-md-6">
         <div id="reportrange" style="background: #fff; cursor: pointer; padding: 7px 10px; border: 1px solid #ccc; width: 60%">
         <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
@@ -15,7 +18,6 @@
         </div>
     </div>
 
-    <div class="box-body">
         <table class="table table-bordered table-striped generalLedgerTable">
             <thead>
                 <tr>
@@ -129,7 +131,6 @@
             @endif
         </table>
     </div>
-    <!-- /.box-body -->
 </div>
  
 @stop

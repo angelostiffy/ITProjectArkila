@@ -25,14 +25,14 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active">
+            <li>
                 <a href="/home">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="{{route('trips.index')}}">
-                    <i class="fa fa-angle-double-right"></i>
+                    <i class="fa fa-list-ol"></i>
                     <span>Van Queue</span>
                 </a>
             </li>

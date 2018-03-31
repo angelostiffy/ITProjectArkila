@@ -6,7 +6,12 @@
     {{ Html::script('adminlte/bower_components/jquery-ui/jquery-ui.min.js') }}
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $.widget.bridge('uibutton', $.ui.button);8
+        $.widget.bridge('uibutton', $.ui.button);
+
+        $(function() {
+            $('.sidebar-menu li a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
+        });
+        
     </script>
     <!-- Bootstrap 3.3.7 -->
     {{ Html::script('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}
