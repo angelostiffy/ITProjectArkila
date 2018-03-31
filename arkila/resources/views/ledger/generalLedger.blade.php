@@ -8,7 +8,8 @@
 
  
 <div class="box">
-    <!-- /.box-header -->    
+<div class="box-body">
+ 
     <h2 class="text-center">General Ledger</h2>
 <div class="table-responsive">   
     <div class="col col-md-6">
@@ -131,6 +132,7 @@
             @endif
         </table>
     </div>
+</div>
 </div>
  
 @stop
