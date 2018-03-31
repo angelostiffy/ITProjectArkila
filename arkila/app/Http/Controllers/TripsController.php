@@ -201,6 +201,16 @@ class TripsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(Trip $trip) {
+        if($trip->queue_number){
+            $trips = Trip::where('terminal_id',$trip->terminal_id)->get();
+            foreach($trips as $tripObj){
+                    if($tripObj->queue_number > $trip->queue_number){
+                        $tripObj->update([
+                            'queue_number' => $tripObj->queue_number-1
+                        ]);
+                    }
+            }
+        }
         $trip->delete();
 
         session()->flash('success', 'Trip Successfully Deleted');
@@ -278,21 +288,6 @@ class TripsController extends Controller {
             return response()->json($responseArr);
     }
 
-    public function updatedQueueNumber(){
-        $updatedQueueList = Trip::where('has_privilege',0)->get();
-        $updatedQueueListArr = [];
-
-        foreach($updatedQueueList as $trip){
-            array_push($updatedQueueListArr, [
-               'id' => $trip->trip_id,
-               'queueNumber' => $trip->queue_number
-            ]);
-        }
-
-        return response()->json($updatedQueueListArr);
-
-    }
-
     public function putOnDeck(Trip $trip){
         $trips = Trip::where('terminal_id',$trip->terminal_id)->whereNotNull('queue_number')->get();
 
@@ -354,10 +349,20 @@ class TripsController extends Controller {
         ]);
 
         if(request('answer') === 'Yes'){
+            $trips = Trip::where('terminal_id',$trip->terminal_id)->get();
+            foreach($trips as $tripObj){
+                if($tripObj->queue_number > $trip->queue_number){
+                    $tripObj->update([
+                        'queue_number' => $tripObj->queue_number-1
+                    ]);
+                }
+            }
+
             $trip->update([
                 'queue_number' => NULL,
                 'has_privilege' => 1
             ]);
+
         }else{
             $trip->update([
                 'remarks' => NULL,
@@ -386,6 +391,20 @@ class TripsController extends Controller {
         $superAdmin = $user->terminal;
         return view('trips.viewReport', compact('destinations', 'trip', 'superAdmin'));
     }
+
+
+    public function listQueueNumbers(Terminal $terminal){
+            $tripsArr = [];
+            $trips = $terminal->trips()->whereNotNull('queue_number')->get();
+
+            foreach($trips as $trip){
+                array_push($tripsArr,[
+                   'value' =>  $trip->queue_number,
+                    'text' => $trip->queue_number
+                ]);
+            }
+            return $tripsArr;
+        }
 
     public function acceptReport(Trip $trip){
         $trip->update([

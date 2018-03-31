@@ -29,10 +29,10 @@
 						<tr>
 							<td>{{$van->plate_number}}</td>
 							<td>
-							{{ $van->driver()->first()->full_name ?? $van->driver()->first() }}
+							{{ $van->driver()->first()->full_name ?? null }}
 							</td>
-							<td>{{ $van->operator()->first()->full_name ??  $van->operator()->first()}}</td>
-							<td>{{$van->model}}</td>
+							<td>{{ $van->operator()->first()->full_name ??  null }}</td>
+							<td>{{$van->vanModel->description}}</td>
 							<td class="pull-right">{{$van->seating_capacity}}</td>
 							<td>
 								<div class="text-center">

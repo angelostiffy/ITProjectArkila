@@ -470,11 +470,7 @@ ol.vertical{
                           return "This field is required";
                       }
                   },
-                    source: [
-                            @foreach($trips as $trip)
-                        {value: '{{ $trip->queue_number }}', text: '{{ $trip->queue_number }}' },
-                        @endforeach
-                    ],
+                    source: '{{route('trips.listQueueNumbers',[$trip->terminal_id])}}',
                   ajaxOptions: {
                         type: 'PATCH',
                         headers: { 'X-CSRF-TOKEN': '{{csrf_token()}}' }
@@ -493,22 +489,6 @@ ol.vertical{
               });
             @endforeach
 
-            function updateQueueList(){
-                $.ajax({
-                    method:'GET',
-                    url: '{{route("trips.updatedQueueNumber")}}',
-                    data: {
-                        '_token': '{{csrf_token()}}'
-                    },
-                    success: function(response){
-                        response.forEach(function(trip){
-                            $('#queue'+trip.id).editable('setValue',trip.queueNumber);
-                        });
-
-                    }
-
-                });
-            }
 
             function specialUnitChecker(){
                     $.ajax({
