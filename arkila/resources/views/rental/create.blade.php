@@ -196,6 +196,32 @@
           });
           navigateTo(0); // Start at the beginning
         });
+
+                function getData() {
+            var firstName = document.getElementById('firstName').value;
+            var lastName = document.getElementById('lastName').value;
+            var middleName = document.getElementById('middleName').value;
+
+            document.getElementById('nameView').textContent = lastName + ', ' + firstName + ' ' + middleName;
+
+            var contactNumber = document.getElementById('contactNumber').value;
+            document.getElementById('contactView').textContent = contactNumber;
+
+            var destination = document.getElementById('destination').value;
+            document.getElementById('destView').textContent = destination;
+
+            var vanType = document.getElementById('model').value;
+            document.getElementById('vanView').textContent = vanType;
+
+            var days = document.getElementById('days').value;
+            document.getElementById('daysView').textContent = days;
+
+            var date = document.getElementById('date').value;
+            document.getElementById('dateView').textContent = date;
+
+            var time = document.getElementById('timepicker').value;
+            document.getElementById('timeView').textContent = time;
+        }
     </script>
 
     <script>
