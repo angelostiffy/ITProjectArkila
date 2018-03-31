@@ -107,7 +107,7 @@ class DriverRequest extends FormRequest
                     'contactPersonAddress' => 'bail|required|max:100',
                     'contactPersonContactNumber' => ['bail','required',new checkContactNum],
                     'sss' => ['bail','unique:member,SSS,'.$this->route('driver')->member_id.',member_id','required', new checkSSS],
-                    'licenseNo' => ['bail','required','max:20'],
+                    'licenseNo' => ['bail','required', new checkLicense],
                     'licenseExpiryDate' => 'bail|required|date|after:today',
                     'children.*' => ['bail','required_with:childrenBDay.*','distinct', 'nullable',new checkName, 'max:50'],
                     'childrenBDay.*' => 'bail|required_with:children.*|nullable|date|before:tomorrow'
