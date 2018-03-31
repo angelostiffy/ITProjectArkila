@@ -18,6 +18,9 @@ class TripLogController extends Controller
       $tripsMade = $member;
       $user = User::where('user_type','Super-admin')->first();
       $superAdmin = $user->terminal;
+      $destinations = Transaction::join('destination', 'destination.destination_id', '=', 'transaction.destination_id')
+                          ->selectRaw('trip_id as tripid, destination.description as destdesc, COUNT(destination.description) as counts')
+                          ->groupBy(['trip_id','destination.description'])->get();
       return view('drivermodule.triplog.driverTripLog', compact('tripsMade', 'superAdmin', 'destinations'));
     }
 
@@ -26,6 +29,7 @@ class TripLogController extends Controller
       $user = User::where('user_type','Super-admin')->first();
       $superAdmin = $user->terminal;
       $destinations = Transaction::join('destination', 'destination.destination_id', '=', 'transaction.destination_id')->join('trip', 'trip.trip_id', '=', 'transaction.trip_id')->where('transaction.trip_id', $trip->trip_id)->selectRaw('transaction.trip_id as tripid, destination.description as destdesc, COUNT(destination.description) as counts')->groupBy(['transaction.trip_id','destination.description'])->get();
+      
       return view('drivermodule.triplog.driverTripDetails', compact('superAdmin', 'destinations', 'trip'));
     }
 }

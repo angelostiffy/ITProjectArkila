@@ -78,16 +78,35 @@
                             <div class="box-body" id="inner-dest">
                                 <div class="form-group inner-routes">
                                     <label for="">BanTrans: </label>
-                                    <input class="form-control pull-right" type="number" id="" style="width:30%;" value="" disabled>
+                                    @php $bantrans = 0; @endphp
+                                    @if($trip->SOP == null)
+                                        @php $bantrans = $trip->total_booking_fee + $trip->community_fund  @endphp
+                                    @else
+                                        @php $bantrans = $trip->total_booking_fee + $trip->SOP + $trip->community_fund  @endphp
+                                    @endif
+                                    
+                                    @php $totalfare = 0; @endphp
+                                    @foreach($destinations as $key => $values)
+                                        @php $totalfare = $totalfare + ($values->amount * $values->counts); @endphp
+                                    @endforeach
+                                    <input class="form-control pull-right" type="number" id="" style="width:30%;" value="{{floatval($bantrans)}}" disabled>
                                 </div>
 
                                 <label for="">Driver:</label>
-                                <input id="" class="form-control pull-right" type="text" id="total" style="width:30%;" value="" disabled>
+                                <input id="" class="form-control pull-right" type="number" id="total" style="width:30%;" value="{{$totalfare}}" disabled>
                             </div>
                         </div>
                         <div class="text-center" style="margin: 5%;">
-                            <button class="btn btn-success btn-sm" data-dismiss="modal"><i class="fa fa-check"></i>Accept</button>
-                            <button class="btn btn-danger btn-sm"><i class="fa fa-close"></i>Decline</button>
+                            <form action="{{route('trips.acceptReport', [$trip->trip_id])}}" method="POST">
+                                {{csrf_field()}}
+                                {{method_field('PATCH')}}
+                                <button class="btn btn-success btn-sm" data-dismiss="modal"><i class="fa fa-check"></i>Accept</button>
+                            </form>
+                            <form action="{{route('trips.declineReport', [$trip->trip_id])}}" method="POST">
+                                {{csrf_field()}}
+                                {{method_field('PATCH')}}
+                                <button class="btn btn-danger btn-sm"><i class="fa fa-close"></i>Decline</button>
+                            </form>
                         </div>
                     </div>
                     </div>
