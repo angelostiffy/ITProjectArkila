@@ -28,7 +28,7 @@
                             </div><!-- col-->
                             <div class="col-md-6">
                                 <div class="wrap-input100">
-                                    <input id="name" class="input100" type="number" name="numberOfSeats" placeholder="Number of Seats">
+                                    <input id="seats" class="input100" type="number" name="numberOfSeats" placeholder="Number of Seats">
                                     <span class="focus-input100"></span>
                                 </div><!-- wrap-input100-->
                             </div><!-- col-->
@@ -54,7 +54,7 @@
                             <span class="focus-input100"></span>
                         </div><!-- wrap-input100-->
                         <div class="container-contact100-form-btn">
-                            <button type="button" class="contact100-form-btn" data-toggle="modal" data-target="#addSuccess"><strong>Book</strong></button>
+                            <button type="button" class="contact100-form-btn" onclick="showSummary()" data-toggle="modal" data-target="#addSuccess"><strong>Book</strong></button>
                         </div><!-- container-contact100-form-btn-->
                     
                     <!-- contact100-form-->
@@ -80,27 +80,27 @@
                         <tbody>
                             <tr>
                                 <th>Destination</th>
-                                <td></td>
+                                <td id="summaryDest"></td>
                             </tr>
                             <tr>
                                 <th>Contact Number</th>
-                                <td></td>
+                                <td id="summaryContact"></td>
                             </tr>
                             <tr>
                                 <th>Number of Seats</th>
-                                <td></td>
+                                <td id="summarySeats"></td>
                             </tr>
                             <tr>
                                 <th>Date</th>
-                                <td></td>
+                                <td id="summaryDate"></td>
                             </tr>
                             <tr>
                                 <th>Time</th>
-                                <td></td>
+                                <td id="summaryTime"></td>
                             </tr>
                             <tr>
                                 <th>Comments</th>
-                                <td></td>
+                                <td id="summaryComments"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -117,3 +117,26 @@
     </div>
     <!-- addSuccess-->
 @stop 
+@section('scripts')
+@parent
+<script>
+    function getDestination(elementId){
+        var sel = document.getElementById(elementId);
+        if (sel.selectedIndex == -1){
+            return null;
+        }
+        
+        return sel.options[sel.selectedIndex].text;
+    }
+
+    function showSummary(){
+        document.getElementById('summaryDest').textContent = getDestination('destination');
+        document.getElementById('summaryContact').textContent = document.getElementById('contactNumber').value;
+        document.getElementById('summarySeats').textContent = document.getElementById('seat').value;
+        document.getElementById('summaryDate').textContent = document.getElementById('date').value;
+        document.getElementById('summaryTime').textContent = document.getElementById('timepicker').value;
+        document.getElementById('summaryComments').textContent = document.getElementById('message').value;
+       
+    }
+</script>
+@endsection

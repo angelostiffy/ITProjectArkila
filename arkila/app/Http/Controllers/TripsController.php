@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Trip;
 use App\Van;
 use App\Member;
+use App\User;
 use App\Terminal;
+use App\Transaction;
 use Illuminate\Validation\Rule;
 
 
@@ -215,7 +217,7 @@ class TripsController extends Controller {
 
         $tripArr = [];
         if(is_array($vans)) {
-            foreach($vans[1] as $key => $vanInfo){
+            foreach($vans[0] as $key => $vanInfo){
 
                 if($van = Van::find($vanInfo['plate'])){
                     $van->updateQueue($key);
@@ -244,7 +246,8 @@ class TripsController extends Controller {
     public function specialUnitChecker() {
         $firstOnQueue = Trip::where('queue_number',1)->get();
         $successfullyUpdated = [];
-        $obRemarkSession = [];
+        $pendingUpdate = [];
+        $responseArr = [];
 
             foreach($firstOnQueue as $first) {
                 if($first->remarks == "ER" || $first->remarks == 'CC'){
@@ -265,19 +268,14 @@ class TripsController extends Controller {
 
                     }
 
-                    session()->flash('successMessage', "Van ".$first->plate_number." with a remark of ".$first->remarks." has been moved to the Special Units list.");
-
                 }elseif($first->remarks =='OB') {
-                    array_push($obRemarkSession, "Van ".$first->plate_number." with a remark of ".$first->remarks." can now be moved to the Special Units list.");
+                    array_push($pendingUpdate,$first->trip_id);
                 }
-
             }
+            $responseArr[0] = http_build_query($successfullyUpdated);
+            $responseArr[1] = http_build_query($pendingUpdate);
 
-
-            if(count($obRemarkSession) > 0){
-                session()->flash('obNotification',$obRemarkSession);
-            }
-            return http_build_query($successfullyUpdated);
+            return response()->json($responseArr);
     }
 
     public function updatedQueueNumber(){
@@ -296,11 +294,12 @@ class TripsController extends Controller {
     }
 
     public function putOnDeck(Trip $trip){
-        $trips = Trips::where('terminal_id',$trip->terminal_id)->whereNotNull('queue_number')->get();
+        $trips = Trip::where('terminal_id',$trip->terminal_id)->whereNotNull('queue_number')->get();
 
         foreach($trips as $tripObj){
+            $newQueueNumber = ($tripObj->queue_number)+1;
             $tripObj->update([
-                'queue_number' => ($tripObj->queue_number)-1
+                'queue_number' => $newQueueNumber
             ]);
         }
 
@@ -309,6 +308,8 @@ class TripsController extends Controller {
             'remarks' => null,
             'has_privilege' => 0
         ]);
+
+        return back();
     }
 
     public function showConfirmationBox($encodedTrips){
@@ -329,14 +330,84 @@ class TripsController extends Controller {
         return view('trips.partials.confirmDialogBox',compact('tripsObjArr'));
     }
 
+    public function showConfirmationBoxOb($encodedTrips) {
+        $trips = [];
+        parse_str($encodedTrips,$trips);
+        if(!is_array($trips)){
+            abort(404);
+        }else{
+            $tripsObjArr = [];
+            foreach($trips as $trip){
+                if($tripObj = Trip::find($trip)){
+                    array_push($tripsObjArr,$tripObj);
+                }else{
+                    abort(404);
+                }
+            }
+        }
+        return view('message.confirm',compact('tripsObjArr'));
+    }
+
+    public function changeRemarksOB(Trip $trip){
+        $this->validate(request(),[
+            'answer' => [Rule::in(['Yes', 'No'])]
+        ]);
+
+        if(request('answer') === 'Yes'){
+            $trip->update([
+                'queue_number' => NULL,
+                'has_privilege' => 1
+            ]);
+        }else{
+            $trip->update([
+                'remarks' => NULL,
+            ]);
+        }
+    }
+
     
-    public function tripLog()
-    {
-        return view('trips.tripLog');
+    public function tripLog() {
+        $trips = Trip::where('report_status', 'Accepted')->get();
+        $user = User::where('user_type','Super-admin')->first();
+        $superAdmin = $user->terminal;
+        return view('trips.tripLog', compact('trips', 'superAdmin'));
     }
     
-    public function driverReport()
-    {
-        return view('trips.driverReport');
+    public function driverReport() {
+        $trips = Trip::where('report_status', 'Pending')->get();
+        $user = User::where('user_type','Super-admin')->first();
+        $superAdmin = $user->terminal;
+        return view('trips.driverReport', compact('trips', 'superAdmin'));
+    }
+
+    public function viewReport(Trip $trip) {
+        $destinations = Transaction::join('destination', 'destination.destination_id', '=', 'transaction.destination_id')->join('trip', 'trip.trip_id', '=', 'transaction.trip_id')->where('transaction.trip_id', $trip->trip_id)->selectRaw('transaction.trip_id as tripid, destination.description as destdesc, destination.amount as amount, COUNT(destination.description) as counts')->groupBy(['transaction.trip_id','destination.description'])->get();
+        $user = User::where('user_type','Super-admin')->first();
+        $superAdmin = $user->terminal;
+        return view('trips.viewReport', compact('destinations', 'trip', 'superAdmin'));
+    }
+
+    public function acceptReport(Trip $trip){
+        $trip->update([
+            "report_status" => 'Accepted',
+        ]);
+
+        $message = "Trip " . $trip->trip_id . " successfully accepted";
+        return redirect('trips.driverReport')->with('success', $message);
+    }
+
+    public function rejectReport(Trip $trip){
+        $trip->update([
+            "report_status" => 'Declined',
+        ]);
+        $message = "Trip " . $trip->trip_id . " successfully declined";
+        return redirect('trips.tripLog')->with('success', $message);   
+    }
+
+    public function viewTripLog(Trip $trip){
+        $destinations = Transaction::join('destination', 'destination.destination_id', '=', 'transaction.destination_id')->join('trip', 'trip.trip_id', '=', 'transaction.trip_id')->where('transaction.trip_id', $trip->trip_id)->selectRaw('transaction.trip_id as tripid, destination.description as destdesc, destination.amount as amount, COUNT(destination.description) as counts')->groupBy(['transaction.trip_id','destination.description'])->get();
+        $user = User::where('user_type','Super-admin')->first();
+        $superAdmin = $user->terminal;
+        return view('trips.viewTrip', compact('destinations', 'trip', 'superAdmin'));
     }
 }

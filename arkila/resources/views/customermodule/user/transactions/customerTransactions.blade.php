@@ -33,13 +33,13 @@
                                                 <td>{{$rental->departure_time}}</td>
                                                 <td>
                                                     <div class="text-center">
-                                                        <button type="button" class="btn btn-primary" 
+                                                        <button id="viewRentalModal{{$rental->rent_id}}" type="button" class="btn btn-primary" 
                                                         data-toggle="modal" 
                                                         data-target="#viewRental{{$rental->rent_id}}"
-                                                        data-vehicle="{{$rental->vanmodel->description}}"
-                                                        data-destination="{{$rental->destination}}"
-                                                        data-contact="{{$rental->contact_number}}"
-                                                        data-days="{{$rental->number_of_days}}"
+                                                        data-rentvehicle="{{$rental->vanmodel->description}}"
+                                                        data-rentdestination="{{$rental->destination}}"
+                                                        data-rentcontact="{{$rental->contact_number}}"
+                                                        data-rentdays="{{$rental->number_of_days}}"
                                                         data-rentdate="{{$rental->departure_date}}"
                                                         data-renttime="{{$rental->departure_time}}"
                                                         data-rentcomment="{{$rental->comments}}">View</button>
@@ -70,12 +70,12 @@
                                                 <td>{{$reservation->departure_time}}</td>
                                                 <td>
                                                     <div class="text-center">
-                                                        <button type="button" class="btn btn-primary" 
+                                                        <button id="viewReservationModal{{$reservation->id}}" type="button" class="btn btn-primary" 
                                                         data-toggle="modal" 
                                                         data-target="#viewReservation{{$reservation->id}}"
-                                                        data-destination="{{$reservation->destination->description}}"
-                                                        data-contact="{{$reservation->contact_number}}"
-                                                        data-seats="{{$reservation->number_of_seats}}"
+                                                        data-reservedestination="{{$reservation->destination->description}}"
+                                                        data-reservecontact="{{$reservation->contact_number}}"
+                                                        data-reserveseats="{{$reservation->number_of_seats}}"
                                                         data-reservedate="{{$reservation->departure_date}}"
                                                         data-reservetime="{{$reservation->departure_time}}"
                                                         data-reservecomment="{{$reservation->comments}}">View</button>
@@ -285,11 +285,11 @@
     @foreach($rentals as $rental)
         <script>
             $(document).ready(function(){
-                $('#viewRental{{$rental->rent_id}}').click(function(){
-                    $('#vehicleType{{$rental->rent_id}}').html($(this).data('vehicle}'));
-                    $('#rentalDestination{{$rental->rent_id}}').html($(this).data('destination'));
-                    $('#rentalContactNumber{{$rental->rent_id}}').html($(this).data('contact'));
-                    $('#rentalNumOfDays{{$rental->rent_id}}').html($(this).data('days'));
+                $('#viewRentalModal{{$rental->rent_id}}').click(function(){
+                    $('#vehicleType{{$rental->rent_id}}').html($(this).data('rentvehicle}'));
+                    $('#rentalDestination{{$rental->rent_id}}').html($(this).data('rentdestination'));
+                    $('#rentalContactNumber{{$rental->rent_id}}').html($(this).data('rentcontact'));
+                    $('#rentalNumOfDays{{$rental->rent_id}}').html($(this).data('rentdays'));
                     $('#rentalDate{{$rental->rent_id}}').html($(this).data('rentdate'));
                     $('#rentalTime{{$rental->rent_id}}').html($(this).data('renttime'));
                     $('#rentalComment{{$rental->rent_id}}').html($(this).data('rentcomment'));
@@ -300,13 +300,15 @@
     @foreach($reservations as $reservation)
         <script>
             $(document).ready(function(){
-                $('#viewReservation{{$reservation->id}}').click(function(){
-                    $('#reservationDest{{$reservation->id}}').html($(this).data('destination'));
-                    $('#reservationContactNumber{{$reservation->id}}').html($(this).data('contact'));
-                    $('#reservationSeats{{$reservation->id}}').html($(this).data('seats'));
-                    $('#reservationDate{{$reservation->id}}').html($(this).data('reservedate'));
-                    $('#reservationTime{{$reservation->id}}').html($(this).data('reservetime'));
-                    $('#reservationComment{{$reservation->id}}').html($(this).data('reservecomment'));
+                $('#viewReservationModal{{$reservation->id}}').click(function(){
+                    $('#reservationDest{{$reservation->id}}').html($(this).data('reservedestination').toString());
+                    $('#reservationContactNumber{{$reservation->id}}').html($(this).data('reservecontact').toString());
+                    $('#reservationSeats{{$reservation->id}}').html($(this).data('reserveseats').toString());
+                    $('#reservationDate{{$reservation->id}}').html($(this).data('reservedate').toString());
+                    $('#reservationTime{{$reservation->id}}').html($(this).data('reservetime').toString());
+                    $('#reservationComment{{$reservation->id}}').html($(this).data('reservecomment').toString());
+                    // console.log(r.toString());
+                    // console.log(r);
                 });
             });
         </script>

@@ -21,39 +21,21 @@
                             </div>
                             <div class="box-body" id="inner-dest">
 
-                                <!-- dito mag loop :) -->
+                                @php $totalPassengers = 0; @endphp
+                                @foreach($destinations as $key => $values)
+                                    @if($trip->trip_id == $values->tripid)
+                                    @php $innerRoutesArr[$key] = $values; @endphp
                                 <div class="form-group inner-routes">
-                                    <label for="">Agoo</label>
-                                    <input class="form-control pull-right" type="number" id="" style="width:30%;" value="" disabled>
+                                    <label for="">{{$values->destdesc}}</label>
+                                    <input class="form-control pull-right" type="number" id="qty{{$trip->trip_id}}" style="width:30%;" value="{{$values->counts}}" disabled>
                                 </div>
+                                    @php $totalPassengers = $totalPassengers + $values->counts; @endphp
+                                    @endif
+                                @endforeach
                                 
-                                <div class="form-group inner-routes">
-                                    <label for="">Agoo</label>
-                                    <input class="form-control pull-right" type="number" id="" style="width:30%;" value="" disabled>
-                                </div>
-                                <div class="form-group inner-routes">
-                                    <label for="">Agoo</label>
-                                    <input class="form-control pull-right" type="number" id="" style="width:30%;" value="" disabled>
-                                </div>
-                                <div class="form-group inner-routes">
-                                    <label for="">Agoo</label>
-                                    <input class="form-control pull-right" type="number" id="" style="width:30%;" value="" disabled>
-                                </div>
-                                <div class="form-group inner-routes">
-                                    <label for="">Agoo</label>
-                                    <input class="form-control pull-right" type="number" id="" style="width:30%;" value="" disabled>
-                                </div>
-                                <div class="form-group inner-routes">
-                                    <label for="">Agoo</label>
-                                    <input class="form-control pull-right" type="number" id="" style="width:30%;" value="" disabled>
-                                </div>
-                                <div class="form-group inner-routes">
-                                    <label for="">Agoo</label>
-                                    <input class="form-control pull-right" type="number" id="" style="width:30%;" value="" disabled>
-                                </div>
 
                                 <label for="">Total</label>
-                                <input id="" class="form-control pull-right" type="text" id="total" style="width:30%;" value="" disabled>
+                                <input id="" class="form-control pull-right" type="text" id="total" style="width:30%;" value="{{$totalPassengers}}" disabled>
                             </div>
                         </div>
 
@@ -66,27 +48,27 @@
                         </div>
                          <div>
                             <label>Driver:</label>
-                            <name>Tie </name>
+                            <name>{{$trip->driver->first_name . " " . $trip->driver->middle_name . " " . $trip->driver->last_name}}<</name>
                         </div>
                         <div>
                             <label>Van:</label>
-                            <name>AAAA-777</name>
+                            <name>{{$trip->plate_number}}</name>
                         </div> 
                         <div>
                             <label>Origin:</label>
-                            <name>Baguio City</name>
+                            <name>{{$superAdmin->description}}</name>
                         </div>
                         <div>
                             <label>Destination:</label>
-                            <name>Cabanatuan</name>
+                            <name>{{$trip->terminal->description}}</name>
                         </div>
                         <div>
                             <label>Date:</label>
-                            <name>03/11/2018</name>
+                            <name>{{$trip->date_departed}}</name>
                         </div>
                         <div>
                             <label>Time:</label>
-                            <name>12:00 PM</name>
+                            <name>{{$trip->time_departed}}</name>
                         </div> 
                         
                         <div class="box" style="margin: 3% 0%">
@@ -96,11 +78,22 @@
                             <div class="box-body" id="inner-dest">
                                 <div class="form-group inner-routes">
                                     <label for="">BanTrans: </label>
-                                    <input class="form-control pull-right" type="number" id="" style="width:30%;" value="" disabled>
+                                    @php $bantrans = 0; @endphp
+                                    @if($trip->SOP == null)
+                                        @php $bantrans = $trip->total_booking_fee + $trip->community_fund  @endphp
+                                    @else
+                                        @php $bantrans = $trip->total_booking_fee + $trip->SOP + $trip->community_fund  @endphp
+                                    @endif
+                                    
+                                    @php $totalfare = 0; @endphp
+                                    @foreach($destinations as $key => $values)
+                                        @php $totalfare = $totalfare + ($values->amount * $values->counts); @endphp
+                                    @endforeach
+                                    <input class="form-control pull-right" type="number" id="" style="width:30%;" value="{{floatval($bantrans)}}" disabled>
                                 </div>
 
                                 <label for="">Driver:</label>
-                                <input id="" class="form-control pull-right" type="text" id="total" style="width:30%;" value="" disabled>
+                                <input id="" class="form-control pull-right" type="number" id="total" style="width:30%;" value="{{$totalfare}}" disabled>
                             </div>
                         </div>
 

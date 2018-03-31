@@ -54,7 +54,7 @@ class HomeController extends Controller
 
     public function usermanagement()
     {
-        $userAdmins = User::join('terminal', 'users.terminal_id', '=', 'terminal.terminal_id')->orderBy('users.created_at', 'desc')->admin()->select('users.id as userid','users.name', 'users.username', 'terminal.terminal_id', 'terminal.description')->get();
+        $userAdmins = User::join('terminal', 'users.terminal_id', '=', 'terminal.terminal_id')->orderBy('users.created_at', 'desc')->admin()->select('users.id as userid','users.first_name', 'users.middle_name', 'users.last_name', 'users.username', 'terminal.terminal_id', 'terminal.description')->get();
         $userDrivers = User::driver()->where('users.terminal_id','=', null)->get();
         $userCustomers = User::customer()->where('users.terminal_id','=', null)->get();
         return view('usermanagement.index', compact('userAdmins', 'userDrivers', 'userCustomers'));

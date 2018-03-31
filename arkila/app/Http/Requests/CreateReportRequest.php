@@ -33,7 +33,7 @@ class CreateReportRequest extends FormRequest
         $rules = [
           "dateDeparted" => "required|date_format:m/d/Y",
           "timeDeparted" => [new checkTime, "required"],
-          "numberOfDiscount" => "present|array",
+          "numberOfDiscount" => "array",
           "qty" => "present|array",
           //"numberOfDiscount.*" => "nullable|numeric|min:1",
           "totalPassengers" => "numeric|min:1|max:".$member_van->seating_capacity."|required",

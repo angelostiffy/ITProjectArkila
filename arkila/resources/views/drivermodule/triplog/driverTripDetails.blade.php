@@ -15,25 +15,29 @@
                                     <div class="form-group col-md-6" class="control-label">
                                         <label for="">Date:</label>
 
-                                        <input value="" id="" name="" type="text" class="form-control" disabled>
+                                        <input value="{{$trip->date_departed}}" id="dateDeparted{{$trip->trip_id}}" type="text" class="form-control" disabled>
 
                                     </div>
                                     <div class="form-group col-md-6" class="control-label">
                                         <label for="">Time:</label>
 
-                                        <input value="" id="" name="" type="text" class="form-control" disabled>
+                                        <input value="{{$trip->time_departed}}" id="timeDeparted{{$trip->trip_id}}" type="text" class="form-control" disabled>
 
                                     </div>
                                     <div class="form-group col-md-6" class="control-label">
                                         <label for="">Origin:</label>
 
-                                        <input value="" id="" name="" type="text" class="form-control" disabled>
+                                        <input value="{{$trip->terminal->description}}" id="origin{{$trip->trip_id}}" type="text" class="form-control" disabled>
 
                                     </div>
                                     <div class="form-group col-md-6" class="control-label">
                                         <label for="">Destination:</label>
 
-                                        <input value="" id="" name="" type="text" class="form-control" disabled>
+                                        <input value="{{$superAdmin->description}}" id="destination{{$trip->trip_id}}" type="text" class="form-control" disabled>
+                                    </div>
+                                    <div class="form-group col-md-6" class="control-label">
+                                        <label for="">Status:</label>
+                                        <input value="{{$trip->report_status}}" id="status{{$trip->trip_id}}" type="text" class="form-control" disabled>
                                     </div>
                                 </div>
                                 <div class="box">
@@ -44,27 +48,27 @@
                                         <div class="row">
                                             <div class="col-md-2"></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
+                                                @php $totalPassengers = 0; @endphp
+                                                  @foreach($destinations as $key => $values)
+                                                  @if($trip->trip_id == $values->tripid)
+                                                    @php $innerRoutesArr[$key] = $values; @endphp
 
-                                                    <label for="">Baguio : </label>
-                                                    <input class="form-control pull-right" onblur="findTotal()" type="text" name="qty" id="qty4" style="width:30%;" disabled>
-                                                </div>
-                                                <div class="form-group">
-
-                                                    <label for="">Nueva Ecija : </label>
-                                                    <input class="form-control pull-right" onblur="findTotal()" type="text" name="qty" id="qty4" style="width:30%;" disabled>
-                                                </div>
-                                                <div class="form-group">
+                                                    <div class="form-group inner-routes">
+                                                        <label for="">{{$values->destdesc}}</label>
+                                                        <input class="form-control pull-right" type="number" id="qty{{$trip->trip_id}}" style="width:30%;" value="{{$values->counts}}" disabled>
+                                                    </div>
+                                                    @php $totalPassengers = $totalPassengers + $values->counts; @endphp
+                                                  @endif
+                                                @endforeach
 
                                                     <label for="">Total</label>
-                                                    <input class="form-control pull-right" type="text" name="total" id="total" style="width:30%;" disabled>
-                                                </div>
+                                                    <input id="totalPassenger{{$trip->trip_id}}" class="form-control pull-right" type="text" id="total" style="width:30%;" value="{{$totalPassengers}}" disabled>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="box-footer text-center">
-                                    <p>Your income for this trip: Php <strong>3500.00</strong></p>
+                                    <p>Your income for this trip: Php <strong id="totalIncome{{$trip->trip_id}}">{{$trip->total_booking_fee}}</strong></p>
                                 </div>
                             </div>
                         </div>

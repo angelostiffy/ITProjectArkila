@@ -25,12 +25,12 @@
                     </div>
                     <div class="col-xs-12">
                         <div class="pull-right">
-                             <form method="POST" action="{{route('trips.destroy',[$trip->trip_id])}}">
-                                 {{method_field('DELETE')}}
-                                 {{csrf_field()}}
+                            <form action="{{route('trips.putOnDeck',[$trip->trip_id])}}" method="POST">
+                                {{method_field('PATCH')}}
+                                {{csrf_field()}}
                                 <a class="btn btn-default btn-xs itemSpBtn{{$trip->trip_id}}"> <i class="fa fa-times"></i></a>
                                 <button type="submit" class="btn btn-primary btn-xs"><i class="fa fa-check"></i></button>
-                             </form>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -41,9 +41,13 @@
                       <p>Are you sure you want to <i class="text-red">delete</i> <strong>{{$trip->van->plate_number}}</strong>?</p>
                     </div>
                     <div class="col-xs-12">
-                        <div class="pull-right">  
-                            <button class="btn btn-default btn-xs itemSpBtn{{$trip->trip_id}}"> <i class="fa fa-times"></i></button>
-                            <button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                        <div class="pull-right">
+                            <form method="POST" action="{{route('trips.destroy',[$trip->trip_id])}}">
+                                 {{method_field('DELETE')}}
+                                 {{csrf_field()}}
+                                <a class="btn btn-default btn-xs itemSpBtn{{$trip->trip_id}}"> <i class="fa fa-times"></i></a>
+                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -105,14 +105,12 @@
                             <div class="box-body">
 
                                     <label for="">Terminal</label>
-                                    <select @if(is_null($terminals->first())){{'disabled'}}@endif name="terminal" id="terminal" class="form-control">
-                                        @if(is_null($terminals->first()))
-                                            <option value="">No Available Terminal</option>
-                                        @else
-                                            @foreach($terminals as $terminal)
+                                    <select name="terminal" id="terminal" class="form-control">
+                                        @foreach($terminals as $terminal)
+                                            @if($terminal->trips->where('queue_number',1)->first()->plate_number ?? null)
                                                 <option value="{{$terminal->terminal_id}}">{{$terminal->description}}</option>
-                                            @endforeach
-                                        @endif
+                                            @endif
+                                        @endforeach
                                      </select>
                                      <label for="">Destination</label>
                                     <select name="destination" id="destination" class="form-control">
@@ -179,7 +177,7 @@
                                                             <span class="col-md-6">
                                                                 <h6>Driver:</h6>
                                                                  <h4>
-                                                                    <a href="#" id="driverChange{{$terminal->terminal_id}}">John Doe</a>
+                                                                    <a href="#" id="driverChange{{$terminal->terminal_id}}"></a>
                                                                 </h4>
                                                             </span>
                                                              <span class="pull-right btn-group">
@@ -195,12 +193,16 @@
                                                                  </p>
                                                             </span>
                                                              <span class="pull-right">
-                                                                <button type="button" id="onDeckBtn2-{{$terminal->terminal_id}}" class="btn btn-sm btn-primary">
-                                                                    NO
-                                                                </button>
-                                                                <button type="button" class="btn btn-sm btn-danger">
-                                                                    YES
-                                                                </button>
+                                                                 <form method="POST" action="{{route('trips.destroy',[$terminal->trips->where('queue_number',1)->first()->trip_id])}}">
+                                                                     {{method_field('DELETE')}}
+                                                                     {{csrf_field()}}
+                                                                    <button type="button" id="onDeckBtn2-{{$terminal->terminal_id}}" class="btn btn-sm btn-primary">
+                                                                        NO
+                                                                    </button>
+                                                                    <button type="submit" class="btn btn-sm btn-danger">
+                                                                        YES
+                                                                    </button>
+                                                                 </form>
                                                             </span>
                                                         </div>
 
@@ -351,7 +353,6 @@
 
 
     $(function(){
-
      var activeTab = document.location.hash;
     if(!activeTab){
 
@@ -375,6 +376,11 @@
 
 
     $(function(){
+        checkTerminals();
+        listDestinations();
+        listDiscounts();
+        listTickets();
+        checkSellButton()
       var hash = window.location.hash;
       hash && $('ul.nav a[href="' + hash + '"]').tab('show');
 
@@ -384,20 +390,6 @@
       window.location.hash = this.hash;
       $('html,body').scrollTop(scrollmem);
       });
-
-    @if(!is_null($terminals->first()))
-        $('#destination').prop('disabled',false);
-        $('#checkDiscount').prop('disabled',false);
-        listDestinations();
-        listTickets();
-    @else
-        $('#checkDiscount').prop('disabled',true);
-        $('#destination').prop('disabled',true);
-        $('#destination').append('<option>Data Not Available</option>');
-
-        $('#ticket').prop('disabled',true);
-        $('#ticket').append('<option>Data Not Available</option>');
-    @endif
 
 
     checkDiscountBox();
@@ -465,7 +457,12 @@
         });
 
     });
-
+    function checkTerminals(){
+        if(!$('#terminal').val()){
+            $('#terminal').prop('disabled',true);
+            $('#terminal').append('<option value="">No Available Terminal</option>');
+        }
+    }
 
     function checkDiscountBox(){
             if($('#checkDiscount').is(':checked')){
@@ -476,95 +473,110 @@
                 $('#discount').empty();
             }
         }
+
         function listDiscounts(){
             $('#discount').empty();
 
-            $.ajax({
-                method:'GET',
-                url: '{{route('transactions.listDiscounts')}}',
-                data: {
-                    '_token': '{{csrf_token()}}'
-                },
-                success: function(discounts){
-                    console.log(discounts);
-                    if(discounts.length === 0){
-                        $('#checkDiscount').prop('disabled',true);
-                        $('#discount').prop('disabled',true);
-                        $('#discount').append('<option>Data Not Available</option>');
-                    }
-                    else{
-                        $('#checkDiscount').prop('disabled',false);
-                        discounts.forEach(function(discounts){
-                            $('#discount').append('<option value='+discounts.id+'> '+discounts.description+'</option>');
-                        });
-                    }
+            if($('#terminal').val() && $('#destination').val()){
+                $.ajax({
+                    method:'GET',
+                    url: '{{route('transactions.listDiscounts')}}',
+                    data: {
+                        '_token': '{{csrf_token()}}'
+                    },
+                    success: function(discounts){
+                        console.log(discounts);
+                        if(discounts.length === 0){
+                            $('#checkDiscount').prop('disabled',true);
+                            $('#discount').prop('disabled',true);
+                            $('#discount').append('<option value="">No Available Discounts</option>');
+                        }
+                        else{
+                            $('#checkDiscount').prop('disabled',false);
+                            discounts.forEach(function(discounts){
+                                $('#discount').append('<option value='+discounts.id+'> '+discounts.description+'</option>');
+                            });
+                        }
 
-                }
-            });
-
+                    }
+                });
+            }else{
+                $('#discount').append('<option value="">No Available Discounts</option>');
+                $('#discount').prop('disabled',true);
+            }
         }
 
-        function listDestinations(){
+        function listDestinations() {
             $('#destination').empty();
+            if ($('#terminal').val()) {
+                $.ajax({
+                    method: 'GET',
+                    url: '/listDestinations/' + $('#terminal').val(),
+                    data: {
+                        '_token': '{{csrf_token()}}'
+                    },
+                    success: function (destinations) {
+                        console.log(destinations);
+                        if (destinations.length === 0) {
+                            $('#destination').empty();
+                            $('#destination').prop('disabled', true);
+                            $('#destination').append('<option value="">No Available Destination</option>');
+                        }
+                        else {
+                            destinations.forEach(function (destination) {
+                                $('#destination').append('<option value=' + destination.id + '> ' + destination.description + '</option>');
+                            });
+                        }
 
-            $.ajax({
-                method:'GET',
-                url: '/listDestinations/'+$('#terminal').val(),
-                data: {
-                    '_token': '{{csrf_token()}}'
-                },
-                success: function(destinations){
-                    console.log(destinations);
-                    if(destinations.length === 0){
-                        $('#destination').empty();
-                        $('#destination').prop('disabled',true);
-                        $('#destination').append('<option>Data Not Available</option>');
                     }
-                    else{
-                        destinations.forEach(function(destination){
-                            $('#destination').append('<option value='+destination.id+'> '+destination.description+'</option>');
-                        });
-                    }
-
-                }
-            });
+                });
+            }else{
+                $('#destination').prop('disabled', true);
+                $('#destination').append('<option value="">No Available Destination</option>');
+            }
         }
 
-        function listTickets(){
+        function listTickets() {
             $('#ticket').empty();
+            if ($('#terminal').val() && $('#destination').val() && $('#discount').val()) {
 
-            $.ajax({
-                method:'GET',
-                url: '/listTickets/'+$('#terminal').val(),
-                data: {
-                    '_token': '{{csrf_token()}}'
-                },
-                success: function(tickets){
-                    console.log(tickets);
-                    if(tickets.length === 0){
-                        $('#ticket').empty();
-                        $('#ticket').prop('disabled',true);
-                        $('#ticket').append('<option>Data Not Available</option>');
-                    }
-                    else{
-                        tickets.forEach(function(ticket){
-                            $('#ticket').append('<option value='+ticket.id+'> '+ticket.ticket_number+'</option>');
-                        });
-                    }
+                    $.ajax({
+                        method: 'GET',
+                        url: '/listTickets/' + $('#terminal').val(),
+                        data: {
+                            '_token': '{{csrf_token()}}'
+                        },
+                        success: function (tickets) {
+                            console.log(tickets);
+                            if (tickets.length === 0) {
+                                $('#ticket').empty();
+                                $('#ticket').prop('disabled', true);
+                                $('#ticket').append('<option value =""> Tickets Not Available</option>');
+                            }
+                            else {
+                                tickets.forEach(function (ticket) {
+                                    $('#ticket').append('<option value=' + ticket.id + '> ' + ticket.ticket_number + '</option>');
+                                });
+                            }
 
-                }
-            });
+                        }
+                    });
+            }else{
+                $('#ticket').prop('disabled', true);
+                $('#ticket').append('<option value=""> Tickets Not Available</option>');
+            }
         }
 
         function checkSellButton(){
             var terminal = $('#terminal').val();
             var destination = $('#destination').val();
             var ticket = $('#ticket').val();
+            $('#sellButtContainer').empty();
 
-            if(terminal != null && destination != null && ticket != null){
-                if(!$('#sellButt').length){
-                    $('#sellButtContainer').append('<button id="sellButt" type="button" class="btn btn-info btn-flat">Sell</button>');
-                }
+            if(terminal && destination && ticket ){
+                $('#sellButtContainer').append('<button id="sellButt" type="button" class="btn btn-info btn-flat">Sell</button>');
+            }else{
+                $('#sellButtContainer').append('<button type="button" class="btn btn-info btn-flat">Sell</button>');
             }
 
 
@@ -771,16 +783,35 @@
 <script>
     $(document).ready(function() {
         @foreach($terminals as $terminal)
-        @if($terminal->trips->where('queue_number',1)->first())
+        @if($trip = $terminal->trips->where('queue_number',1)->first())
             $('#driverChange{{$terminal->terminal_id}}').editable({
-                name: 'driver_id',
                 type: 'select',
                 title: 'Change Driver',
-                value: "{{$terminal->trips->where('queue_number',1)->first()->driver->full_name}}",
+                value: "{{$terminal->trips->where('queue_number',1)->first()->driver_id}}",
                 source: "{{route('transactions.listSourceDrivers')}}",
                 sourceCache: true,
                 pk: '{{$terminal->trips->where('queue_number',1)->first()->trip_id}}',
-                url: ''
+                url: '{{route('transactions.changeDriver',[$trip->trip_id])}}',
+                validate: function(value){
+                    if($.trim(value) == ""){
+                        return "This field is required";
+                    }
+                },
+                ajaxOptions: {
+                    type: 'PATCH',
+                    headers: { 'X-CSRF-TOKEN': '{{csrf_token()}}' }
+                },
+                error: function(response) {
+                    if(response.status === 500) {
+                        return 'Service unavailable. Please try later.';
+                    } else {
+                        console.log(response);
+                        return response.responseJSON.message;
+                    }
+                },
+                success: function(response){
+                    console.log(response);
+                }
             });
         @endif
         @endforeach

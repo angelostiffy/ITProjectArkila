@@ -120,46 +120,6 @@
                 <!-- /.modal-body -->
 
 
-                <div class="col-md-6">
-                    <div class="box">
-
-                        <div class="box-header">
-                            <h3 class="box-title">Personal Info</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-
-                            <div class="form-group" class="control-label">
-                                <label for="">Contact Number:</label>
-                                <input value="{{$profile->contact_number}}" id="" name="" type="text" class="form-control" disabled>
-                            </div>
-                            <!-- /.form-group -->
-
-                            <div class="form-group" class="control-label">
-                                <label for="">Address:</label>
-                                <input value="{{$profile->address}}" id="" name="" type="text" class="form-control" disabled>
-                            </div>
-                            <!-- /.form-group -->
-
-                            <div class="form-group" class="control-label">
-                                <label for="">Birthday:</label>
-                                <input value="{{$profile->birth_date}}" id="" name="" type="text" class="form-control" disabled>
-                            </div>
-                            <!-- /.form-group -->
-
-                            <div class="form-group" class="control-label">
-                                <label for="">Trips Completed:</label>
-                                <input value="{{$counter}}" id="" name="" type="text" class="form-control" disabled>
-                            </div>
-                            <!-- /.form-group -->
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-                </div>
-                <!-- /.col -->
-
-
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary btn-group-justified text-center">Submit</button>
                 </div>

@@ -148,10 +148,8 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
     /* Trips */
     Route::post('/home/trips/{destination}/{van}/{member}', 'TripsController@store')->name('trips.store');
     Route::get('/listSpecialUnits/{terminal}','TripsController@listSpecialUnits')->name('trips.listSpecialUnits');
-
     Route::patch('/home/trips/{trip}', 'TripsController@updateRemarks')->name('trips.updateRemarks');
     Route::patch('/home/trips/changeDestination/{trip}', 'TripsController@updateDestination')->name('trips.updateDestination');
-
     Route::resource('/home/trips', 'TripsController',[
         'except' => ['create','show','edit','update']
     ]);
@@ -160,7 +158,10 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
     Route::patch('/updateQueueNumber/{trip}', 'TripsController@updateQueueNumber')->name('trips.updateQueueNumber');
     Route::post('/specialUnitChecker','TripsController@specialUnitChecker')->name('trips.specialUnitChecker');
     Route::get('/updatedQueueNumber','TripsController@updatedQueueNumber')->name('trips.updatedQueueNumber');
-    Route::post('/putOnDeck/{trip}','TripsController@putOnDeck')->name('trips.putOnDeck');
+    Route::patch('/putOnDeck/{trip}','TripsController@putOnDeck')->name('trips.putOnDeck');
+    Route::post('/changeRemarksOB/{trip}','TripsController@changeRemarksOB')->name('trips.changeRemarksOB');
+    Route::get('/showConfirmationBox/{encodedTrips}','TripsController@showConfirmationBox');
+    Route::get('/showConfirmationBoxOB/{encodedTrips}','TripsController@showConfirmationBoxOb');
     /* Transactions(Ticket) */
     Route::resource('/home/transactions', 'TransactionsController',[
         'except' => ['create','show','edit']
@@ -172,20 +173,22 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
     Route::patch('/updatePendingTransactions', 'TransactionsController@updatePendingTransactions')->name('transactions.updatePendingTransactions');
     Route::patch('/updateOnBoardTransactions', 'TransactionsController@updateOnBoardTransactions')->name('transactions.updateOnBoardTransactions');
     Route::get('/listSourceDrivers','TransactionsController@listSourceDrivers')->name('transactions.listSourceDrivers');
+    Route::patch('/changeDriver/{trip}', 'TransactionsController@changeDriver')->name('transactions.changeDriver');
     /********Archive ********/
     Route::patch('/home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
-    Route::get('/showConfirmationBox/{encodedTrips}','TripsController@showConfirmationBox');
-
     Route::get('/drivers/generatePDF', 'DriversController@generatePDF')->name('pdf.drivers');
     Route::get('/operators/generatePDF', 'OperatorsController@generatePDF')->name('pdf.operators');
     Route::get('/drivers/generatePerDriver/{driver}', 'DriversController@generatePerDriver')->name('pdf.perDriver');
     Route::get('/drivers/generatePerOperator/{operator}', 'OperatorsController@generatePerOperator')->name('pdf.perOperator');
-     
     Route::get('/home/trip-log', 'TripsController@tripLog')->name('trips.tripLog');
+    Route::get('/home/trip-log/{trip}', 'TripsController@viewTripLog')->name('trips.viewTripLog');
     Route::get('/home/driver-report', 'TripsController@driverReport')->name('trips.driverReport');
-
+    Route::get('/home/driver-report/{trip}', 'TripsController@viewReport')->name('trips.viewReport');
+    Route::patch('/home/driver-report/{trip}/accept', 'TripsController@acceptReport')->name('trips.acceptReport');
+    Route::patch('/home/driver-report/{trip}/decline', 'TripsController@declineReport')->name('trips.declineReport');
     Route::resource('/home/ledger', 'LedgersController');
     Route::get('/home/general-ledger', 'LedgersController@generalLedger')->name('ledger.generalLedger');
+    Route::get('/ledger/daily-ledger/generate-pdf', 'LedgersController@generatePDF')->name('pdf.ledger');
 
 
  });
@@ -215,6 +218,7 @@ Route::group(['middleware' => ['auth', 'driver']], function(){
   Route::post('/home/create-report/{terminal}/store', 'DriverModuleControllers\CreateReportController@storeReport')->name('drivermodule.storeReport');
   /*Trip Log*/
   Route::get('/home/view-trips', 'DriverModuleControllers\TripLogController@viewTripLog')->name('drivermodule.triplog.driverTripLog');
+  Route::get('/home/view-trips/{trip}', 'DriverModuleControllers\TripLogController@viewSpecificTrip')->name('drivermodule.triplog.driverTripDetails');
 
 });
 /******************************************************************************/

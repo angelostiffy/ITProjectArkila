@@ -135,7 +135,7 @@ ol.vertical{
   </style>
 @endsection
 
-@section('content-header','WOW')
+@section('content-header','Van Queue')
 
 @section('content')
       <div class="row">
@@ -453,10 +453,6 @@ ol.vertical{
         },
         success: function(response){
             specialUnitChecker();
-            console.log(response);
-            if(response.length > 0){
-
-            }
         }
       });
 
@@ -522,29 +518,18 @@ ol.vertical{
                             '_token': '{{csrf_token()}}'
                         },
                         success: function(response){
-                            if(response) {
-                                $('#confirmBoxModal').load('/showConfirmationBox/' + response);
+                            if(response[0]) {
+                                $('#confirmBoxModal').load('/showConfirmationBox/' + response[0]);
+                            }else{
+                                if(response[1]){
+                                    $('#confirmBoxModal').load('/showConfirmationBoxOB/'+response[1]);
+                                }
                             }
                         }
 
                     });
             }
 
-            $('a[name="onDeck"]').on('click',function(e){
-
-                $.ajax({
-                    method:'POST',
-                    url: '/putOnDeck/'+$(e.currentTarget).data('val'),
-                    data: {
-                        '_token': '{{csrf_token()}}'
-                    },
-                    success: function(response){
-
-                    }
-
-                });
-
-            });
 
         });
 </script>

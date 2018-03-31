@@ -11,8 +11,7 @@ class ViewVanQueueController extends Controller
     public function showVanQueue()
     {
       $trips = Trip::join('member', 'trip.driver_id', '=', 'member.member_id')
-                    ->join('destination', 'trip.destination_id', '=', 'destination.destination_id')
-                    ->join('terminal', 'destination.terminal_id', '=', 'terminal.terminal_id')
+                    ->join('terminal', 'trip.terminal_id', '=', 'terminal.terminal_id')
                     ->join('van', 'trip.plate_number', '=', 'van.plate_number')
                     ->where('member.operator_id', '=', null)
                     ->where('member.role', '=', 'Driver')

@@ -8,6 +8,7 @@
             <div class="carousel-inner" role="listbox">
                 <div class="item  active">
                     <div class="box">
+                        {{!! json_encode($announcements)!!}}
                         <div class="box-header with-border text-center">
                             <h4>{{$announcements->first()->title}}</h4>
                         </div>
