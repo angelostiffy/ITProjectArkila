@@ -10,81 +10,53 @@
                 <div class="tab-pane active" id="control-sidebar-queue-tab">
                     <h3 class="control-sidebar-heading" style="margin-top: 0;">Van Queue</h3>
 
-                    <table class="table table-bordered dataTable text-center">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Plate No.</th>
-                                <th>Remark</th>
-                            </tr>
-                        </thead>
+                    <div class="box box-solid">
+              <div class="box-header with-border">
+                  <h3 class="box-title">Add Unit to Queue</h3>
 
-                        <tr>
-                            <td><i class="fa fa-star text-yellow"></i> 1</td>
-                            <td>MMM-123</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>NNN-123</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>OOO-123</td>
-                            <td>ER</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>PPP-123</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>QQQ-123</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>RRR-123</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>SSS-123</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>TTT-123</td>
-                            <td>OB</td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>UUU-123</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>VVV-123</td>
-                            <td>OB</td>
-                        </tr>
-                    </table>
+                  <div class="box-tools">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                  </div>
+              </div>
+              <div class="box-body">
 
-                    <form action="" class="form-group">
-                        <div class="input-group input-group-sm">
-                            <select name="" id="" class="form-control">
-              <option value="">Plate No.</option>
-              <option value=""></option>
-              <option value=""></option>
-              <option value=""></option>
-              <option value=""></option>
-            </select>
-                            <span class="input-group-btn">
-              <button type="button" class="btn btn-primary btn-flat">Add van unit</button>
-            </span>
+                <ul class="list-group">
+                        <li class="list-group-item">AAA</li>
+                    </ul>
+                <div class="form-group">
+
+                    
+                      <label for="">Van Unit</label>
+                      <select class="form-control">
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                       </select>
+                    </div>
+                      <div class="form-group">  
+                       <label for="">Destination</label>
+                      <select name="" class="form-control">
+                          <option value=""></option>
+                          <option value=""></option>
+                          <option value=""></option>
+                      </select>
+                      </div>
+                      <div class="form-group">  
+                      <label for="">Driver</label>
+                      <select class="form-control">
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                      </select>
+                      </div>
+              </div>
+                    <div class="box-footer">
+                        <div class="pull-right">
+                            <button  data-toggle="tooltip" class="btn btn-primary btn-sm" title="Please add vans, destinations, or drivers before adding a van to the queue" disabled><i class="fa fa-plus"></i> ADD </button>
                         </div>
-                    </form>
+                    </div>
+              </div>
 
                     <!-- /.control-sidebar-menu -->
 

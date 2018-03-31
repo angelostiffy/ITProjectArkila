@@ -3,7 +3,12 @@
 
 <head>
  @include('layouts.partials.stylesheets')
-
+<style> 
+.control-sidebar-bg, .control-sidebar {
+    right: -500px;
+    width: 500px;
+}
+</style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini fixed">
