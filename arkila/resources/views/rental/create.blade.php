@@ -61,7 +61,7 @@
                             <div class="form-group">
                                 <label>Type of Van:</label>
                                 <select class="form-control" name="model" id="model">
-                                    <option value="" disabled selected>Select Model</option>
+                                    <option value="" selected>Select Model</option>
                                 @foreach ($models as $model)
                                    <option value="{{ $model->description }}" @if($model->description == old('model') ) {{'selected'}} @endif>{{ $model->description }}</option>
                                    @endforeach
@@ -196,6 +196,32 @@
           });
           navigateTo(0); // Start at the beginning
         });
+
+                function getData() {
+            var firstName = document.getElementById('firstName').value;
+            var lastName = document.getElementById('lastName').value;
+            var middleName = document.getElementById('middleName').value;
+
+            document.getElementById('nameView').textContent = lastName + ', ' + firstName + ' ' + middleName;
+
+            var contactNumber = document.getElementById('contactNumber').value;
+            document.getElementById('contactView').textContent = contactNumber;
+
+            var destination = document.getElementById('destination').value;
+            document.getElementById('destView').textContent = destination;
+
+            var vanType = document.getElementById('model').value;
+            document.getElementById('vanView').textContent = vanType;
+
+            var days = document.getElementById('days').value;
+            document.getElementById('daysView').textContent = days;
+
+            var date = document.getElementById('date').value;
+            document.getElementById('dateView').textContent = date;
+
+            var time = document.getElementById('timepicker').value;
+            document.getElementById('timeView').textContent = time;
+        }
     </script>
 
     <script>
