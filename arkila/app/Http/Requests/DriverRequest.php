@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\checkAge;
-use App\Rules\checkContactNum;
-use App\Rules\checkLicenseNumber;
 use App\Rules\checkName;
 use App\Rules\checkOccupation;
+use App\Rules\checkAge;
+use App\Rules\checkContactNum;
+use App\Rules\checkSSS;
+use App\Rules\checkLicense;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -65,8 +66,8 @@ class DriverRequest extends FormRequest
                     'contactPerson' => ['bail','required','max:50', new checkName],
                     'contactPersonAddress' => 'bail|required|max:100',
                     'contactPersonContactNumber' => ['bail','required',new checkContactNum],
-                    'sss' => 'bail|unique:member,SSS|required|max:10',
-                    'licenseNo' => ['bail','required','max:20'],
+                    'sss' => ['bail','unique:member,SSS','required', new checkSSS],
+                    'licenseNo' => ['bail','required',new checkLicense],
                     'licenseExpiryDate' => 'bail|required|date|after:today',
                     'children.*' => ['bail','required_with:childrenBDay.*','distinct', 'nullable',new checkName, 'max:120'],
                     'childrenBDay.*' => 'bail|required_with:children.*|nullable|date|before:tomorrow'
@@ -105,7 +106,7 @@ class DriverRequest extends FormRequest
                     'contactPerson' => ['bail','required','max:50', 'nullable',new checkName],
                     'contactPersonAddress' => 'bail|required|max:100',
                     'contactPersonContactNumber' => ['bail','required',new checkContactNum],
-                    'sss' => 'bail|unique:member,SSS,'.$this->route('driver')->member_id.',member_id|required|max:10',
+                    'sss' => ['bail','unique:member,SSS,'.$this->route('driver')->member_id.',member_id','required', new checkSSS],
                     'licenseNo' => ['bail','required','max:20'],
                     'licenseExpiryDate' => 'bail|required|date|after:today',
                     'children.*' => ['bail','required_with:childrenBDay.*','distinct', 'nullable',new checkName, 'max:50'],
