@@ -23,7 +23,7 @@
         </h3>
     </div>
     <div class="box-body">
-    <a href="{{route('pdf.perDriver', [$driver->member_id])}}"  class="btn btn-default btn-sm btn-fla"> <i class="fa fa-print"></i> PRINT</a>
+    <button onclick="window.open('{{route('pdf.perDriver', [$driver->member_id])}}')" class="btn btn-default btn-sm btn-fla"> <i class="fa fa-print"></i> PRINT</button>
 
         <h4>Personal Information</h4>
         <div class="row">
