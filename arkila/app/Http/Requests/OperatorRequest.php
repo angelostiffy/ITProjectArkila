@@ -40,7 +40,7 @@ class OperatorRequest extends FormRequest
 
                     'lastName' => ['bail','required',new checkName,'max:25'],
                     'firstName' => ['bail','required',new checkName,'max:25'],
-                    'middleName' => ['bail',new checkName,'max:25'],
+                    'middleName' => ['bail','nullable',new checkName,'max:25'],
                     'contactNumber' => ['bail', new checkContactNum],
                     'address' => 'bail|required|max:100',
                     'provincialAddress' => 'bail|required|max:100',
@@ -79,7 +79,7 @@ class OperatorRequest extends FormRequest
                     return [
                         'lastName' => ['bail','required',new checkName,'max:25'],
                         'firstName' => ['bail','required',new checkName,'max:25'],
-                        'middleName' => ['bail',new checkName,'max:25'],
+                        'middleName' => ['bail','nullable',new checkName,'max:25'],
                         'contactNumber' => ['bail',new checkContactNum],
                         'address' => 'bail|required|max:100',
                         'provincialAddress' => 'bail|required|max:100',
