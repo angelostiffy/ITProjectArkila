@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Carbon\Carbon;
 use DB;
+use PDF;
 
 
 class LedgersController extends Controller
@@ -22,9 +23,8 @@ class LedgersController extends Controller
     public function index()
     {
         $date = Carbon::now();
-        $thisDate = $date->setTimezone('Asia/Manila');
         $ledgers = Ledger::all();
-        return view('ledger.index', compact('ledgers', 'thisDate'));
+        return view('ledger.index', compact('ledgers', 'date'));
     }
 
     /**
@@ -146,5 +146,13 @@ class LedgersController extends Controller
         ->groupBy(DB::raw('day(created_at)'), DB::raw('month(created_at)'), DB::raw('year(created_at)'))->get();
 
         return view('ledger.generalLedger', compact('ledgers', 'thisDate', 'bookings', 'sops'));
+    }
+
+    public function generatePDF()
+    {
+        $date = Carbon::now();
+        $ledgers = Ledger::all()->where('description', '!=' , 'Booking Fee')->where('description', '!=' , 'SOP');
+        $pdf = PDF::loadView('pdf.daily', compact('ledgers', 'date'));
+        return $pdf->stream('ledger.pdf');
     }
 }

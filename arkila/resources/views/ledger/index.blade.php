@@ -8,13 +8,13 @@
 
 <div class="box">
     <!-- /.box-header -->
-    <h2 class="text-center">{{ $thisDate->formatLocalized('%A %d %B %Y') }}</h2>
+    <h2 class="text-center">{{ $date->formatLocalized('%A %d %B %Y') }}</h2>
     
     <div class="col col-md-6">
         <a href="{{route('ledger.create')}}" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-plus"></i>
             Add Revenue/Expense 
         </a>
-        <a href="#"  class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i>PRINT</a>
+        <button onclick="window.open('{{route('pdf.ledger')}}')" class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i>PRINT</button>
     </div>
 
     <div class="box-body">
@@ -32,9 +32,9 @@
             </thead>
             <tbody>
             @foreach ($ledgers->sortByDesc('ledger_id') as $ledger)
-                @if ($ledger->created_at->format('m-d-Y') == $thisDate->format('m-d-Y'))
+                @if ($ledger->created_at->format('m-d-Y') == $date->format('m-d-Y'))
                 <tr>
-                    @if ($ledger->description !== 'Booking Fee' && $ledger->description !== 'SOP')
+                    @if ($ledger->description !== 'Booking Fee' AND $ledger->description !== 'SOP')
                     <td>{{$ledger->payee}}</td>
                     <td>{{$ledger->description}}</td>
                     <td>{{$ledger->or_number}}</td>
