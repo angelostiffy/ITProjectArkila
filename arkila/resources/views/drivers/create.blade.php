@@ -301,7 +301,7 @@
                                                   <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                   </div>
-                                                  <input type="text" name="childrenBDay[]" class="form-control  pull-right date-mask" value="{{old('childrenBDay.'.$i)}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                                                  <input type="text" name="childrenBDay[]" class="form-control  pull-right date-mask" placeholder="mm/dd/yyyy" value="{{old('childrenBDay.'.$i)}}" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
                                                 </div>
                                             </td>
                                             <td>
