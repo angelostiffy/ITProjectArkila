@@ -124,7 +124,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>SSS No: <span class="text-red">*</span></label>
-                                <input value="{{old('sss')}}" name="sss" type="text" class="form-control" placeholder="SSS No." data-parsley-trigger="keyup" val-sss required>
+                                <input value="{{old('sss')}}" name="sss" type="text" class="form-control" placeholder="SSS No." data-parsley-trigger="keyup" val-sss required data-inputmask='"mask": "99-9999999-9"' data-mask>
                             </div>
                         </div>
                     </div> 
@@ -132,7 +132,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>License No:</label>
-                                <input value="{{old('licenseNo')}}" name="licenseNo" type="text" class="form-control" placeholder="License No." data-parsley-trigger="keyup" val-license>
+                                <input value="{{old('licenseNo')}}" name="licenseNo" type="text" class="form-control" placeholder="License No." data-parsley-trigger="keyup" val-license data-inputmask='"mask": "A99-99-999999"' data-mask>
                             </div>
                         </div>
                         <div class="col-md-4">
