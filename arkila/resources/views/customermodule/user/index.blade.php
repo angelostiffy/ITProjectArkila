@@ -72,93 +72,11 @@
 
     <section style="background: url('{{ URL::asset('img/fixed-background-2.jpg') }}') center top no-repeat; background-size: cover;" class="bar text-center bg-fixed relative-positioned">
         <div class="dark-mask"></div>
-        <div class="container">
-            <div class="heading text-center" style="color:white;">
-                <h2><i class="fa fa-bullhorn"></i> Announcements</h2>
-            </div>
-            <!-- Carousel Start-->
-            <ul class="owl-carousel testimonials list-unstyled equal-height">
-                <li class="item">
-                    <div class="testimonial d-flex flex-wrap">
-                        <div class="text">
-                            <h3>TITLE</h3>
-                            <p>The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me? " he thought. It wasn't a dream.</p>
-                            <a href="" class="pull-right">see more...</a>
-                        </div>
-                        <div class="bottom d-flex align-items-center justify-content-between align-self-end">
-                            <div class="icon"><i class="fa fa-calendar"></i> </div>
-                            <div class="testimonial-info d-flex">
-
-                                <h5>February 7, 1998</h5>
-                            </div>
-                            <!-- estimonial-info-->
-                        </div>
-                        <!-- bottom-->
-                    </div>
-                    <!-- testimonial-->
-                </li>
-                <li class="item">
-                    <div class="testimonial d-flex flex-wrap">
-                        <div class="text">
-                            <h3>TITLE</h3>
-                            <p>The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me? " he thought. It wasn't a dream.</p>
-                        </div>
-                        <div class="bottom d-flex align-items-center justify-content-between align-self-end">
-                            <div class="icon"><i class="fa fa-calendar"></i> </div>
-                            <div class="testimonial-info d-flex">
-
-                                <h5>February 7, 1998</h5>
-                            </div>
-                            <!-- estimonial-info-->
-                        </div>
-                        <!-- bottom-->
-                    </div>
-                    <!-- testimonial-->
-                </li>
-                <li class="item">
-                    <div class="testimonial d-flex flex-wrap">
-                        <div class="text">
-                            <h3>TITLE</h3>
-                            <p>The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me? " he thought. It wasn't a dream.</p>
-                        </div>
-                        <div class="bottom d-flex align-items-center justify-content-between align-self-end">
-                            <div class="icon"><i class="fa fa-calendar"></i> </div>
-                            <div class="testimonial-info d-flex">
-
-                                <h5>February 7, 1998</h5>
-                            </div>
-                            <!-- estimonial-info-->
-                        </div>
-                        <!-- bottom-->
-                    </div>
-                    <!-- testimonial-->
-                </li>
-                <li class="item">
-                    <div class="testimonial d-flex flex-wrap">
-                        <div class="text">
-                            <h3>TITLE</h3>
-                            <p>The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me? " he thought. It wasn't a dream.</p>
-                        </div>
-                        <div class="bottom d-flex align-items-center justify-content-between align-self-end" style="margin-top:30px;">
-                            <div class="icon"><i class="fa fa-calendar"></i> </div>
-                            <div class="testimonial-info d-flex">
-
-                                <h5>February 7, 1998</h5>
-                            </div>
-                            <!-- estimonial-info-->
-                        </div>
-                        <!-- bottom-->
-                    </div>
-                    <!-- testimonial-->
-                </li>
-            </ul>
-            <!-- Carousel End-->
-        </div>
-        <!-- container-->
+        
     </section>
     <!-- section-->
 
-    <section style="background: url('{{ URL::asset('img/baguio-lion.jpg') }}') center top no-repeat; background-size: cover;" class="bar text-center bg-fixed relative-positioned">
+    <section style="background: url('{{ URL::asset('img/bron_gradient.jpg') }}') center top no-repeat; background-size: cover;" class="bar text-center ">
         <div class="dark-mask"></div>
         <div class="container">
             <div class="heading text-center">
@@ -190,152 +108,17 @@
     <section style="background: url(../img/fixed-background-2.jpg) center top no-repeat; background-size: cover;" class="bar text-center bg-fixed relative-positioned">
         <div class="dark-mask">
         </div>
-        <div class="container">
-            <div class="heading text-center" style="color:white;">
-                <h2><i class="fa fa-car"></i> Fare Lists and Current Trips</h2>
-            </div>
-            <!-- Carousel Start-->
-            <ul class="owl-carousel testimonials list-unstyled equal-height">
-                <li class="item">
-                    <div class="testimonial d-flex flex-wrap">
-                        <div class="box zoom" style="margin-top:-10%;">
-                            <div class="box-header text-center">
-                                <h4>Fare List Cabanatuan</h4>
-                            </div>
-                            <div class="box-body">
-                                <table class="table text-center">
-                                    <thead>
-                                        <tr>
-                                            <th>Destination</th>
-                                            <th>Fare</th>
-                                        </tr>
-                                    </thead>
-                                    <tr>
-                                        <td>Jan lang</td>
-                                        <td>50</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jan lang</td>
-                                        <td>50</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jan lang</td>
-                                        <td>50</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jan lang</td>
-                                        <td>50</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jan lang</td>
-                                        <td>50</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <!-- box-body-->
-                        </div>
-                        <!-- box-->
-                    </div>
-                    <!-- testimonial-->
-                </li>
-                <li class="item">
-                    <div class="testimonial d-flex flex-wrap">
-                        <div class="box zoom" style="margin-top:-10%;">
-                            <div class="box-header text-center">
-                                <h4>Current Trip Cabanatuan</h4>
-                            </div>
-                            <div class="box-body">
-                                <table class="table text-center">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Plate No.</th>
-                                        </tr>
-                                    </thead>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>NQS-977</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <!-- box-body-->
-                        </div>
-                        <!-- box-->
-                    </div>
-                    <!-- testimonial-->
-                </li>
-                <li class="item">
-                    <div class="testimonial d-flex flex-wrap">
-                        <div class="box zoom" style="margin-top:-10%;">
-                            <div class="box-header text-center">
-                                <h4>Fare List San Jose</h4>
-                            </div>
-                            <div class="box-body">
-                                <table class="table text-center">
-                                    <thead>
-                                        <tr>
-                                            <th>Destination</th>
-                                            <th>Fare</th>
-                                        </tr>
-                                    </thead>
-                                    <tr>
-                                        <td>Jan lang</td>
-                                        <td>50</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jan lang</td>
-                                        <td>50</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jan lang</td>
-                                        <td>50</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jan lang</td>
-                                        <td>50</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jan lang</td>
-                                        <td>50</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <!-- box-body-->
-                        </div>
-                        <!-- box-->
-                    </div>
-                    <!-- testimonial-->
-                </li>
-                <li class="item">
-                    <div class="testimonial d-flex flex-wrap">
-                        <div class="box zoom" style="margin-top:-10%;">
-                            <div class="box-header text-center">
-                                <h4>Current Trip San Jose</h4>
-                            </div>
-                            <div class="box-body">
-                                <table class="table text-center">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Plate No.</th>
-                                        </tr>
-                                    </thead>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>NQS-977</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <!-- box-body-->
-                        </div>
-                        <!-- box-->
-                    </div>
-                    <!-- testimonial-->
-                </li>
-            </ul>
-            <!-- Carousel End-->
-        </div>
-        <!-- container-->
+
     </section>
     <!-- section-->
-@stop
+    
+
+@endsection
+@section('scripts')
+@parent
+<script>
+var myDiv = $('#announcementsLimit');
+myDiv.text(myDiv.text().substring(0,250) + '...')
+</script>
+
+@endsection

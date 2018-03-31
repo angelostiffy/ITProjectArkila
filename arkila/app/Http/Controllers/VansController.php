@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Rules\checkDriver;
 use App\Rules\checkPlateNumber;
 use App\Rules\checkOperator;
+use App\Rules\checkVanModel;
 use App\Van;
 use App\Member;
 use App\VanModel;
@@ -53,7 +54,7 @@ class VansController extends Controller {
             "operator" => ['numeric','exists:member,member_id',new checkOperator],
             "driver" => ['nullable','numeric','exists:member,member_id',new checkDriver],
             "plateNumber" => [new checkPlateNumber,'unique:van,plate_number','required','between:6,9'],
-            "vanModel" =>  'required|max:30',
+            "vanModel" =>  ['required','max:30',new checkVanModel],
             "seatingCapacity" => 'required|between:10,15|numeric'
         ]);
 
@@ -109,7 +110,7 @@ class VansController extends Controller {
         $this->validate(request(), [
             "driver" => ['nullable','numeric','exists:member,member_id','unique:member_van,member_id',new checkDriver],
             "plateNumber" => [new checkPlateNumber,'unique:van,plate_number','required','between:6,9'],
-            "vanModel" =>  'required|max:50',
+            "vanModel" =>  ['required','max:30',new checkVanModel],
             "seatingCapacity" => 'required|between:10,15|numeric'
         ]);
 
@@ -165,7 +166,8 @@ class VansController extends Controller {
     public function edit(Van $van)
     {
         $operators = Member::allOperators()->get();
-        return view('vans.edit', compact('van','operators'));
+        $drivers = Member::allDrivers()->doesntHave('van')->get();
+        return view('vans.edit', compact('van','operators','drivers'));
     }
 
     /**
@@ -175,10 +177,10 @@ class VansController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Van $van)
+    public function update(Van $van)
     {
-        $current_time = \Carbon\Carbon::now();
-        $dateNow = $current_time->setTimezone('Asia/Manila')->format('Y-m-d H:i:s');
+        //$current_time = \Carbon\Carbon::now();
+       // $dateNow = $current_time->setTimezone('Asia/Manila')->format('Y-m-d H:i:s');
 
         // $oldVan = $van->driver()->first()->member_id ?? $van->driver()->first();
         // $newVan = $request->driver;
@@ -200,27 +202,34 @@ class VansController extends Controller {
         if(request('addDriver') != 'on'){
             $this->validate(request(), [
                 "driver" => ['nullable','numeric','exists:member,member_id',new checkDriver],
+                "operator" => ['required','exists:member,member_id', new checkOperator]
             ]);
 
+            //Find the past Operator and Driver
             $driver = $van->driver()->first();
+            $operator = $van->operator()->first();
 
+            //Detach the driver and Operator
             if($driver){
                 $van->members()->detach($driver->member_id);
             }
+            $van->members()->detach($operator->member_id);
 
-            $newDriver = Member::find(request('driver'));
-            if($newDriver->operator_id == null){
+            //Find the New Operator then attach it to the van
+            $newOperator = Member::find(request('operator'));
+            $van->members()->attach($newOperator->member_id);
+
+            if(!is_null(request('driver'))) {
+                //Find the New Driver then check if it has any operator, then update its operator and attach the new driver to the van
+                $newDriver = Member::find(request('driver'));
                 $newDriver->update([
                     'operator_id' => $van->operator()->first()->member_id
                 ]);
-            }
-
-            if($newDriver->van()->first() != null){
+                if($newDriver->van()->first() != null){
                     $newDriver->van()->detach();
+                }
+                $van->members()->attach($newDriver);
             }
-
-
-            $van->members()->attach($newDriver);
 
             session()->flash('message','Van '.request('plateNumber').'Successfully Edited');
 

@@ -157,11 +157,11 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
     Route::get('/showTrips/{terminal}', 'TripsController@showTrips');
     Route::patch('/updateQueueNumber/{trip}', 'TripsController@updateQueueNumber')->name('trips.updateQueueNumber');
     Route::post('/specialUnitChecker','TripsController@specialUnitChecker')->name('trips.specialUnitChecker');
-    Route::get('/updatedQueueNumber','TripsController@updatedQueueNumber')->name('trips.updatedQueueNumber');
     Route::patch('/putOnDeck/{trip}','TripsController@putOnDeck')->name('trips.putOnDeck');
     Route::post('/changeRemarksOB/{trip}','TripsController@changeRemarksOB')->name('trips.changeRemarksOB');
     Route::get('/showConfirmationBox/{encodedTrips}','TripsController@showConfirmationBox');
     Route::get('/showConfirmationBoxOB/{encodedTrips}','TripsController@showConfirmationBoxOb');
+    Route::get('/listQueueNumbers/{terminal}','TripsController@listQueueNumbers')->name('trips.listQueueNumbers');
     /* Transactions(Ticket) */
     Route::resource('/home/transactions', 'TransactionsController',[
         'except' => ['create','show','edit']
@@ -203,8 +203,8 @@ Route::group(['middleware' => ['auth', 'driver']], function(){
   /*Driver Dashboard*/
   Route::get('/home/driver-dashboard', 'DriverModuleControllers\DriverHomeController@index')->name('drivermodule.index');
   /*AJAX GET for queue and announcements*/
-  Route::get('/home/view-queue', 'DriverModuleControllers\ViewVanQueueController@showVanQueue')->name('drivermodule.viewQueue');
-  Route::get('/home/view-announcement', 'DriverModuleControllers\ViewAnnouncementsController@showAnnouncement')->name('drivermodule.viewAnnouncement');
+  Route::get('/home/view-queue', 'DriverModuleControllers\ViewVanQueueController@showVanQueue')->name('drivermodule.vanQueue');
+  Route::get('/home/view-announcement', 'DriverModuleControllers\ViewAnnouncementsController@showAnnouncement')->name('drivermodule.indexAnnouncements');
   /*Driver Profile*/
   Route::get('/home/profile', 'DriverModuleControllers\DriverProfileController@showDriverProfile')->name('drivermodule.profile.driverProfile');
   Route::post('/home/profile', 'DriverModuleControllers\DriverProfileController@changeNotificationStatus')->name('drivermodule.notification');

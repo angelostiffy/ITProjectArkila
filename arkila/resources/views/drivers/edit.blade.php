@@ -138,7 +138,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="sssO">SSS No:</label>
-                        <input id="sssO" name="sss" value="{{  old('sss') ?? $driver->SSS }}" type="text" class="form-control" placeholder="SSS No." val-sss required>
+                        <input id="sssO" name="sss" value="{{  old('sss') ?? $driver->SSS }}" type="text" class="form-control" placeholder="SSS No." val-sss required data-inputmask='"mask": "99-9999999-9"' data-mask>
                     </div>
                 </div>
             </div>
@@ -146,7 +146,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="licenseNoO">License No: <span class="text-red">*</span></label>
-                        <input id="licenseNoO" value="{{  old('licenseNo') ?? $driver->license_number }}" name="licenseNo" type="text" class="form-control" placeholder="License No." val-license required>
+                        <input id="licenseNoO" value="{{  old('licenseNo') ?? $driver->license_number }}" name="licenseNo" type="text" class="form-control" placeholder="License No." val-license required data-inputmask='"mask": "A99-99-999999"' data-mask>
                     </div>
                 </div>
                 <div class="col-md-4">

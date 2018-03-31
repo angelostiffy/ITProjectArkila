@@ -60,7 +60,7 @@
     	pattern: /^[a-zA-Z]$|^[a-zA-Z][a-zA-Z\s-]*[a-zA-Z]$/,
     	maxlength: 35
     });
-    $('[val-birthplace]').attr('data-parsley-pattern-message','Please use only letters (a-z) and numbers.');
+    $('[val-birthplace]').attr('data-parsley-pattern-message','Please use letters (a-z) only.');
     $('[val-birthplace]').attr('data-parsley-required-message','Please enter a birthplace.');
 
 
@@ -74,15 +74,18 @@
 
   // Validate SSS.
     $('[val-sss]').parsley({
-    	maxlength: 10
+    	pattern: /\d{2}-\d{7}-\d{1}$/
     });
+
+    $('[val-sss]').attr('data-parsley-pattern-message','Please enter a valid SSS number format.');
     $('[val-sss]').attr('data-parsley-required-message','Please enter a SSS number.');
 
   // Validate license.
     $('[val-license]').parsley({
-    	maxlength: 11
+    	pattern: /^[A-Z]\d{2}-\d{2}-\d{6}$/
     });
 
+    $('[val-license]').attr('data-parsley-pattern-message', 'Please enter a valid license number format');
     $('[val-license]').attr('data-parsley-license-unique');
     $('[val-license]').attr('data-parsley-required-message','Please enter a license number.');
 

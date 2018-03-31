@@ -18,7 +18,7 @@
         <label for="">Operator:</label> <span></span>
         <select name="operator" id="" class="form-control select2">
         @foreach($operators as $operator)
-            <option value="{{$operator->member_id}}">{{$operator->full_name}}</option>
+            <option @if($operator->member_id == $van->operator->first()->member_id) {{'selected'}}@endif value="{{$operator->member_id}}">{{$operator->full_name}}</option>
         @endforeach
     </select>
     </div>
@@ -46,7 +46,7 @@
 
         <select name="driver" id="driver" class="form-control select2">
             <option value="">None</option>
-            @foreach($van->operator()->first()->drivers()->doesntHave('van')->get() as $driver)
+            @foreach($drivers as $driver)
                 <option value="{{$driver->member_id}}">{{$driver->full_name}}</option>
             @endforeach
 
