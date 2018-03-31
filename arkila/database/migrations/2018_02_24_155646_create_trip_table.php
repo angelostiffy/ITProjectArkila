@@ -27,7 +27,7 @@ class CreateTripTable extends Migration
             $table->smallInteger('total_passengers')->nullable();
             $table->decimal('total_booking_fee', 7, 2)->nullable();
             $table->decimal('community_fund', 7, 2);
-            $table->decimal('SOP', 7, 2);
+            $table->decimal('SOP', 7, 2)->nullable();
             $table->date('date_departed')->nullable();
             $table->time('time_departed')->nullable();
             $table->integer('queue_number')->nullable();
