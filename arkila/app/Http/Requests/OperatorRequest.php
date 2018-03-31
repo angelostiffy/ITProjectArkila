@@ -44,7 +44,7 @@ class OperatorRequest extends FormRequest
                     'contactNumber' => ['bail', new checkContactNum],
                     'address' => 'bail|required|max:100',
                     'provincialAddress' => 'bail|required|max:100',
-                    'birthDate' => ['bail','required','date_format:m/d/Y','after:1/1/1990', new checkAge],
+                    'birthDate' => ['bail','required','date_format:m/d/Y','after:1/1/1900', new checkAge],
                     'birthPlace' => ['bail',new checkName,'required','max:35'],
                     'gender' => [
                         'bail',
@@ -83,7 +83,7 @@ class OperatorRequest extends FormRequest
                         'contactNumber' => ['bail',new checkContactNum],
                         'address' => 'bail|required|max:100',
                         'provincialAddress' => 'bail|required|max:100',
-                        'birthDate' => ['bail','required','date_format:m/d/Y','after:1/1/1918', new checkAge],
+                        'birthDate' => ['bail','required','date_format:m/d/Y','after:1/1/1900', new checkAge],
                         'birthPlace' => ['bail',new checkName,'required','max:35'],
                         'gender' => [
                             'bail',
