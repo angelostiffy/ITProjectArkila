@@ -120,7 +120,7 @@
                                 <th>Age</th>
                                 <th>Contact Number</th>
                                 <th>Van</th>
-                                <th>Actions</th>
+                                <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -207,7 +207,11 @@
                 'searching': true,
                 'ordering': true,
                 'info': true,
-                'autoWidth': true
+                'autoWidth': true,
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1] /* 1st one, start by the right */
+                }]
             })
             $('#van').DataTable({
                 'paging': true,
@@ -215,7 +219,11 @@
                 'searching': true,
                 'ordering': true,
                 'info': true,
-                'autoWidth': true
+                'autoWidth': true,
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1] /* 1st one, start by the right */
+                }]
             })
         });
 

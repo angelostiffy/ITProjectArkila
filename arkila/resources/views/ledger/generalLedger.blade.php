@@ -8,10 +8,9 @@
 <div class="box">
     <!-- /.box-header -->
     <h2 class="text-center">General Ledger</h2>
-    
+    <div class="table-responsive">
     <div class="col col-md-6">
-        <a href="#" class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i>PRINT</a>
-        <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 50%">
+        <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 50%">
             <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
             <span></span> <b class="caret"></b>
         </div>
@@ -133,7 +132,7 @@
     </div>
     <!-- /.box-body -->
 </div>
-         
+</div>  
 @stop
 
 @section('scripts')
