@@ -1,22 +1,18 @@
-@extends('layouts.master') @section('title', 'View Operator') @section('links') @parent
-<!-- DataTables -->
-<link rel="stylesheet" href="{{ URL::asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
-<!-- additional CSS -->
-<link rel="stylesheet" href="operatorStyle.css"> 
-<style> 
+@extends('layouts.master') 
+@section('title', 'View Operator')  
+@section('content')
 
-</style>
-@stop @section('content')
-
-<div class="box box-default"  style="box-shadow: 0px 5px 10px gray;">
-    <div class="box-header with-border text-center" >
-        <a href="{{route('operators.showProfile',[$operator->member_id])}}" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+<div class="box box-default with-shadow">
+    <div class="box-header with-border text-center">
+        <h4>
+            <a href="{{route('operators.showProfile',[$operator->member_id])}}" class="pull-left"><i class="fa  fa-chevron-left"></i></a>
+        </h4>
         <h3 class="box-title">
             View Operator Information
         </h3>
     </div>
     <div class="box-body">
-    <button onclick="window.open('{{route('pdf.perOperator', [$operator->member_id])}}')" class="btn btn-default btn-sm btn-fla"> <i class="fa fa-print"></i> PRINT</button>
+        <button onclick="window.open('{{route('pdf.perOperator', [$operator->member_id])}}')" class="btn btn-default btn-sm btn-fla"> <i class="fa fa-print"></i> PRINT</button>
 
             <h4>Personal Information</h4>
             <div class="row">
@@ -87,11 +83,6 @@
                     </div>
                 </div>
             </div>
-    </div>
-</div>
-<div class="box box-default"  style="box-shadow: 0px 5px 10px gray;">
-    <div class="box-body">
-        
             <h4>Family Information</h4>
             <div class="row">
                 <div class="col-md-6">

@@ -6,9 +6,9 @@
 
 <div class="box box-primary" style="box-shadow: 0px 5px 10px gray;">
     <div class="box-header with-border text-center">
-        <h3>
+        <h4>
         <a href="{{route('operators.showProfile',[$operator->member_id])}}" class="pull-left"><i class="fa  fa-chevron-left"></i></a>
-        </h3>
+        </h4>
         <h3 class="box-title">
             EDIT OPERATOR INFORMATION
         </h3>
