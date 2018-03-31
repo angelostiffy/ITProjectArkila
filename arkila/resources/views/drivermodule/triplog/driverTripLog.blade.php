@@ -73,11 +73,12 @@
                 @php $tripCount = 1; @endphp
                 @foreach($tripsMade as $tripMade)
                 <li class="list-group-item">Trip {{$tripCount}} ({{$tripMade->date_departed}} || {{$tripMade->time_departed}})
-                    <button type="button" class="view-trip btn btn-xs btn-primary pull-right"
+                    <button type="button" id="view-tripresp{{$tripMade->trip_id}}" class="btn btn-xs btn-primary pull-right"
                     data-date="{{$tripMade->date_departed}}"
                     data-time="{{$tripMade->time_departed}}"
                     data-origin="{{$tripMade->terminal->description}}"
                     data-destination="{{$superAdmin->description}}"
+                    data-innerroutes="@foreach($destinations as $key => $values) @if($tripMade->trip_id == $values->tripid) @php $innerRoutesArr[$key] = $values; @endphp {{$values}} @endif @endforeach"
                     data-income="{{$tripMade->total_booking_fee}}"
                     data-status="{{$tripMade->report_status}}"
                     data-toggle="modal" data-target="#seeLogDetails{{$tripMade->trip_id}}">
@@ -195,6 +196,24 @@ $(function() {
 <script>
 $(document).ready(function(){
   $('#view-trip{{$trip->trip_id}}').click(function(){
+    $('#dateDeparted{{$trip->trip_id}}').val($(this).data('date'));
+    $('#timeDeparted{{$trip->trip_id}}').val($(this).data('time'));
+    $('#origin{{$trip->trip_id}}').val($(this).data('origin'));
+    $('#destination{{$trip->trip_id}}').val($(this).data('destination'));
+    var income = $(this).data('income');
+    $('#totalIncome{{$trip->trip_id}}').html(income.toString());
+    var status = $(this).data('status');
+    $('#status{{$trip->trip_id}}').val($(this).data('status'));
+    console.log(income.toString());
+  });
+});
+</script>
+@endforeach
+
+@foreach($tripsMade as $trip)
+<script>
+$(document).ready(function(){
+  $('#view-tripresp{{$trip->trip_id}}').click(function(){
     $('#dateDeparted{{$trip->trip_id}}').val($(this).data('date'));
     $('#timeDeparted{{$trip->trip_id}}').val($(this).data('time'));
     $('#origin{{$trip->trip_id}}').val($(this).data('origin'));
