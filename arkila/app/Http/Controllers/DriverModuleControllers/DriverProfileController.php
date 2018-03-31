@@ -79,7 +79,7 @@ class DriverProfileController extends Controller
         Auth::user()->password = Hash::make(request('password'));
         Auth::user()->save();
         Auth::logout();
-        return redirect('/home/login')->with('success', 'Successfully changed password');
+        return redirect('/home')->with('success', 'Successfully changed password');
 
 
 
