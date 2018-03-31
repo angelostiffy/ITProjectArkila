@@ -367,7 +367,10 @@ class TripsController extends Controller {
 
     
     public function tripLog() {
-        return view('trips.tripLog');
+        $trips = Trip::where('report_status', 'Accepted')->get();
+        $user = User::where('user_type','Super-admin')->first();
+        $superAdmin = $user->terminal;
+        return view('trips.tripLog', compact('trips', 'superAdmin'));
     }
     
     public function driverReport() {
@@ -378,9 +381,33 @@ class TripsController extends Controller {
     }
 
     public function viewReport(Trip $trip) {
-        $destinations = Transaction::join('destination', 'destination.destination_id', '=', 'transaction.destination_id')->join('trip', 'trip.trip_id', '=', 'transaction.trip_id')->where('transaction.trip_id', $trip->trip_id)->selectRaw('transaction.trip_id as tripid, destination.description as destdesc, COUNT(destination.description) as counts')->groupBy(['transaction.trip_id','destination.description'])->get();
+        $destinations = Transaction::join('destination', 'destination.destination_id', '=', 'transaction.destination_id')->join('trip', 'trip.trip_id', '=', 'transaction.trip_id')->where('transaction.trip_id', $trip->trip_id)->selectRaw('transaction.trip_id as tripid, destination.description as destdesc, destination.amount as amount, COUNT(destination.description) as counts')->groupBy(['transaction.trip_id','destination.description'])->get();
         $user = User::where('user_type','Super-admin')->first();
         $superAdmin = $user->terminal;
         return view('trips.viewReport', compact('destinations', 'trip', 'superAdmin'));
+    }
+
+    public function acceptReport(Trip $trip){
+        $trip->update([
+            "report_status" => 'Accepted',
+        ]);
+
+        $message = "Trip " . $trip->trip_id . " successfully accepted";
+        return redirect('trips.driverReport')->with('success', $message);
+    }
+
+    public function rejectReport(Trip $trip){
+        $trip->update([
+            "report_status" => 'Declined',
+        ]);
+        $message = "Trip " . $trip->trip_id . " successfully declined";
+        return redirect('trips.tripLog')->with('success', $message);   
+    }
+
+    public function viewTripLog(Trip $trip){
+        $destinations = Transaction::join('destination', 'destination.destination_id', '=', 'transaction.destination_id')->join('trip', 'trip.trip_id', '=', 'transaction.trip_id')->where('transaction.trip_id', $trip->trip_id)->selectRaw('transaction.trip_id as tripid, destination.description as destdesc, destination.amount as amount, COUNT(destination.description) as counts')->groupBy(['transaction.trip_id','destination.description'])->get();
+        $user = User::where('user_type','Super-admin')->first();
+        $superAdmin = $user->terminal;
+        return view('trips.viewTrip', compact('destinations', 'trip', 'superAdmin'));
     }
 }

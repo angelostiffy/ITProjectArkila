@@ -53,18 +53,34 @@ class CreateReportController extends Controller
      $timeDeparted = Carbon::createFromFormat('h:i A', $request->timeDeparted);
      $timeDepartedFormat = $timeDeparted->format('H:i:s');
      $dateDeparted = $request->dateDeparted;
-     Trip::create([
-       'driver_id' => $driver_id->member_id,
-       'terminal_id' => $terminal->terminal_id,
-       'plate_number' => $plateNumber->plate_number,
-       'status' => 'Departed',
-       'total_passengers' => $totalPassengers,
-       'total_booking_fee' => $request->totalBookingFee,
-       'community_fund' => $communityFund,
-       'date_departed' => $request->dateDeparted,
-       'time_departed' => $timeDepartedFormat,
-       'report_status' => 'Pending',
-     ]);
+     if($totalPassengers >=  10){
+        Trip::create([
+         'driver_id' => $driver_id->member_id,
+         'terminal_id' => $terminal->terminal_id,
+         'plate_number' => $plateNumber->plate_number,
+         'status' => 'Departed',
+         'total_passengers' => $totalPassengers,
+         'total_booking_fee' => $request->totalBookingFee,
+         'community_fund' => $communityFund,
+         'date_departed' => $request->dateDeparted,
+         'time_departed' => $timeDepartedFormat,
+         'report_status' => 'Pending',
+         'SOP' => 100.00,
+       ]);
+     }else if($totalPassengers <  10){
+          Trip::create([
+           'driver_id' => $driver_id->member_id,
+           'terminal_id' => $terminal->terminal_id,
+           'plate_number' => $plateNumber->plate_number,
+           'status' => 'Departed',
+           'total_passengers' => $totalPassengers,
+           'total_booking_fee' => $request->totalBookingFee,
+           'community_fund' => $communityFund,
+           'date_departed' => $request->dateDeparted,
+           'time_departed' => $timeDepartedFormat,
+           'report_status' => 'Pending',
+         ]);
+     }
 
     $destinationArr = request('destination');
     $numOfPassengers = request('qty');
