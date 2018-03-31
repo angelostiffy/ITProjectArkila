@@ -9,15 +9,13 @@
 <div class="box">
     <!-- /.box-header -->
     <h2 class="text-center">{{ $thisDate->formatLocalized('%A %d %B %Y') }}</h2>
-    
-    <div class="col col-md-6">
+          <div class="table-responsive">  
+    <div class="col-md-6">
         <a href="{{route('ledger.create')}}" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-plus"></i>
             Add Revenue/Expense 
         </a>
         <a href="#"  class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i>PRINT</a>
     </div>
-
-    <div class="box-body">
         <table class="table table-bordered table-striped dailyLedgerTable">
             <thead>
                 <tr>
@@ -125,7 +123,6 @@
             @endif
         </table>
     </div>
-    <!-- /.box-body -->
 </div>
          
 
@@ -141,7 +138,7 @@
                 'searching': true,
                 'ordering': true,
                 'info': false,
-                'autoWidth': true,
+                'autoWidth': false,
                 'aoColumnDefs': [{
                     'bSortable': false,
                     'aTargets': [-1] /* 1st one, start by the right */

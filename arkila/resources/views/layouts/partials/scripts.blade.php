@@ -7,6 +7,18 @@
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button);8
+
+        $(function(){
+            var current = location.pathname;
+            $('#sidemenu-bar li a').each(function(){
+                var $this = $(this);
+                // if the current path is like this link, make it active
+                if($this.attr('href').indexOf(current) !== -1){
+                    $this.addClass('active');
+                }
+            })
+        });
+        
     </script>
     <!-- Bootstrap 3.3.7 -->
     {{ Html::script('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}
