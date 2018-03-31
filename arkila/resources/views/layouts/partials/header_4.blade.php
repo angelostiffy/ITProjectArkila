@@ -1,7 +1,7 @@
 <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="{{ route('home') }}" class="logo">
       <span class="logo-lg"><b>Home</b></span>
     </a>
 
