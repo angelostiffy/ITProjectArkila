@@ -3,16 +3,19 @@
 @section('links')
 @parent
   <link rel="stylesheet" href="public\css\myOwnStyle.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 @stop
 @section('content')
 
  
 <div class="box">
-    <!-- /.box-header -->    
+<div class="box-body">
+ 
     <h2 class="text-center">General Ledger</h2>
 <div class="table-responsive">   
     <div class="col col-md-6">
-        <div id="reportrange" style="background: #fff; cursor: pointer; padding: 7px 10px; border: 1px solid #ccc; width: 60%">
+        <div id="reportrange" name="dateBetween" style="background: #fff; cursor: pointer; padding: 7px 10px; border: 1px solid #ccc; width: 60%">
         <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
         <span></span> <b class="caret"></b>
         </div>
@@ -132,15 +135,37 @@
         </table>
     </div>
 </div>
+</div>
  
 @stop
 
 @section('scripts')
 @parent
 
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"> </script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"> </script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"> </script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"> </script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"> </script>
+
 <script>
-    $(function() {
+
+    $(document).ready(function() {
         $('.generalLedgerTable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'pdfHtml5',
+                    text: 'Print',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
+                    title: 'Ban Trans General Ledger',
+                }
+            ],
             'paging': false,
             'lengthChange': true,
             'searching': true,
@@ -154,7 +179,6 @@
             }]
         })
     });
-    
     $(function() {
 
         var start = moment().subtract(29, 'days');
@@ -180,6 +204,7 @@
         cb(start, end);
 
     });
+
 </script>
 
 @stop
