@@ -7,10 +7,6 @@
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button);
-
-        $(function() {
-            $('.sidebar-menu li a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
-        });
         
     </script>
     <!-- Bootstrap 3.3.7 -->

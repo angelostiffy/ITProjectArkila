@@ -40,11 +40,11 @@ class OperatorRequest extends FormRequest
 
                     'lastName' => ['bail','required',new checkName,'max:25'],
                     'firstName' => ['bail','required',new checkName,'max:25'],
-                    'middleName' => ['bail',new checkName,'max:25'],
+                    'middleName' => ['bail','nullable',new checkName,'max:25'],
                     'contactNumber' => ['bail', new checkContactNum],
                     'address' => 'bail|required|max:100',
                     'provincialAddress' => 'bail|required|max:100',
-                    'birthDate' => ['bail','required','date_format:m/d/Y','after:1/1/1990', new checkAge],
+                    'birthDate' => ['bail','required','date_format:m/d/Y','after:1/1/1900', new checkAge],
                     'birthPlace' => ['bail',new checkName,'required','max:35'],
                     'gender' => [
                         'bail',
@@ -79,11 +79,11 @@ class OperatorRequest extends FormRequest
                     return [
                         'lastName' => ['bail','required',new checkName,'max:25'],
                         'firstName' => ['bail','required',new checkName,'max:25'],
-                        'middleName' => ['bail',new checkName,'max:25'],
+                        'middleName' => ['bail','nullable',new checkName,'max:25'],
                         'contactNumber' => ['bail',new checkContactNum],
                         'address' => 'bail|required|max:100',
                         'provincialAddress' => 'bail|required|max:100',
-                        'birthDate' => ['bail','required','date_format:m/d/Y','after:1/1/1918', new checkAge],
+                        'birthDate' => ['bail','required','date_format:m/d/Y','after:1/1/1900', new checkAge],
                         'birthPlace' => ['bail',new checkName,'required','max:35'],
                         'gender' => [
                             'bail',
@@ -105,8 +105,8 @@ class OperatorRequest extends FormRequest
                         'contactPerson' => ['bail','required','max:50', 'nullable', new checkName],
                         'contactPersonAddress' => 'bail|required|max:100',
                         'contactPersonContactNumber' => ['bail','required',new checkContactNum],
-                        'sss' => ['bail|','unique:member,SSS,'.$this->route('operator')->member_id.',member_id','required',new checkSSS],
-                        'licenseNo' => ['bail','required_with:licenseExpiryDate',new checkLicense],
+                        'sss' => ['bail','unique:member,SSS,'.$this->route('operator')->member_id.',member_id','required',new checkSSS],
+                        'licenseNo' => ['bail','required_with:licenseExpiryDate', new checkLicense],
                         'licenseExpiryDate' => 'bail|required_with:licenseNo|nullable|date|after:today',
                         'children.*' => ['bail','required_with:childrenBDay.*','distinct', 'nullable', new checkName,'max:50'],
                         'childrenBDay.*' => 'bail|required_with:children.*|nullable|date|before:tomorrow'
