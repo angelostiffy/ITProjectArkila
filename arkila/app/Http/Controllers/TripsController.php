@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Trip;
 use App\Van;
 use App\Member;
+use App\User;
 use App\Terminal;
+use App\Transaction;
 use Illuminate\Validation\Rule;
 
 
@@ -369,6 +371,16 @@ class TripsController extends Controller {
     }
     
     public function driverReport() {
-        return view('trips.driverReport');
+        $trips = Trip::where('report_status', 'Pending')->get();
+        $user = User::where('user_type','Super-admin')->first();
+        $superAdmin = $user->terminal;
+        return view('trips.driverReport', compact('trips', 'superAdmin'));
+    }
+
+    public function viewReport(Trip $trip) {
+        $destinations = Transaction::join('destination', 'destination.destination_id', '=', 'transaction.destination_id')->join('trip', 'trip.trip_id', '=', 'transaction.trip_id')->where('transaction.trip_id', $trip->trip_id)->selectRaw('transaction.trip_id as tripid, destination.description as destdesc, COUNT(destination.description) as counts')->groupBy(['transaction.trip_id','destination.description'])->get();
+        $user = User::where('user_type','Super-admin')->first();
+        $superAdmin = $user->terminal;
+        return view('trips.viewReport', compact('destinations', 'trip', 'superAdmin'));
     }
 }
