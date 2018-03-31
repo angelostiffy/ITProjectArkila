@@ -95,18 +95,18 @@
                         <td></td>
                         <td>Booking Fee(Baguio)</td>
                         <td></td>
-                        <td class="text-right">{{$ledger->booking_fee}}</td>
+                        <td class="text-right">&#8369;{{$ledger->booking_fee}}</td>
                         <td></td>
-                        <td class="text-right">{{$ledger->booking_fee}}</td>
+                        <td class="text-right">&#8369;{{$ledger->booking_fee}}</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>SOP</td>
                         <td></td>
-                        <td class="text-right">{{$ledger->sop}}</td>
+                        <td class="text-right">&#8369;{{$ledger->sop}}</td>
                         <td></td>
-                        <td class="text-right">{{$ledger->sop}}</td>
+                        <td class="text-right">&#8369;{{$ledger->sop}}</td>
                         <td></td>
                     </tr>
 
