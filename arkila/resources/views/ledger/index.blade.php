@@ -89,6 +89,8 @@
                     </div>
                 
                 @endforeach
+                 @if ($ledgers->count() > 0)
+
                     <tr>
                         <td></td>
                         <td>Booking Fee(Baguio)</td>
@@ -109,7 +111,6 @@
                     </tr>
 
             </tbody>
-            @if ($ledgers->count() > 0)
             <tfoot>
                 <tr>
                     <th></th>
