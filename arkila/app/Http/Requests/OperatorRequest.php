@@ -40,11 +40,11 @@ class OperatorRequest extends FormRequest
 
                     'lastName' => ['bail','required',new checkName,'max:25'],
                     'firstName' => ['bail','required',new checkName,'max:25'],
-                    'middleName' => ['bail',new checkName,'max:25'],
+                    'middleName' => ['bail','nullable',new checkName,'max:25'],
                     'contactNumber' => ['bail', new checkContactNum],
                     'address' => 'bail|required|max:100',
                     'provincialAddress' => 'bail|required|max:100',
-                    'birthDate' => ['bail','required','date_format:m/d/Y','after:1/1/1990', new checkAge],
+                    'birthDate' => ['bail','required','date_format:m/d/Y','after:1/1/1900', new checkAge],
                     'birthPlace' => ['bail',new checkName,'required','max:35'],
                     'gender' => [
                         'bail',
@@ -79,11 +79,11 @@ class OperatorRequest extends FormRequest
                     return [
                         'lastName' => ['bail','required',new checkName,'max:25'],
                         'firstName' => ['bail','required',new checkName,'max:25'],
-                        'middleName' => ['bail',new checkName,'max:25'],
+                        'middleName' => ['bail','nullable',new checkName,'max:25'],
                         'contactNumber' => ['bail',new checkContactNum],
                         'address' => 'bail|required|max:100',
                         'provincialAddress' => 'bail|required|max:100',
-                        'birthDate' => ['bail','required','date_format:m/d/Y','after:1/1/1918', new checkAge],
+                        'birthDate' => ['bail','required','date_format:m/d/Y','after:1/1/1900', new checkAge],
                         'birthPlace' => ['bail',new checkName,'required','max:35'],
                         'gender' => [
                             'bail',
