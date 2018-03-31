@@ -173,11 +173,15 @@ class TransactionsController extends Controller {
 
     }
 
-    public function changeDestination(Transaction $transaction,Destination $destination) {
+    public function changeDestination(Transaction $transaction) {
+        $this->validate(request(),[
+            'changeDestination' => 'required|exists:destination,destination_id'
+        ]);
 
         $transaction->update([
-            'destination_id'=> $destination->destination_id
+            'destination_id'=> request('changeDestination')
         ]);
+        return back();
     }
     /**
      * Remove the specified resource from storage.
@@ -266,5 +270,9 @@ class TransactionsController extends Controller {
         ]);
 
         return 'success';
+    }
+
+    public function getTicketManagementPartial(Terminal $terminal) {
+        return view('transaction.managetickets',compact('terminal'));
     }
 }

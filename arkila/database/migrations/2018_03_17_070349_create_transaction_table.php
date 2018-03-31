@@ -30,7 +30,7 @@ class CreateTransactionTable extends Migration
                 ->nullable()
             ->unsigned();
 
-            $table->enum('status', ['Pending', 'Cancelled', 'Departed','OnBoard']);
+            $table->enum('status', ['Pending', 'Cancelled', 'Departed','OnBoard','Refunded','Deleted']);
 
             $table->foreign('terminal_id')
             ->references('terminal_id')->on('terminal')
