@@ -182,7 +182,7 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
     Route::get('/drivers/generatePerOperator/{operator}', 'OperatorsController@generatePerOperator')->name('pdf.perOperator');
     Route::get('/home/trip-log', 'TripsController@tripLog')->name('trips.tripLog');
     Route::get('/home/driver-report', 'TripsController@driverReport')->name('trips.driverReport');
-
+    Route::get('/home/driver-report/{trip}', 'TripsController@viewReport')->name('trips.viewReport');
     Route::resource('/home/ledger', 'LedgersController');
     Route::get('/home/general-ledger', 'LedgersController@generalLedger')->name('ledger.generalLedger');
 
