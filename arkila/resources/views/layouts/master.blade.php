@@ -4,10 +4,10 @@
 <head>
  @include('layouts.partials.stylesheets')
 <style> 
-.control-sidebar-bg, .control-sidebar {
+/*.control-sidebar-bg, .control-sidebar {
     right: -500px;
     width: 500px;
-}
+}*/
 </style>
 </head>
 
