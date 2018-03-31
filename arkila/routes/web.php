@@ -157,11 +157,11 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
     Route::get('/showTrips/{terminal}', 'TripsController@showTrips');
     Route::patch('/updateQueueNumber/{trip}', 'TripsController@updateQueueNumber')->name('trips.updateQueueNumber');
     Route::post('/specialUnitChecker','TripsController@specialUnitChecker')->name('trips.specialUnitChecker');
-    Route::get('/updatedQueueNumber','TripsController@updatedQueueNumber')->name('trips.updatedQueueNumber');
     Route::patch('/putOnDeck/{trip}','TripsController@putOnDeck')->name('trips.putOnDeck');
     Route::post('/changeRemarksOB/{trip}','TripsController@changeRemarksOB')->name('trips.changeRemarksOB');
     Route::get('/showConfirmationBox/{encodedTrips}','TripsController@showConfirmationBox');
     Route::get('/showConfirmationBoxOB/{encodedTrips}','TripsController@showConfirmationBoxOb');
+    Route::get('/listQueueNumbers/{terminal}','TripsController@listQueueNumbers')->name('trips.listQueueNumbers');
     /* Transactions(Ticket) */
     Route::resource('/home/transactions', 'TransactionsController',[
         'except' => ['create','show','edit']
