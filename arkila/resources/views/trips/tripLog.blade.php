@@ -25,18 +25,20 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($trips as $trip)
                 <tr>
-                    <td>1</td>
-                    <td>PLS-124</td>
-                    <td>Miguel</td>
-                    <td>Baguio City</td>
-                    <td>San Jose City</td>
+                    <td>{{$trip->trip_id}}</td>
+                    <td>{{$trip->plate_number}}</td>
+                    <td>{{$trip->driver->first_name . " " . $trip->driver->middle_name . " " . $trip->driver->last_name}}</td>
+                    <td>{{$trip->terminal->description}}</td>
+                    <td>{{$superAdmin->description}}</td>
                     <td>
                         <div class="text-center">
-                            <button data-toggle="modal" data-target="#wala" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> VIEW</button>
+                            <a href="{{route('trips.viewTripLog', [$trip->trip_id])}}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> VIEW</a>
                         </div>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
         </div>

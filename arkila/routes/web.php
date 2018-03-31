@@ -181,8 +181,11 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
     Route::get('/drivers/generatePerDriver/{driver}', 'DriversController@generatePerDriver')->name('pdf.perDriver');
     Route::get('/drivers/generatePerOperator/{operator}', 'OperatorsController@generatePerOperator')->name('pdf.perOperator');
     Route::get('/home/trip-log', 'TripsController@tripLog')->name('trips.tripLog');
+    Route::get('/home/trip-log/{trip}', 'TripsController@viewTripLog')->name('trips.viewTripLog');
     Route::get('/home/driver-report', 'TripsController@driverReport')->name('trips.driverReport');
     Route::get('/home/driver-report/{trip}', 'TripsController@viewReport')->name('trips.viewReport');
+    Route::patch('/home/driver-report/{trip}/accept', 'TripsController@acceptReport')->name('trips.acceptReport');
+    Route::patch('/home/driver-report/{trip}/decline', 'TripsController@declineReport')->name('trips.declineReport');
     Route::resource('/home/ledger', 'LedgersController');
     Route::get('/home/general-ledger', 'LedgersController@generalLedger')->name('ledger.generalLedger');
     Route::get('/ledger/daily-ledger/generate-pdf', 'LedgersController@generatePDF')->name('pdf.ledger');

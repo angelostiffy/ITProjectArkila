@@ -1,17 +1,17 @@
 @extends('layouts.form_lg')
-@section('title', 'book Van')
+@section('title', 'Rent Van')
 @section('form-id', 'parsley-form')
-@section('form-action', route('bookal.store'))
+@section('form-action', route('rental.store'))
 @section('form-method', 'POST')
 @section('form-body')
                           {{csrf_field()}}     
 <div class="box box-danger with-shadow" style = " margin: 7% auto;">
         <div class="box-header with-border text-center">
             <h3>
-            <a href="{{ route('bookal.index')}}" class="pull-left"><i class="fa fa-chevron-left"></i></a>
+            <a href="{{ route('rental.index')}}" class="pull-left"><i class="fa fa-chevron-left"></i></a>
             </h3>
             <h3 class="box-title">
-                bookal Form
+                Rental Form
             </h3>
         </div>
         <div class="box-body">
@@ -143,7 +143,7 @@
 </div> 
 @endsection
 @section('scripts')
-@pabook
+@parent
     <script>
     	$('#timepicker').timepicker({
     		template: false
@@ -159,12 +159,12 @@
           var $sections = $('.form-section');
 
           function navigateTo(index) {
-            // Mark the curbook section with the class 'curbook'
+            // Mark the current section with the class 'current'
             $sections
-              .removeClass('curbook')
+              .removeClass('current')
               .eq(index)
-                .addClass('curbook');
-            // Show only the navigation buttons that make sense for the curbook section:
+                .addClass('current');
+            // Show only the navigation buttons that make sense for the current section:
             $('.form-navigation .previous').toggle(index > 0);
             var atTheEnd = index >= $sections.length - 1;
             $('.form-navigation .next').toggle(!atTheEnd);
@@ -172,8 +172,8 @@
           }
 
           function curIndex() {
-            // Return the curbook index by looking at which section has the class 'curbook'
-            return $sections.index($sections.filter('.curbook'));
+            // Return the current index by looking at which section has the class 'current'
+            return $sections.index($sections.filter('.current'));
           }
 
           // Previous button is easy, just go back
@@ -181,7 +181,7 @@
             navigateTo(curIndex() - 1);
           });
 
-          // Next button goes forward iff curbook block validates
+          // Next button goes forward iff current block validates
           $('.form-navigation .next').click(function() {
             $('.parsley-form').parsley().whenValidate({
               group: 'block-' + curIndex()
@@ -199,7 +199,7 @@
     </script>
 
     <script>
-        $('[data-mask]').inputmask()
+    $('[data-mask]').inputmask()
     $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
     </script>
     
