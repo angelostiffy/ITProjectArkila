@@ -179,7 +179,7 @@
 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="{{ URL::asset('img/jl.JPG') }}" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Miguel Mukhangpaa</span>
+                                <span class="hidden-xs">Admin Baguio</span>
                             </a>
                     <ul class="dropdown-menu">
 
@@ -188,7 +188,7 @@
                             <div class="box-body box-profile">
                                 <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset('img/jl.JPG') }}" alt="User profile picture">
 
-                                <h3 class="profile-username text-center">Miguel lookssaka - owner ng pangit </h3>
+                                <h3 class="profile-username text-center">Admin - Baguio City</h3>
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
@@ -211,6 +211,6 @@
                     <a href="#" data-toggle="control-sidebar"><i class="fa fa-list-ol"></i></a>
                 </li>
             </ul>
-
+        </div>
     </nav>
 </header>

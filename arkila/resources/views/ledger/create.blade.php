@@ -28,17 +28,22 @@
     <label for="amount">Amount:</label>
     <input type="text" class="form-control" name="amount" value="{{ old('amount') }}">
 </div>
-<div class="form-group" name="revenueExpense">
 
-<div class="form-group">
-    <label>
-        <input type="radio" name="type" class="minimal" value="Revenue" @if(old('type') == 'Revenue') {{'checked'}}@endif>
-            Revenue
-    </label>
-    <label>
-        <input type="radio" name="type" class="minimal" value="Expense" @if(old('type') == 'Expense') {{'checked'}}@endif>
-            Expense
-    </label>
+<div class="form-group" name="revenueExpense">
+    <div class="radio">
+        <div class="col-md-6">
+            <label for=""> Revenue</label>
+            <label class="radio-inline">
+                <input type="radio" name="type" class="flat-blue" value="Revenue" @if(old('type') == 'Revenue') {{'checked'}}@endif>
+            </label>
+        </div>
+        <div class="col-md-6">
+            <label for="">Expense</label>
+            <label class="radio-inline">
+                <input type="radio" name="type" class="flat-blue" value="Expense" @if(old('type') == 'Expense') {{'checked'}}@endif>
+            </label>
+        </div>
+    </div>
 </div>
     
 @endsection
