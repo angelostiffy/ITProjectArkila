@@ -175,10 +175,6 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
     Route::get('/listSourceDrivers','TransactionsController@listSourceDrivers')->name('transactions.listSourceDrivers');
     Route::patch('/changeDriver/{trip}', 'TransactionsController@changeDriver')->name('transactions.changeDriver');
     Route::patch('/home/transactions/changeDestination/{transaction}','TransactionsController@changeDestination')->name('transactions.changeDestination');
-    Route::get('/getTicketManagementPartials/{terminal}', 'TransactionsController@getTicketManagementPartial')->name('transactions.getTicketManagementPartial');
-    Route::get('/getmanageticketJS',function(){
-       return view('transaction.manageticketsJS');
-    }) ->name('transactions.getmanageticketJS');
     /********Archive ********/
     Route::patch('/home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
     Route::get('/drivers/generatePDF', 'DriversController@generatePDF')->name('pdf.drivers');
