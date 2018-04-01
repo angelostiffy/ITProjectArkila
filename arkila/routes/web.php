@@ -229,10 +229,14 @@ Route::get('/home/try', 'PassController@index');
 /******************************************************************************/
 
 Route::get('/about', 'CustomerModuleControllers\CustomerNonUserHomeController@aboutNonUser')->name('customermodule.non-user.about.customerAbout');
-
+Route::get('/home/get-announcement', 'ViewAnnouncementsNonUserController@showAnnouncement')->name('index.getAnnouncements');
+Route::get('/home/get-queue', 'ViewVanQueueNonUserController@showQueue')->name('index.getVanQueue');
 Route::group(['middleware' => ['auth', 'customer']], function(){
     /*User Dashboard*/
     Route::get('/home', 'CustomerModuleControllers\CustomerUserHomeController@index')->name('customermodule.user.index');
+    Route::get('/home/view-queue', 'CustomerModuleControllers\ViewQueueController@showVanQueue')->name('customermodule.user.indexFairListAndTrips');
+    Route::get('/home/user/view-announcement', 'CustomerModuleControllers\ViewAnnouncementsController@showAnnouncement')->name('customermodule.user.indexAnnouncements');
+
     /**Services**/
     /*Rental*/
     Route::get('/home/create-rental', 'CustomerModuleControllers\MakeRentalController@createRental')->name('customermodule.user.rental.customerRental');

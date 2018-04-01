@@ -61,4 +61,7 @@
     {{ Html::script('js/notifications/pnotify.custom.min.js') }}
     {{ Html::script('js/notifications/bootstrap-notify.min.js') }}
     
+    <!-- Awesome Functions-->
+    {{ Html::script('js/awesome-functions-min.js') }}
+    
 @show

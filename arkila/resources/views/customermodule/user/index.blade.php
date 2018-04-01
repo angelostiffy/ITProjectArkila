@@ -72,6 +72,7 @@
 
     <section style="background: url('{{ URL::asset('img/fixed-background-2.jpg') }}') center top no-repeat; background-size: cover;" class="bar text-center bg-fixed relative-positioned">
         <div class="dark-mask"></div>
+        <div id="announcements" class="container"></div>    
         
     </section>
     <!-- section-->
@@ -108,7 +109,8 @@
     <section style="background: url(../img/fixed-background-2.jpg) center top no-repeat; background-size: cover;" class="bar text-center bg-fixed relative-positioned">
         <div class="dark-mask">
         </div>
-
+        <div id="fareAndQueue" class="container">
+        </div> 
     </section>
     <!-- section-->
     
@@ -119,6 +121,13 @@
 <script>
 var myDiv = $('#announcementsLimit');
 myDiv.text(myDiv.text().substring(0,250) + '...')
+</script>
+
+<script>
+    $(document).ready(function(){
+        $("#announcements").load("{{route('customermodule.user.indexAnnouncements')}}");
+        $("#fareAndQueue").load("{{route('customermodule.user.indexFairListAndTrips')}}");
+    });
 </script>
 
 @endsection
