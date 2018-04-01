@@ -40,7 +40,7 @@
     {{ Html::style('css/client-side_validation/parsley.css') }}
     {{ Html::style('css/notifications/pnotify.custom.min.css') }}
     {{ Html::style('css/notifications/animate.css') }}
-@show
+
         
     
  
