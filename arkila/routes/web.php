@@ -174,6 +174,7 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
     Route::patch('/updateOnBoardTransactions', 'TransactionsController@updateOnBoardTransactions')->name('transactions.updateOnBoardTransactions');
     Route::get('/listSourceDrivers','TransactionsController@listSourceDrivers')->name('transactions.listSourceDrivers');
     Route::patch('/changeDriver/{trip}', 'TransactionsController@changeDriver')->name('transactions.changeDriver');
+    Route::patch('/home/transactions/changeDestination/{transaction}','TransactionsController@changeDestination')->name('transactions.changeDestination');
     /********Archive ********/
     Route::patch('/home/vans/{van}/archiveVan', 'VansController@archiveDelete')->name('vans.archiveDelete');
     Route::get('/drivers/generatePDF', 'DriversController@generatePDF')->name('pdf.drivers');
@@ -248,6 +249,7 @@ Route::group(['middleware' => ['auth', 'customer']], function(){
     Route::get('/home/about', 'CustomerModuleControllers\ViewAboutController@viewAbout')->name('customermodule.user.about.customerAbout');
     /*Help*/
     Route::get('/home/help', 'CustomerModuleControllers\ViewHelpController@viewHelp')->name('customermodule.user.help.customerHelp');
+
 });
 /******************************************************************************/
 /******************************************************************************/

@@ -1,29 +1,19 @@
 @extends('layouts.master') 
 @section('title', 'View Driver')
-@section('links') 
-    @parent
-    <style> 
-        .info-container{
-            border: 1px solid; 
-            padding: 5px;
-            overflow-x: auto;
-            height:33px;
-            background:#fff6e2;
-        }
-    </style>
-@stop 
 
 @section('content')
 
-<div class="box box-default" style="box-shadow: 0px 5px 10px gray;">
+<div class="box box-default with-shadow">
     <div class="box-header with-border text-center">
-        <a href="@if(session()->get('opLink') && session()->get('opLink') == URL::previous()) {{session()->get('opLink')}} @else {{ route('drivers.index') }} @endif" class="pull-left btn btn-default"><i class="fa  fa-chevron-left"></i></a>
+        <h4>
+            <a href="@if(session()->get('opLink') && session()->get('opLink') == URL::previous()) {{session()->get('opLink')}} @else {{ route('drivers.index') }} @endif" class="pull-left"><i class="fa fa-chevron-left"></i></a>
+        </h4>
         <h3 class="box-title">
             View Driver Information
         </h3>
     </div>
     <div class="box-body">
-    <button onclick="window.open('{{route('pdf.perDriver', [$driver->member_id])}}')" class="btn btn-default btn-sm btn-fla"> <i class="fa fa-print"></i> PRINT</button>
+        <button onclick="window.open('{{route('pdf.perDriver', [$driver->member_id])}}')" class="btn btn-default btn-sm btn-fla"> <i class="fa fa-print"></i> PRINT</button>
 
         <h4>Personal Information</h4>
         <div class="row">
@@ -94,10 +84,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="box box-default"  style="box-shadow: 0px 5px 10px gray;">
-    <div class="box-body">
+ 
+
         <h4>Family Information</h4>
         <div class="row">
             <div class="col-md-6">

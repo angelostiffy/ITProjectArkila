@@ -177,8 +177,7 @@ class VansController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Van $van)
-    {
+    public function update(Van $van) {
         //$current_time = \Carbon\Carbon::now();
        // $dateNow = $current_time->setTimezone('Asia/Manila')->format('Y-m-d H:i:s');
 

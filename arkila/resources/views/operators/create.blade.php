@@ -254,7 +254,7 @@
                                                     <i class="fa fa-calendar"></i>
                                                   </div>
                                                   <input type="text" name="childrenBDay[]" class="form-control date-mask" placeholder="mm/dd/yyyy" value="{{old('childrenBDay.'.$i)}}" data-inputmask="'alias': 'mm/dd/yyyy'" 
-                                                 >
+                                                 data mask>
                                                 </div>
                                                 <p id=""></p>
                                             </td>
@@ -451,6 +451,4 @@
           navigateTo(0); // Start at the beginning
         });
     </script>
-
-    
 @endsection

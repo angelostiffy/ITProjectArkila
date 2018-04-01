@@ -5,7 +5,9 @@
 @section('form-body')
 <div class="box box-warning" style="box-shadow: 0px 5px 10px gray;">
     <div class="box-header with-border text-center">
-        <a href="@if(session()->get('opLink') && session()->get('opLink') == URL::previous()) {{ session()->get('opLink') }} @else {{ route('drivers.index')}} @endif" class="pull-left btn "><i class="fa  fa-chevron-left"></i></a>
+        <h4>
+            <a href="@if(session()->get('opLink') && session()->get('opLink') == URL::previous()) {{ session()->get('opLink') }} @else {{ route('drivers.index')}} @endif" class="pull-left btn "><i class="fa  fa-chevron-left"></i></a>
+        </h4>
         <h3 class="box-title">
             EDIT DRIVER INFORMATION
         </h3>
