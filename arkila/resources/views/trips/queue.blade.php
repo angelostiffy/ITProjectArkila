@@ -325,8 +325,6 @@ ol.vertical{
           </div>
         </div>
         </div>
-        @foreach ($trips as $trip)
-                              @endforeach
           <div id="confirmBoxModal"></div>
       </div>
 

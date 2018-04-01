@@ -166,7 +166,7 @@ class VansController extends Controller {
     public function edit(Van $van)
     {
         $operators = Member::allOperators()->get();
-        $drivers = Member::allDrivers()->doesntHave('van')->get();
+        $drivers = Member::allDrivers()->get();
         return view('vans.edit', compact('van','operators','drivers'));
     }
 
@@ -177,8 +177,7 @@ class VansController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Van $van)
-    {
+    public function update(Van $van) {
         //$current_time = \Carbon\Carbon::now();
        // $dateNow = $current_time->setTimezone('Asia/Manila')->format('Y-m-d H:i:s');
 

@@ -47,7 +47,7 @@
         <select name="driver" id="driver" class="form-control select2">
             <option value="">None</option>
             @foreach($drivers as $driver)
-                <option value="{{$driver->member_id}}">{{$driver->full_name}}</option>
+                <option @if($van->driver->first()->member_id ?? null) @if($driver->member_id == $van->driver->first()->member_id) {{'selected'}} @endif @endif value="{{$driver->member_id}}">{{$driver->full_name}}</option>
             @endforeach
 
         </select>
@@ -66,7 +66,7 @@
 @endsection
 
 @section('form-btn')
-<button class="btn btn-primary" type="submit">Add Driver</button>
+<button class="btn btn-primary" type="submit">@if( $van->driver->first()->member_id ?? null) Change Driver @else Add Driver @endif</button>
 @endsection
 @section('scripts')
 	@parent

@@ -103,11 +103,12 @@
                             </div>
                             <form action="">
                             <div class="box-body">
-
                                     <label for="">Terminal</label>
                                     <select name="terminal" id="terminal" class="form-control">
+                                        @php $counter = 0; @endphp
                                         @foreach($terminals as $terminal)
                                             @if($terminal->trips->where('queue_number',1)->first()->plate_number ?? null)
+                                                @php $counter++; @endphp
                                                 <option value="{{$terminal->terminal_id}}">{{$terminal->description}}</option>
                                             @endif
                                         @endforeach
@@ -129,13 +130,14 @@
                             </div>
 
                             <div class="box-footer">
-                                <div id="sellButtContainer" class="pull-right"></div>
+                                <div id="sellButtContainer" class="pull-right">
+                                    <button type="button" class="btn btn-info btn-flat" @if($counter) title="Please add atleast one destination for the specified terminal on the terminal field" @else title="Please Add a van from the queue to start selling tickets" @endif disabled>Sell</button>
+                                </div>
                             </div>
                             </form>
                         </div>
 
-                        <button id="managePageBtn" class="btn btn-warning btn-flat btn-block">Manage Tickets</button>
-                        <button id="boardPageBtn" class="btn btn-primary btn-flat btn-block hidden">Board Tickets</button>
+                        <a href="{{route('transactions.manageTickets')}}" class="btn btn-warning btn-flat btn-block">Manage Tickets</a>
                     </div>
 
                     <div class="col-md-9">
@@ -146,7 +148,7 @@
 
                                         @foreach($terminals as $terminal)
                                             @if($terminal->trips->where('queue_number',1)->first()->plate_number ?? null)
-                                            <li class="@if($terminals->first() == $terminal){{'active'}}@endif"><a href="#terminal{{$terminal->terminal_id}}" data-toggle="tab">{{$terminal->description}}</a></li>
+                                                <li class="@if($terminals->first() == $terminal){{'active'}}@endif"><a href="#terminal{{$terminal->terminal_id}}" data-toggle="tab">{{$terminal->description}}</a></li>
                                             @endif
                                         @endforeach
 
@@ -283,53 +285,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div id="manageTickets{{$terminal->terminal_id}}" class="hidden">
-                                               <div class="pull-left col-md-6">
-                                                    
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-default btn-sm  btn-flat checkbox-toggle"><i class="fa fa-square-o"></i>
-                                                        </button>
-                                                        <button type="button" class="btn btn-default btn-sm btn-flat"><i class="fa fa-trash"></i></button>
-                                                    </div>
-                                                </div>
-                                            <table id="sold-tickets{{$terminal->terminal_id}}" class="table table-bordered sold-tickets">
-                                                <thead>
-                                                    <tr>
-                                                    <th></th>
-                                                      <th>Ticket No.</th>
-                                                      <th>Destination</th>
-                                                      <th>Date Purchased</th>
-                                                      <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach($terminal->transactions->where('status','Pending') as $transaction)
-                                                    <tr>
-                                                    <td>
-                                                        <input type="checkbox">
-                                                        </td> 
-                                                        <td>
-                                                            {{ $transaction->ticket->ticket_number }}</td>
-                                                    <td>
-                                                        {{ $transaction->destination->description}}
-                                                    </td>
-                                                    <td>
-                                                        {{ $transaction->created_at }}
-                                                    </td>
-                                                    <td>
-
-                                                        <button class="btn btn-primary btn-sm"><i class="fa fa-money"></i> Refund</button>
-                                                        <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i> Change Destination</button>
-                                                        <button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i> Delete</button>
-                                                        </div>
-                                                    </td>
-                                                    
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-
-                                            </div>
                                         </div>
                                             @endif
                                             @endforeach
@@ -338,7 +293,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+    <div id="confirmBoxModal"></div>
+
 @endsection
 @section('scripts')
 @parent
@@ -346,7 +302,28 @@
 
 <script>
 	$(function () {
-	 $('.select2').select2()
+        specialUnitChecker();
+	 $('.select2').select2();
+
+        function specialUnitChecker(){
+            $.ajax({
+                method:'POST',
+                url: '{{route("trips.specialUnitChecker")}}',
+                data: {
+                    '_token': '{{csrf_token()}}'
+                },
+                success: function(response){
+                    if(response[0]) {
+                        $('#confirmBoxModal').load('/showConfirmationBox/' + response[0]);
+                    }else{
+                        if(response[1]){
+                            $('#confirmBoxModal').load('/showConfirmationBoxOB/'+response[1]);
+                        }
+                    }
+                }
+
+            });
+        }
 	})
 </script>
 <script>
@@ -378,9 +355,7 @@
     $(function(){
         checkTerminals();
         listDestinations();
-        listDiscounts();
-        listTickets();
-        checkSellButton()
+        checkDiscountBox();
       var hash = window.location.hash;
       hash && $('ul.nav a[href="' + hash + '"]').tab('show');
 
@@ -392,21 +367,12 @@
       });
 
 
-    checkDiscountBox();
-
     $('#checkDiscount').on('click',function(){
         checkDiscountBox();
     });
 
     $('#terminal').on('change',function(){
         listDestinations();
-        listTickets();
-    });
-
-
-    $(document).ajaxStop(function(){
-        checkSellButton();
-
     });
 
     $('button[name="depart"]').on('click', function(e){
@@ -470,7 +436,7 @@
                 listDiscounts();
             }else{
                 $('#discount').prop('disabled',true);
-                $('#discount').empty();
+                $('#discount').append('<option value="" selected>Check the checkbox to enable discount</option>');
             }
         }
 
@@ -485,11 +451,10 @@
                         '_token': '{{csrf_token()}}'
                     },
                     success: function(discounts){
-                        console.log(discounts);
                         if(discounts.length === 0){
                             $('#checkDiscount').prop('disabled',true);
                             $('#discount').prop('disabled',true);
-                            $('#discount').append('<option value="">No Available Discounts</option>');
+                            $('#discount').append('<option value="" selected>No Available Discounts</option>');
                         }
                         else{
                             $('#checkDiscount').prop('disabled',false);
@@ -516,7 +481,6 @@
                         '_token': '{{csrf_token()}}'
                     },
                     success: function (destinations) {
-                        console.log(destinations);
                         if (destinations.length === 0) {
                             $('#destination').empty();
                             $('#destination').prop('disabled', true);
@@ -526,6 +490,7 @@
                             destinations.forEach(function (destination) {
                                 $('#destination').append('<option value=' + destination.id + '> ' + destination.description + '</option>');
                             });
+                            listTickets();
                         }
 
                     }
@@ -538,49 +503,59 @@
 
         function listTickets() {
             $('#ticket').empty();
-            if ($('#terminal').val() && $('#destination').val() && $('#discount').val()) {
+            $.ajax({
+                method: 'GET',
+                url: '/listTickets/' + $('#terminal').val(),
+                data: {
+                    '_token': '{{csrf_token()}}'
+                },
+                success: function (tickets) {
 
-                    $.ajax({
-                        method: 'GET',
-                        url: '/listTickets/' + $('#terminal').val(),
-                        data: {
-                            '_token': '{{csrf_token()}}'
-                        },
-                        success: function (tickets) {
-                            console.log(tickets);
-                            if (tickets.length === 0) {
-                                $('#ticket').empty();
-                                $('#ticket').prop('disabled', true);
-                                $('#ticket').append('<option value =""> Tickets Not Available</option>');
-                            }
-                            else {
-                                tickets.forEach(function (ticket) {
-                                    $('#ticket').append('<option value=' + ticket.id + '> ' + ticket.ticket_number + '</option>');
-                                });
-                            }
+                    if (tickets.length === 0) {
+                        $('#ticket').prop('disabled', true);
+                        $('#ticket').append('<option value =""> Tickets Not Available</option>');
+                    }
+                    else {
+                        $('#ticket').prop('disabled', false);
+                        tickets.forEach(function (ticket) {
+                            $('#ticket').append('<option value=' + ticket.id + '> ' + ticket.ticket_number + '</option>');
+                        });
+                        checkSellButton();
+                    }
 
-                        }
-                    });
-            }else{
-                $('#ticket').prop('disabled', true);
-                $('#ticket').append('<option value=""> Tickets Not Available</option>');
-            }
+                }
+            });
+
         }
 
         function checkSellButton(){
             var terminal = $('#terminal').val();
             var destination = $('#destination').val();
             var ticket = $('#ticket').val();
-            $('#sellButtContainer').empty();
 
             if(terminal && destination && ticket ){
+                $('#sellButtContainer').empty();
                 $('#sellButtContainer').append('<button id="sellButt" type="button" class="btn btn-info btn-flat">Sell</button>');
-            }else{
-                $('#sellButtContainer').append('<button type="button" class="btn btn-info btn-flat">Sell</button>');
             }
 
-
         }
+
+
+        $.ajax({
+            method:'POST',
+            url: '{{route("transactions.store")}}',
+            data: {
+                '_token': '{{csrf_token()}}',
+                'terminal': terminal,
+                'destination': destination,
+                'discount': discount,
+                'ticket': ticket
+            },
+            success: function(){
+                location.reload();
+            }
+
+        });
 
     });
 </script>
@@ -691,27 +666,9 @@
 
 <script>
     @foreach($terminals as $terminal)
-     $(document).ready(function(){
-        $("#manageTickets{{$terminal->terminal_id}}").hide();
-        $("#boardPageBtn").hide();
-        $("#managePageBtn").click(function(){
-            $("#sellTickets{{$terminal->terminal_id}}").hide();
-            $("#manageTickets{{$terminal->terminal_id}}").show();
-            $("#manageTickets{{$terminal->terminal_id}}").removeClass("hidden");
-            $("#boardPageBtn").show();
-            $("#boardPageBtn").removeClass("hidden");
-            $("#managePageBtn").hide();
-        })
-        $("#boardPageBtn").click(function(){
-            $("#manageTickets{{$terminal->terminal_id}}").hide();
-            $("#sellTickets{{$terminal->terminal_id}}").show();
-            $("#managePageBtn").show();
-            $("#boardPageBtn").hide();
 
-        })
-      });
 
-     $(document).ready(function(){
+     $(function(){
         $("#changedriver-header{{$terminal->terminal_id}}").hide();
         $("#deletedriver-header{{$terminal->terminal_id}}").hide();
         $("#changeDriverBtn{{$terminal->terminal_id}}").click(function(){
@@ -781,7 +738,7 @@
     })
 </script>
 <script>
-    $(document).ready(function() {
+    $(function() {
         @foreach($terminals as $terminal)
         @if($trip = $terminal->trips->where('queue_number',1)->first())
             $('#driverChange{{$terminal->terminal_id}}').editable({
@@ -817,4 +774,4 @@
         @endforeach
     });
 </script>
-@stop
+@endsection

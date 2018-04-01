@@ -89,8 +89,8 @@ class ReservationsController extends Controller
 
             'status' => request('butt'),
         ]);
-
-        return redirect()->back()->with('message', 'Reservation marked '. request('butt'));
+        session()->flash('message', 'Reservation marked '. request('butt'));
+        return redirect()->back();
     }
 
     /**
