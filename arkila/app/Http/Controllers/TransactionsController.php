@@ -104,6 +104,7 @@ class TransactionsController extends Controller {
                 'SOP' => $sop,
                 'date_departed' => Carbon::now(),
                 'queue_number' => null,
+                'report_status' => 'Accepted'
             ]);
 
 

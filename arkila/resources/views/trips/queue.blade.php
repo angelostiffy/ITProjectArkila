@@ -325,7 +325,6 @@ ol.vertical{
           </div>
         </div>
         </div>
-          <div id="confirmBoxModal"></div>
       </div>
 
 
@@ -343,7 +342,6 @@ ol.vertical{
     <!-- List sortable -->
     <script>
         $(function() {
-            specialUnitChecker();
             $('button[name="destBtn"]').on('click',function(){
                 $.ajax({
                     method:'PATCH',
@@ -486,28 +484,6 @@ ol.vertical{
                   }
               });
             @endforeach
-
-
-            function specialUnitChecker(){
-                    $.ajax({
-                        method:'POST',
-                        url: '{{route("trips.specialUnitChecker")}}',
-                        data: {
-                            '_token': '{{csrf_token()}}'
-                        },
-                        success: function(response){
-                            if(response[0]) {
-                                $('#confirmBoxModal').load('/showConfirmationBox/' + response[0]);
-                            }else{
-                                if(response[1]){
-                                    $('#confirmBoxModal').load('/showConfirmationBoxOB/'+response[1]);
-                                }
-                            }
-                        }
-
-                    });
-            }
-
 
         });
 </script>

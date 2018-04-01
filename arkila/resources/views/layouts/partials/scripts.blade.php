@@ -7,6 +7,8 @@
         $.widget.bridge('uibutton', $.ui.button);
         
     </script>
+    <!-- Special Unit Checker -->
+    {{ Html::script('js/specialUnitChecker.js') }}
     <!-- Bootstrap 3.3.7 -->
     {{ Html::script('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}
     <!-- Morris.js charts -->
