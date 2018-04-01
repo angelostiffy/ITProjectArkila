@@ -19,13 +19,10 @@ class TripsController extends Controller {
      */
     public function index() {
         $terminals = Terminal::whereNotIn('terminal_id',[auth()->user()->terminal_id])->get();
-        $trips = Trip::whereNotNull('queue_number')
-            ->orderBy('queue_number')->get();
+        $trips = Trip::whereNotNull('queue_number')->orderBy('queue_number')->get();
 
         $drivers = Member::whereNotIn('member_id', function($query){
-            $query->select('driver_id')
-                ->from('trip')
-                ->whereNotNull('queue_number');
+            $query->select('driver_id')->from('trip')->whereNotNull('queue_number');
         })->get();
 
         $vans = Van::whereNotIn('plate_number', function($query){
@@ -80,7 +77,8 @@ class TripsController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateRemarks(Trip $trip) {
+    public function updateRemarks(Trip $trip)
+    {
 
         $this->validate(request(),[
             'value' => [Rule::in('OB','CC','ER', 'NULL')]
