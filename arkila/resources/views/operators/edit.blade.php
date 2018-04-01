@@ -227,7 +227,7 @@
                             <th>Birthdate</th>
                             <th>
                                 <div class="pull-right">
-                                    <button type="button" class="btn btn-primary btn-sm btn-flat" onclick="addItem()"><i class="fa fa-plus"></i> ADD DEPENDENT</button>
+                                    <button type="button" class="btn btn-primary btn-sm btn-flat" onclick="addDependent()"><i class="fa fa-plus"></i> ADD DEPENDENT</button>
                                 </div>
                             </th>
                         </thead>
@@ -316,6 +316,7 @@
 
 <script>
     $(document).ready(function(){
+        $('input[name="childrenBDay[]"]').focus();
         cloneDateMask();
         switch($('select[name="civilStatus"]').val()){
             case "Single":
@@ -358,7 +359,7 @@
         }
 
 
-    function addItem() {
+    function addDependent() {
         var tablebody = document.getElementById('childrens');
         if (tablebody.rows.length == 1) {
             tablebody.rows[0].cells[tablebody.rows[0].cells.length - 1].children[0].children[0].style.display = "";
