@@ -60,7 +60,7 @@
     	pattern: /^[a-zA-Z]$|^[a-zA-Z][a-zA-Z\s-]*[a-zA-Z]$/,
     	maxlength: 35
     });
-    $('[val-birthplace]').attr('data-parsley-pattern-message','Please use only letters (a-z) and numbers.');
+    $('[val-birthplace]').attr('data-parsley-pattern-message','Please use letters (a-z) only.');
     $('[val-birthplace]').attr('data-parsley-required-message','Please enter a birthplace.');
 
 

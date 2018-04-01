@@ -115,6 +115,7 @@
             <div style="float:right;">
                 <button type="button" id="prevBtn" class="previous btn btn-default">Previous</button>
                 <button type="button" id="nextBtn" onclick="getData();" class="next btn btn-primary">Next</button>
+                <input type="submit" class="btn btn-primary">
             </div>
         </div>
     </div>
@@ -178,6 +179,26 @@
           });
           navigateTo(0); // Start at the beginning
         });
+
+        function getData() {
+            var name = document.getElementById('name').value;
+            document.getElementById('nameView').textContent = name;
+
+            var contactNumber = document.getElementById('contactNumber').value;
+            document.getElementById('contactView').textContent = contactNumber;
+
+            var destination = document.getElementById('dest').value;
+            document.getElementById('destView').textContent = destination;
+
+            var seat = document.getElementById('seat').value;
+            document.getElementById('seatView').textContent = seat;
+
+            var date = document.getElementById('date').value;
+            document.getElementById('dateView').textContent = date;
+
+            var time = document.getElementById('timepicker').value;
+            document.getElementById('timeView').textContent = time;
+        }
     </script>
 
     <script>

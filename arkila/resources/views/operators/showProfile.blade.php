@@ -61,7 +61,7 @@
                                 <th>Driver</th>
                                 <th>Model</th>
                                 <th>Seating Capacity</th>
-                                <th>Actions</th>
+                                <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,15 +70,14 @@
                                 <td>{{$van->plate_number}}</td>
                                 <td>{{$van->driver()->first()->full_name ?? $van->driver()->first()}}</td>
                                 <td>{{$van->vanmodel->description}}</td>
-                                <td>{{$van->seating_capacity}}</td>
+                                <td class="text-right">{{$van->seating_capacity}}</td>
                                 <td>
                                     <div class="text-center">
-                                        <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i>View</a>    
-
+                                          
                                         @if($van->driver()->first())
-                                            <a name="listDriver" data-val="{{ $van->operator()->first()->member_id }}" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modal-default"><i class="fa fa-exchange"></i>Change Driver</a>
+                                            <a name="listDriver" data-val="{{ $van->operator()->first()->member_id }}" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default"><i class="fa fa-exchange"></i>Change Driver</a>
                                         @else
-                                            <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-outline-secondary btn-sm"><i class="fa fa-user-plus"></i>Add Driver</a>
+                                            <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary btn-sm"><i class="fa fa-user-plus"></i>Add Driver</a>
                                         @endif
 
                                         <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{ 'deleteVan'.$van->plate_number }}"><i class="fa fa-trash"></i> Delete</button>
@@ -146,7 +145,7 @@
                                 <th>Name</th>
                                 <th>Age</th>
                                 <th>Contact Number</th>
-                                <th>Actions</th>
+                                <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>

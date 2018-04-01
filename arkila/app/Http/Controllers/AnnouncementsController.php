@@ -58,8 +58,9 @@ class AnnouncementsController extends Controller
             'created_at' => $dateNow,
             'updated_at' => $dateNow,
         ]);
+        session()->flash('message', 'Announcement posted successfully');
 
-        return redirect('/home/announcements/')->with('success', 'Information created successfully');
+        return redirect('/home/announcements/');
 
     }
 
@@ -97,7 +98,7 @@ class AnnouncementsController extends Controller
     {
         //
         $this->validate(request(), [
-            "announce" =>  'required|max:1000',
+            "announce" =>  'required|max:2500',
             "title" =>  'required|max:50',
 
         ]);
@@ -112,7 +113,9 @@ class AnnouncementsController extends Controller
             'updated_at' => $dateNow,
 
         ]);
-        return redirect('/home/announcements/')->with('success', 'Information was updated successfully');
+        session()->flash('message', 'Announcement ' . request('title') . ' has been edited successfully');
+
+        return redirect('/home/announcements/');
     }
 
     /**

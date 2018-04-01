@@ -5,7 +5,9 @@
 @section('form-body')
 <div class="box box-warning" style="box-shadow: 0px 5px 10px gray;">
     <div class="box-header with-border text-center">
-        <a href="@if(session()->get('opLink') && session()->get('opLink') == URL::previous()) {{ session()->get('opLink') }} @else {{ route('drivers.index')}} @endif" class="pull-left btn "><i class="fa  fa-chevron-left"></i></a>
+        <h4>
+            <a href="@if(session()->get('opLink') && session()->get('opLink') == URL::previous()) {{ session()->get('opLink') }} @else {{ route('drivers.index')}} @endif" class="pull-left btn "><i class="fa  fa-chevron-left"></i></a>
+        </h4>
         <h3 class="box-title">
             EDIT DRIVER INFORMATION
         </h3>
@@ -20,19 +22,19 @@
                         <label>Choose Operator:</label>
 
                         <select name="operator" id="" class="form-control select2">
-                                <option value=''>No Operator</option>
-                                @foreach($operators as $operator)
-                                    <option value="{{$operator->member_id}}"
-                                    @if(old('operator') == $operator->member_id)
-                                        {{'selected'}}
-                                            @elseif($driver->operator != null)
-                                            @if($driver->operator->member_id == $operator->member_id)
-                                                {{'selected'}}
-                                            @endif
-                                            @endif
-                                    >{{$operator->full_name}}</option>
-                                @endforeach
-                            </select>
+                            <option value=''>No Operator</option>
+                            @foreach($operators as $operator)
+                                <option value="{{$operator->member_id}}"
+                                @if(old('operator') == $operator->member_id)
+                                    {{'selected'}}
+                                        @elseif($driver->operator != null)
+                                        @if($driver->operator->member_id == $operator->member_id)
+                                            {{'selected'}}
+                                        @endif
+                                        @endif
+                                >{{$operator->full_name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>

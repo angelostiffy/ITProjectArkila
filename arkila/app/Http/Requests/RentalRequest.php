@@ -52,12 +52,12 @@ class RentalRequest extends FormRequest
             return [
                 "lastName" => ['bail',new checkName, 'required', 'max:35'],
                 "firstName" => ['bail',new checkName, 'required', 'max:35'],
-                "middleName" => ['bail',new checkName, 'required', 'max:35'],
+                "middleName" => ['bail',new checkName, 'max:35'],
                 "date" => 'bail|required|date_format:m/d/Y|after_or_equal:today',
                 "destination" => "bail|required|regex:/^[,\pL\s\-]+$/u|max:50",
                 "model" => "bail|required|max:50",
                 "time" => ['bail',new checkTime, 'required'],
-                "days" => "bail|required|numeric|digits_between:1,2|min:1",
+                "days" => "bail|required|numeric|digits_between:1,15|min:1",
                 "contactNumber" => ['bail',new checkContactNum],
         
             ];
@@ -65,12 +65,12 @@ class RentalRequest extends FormRequest
             return [
                 "lastName" => ['bail',new checkName, 'required', 'max:35'],
                 "firstName" => ['bail',new checkName, 'required', 'max:35'],
-                "middleName" => ['bail',new checkName, 'required', 'max:35'],
+                "middleName" => ['bail',new checkName, 'max:35'],
                 "date" =>  'bail|required|date_format:m/d/Y|after_or_equal:today',
                 "destination" => "bail|required|regex:/^[,\pL\s\-]+$/u|max:50",
                 "model" => "bail|required|max:50",
                 "time" => ['bail',new checkTime, 'required', 'after:' . $timeFormattedNow],
-                "days" => "bail|required|numeric|digits_between:1,2|min:1",
+                "days" => "bail|required|numeric|digits_between:1,15|min:1",
                 "contactNumber" => ['bail',new checkContactNum],
          
                 ];
@@ -79,6 +79,8 @@ class RentalRequest extends FormRequest
 
     public function messages() 
     {
+        $dateNow = Carbon::now()->format('h:i A');
+
         return [
             "lastName.required" => "Please enter the customers last name",
             "lastName.max" => "Last name must be less than or equal to 35 characters",
@@ -91,6 +93,7 @@ class RentalRequest extends FormRequest
             "date.date_format" => "The preferred date does not match the format mm/dd/yyyy",
 
             "time.required" => "Please enter the preffered departure time",
+            "time.after" => "The time must be a time after ". $dateNow ."",
             "days.required" => "Please enter the number of days",
             "days.numeric" => "Please enter a number in number of days",
             "days.digits_between" => "The days must be between 1-15",

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Ticket;
 use App\Terminal;
 use App\Rules\checkCurrency;
 class TerminalController extends Controller
@@ -29,12 +29,23 @@ class TerminalController extends Controller
         $this->validate(request(),[
             "addTerminalName" => "unique:terminal,description|regex:/^[,\pL\s\-]+$/u|required|max:40",
             "bookingFee" => [new checkCurrency, "numeric", "required","min:1","max:5000"],
+            "numberOfTickets" => 'required|numeric|digits_between:1,200'
         ]);
 
-        Terminal::create([
+        $terminal = Terminal::create([
             "description" => request('addTerminalName'),
             "booking_fee" => request('bookingFee'),
         ]);
+
+        for($i =1; $i <= request('numberOfTickets'); $i++ ){
+            $ticketName = request('addTerminalName')[0].'-'.$i;
+            Ticket::create([
+                'ticket_number' => $ticketName,
+                'terminal_id' => $terminal->terminal_id,
+                'isAvailable' => 1
+            ]);
+
+        }
 
         session()->flash('message', 'Terminal created successfully');
         return redirect('/home/settings');

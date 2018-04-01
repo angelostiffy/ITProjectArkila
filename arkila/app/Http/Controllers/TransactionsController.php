@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\FeesAndDeduction;
+use App\Ledger;
 use App\Trip;
 use App\Terminal;
 use App\Transaction;
 use App\Ticket;
-use App\Destination;
 use Carbon\Carbon;
 use App\Member;
 
@@ -21,6 +21,12 @@ class TransactionsController extends Controller {
         $terminals = Terminal::whereNotIn('terminal_id',[auth()->user()->terminal_id])->get();
 
         return view('transaction.index',compact('terminals'));
+    }
+
+    public function manageTickets(){
+        $terminals = Terminal::whereNotIn('terminal_id',[auth()->user()->terminal_id])->get();
+
+        return view('transaction.managetickets',compact('terminals'));
     }
 
     /**
@@ -70,22 +76,43 @@ class TransactionsController extends Controller {
                 'transactions.*' => 'required|exists:transaction,transaction_id'
             ]);
             $totalPassengers = count(request('transactions'));
-            \Log::info('Total Passengers: '.$totalPassengers);
+
 
             $totalBooking = (Terminal::find(auth()->user()->terminal_id)->booking_fee) * $totalPassengers;
-            \Log::info('Total Booking: '.$totalBooking);
+
 
             $totalCommunity = (FeesAndDeduction::where('description', 'Community Fund')->first()->amount) * $totalPassengers;
-            \Log::info('Total Community: '.$totalCommunity);
+
+            if($totalPassengers >= 10){
+                $sop = 100;
+
+                Ledger::create([
+                    'description' => 'SOP',
+                    'amount' => $sop,
+                    'type' => 'Revenue'
+                ]);
+
+            }else{
+                $sop = null;
+            }
 
             $trip->update([
                 'status' => 'Departed',
                 'total_passengers' => $totalPassengers,
                 'total_booking_fee' => $totalBooking,
                 'community_fund' => $totalCommunity,
+                'SOP' => $sop,
                 'date_departed' => Carbon::now(),
                 'queue_number' => null,
             ]);
+
+
+            Ledger::create([
+                'description' => 'Booking Fee',
+                'amount' => $totalBooking,
+                'type' => 'Revenue'
+            ]);
+
 
             if($totalPassengers <= 10){
                 if(Trip::where('terminal_id',$terminal->terminal_id)->orderBy('queue_number','desc')->first() ?? null){
@@ -93,7 +120,7 @@ class TransactionsController extends Controller {
                 }else{
                     $queueNumber = 1;
                 }
-                \Log::info('Queue Number'.$queueNumber);
+
                 Trip::create([
                     'driver_id' => $trip->driver_id,
                     'terminal_id' => $trip->terminal_id,
@@ -173,11 +200,15 @@ class TransactionsController extends Controller {
 
     }
 
-    public function changeDestination(Transaction $transaction,Destination $destination) {
+    public function changeDestination(Transaction $transaction) {
+        $this->validate(request(),[
+            'changeDestination' => 'required|exists:destination,destination_id'
+        ]);
 
         $transaction->update([
-            'destination_id'=> $destination->destination_id
+            'destination_id'=> request('changeDestination')
         ]);
+        return 'success';
     }
     /**
      * Remove the specified resource from storage.
@@ -185,16 +216,51 @@ class TransactionsController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
-    {
+    public function destroy(Transaction $transaction) {
         $this->validate(request(),[
-            'delete.*' => 'exists|ticket,ticket_id'
+            'delete' => 'exists|ticket,ticket_id'
         ]);
-        foreach(request('delete') as $transaction){
-            $transaction->delete();
+
+        $transaction->update([
+            'status' => 'Deleted'
+        ]);
+
+        //put transaction into ledger
+
+
+        $transaction->ticket->update([
+           'isAvailable' => 1
+        ]);
+
+        return 'success';
+    }
+
+    public function multipleDelete(){
+        $transactionObjArr = [];
+        $this->validate(request(),[
+            'delete.*' => 'exists:transaction,transaction_id'
+        ]);
+
+
+        foreach(request('delete') as $transactionId){
+            array_push($transactionObjArr, Transaction::find($transactionId));
         }
 
-        return back();
+        foreach($transactionObjArr as $transaction){
+
+            $transaction->update([
+                'status' => 'Deleted'
+            ]);
+
+            //put transaction into ledger
+
+
+            $transaction->ticket->update([
+                'isAvailable' => 1
+            ]);
+
+        }
+        return 'success';
     }
 
     public function listDestinations(Terminal $terminal) {
@@ -226,13 +292,18 @@ class TransactionsController extends Controller {
 
     public function listTickets(Terminal $terminal) {
         $ticketsArr = [];
-        $tickets = $terminal->tickets->where('isAvailable', 1);
+        $tickets = $terminal->tickets()->where('isAvailable', 1)->orderBy('ticket_id','asc')->get();
+        $seatingCapacity = ($terminal->trips->where('queue_number',1)->first()->van->seating_capacity)+2;
 
-        foreach ($tickets as $ticket){
-            array_push($ticketsArr,[
-                'id' => $ticket->ticket_id,
-                'ticket_number' => $ticket->ticket_number
-            ]);
+        for($i=0; $i < $seatingCapacity ; $i++){
+            if(count($tickets) > $i){
+                array_push($ticketsArr,[
+                    'id' => $tickets[$i]->ticket_id,
+                    'ticket_number' => $tickets[$i]->ticket_number
+                ]);
+            }else{
+                continue;
+            }
         }
 
         return response()->json($ticketsArr);
@@ -263,6 +334,22 @@ class TransactionsController extends Controller {
 
         $trip->update([
            'driver_id' => request('value')
+        ]);
+
+        return 'success';
+    }
+
+    public function getTicketManagementPartial(Terminal $terminal) {
+        return view('transaction.managetickets',compact('terminal'));
+    }
+
+    public function refund(Transaction $transaction){
+        $transaction->update([
+            'status' => 'Refunded'
+        ]);
+
+        $transaction->ticket->update([
+            'isAvailable' => 1
         ]);
 
         return 'success';

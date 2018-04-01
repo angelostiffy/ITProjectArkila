@@ -1,6 +1,6 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="{{ route('home') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>BT</b></span>
         <!-- logo for regular state and mobile devices -->
@@ -169,7 +169,7 @@
                                 </div>
                             </li>
                             <li class="footer box-body text-center">
-                                <a href="">View all</a>
+                                <a href="{{route('announcements.index')}}">View all announcement</a>
                             </li>
                         </form>
                     </ul>
