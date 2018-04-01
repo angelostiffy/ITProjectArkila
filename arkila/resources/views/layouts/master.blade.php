@@ -58,7 +58,6 @@
      @include('layouts.partials.scripts')
      @include('message.success')
      @include('message.error')
-     @include('message.confirm')
     @show
     <div id="confirmBoxModal"></div>
 </body>

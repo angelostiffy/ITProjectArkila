@@ -94,8 +94,11 @@
 
                                 <label for="">Driver:</label>
                                 <input id="" class="form-control pull-right" type="number" id="total" style="width:30%;" value="{{$totalfare}}" disabled>
+                                
                             </div>
                         </div>
+                        
+                        <button onclick="#"  class="btn btn-default btn-sm btn-flat pull-right"> <i class="fa fa-print"></i> PRINT</button>
 
                     </div>
                     </div>
