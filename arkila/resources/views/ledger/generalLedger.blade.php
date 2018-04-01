@@ -181,7 +181,7 @@
             'lengthChange': true,
             'searching': true,
             'ordering': true,
-            'info': false,
+            'info': true,
             'autoWidth': true,
             'order': [[ 6, "desc" ]],
             'aoColumnDefs': [{
@@ -219,7 +219,7 @@
 
                 // balance
                 $( api.column( 5 ).footer() ).html(
-                    '$'+pageTotal +' ( $'+ total +' total)'
+                    pageTotal +' ('+ total +' total)'
                 );
 
                 // Total exp
@@ -232,7 +232,7 @@
 
                 // show exp
                 $( api.column( 4 ).footer() ).html(
-                    '$'+expPageTotal 
+                    expPageTotal 
                 );
                             
                 // Total rev
@@ -245,7 +245,7 @@
 
                 // show rev
                 $( api.column( 3 ).footer() ).html(
-                    '$'+revPageTotal
+                    revPageTotal
                 );
                 
             }
