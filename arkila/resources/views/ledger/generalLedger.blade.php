@@ -40,9 +40,9 @@
                     <td></td>
                     <td>{{$booking->description}}</td>
                     <td></td>
-                    <td class="text-right">&#8369;{{ $booking->total_amount }}</td>
+                    <td class="text-right">{{ $booking->total_amount }}</td>
                     <td></td>
-                    <td class="text-right">&#8369;{{ $booking->total_amount }}</td>
+                    <td class="text-right">{{ $booking->total_amount }}</td>
                     <td>{{$booking->created_at->formatLocalized('%B %d, %Y')}}</td>
                     <td></td>
                 </tr>
@@ -52,9 +52,9 @@
                     <td></td>
                     <td>{{$sop->description}}</td>
                     <td></td>
-                    <td class="text-right">&#8369;{{ $sop->total_amount }}</td>
+                    <td class="text-right">{{ $sop->total_amount }}</td>
                     <td></td>
-                    <td class="text-right">&#8369;{{ $sop->total_amount }}</td>
+                    <td class="text-right">{{ $sop->total_amount }}</td>
                     <td>{{$sop->created_at->formatLocalized('%B %d, %Y')}}</td>
                     <td></td>
                 </tr>
@@ -69,14 +69,14 @@
                     <td>{{$ledger->or_number}}</td>
                     @if ($ledger->type == 'Revenue')
 
-                    <td class="text-right">&#8369;{{$ledger->amount}}</td>
+                    <td class="text-right">{{$ledger->amount}}</td>
                     <td></td>
-                    <td class="text-right">&#8369;{{$ledger->amount}}</td>
+                    <td class="text-right">{{$ledger->amount}}</td>
 
                     @else
                     <td></td>                    
-                    <td class="text-right">&#8369;{{$ledger->amount}}</td>
-                    <td class="text-right">-&#8369;{{$ledger->amount}}</td>
+                    <td class="text-right">{{$ledger->amount}}</td>
+                    <td class="text-right">{{$ledger->amount}}</td>
                     @endif
                     
                     <td>{{$ledger->created_at->formatLocalized('%B %d, %Y')}}</td>
@@ -119,19 +119,17 @@
                 @endif
                 @endforeach
             </tbody>
-            @if ($ledgers->count() > 0)
             <tfoot>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th>TOTAL:</th>
-                    <th class="text-right">&#8369;{{$ledger->gledger_total_revenue}}</th>
-                    <th class="text-right">&#8369;{{$ledger->gledger_total_expense}}</th>
-                    <th class="text-right">&#8369;{{number_format($ledger->gledger_total_balance, 2)}}</th>
-                    <th></th>
-                </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>TOTAL:</th>
+                <th style="text-align:right"></th>
+                <th style="text-align:right"></th>
+                <th colspan="2" style="text-align:left"></th>  
+                <th></th>
+            </tr>
             </tfoot>
-            @endif
         </table>
     </div>
 </div>
@@ -148,9 +146,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"> </script>
 <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"> </script>
 <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"> </script>
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"> </script>
+<script src="//cdn.datatables.net/plug-ins/1.10.16/api/sum().js"> </script>
 
 <script>
 
@@ -161,11 +158,26 @@
                 {
                     extend: 'pdfHtml5',
                     text: 'Print',
-                    orientation: 'landscape',
                     pageSize: 'LEGAL',
                     title: 'Ban Trans General Ledger',
+                    extend: 'print',
+                    autoPrint: false,
+                    footer: true,
+                    download: 'open',
+                    exportOptions : {
+                        columns: ':not(:last-child)',
+                    },
+                    customize: function ( win ) {
+                        $(win.document.body)
+                            .css( 'font-size', '10pt' );
+
+                        $(win.document.body).find( 'table' )
+                            .addClass( 'compact' )
+                            .css( 'font-size', 'inherit' );
+                    }
+                    
                 }
-            ],
+            ],     
             'paging': false,
             'lengthChange': true,
             'searching': true,
@@ -176,11 +188,71 @@
             'aoColumnDefs': [{
                 'bSortable': false,
                 'aTargets': [-1] /* 1st one, start by the right */
-            }]
-        })
-    });
-    $(function() {
+            }],
+            
+            
+            "footerCallback": function ( row, data, start, end, display ) {
+                var api = this.api(), data;
 
+                // Remove the formatting to get integer data for summation
+                var intVal = function ( i ) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '')*1 :
+                        typeof i === 'number' ?
+                            i : 0;
+                };
+
+                // Total over all pages
+                total = api
+                    .column( 5 )
+                    .data()
+                    .reduce( function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0 );
+
+                // Total over this page
+                pageTotal = api
+                    .column( 5, { page: 'current'} )
+                    .data()
+                    .reduce( function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0 );
+
+                // Update footer
+                $( api.column( 5 ).footer() ).html(
+                    '$'+pageTotal +' ( $'+ total +' total)'
+                );
+
+                // Total over this page
+                expPageTotal = api
+                    .column( 4, { page: 'current'} )
+                    .data()
+                    .reduce( function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0 );
+
+                // Update footer
+                $( api.column( 4 ).footer() ).html(
+                    '$'+expPageTotal 
+                );
+                            
+                // Total over this page
+                revPageTotal = api
+                    .column( 3, { page: 'current'} )
+                    .data()
+                    .reduce( function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0 );
+
+                // Update footer
+                $( api.column( 3 ).footer() ).html(
+                    '$'+revPageTotal
+                );
+                
+            }
+            
+        });
+    
         var start = moment().subtract(29, 'days');
         var end = moment();
 
@@ -204,7 +276,16 @@
         cb(start, end);
 
     });
+    
+    $(document).ready(function() {
+        var table = $('.generalLedgerTable').DataTable();
 
+        // Event listener to the two range filtering inputs to redraw on input
+        $('#reportrange').keyup( function() {
+            table.draw();
+        } );
+    } );
+  
 </script>
 
 @stop
