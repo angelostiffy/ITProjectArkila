@@ -25,9 +25,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
 
-//        $schedule->command(
-//            'db:backup --database=mysql --destination=local --destinationPath=dbBackup --timestamp="Y_m_d_H_i_s" --compression=null'
-//         )->daily();
+        $schedule->command(
+           'db:backup --database=mysql --destination=local --destinationPath=dbBackup --timestamp="Y_m_d" --compression=null'
+         )->daily();
     }
 
     /**
