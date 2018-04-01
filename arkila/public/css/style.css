@@ -440,6 +440,13 @@ textarea.parsley-error {
   background-size:cover;
 }
 
+.bg-image-driver {
+  background-image: url("../img/bg2-image.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size:cover;
+}
+
 .btn-menu{
     text-align: left;
     color: #6e6969;
