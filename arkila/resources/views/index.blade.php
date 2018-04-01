@@ -72,8 +72,17 @@
 
     <section style="background: url(../img/fixed-background-2.jpg) center top no-repeat; background-size: cover;" class="bar text-center bg-fixed relative-positioned">
         <div class="dark-mask">
-
         </div>
-
+        <div id="fareListAndQueue" class="container">
+            
+        </div> 
     </section><!-- section-->
 @stop
+@section('scripts')
+@parent
+<script>
+    $(document).ready(function(){
+        $("#fareListAndQueue").load("{{route('index.getVanQueue')}}");
+    });
+</script>
+@endsection
