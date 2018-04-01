@@ -1,6 +1,14 @@
-@extends('layouts.driver') @section('title', 'Driver Profile') @section('content-title', 'Driver Home') @section('content')
+@extends('layouts.driver') 
+@section('title', 'Driver Profile') 
+@section('content-title', 'Driver Profile')
+@section('content')
 <div class="desktop">
     <div class="box">
+        <div class="box-header with-border">
+            <i class="fa fa-car"></i>
+            <h3 class="box-title">Trip Log</h3>
+        </div>
+        <!-- /.box-header -->
         <div class="box-body">
             <table id="driverLog" class="table table-bordered table-striped">
                 <thead>
@@ -52,11 +60,9 @@
 <!-- /.desktop -->
 
 <div class="mobile_device_480px">
-
-    <div class="box box-solid">
+    <div class="box">
         <div class="box-header with-border">
             <i class="fa fa-car"></i>
-
             <h3 class="box-title">Trip Log</h3>
         </div>
         <!-- /.box-header -->
@@ -65,8 +71,7 @@
                 @php $tripCount = 1; @endphp
                 @foreach($tripsMade->trips as $tripMade)
                 <li class="list-group-item">Trip {{$tripCount}} ({{$tripMade->date_departed}} || {{$tripMade->time_departed}})
-                    <a href="{{route('drivermodule.triplog.driverTripDetails', [$tripMade->trip_id])}}" type="button" id="view-tripresp{{$tripMade->trip_id}}" class="btn btn-xs btn-primary pull-right"
-                    ">
+                    <a href="{{route('drivermodule.triplog.driverTripDetails', [$tripMade->trip_id])}}" type="button" id="view-tripresp{{$tripMade->trip_id}}" class="btn btn-xs btn-primary pull-right">
                     <i class="fa fa-eye"></i>
                       View
                     </a>

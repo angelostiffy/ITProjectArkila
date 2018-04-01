@@ -19,13 +19,14 @@
             border-bottom: 1px solid #ddd;
             text-align: left;
         }
-        h1 
+        h1, h2
         {
             text-align: center;
         }
     </style>
 
     <h1>Ban Trans Bio-Data</h1>
+    <h2>{{ $date->formatLocalized('%A %d %B %Y') }}</h2>
     <table width="800" border="0" align="center" cellpadding="5">
         <tr>
             <td colspan="2">Personal Data<hr/></td>

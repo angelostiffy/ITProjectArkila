@@ -98,7 +98,7 @@
                             </div>
                         </div>
                         
-                        <button onclick="#"  class="btn btn-default btn-sm btn-flat pull-right"> <i class="fa fa-print"></i> PRINT</button>
+                        <button onclick="window.open('{{route('pdf.perTrip', $trip->trip_id)}}')" class="btn btn-default btn-sm btn-flat pull-right"> <i class="fa fa-print"></i> PRINT</button>
 
                     </div>
                     </div>

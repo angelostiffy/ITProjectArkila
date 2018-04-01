@@ -194,15 +194,16 @@ class OperatorsController extends Controller
 
     public function generatePDF()
     {
+        $date = Carbon::now();
         $operators = Member::allOperators()->get();
-        $pdf = PDF::loadView('pdf.operators', ['operators' => $operators]);
+        $pdf = PDF::loadView('pdf.operators', compact('operators', 'date'));
         return $pdf->stream('operators.pdf');
     }
 
     public function generatePerOperator(Member $operator)
     {
         $date = Carbon::now();
-        $pdf = PDF::loadView('pdf.perOperator', ['operator' => $operator]);
+        $pdf = PDF::loadView('pdf.perOperator', compact('operator', 'date'));
         return $pdf->stream("$operator->last_name"."$operator->first_name-Bio-Data.pdf");
         
     }

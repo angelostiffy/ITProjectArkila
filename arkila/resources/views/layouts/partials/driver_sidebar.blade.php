@@ -5,45 +5,40 @@
         <!-- Sidebar user panel -->
         <div class="user-panel" style="padding-bottom:10%;">
             <div class="pull-left image">
-                <img src="{{ URL::asset('adminlte/dist/img/avatar.png') }}" class="img-circle" alt="User Image">
+                <img src="{{ URL::asset('adminlte/dist/img/avatar.png') }}" class="img-circle" alt="User Image" style="margin-top:15px;">
             </div>
-            <div class="pull-left info">
+            <div class="pull-right info">
                 <h4>Shaina Caballar</h4>
                 <p>123@gmail.com</p>
             </div>
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="active treeview">
+           <li class="{{ Request::is('home/driver-dashboard') ? 'active' : '' }}">
                 <a href="{{ route('drivermodule.index') }}">
-            <i class="fa fa-home"></i> <span>Home</span>
-          </a>
+                    <i class="fa fa-home"></i> <span>Home</span>
+                </a>
             </li>
-            <li class="treeview">
+           <li class="{{ Request::is('home/view-trips') ? 'active' : '' }}">
                 <a href="{{ route('drivermodule.triplog.driverTripLog') }}">
-                    <i class="fa fa-book"></i>
-                    <span>Trip Log</span>
-                  </a>
+                    <i class="fa fa-book"></i> <span>Trip Log</span>
+                </a>
             </li>
-            <li class="treeview">
-                <a href="{{route('drivermodule.report.driverChooseDestination')}}">
-            <i class="fa fa-plus"></i>
-            <span>Create Report</span>
-          </a>
+           <li class="{{ Request::is('home/choose-terminal') ? 'active' : '' }}">
+                <a href="{{ route('drivermodule.report.driverChooseDestination') }}">
+                    <i class="fa fa-plus"></i> <span>Create Report</span>
+                </a>
             </li>
-            <li class="treeview">
-                <a href="{{route('drivermodule.profile.driverProfile')}}">
-            <i class="	fa fa-user"></i>
-            <span>Profile</span>
-          </a>
+           <li class="{{ Request::is('home/profile') ? 'active' : '' }}">
+                <a href="{{ route('drivermodule.profile.driverProfile') }}">
+                    <i class="fa fa-user"></i> <span>Profile</span>
+                </a>
             </li>
-            <li class="treeview">
-                <a href="#">
-            <i class="fa fa-question"></i>
-            <span>Help</span>
-          </a>
+           <li class="{{ Request::is('home/driver/help') ? 'active' : '' }}">
+                <a href="{{ route('drivermodule.help.driverHelp') }}">
+                    <i class="fa fa-question"></i> <span>Help</span>
+                </a>
             </li>
-
             <li class="treeview">
                 <a href="{{route('logout')}}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
@@ -54,8 +49,7 @@
             {{csrf_field()}}
           </form>
             </li>
-
-
     </section>
     <!-- /.sidebar -->
 </aside>
+<!-- /.main-sidebar -->
