@@ -40,7 +40,7 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
 /*****************************************************************************/
  Route::group(['middleware' => ['auth', 'super-admin']], function(){
     Route::get('/home/superadmin-dashboard', 'HomeController@index')->name('home');
-
+    Route::post('/home/restoreDatabase','RestoreDatabaseController@restoreDatabase')->name('home.restoreDatabase');
     Route::resource('/home/ledger', 'DailyLedgerController');
 
     Route::resource('/home/announcements', 'AnnouncementsController');

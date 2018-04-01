@@ -166,7 +166,7 @@ class VansController extends Controller {
     public function edit(Van $van)
     {
         $operators = Member::allOperators()->get();
-        $drivers = Member::allDrivers()->doesntHave('van')->get();
+        $drivers = Member::allDrivers()->get();
         return view('vans.edit', compact('van','operators','drivers'));
     }
 

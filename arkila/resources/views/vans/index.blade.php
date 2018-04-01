@@ -38,7 +38,7 @@
 								<div class="text-center">
 	                                 
                                     @if($van->driver()->first())
-                                        <a name="listDriver" data-driver="{{$van->driver->first()->member_id}}" data-val="{{ $van->operator()->first()->member_id ?? $van->operator()->first()}}" class="btn btn-primary btn-sm btn-driver"><i class="fa fa-exchange"></i> CHANGE DRIVER</a>
+                                        <a href="{{ route('vans.edit',[$van->plate_number] ) }}" name="listDriver" data-driver="{{$van->driver->first()->member_id}}" data-val="{{ $van->operator()->first()->member_id ?? $van->operator()->first()}}" class="btn btn-primary btn-sm btn-driver"><i class="fa fa-exchange"></i> CHANGE DRIVER</a>
                                     @else
                                         <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary btn-sm btn-driver"><i class="fa fa-user-plus"></i> ADD DRIVER</a>
                                     @endif

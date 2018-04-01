@@ -42,8 +42,11 @@
                 </div>
             </div>
             <div class="box-body">
+                <form method="POST" action="{{route('home.restoreDatabase')}}">
+                    {{csrf_field()}}
                 <p class="text-center">Click "Restore" to retreive all saved data.</p>
-                <a class="btn btn-primary btn-sm btn-flat btn-block pull-right">RESTORE</a>
+                <button type="submit" class="btn btn-primary btn-sm btn-flat btn-block pull-right">RESTORE</button>
+                </form>
             </div>
         </div>
         
