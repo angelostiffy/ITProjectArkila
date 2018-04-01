@@ -52,7 +52,7 @@ class RentalRequest extends FormRequest
             return [
                 "lastName" => ['bail',new checkName, 'required', 'max:35'],
                 "firstName" => ['bail',new checkName, 'required', 'max:35'],
-                "middleName" => ['bail',new checkName, 'required', 'max:35'],
+                "middleName" => ['bail',new checkName, 'max:35'],
                 "date" => 'bail|required|date_format:m/d/Y|after_or_equal:today',
                 "destination" => "bail|required|regex:/^[,\pL\s\-]+$/u|max:50",
                 "model" => "bail|required|max:50",
@@ -65,7 +65,7 @@ class RentalRequest extends FormRequest
             return [
                 "lastName" => ['bail',new checkName, 'required', 'max:35'],
                 "firstName" => ['bail',new checkName, 'required', 'max:35'],
-                "middleName" => ['bail',new checkName, 'required', 'max:35'],
+                "middleName" => ['bail',new checkName, 'max:35'],
                 "date" =>  'bail|required|date_format:m/d/Y|after_or_equal:today',
                 "destination" => "bail|required|regex:/^[,\pL\s\-]+$/u|max:50",
                 "model" => "bail|required|max:50",

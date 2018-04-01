@@ -61,7 +61,7 @@ class RentalsController extends Controller
             'status' => 'Paid',
     
         ]);
-        session()->flash('message', 'Rental was created successfully');
+        session()->flash('message.success', 'Rental was created successfully');
     
         return redirect('/home/rental/');
 
@@ -80,8 +80,8 @@ class RentalsController extends Controller
         $rental->update([
             'status' => request('click'),
         ]);
-
-        return redirect()->back()->with('message', 'Rental request marked '. request('click'));
+        session()->flash('message', 'Rental marked '. request('click'));
+        return redirect()->back();
         
     }
 
