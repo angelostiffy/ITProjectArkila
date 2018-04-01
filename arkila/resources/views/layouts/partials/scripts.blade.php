@@ -8,7 +8,31 @@
         
     </script>
     <!-- Special Unit Checker -->
-    {{ Html::script('js/specialUnitChecker.js') }}
+  <script>
+      $(function(){
+          function specialUnitChecker(){
+              $.ajax({
+                  method:'POST',
+                  url: '{{route("trips.specialUnitChecker")}}',
+                  data: {
+                      '_token': '{{csrf_token()}}'
+                  },
+                  success: function(response){
+                      if(response[0]) {
+                          $('#confirmBoxModal').load('/showConfirmationBox/' + response[0]);
+                      }else{
+                          if(response[1]){
+                              $('#confirmBoxModal').load('/showConfirmationBoxOB/'+response[1]);
+                          }
+                      }
+                  }
+
+              });
+          }
+
+          specialUnitChecker();
+      });
+  </script>
     <!-- Bootstrap 3.3.7 -->
     {{ Html::script('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}
     <!-- Morris.js charts -->
