@@ -8,6 +8,8 @@ use App\Member;
 use App\User;
 use App\Terminal;
 use App\Transaction;
+use Carbon\Carbon;
+use PDF;
 use Illuminate\Validation\Rule;
 
 
@@ -428,5 +430,16 @@ class TripsController extends Controller {
         $user = User::where('user_type','Super-admin')->first();
         $superAdmin = $user->terminal;
         return view('trips.viewTrip', compact('destinations', 'trip', 'superAdmin'));
+    }
+    
+    public function generatePerTrip(Trip $trip)
+    {
+        $destinations = Transaction::join('destination', 'destination.destination_id', '=', 'transaction.destination_id')->join('trip', 'trip.trip_id', '=', 'transaction.trip_id')->where('transaction.trip_id', $trip->trip_id)->selectRaw('transaction.trip_id as tripid, destination.description as destdesc, destination.amount as amount, COUNT(destination.description) as counts')->groupBy(['transaction.trip_id','destination.description'])->get();
+        $user = User::where('user_type','Super-admin')->first();
+        $superAdmin = $user->terminal;
+        $date = Carbon::now();
+        $pdf = PDF::loadView('pdf.perTrip', compact('destinations', 'date', 'trip', 'superAdmin'));
+        return $pdf->stream("tripLog.pdf");
+        
     }
 }
