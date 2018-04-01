@@ -157,8 +157,7 @@
             buttons: [
                 {
                     extend: 'pdfHtml5',
-                    text: 'Print',
-                    pageSize: 'LEGAL',
+                    text: 'PRINT',
                     title: 'Ban Trans General Ledger',
                     extend: 'print',
                     autoPrint: false,
@@ -202,7 +201,7 @@
                             i : 0;
                 };
 
-                // Total over all pages
+                // total balnce
                 total = api
                     .column( 5 )
                     .data()
@@ -210,7 +209,7 @@
                         return intVal(a) + intVal(b);
                     }, 0 );
 
-                // Total over this page
+                // searched balance
                 pageTotal = api
                     .column( 5, { page: 'current'} )
                     .data()
@@ -218,12 +217,12 @@
                         return intVal(a) + intVal(b);
                     }, 0 );
 
-                // Update footer
+                // balance
                 $( api.column( 5 ).footer() ).html(
                     '$'+pageTotal +' ( $'+ total +' total)'
                 );
 
-                // Total over this page
+                // Total exp
                 expPageTotal = api
                     .column( 4, { page: 'current'} )
                     .data()
@@ -231,12 +230,12 @@
                         return intVal(a) + intVal(b);
                     }, 0 );
 
-                // Update footer
+                // show exp
                 $( api.column( 4 ).footer() ).html(
                     '$'+expPageTotal 
                 );
                             
-                // Total over this page
+                // Total rev
                 revPageTotal = api
                     .column( 3, { page: 'current'} )
                     .data()
@@ -244,7 +243,7 @@
                         return intVal(a) + intVal(b);
                     }, 0 );
 
-                // Update footer
+                // show rev
                 $( api.column( 3 ).footer() ).html(
                     '$'+revPageTotal
                 );

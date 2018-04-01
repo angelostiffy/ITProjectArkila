@@ -36,13 +36,11 @@
 							<td class="pull-right">{{$van->seating_capacity}}</td>
 							<td>
 								<div class="text-center">
-	                               
-                                    <a data-val='{{$van->plate_number}}' name="vanInfo" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-view"><i class="fa fa-eye"></i> VIEW</a>
-                                    
+	                                 
                                     @if($van->driver()->first())
-                                            <a name="listDriver" data-driver="{{$van->driver->first()->member_id}}" data-val="{{ $van->operator()->first()->member_id ?? $van->operator()->first()}}" class="btn btn-outline-secondary btn-sm btn-driver" data-toggle="modal" data-target="#edit-modal"><i class="fa fa-exchange"></i> CHANGE DRIVER</a>
+                                            <a name="listDriver" data-driver="{{$van->driver->first()->member_id}}" data-val="{{ $van->operator()->first()->member_id ?? $van->operator()->first()}}" class="btn btn-primary btn-sm btn-driver" data-toggle="modal" data-target="#edit-modal"><i class="fa fa-exchange"></i> CHANGE DRIVER</a>
                                     @else
-                                        <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-outline-secondary btn-sm btn-driver"><i class="fa fa-user-plus"></i> ADD DRIVER</a>
+                                        <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary btn-sm btn-driver"><i class="fa fa-user-plus"></i> ADD DRIVER</a>
                                     @endif
                                     
                                     <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{ 'deleteWarning'. $van->plate_number }}"><i class="fa fa-trash"></i> DELETE</button>
@@ -89,73 +87,7 @@
                 <!-- /.modal-dialog -->
             </div>
             <!-- /.modal -->
-    @endforeach
-
-        <div class="modal fade" id="modal-view">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                        <h4 class="modal-title">Van Details</h4>
-                    </div>
-                    <!-- /.modal-header -->
-                    <div class="modal-body">
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <div class="col-md-5">
-                                    <label for="#plateNumber">Plate Number:</label>    
-                                </div>
-                                <div class="col-md-7">
-                                    <p id="plateNumber" class="info-container" disabled></p>
-                                </div>
-                                
-                                
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-5">
-                                    <label for="#vanModel">Van Model:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <p id="vanModel" class="info-container" disabled> </p>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-5">
-                                    <label for="seatingCapacity">Seating Capacity:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <p id="seatingCapacity" class="info-container" disabled></p>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-5">
-                                    <label for="vanOperator">Operator:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <p id="vanOperator" class="info-container" disabled></p>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                 <div class="col-md-5">
-                                     <label for="vanDriver">Driver:</label>
-                                 </div>
-                                 <div class="col-md-7">
-                                     <p id="vanDriver" type="text" class="info-container" disabled></p>
-                                 </div>
-                                
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" name="search" id="search-btn" class="btn btn-default pull-right" data-dismiss="modal"> Back </button>
-                    </div>
-                    <!-- /.modal-body -->
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
+        @endforeach
     </div>
 </div>
 
