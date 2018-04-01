@@ -24,5 +24,8 @@
     {{ Html::script('adminlte/plugins/input-mask/jquery.inputmask.js') }}
     {{ Html::script('adminlte/plugins/input-mask/jquery.inputmask.date.extensions.js') }}
     {{ Html::script('adminlte/plugins/input-mask/jquery.inputmask.extensions.js') }}
+    
+    <!-- Awesome Functions-->
+    {{ Html::script('js/awesome-functions-min.js') }}
    
 @show

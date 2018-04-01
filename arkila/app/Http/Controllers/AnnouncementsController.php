@@ -98,7 +98,7 @@ class AnnouncementsController extends Controller
     {
         //
         $this->validate(request(), [
-            "announce" =>  'required|max:1000',
+            "announce" =>  'required|max:2500',
             "title" =>  'required|max:50',
 
         ]);

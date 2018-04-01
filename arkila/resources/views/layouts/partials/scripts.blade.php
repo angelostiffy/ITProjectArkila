@@ -1,5 +1,3 @@
-@section('scripts')
-    
     <!-- jQuery 3 -->
     {{ Html::script('adminlte/bower_components/jquery/dist/jquery.min.js') }}
     <!-- jQuery UI 1.11.4 -->
@@ -51,10 +49,11 @@
     {{ Html::script('js/client-side_validation/member-validation.js') }}
     {{ Html::script('js/client-side_validation/van-validation.js') }}
     {{ Html::script('js/client-side_validation/settings-validation.js') }}
-    {{ Html::script('js/client-side_validation/rental-form-validation.js') }}
+    {{ Html::script('js/client-side_validation/booking-form-validation.js') }}
     {{ Html::script('js/client-side_validation/reservation-form-validation.js') }}
     {{ Html::script('js/client-side_validation/driver-report-validation.js') }}
     {{ Html::script('js/notifications/pnotify.custom.min.js') }}
     {{ Html::script('js/notifications/bootstrap-notify.min.js') }}
     
-@show
+    <!-- Awesome Functions-->
+    {{ Html::script('js/awesome-functions-min.js') }}
