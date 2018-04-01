@@ -10,7 +10,7 @@
     <div class="table-responsive">
     	<div class="col-md-6">
     		<a href="{{route('vans.create')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> REGISTER VAN</a>
-            <a href=""  class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i> PRINT</a>
+            <button onclick="window.open('{{route('pdf.van')}}')" class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i> PRINT</button>
     	</div>
 
         <table id="van" class="table table-bordered table-striped">
@@ -38,7 +38,7 @@
 								<div class="text-center">
 	                                 
                                     @if($van->driver()->first())
-                                            <a name="listDriver" data-driver="{{$van->driver->first()->member_id}}" data-val="{{ $van->operator()->first()->member_id ?? $van->operator()->first()}}" class="btn btn-primary btn-sm btn-driver" data-toggle="modal" data-target="#edit-modal"><i class="fa fa-exchange"></i> CHANGE DRIVER</a>
+                                        <a href="{{ route('vans.edit',[$van->plate_number] ) }}" name="listDriver" data-driver="{{$van->driver->first()->member_id}}" data-val="{{ $van->operator()->first()->member_id ?? $van->operator()->first()}}" class="btn btn-primary btn-sm btn-driver"><i class="fa fa-exchange"></i> CHANGE DRIVER</a>
                                     @else
                                         <a href="{{ route('vans.edit',[$van->plate_number] ) }}" class="btn btn-primary btn-sm btn-driver"><i class="fa fa-user-plus"></i> ADD DRIVER</a>
                                     @endif
@@ -54,7 +54,7 @@
 					@endforeach
             </tbody>
         </table>
-</div>
+        </div>
         @foreach($vans->where('status', 'Active') as $van)
         <!-- MODAL DELETION -->
             <div class="modal fade" id="{{ 'deleteWarning'. $van->plate_number }}">
@@ -76,7 +76,7 @@
                                     {{csrf_field()}}
                                     {{method_field('PATCH')}}
                                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                    <button type="submit" class="btn btn-danger">Yes</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
                                 </form>    
                             </div>
                         </div>
@@ -87,6 +87,7 @@
                 <!-- /.modal-dialog -->
             </div>
             <!-- /.modal -->
+        
         @endforeach
     </div>
 </div>

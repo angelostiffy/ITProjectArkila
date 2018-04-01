@@ -1,21 +1,37 @@
 @if (session('success'))
 <script type="text/javascript">
-
-
-$.notify({
-  // options
-  message: '{{ session('success') }}'
-},{
-  // settings
-  type: 'success',
-  postion: "bottom left",
-  icon: "fa fa-check",
-  animate: {
-    enter: 'animated bounceIn',
-    exit: 'animated bounceOut'
-  }
+new PNotify({
+        title: "Success!",
+        text: "{{ session('success') }}",
+        animate: {
+        animate: true,
+        in_class: 'slideInDown',
+        out_class: 'fadeOut'
+        },
+        nonblock: {
+            nonblock: true
+        },
+        animate_speed: 'fast',
+        cornerclass: "",
+        width: "100%",
+        type: "success",
+        stack: {"dir1": "down", "dir2": "right", "push": "top", "spacing1": 0, "spacing2": 0}
+    });
 });
 
-
+// new PNotify({
+//     title: 'Success!',
+//     text: 'That thing that you were trying to do worked.',
+//     type: 'success'
+//     animate: {
+//         animate: true,
+//         in_class: 'slideInDown',
+//         out_class: 'fadeOut'
+//     },
+//     animate_speed: 'fast',
+//     nonblock: {
+//             nonblock: true
+//     }
+// });
 </script>
 @endif

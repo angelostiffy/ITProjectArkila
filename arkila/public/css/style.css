@@ -605,3 +605,8 @@ input:checked+.slider:before {
     padding: 15px;
     background-color: #fff;
 }
+
+.ui-pnotify.stack-bar-top {
+  right: 0;
+  top: 0;
+}

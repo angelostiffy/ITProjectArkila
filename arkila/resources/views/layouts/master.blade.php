@@ -2,13 +2,22 @@
 <html>
 
 <head>
- @include('layouts.partials.stylesheets')
-<style> 
-/*.control-sidebar-bg, .control-sidebar {
-    right: -500px;
-    width: 500px;
-}*/
-</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="_token" content="{{ csrf_token() }}"/>
+    
+    <title>Ban Trans | @yield('title')</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    @section('links')
+        @include('layouts.partials.stylesheets')
+    @show
+    <style> 
+    /*.control-sidebar-bg, .control-sidebar {
+        right: -500px;
+        width: 500px;
+    }*/
+    </style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini fixed">
@@ -45,9 +54,12 @@
         
     </div>
 
-    <!-- ./wrapper -->
+    @section('scripts')
      @include('layouts.partials.scripts')
-
+     @include('message.success')
+     @include('message.error')
+    @show
+    <div id="confirmBoxModal"></div>
 </body>
 
 </html>

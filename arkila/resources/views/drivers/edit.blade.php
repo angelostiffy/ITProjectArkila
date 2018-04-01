@@ -22,19 +22,19 @@
                         <label>Choose Operator:</label>
 
                         <select name="operator" id="" class="form-control select2">
-                                <option value=''>No Operator</option>
-                                @foreach($operators as $operator)
-                                    <option value="{{$operator->member_id}}"
-                                    @if(old('operator') == $operator->member_id)
-                                        {{'selected'}}
-                                            @elseif($driver->operator != null)
-                                            @if($driver->operator->member_id == $operator->member_id)
-                                                {{'selected'}}
-                                            @endif
-                                            @endif
-                                    >{{$operator->full_name}}</option>
-                                @endforeach
-                            </select>
+                            <option value=''>No Operator</option>
+                            @foreach($operators as $operator)
+                                <option value="{{$operator->member_id}}"
+                                @if(old('operator') == $operator->member_id)
+                                    {{'selected'}}
+                                        @elseif($driver->operator != null)
+                                        @if($driver->operator->member_id == $operator->member_id)
+                                            {{'selected'}}
+                                        @endif
+                                        @endif
+                                >{{$operator->full_name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>

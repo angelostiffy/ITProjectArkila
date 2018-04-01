@@ -32,8 +32,8 @@
                     <td>{{$trip->trip_id}}</td>
                     <td>{{$trip->plate_number}}</td>
                     <td>{{$trip->driver->first_name . " " . $trip->driver->middle_name . " " . $trip->driver->last_name}}</td>
-                    <td>{{$trip->terminal->description}}</td>
                     <td>{{$superAdmin->description}}</td>
+                    <td>{{$trip->terminal->description}}</td>
                     <th>{{$trip->report_status}}</th>
                     <td>
                         <div class="text-center">

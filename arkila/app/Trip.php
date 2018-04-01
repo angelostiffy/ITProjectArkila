@@ -51,7 +51,21 @@ class Trip extends Model
       return Carbon::parse($value)->format('g:i A');
     }
 
-
+    public function scopeDeparted($query)
+    {
+      return $query->where('status', '=','Departed');  
+    }
+    
+    public function scopePending($query)
+    {
+      return $query->where('report_status', '=','Pending');  
+    }
+    
+    public function scopeAccepted($query)
+    {
+      return $query->where('report_status', '=','Accepted');  
+    }
+    
     public function setDateDepartedAttribute($value)
     {
       $this->attributes['date_departed'] = Carbon::parse($value);

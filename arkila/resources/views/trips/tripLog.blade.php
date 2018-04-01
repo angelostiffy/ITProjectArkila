@@ -30,8 +30,8 @@
                     <td>{{$trip->trip_id}}</td>
                     <td>{{$trip->plate_number}}</td>
                     <td>{{$trip->driver->first_name . " " . $trip->driver->middle_name . " " . $trip->driver->last_name}}</td>
-                    <td>{{$trip->terminal->description}}</td>
                     <td>{{$superAdmin->description}}</td>
+                    <td>{{$trip->terminal->description}}</td>
                     <td>
                         <div class="text-center">
                             <a href="{{route('trips.viewTripLog', [$trip->trip_id])}}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> VIEW</a>

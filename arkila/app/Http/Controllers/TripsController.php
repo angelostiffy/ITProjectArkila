@@ -372,14 +372,14 @@ class TripsController extends Controller {
 
     
     public function tripLog() {
-        $trips = Trip::where('report_status', 'Accepted')->get();
+        $trips = Trip::departed()->accepted()->get();
         $user = User::where('user_type','Super-admin')->first();
         $superAdmin = $user->terminal;
         return view('trips.tripLog', compact('trips', 'superAdmin'));
     }
     
     public function driverReport() {
-        $trips = Trip::where('report_status', 'Pending')->get();
+        $trips = Trip::departed()->pending()->get();
         $user = User::where('user_type','Super-admin')->first();
         $superAdmin = $user->terminal;
         return view('trips.driverReport', compact('trips', 'superAdmin'));

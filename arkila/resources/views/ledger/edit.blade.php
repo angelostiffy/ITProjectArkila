@@ -31,15 +31,21 @@
 <div class="form-group" name="revenueExpense">
 
 <div class="form-group">
-    <label>
-      <input type="radio" value="Revenue" name="type" class="minimal" @if(old('type') || $ledger->type == 'Revenue') {{ 'checked' }} @endif>
-        Revenue
-    </label>
-    <label>
-      <input type="radio" value="Expense" name="type" class="minimal" @if(old('type') || $ledger->type == 'Expense') {{ 'checked' }} @endif>
-        Expense
-    </label>
+    <div class="radio">
+        <label>Revenue</label>
+        <div class="col-md-6">
+            <label class="radio-inline">
+                <input type="radio" value="Revenue" name="type" class="with-gap" @if(old('type') || $ledger->type == 'Revenue') {{ 'checked' }} @endif>
+            </label>
+        </div>
 
+        <div class="col-md-6">
+            <label>Expense</label>
+            <label class="radio-inline">
+                <input type="radio" value="Expense" name="type" class="with-gap" @if(old('type') || $ledger->type == 'Expense') {{ 'checked' }} @endif>      
+            </label>
+        </div>
+    </div>
 </div>
     
 @endsection

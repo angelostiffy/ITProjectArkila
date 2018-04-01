@@ -40,7 +40,7 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
 /*****************************************************************************/
  Route::group(['middleware' => ['auth', 'super-admin']], function(){
     Route::get('/home/superadmin-dashboard', 'HomeController@index')->name('home');
-
+    Route::post('/home/restoreDatabase','RestoreDatabaseController@restoreDatabase')->name('home.restoreDatabase');
     Route::resource('/home/ledger', 'DailyLedgerController');
 
     Route::resource('/home/announcements', 'AnnouncementsController');
@@ -193,6 +193,7 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
     Route::resource('/home/ledger', 'LedgersController');
     Route::get('/home/general-ledger', 'LedgersController@generalLedger')->name('ledger.generalLedger');
     Route::get('/ledger/daily-ledger/generate-pdf', 'LedgersController@generatePDF')->name('pdf.ledger');
+    Route::get('/home/listOfVans-pdf', 'VansController@generatePDF')->name('pdf.van');
 
 
  });
@@ -236,10 +237,14 @@ Route::get('/home/try', 'PassController@index');
 /******************************************************************************/
 
 Route::get('/about', 'CustomerModuleControllers\CustomerNonUserHomeController@aboutNonUser')->name('customermodule.non-user.about.customerAbout');
-
+Route::get('/home/get-announcement', 'ViewAnnouncementsNonUserController@showAnnouncement')->name('index.getAnnouncements');
+Route::get('/home/get-queue', 'ViewVanQueueNonUserController@showQueue')->name('index.getVanQueue');
 Route::group(['middleware' => ['auth', 'customer']], function(){
     /*User Dashboard*/
     Route::get('/home', 'CustomerModuleControllers\CustomerUserHomeController@index')->name('customermodule.user.index');
+    Route::get('/home/view-queue', 'CustomerModuleControllers\ViewQueueController@showVanQueue')->name('customermodule.user.indexFairListAndTrips');
+    Route::get('/home/user/view-announcement', 'CustomerModuleControllers\ViewAnnouncementsController@showAnnouncement')->name('customermodule.user.indexAnnouncements');
+
     /**Services**/
     /*Rental*/
     Route::get('/home/create-rental', 'CustomerModuleControllers\MakeRentalController@createRental')->name('customermodule.user.rental.customerRental');

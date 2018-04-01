@@ -10,6 +10,8 @@ use App\Van;
 use App\Member;
 use App\VanModel;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use PDF;
 
 
 
@@ -166,7 +168,7 @@ class VansController extends Controller {
     public function edit(Van $van)
     {
         $operators = Member::allOperators()->get();
-        $drivers = Member::allDrivers()->doesntHave('van')->get();
+        $drivers = Member::allDrivers()->get();
         return view('vans.edit', compact('van','operators','drivers'));
     }
 
@@ -327,6 +329,14 @@ class VansController extends Controller {
         return back();
 
         }
+
+    public function generatePDF()
+    {
+        $date = Carbon::now();
+        $vans = Van::all();
+        $pdf = PDF::loadView('pdf.van', compact('vans', 'date'));
+        return $pdf->stream('listOfVans.pdf');
     }
+ }
 
 
