@@ -75,8 +75,8 @@
 
                     @else
                     <td></td>                    
-                    <td class="text-right">{{$ledger->amount}}</td>
-                    <td class="text-right">{{$ledger->amount}}</td>
+                    <td class="text-right">{{number_format($ledger->amount * -1, 2)}}</td>
+                    <td class="text-right">{{number_format($ledger->amount * -1, 2)}}</td>
                     @endif
                     
                     <td>{{$ledger->created_at->formatLocalized('%B %d, %Y')}}</td>
