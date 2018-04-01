@@ -9,7 +9,7 @@ $('[name="name"]').attr('data-parsley-required-message',"Please enter a name.");
 $('[val-rent-dest]').attr('data-parsley-required-message','Please enter a destination.');
 
 $('[val-num-days]').parsley({
-	range: [1,2]
+	range: [1,15]
 });
 
 $('[val-num-seats]').parsley({
@@ -48,3 +48,17 @@ $('[val-num-days]').attr('data-parsley-required-message','Please enter a number 
     });
 
     $('[val-book-time]').attr('data-parsley-required-message','Please enter a departure time.');
+
+    //ANNOUNCEMENT VALIDATION
+
+$('[val-announcement-title]').parsley({
+  maxlength: 50
+})
+
+$('[val-announcement-title]').attr('data-parsley-required-message','Please enter a title.');
+
+$('[val-announcement]').parsley({
+  maxlength: 2500
+})
+
+$('[val-announcement]').attr('data-parsley-required-message','Please enter an announcement.');

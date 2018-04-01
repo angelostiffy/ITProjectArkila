@@ -15,7 +15,5 @@ $.notify({
     exit: 'animated bounceOut'
   }
 });
-
-
 </script>
 @endif
