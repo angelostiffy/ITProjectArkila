@@ -26,7 +26,7 @@
                 @foreach ($operators->where('status', 'Active')->sortByDesc('member_id') as $operator)
                 <tr>
                     <td class="hidden-xs" name="opId">{{ $operator->member_id }}</td>
-                    <td><a href="{{ $operator->member_id }}">{{ $operator->first_name }} {{ $operator->middle_name }} {{ $operator->last_name }}</a></td>
+                    <td><a href="/home/operators/{{ $operator->member_id }}">{{ $operator->first_name }} {{ $operator->middle_name }} {{ $operator->last_name }}</a></td>
                     <td>{{ $operator->contact_number }}</td>
                     <td>
                         <div class="text-center">

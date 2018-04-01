@@ -7,6 +7,7 @@ use App\Van;
 use App\User;
 use App\Http\Requests\DriverRequest;
 use PDF;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -373,14 +374,16 @@ class DriversController extends Controller
 
     public function generatePDF()
     {
+        $date = Carbon::now();
         $drivers = Member::allDrivers()->get();
-        $pdf = PDF::loadView('pdf.drivers', ['drivers' => $drivers]);
+        $pdf = PDF::loadView('pdf.drivers', compact('drivers', 'date'));
         return $pdf->stream('drivers.pdf');
     }
 
     public function generatePerDriver(Member $driver)
     {
-        $pdf = PDF::loadView('pdf.perDriver', ['driver' => $driver]);
+        $date = Carbon::now();
+        $pdf = PDF::loadView('pdf.perDriver', compact('driver', 'date'));
         return $pdf->stream("$driver->last_name"."$driver->first_name-Bio-Data.pdf");
         
     }

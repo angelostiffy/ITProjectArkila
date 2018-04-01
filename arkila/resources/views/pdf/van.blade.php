@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Operators</title>
+    <title>List of Vans</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-
-    <style>
+<style>
         table
         {
             width: 100%;
@@ -19,36 +19,35 @@
             border-bottom: 1px solid #ddd;
             text-align: left;
         }
-        h1, h2
+        h1, h2 
         {
             text-align: center;
         }
     </style>
-
-    <h1>Ban Trans Operators List</h1>
+    <h1>Ban Trans List of Vans</h1>
     <h2>{{ $date->formatLocalized('%A %d %B %Y') }}</h2>
     <table>
         <thead>
             <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Contact Number</th>
-                <th>Age</th>
+                <th>Plate Number</th>
+			    <th>Driver</th>
+			    <th>Operator</th>
+			    <th>Model</th>
+			    <th>Seating Capacity</th>
             </tr>
         </thead>
 
         <tbody>
-        @foreach ($operators->where('status', 'Active')->sortBy('last_name') as $operator)
+        @foreach($vans->where('status', 'Active')->sortBy('plate_number') as $van)
             <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $operator->last_name }}, {{ $operator->first_name }}</td>
-                <td>{{ $operator->contact_number }}</td>
-                <td>{{ $operator->age }}</td>
-
+                 <td>{{$van->plate_number}}</td>
+				 <td>{{ $van->driver()->first()->full_name ?? 'None' }}</td>
+				 <td>{{ $van->operator()->first()->full_name ??  'None' }}</td>
+				 <td>{{$van->vanModel->description}}</td>
+				 <td>{{$van->seating_capacity}}</td>
             </tr>
         @endforeach
         </tbody>
     </table>
-    
 </body>
 </html>

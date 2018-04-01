@@ -19,13 +19,14 @@
             border-bottom: 1px solid #ddd;
             text-align: left;
         }
-        h1 
+        h1, h2 
         {
             text-align: center;
         }
     </style>
 
     <h1>Ban Trans Drivers List</h1>
+    <h2>{{ $date->formatLocalized('%A %d %B %Y') }}</h2>
     <table>
         <thead>
             <tr>
