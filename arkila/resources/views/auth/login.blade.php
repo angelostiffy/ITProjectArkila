@@ -36,9 +36,6 @@
                             <div class="col-md-2">
                                 <button type="submit" class="contact100-form-btn"><strong>Log In</strong></button>
                             </div>
-                            <div class="col-md-2">
-                                <a href="{{route('register')}}" type="button" class="contact100-form-btn"><strong>Sign-up</strong></a>
-                            </div>
                           </div>
 
 
