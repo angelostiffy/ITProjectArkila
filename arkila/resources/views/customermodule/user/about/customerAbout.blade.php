@@ -1,7 +1,7 @@
 @extends('layouts.customer_user')
 @section('content')
 <section id="">
-            <section class="bar">
+            <section class="bar" style="background-color: lightgray;">
                <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -23,7 +23,7 @@
                 </div><!-- container-->
             </section>
             <!-- bar-->
-            <section class="bar mt-0">
+            <section class="bar mt-0" style="background-color: lightgray;">
                <div class="container">
                 <div class="row">
                     <div class="col-md-4">
@@ -84,7 +84,7 @@
             <!-- container-->
         </section>
         <!-- bar-->
-        <section class="bar no-mb">
+        <section class="bar no-mb" style="background-color: lightgray;">
             <div class="container">
                 <div class="col-md-12">
                     <div class="heading">
@@ -94,28 +94,28 @@
                         <div class="col-md-3">
                             <div data-animate="fadeInUp" class="team-member">
                                 <div class="image"><img src="../img/person-1.jpg" alt="" class="img-fluid rounded-circle"></div>
-                                <h3>Judith Galvan</h3>
+                                <h3>Juan Reyes</h3>
                                 <p class="role">Cashier</p>
                             </div><!-- team-member-->
                         </div><!-- col-->
                         <div class="col-md-3">
                             <div data-animate="fadeInUp" class="team-member">
                                 <div class="image"><img src="../img/person-1.jpg" alt="" class="img-fluid rounded-circle"></div>
-                                <h3>Judith Galvan</h3>
+                                <h3>James Santos</h3>
                                 <p class="role">Cashier</p>
                             </div><!-- team-member-->
                         </div><!-- col-->
                         <div class="col-md-3">
                             <div data-animate="fadeInUp" class="team-member">
                                 <div class="image"><img src="../img/person-1.jpg" alt="" class="img-fluid rounded-circle"></div>
-                                <h3>Judith Galvan</h3>
+                                <h3>Jenny Cruz</h3>
                                 <p class="role">Cashier</p>
                             </div><!-- team-member-->
                         </div><!-- col-->
                         <div class="col-md-3">
                             <div data-animate="fadeInUp" class="team-member">
-                                <div class="image"><img src="../img/person-1.jpg" alt="" class="img-fluid rounded-circle"></div>
-                                <h3>Judith Galvan</h3>
+                                <div class="image"><img src="url(../img/person-2.jpg)" alt="" class="img-fluid rounded-circle"></div>
+                                <h3>Jinky Pascua</h3>
                                 <p class="role">Cashier</p>
                             </div><!-- team-member-->
                         </div><!-- col-->

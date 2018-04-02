@@ -9,7 +9,7 @@
                 </div>
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h5>1. How to rent a van</h5>
+                        <h5>1. How to rent a van?</h5>
                     </div>
                     <div class="card-body">
                         <ul>
@@ -25,7 +25,7 @@
                 <!-- card-->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h5>2. How to Reserve a Trip</h5>
+                        <h5>2. How to Reserve a Trip?</h5>
                     </div>
                     <div class="card-body">
                         <ul>
@@ -41,7 +41,7 @@
                 <!-- card-->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h5>3. How to view your reservations/rentals</h5>
+                        <h5>3. How to view your reservations/rentals?</h5>
                     </div>
                     <div class="card-body">
                         <ul>
