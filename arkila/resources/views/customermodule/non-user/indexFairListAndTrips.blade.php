@@ -1,80 +1,120 @@
-
-        <!-- container-->
-        <div class="heading text-center" style="color:white;">
-                <h2><i class="fa fa-car"></i> Fare Lists and Current Trips</h2>
+<div id="accordionFour">
+    <div class="card">
+        <div id="FareListCabanatuanHead" class="card-header">
+            <h5 class="mb-0"><a data-toggle="collapse" href="#FareListCabanatuanBody" aria-expanded="true">Fare List Cabanatuan</a></h5>
+        </div>
+        <div id="FareListCabanatuanBody" data-parent="#accordionFour" class="collapse show">
+            <div class="card-body">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th>Destination</th>
+                            <th>Fare</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>Jan lang</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>Jan lang</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>Jan lang</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>Jan lang</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>Jan lang</td>
+                        <td>50</td>
+                    </tr>
+                </table>
             </div>
-            <!-- Carousel Start-->
-            <ul class="owl-carousel testimonials list-unstyled equal-height">
-                @foreach($terminals as $terminal)
-                <li class="item">
-                    <div class="testimonial d-flex flex-wrap">
-                        <div class="box zoom" style="margin-top:-10%;">
-                            <div class="box-header text-center">
-                                <h4>Fare List {{$terminal->description}}</h4>
-                            </div>
-                            <div class="box-body">
-                                <table class="table text-center">
-                                    <thead>
-                                        <tr>
-                                            <th>Destination</th>
-                                            <th>Fare</th>
-                                        </tr>
-                                    </thead>
-                                    @foreach($farelist as $fare)
-                                        @if($fare->terminal_id == $terminal->terminal_id)
-                                        <tr>
-                                            <td>{{$fare->description}}</td>
-                                            <td>{{$fare->amount}}</td>
-                                        </tr>
-                                        @endif
-                                    @endforeach
+        </div>
+    </div>
+    <div class="card">
+        <div id="CurrentTripCabanatuanHead" class="card-header">
+            <h5 class="mb-0"><a data-toggle="collapse" href="#CurrentTripCabanatuanBody" aria-expanded="false">Current Trip Cabanatuan</a></h5>
+        </div>
+        <div id="CurrentTripCabanatuanBody" data-parent="#accordionFour" class="collapse">
+            <div class="card-body">
 
-                                </table>
-                            </div>
-                            <!-- box-body-->
-                        </div>
-                        <!-- box-->
-                    </div>
-                    <!-- testimonial-->
-                </li>
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Plate No.</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>1</td>
+                        <td>NQS-977</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div id="FareListSanJoseHead" class="card-header">
+            <h5 class="mb-0"><a data-toggle="collapse" href="#FareListSanJoseBody" aria-expanded="true">Fare List San Jose</a></h5>
+        </div>
+        <div id="FareListSanJoseBody" data-parent="#accordionFour" class="collapse">
+            <div class="card-body">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th>Destination</th>
+                            <th>Fare</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>Jan lang</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>Jan lang</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>Jan lang</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>Jan lang</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>Jan lang</td>
+                        <td>50</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div id="CurrentTripSanJoseHead" class="card-header">
+            <h5 class="mb-0"><a data-toggle="collapse" href="#CurrentTripSanJoseBody" aria-expanded="false">Current Trip Cabanatuan</a></h5>
+        </div>
+        <div id="CurrentTripSanJoseBody" data-parent="#accordionFour" class="collapse">
+            <div class="card-body">
 
-                <li class="item">
-                    <div class="testimonial d-flex flex-wrap">
-                        <div class="box zoom" style="margin-top:-10%;">
-                            <div class="box-header text-center">
-                                <h4>Current Trip {{$terminal->description}}</h4>
-                            </div>
-                            <div class="box-body">
-                                <table class="table text-center">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Plate No.</th>
-                                        </tr>
-                                    </thead>
-
-                                    @foreach($trips as $trip)
-                                      @if($trips->where('terminal_id', $terminal->terminal_id)->count() > 0 )
-                                      <tr>
-                                          <td>{{$trip->queue_number}}</td>
-                                          <td>{{$trip->plate_number}}</td>
-                                      </tr>
-                                      @else
-                                      <tr>
-                                          <td>No van on deck</td>
-                                          <td></td>
-                                      </tr>
-                                      @endif
-                                    @endforeach
-
-                                </table>
-                            </div>
-                            <!-- box-body-->
-                        </div>
-                        <!-- box-->
-                    </div>
-                    <!-- testimonial-->
-                </li>
-                @endforeach
-            </ul>
-            <!-- Carousel End-->
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Plate No.</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>1</td>
+                        <td>NQS-977</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
