@@ -2,6 +2,7 @@
  @section('title', 'Driver Report')
  @section('content-title', 'Driver Report')
  @section('content')
+@if($member->van->count() > 0)
 <div class="row">
     <div class="col-md-offset-1 col-md-10">
         <div id="terminal" class="tab-pane">
@@ -132,7 +133,12 @@
 </div>
 <!-- /.row -->
 </div>
-
+@else
+<div class="container text-center" style="margin-top: 18%">
+    <h1>Currently you don't have a registered van</h1>
+    <p>Please approach the clerk in the Baguio Terminal to register your van unit</p>
+</div>
+@endif
 @endsection
 @section('scripts')
 @parent

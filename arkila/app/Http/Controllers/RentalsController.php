@@ -19,7 +19,7 @@ class RentalsController extends Controller
     public function index()
     {
         //
-        $rentals = Rental::all();
+        $rentals = Rental::join('van', 'van.plate_number', '=', 'rental.plate_number')->get();
         $vans = Van::all();
         return view('rental.index', compact('vans', 'rentals'));
     }

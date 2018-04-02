@@ -16,7 +16,6 @@ new PNotify({
         width: "100%",
         type: "success",
         stack: {"dir1": "down", "dir2": "right", "push": "top", "spacing1": 0, "spacing2": 0}
-    });
 });
 
 // new PNotify({

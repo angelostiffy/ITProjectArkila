@@ -150,14 +150,20 @@ class DriversController extends Controller
         }
 
         //Add Account for the driver
-        User::create([
-            'name' => $driver->full_name,
+        $createdDriverUser = User::create([
+            'last_name'=> $request->lastName,
+            'first_name' => $request->firstName,
+            'middle_name' => $request->middleName,
             'username' => $driver->first_name[0].$driver->last_name,
             'password' => Hash::make('driver!@bantrans'),
             'user_type' => 'Driver',
             'status' => 'enable'
         ]);
-
+        
+        $driver->update([
+            'user_id' => $createdDriverUser->id,
+        ]);
+        
         return redirect(route('operators.showProfile',[$operator->member_id]));
     }
 

@@ -35,7 +35,8 @@ class CreateReportController extends Controller
                     ->where('terminal.terminal_id', '=', $terminals->terminal_id)
                     ->select('terminal.terminal_id as term_id','terminal.description as termdesc', 'destination.destination_id as destid', 'destination.description')->get();
     $fads = FeesAndDeduction::where('type','=','Discount')->get();
-    return view('drivermodule.report.driverCreateReport', compact('terminals', 'destinations', 'fads'));
+    $member = Member::where('user_id', Auth::id())->first();  
+    return view('drivermodule.report.driverCreateReport', compact('terminals', 'destinations', 'fads', 'member'));
   }
   public function storeReport(Terminal $terminal, CreateReportRequest $request)
   {
