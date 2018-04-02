@@ -1,38 +1,49 @@
-<div class="container">
+
             <div class="heading text-center" style="color:white;">
                 <h2><i class="fa fa-bullhorn"></i> Announcements</h2>
             </div>
             <!-- Carousel Start-->
-            <ul class="owl-carousel testimonials list-unstyled equal-height">
-                @foreach($announcements as $announcement)
-                <li class="item">
-                    <div class="testimonial d-flex flex-wrap" >
-                        <div class="text" >
-                            <h3>{{$announcement->title}}</h3>
-                            <p id="announcementsLimit">{{$announcement->description}}</p>
-                            <button class="btn btn-template-outlined" 
-                                data-toggle="modal" 
-                                data-target="#announcementDetails{{$announcement->announcement_id}}"
-                                data-title="{{$announcement->title}}"
-                                data-body="{{$announcement->description}}"
-                                id="seeMore{{$announcement->announcement_id}}">Continue Reading</button>
+            <ul class="owl-carousel testimonials list-unstyled equal-height owl-loaded owl-drag">
+                <div class="owl-stage-outer">
+                    <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: 0s; width: 1388px;">
+                       @foreach($announcements as $announcement)
+                        <div class="owl-item" style="width: 277.5px;">
+                            <li class="item">
+                                <div class="testimonial d-flex flex-wrap" >
+                                    <div class="text" >
+                                        <h3>{{$announcement->title}}</h3>
+                                        <p id="announcementsLimit">{{$announcement->description}}</p>
+                                        <button class="btn btn-template-outlined" 
+                                            data-toggle="modal" 
+                                            data-target="#announcementDetails{{$announcement->announcement_id}}"
+                                            data-title="{{$announcement->title}}"
+                                            data-body="{{$announcement->description}}"
+                                            id="seeMore{{$announcement->announcement_id}}">Continue Reading</button>
+                                    </div>
+                                </div>
+                                <!-- testimonial-->
+                            </li>
                         </div>
-                        <div class="bottom d-flex align-items-center justify-content-between align-self-end">
-                            <div class="icon"><i class="fa fa-calendar"></i> </div>
-                            <div class="testimonial-info d-flex">
-
-                                <h5>February 7, 1998</h5>
-                            </div>
-                            <!-- estimonial-info-->
-                        </div>
-                        <!-- bottom-->
+                        @endforeach
                     </div>
-                    <!-- testimonial-->
-                </li>
-                @endforeach
+                </div>
+                
+                <div class="owl-nav disabled">
+                    <div class="owl-prev">prev</div>
+                    <div class="owl-next">next</div>
+                </div>
+                <div class="owl-dots">
+                    <div class="owl-dot active">
+                        <span></span>
+                    </div>
+                    <div class="owl-dot">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="owl-thumbs"></div>
             </ul>
             <!-- Carousel End-->
-        </div>
+        
         <!-- container-->
 @foreach($announcements as $announcement)        
 <div class="modal fade" id="announcementDetails{{$announcement->announcement_id}}">
