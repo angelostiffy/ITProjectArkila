@@ -13,23 +13,11 @@
 
 Auth::routes();
 
-//Made by Randall
-
-Route::get('/randall', 'RandallController@index');
 
 /*Log in*/
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 /*Email Verification*/
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
-/*Reset Password*/
-// Route::get('password/reset/{token?}', 'Auth\ResetPasswordController@showResetForm');
-// Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-
-Route::get('/teo', function(){
-    return view('rental.newcreate');
-});
-
-Route::get('/dixon', 'TripsController@index');
 
 Route::get('/ticketmanagement','TransactionsController@manage');
 
@@ -237,7 +225,7 @@ Route::group(['middleware' => ['auth', 'driver']], function(){
 });
 /******************************************************************************/
 /******************************************************************************/
-Route::get('/home/try', 'PassController@index');
+//Route::get('/home/try', 'PassController@index');
 
 /*********************************Customer Module******************************/
 /******************************************************************************/

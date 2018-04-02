@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\checkName;
+use App\Rules\checkAddress;
 use App\Rules\checkOccupation;
 use App\Rules\checkAge;
 use App\Rules\checkContactNum;
@@ -42,8 +43,8 @@ class DriverRequest extends FormRequest
                     'firstName' => ['bail','required',new checkName,'max:25'],
                     'middleName' => ['bail','nullable',new checkName,'nullable','max:25'],
                     'contactNumber' => ['bail',new checkContactNum],
-                    'address' => 'bail|required|max:100',
-                    'provincialAddress' => 'bail|required|max:100',
+                    'address' => ['bail','required','max:100',new checkAddress],
+                    'provincialAddress' => ['bail','required','max:100',new checkAddress],
                     'birthDate' => ['bail','required','date_format:m/d/Y','after:1/1/1900', new checkAge],
                     'birthPlace' => ['bail',new checkName,'required','max:35'],
                     'gender' => [
@@ -64,7 +65,7 @@ class DriverRequest extends FormRequest
                     'mothersName' => ['bail','required_with:motherOccupation','max:50', 'nullable',new checkName],
                     'motherOccupation' => ['bail','required_with:mothersName','max:30','nullable', new checkOccupation],
                     'contactPerson' => ['bail','required','max:50', new checkName],
-                    'contactPersonAddress' => 'bail|required|max:100',
+                    'contactPersonAddress' => ['bail','required','max:100',new checkAddress],
                     'contactPersonContactNumber' => ['bail','required',new checkContactNum],
                     'sss' => ['bail','unique:member,SSS','required', new checkSSS],
                     'licenseNo' => ['bail','required',new checkLicense],
@@ -82,8 +83,8 @@ class DriverRequest extends FormRequest
                     'firstName' => ['bail','required',new checkName,'max:25'],
                     'middleName' => ['bail','nullable',new checkName,'nullable','max:25'],
                     'contactNumber' => ['bail',new checkContactNum],
-                    'address' => 'bail|required|max:100',
-                    'provincialAddress' => 'bail|required|max:100',
+                    'address' => ['bail','required','max:100',new checkAddress],
+                    'provincialAddress' => ['bail','required','max:100',new checkAddress],
                     'birthDate' => ['bail','required','date_format:m/d/Y','after:1/1/1900', new checkAge],
                     'birthPlace' => ['bail',new checkName,'required','max:35'],
                     'gender' => [
@@ -104,7 +105,7 @@ class DriverRequest extends FormRequest
                     'mothersName' => ['bail','required_with:motherOccupation','max:50', 'nullable',new checkName],
                     'motherOccupation' => ['bail','required_with:mothersName','max:30', 'nullable',new checkOccupation],
                     'contactPerson' => ['bail','required','max:50', 'nullable',new checkName],
-                    'contactPersonAddress' => 'bail|required|max:100',
+                    'contactPersonAddress' => ['bail','required','max:100',new checkAddress],
                     'contactPersonContactNumber' => ['bail','required',new checkContactNum],
                     'sss' => ['bail','unique:member,SSS,'.$this->route('driver')->member_id.',member_id','required', new checkSSS],
                     'licenseNo' => ['bail','required', new checkLicense],

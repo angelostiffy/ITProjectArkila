@@ -21,7 +21,7 @@
 
   // Validate address.
     $('[val-address]').parsley({
-    	pattern: /^(?!.* {2})(?=\S)(?=.*\S$)[a-zA-Z0-9\s-]+$/,
+    	pattern: /^[\dA-Za-z][A-Za-z\d .,-]*[A-Za-z\d]$/,
     	maxlength: 100
     });
     $('[val-address]').attr('data-parsley-pattern-message','Please  use only letters (a-z) and numbers.');

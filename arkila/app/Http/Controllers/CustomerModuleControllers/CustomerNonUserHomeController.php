@@ -10,7 +10,13 @@ class CustomerNonUserHomeController extends Controller
 {
     public function indexNonUser()
     {
-      return view('index');
+
+        if(auth()->user()){
+            return redirect('/home');
+        }else{
+            return view('index');
+        }
+
     }
 
     public function aboutNonUser()
