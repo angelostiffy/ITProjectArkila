@@ -47,6 +47,9 @@
                             <a href="{{route('customermodule.user.help.customerHelp')}}">Help</a>
                         </li>
                         <li class="nav-item dropdown menu-large">
+                            <a href="{{route('customermodule.user.changepassword.index')}}">Change Password</a>
+                        </li>
+                        <li class="nav-item dropdown menu-large">
                             <a href="{{route('logout')}}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">Sign-out
                             </a>

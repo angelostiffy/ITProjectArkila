@@ -196,7 +196,10 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
     Route::get('/home/listOfVans-pdf', 'VansController@generatePDF')->name('pdf.van');
     Route::get('/trip-log/pdf/{trip}', 'TripsController@generatePerTrip')->name('pdf.perTrip');
     Route::post('/home/general-ledger/date-range', 'LedgersController@dateRange')->name('ledger.filter');
-
+    /*Account Settings - Change Password*/
+    Route::get('/home/account-settings', 'SuperAdminChangePasswordController@viewAccountSettings')->name('accountSettings');
+    Route::post('/checkCurrentPassAdmin', 'SuperAdminChangePasswordController@checkCurrentPassword')->name('checkPass');
+    Route::patch('/home/account-settings/{superAdminid}/change-password', 'SuperAdminChangePasswordController@updatePassword')->name('superadminmodule.changePassword');
  });
 /*****************************************************************************/
 /*****************************************************************************/
@@ -224,7 +227,7 @@ Route::group(['middleware' => ['auth', 'driver']], function(){
   /*Trip Log*/
   Route::get('/home/view-trips', 'DriverModuleControllers\TripLogController@viewTripLog')->name('drivermodule.triplog.driverTripLog');
   Route::get('/home/view-trips/{trip}', 'DriverModuleControllers\TripLogController@viewSpecificTrip')->name('drivermodule.triplog.driverTripDetails');
-
+  /*View Rentals*/
   Route::get('/home/view-rentals', 'DriverModuleControllers\ViewRentalsController@viewRentals')->name('drivermodule.rentals.rental');
   Route::patch('/home/view-rentals/{rental}', 'DriverModuleControllers\ViewRentalsController@updateRental')->name('drivermodule.updateRental');
 
@@ -259,6 +262,10 @@ Route::group(['middleware' => ['auth', 'customer']], function(){
     Route::get('/home/view-transactions', 'CustomerModuleControllers\ViewTransactionsController@viewTransactions')->name('customermodule.user.transactions.customerTransactions');
     Route::delete('/home/view-transactions/delete-rental/{rental}', 'CustomerModuleControllers\ViewTransactionsController@destroyRental')->name('customermodule.deleteRental');
     Route::delete('/home/view-transactions/delete-reservation/{reservation}', 'CustomerModuleControllers\ViewTransactionsController@destroyReservation')->name('customermodule.deleteReservation');
+    /*Change Password*/
+    Route::get('/home/change-password', 'CustomerModuleControllers\CustomerChangePasswordController@viewChangePassword')->name('customermodule.user.changepassword.index');
+    Route::patch('/home/change-password/{customerId}', 'CustomerModuleControllers\CustomerChangePasswordController@updatePassword')->name('customermodule.changePassword');
+    Route::post('/customerCheckPassword', 'CustomerModuleControllers\CustomerChangePasswordController@checkCurrentPassword')->name('customermodule.checkCurrentPassword');
     /*About*/
     Route::get('/home/about', 'CustomerModuleControllers\ViewAboutController@viewAbout')->name('customermodule.user.about.customerAbout');
     /*Help*/

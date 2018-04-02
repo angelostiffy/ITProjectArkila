@@ -1,5 +1,5 @@
-@extends('layouts.driver') 
-@section('title', 'Driver Profile') 
+@extends('layouts.driver')
+@section('title', 'Driver Profile')
 @section('content-title', 'Driver Home') @section('content')
 <div class="col-md-offset-1 col-md-3">
     {{Session::get('error')}}
@@ -86,10 +86,10 @@
                 <div class="modal-body">
                     <div class="box">
                         <div class="box-body">
-                            <form action="{{route('drivermodule.changePassword',[$userId])}}" method="POST">
+                            <form action="{{route('drivermodule.changePassword',[$driverId])}}" method="POST">
                                 {{csrf_field()}} {{method_field('PATCH')}}
                                 <div class="form-group" class="control-label">
-                                    <input type="hidden" id="userid" value="{{$userId}}">
+                                    <input type="hidden" id="userid" value="{{$driverId}}">
                                     <label for="">Current password:</label>
                                     <input value="" id="current_password" name="current_password" type="password" class="form-control">
                                     <div id="pass_response" class="response"></div>
@@ -105,7 +105,7 @@
                                     <input value="" id="" name="password_confirmation" type="password" class="form-control" required>
                                 </div>
                                 <!-- /.form-group -->
-                                </form>
+
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -116,7 +116,7 @@
                     <button type="submit" class="btn btn-primary btn-group-justified text-center">Submit</button>
                 </div>
                 <!-- /.modal-footer -->
-                
+                </form>
                 <!-- /.form -->
             </div>
             <!-- /.modal-content -->
@@ -192,7 +192,7 @@
         border-radius: 80%;
     }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script>
     $(document).ready(function() {
         $('#current_password').keyup(function() {

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\User;
 use App\Member;
 use App\Trip;
 
@@ -14,8 +15,8 @@ class DriverProfileController extends Controller
 {
       public function showDriverProfile()
       {
-        $userId = Auth::id();
-        $profile = Member::where('user_id', $userId)->first();
+        $driverId = Auth::id();
+        $profile = Member::where('user_id', $driverId)->first();
         $driverTrips = Trip::all();
         $counter = 0;
         foreach($driverTrips as $driverTrip){
@@ -25,7 +26,7 @@ class DriverProfileController extends Controller
         }
 
 
-        return view('drivermodule.profile.driverProfile', compact('profile', 'counter', 'userId'));
+        return view('drivermodule.profile.driverProfile', compact('profile', 'counter', 'driverId'));
 
       }
 
@@ -66,7 +67,7 @@ class DriverProfileController extends Controller
         ]);
       }
 
-      public function updatePassword()
+      public function updatePassword(User $driverId)
       {
         $checkCurrentPassword = Hash::check(request('current_password'), Auth::user()->password);
         if(!$checkCurrentPassword){
@@ -79,10 +80,6 @@ class DriverProfileController extends Controller
         Auth::user()->password = Hash::make(request('password'));
         Auth::user()->save();
         Auth::logout();
-        return redirect('/home')->with('success', 'Successfully changed password');
-
-
-
-
+        return redirect('/login')->with('success', 'Successfully changed password');
       }
 }
