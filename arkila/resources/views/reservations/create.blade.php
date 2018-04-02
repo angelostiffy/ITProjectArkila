@@ -1,5 +1,5 @@
 @extends('layouts.form_lg') 
-@section('title', 'Book a Seat') 
+@section('title', 'Line Reservation') 
 @section('form-id', 'regForm') 
 @section('form-action', route('reservations.store')) 
 @section('form-method', 'POST') 
@@ -10,7 +10,7 @@
     <div class="box-header with-border text-center">
         <a href="@yield('backRef')"><i class="fa  fa-chevron-left"></i></a>
         <h3 class="box-title">
-            Book a Seat
+        Line Reservation
         </h3>
     </div>
     <div class="box-body">
@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>Number of Seats: <span class="text-red">*</span></label>
+                        <label>Number of Person: <span class="text-red">*</span></label>
                         <input type="number" class="form-control" placeholder="Number of Seats" name="seat" id="seat" value="{{ old('seat') }}" val-num-seats required>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                 <dd id="nameView"></dd>
                 <dt>Destination:</dt>
                 <dd id="destView"></dd>
-                <dt>Number of Days:</dt>
+                <dt>Number of Person:</dt>
                 <dd id="seatView"></dd>
                 <dt>Contact Number:</dt>
                 <dd id="contactView"></dd>

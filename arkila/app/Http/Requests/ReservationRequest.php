@@ -47,7 +47,7 @@ class ReservationRequest extends FormRequest
                 "date" => "bail|required|date_format:m/d/Y|after_or_equal:today",
                 "dest" => "bail|required",
                 "time" => ['bail',new checkTime, 'required'],
-                "seat" => "bail|required|numeric|digits_between:1,2|min:0|max:15",
+                "seat" => "bail|required|numeric|digits_between:1,4|min:0|max:15",
                 "contactNumber" => ['bail',new checkContactNum],
                 "amount" => ['bail',new checkCurrency,'numeric','min:0'],
                 ];
@@ -57,7 +57,7 @@ class ReservationRequest extends FormRequest
                 "date" => "bail|required|date_format:m/d/Y|after_or_equal:today",
                 "dest" => "bail|required",
                 "time" => ['bail',new checkTime, 'required', 'after:' . $timeFormattedNow],
-                "seat" => "bail|required|numeric|digits_between:1,2|min:1|max:15",
+                "seat" => "bail|required|numeric|digits_between:1,4|min:1|max:15",
                 "contactNumber" => ['bail',new checkContactNum],
                 "amount" => ['bail',new checkCurrency,'numeric','min:0'],
             ];
