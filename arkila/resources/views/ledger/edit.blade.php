@@ -17,16 +17,16 @@
     <input type="text" class="form-control" name="payor" value="{{ $ledger->payee }}">
 </div>
 <div class="form-group">
-    <label for="Particulars">Particulars:</label>
-    <input type="text" class="form-control" name="particulars" value="{{ $ledger->description }}">
+    <label for="Particulars">Particulars:<span class="text-red">*</span></label>
+    <input type="text" class="form-control" name="particulars" value="{{ $ledger->description }}" required>
 </div>
 <div class="form-group">
     <label for="or">OR#:</label>
     <input type="text" class="form-control" name="or"  value="{{ $ledger->or_number }}">
 </div>
 <div class="form-group">
-    <label for="amount">Amount:</label>
-    <input type="number" class="form-control" name="amount" value="{{ $ledger->amount }}">
+    <label for="amount">Amount: <span class="text-red">*</span></label>
+    <input type="number" class="form-control" name="amount" step="0.25" placeholder="Php 0.00" value="{{ $ledger->amount }}" required>
 </div>
 <div class="form-group" name="revenueExpense">
 
@@ -42,18 +42,18 @@
         <div class="col-md-6">
             <label>Expense</label>
             <label class="radio-inline">
-                <input type="radio" value="Expense" name="type" class="with-gap" @if(old('type') || $ledger->type == 'Expense') {{ 'checked' }} @endif>      
+                <input type="radio" value="Expense" name="type" class="with-gap" @if(old('type') || $ledger->type == 'Expense') {{ 'checked' }} @endif>
             </label>
         </div>
     </div>
 </div>
-    
+
 @endsection
 @section('form-btn')
-    
+
     <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
 
-    
+
 @endsection
 
 @section('scripts')
