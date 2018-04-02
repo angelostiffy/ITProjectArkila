@@ -8,18 +8,24 @@
 @stop
 @section('content')
 
- 
+
 <div class="box">
 <div class="box-body">
- 
-    <h2 style="margin-left:37%">General Ledger</h2>
-    <div class="table-responsive">   
-   
-        <div id="reportrange" name="dateBetween" style="background: #fff; cursor: pointer; padding: 7px 10px; border: 1px solid #ccc; width: 30%; margin-left:31%">
-        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-        <span></span> <b class="caret"></b>
-        </div>
-    
+
+   <h2 style="margin-left:37%">General Ledger</h2>
+   @if ($start !== null && $end !==null)
+   <h4 style="margin-left:31%">Showing results from {{ $start }} to {{ $end }}.</h4>
+   @endif
+
+   <div class="table-responsive">
+    <div style="margin-left:28%">
+      <form method="POST" action="{{route('ledger.filter')}}">
+      {{csrf_field()}}
+        From: <input type="date" name="start">
+        To: <input type="date" name="end">
+        <button type="submit" class="btn btn-default btn-sm" name"search">SEARCH</button>
+      </form>
+    </div>
 
         <table class="table table-bordered table-striped generalLedgerTable">
             <thead>
@@ -86,11 +92,11 @@
                     <td class="text-right">{{$ledger->amount}}</td>
 
                     @else
-                    <td></td>                    
+                    <td></td>
                     <td class="text-right">{{number_format($ledger->amount * -1, 2)}}</td>
                     <td class="text-right">{{number_format($ledger->amount * -1, 2)}}</td>
                     @endif
-                    
+
                     <td>{{$ledger->created_at->formatLocalized('%B %d, %Y')}}</td>
 
                     <td class="center-block">
@@ -100,7 +106,7 @@
                         </div>
                     </td>
                 </tr>
-             
+
                     <!-- Modal for Delete-->
                     <div class="modal fade" id="{{'deleteLedger'. $ledger->ledger_id}}">
                         <div class="modal-dialog modal-sm">
@@ -118,7 +124,7 @@
                                     <div class="modal-footer">
                                          <form action="{{route('ledger.destroy', $ledger->ledger_id)}}" method="POST">
                                             {{csrf_field()}} {{method_field('DELETE')}}
-                                             
+
                                             <button type="button" class="btn btn-default" data-dismiss="modal">No</button> <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
                                     </div>
@@ -138,7 +144,7 @@
                 <th>TOTAL:</th>
                 <th style="text-align:right"></th>
                 <th style="text-align:right"></th>
-                <th colspan="2" style="text-align:left"></th>  
+                <th colspan="2" style="text-align:left"></th>
                 <th></th>
             </tr>
             </tfoot>
@@ -146,7 +152,7 @@
     </div>
 </div>
 </div>
- 
+
 @stop
 
 @section('scripts')
@@ -186,9 +192,9 @@
                             .addClass( 'compact' )
                             .css( 'font-size', 'inherit' );
                     }
-                    
+
                 }
-            ],     
+            ],
             'paging': false,
             'lengthChange': true,
             'searching': true,
@@ -200,8 +206,8 @@
                 'bSortable': false,
                 'aTargets': [-1] /* 1st one, start by the right */
             }],
-            
-            
+
+
             "footerCallback": function ( row, data, start, end, display ) {
                 var api = this.api(), data;
 
@@ -244,9 +250,9 @@
 
                 // show exp
                 $( api.column( 4 ).footer() ).html(
-                    expPageTotal 
+                    expPageTotal
                 );
-                            
+
                 // Total rev
                 revPageTotal = api
                     .column( 3, { page: 'current'} )
@@ -259,11 +265,11 @@
                 $( api.column( 3 ).footer() ).html(
                     revPageTotal
                 );
-                
-            }
-            
+
+            }, 
+
         });
-    
+
         var start = moment().subtract(29, 'days');
         var end = moment();
 
@@ -287,7 +293,7 @@
         cb(start, end);
 
     });
-    
+
     $(document).ready(function() {
         var table = $('.generalLedgerTable').DataTable();
 
@@ -296,7 +302,7 @@
             table.draw();
         } );
     } );
-  
+
 </script>
 
 @stop

@@ -17,16 +17,16 @@
     <input type="text" class="form-control" name="payor" value="{{ old('payor') }}">
 </div>
 <div class="form-group">
-    <label for="Particulars">Particulars:</label>
-    <input type="text" class="form-control" name="particulars" value="{{ old('particulars') }}">
+    <label for="Particulars">Particulars: <span class="text-red">*</span></label>
+    <input type="text" class="form-control" name="particulars" value="{{ old('particulars') }}" required>
 </div>
 <div class="form-group">
     <label for="or">OR#:</label>
     <input type="text" class="form-control" name="or" value="{{ old('or') }}">
 </div>
 <div class="form-group">
-    <label for="amount">Amount:</label>
-    <input type="text" class="form-control" name="amount" value="{{ old('amount') }}">
+    <label>Amount: <span class="text-red">*</span></label>
+    <input type="number" class="form-control" name="amount" step="0.25" placeholder="Php 0.00" value="{{ old('amount') }}" required>
 </div>
 
 <div class="form-group" name="revenueExpense">
@@ -45,10 +45,9 @@
         </div>
     </div>
 </div>
-    
+
 @endsection
-@section('form-btn')     
+@section('form-btn')
    <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
 
 @endsection
-

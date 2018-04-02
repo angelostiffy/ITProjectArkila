@@ -4,24 +4,20 @@
 @section('form-body')
                  
     <div class="form-group">
-        <label>Username:</label>
-        <input name="" type="text" class="form-control">
+        <label>Current Password:</label>
+        <input name="password" type="password" class="form-control">
     </div>
     <div class="form-group">
-        <label>Email:</label>
-        <input name="" type="text" class="form-control">
+        <label>New Password:</label>
+        <input name="password_confirmation" type="password" class="form-control">
     </div>
     <div class="form-group">
-        <label>Password:</label>
-        <input name="" type="text" class="form-control">
-    </div>
-    <div class="form-group">
-        <label>Reset Password:</label>
-        <input name="" type="text" class="form-control">
+        <label>Confirm Password:</label>
+        <input name="password_confirmation" type="password" class="form-control">
     </div>
 
 @endsection
 @section('form-btn')
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
 @endsection
 

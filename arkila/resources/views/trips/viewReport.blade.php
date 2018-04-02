@@ -1,4 +1,4 @@
-@extends('layouts.master') 
+@extends('layouts.master')
 @section('title', 'Report Details')
 @section('links')
 @section('content')
@@ -32,7 +32,7 @@
                                     @php $totalPassengers = $totalPassengers + $values->counts; @endphp
                                     @endif
                                 @endforeach
-                                
+
 
                                 <label for="">Total</label>
                                 <input id="" class="form-control pull-right" type="text" id="total" style="width:30%;" value="{{$totalPassengers}}" disabled>
@@ -53,7 +53,7 @@
                         <div>
                             <label>Van:</label>
                             <name>{{$trip->plate_number}}</name>
-                        </div> 
+                        </div>
                         <div>
                             <label>Origin:</label>
                             <name>{{$superAdmin->description}}</name>
@@ -69,8 +69,8 @@
                         <div>
                             <label>Time:</label>
                             <name>{{$trip->time_departed}}</name>
-                        </div> 
-                        
+                        </div>
+
                         <div class="box" style="margin: 3% 0%">
                             <div class="box-header text-center">
                                 <h4>Shares</h4>
@@ -84,7 +84,7 @@
                                     @else
                                         @php $bantrans = $trip->total_booking_fee + $trip->SOP + $trip->community_fund  @endphp
                                     @endif
-                                    
+
                                     @php $totalfare = 0; @endphp
                                     @foreach($destinations as $key => $values)
                                         @php $totalfare = $totalfare + ($values->amount * $values->counts); @endphp
@@ -94,32 +94,32 @@
 
                                 <label for="">Driver:</label>
                                 <input id="" class="form-control pull-right" type="number" id="total" style="width:30%;" value="{{$totalfare - $bantrans}}" disabled>
-                                
+
                                 <hr>
-                                
+
                                 <label for="">Total:</label>
                                 <input id="" class="form-control pull-right" type="number" id="total" style="width:30%;" value="{{$totalfare}}" disabled>
-                                
+
                             </div>
                         </div>
                         <div class="text-center" style="margin: 5%;">
                             <div class="row">
                                 <div class="col col-md-6">
-                                    <form action="{{route('trips.acceptReport', [$trip->trip_id])}}" method="POST">
+                                    <form action="{{route('trips.acceptReport', $trip->trip_id)}}" method="POST">
                                         {{csrf_field()}}
                                         {{method_field('PATCH')}}
                                         <button class="btn btn-success btn-sm" data-dismiss="modal"><i class="fa fa-check"></i>Accept</button>
                                     </form>
                                 </div>
-                                
+
                                 <div class="col col-md-6">
-                                    <form action="{{route('trips.declineReport', [$trip->trip_id])}}" method="POST">
+                                    <form action="{{route('trips.declineReport', $trip->trip_id)}}" method="POST">
                                         {{csrf_field()}}
                                         {{method_field('PATCH')}}
                                         <button class="btn btn-danger btn-sm"><i class="fa fa-close"></i>Decline</button>
                                     </form>
                                 </div>
-                            </div>    
+                            </div>
                         </div>
                     </div>
                     </div>
