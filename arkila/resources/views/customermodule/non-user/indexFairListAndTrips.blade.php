@@ -52,6 +52,7 @@
                                             <th>Plate No.</th>
                                         </tr>
                                     </thead>
+
                                     @foreach($trips as $trip)
                                       @if($trips->where('terminal_id', $terminal->terminal_id)->count() > 0 )
                                       <tr>
@@ -65,6 +66,7 @@
                                       </tr>
                                       @endif
                                     @endforeach
+
                                 </table>
                             </div>
                             <!-- box-body-->

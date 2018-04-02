@@ -1,5 +1,4 @@
 
-        <!-- container-->
         <div class="heading text-center" style="color:white;">
                 <h2><i class="fa fa-car"></i> Fare Lists and Current Trips</h2>
             </div>
@@ -52,7 +51,7 @@
                                             <th>Plate No.</th>
                                         </tr>
                                     </thead>
-                                  </thead>
+
                                   @foreach($trips as $trip)
                                     @if($trips->where('terminal_id', $terminal->terminal_id)->count() > 0 )
                                     <tr>
@@ -66,6 +65,7 @@
                                     </tr>
                                     @endif
                                   @endforeach
+
                                 </table>
                             </div>
                             <!-- box-body-->
