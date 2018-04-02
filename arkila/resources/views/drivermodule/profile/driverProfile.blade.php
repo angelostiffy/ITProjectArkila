@@ -7,7 +7,7 @@
         <div class="box-body box-profile">
             <img class="profile-user-img img-responsive img-circle" src="../dist/img/user4-128x128.jpg" alt="User profile picture">
             <h3 class="profile-username text-center">{{ $profile->first_name.' '.$profile->middle_name.' '.$profile->last_name }}</h3>
-            <p class="text-muted text-center">1232gmailcom</p>
+            <p class="text-muted text-center"></p>
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

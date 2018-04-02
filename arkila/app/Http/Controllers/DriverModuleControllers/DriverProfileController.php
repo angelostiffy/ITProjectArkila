@@ -15,7 +15,7 @@ class DriverProfileController extends Controller
       public function showDriverProfile()
       {
         $userId = Auth::id();
-        $profile = Member::find(Auth::id());
+        $profile = Member::where('user_id', $userId)->first();
         $driverTrips = Trip::all();
         $counter = 0;
         foreach($driverTrips as $driverTrip){

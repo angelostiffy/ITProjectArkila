@@ -93,20 +93,33 @@
                                 </div>
 
                                 <label for="">Driver:</label>
+                                <input id="" class="form-control pull-right" type="number" id="total" style="width:30%;" value="{{$totalfare - $bantrans}}" disabled>
+                                
+                                <hr>
+                                
+                                <label for="">Total:</label>
                                 <input id="" class="form-control pull-right" type="number" id="total" style="width:30%;" value="{{$totalfare}}" disabled>
+                                
                             </div>
                         </div>
                         <div class="text-center" style="margin: 5%;">
-                            <form action="{{route('trips.acceptReport', [$trip->trip_id])}}" method="POST">
-                                {{csrf_field()}}
-                                {{method_field('PATCH')}}
-                                <button class="btn btn-success btn-sm" data-dismiss="modal"><i class="fa fa-check"></i>Accept</button>
-                            </form>
-                            <form action="{{route('trips.declineReport', [$trip->trip_id])}}" method="POST">
-                                {{csrf_field()}}
-                                {{method_field('PATCH')}}
-                                <button class="btn btn-danger btn-sm"><i class="fa fa-close"></i>Decline</button>
-                            </form>
+                            <div class="row">
+                                <div class="col col-md-6">
+                                    <form action="{{route('trips.acceptReport', [$trip->trip_id])}}" method="POST">
+                                        {{csrf_field()}}
+                                        {{method_field('PATCH')}}
+                                        <button class="btn btn-success btn-sm" data-dismiss="modal"><i class="fa fa-check"></i>Accept</button>
+                                    </form>
+                                </div>
+                                
+                                <div class="col col-md-6">
+                                    <form action="{{route('trips.declineReport', [$trip->trip_id])}}" method="POST">
+                                        {{csrf_field()}}
+                                        {{method_field('PATCH')}}
+                                        <button class="btn btn-danger btn-sm"><i class="fa fa-close"></i>Decline</button>
+                                    </form>
+                                </div>
+                            </div>    
                         </div>
                     </div>
                     </div>
