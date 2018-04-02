@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Van;
+use App\User;
 
 class Rental extends Model
 {
@@ -15,6 +16,10 @@ class Rental extends Model
 
     public function van(){
     	return $this->belongsTo(Van::Class, 'plate_number');
+    }
+
+    public function users(){
+    	return $this->belongsTo(User::Class, 'driver_id', 'id');
     }
 
     public function getFullNameAttribute(){

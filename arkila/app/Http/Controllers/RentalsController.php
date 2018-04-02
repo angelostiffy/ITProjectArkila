@@ -106,7 +106,7 @@ class RentalsController extends Controller
         $rental->update([
             'status' => request('click'),
         ]);
-        return redirect()->back()->with('success', 'Rental marked '. request('click'));
+        return redirect()->back()->with('success', 'Rental requested by ' . $rental->full_name . ' was marked as '. request('click'));
         
     }
 
