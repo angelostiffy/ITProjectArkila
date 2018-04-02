@@ -195,7 +195,7 @@ Route::get('/', 'CustomerModuleControllers\CustomerNonUserHomeController@indexNo
     Route::get('/ledger/daily-ledger/generate-pdf', 'LedgersController@generatePDF')->name('pdf.ledger');
     Route::get('/home/listOfVans-pdf', 'VansController@generatePDF')->name('pdf.van');
     Route::get('/trip-log/pdf/{trip}', 'TripsController@generatePerTrip')->name('pdf.perTrip');
-
+    Route::post('/home/general-ledger/date-range', 'LedgersController@dateRange')->name('ledger.filter');
 
  });
 /*****************************************************************************/

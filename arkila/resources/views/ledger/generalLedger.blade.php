@@ -14,13 +14,15 @@
  
     <h2 style="margin-left:37%">General Ledger</h2>
     <div class="table-responsive">   
-   
-        <div id="reportrange" name="dateBetween" style="background: #fff; cursor: pointer; padding: 7px 10px; border: 1px solid #ccc; width: 30%; margin-left:31%">
-        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-        <span></span> <b class="caret"></b>
-        </div>
-    
-
+   <form method="POST" action="{{route('ledger.filter')}}">
+   {{csrf_field()}}
+        From:<input type="date" name="start">
+        To:<input type="date" name="end">
+        <button type="submit" name"search">Search</button>
+    </form>
+    @if ($start !== null && $end !==null)
+    <h3>Showing results from {{ $start }} to {{ $end }}.</h3>
+    @endif
         <table class="table table-bordered table-striped generalLedgerTable">
             <thead>
                 <tr>
