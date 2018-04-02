@@ -13,7 +13,7 @@ $('[val-num-days]').parsley({
 });
 
 $('[val-num-seats]').parsley({
-	range: [1,2]
+	range: [1,4]
 });
 
 $('[val-num-days]').attr('data-parsley-required-message','Please enter a number of days.');

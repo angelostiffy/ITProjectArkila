@@ -10,7 +10,8 @@ class ViewAnnouncementsController extends Controller
 {
 	public function showAnnouncement()
 	{
-		$announcements = Announcement::latest()->where('viewer', '=', 'Public')->orWhere('viewer', '=', 'Customer Only')->get();
+		$announcements = Announcement::latest()->where('viewer', '=', 'Public')
+																	->orWhere('viewer', '=', 'Customer Only')->limit(5)->get();
     	return view('customermodule.user.indexAnnouncements', compact('announcements'));
 	}
 }

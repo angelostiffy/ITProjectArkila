@@ -39,14 +39,14 @@
 
                                         <a href="" class="btn btn-default btn-sm"><i class="fa fa-eye"></i>View</a>
 
-                                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteDriver"><i class="fa fa-trash"></i> Delete</button>
+                                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{'deleteDriver', [$driver->member_id]}}"><i class="fa fa-trash"></i> Delete</button>
                                     </div>
 
                                 </td>
                             </tr>
 
                             <!--DELETE MODAL MIGUEL-->
-                            <div class="modal fade" id="deleteDriver">
+                            <div class="modal fade" id="{{'deleteDriver', [$driver->member_id]}}">
                                 <div class="modal-dialog">
                                     <div class="col-md-offset-2 col-md-8">
                                         <div class="modal-content">
@@ -60,7 +60,7 @@
                                                            <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
                                                        </div>
                                                        <div class="col-md-10">
-                                                        <p style="font-size: 110%;">Are you sure you want to delete ""</p>
+                                                        <p style="font-size: 110%;">Are you sure you want to delete "{{ $driver->full_name }}"</p>
                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">
