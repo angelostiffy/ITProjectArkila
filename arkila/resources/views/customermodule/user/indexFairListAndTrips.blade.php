@@ -1,4 +1,4 @@
-<!-- container-->
+
         <div class="heading text-center" style="color:white;">
                 <h2><i class="fa fa-car"></i> Fare Lists and Current Trips</h2>
             </div>
@@ -36,7 +36,7 @@
                     </div>
                     <!-- testimonial-->
                 </li>
-                
+
                 <li class="item">
                     <div class="testimonial d-flex flex-wrap">
                         <div class="box zoom" style="margin-top:-10%;">
@@ -51,18 +51,21 @@
                                             <th>Plate No.</th>
                                         </tr>
                                     </thead>
-                                    @if($trips->where('terminal_id', $terminal->terminal_id)->count() > 0)
-                                        @foreach($trips as $trip)
-                                            @if($trip->terminal_id == $terminal->terminal_id)
+
+                                  @foreach($trips as $trip)
+                                    @if($trips->where('terminal_id', $terminal->terminal_id)->count() > 0 )
                                     <tr>
                                         <td>{{$trip->queue_number}}</td>
                                         <td>{{$trip->plate_number}}</td>
                                     </tr>
-                                        @endif
-                                        @endforeach
                                     @else
-                                        <td>No Current Trips for {{$terminal->description}}</td>    
-                                    @endif    
+                                    <tr>
+                                        <td>No van on deck</td>
+                                        <td></td>
+                                    </tr>
+                                    @endif
+                                  @endforeach
+
                                 </table>
                             </div>
                             <!-- box-body-->
