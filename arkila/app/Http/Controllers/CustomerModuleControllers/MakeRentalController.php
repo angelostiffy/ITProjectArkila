@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\CustomerModuleControllers;
 
-use Carbon\Carbon;
-use App\VanModel;
+use App\User;
 use App\Rental;
-use Illuminate\Support\Facades\Auth;
+use App\VanModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Notifications\CustomerRent;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CustomerRentalRequest;
 
 use App\Http\Controllers\Controller;
@@ -22,7 +24,8 @@ class MakeRentalController extends Controller
     public function storeRental(CustomerRentalRequest $request)
     {
     	if($request->message == null){
-    		Rental::create([
+    		$rent = Rental::create([
+    			"user_id" => Auth::id(),
 	    		"first_name" => Auth::user()->first_name,
 	    		"last_name" => Auth::user()->last_name,
 	    		"middle_name" => Auth::user()->middle_name,
@@ -36,7 +39,8 @@ class MakeRentalController extends Controller
 	    		"rent_type" => 'Online',
     		]);
     	}else{
-    		Rental::create([
+    		$rent = Rental::create([
+    			"user_id" => Auth::id(),
 	    		"first_name" => Auth::user()->first_name,
 	    		"last_name" => Auth::user()->last_name,
 	    		"middle_name" => Auth::user()->middle_name,
@@ -50,7 +54,11 @@ class MakeRentalController extends Controller
 	    		"rent_type" => 'Online',
 	    		"comments" => $request->message
     		]);
-    	}	
-    	return redirect(route('customermodule.user.transactions.customerTransactions'))->with('success', 'Successfully made a rental');
+    	}
+
+    	$userNotif = User::find(Auth::id());
+    	$user = Auth::user();
+    	$userNotif->notify(new CustomerRent($user,$rent));
+    	return 	redirect(route('customermodule.user.transactions.customerTransactions'))->with('success', 'Successfully made a rental');
     }
 }
