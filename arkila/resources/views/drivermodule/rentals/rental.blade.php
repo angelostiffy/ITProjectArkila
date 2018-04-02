@@ -21,7 +21,7 @@
     </thead>
     <tbody>
         @foreach($rentals->sortByDesc('status') as $rental)
-            @if ($rental->status == 'Pending')
+            @if ($rental->status == 'Pending' && $rental->model_id == Auth::user()->model_id || $rental->model_id == null)
         <tr>
             <td>{{ $rental->rent_id }}</td>
             <td>{{ $rental->full_name }}</td>
@@ -29,7 +29,7 @@
             <td>{{ $rental->departure_date }}</td>
             <td>{{ $rental->departure_time }}</td>
             <td>{{ $rental->contact_number }}</td>
-            <td>{{ $rental->vanmodel->description }}</td>
+            <td>{{ $rental->vanmodel->description ?? 'None' }}</td>
             <td>{{ $rental->status }}</td>
             <td class="center-block">
                 <div class="text-center">
@@ -40,7 +40,7 @@
                         <button class="btn btn-success btn-sm" name="click" onclick="return ConfirmStatus()" value="Accepted"><i class="fa fa-automobile"></i> Accept</button>
 
                     </form>
-                    @else
+                    @elseif ($rental->status == 'Departed')
                      <form method="POST" action="">
                         {{csrf_field()}} {{method_field('DELETE')}}
                         <button type="submit" class="btn btn-danger btn-sm" style="width:22%;">Delete</button>
@@ -52,7 +52,7 @@
             </td>
         </tr>
         @endif
-        @if ($rental->driver_id == Auth::id())
+        @if ($rental->driver_id == Auth::id() && $rental->model_id == Auth::user()->model_id)
         <tr>
             <td>{{ $rental->rent_id }}</td>
             <td>{{ $rental->full_name }}</td>
@@ -71,7 +71,7 @@
                         <button class="btn btn-success btn-sm" name="click" onclick="return ConfirmStatus()" value="Accepted"><i class="fa fa-automobile"></i> Accept</button>
 
                     </form>
-                    @else
+                    @elseif ($rental->status == 'Departed')
                      <form method="POST" action="">
                         {{csrf_field()}} {{method_field('DELETE')}}
                         <button type="submit" class="btn btn-danger btn-sm" style="width:22%;">Delete</button>

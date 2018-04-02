@@ -36,7 +36,11 @@
                             <td>{{ $rental->departure_time }}</td>
                             <td>{{ $rental->contact_number }}</td>
                             <td>{{ $rental->vanmodel->description ?? 'None' }}</td>
+                            @if ($rental->status == 'Pending')
                             <td>{{ $rental->status }}</td>
+                            @else
+                            <td>{{ $rental->status }} by {{ $rental->users->last_name  }}, {{ $rental->users->first_name  }}</td>
+                            @endif                            
                             <td class="center-block">
                                 <div class="center-block">
                                     @if ($rental->status == 'Paid' | $rental->status == 'Accepted')
@@ -56,7 +60,7 @@
                                                     </div>
                                                     <div class="modal-body row" style="margin: 0% 1%;">
 
-                                                        <p style="font-size: 110%;">Are you sure you want to depart rental #{{$rental->rent_id}}?</p>
+                                                        <p style="font-size: 110%;">Are you sure you want to depart rental from {{$rental->full_name}} going to {{ $rental->destination }}?</p>
 
                                                     </div>
                                                     <div class="modal-footer">

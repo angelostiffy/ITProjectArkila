@@ -48,8 +48,8 @@
                             </div>
                             <div class="modal-footer">
                                 @if($operators && $operator)
-                                <form action="{{ route('operators.archiveOperator', [$operator->member_id]) }}" method="POST">
-                                    {{ csrf_field() }}
+                                <form action="{{ route('operators.destroy', [$operator->member_id]) }}" method="POST">
+                                    {{ csrf_field() }} {{method_field('DELETE')}}
                                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                                     <button type="submit" class="btn btn-danger">Delete</button>
                                 </form>

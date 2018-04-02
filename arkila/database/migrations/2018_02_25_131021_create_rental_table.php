@@ -25,15 +25,17 @@ class CreateRentalTable extends Migration
             ->unsigned();
             $table->string('first_name', 50);
             $table->string('last_name', 50);
-            $table->string('middle_name', 50);
+            $table->string('middle_name', 50)
+            ->nullable();
             $table->string('departure_date');
             $table->string('departure_time', 8);
             $table->integer('model_id')
-            ->unsigned();
+            ->unsigned()
+            ->nullable();
             $table->smallInteger('number_of_days');
             $table->string('destination');
             $table->string('contact_number', 13);
-            $table->enum('status', ['Departed', 'Pending', 'Declined', 'Accepted','Cancelled', 'Paid'])
+            $table->enum('status', ['Departed', 'Pending', 'Declined', 'Accepted','Cancelled'])
             ->default('Pending');
             $table->enum('rent_type', ['Online', 'Walk-in']);
             $table->string('comments', 300)

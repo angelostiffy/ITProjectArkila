@@ -53,6 +53,11 @@ class User extends Authenticatable
       return $this->hasMany(Rental::class, 'user_id', 'id');
     }
 
+    public function rentals()
+    {
+      return $this->hasMany(Rental::class, 'driver_id', 'id');
+    }
+
     public function scopeStatusEnable($query)
     {
       return $query->where('status', '=', 'enable');
