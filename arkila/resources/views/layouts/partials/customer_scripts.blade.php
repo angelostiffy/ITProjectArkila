@@ -1,5 +1,4 @@
-@section('scripts')
-  
+ 
    {{ Html::script('customer/vendor/jquery/jquery.min.js') }} 
    {{ Html::script('customer/vendor/popper.js/umd/popper.min.js') }} 
    {{ Html::script('customer/vendor/bootstrap/js/bootstrap.min.js') }} 
@@ -27,5 +26,14 @@
     
     <!-- Awesome Functions-->
     {{ Html::script('js/awesome-functions-min.js') }}
-   
-@show
+    
+    <!-- Bootstrap Datepicker -->
+    {{ Html::script('customer/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}
+
+    <!-- Bootstrap Timepicker -->
+    {{ Html::script('customer/plugins/timepicker/bootstrap-timepicker.min.js') }}
+
+    <!-- Select 2-->
+    {{ Html::script('customer/bower_components/select2/dist/js/select2.full.min.js') }}
+    
+    

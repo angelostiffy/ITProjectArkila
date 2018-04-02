@@ -120,6 +120,20 @@
 @section('scripts')
 @parent
 <script>
+    
+        $(function() {
+            $('.datepicker').datepicker({
+                autoclose: true
+            });
+            
+        $('#timepicker').timepicker({
+            showInputs: false,
+            defaultTime: false
+        });
+        })
+        $('[data-mask]').inputmask()
+            $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
+            
     function getDestination(elementId){
         var sel = document.getElementById(elementId);
         if (sel.selectedIndex == -1){

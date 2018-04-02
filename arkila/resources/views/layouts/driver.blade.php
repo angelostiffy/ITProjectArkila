@@ -42,7 +42,8 @@
     @section('scripts') 
     @parent 
     @include('layouts.partials.scripts') 
-    @include('message.error') @include('message.success') 
+    @include('message.error') 
+    @include('message.success') 
     @show
 
 </body>

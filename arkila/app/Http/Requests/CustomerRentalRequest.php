@@ -34,34 +34,26 @@ class CustomerRentalRequest extends FormRequest
         $dateFormattedNow = $thisDate->format('m/d/Y');
         $timeFormattedNow = $thisDate->format('h:i A');
         
-        $dateToday = $request->date;
-        $mm = substr($dateToday, '0', 2);
-        $dd = substr($dateToday, '3', 2);
-        $yy = substr($dateToday, '6', 4);
-        if ($mm == 'mm' || $dd == 'dd' || $yy == 'yyyy' || $dateToday == null) {
-            return [
-                "date" => 'bail|required|date_format:m/d/Y|after_or_equal:today',
-            ];
-        }
+    
         $dateCarbon = new Carbon(request('date'));
         $dateFormatted = $dateCarbon->format('m/d/Y');
 
         if($dateFormatted !== $dateFormattedNow){
             return [
-                "rentalDestination" => "bail|required|regex:/^[,\pL\s\-]+$/u|max:50",
-                "contactNumber" => ['bail',new checkContactNum],
-                "numberOfDays" => "bail|required|numeric|digits_between:1,2|min:1",
-                "date" => "bail|required|date_format:m/d/Y|after_or_equal:today",
-                "time" => ["bail",new checkTime, "required"],
+                "rentalDestination" => "required|regex:/^[,\pL\s\-]+$/u|max:50",
+                "contactNumber" => ["required", new checkContactNum],
+                "numberOfDays" => "required|numeric|digits_between:1,2|min:1",
+                "date" => "required|date_format:m/d/Y|after_or_equal:today",
+                "time" => ["required", new checkTime],
                 "message" => "string|max:300|nullable",
             ]; 
         }else{
             return [
-                "rentalDestination" => "bail|required|regex:/^[,\pL\s\-]+$/u|max:50",
-                "contactNumber" => ['bail',new checkContactNum],
-                "numberOfDays" => "bail|required|numeric|digits_between:1,2|min:1",
-                "date" => "bail|required|date_format:m/d/Y|after:" . $timeFormattedNow,
-                "time" => ["bail",new checkTime, "required"],
+                "rentalDestination" => "required|regex:/^[,\pL\s\-]+$/u|max:50",
+                "contactNumber" => ["required", new checkContactNum],
+                "numberOfDays" => "required|numeric|digits_between:1,2|min:1",
+                "date" => "required|date_format:m/d/Y|after:" . $timeFormattedNow,
+                "time" => ["required", new checkTime],
                 "message" => "string|max:300|nullable",
             ];
         }   

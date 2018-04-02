@@ -1,11 +1,4 @@
-@section('links')
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ban Trans</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="all,follow">
-    
+
     <!-- Bootstrap CSS-->
     {{ Html::style('customer/vendor/bootstrap/css/bootstrap.min.css') }}
     <!-- Font Awesome CSS-->
@@ -34,8 +27,19 @@
     {{ Html::style('css/client-side_validation/parsley.css') }}
     {{ Html::style('css/notifications/pnotify.custom.min.css') }}
     {{ Html::style('css/notifications/animate.css') }}
+    
+    <!-- Bootstrap Datepicker -->
+    {{ Html::style('customer/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}
+    
+    <!-- Bootstrap Timepicker -->
+    {{ Html::style('customer/plugins/timepicker/bootstrap-timepicker.min.css') }}
 
-@show
+    <!-- Select 2-->
+    {{ Html::style('customer/bower_components/select2/dist/css/select2.min.css') }}
+        
+            
+    {{ Html::style('customer/bower_components/bootstrap/dist/css/glyphicon.css') }}
+
         
     
  
