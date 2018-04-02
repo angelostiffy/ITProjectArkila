@@ -15,9 +15,6 @@ class CreateLedgerTable extends Migration
     {
         Schema::create('ledger', function (Blueprint $table) {
             $table->increments('ledger_id');
-            $table->integer('trip_id')
-            ->unsigned()
-            ->nullable();
 
             $table->string('description');
             $table->string('payee')
@@ -30,10 +27,6 @@ class CreateLedgerTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('trip_id')
-            ->references('trip_id')->on('trip')
-            ->onDelete('restrict')
-            ->onUpdate('cascade');
         });
     }
 
