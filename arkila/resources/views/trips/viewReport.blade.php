@@ -48,7 +48,7 @@
                         </div>
                          <div>
                             <label>Driver:</label>
-                            <name>{{$trip->driver->first_name . " " . $trip->driver->middle_name . " " . $trip->driver->last_name}}<</name>
+                            <name>{{$trip->driver->first_name . " " . $trip->driver->middle_name . " " . $trip->driver->last_name}}</name>
                         </div>
                         <div>
                             <label>Van:</label>

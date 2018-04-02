@@ -59,9 +59,21 @@
                     <td></td>
                 </tr>
                 @endforeach
+                @foreach ($expired as $expire)
+                <tr>
+                    <td></td>
+                    <td>{{$expire->description}}</td>
+                    <td></td>
+                    <td class="text-right">{{ $expire->total_amount }}</td>
+                    <td></td>
+                    <td class="text-right">{{ $expire->total_amount }}</td>
+                    <td>{{$expire->created_at->formatLocalized('%B %d, %Y')}}</td>
+                    <td></td>
+                </tr>
+                @endforeach
 
             @foreach ($ledgers->sortByDesc('ledger_id') as $ledger)
-                @if ($ledger->description !== 'Booking Fee' && $ledger->description !== 'SOP')
+                @if ($ledger->description !== 'Booking Fee' && $ledger->description !== 'SOP' && $ledger->description !== 'Expired Ticket')
 
                 <tr>
                     <td>{{$ledger->payee}}</td>
@@ -181,9 +193,9 @@
             'lengthChange': true,
             'searching': true,
             'ordering': true,
-            'info': false,
+            'info': true,
             'autoWidth': true,
-            'order': [[ 6, "desc" ]],
+            'order': [[ 6, "asc" ]],
             'aoColumnDefs': [{
                 'bSortable': false,
                 'aTargets': [-1] /* 1st one, start by the right */
@@ -219,7 +231,7 @@
 
                 // balance
                 $( api.column( 5 ).footer() ).html(
-                    '$'+pageTotal +' ( $'+ total +' total)'
+                    pageTotal +' ('+ total +' total)'
                 );
 
                 // Total exp
@@ -232,7 +244,7 @@
 
                 // show exp
                 $( api.column( 4 ).footer() ).html(
-                    '$'+expPageTotal 
+                    expPageTotal 
                 );
                             
                 // Total rev
@@ -245,7 +257,7 @@
 
                 // show rev
                 $( api.column( 3 ).footer() ).html(
-                    '$'+revPageTotal
+                    revPageTotal
                 );
                 
             }

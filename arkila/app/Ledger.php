@@ -58,6 +58,14 @@ class Ledger extends Model
         ->groupBy('description')
         ->sum('amount');
     }
+
+    public function getExpiredTicketAttribute() {
+        $now = Carbon::now()->format('Y-m-d');
+        return $this->where('description', 'Expired Ticket')
+        ->where('created_at', 'like', $now . '%')
+        ->groupBy('description')
+        ->sum('amount');
+    }
     
     public function scopeAllBooking($query) {
         return $query->where('description', 'Booking Fee')->orWhere('description', 'SOP')->groupBy(DB::raw('day(created_at)'), DB::raw('month(created_at)'), DB::raw('year(created_at)'));

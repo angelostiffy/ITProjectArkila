@@ -58,7 +58,7 @@ class OperatorRequest extends FormRequest
                         Rule::in(['Single', 'Married', 'Divorced', 'Widowed'])
                     ],
                     'nameOfSpouse' => ['bail','required_if:civilStatus,Married','required_with:spouseBirthDate','max:40', 'nullable',new checkName],
-                    'spouseBirthDate' => 'bail|required_with:nameOfSpouse|nullable|date|before:today',
+                    'spouseBirthDate' => ['bail','required_with:nameOfSpouse','nullable','date','before:today',new checkAge],
                     'fathersName' => ['bail','required_with:fatherOccupation','max:50', 'nullable',new checkName],
                     'fatherOccupation' => ['bail','required_with:fathersName','max:30', 'nullable', new checkOccupation],
                     'mothersName' => ['bail','required_with:motherOccupation','max:50', 'nullable',new checkName],
@@ -70,7 +70,7 @@ class OperatorRequest extends FormRequest
                     'licenseNo' => ['bail','required_with:licenseExpiryDate',new checkLicense],
                     'licenseExpiryDate' => 'bail|required_with:licenseNo|nullable|date|after:today',
                     'children.*' => ['bail','required_with:childrenBDay.*','distinct', 'nullable', new checkName, 'max:40'],
-                    'childrenBDay.*' => 'bail|required_with:children.*|nullable|date|before:tomorrow'
+                    'childrenBDay.*' => 'bail|required_with:children.*|nullable|date|before:tomorrow|after:'.$this->birthDate
                 ];
             }
             case 'PATCH':
@@ -97,7 +97,7 @@ class OperatorRequest extends FormRequest
                             Rule::in(['Single', 'Married', 'Divorced', 'Widowed'])
                         ],
                         'nameOfSpouse' => ['bail','required_if:civilStatus,Married','required_with:spouseBirthDate','max:40', 'nullable', new checkName],
-                        'spouseBirthDate' => 'bail|required_with:nameOfSpouse|nullable|date|before:today',
+                        'spouseBirthDate' => ['bail','required_with:nameOfSpouse','nullable','date','before:today',new checkAge],
                         'fathersName' => ['bail','required_with:fatherOccupation','max:50', 'nullable', new checkName],
                         'fatherOccupation' => ['bail','required_with:fathersName','max:30', 'nullable', new checkOccupation],
                         'mothersName' => ['bail','required_with:motherOccupation','max:50', 'nullable',new checkName],
@@ -109,7 +109,7 @@ class OperatorRequest extends FormRequest
                         'licenseNo' => ['bail','required_with:licenseExpiryDate', new checkLicense],
                         'licenseExpiryDate' => 'bail|required_with:licenseNo|nullable|date|after:today',
                         'children.*' => ['bail','required_with:childrenBDay.*','distinct', 'nullable', new checkName,'max:50'],
-                        'childrenBDay.*' => 'bail|required_with:children.*|nullable|date|before:tomorrow'
+                        'childrenBDay.*' => 'bail|required_with:children.*|nullable|date|before:tomorrow|after:'.$this->birthDate
                     ];
 
             }

@@ -48,7 +48,7 @@
                         </div>
                          <div>
                             <label>Driver:</label>
-                            <name>{{$trip->driver->first_name . " " . $trip->driver->middle_name . " " . $trip->driver->last_name}}<</name>
+                            <name>{{$trip->driver->first_name . " " . $trip->driver->middle_name . " " . $trip->driver->last_name}}</name>
                         </div>
                         <div>
                             <label>Van:</label>
@@ -94,8 +94,11 @@
 
                                 <label for="">Driver:</label>
                                 <input id="" class="form-control pull-right" type="number" id="total" style="width:30%;" value="{{$totalfare}}" disabled>
+                                
                             </div>
                         </div>
+                        
+                        <button onclick="window.open('{{route('pdf.perTrip', $trip->trip_id)}}')" class="btn btn-default btn-sm btn-flat pull-right"> <i class="fa fa-print"></i> PRINT</button>
 
                     </div>
                     </div>

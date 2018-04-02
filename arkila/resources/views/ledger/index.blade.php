@@ -33,20 +33,20 @@
         @foreach ($ledgers->sortByDesc('ledger_id') as $ledger)
             @if ($ledger->created_at->format('m-d-Y') == $date->format('m-d-Y'))
             <tr>
-                @if ($ledger->description !== 'Booking Fee' AND $ledger->description !== 'SOP')
+                @if ($ledger->description !== 'Booking Fee' && $ledger->description !== 'SOP' && $ledger->description !== 'Expired Ticket')
                 <td>{{$ledger->payee}}</td>
                 <td>{{$ledger->description}}</td>
                 <td>{{$ledger->or_number}}</td>
                 @if ($ledger->type == 'Revenue')
 
-                <td class="text-right">&#8369;{{$ledger->amount}}</td>
+                <td class="text-right">{{$ledger->amount}}</td>
                 <td></td>
-                <td class="text-right">&#8369;{{$ledger->amount}}</td>
+                <td class="text-right">{{$ledger->amount}}</td>
 
                 @else
                 <td></td>                    
-                <td class="text-right">&#8369;{{$ledger->amount}}</td>
-                <td class="text-right">-&#8369;{{$ledger->amount}}</td>
+                <td class="text-right">{{number_format($ledger->amount * -1, 2)}}</td>
+                <td class="text-right">{{number_format($ledger->amount * -1, 2)}}</td>
 
                 @endif
 
@@ -94,30 +94,38 @@
                     <td></td>
                     <td>Booking Fee(Baguio)</td>
                     <td></td>
-                    <td class="text-right">&#8369;{{$ledger->booking_fee}}</td>
+                    <td class="text-right">{{$ledger->booking_fee}}</td>
                     <td></td>
-                    <td class="text-right">&#8369;{{$ledger->booking_fee}}</td>
+                    <td class="text-right">{{$ledger->booking_fee}}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>SOP</td>
                     <td></td>
-                    <td class="text-right">&#8369;{{$ledger->sop}}</td>
+                    <td class="text-right">{{$ledger->sop}}</td>
                     <td></td>
-                    <td class="text-right">&#8369;{{$ledger->sop}}</td>
+                    <td class="text-right">{{$ledger->sop}}</td>
                     <td></td>
                 </tr>
-
+                <tr>
+                    <td></td>
+                    <td>Expired Ticket</td>
+                    <td></td>
+                    <td class="text-right">{{$ledger->expired_ticket}}</td>
+                    <td></td>
+                    <td class="text-right">{{$ledger->expired_ticket}}</td>
+                    <td></td>
+                </tr>
         </tbody>
         <tfoot>
             <tr>
                 <th></th>
                 <th></th>
                 <th>TOTAL:</th>
-                <th class="text-right">&#8369;{{$ledger->total_revenue}}</th>
-                <th class="text-right">&#8369;{{$ledger->total_expense}}</th>
-                <th class="text-right">&#8369;{{ number_format($ledger->balance, 2) }}</th>
+                <th class="text-right">{{$ledger->total_revenue}}</th>
+                <th class="text-right">{{$ledger->total_expense}}</th>
+                <th class="text-right">{{ number_format($ledger->balance, 2) }}</th>
                 <th></th>
             </tr>
         </tfoot>
@@ -139,7 +147,7 @@
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
-                'info': false,
+                'info': true,
                 'autoWidth': false,
                 'aoColumnDefs': [{
                     'bSortable': false,

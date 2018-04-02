@@ -2,23 +2,24 @@
 
     <!-- Logo -->
     <a href="{{ route('home') }}" class="logo">
-      <span class="logo-lg"><b>Home</b></span>
+      <span class="logo-lg"><b>Ban Trans</b></span>
+      <span class="logo-sm"><b>BT</b></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
+            <span class="sr-only">Toggle navigation</span>
+        </a>
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 <!-- Tasks: style can be found in dropdown.less -->
                 <li class="dropdown tasks-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-flag-o"></i>
-            </a>
+                      <i class="fa fa-flag-o"></i>
+                    </a>
                     <ul class="dropdown-menu">
                         <li class="header">You have 9 tasks</li>
                         <li>
@@ -93,6 +94,5 @@
                 </li>
             </ul>
         </div>
-
     </nav>
 </header>

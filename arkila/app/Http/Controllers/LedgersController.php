@@ -45,18 +45,51 @@ class LedgersController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $this->validate(request(), [
-            'payor' => ['bail', new checkName, 'required', 'max:25'],
-            'particulars' => 'bail|required|max:30',
-            'or' =>  'bail|required|unique:ledger,or_number|max:15',
-            'amount' => ['bail',new checkCurrency,'numeric','min:0'],
-            'type' => [
-                'bail',
-                'required',
-                Rule::in(['Revenue', 'Expense'])
-            ],
-        ]);
+        if ($request->or == null && $request->payor == null) {
+            $this->validate(request(), [
+                'particulars' => 'bail|required|max:30',
+                'amount' => ['bail',new checkCurrency,'numeric', 'required', 'min:0'],
+                'type' => [
+                    'bail',
+                    'required',
+                    Rule::in(['Revenue', 'Expense'])
+                ],
+            ]);            
+        } elseif ($request->or == null) {
+            $this->validate(request(), [
+                'payor' => ['bail', new checkName, 'max:25'],
+                'particulars' => 'bail|required|max:30',
+                'amount' => ['bail',new checkCurrency,'numeric', 'required', 'min:0'],
+                'type' => [
+                    'bail',
+                    'required',
+                    Rule::in(['Revenue', 'Expense'])
+                ],
+            ]);
+        }elseif ($request->payor == null) {
+            $this->validate(request(), [
+                'particulars' => 'bail|required|max:30',
+                'amount' => ['bail',new checkCurrency,'numeric', 'required', 'min:0'],
+                'or' =>  'bail|unique:ledger,or_number|max:15',
+                'type' => [
+                    'bail',
+                    'required',
+                    Rule::in(['Revenue', 'Expense'])
+                ],
+            ]);
+        } else {
+            $this->validate(request(), [
+                'payor' => ['bail', new checkName, 'max:25'],
+                'particulars' => 'bail|required|max:30',
+                'or' =>  'bail|unique:ledger,or_number|max:15',
+                'amount' => ['bail',new checkCurrency,'numeric', 'required', 'min:0'],
+                'type' => [
+                    'bail',
+                    'required',
+                    Rule::in(['Revenue', 'Expense'])
+                ],
+            ]);
+        }
 
         Ledger::create([
             'payee' => $request->payor,
@@ -101,10 +134,10 @@ class LedgersController extends Controller
     public function update(Ledger $ledger)
     {
         $this->validate(request(), [
-            'payor' => ['bail', new checkName, 'required', 'max:25'],
+            'payor' => ['bail', new checkName, 'max:25'],
             'particulars' => 'bail|required|max:30',
-            'or' =>  'bail|required|max:15|unique:ledger,or_number,'.$ledger->ledger_id.',ledger_id',
-            'amount' => ['bail',new checkCurrency,'numeric','min:0'],
+            'or' =>  'bail|max:15|unique:ledger,or_number,'.$ledger->ledger_id.',ledger_id',
+            'amount' => ['bail',new checkCurrency,'numeric', 'required', 'min:0'],
             'type' => [
                 'bail',
                 'required',
@@ -117,7 +150,7 @@ class LedgersController extends Controller
             'description' => request('particulars'),
             'or_number' => request('or'),
             'amount' => request('amount'),
-            'type' => request('r1'), 
+            'type' => request('type'), 
         ]);
 
         return redirect('/home/ledger');
@@ -144,8 +177,10 @@ class LedgersController extends Controller
         ->groupBy(DB::raw('day(created_at)'), DB::raw('month(created_at)'), DB::raw('year(created_at)'))->get();
         $sops = Ledger::select('created_at','description', DB::raw("SUM(amount) as total_amount"))->where('description', 'SOP')
         ->groupBy(DB::raw('day(created_at)'), DB::raw('month(created_at)'), DB::raw('year(created_at)'))->get();
+        $expired = Ledger::select('created_at','description', DB::raw("SUM(amount) as total_amount"))->where('description', 'Expired Ticket')
+        ->groupBy(DB::raw('day(created_at)'), DB::raw('month(created_at)'), DB::raw('year(created_at)'))->get();
 
-        return view('ledger.generalLedger', compact('ledgers', 'thisDate', 'bookings', 'sops'));
+        return view('ledger.generalLedger', compact('ledgers', 'thisDate', 'bookings', 'sops', 'expired'));
     }
 
     public function generatePDF()

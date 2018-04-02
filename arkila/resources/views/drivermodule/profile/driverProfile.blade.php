@@ -1,39 +1,34 @@
 @extends('layouts.driver') @section('title', 'Driver Profile') @section('content-title', 'Driver Home') @section('content')
 <div class="col-md-offset-1 col-md-3">
-
-
     {{Session::get('error')}}
     @include('message.success')
     <!-- Profile Image -->
     <div class="box box-primary">
         <div class="box-body box-profile">
             <img class="profile-user-img img-responsive img-circle" src="../dist/img/user4-128x128.jpg" alt="User profile picture">
-
             <h3 class="profile-username text-center">{{ $profile->first_name.' '.$profile->middle_name.' '.$profile->last_name }}</h3>
-
             <p class="text-muted text-center">1232gmailcom</p>
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-
-
             <ul class="nav nav-pills nav-stacked">
-                <li><a href="#"><i class="fa fa-bell"></i> Notifications
-                                              <span class="label pull-right">
-
-                                                  <label class="switch">
-                                                      <input type="checkbox" class="status" data-id="{{$profile->member_id}}"
-                                                      @if($profile->notification === 'Enable') checked @endif>
-                                                      <span class="slider round"></span>
-                                                  </label>
-                                              </span></a>
+                <li>
+                    <a href="#">
+                       <i class="fa fa-bell"></i> Notifications
+                        <span class="label pull-right">
+                            <label class="switch">
+                                <input type="checkbox" class="status" data-id="{{$profile->member_id}}"
+                                @if($profile->notification === 'Enable') checked @endif>
+                                <span class="slider round"></span>
+                            </label>
+                        </span>
+                    </a>
                 </li>
             </ul>
             <div class="text-center">
                 <button type="button" class="btn btn-primary btn-group-justified text-center" data-toggle="modal" data-target="#driverChangePassword">Change Password</button>
             </div>
             <!-- /.text -->
-
         </div>
         <!-- /.box-footer -->
     </div>
@@ -43,7 +38,6 @@
 
 <div class="col-md-6">
     <div class="box">
-
         <div class="box-header">
             <h3 class="box-title">Personal Info</h3>
         </div>
@@ -76,7 +70,7 @@
 </div>
 <!-- /.col -->
 
-<!--        CHANGE PASSWORD MODAL-->
+<!-- CHANGE PASSWORD MODAL-->
 <div class="modal fade" id="driverChangePassword">
     <div class="modal-dialog" style="margin-top:150px;">
         <div class="col-md-offset-2 col-md-8">
@@ -92,7 +86,6 @@
                         <div class="box-body">
                             <form action="{{route('drivermodule.changePassword',[$userId])}}" method="POST">
                                 {{csrf_field()}} {{method_field('PATCH')}}
-
                                 <div class="form-group" class="control-label">
                                     <input type="hidden" id="userid" value="{{$userId}}">
                                     <label for="">Current password:</label>
@@ -100,13 +93,11 @@
                                     <div id="pass_response" class="response"></div>
                                 </div>
                                 <!-- /.form-group -->
-
                                 <div class="form-group" class="control-label">
                                     <label for="">New Password:</label>
                                     <input value="" id="" name="password" type="password" class="form-control" required>
                                 </div>
                                 <!-- /.form-group -->
-
                                 <div class="form-group" class="control-label">
                                     <label for="">Confirm New Password:</label>
                                     <input value="" id="" name="password_confirmation" type="password" class="form-control" required>
@@ -118,8 +109,6 @@
                     <!-- /.box -->
                 </div>
                 <!-- /.modal-body -->
-
-
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary btn-group-justified text-center">Submit</button>
                 </div>

@@ -10,7 +10,7 @@
     <div class="table-responsive">
     	<div class="col-md-6">
     		<a href="{{route('vans.create')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> REGISTER VAN</a>
-            <a href=""  class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i> PRINT</a>
+            <button onclick="window.open('{{route('pdf.van')}}')" class="btn btn-default btn-sm btn-flat"> <i class="fa fa-print"></i> PRINT</button>
     	</div>
 
         <table id="van" class="table table-bordered table-striped">
