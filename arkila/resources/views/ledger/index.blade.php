@@ -33,7 +33,7 @@
         @foreach ($ledgers->sortByDesc('ledger_id') as $ledger)
             @if ($ledger->created_at->format('m-d-Y') == $date->format('m-d-Y'))
             <tr>
-                @if ($ledger->description !== 'Booking Fee' AND $ledger->description !== 'SOP')
+                @if ($ledger->description !== 'Booking Fee' && $ledger->description !== 'SOP' && $ledger->description !== 'Expired Ticket')
                 <td>{{$ledger->payee}}</td>
                 <td>{{$ledger->description}}</td>
                 <td>{{$ledger->or_number}}</td>
@@ -45,8 +45,8 @@
 
                 @else
                 <td></td>                    
-                <td class="text-right">{{$ledger->amount}}</td>
-                <td class="text-right">{{$ledger->amount}}</td>
+                <td class="text-right">{{number_format($ledger->amount * -1, 2)}}</td>
+                <td class="text-right">{{number_format($ledger->amount * -1, 2)}}</td>
 
                 @endif
 
@@ -108,7 +108,15 @@
                     <td class="text-right">{{$ledger->sop}}</td>
                     <td></td>
                 </tr>
-
+                <tr>
+                    <td></td>
+                    <td>Expired Ticket</td>
+                    <td></td>
+                    <td class="text-right">{{$ledger->expired_ticket}}</td>
+                    <td></td>
+                    <td class="text-right">{{$ledger->expired_ticket}}</td>
+                    <td></td>
+                </tr>
         </tbody>
         <tfoot>
             <tr>

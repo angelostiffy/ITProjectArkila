@@ -40,7 +40,7 @@ class DriverRequest extends FormRequest
                     'operator' => 'bail|nullable|exists:member,member_id|numeric',
                     'lastName' => ['bail','required',new checkName,'max:25'],
                     'firstName' => ['bail','required',new checkName,'max:25'],
-                    'middleName' => ['bail',new checkName,'nullable','max:25'],
+                    'middleName' => ['bail','nullable',new checkName,'nullable','max:25'],
                     'contactNumber' => ['bail',new checkContactNum],
                     'address' => 'bail|required|max:100',
                     'provincialAddress' => 'bail|required|max:100',
@@ -58,7 +58,7 @@ class DriverRequest extends FormRequest
                         Rule::in(['Single', 'Married', 'Divorced', 'Widowed'])
                     ],
                     'nameOfSpouse' => ['bail','required_if:civilStatus,Married','required_with:spouseBirthDate','max:120', 'nullable',new checkName],
-                    'spouseBirthDate' => 'bail|required_with:nameOfSpouse|nullable|date|before:today',
+                    'spouseBirthDate' => ['bail','required_with:nameOfSpouse','nullable','date','before:today',new checkAge],
                     'fathersName' => ['bail','required_with:fatherOccupation','max:50', 'nullable',new checkName],
                     'fatherOccupation' => ['bail','required_with:fathersName','max:30','nullable', new checkOccupation],
                     'mothersName' => ['bail','required_with:motherOccupation','max:50', 'nullable',new checkName],
@@ -70,7 +70,7 @@ class DriverRequest extends FormRequest
                     'licenseNo' => ['bail','required',new checkLicense],
                     'licenseExpiryDate' => 'bail|required|date|after:today',
                     'children.*' => ['bail','required_with:childrenBDay.*','distinct', 'nullable',new checkName, 'max:120'],
-                    'childrenBDay.*' => 'bail|required_with:children.*|nullable|date|before:tomorrow'
+                    'childrenBDay.*' => 'bail|required_with:children.*|nullable|date|before:tomorrow|after:'.$this->birthDate
                 ];
             }
             case 'PATCH':
@@ -80,7 +80,7 @@ class DriverRequest extends FormRequest
                     'operator' => 'bail|nullable|exists:member,member_id|numeric',
                     'lastName' => ['bail','required',new checkName,'max:25'],
                     'firstName' => ['bail','required',new checkName,'max:25'],
-                    'middleName' => ['bail',new checkName,'nullable','max:25'],
+                    'middleName' => ['bail','nullable',new checkName,'nullable','max:25'],
                     'contactNumber' => ['bail',new checkContactNum],
                     'address' => 'bail|required|max:100',
                     'provincialAddress' => 'bail|required|max:100',
@@ -98,7 +98,7 @@ class DriverRequest extends FormRequest
                         Rule::in(['Single', 'Married', 'Divorced', 'Widowed'])
                     ],
                     'nameOfSpouse' => ['bail','required_if:civilStatus,Married','required_with:spouseBirthDate','max:120', 'nullable',new checkName],
-                    'spouseBirthDate' => 'bail|required_with:nameOfSpouse|nullable|date|before:today',
+                    'spouseBirthDate' => ['bail','required_with:nameOfSpouse','nullable','date','before:today',new checkAge],
                     'fathersName' => ['bail','required_with:fatherOccupation','max:50', 'nullable',new checkName],
                     'fatherOccupation' => ['bail','required_with:fathersName','max:30', 'nullable',new checkOccupation],
                     'mothersName' => ['bail','required_with:motherOccupation','max:50', 'nullable',new checkName],
@@ -110,7 +110,7 @@ class DriverRequest extends FormRequest
                     'licenseNo' => ['bail','required', new checkLicense],
                     'licenseExpiryDate' => 'bail|required|date|after:today',
                     'children.*' => ['bail','required_with:childrenBDay.*','distinct', 'nullable',new checkName, 'max:50'],
-                    'childrenBDay.*' => 'bail|required_with:children.*|nullable|date|before:tomorrow'
+                    'childrenBDay.*' => 'bail|required_with:children.*|nullable|date|before:tomorrow|after:'.$this->birthDate
                 ];
             }
             default:break;

@@ -8,6 +8,8 @@ use App\Member;
 use App\User;
 use App\Terminal;
 use App\Transaction;
+use Carbon\Carbon;
+use PDF;
 use Illuminate\Validation\Rule;
 
 
@@ -19,13 +21,10 @@ class TripsController extends Controller {
      */
     public function index() {
         $terminals = Terminal::whereNotIn('terminal_id',[auth()->user()->terminal_id])->get();
-        $trips = Trip::whereNotNull('queue_number')
-            ->orderBy('queue_number')->get();
+        $trips = Trip::whereNotNull('queue_number')->orderBy('queue_number')->get();
 
         $drivers = Member::whereNotIn('member_id', function($query){
-            $query->select('driver_id')
-                ->from('trip')
-                ->whereNotNull('queue_number');
+            $query->select('driver_id')->from('trip')->whereNotNull('queue_number');
         })->get();
 
         $vans = Van::whereNotIn('plate_number', function($query){
@@ -80,7 +79,8 @@ class TripsController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateRemarks(Trip $trip) {
+    public function updateRemarks(Trip $trip)
+    {
 
         $this->validate(request(),[
             'value' => [Rule::in('OB','CC','ER', 'NULL')]
@@ -428,5 +428,16 @@ class TripsController extends Controller {
         $user = User::where('user_type','Super-admin')->first();
         $superAdmin = $user->terminal;
         return view('trips.viewTrip', compact('destinations', 'trip', 'superAdmin'));
+    }
+    
+    public function generatePerTrip(Trip $trip)
+    {
+        $destinations = Transaction::join('destination', 'destination.destination_id', '=', 'transaction.destination_id')->join('trip', 'trip.trip_id', '=', 'transaction.trip_id')->where('transaction.trip_id', $trip->trip_id)->selectRaw('transaction.trip_id as tripid, destination.description as destdesc, destination.amount as amount, COUNT(destination.description) as counts')->groupBy(['transaction.trip_id','destination.description'])->get();
+        $user = User::where('user_type','Super-admin')->first();
+        $superAdmin = $user->terminal;
+        $date = Carbon::now();
+        $pdf = PDF::loadView('pdf.perTrip', compact('destinations', 'date', 'trip', 'superAdmin'));
+        return $pdf->stream("tripLog.pdf");
+        
     }
 }

@@ -227,7 +227,17 @@ class TransactionsController extends Controller {
         ]);
 
         //put transaction into ledger
-
+        if($transaction->feesAndDeduction){
+                $discount = $transaction->feesAndDeduction->amount;
+        }else{
+                $discount = 0;
+        }
+        $computedAmount = $transaction->destination->amount - $discount;
+        Ledger::create([
+            'description' => 'Expired Ticket',
+            'amount' => $computedAmount,
+            'type' => 'Revenue'
+        ]);
 
         $transaction->ticket->update([
            'isAvailable' => 1
@@ -254,7 +264,17 @@ class TransactionsController extends Controller {
             ]);
 
             //put transaction into ledger
-
+            if($transaction->feesAndDeduction){
+                $discount = $transaction->feesAndDeduction->amount;
+            }else{
+                $discount = 0;
+            }
+            $computedAmount = ($transaction->destination->amount) - $discount;
+            Ledger::create([
+                'description' => 'Expired Ticket',
+                'amount' => $computedAmount,
+                'type' => 'Revenue'
+            ]);
 
             $transaction->ticket->update([
                 'isAvailable' => 1

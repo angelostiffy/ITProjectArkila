@@ -25,7 +25,7 @@ class Transaction extends Model
 
     public function feesAndDeduction()
     {
-        return $this->belongsTo(FeesAndDestination::class, 'fad_id');
+        return $this->belongsTo(FeesAndDeduction::class, 'fad_id');
     }
 
     public function trip()

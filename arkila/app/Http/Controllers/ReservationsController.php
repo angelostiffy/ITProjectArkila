@@ -46,12 +46,16 @@ class ReservationsController extends Controller
         $seat = $request->seat;
         $destinationReq = $request->dest;
         $findDest = Destination::all();
-        
-        foreach ($findDest->where('description', $destinationReq) as $find) {
-            $findThis = $find->destination_id;
-            $findAmount = $find->amount;
+
+        if ($findDest->where('description', $destinationReq)->count() > 0) {
+            foreach ($findDest->where('description', $destinationReq) as $find) {
+                $findThis = $find->destination_id;
+                $findAmount = $find->amount;
+            }
+            $total = $findAmount*$seat;
+        } else {
+            return back()->withInput()->withErrors('Invalid Destination!');
         }
-        $total = $findAmount*$seat;
         
         
         $timeRequest = new Carbon(request('time'));

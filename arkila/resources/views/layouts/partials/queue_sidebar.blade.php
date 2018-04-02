@@ -11,31 +11,48 @@
       <div class="tab-pane active" id="control-sidebar-queue-tab">
         <h3 class="">Add Unit to Queue</h3>
         <div class="form-group">
-          <label for="">Van Unit</label>
-          <select class="form-control">
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-           </select>
+            <label for="">Van Unit</label>
+            <select @if(count($vansSideBar) <= 0 && count($terminalsSideBar) <= 0 && count($driversSideBar) <= 0) {{'disabled'}} @endif  id="vanInputSideBar" class="form-control select2">
+                @if(count($vansSideBar) > 0)
+                    @foreach ($vansSideBar as $vanSideBar)
+                        <option value="{{$vanSideBar->plate_number}}">{{ $vanSideBar->plate_number }}</option>
+                    @endforeach
+                @else
+                    <option value=""> No Available Van Units</option>
+                @endif
+            </select>
         </div>
-        <div class="form-group">  
-          <label for="">Destination</label>
-          <select name="" class="form-control">
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-          </select>
+        <div class="form-group">
+            <label for="">Destination</label>
+            <select @if(count($vansSideBar) <= 0 && count($terminalsSideBar) <= 0 && count($driversSideBar) <= 0) {{'disabled'}} @endif id="destinationInputSideBar" class="form-control">
+                @if(count($terminalsSideBar) > 0)
+                    @foreach ($terminalsSideBar as $terminalSideBar)
+                        <option value="{{$terminalSideBar->terminal_id}}">{{ $terminalSideBar->description }}</option>
+                    @endforeach
+                @else
+                    <option value=""> No Available Destination</option>
+                @endif
+
+            </select>
         </div>
-        <div class="form-group">  
-        <label for="">Driver</label>
-        <select class="form-control">
-              <option value=""></option>
-              <option value=""></option>
-              <option value=""></option>
-        </select>
+        <div class="form-group">
+            <label for="">Driver</label>
+            <select @if(count($vansSideBar) <= 0 && count($terminalsSideBar) <= 0 && count($driversSideBar) <= 0) {{'disabled'}} @endif name="driver" id="driverInputSideBar" class="form-control select2">
+                @if(count($driversSideBar) > 0 )
+                    @foreach ($driversSideBar as $driverSideBar)
+                        <option value="{{$driverSideBar->member_id}}">{{ $driverSideBar->full_name }}</option>
+                    @endforeach
+                @else
+                    <option value=""> No Available Driver</option>
+                @endif
+            </select>
         </div>
         <div class="pull-right">
-            <button  data-toggle="tooltip" class="btn btn-primary btn-sm" title="Please add vans, destinations, or drivers before adding a van to the queue" disabled><i class="fa fa-plus"></i> ADD </button>
+            @if(count($vansSideBar) > 0 && count($terminalsSideBar) > 0 && count($driversSideBar) > 0)
+                <button  id='addQueueSideBarButt' type=submit class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i> ADD </button>
+            @else
+                <button  class="btn btn-primary btn-sm" title="Please add vans, destinations, or drivers before adding a van to the queue" disabled><i class="fa fa-plus"></i> ADD </button>
+            @endif
         </div>
       </div>
         <!-- /.tab-pane -->
@@ -47,35 +64,36 @@
         <h3 class="">Sell Ticket</h3>
         <div class="form-group">
           <label for="">Terminal</label>
-            <select name="terminal" id="terminal" class="form-control">
-              <option value="">AA</option>
+            <select id="terminalTicketSideBar" class="form-control">
+                @php $counterTicketSideBar = 0; @endphp
+                @foreach($terminalsTicketSideBar as $terminalTicketSideBar)
+                    @if($terminalTicketSideBar->trips->where('queue_number',1)->first()->plate_number ?? null)
+                        @php $counterTicketSideBar++; @endphp
+                        <option value="{{$terminalTicketSideBar->terminal_id}}">{{$terminalTicketSideBar->description}}</option>
+                    @endif
+                @endforeach
             </select>
         </div>
         <div class="form-group">
           <label for="">Destination</label>
-            <select name="destination" id="destination" class="form-control">
-              <option>BB</option>
-            </select>
+            <select id="destinationTicketSideBar" class="form-control"></select>
         </div>
         <div class="form-group">
           <label for="">Discount</label>
           <div class="input-group">
             <span class="input-group-addon">
-              <input id="checkDiscount" type="checkbox">
+              <input id="checkDiscountTicketSideBar" type="checkbox">
             </span>
-            <select name="discount" id="discount" class="form-control">
-              <option value="">CCC</option>
-            </select>
+            <select id="discountTicketSideBar" class="form-control"></select>
           </div>
         </div>
         <div class="form-group">
           <label for="">Ticket</label>
-          <select name="tickets" id="ticket" class="form-control select2" multiple="multiple" data-placeholder="Select Ticket">
-            <option value="">aa</option>
+          <select id="ticketSellSideBar" class="form-control select2" multiple="multiple" data-placeholder="Select Ticket">
           </select>
         </div>
-          <div class="pull-right">
-            <button class="btn btn-primary">AAA</button>
+          <div id="sellButtContainerSideBar" class="pull-right">
+              <button type="button" class="btn btn-info btn-flat" @if($counterTicketSideBar) title="Please add atleast one destination for the specified terminal on the terminal field" @else title="Please Add a van from the queue to start selling tickets" @endif disabled>Sell</button>
           </div>
         </div>
         <!-- /.tab-pane -->
