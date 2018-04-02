@@ -306,7 +306,11 @@
                                             </td>
                                             <td>
                                                 <div class="pull-right">
-                                                    <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
+                                                    @if(count(old('children')) > 1)
+                                                        <button type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
+                                                    @else
+                                                        <button style="display: none;" type="button" onclick="event.srcElement.parentElement.parentElement.parentElement.remove();rmv()" class='btn btn-danger'>Delete</button>
+                                                    @endif
                                                 </div>
                                             </td>
 
@@ -363,7 +367,19 @@
 @parent
  <script>
      $(document).ready(function(){
-         $('input[name="childrenBDay[]"]').focus();
+         $('input[type="submit"]').on('click',function(){
+             $('input[name="childrenBDay[]"]').each(function(key,value) {
+                 if($(value).val() === '')
+                 {
+                     $(value).val(null);
+                 }
+             });
+
+             if($('input[name="licenseExpiryDate"]').val() === ""){
+                 $('input[name="licenseExpiryDate"]').val(null);
+             }
+         });
+
          cloneDateMask();
          switch($('select[name="civilStatus"]').val()){
              case "Single":
@@ -450,10 +466,11 @@
           checkboxClass: 'icheckbox_flat-blue',
           radioClass   : 'iradio_flat-blue'
         });
-    })
 
-     $('[data-mask]').inputmask()
-     $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true})
+        $('[data-mask]').inputmask();
+        $('.date-mask').inputmask('mm/dd/yyyy',{removeMaskOnSubmit: true});
+    });
+
     </script>
 
     <script type="text/javascript">

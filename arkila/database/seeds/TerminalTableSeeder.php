@@ -18,7 +18,6 @@ class TerminalTableSeeder extends Seeder
             'booking_fee' => '100.00'
         ]);
 
-        factory(App\Terminal::class, 2)->create();
     }
 
 }

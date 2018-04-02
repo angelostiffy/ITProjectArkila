@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('vanNd',function($value) {
-            return is_null(Van::find($value)->driver()->first()) ? $value : abort(404);
+            return is_null(Van::find($value)->driver->first()) ? $value : abort(404);
         });
 
         Route::bind('driver_user', function($value){

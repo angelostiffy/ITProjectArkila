@@ -67,7 +67,7 @@ class OperatorRequest extends FormRequest
                     'contactPersonAddress' => 'bail|required|max:100',
                     'contactPersonContactNumber' => ['bail','required', new checkContactNum],
                     'sss' => ['bail','unique:member,SSS','required',new checkSSS],
-                    'licenseNo' => ['bail','required_with:licenseExpiryDate',new checkLicense],
+                    'licenseNo' => ['bail','required_with:licenseExpiryDate','nullable',new checkLicense],
                     'licenseExpiryDate' => 'bail|required_with:licenseNo|nullable|date|after:today',
                     'children.*' => ['bail','required_with:childrenBDay.*','distinct', 'nullable', new checkName, 'max:40'],
                     'childrenBDay.*' => 'bail|required_with:children.*|nullable|date|before:tomorrow|after:'.$this->birthDate
@@ -106,7 +106,7 @@ class OperatorRequest extends FormRequest
                         'contactPersonAddress' => 'bail|required|max:100',
                         'contactPersonContactNumber' => ['bail','required',new checkContactNum],
                         'sss' => ['bail','unique:member,SSS,'.$this->route('operator')->member_id.',member_id','required',new checkSSS],
-                        'licenseNo' => ['bail','required_with:licenseExpiryDate', new checkLicense],
+                        'licenseNo' => ['bail','required_with:licenseExpiryDate','nullable',new checkLicense],
                         'licenseExpiryDate' => 'bail|required_with:licenseNo|nullable|date|after:today',
                         'children.*' => ['bail','required_with:childrenBDay.*','distinct', 'nullable', new checkName,'max:50'],
                         'childrenBDay.*' => 'bail|required_with:children.*|nullable|date|before:tomorrow|after:'.$this->birthDate

@@ -63,19 +63,19 @@
                     <div class="col-md-4 col-sm-6">
                         <div class="item">
                             <div class="icon-outlined icon-sm icon-thin"><i class="fa fa-car"></i></div>
-                            <h4><span class="h1 counter">100</span><br>Vans</h4>
+                            <h4><span class="h1 counter">{{$numberOfVans}}</span><br>Vans</h4>
                         </div><!-- item-->
                         </div><!-- col-->
                     <div class="col-md-4 col-sm-6">
                         <div class="item">
                             <div class="icon-outlined icon-sm icon-thin"><i class="fa fa-user"></i></div>
-                            <h4><span class="h1 counter">30</span><br>Operators</h4>
+                            <h4><span class="h1 counter">{{$numberOfOperators}}</span><br>Operators</h4>
                         </div><!-- item-->
                         </div><!-- col-->
                     <div class="col-md-4 col-sm-6">
                         <div class="item">
                             <div class="icon-outlined icon-sm icon-thin"><i class="fa fa-users"></i></div>
-                            <h4><span class="h1 counter">20</span><br>Drivers</h4>
+                            <h4><span class="h1 counter">{{$numberOfDrivers}}</span><br>Drivers</h4>
                         </div><!-- item-->
                         </div><!-- col-->
                 </div>

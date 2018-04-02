@@ -5,7 +5,7 @@
 <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-aqua">55</span>
+            <span class="info-box-icon bg-aqua">{{$numberOfOperators}}</span>
             <div class="info-box-content">
               <span class="info-box-text text-center" style="margin: 5px;">Operators</span>
               <span >
@@ -19,7 +19,7 @@
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-red">55</span>
+            <span class="info-box-icon bg-red">{{$numberOfVans}}</span>
             <div class="info-box-content">
               <span class="info-box-text text-center" style="margin: 5px;">Van units</span>
               <span>
@@ -35,7 +35,7 @@
         <!-- fix for small devices only -->
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-green">6</span>
+            <span class="info-box-icon bg-green">{{$numberOfReservations}}</span>
 
             <div class="info-box-content">
               <span class="info-box-text text-center" style="margin: 5px;">Reservations</span>
@@ -50,7 +50,7 @@
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-yellow">1</span>
+            <span class="info-box-icon bg-yellow">{{$numberOfRentals}}</span>
             <div class="info-box-content">
               <span class="info-box-text text-center" style="margin: 5px;">Rentals</span>
               <span>

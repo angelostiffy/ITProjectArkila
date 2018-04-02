@@ -3,20 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Ticket;
-use Illuminate\Http\Request;
-use App\Announcement;
+
 use App\FeesAndDeduction;
 use App\Destination;
 use App\Feature;
 use App\Terminal;
 use App\User;
 use App\Van;
-
-use App\Trip;
 use App\Member;
-
+use App\Reservation;
+use App\Rental;
 use App\ArchiveMember;
-use App\ArchiveVan;
 
 
 class HomeController extends Controller
@@ -38,7 +35,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $numberOfOperators = count(Member::allOperators()->get());
+        $numberOfVans = count(Van::all());
+        $numberOfReservations =count(Reservation::all());
+        $numberOfRentals = count(Rental::all());
+        return view('home', compact('numberOfOperators','numberOfVans','numberOfReservations','numberOfRentals'));
     }
 
     public function settings(){
