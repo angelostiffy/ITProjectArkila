@@ -1,4 +1,6 @@
-@extends('layouts.driver') @section('title', 'Driver Profile') @section('content-title', 'Driver Home') @section('content')
+@extends('layouts.driver') 
+@section('title', 'Driver Profile') 
+@section('content-title', 'Driver Home') @section('content')
 <div class="col-md-offset-1 col-md-3">
     {{Session::get('error')}}
     @include('message.success')
@@ -103,6 +105,7 @@
                                     <input value="" id="" name="password_confirmation" type="password" class="form-control" required>
                                 </div>
                                 <!-- /.form-group -->
+                                </form>
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -113,7 +116,7 @@
                     <button type="submit" class="btn btn-primary btn-group-justified text-center">Submit</button>
                 </div>
                 <!-- /.modal-footer -->
-                </form>
+                
                 <!-- /.form -->
             </div>
             <!-- /.modal-content -->

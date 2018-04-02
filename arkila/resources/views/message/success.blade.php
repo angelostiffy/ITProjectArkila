@@ -8,12 +8,12 @@ new PNotify({
         in_class: 'slideInDown',
         out_class: 'fadeOut'
         },
+        animate_speed: 'fast',
         nonblock: {
             nonblock: true
         },
-        animate_speed: 'fast',
         cornerclass: "",
-        width: "100%",
+        width: "",
         type: "success",
         stack: {"dir1": "down", "dir2": "right", "push": "top", "spacing1": 0, "spacing2": 0}
 });

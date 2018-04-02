@@ -215,7 +215,6 @@ Route::group(['middleware' => ['auth', 'driver']], function(){
   Route::get('/home/profile', 'DriverModuleControllers\DriverProfileController@showDriverProfile')->name('drivermodule.profile.driverProfile');
   Route::post('/home/profile', 'DriverModuleControllers\DriverProfileController@changeNotificationStatus')->name('drivermodule.notification');
   /*Change Password*/
-
   Route::patch('/home/profile/change-password/{driverid}', 'DriverModuleControllers\DriverProfileController@updatePassword')->name('drivermodule.changePassword');
   Route::post('home/profile/change-password', 'DriverModuleControllers\DriverProfileController@checkCurrentPassword')->name('drivermodule.checkCurrentPassword');
   /*Create Report*/
@@ -225,7 +224,8 @@ Route::group(['middleware' => ['auth', 'driver']], function(){
   /*Trip Log*/
   Route::get('/home/view-trips', 'DriverModuleControllers\TripLogController@viewTripLog')->name('drivermodule.triplog.driverTripLog');
   Route::get('/home/view-trips/{trip}', 'DriverModuleControllers\TripLogController@viewSpecificTrip')->name('drivermodule.triplog.driverTripDetails');
-  
+  Route::get('/home/view-rentals', 'DriverModuleControllers\ViewRentalsController@viewRentals')->name('drivermodule.rentals.rental');
+  Route::patch('/home/view-rentals/{rental}', 'DriverModuleControllers\ViewRentalsController@updateRental')->name('drivermodule.updateRental');
   /*Help*/
   Route::get('/home/driver/help', 'DriverModuleControllers\ViewDriverHelpController@viewDriverHelp')->name('drivermodule.help.driverHelp');  
 
