@@ -1,4 +1,6 @@
-@extends('layouts.driver') @section('title', 'Driver Profile') @section('content-title', 'Driver Home') @section('content')
+@extends('layouts.driver') 
+@section('title', 'Driver Profile') 
+@section('content-title', 'Driver Home') @section('content')
 <div class="col-md-offset-1 col-md-3">
     {{Session::get('error')}}
     @include('message.success')
@@ -7,7 +9,7 @@
         <div class="box-body box-profile">
             <img class="profile-user-img img-responsive img-circle" src="../dist/img/user4-128x128.jpg" alt="User profile picture">
             <h3 class="profile-username text-center">{{ $profile->first_name.' '.$profile->middle_name.' '.$profile->last_name }}</h3>
-            <p class="text-muted text-center">1232gmailcom</p>
+            <p class="text-muted text-center"></p>
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
@@ -103,6 +105,7 @@
                                     <input value="" id="" name="password_confirmation" type="password" class="form-control" required>
                                 </div>
                                 <!-- /.form-group -->
+                                </form>
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -113,7 +116,7 @@
                     <button type="submit" class="btn btn-primary btn-group-justified text-center">Submit</button>
                 </div>
                 <!-- /.modal-footer -->
-                </form>
+                
                 <!-- /.form -->
             </div>
             <!-- /.modal-content -->

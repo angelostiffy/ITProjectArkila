@@ -169,7 +169,9 @@ class LedgersController extends Controller
         return back();
     }
 
-    public function generalLedger() {
+    public function generalLedger(Request $request) {
+        $start = $request->start;
+        $end = $request->end;
         $date = Carbon::now();
         $thisDate = $date->setTimezone('Asia/Manila');
         $ledgers = Ledger::all();
@@ -180,11 +182,40 @@ class LedgersController extends Controller
         $expired = Ledger::select('created_at','description', DB::raw("SUM(amount) as total_amount"))->where('description', 'Expired Ticket')
         ->groupBy(DB::raw('day(created_at)'), DB::raw('month(created_at)'), DB::raw('year(created_at)'))->get();
 
-        return view('ledger.generalLedger', compact('ledgers', 'thisDate', 'bookings', 'sops', 'expired'));
+        return view('ledger.generalLedger', compact('ledgers', 'thisDate', 'bookings', 'sops', 'expired', 'start', 'end'));
     }
 
-    public function generatePDF()
+    public function dateRange(Request $request) {
+        $start = $request->start;
+        $end = $request->end;
+        if ($start == null && $end == null) {
+            return redirect('/home/general-ledger');
+        } elseif ($end == null) {
+            return back()->withErrors('Please enter an ending date');          
+        } elseif ($start == null){
+            return back()->withErrors('Please enter a starting date');          
+        } else {
+            $date = Carbon::now();
+            $thisDate = $date->setTimezone('Asia/Manila');
+            $ledgers = Ledger::whereBetween('created_at', [$start . ' 00:00:00', $end .' 23:59:59'])->get();
+            $bookings = Ledger::select('created_at','description', DB::raw("SUM(amount) as total_amount"))->where('description', 'Booking Fee')
+            ->groupBy(DB::raw('day(created_at)'), DB::raw('month(created_at)'), DB::raw('year(created_at)'))
+            ->whereBetween('created_at', [$start . ' 00:00:00', $end .' 23:59:59'])->get();
+            $sops = Ledger::select('created_at','description', DB::raw("SUM(amount) as total_amount"))->where('description', 'SOP')
+            ->groupBy(DB::raw('day(created_at)'), DB::raw('month(created_at)'), DB::raw('year(created_at)'))
+            ->whereBetween('created_at', [$start . ' 00:00:00', $end .' 23:59:59'])->get();
+            $expired = Ledger::select('created_at','description', DB::raw("SUM(amount) as total_amount"))->where('description', 'Expired Ticket')
+            ->groupBy(DB::raw('day(created_at)'), DB::raw('month(created_at)'), DB::raw('year(created_at)'))
+            ->whereBetween('created_at', [$start . ' 00:00:00', $end .' 23:59:59'])->get();
+
+            return view('ledger.generalLedger', compact('ledgers', 'thisDate', 'bookings', 'sops', 'expired', 'start', 'end'));
+        }
+    }
+
+    public function generatePDF(Request $request)
     {
+        $start = $request->start;
+        $end = $request->end;
         $date = Carbon::now();
         $ledgers = Ledger::all()->where('description', '!=' , 'Booking Fee')->where('description', '!=' , 'SOP');
         $pdf = PDF::loadView('pdf.daily', compact('ledgers', 'date'));

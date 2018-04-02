@@ -35,16 +35,6 @@ class RentalRequest extends FormRequest
         $dateFormattedNow = $thisDate->format('m/d/Y');
         $timeFormattedNow = $thisDate->format('h:i A');
 
-        
-        $dateToday = $request->date;
-        $mm = substr($dateToday, '0', 2);
-        $dd = substr($dateToday, '3', 2);
-        $yy = substr($dateToday, '6', 4);
-        if ($mm == 'mm' || $dd == 'dd' || $yy == 'yyyy' || $dateToday == null) {
-            return [
-                "date" => 'bail|required|date_format:m/d/Y|after_or_equal:today',
-            ];
-        }
         $dateCarbon = new Carbon(request('date'));
         $dateFormatted = $dateCarbon->format('m/d/Y');
 
@@ -55,7 +45,7 @@ class RentalRequest extends FormRequest
                 "middleName" => ['bail',new checkName, 'max:35'],
                 "date" => 'bail|required|date_format:m/d/Y|after_or_equal:today',
                 "destination" => "bail|required|regex:/^[,\pL\s\-]+$/u|max:50",
-                "model" => "bail|required|max:50",
+                "model" => "bail|max:50",
                 "time" => ['bail',new checkTime, 'required'],
                 "days" => "bail|required|numeric|digits_between:1,15|min:1",
                 "contactNumber" => ['bail',new checkContactNum],

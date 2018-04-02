@@ -42,28 +42,54 @@ class RentalsController extends Controller
      */
     public function store(RentalRequest $request)
     {
-        $findModel = VanModel::all();
-        $modelReq = $request->model;
-        foreach ($findModel->where('description', $modelReq) as $find) {
-            $findModelID = $find->model_id;
+        if($request->model == null) {
+
+            $lastName = ucwords(strtolower($request->lastName));
+            $firstName = ucwords(strtolower($request->firstName));
+            $middleName = ucwords(strtolower($request->middleName));
+
+            Rental::create([
+                'last_name' => $lastName,
+                'first_name' => $firstName,
+                'middle_name' => $middleName,
+                'departure_date' => $request->date,
+                'departure_time' => $request->time,
+                'destination' => $request->destination,
+                'number_of_days' => $request->days,
+                'contact_number' => $request->contactNumber,
+                'rent_type' => 'Walk-in',
+                'status' => 'Pending',
+
+            ]);          
+        } else {
+            
+            $findModel = VanModel::all();
+            $modelReq = $request->model;
+            foreach ($findModel->where('description', $modelReq) as $find) {
+                $findModelID = $find->model_id;
+            }
+
+            $lastName = ucwords(strtolower($request->lastName));
+            $firstName = ucwords(strtolower($request->firstName));
+            $middleName = ucwords(strtolower($request->middleName));
+
+            Rental::create([
+                'last_name' => $lastName,
+                'first_name' => $firstName,
+                'middle_name' => $middleName,
+                'model_id' => $findModelID,
+                'departure_date' => $request->date,
+                'departure_time' => $request->time,
+                'destination' => $request->destination,
+                'number_of_days' => $request->days,
+                'contact_number' => $request->contactNumber,
+                'rent_type' => 'Walk-in',
+                'status' => 'Pending',
+
+            ]);
         }
-        Rental::create([
-            'last_name' => $request->lastName,
-            'first_name' => $request->firstName,
-            'middle_name' => $request->middleName,
-            'model_id' => $findModelID,
-            'departure_date' => $request->date,
-            'departure_time' => $request->time,
-            'destination' => $request->destination,
-            'number_of_days' => $request->days,
-            'contact_number' => $request->contactNumber,
-            'rent_type' => 'Walk-in',
-            'status' => 'Paid',
     
-        ]);
-        session()->flash('message.success', 'Rental was created successfully');
-    
-        return redirect('/home/rental/');
+        return redirect('/home/rental/')->with('success', 'Rental request from ' . $request->lastName . ', ' . $request->firstName . ' was created successfully');
 
     }    
 
@@ -80,8 +106,7 @@ class RentalsController extends Controller
         $rental->update([
             'status' => request('click'),
         ]);
-        session()->flash('message', 'Rental marked '. request('click'));
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Rental marked '. request('click'));
         
     }
 

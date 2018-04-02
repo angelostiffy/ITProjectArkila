@@ -61,7 +61,10 @@ class CustomerRentalRequest extends FormRequest
 
     public function messages()
     {
+        $dateNow = Carbon::now();
+        $thisDate = $dateNow->setTimezone('Asia/Manila')->format('m/d/Y');
         return [
+            "date.after" => "The date must be after or equal" . $thisDate . "",
             "date.required" => "Please enter the preffered departure date",
             "date.date_format" => "The preferred date does not match the format mm/dd/yyyy",
             "numberOfDays.required" => "Please enter the number of days",

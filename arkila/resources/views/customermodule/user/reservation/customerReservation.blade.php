@@ -146,7 +146,7 @@
     function showSummary(){
         document.getElementById('summaryDest').textContent = getDestination('destination');
         document.getElementById('summaryContact').textContent = document.getElementById('contactNumber').value;
-        document.getElementById('summarySeats').textContent = document.getElementById('seat').value;
+        document.getElementById('summarySeats').textContent = document.getElementById('seats').value;
         document.getElementById('summaryDate').textContent = document.getElementById('date').value;
         document.getElementById('summaryTime').textContent = document.getElementById('timepicker').value;
         document.getElementById('summaryComments').textContent = document.getElementById('message').value;

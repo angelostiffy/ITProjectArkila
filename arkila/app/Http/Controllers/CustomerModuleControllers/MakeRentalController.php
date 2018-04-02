@@ -56,9 +56,7 @@ class MakeRentalController extends Controller
     		]);
     	}
 
-    	$userNotif = User::find(Auth::id());
-    	$user = Auth::user();
-    	$userNotif->notify(new CustomerRent($user,$rent));
+    	
     	return 	redirect(route('customermodule.user.transactions.customerTransactions'))->with('success', 'Successfully made a rental');
     }
 }

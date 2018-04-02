@@ -38,22 +38,6 @@ class ReservationRequest extends FormRequest
         $dateFormattedNow = $thisDate->format('m/d/Y');
         $timeFormattedNow = $thisDate->format('h:i A');
 
-
-        $dateToday = $request->date;
-        $mm = substr($dateToday, '0', 2);
-        $dd = substr($dateToday, '3', 2);
-        $yy = substr($dateToday, '6', 4);
-        if ($mm == 'mm' || $dd == 'dd' || $yy == 'yyyy' || $dateToday == null) {
-            return [
-                "name" => ['bail',new checkName, 'required', 'max:30'],
-                "date" => "bail|required|date_format:m/d/Y|after_or_equal:today",
-                "dest" => "bail|required",
-                "time" => ['bail',new checkTime, 'required'],
-                "seat" => "bail|required|numeric|digits_between:1,2|min:0|max:15",
-                "contactNumber" => ['bail',new checkContactNum],
-                "amount" => ['bail',new checkCurrency,'numeric','min:0'],
-            ];
-        }
         $dateCarbon = new Carbon(request('date'));
         $dateFormatted = $dateCarbon->format('m/d/Y');
         

@@ -8,8 +8,17 @@
                 <img src="{{ URL::asset('adminlte/dist/img/avatar.png') }}" class="img-circle" alt="User Image" style="margin-top:15px;">
             </div>
             <div class="pull-right info">
-                <h4>Shaina Caballar</h4>
-                <p>123@gmail.com</p>
+                @php $fullname = null; @endphp
+                @if(Auth::user()->middle_name !== null)
+                    @php 
+                        $fullname = Auth::user()->first_name . " " . Auth::user()->middle_name . " " .     Auth::user()->last_name; 
+                    @endphp
+                @else
+                    @php 
+                        $fullname = Auth::user()->first_name . " " . Auth::user()->last_name; 
+                    @endphp
+                @endif
+                <h4>{{$fullname}}</h4>
             </div>
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -17,6 +26,11 @@
            <li class="{{ Request::is('home/driver-dashboard') ? 'active' : '' }}">
                 <a href="{{ route('drivermodule.index') }}">
                     <i class="fa fa-home"></i> <span>Home</span>
+                </a>
+            </li>
+            <li class="{{ Request::is('/home/view-rentals') ? 'active' : '' }}">
+                <a href="{{ route('drivermodule.rentals.rental') }}">
+                    <i class="fa fa-home"></i> <span>Rentals</span>
                 </a>
             </li>
            <li class="{{ Request::is('home/view-trips') ? 'active' : '' }}">

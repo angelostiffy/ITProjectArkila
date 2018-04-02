@@ -56,12 +56,10 @@
                                         <td>{{ $reservation->amount }}</td>
                                         <td>{{ $reservation->status }}</td>
                                         <td class="center-block">
-                                            <div class="center-block">
+                                            <div class="text-center">
                                                 
                                                     
                                                 @if ($reservation->status == 'Paid')
-                                                
-                                                    <button class="btn btn-primary btn-sm" type="submit" name="butt" data-toggle="modal" data-target="#{{'depart'.$reservation->id}}" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
                                                 
                                                     <button class="btn btn-outline-danger btn-sm" type="submit" name="butt" data-toggle="modal" data-target="#{{'cancel'.$reservation->id}}" value="Cancelled"><i class="fa fa-close"></i> Cancel</button>
                                                 
@@ -90,38 +88,6 @@
 
                                                                             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Discard</button>
                                                                             <button type="submit" name="butt" value="Cancelled" class="btn btn-danger" style="width:22%;">Cancel</button>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- /.modal-content -->
-                                                            </div>
-                                                            <!-- /.col -->
-                                                        </div>
-                                                        <!-- /.modal-dialog -->
-                                                    </div>
-                                                    <!-- /.modal -->
-
-                                                    <!-- Modal for depart-->
-                                                     <div class="modal fade" id="{{'depart'.$reservation->id}}">
-                                                        <div class="modal-dialog">
-                                                            <div class="col-md-offset-2 col-md-8">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header bg-primary">
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span></button>
-                                                                        <h4 class="modal-title"> Confirm</h4>
-                                                                    </div>
-                                                                    <div class="modal-body row" style="margin: 0% 1%;">
-
-                                                                        <p style="font-size: 110%;">Are you sure you want to depart reservation #{{ $reservation->id }}?</p>
-
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                       <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
-                                                                            {{ csrf_field() }} {{ method_field('PATCH') }} 
-
-                                                                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
-                                                                            <button type="submit" name="butt" value="Departed " class="btn btn-primary" style="width:22%;">Depart</button>
                                                                         </form>
                                                                     </div>
                                                                 </div>
@@ -201,7 +167,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($reservations->where('type', 'Online') as $reservation)
+                                    @foreach ($reservations->where('type', 'Online')->where('status', 'Pending') as $reservation)
                                     <tr>
                                         <td>{{ $reservation->id }}</td>
                                         <td>{{ $reservation->name }}</td>
@@ -214,7 +180,7 @@
                                         <td class="center-block">
 
 
-                                            <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">
+                                            
                                                 {{ csrf_field() }} {{ method_field('PATCH') }} 
                                                 @if ($reservation->status == 'Pending')
                                                     <button class="btn btn-success btn-sm" type="submit" name="butt" onclick="return ConfirmStatus()" value="Paid"><i class="fa fa-automobile"></i> Paid</button>
@@ -222,7 +188,6 @@
                                                     <button class="btn btn-danger btn-sm" type="submit" name="butt" onclick="return ConfirmStatus()" value="Declined"><i class="fa fa-close"></i> Decline</button> 
                                                 @elseif ($reservation->status == 'Paid')
 
-                                                    <button class="btn btn-success btn-sm" type="submit" name="butt" onclick="return ConfirmStatus()" value="Departed"><i class="fa fa-automobile"></i> Depart</button>
                                                 
                                                     <button class="btn btn-danger btn-sm" type="submit" name="butt" onclick="return ConfirmStatus()" value="Cancelled"><i class="fa fa-close"></i> Cancel</button> 
                                                 @else
@@ -231,7 +196,7 @@
                                                         <button class="btn btn-danger btn-sm" onclick="return ConfirmDelete()"><i class="fa fa-close"></i> Delete</button>
                                                     </form>
                                                 @endif
-                                            </form>
+                                           
                                         </td>
                                     </tr>
                                     @endforeach

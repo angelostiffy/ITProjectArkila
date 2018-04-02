@@ -87,14 +87,19 @@ class DriversController extends Controller
         }
 
         //Add Account for the driver
-        User::create([
-            'name' => $createdDriver->full_name,
+        $createdUserDriver = User::create([
+            'first_name' => $createdDriver->first_name,
+            'middle_name' => $createdDriver->middle_name,
+            'last_name' => $createdDriver->last_name,
             'username' => $createdDriver->first_name[0].$createdDriver->last_name,
             'password' => Hash::make('driver!@bantrans'),
             'user_type' => 'Driver',
             'status' => 'enable'
         ]);
-
+        
+        $createdDriver->update([
+            'user_id' => $createdUserDriver->id,
+        ]);
 
         return redirect(route('drivers.index'))->with('success', 'Information created successfully');
         //
@@ -145,14 +150,20 @@ class DriversController extends Controller
         }
 
         //Add Account for the driver
-        User::create([
-            'name' => $driver->full_name,
+        $createdDriverUser = User::create([
+            'last_name'=> $request->lastName,
+            'first_name' => $request->firstName,
+            'middle_name' => $request->middleName,
             'username' => $driver->first_name[0].$driver->last_name,
             'password' => Hash::make('driver!@bantrans'),
             'user_type' => 'Driver',
             'status' => 'enable'
         ]);
-
+        
+        $driver->update([
+            'user_id' => $createdDriverUser->id,
+        ]);
+        
         return redirect(route('operators.showProfile',[$operator->member_id]));
     }
 
@@ -210,14 +221,19 @@ class DriversController extends Controller
         $vanNd->members()->attach($driver);
 
         //Add Account for the driver
-        User::create([
-            'name' => $driver->full_name,
+        $createdDriver = User::create([
+            'last_name'=> $request->lastName,
+            'first_name' => $request->firstName,
+            'middle_name' => $request->middleName,
             'username' => $driver->first_name[0].$driver->last_name,
             'password' => Hash::make('driver!@bantrans'),
             'user_type' => 'Driver',
             'status' => 'enable'
         ]);
 
+         $createdDriver->update([
+            'user_id' => $createdUserDriver->id,
+        ]);
         if(session()->get('vanBack') && session()->get('vanBack') == route('operators.showProfile',[$vanNd->operator->first()->member_id])){
             return redirect(route('operators.showProfile',[$vanNd->operator->first()->member_id]));
         }else{
