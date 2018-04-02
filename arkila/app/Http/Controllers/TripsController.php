@@ -370,14 +370,14 @@ class TripsController extends Controller {
         }
     }
 
-    
+
     public function tripLog() {
         $trips = Trip::departed()->accepted()->get();
         $user = User::where('user_type','Super-admin')->first();
         $superAdmin = $user->terminal;
         return view('trips.tripLog', compact('trips', 'superAdmin'));
     }
-    
+
     public function driverReport() {
         $trips = Trip::departed()->pending()->get();
         $user = User::where('user_type','Super-admin')->first();
@@ -412,15 +412,15 @@ class TripsController extends Controller {
         ]);
 
         $message = "Trip " . $trip->trip_id . " successfully accepted";
-        return redirect('trips.driverReport')->with('success', $message);
+        return redirect(route('trips.tripLog'))->with('success', $message);
     }
 
-    public function rejectReport(Trip $trip){
+    public function declineReport(Trip $trip){
         $trip->update([
             "report_status" => 'Declined',
         ]);
         $message = "Trip " . $trip->trip_id . " successfully declined";
-        return redirect('trips.tripLog')->with('success', $message);   
+        return redirect(route('trips.driverReport'))->with('success', $message);
     }
 
     public function viewTripLog(Trip $trip){
@@ -429,7 +429,7 @@ class TripsController extends Controller {
         $superAdmin = $user->terminal;
         return view('trips.viewTrip', compact('destinations', 'trip', 'superAdmin'));
     }
-    
+
     public function generatePerTrip(Trip $trip)
     {
         $destinations = Transaction::join('destination', 'destination.destination_id', '=', 'transaction.destination_id')->join('trip', 'trip.trip_id', '=', 'transaction.trip_id')->where('transaction.trip_id', $trip->trip_id)->selectRaw('transaction.trip_id as tripid, destination.description as destdesc, destination.amount as amount, COUNT(destination.description) as counts')->groupBy(['transaction.trip_id','destination.description'])->get();
@@ -438,6 +438,6 @@ class TripsController extends Controller {
         $date = Carbon::now();
         $pdf = PDF::loadView('pdf.perTrip', compact('destinations', 'date', 'trip', 'superAdmin'));
         return $pdf->stream("tripLog.pdf");
-        
+
     }
 }
