@@ -217,7 +217,6 @@
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
-
                             <tbody>
                                 @foreach($fees as $fee)
                                 <tr>
