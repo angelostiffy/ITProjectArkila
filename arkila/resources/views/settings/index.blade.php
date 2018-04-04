@@ -59,7 +59,6 @@
                     <li class="active"><a href="#terminalTab" data-toggle="tab">Terminals</a></li>
                     <li><a href="#destinationTab" data-toggle="tab">Destinations</a></li>
                     <li><a href="#feeTab" data-toggle="tab">Fees</a></li>
-                    <li><a href="#discountTab" data-toggle="tab">Discounts</a></li>
                 </ul>
                 <div class="tab-content">
                     <!-- Terminal Tab -->
@@ -210,9 +209,6 @@
                     <!-- Fee Tab -->
                     <div class="tab-pane" id="feeTab">
                        <div class="table-responsive">
-                        <div class="col-md-6 pull-left">
-                            <a href="/home/settings/fees/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"> </i> CREATE FEE </a>
-                        </div>
                         <table class="table table-bordered table-striped dataTable">
                             <thead>
                                 <tr>
@@ -230,120 +226,10 @@
                                     <td>
                                         <div class="text-center">    
                                             <a href="{{ route('fees.edit', [$fee->fad_id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> EDIT</a>
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteFee'.$fee->fad_id}}"><i class="fa fa-trash"></i> DELETE</button>
-
                                         </div>
 
                                     </td>
-
-                                    <!-- Modal for Delete-->
-                                    <div class="modal fade" id="{{'deleteFee'.$fee->fad_id}}">
-                                        <div class="modal-dialog">
-                                            <div class="col-md-offset-2 col-md-8">
-                                                <div class="modal-content">
-                                                    <div class="modal-header bg-red">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span></button>
-                                                        <h4 class="modal-title"> Confirm</h4>
-                                                    </div>
-                                                    <div class="modal-body row" style="margin: 0% 1%;">
-                                                        <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
-                                                            <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            <p style="font-size: 110%;">Are you sure you want to delete "{{ $fee->description }}?"</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <form action="{{ route('fees.destroy', [$fee->fad_id]) }}" method="POST">
-                                                            {{csrf_field()}}
-                                                            {{method_field('DELETE')}}
-
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                                            <button type="submit" name="driverArc" value="Arch " class="btn btn-danger" style="width:22%;">Delete</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                <!-- /.modal-content -->
-                                            </div>
-                                            <!-- /.col -->
-                                        </div>
-                                        <!-- /.modal-dialog -->
-                                    </div>
-                                    <!-- /.modal -->
-
                                 </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        </div>
-                    </div>
-
-                    <!-- Discount Tab -->
-                    <div class="tab-pane" id="discountTab">
-                       <div class="table-responsive">
-                        <div class="col-md-6 pull-left">
-                            <a href="/home/settings/discounts/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> CREATE DISCOUNT </a>
-                        </div>
-                        <table class="table table-bordered table-striped dataTable">
-                            <thead>
-                                <tr>
-                                    <th>Discount</th>
-                                    <th>Amount</th>
-                                    <th class="text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($discounts as $discount)
-                                <tr>
-                                    <td>{{$discount->description}}</td>
-                                    <td class="pull-right">{{$discount->amount}}</td>
-                                    <td>
-                                        <div class="text-center">    
-                                            <a href="{{ route('discounts.edit', [$discount->fad_id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> EDIT</a>          
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#{{'deleteDiscount'.$discount->fad_id}}"><i class="fa fa-trash"></i> DELETE</button>
-                                        </div>    
-                                    </td>
-                                </tr>
-
-                                <!-- Modal for Delete-->
-                                <div class="modal fade" id="{{'deleteDiscount'.$discount->fad_id}}">
-                                    <div class="modal-dialog">
-                                        <div class="col-md-offset-2 col-md-8">
-                                            <div class="modal-content">
-                                                <div class="modal-header bg-red">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title"> Confirm</h4>
-                                                </div>
-                                                <div class="modal-body row" style="margin: 0% 1%;">
-                                                    <div class="col-md-2" style="font-size: 35px; margin-top: 7px;">
-                                                        <i class="fa fa-exclamation-triangle pull-left" style="color:#d9534f;">  </i>
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <p style="font-size: 110%;">Are you sure you want to delete "{{ $discount->description }}"?</p>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <form action="{{ route('discounts.destroy', [$discount->fad_id]) }}" method="POST">
-                                                        {{csrf_field()}}
-                                                        {{method_field('DELETE')}}
-
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                                        <button type="submit" name="driverArc" value="Arch" class="btn btn-danger" style="width:22%;">Delete</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <!-- /.modal-content -->
-                                        </div>
-                                        <!-- /.col -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-                                <!-- /.modal -->
-
                                 @endforeach
                             </tbody>
                         </table>
