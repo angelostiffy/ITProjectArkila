@@ -4,7 +4,7 @@
 @section('links')
 @parent
 <!-- additional CSS -->
-<link rel="stylesheet" href="tripModal.css"> 
+<link rel="stylesheet" href="tripModal.css">
 
 @stop
 @section('content')
@@ -22,8 +22,8 @@
                 <div class="tab-content">
                     <!-- /.tab-pane -->
                     <div class="tab-pane active" id="tab_2">
-                        
-                        
+
+
                         <div class="box-body">
                             <div class="table-responsive">
                             <table class="table table-bordered table-striped dataTable">
@@ -38,7 +38,7 @@
                                 <tbody>
                                     @foreach($userDrivers as $userDriver)
                                     <tr>
-                                        <td>{{$userDriver->name}}</td>
+                                        <td>{{$userDriver->first_name . " " . $userDriver->middle_name . " " . $userDriver->last_name}}</td>
                                         <td>{{$userDriver->username}}</td>
 
                                         <td class="center-block">
@@ -70,7 +70,7 @@
                                 <tbody>
                                     @foreach($userCustomers as $userCustomer)
                                     <tr>
-                                        <td>{{$userCustomer->name}}</td>
+                                        <td>{{$userCustomer->first_name . " " . $userCustomer->middle_name . " " . $userCustomer->last_name}}</td>
                                         <td>{{$userCustomer->username}}</td>
                                         <td>{{$userCustomer->email}}</td>
                                         <td class="center-block">
