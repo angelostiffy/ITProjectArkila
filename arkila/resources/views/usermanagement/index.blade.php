@@ -15,63 +15,18 @@
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-
-                    <li class="active"><a href="#tab_1" data-toggle="tab">Admin</a></li>
-                    <li><a href="#tab_2" data-toggle="tab">Driver</a></li>
+                    <li class="active"><a href="#tab_2" data-toggle="tab">Driver</a></li>
                     <li><a href="#tab_3" data-toggle="tab">Customer</a></li>
-
                 </ul>
 
                 <div class="tab-content">
-                    <div class="tab-pane active" id="tab_1">
-                            <div class="box-body">
-                                <div class="table-responsive">
-                                <div class="col col-md-6">
-                                    <a href="/home/user-management/admin/create" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i>  Create New</a>
-                                </div>
-
-
-                                <table id="adminTable" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Username</th>
-                                            <th>Terminal</th>
-                                            <th class="text-center">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($userAdmins as $userAdmin)
-                                        <tr>
-                                            @php $fullName = null; @endphp
-                                            @if($userAdmin->middle_name == null)
-                                                $fullName = $userAdmin->first_name . " " . $userAdmin->last_name;
-                                            @else
-                                                $fullName = $userAdmin->first_name . " " . $userAdmin->middle_name . " " . $userAdmin->last_name;
-                                            @endif
-                                            <td>{{$fullName}}</td>
-                                            <td>{{$userAdmin->username}}</td>
-                                            <td>{{$userAdmin->description}}</td>
-                                            <td class="center-block">
-                                                <div class="text-center">
-                                                    <a href="/home/user-management/admin/{{$userAdmin->userid}}/edit" class="btn btn-default btn-sm btn-flat"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                </div>
-
                     <!-- /.tab-pane -->
-                    <div class="tab-pane" id="tab_2">
+                    <div class="tab-pane active" id="tab_2">
                         
                         
                         <div class="box-body">
                             <div class="table-responsive">
-                            <table id="driverTable" class="table table-bordered table-striped">
+                            <table class="table table-bordered table-striped dataTable">
                                 <thead>
                                     <tr>
 
@@ -103,10 +58,9 @@
                     <div class="tab-pane" id="tab_3">
                         <div class="box-body">
                             <div class="table-responsive">
-                            <table id="customerTable" class="table table-bordered table-striped">
+                            <table class="table table-bordered table-striped dataTable">
                                 <thead>
                                     <tr>
-
                                         <th>Name</th>
                                         <th>Username</th>
                                         <th>Email Address</th>
@@ -148,20 +102,7 @@
 
     <script>
         $(function() {
-            $('#adminTable').DataTable({
-                'paging': true,
-                'lengthChange': false,
-                'searching': true,
-                'ordering': true,
-                'info': true,
-                'autoWidth': true,
-                'aoColumnDefs': [{
-                    'bSortable': false,
-                    'aTargets': [-1] /* 1st one, start by the right */
-                }]
-            })
-
-            $('#driverTable').DataTable({
+            $('.dataTable').DataTable({
                 'paging': true,
                 'lengthChange': true,
                 'searching': true,
@@ -174,18 +115,6 @@
                 }]
             })
 
-            $('#customerTable').DataTable({
-                'paging': true,
-                'lengthChange': true,
-                'searching': true,
-                'ordering': true,
-                'info': true,
-                'autoWidth': true,
-                'aoColumnDefs': [{
-                    'bSortable': false,
-                    'aTargets': [-1] /* 1st one, start by the right */
-                }]
-            })
         });
     </script>
 
