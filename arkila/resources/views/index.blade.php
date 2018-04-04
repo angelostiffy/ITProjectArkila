@@ -71,11 +71,20 @@
     <!-- section-->
 
     <section style="background: url(../img/fixed-background-2.jpg) center top no-repeat; background-size: cover;" class="bar text-center bg-fixed relative-positioned">
-        <div class="dark-mask">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="heading text-center" style="color:white;">
+                        <h2><i class="fa fa-car"></i> Fare Lists &#38; Current Trips</h2>
+                    </div>
+                    <div class="dark-mask">
+                    </div>
+                    <div id="fareListAndQueue" class="container">
+                    </div> 
+                </div>
+            </div>
         </div>
-        <div id="fareListAndQueue" class="container">
-            
-        </div> 
     </section><!-- section-->
 @stop
 @section('scripts')

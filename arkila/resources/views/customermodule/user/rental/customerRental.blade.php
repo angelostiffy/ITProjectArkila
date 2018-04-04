@@ -12,7 +12,7 @@
                         {{csrf_field()}}
                         <div class="wrap-input100">
                             <select id="vanType" name="van_model" class="input100">
-                                
+                                <option selected hidden disabled>Van Model</option>
                                 @foreach($vanmodels as $vanmodel)
                                     <option value="{{$vanmodel->model_id}}">{{$vanmodel->description}}</option>
                                 @endforeach
