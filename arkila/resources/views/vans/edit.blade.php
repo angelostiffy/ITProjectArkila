@@ -1,5 +1,5 @@
 
-@extends('layouts.form') 
+@extends('layouts.form')
 @section('title', 'Add Van Driver')
 
 @if(session()->get('opLink'))
@@ -22,7 +22,7 @@
         @endforeach
     </select>
     </div>
-    
+
 	<div class="form-group">
         <label for="">Plate Number:</label>
         <p class="info-container">{{$van->plate_number}}</p>
@@ -31,8 +31,8 @@
 
     <div class="form-group">
         <label for="">Van Model</label>
-        <p class="info-container">{{$van->model}}</p>
-        <input type="hidden" value="{{$van->model}}">
+        <p class="info-container">{{$van->vanModel->description}}</p>
+        <input type="hidden" value="{{$van->vanModel->description}}">
     </div>
 
     <div class="form-group">
@@ -40,7 +40,7 @@
         <p class="info-container">{{$van->seating_capacity}}</p>
         <input type="hidden" value="{{$van->seating_capacity}}">
     </div>
-    
+
     <div class="form-group">
     <label for="">Driver</label>
 
@@ -51,9 +51,9 @@
             @endforeach
 
         </select>
-        
+
     </div>
-@endsection 
+@endsection
 
 @section('others')
 <div class="form-group">
@@ -106,5 +106,3 @@
 
 	</script>
 @endsection
-
-

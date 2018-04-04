@@ -96,7 +96,7 @@ class DriversController extends Controller
             'user_type' => 'Driver',
             'status' => 'enable'
         ]);
-        
+
         $createdDriver->update([
             'user_id' => $createdUserDriver->id,
         ]);
@@ -159,11 +159,11 @@ class DriversController extends Controller
             'user_type' => 'Driver',
             'status' => 'enable'
         ]);
-        
+
         $driver->update([
             'user_id' => $createdDriverUser->id,
         ]);
-        
+
         return redirect(route('operators.showProfile',[$operator->member_id]));
     }
 
@@ -228,11 +228,12 @@ class DriversController extends Controller
             'username' => $driver->first_name[0].$driver->last_name,
             'password' => Hash::make('driver!@bantrans'),
             'user_type' => 'Driver',
-            'status' => 'enable'
+            'status' => 'enable',
+            'model_id' => $vanNd->vanModel->model_id,
         ]);
-
-         $createdDriver->update([
-            'user_id' => $createdUserDriver->id,
+        
+         $driver->update([
+            'user_id' => $createdDriver->id,
         ]);
         if(session()->get('vanBack') && session()->get('vanBack') == route('operators.showProfile',[$vanNd->operator->first()->member_id])){
             return redirect(route('operators.showProfile',[$vanNd->operator->first()->member_id]));
@@ -260,10 +261,10 @@ class DriversController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Member $driver)
-    {        
+    {
         $operators = Member::allOperators()->get();
         return view('drivers.edit', compact('driver', 'operators'));
-        
+
         //
     }
 
@@ -275,7 +276,7 @@ class DriversController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(DriverRequest $request, Member $driver)
-    {   
+    {
             $current_time = \Carbon\Carbon::now();
             $dateNow = $current_time->setTimezone('Asia/Manila')->format('Y-m-d H:i:s');
             if (request('operator') !== null) {
@@ -401,7 +402,7 @@ class DriversController extends Controller
         $date = Carbon::now();
         $pdf = PDF::loadView('pdf.perDriver', compact('driver', 'date'));
         return $pdf->stream("$driver->last_name"."$driver->first_name-Bio-Data.pdf");
-        
+
     }
 
 }
