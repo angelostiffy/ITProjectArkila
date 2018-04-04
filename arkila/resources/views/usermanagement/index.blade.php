@@ -10,7 +10,7 @@
 @section('content')
 <div class="box">
 
-   
+
         <div class="col-xl-6">
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
@@ -75,7 +75,7 @@
                                         <td>{{$userCustomer->email}}</td>
                                         <td class="center-block">
                                             <div class="text-center">
-                                                <a href="/home/user-management/customer/{{$userCustomer->userid}}" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
+                                                <a href="/home/user-management/customer/{{$userCustomer->id}}" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i>Manage Account</a>
                                             </div>
                                         </td>
                                         @endforeach
@@ -93,7 +93,7 @@
             <!-- /.tab-pane -->
         </div>
         <!-- /.tab-content -->
-    
+
 </div>
 @endsection
 
