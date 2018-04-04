@@ -5,7 +5,7 @@
         <div id="AnnouncementHead{{$announcement->announcement_id}}" class="card-header">
             <h5 class="mb-0"><a data-toggle="collapse" href="#AnnouncementBody{{$announcement->announcement_id}}" aria-expanded="true">{{$announcement->title}}</a></h5>
         </div>
-        <div id="AnnouncementBody{{$announcement->announcement_id}}" data-parent="#accordion" class="collapse show">
+        <div id="AnnouncementBody{{$announcement->announcement_id}}" data-parent="#accordion" class="collapse">
             <div class="card-body">
                 <p>{{$announcement->description}}</p>
             </div>

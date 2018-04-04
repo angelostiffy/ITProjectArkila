@@ -4,7 +4,7 @@
         <div id="FareList{{$terminal->terminal_id}}Head" class="card-header">
             <h5 class="mb-0"><a data-toggle="collapse" href="#FareList{{$terminal->terminal_id}}Body" aria-expanded="true">Fare List {{$terminal->description}}</a></h5>
         </div>
-        <div id="FareList{{$terminal->terminal_id}}Body" data-parent="#accordionFour" class="collapse show">
+        <div id="FareList{{$terminal->terminal_id}}Body" data-parent="#accordionFour" class="collapse">
             <div class="card-body">
                 <table class="table text-center">
                     <thead>
